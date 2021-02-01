@@ -82,12 +82,12 @@ class CommonController extends Controller
             }
 
             $user->password = Hash::make($request->password);
-            $result  = $user->save();
+            $user->save();
             OtpVerification::where(['email'=>$user->email])->delete();
 
-            if($user->role == 1){
+            if($user->role == 0){
               return redirect()->route('admin.login')->with('Success-sweet', 'Your password successfully changed.');
-            }elseif($user->role == 2){
+            }elseif($user->role != 0){
             	return redirect()->route('login')->with('Success-sweet', 'Your password successfully changed.');
             }
           

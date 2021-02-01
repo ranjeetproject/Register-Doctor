@@ -18,7 +18,7 @@ class CreateUserProfilesTable extends Migration
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('mobile',16)->nullable();
             $table->date('dob')->nullable();
-            $table->tinyInteger('gender')->nullable()->comment('1:male','2:female','3:other');
+            $table->enum('gender', ['male','female','other'])->nullable();
             $table->string('profile_photo',100)->nullable();
             $table->text('address')->nullable();
             $table->text('about')->nullable();

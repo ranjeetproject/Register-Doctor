@@ -31,17 +31,16 @@ class AdminController extends Controller
       $validator = $request->validate(
       [
       "email"=>"required|email",
-      "password"=>"required|min:6",
+      "password"=>"required",
       ],[
       "email.email" => "Enter valid email addess.",
-      "password.min" => "Minimum value is 6 chareacter."
       ]
       );
         // if(!$validator->fails()){
         $user_info = array(
         "email"=>$request->email,
         "password"=>$request->password,
-        "role"=>1
+        "role"=>0
         );
 
         if (Auth::guard("siteAdmin")->attempt($user_info) && Auth::attempt($user_info) ) {

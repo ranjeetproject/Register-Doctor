@@ -15,27 +15,27 @@ class AdminSeeder extends Seeder
     public function run()
     {
 
-    	 $role_id = DB::table('roles')->insertGetId([
-            'role' => 'admin',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-         ]);
+    	 // $role_id = DB::table('roles')->insertGetId([
+      //       'role' => 'admin',
+      //       'created_at' => date('Y-m-d H:i:s'),
+      //       'updated_at' => date('Y-m-d H:i:s'),
+      //    ]);
 
     	  $user_id = DB::table('users')->insertGetId([
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('123456'),
+            'role' => 0,
             'created_at' => date('Y-m-d H:i:s'),
-            // 'role' => $role_id,
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-          $role_id = DB::table('user_roles')->insertGetId([
-            'user_id' => $user_id,
-            'role_id' => $role_id,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-         ]);
+         //  $role_id = DB::table('user_roles')->insertGetId([
+         //    'user_id' => $user_id,
+         //    'role_id' => $role_id,
+         //    'created_at' => date('Y-m-d H:i:s'),
+         //    'updated_at' => date('Y-m-d H:i:s'),
+         // ]);
 
 
          // $role_id = DB::table('roles')->insertGetId([

@@ -29,6 +29,9 @@ Route::namespace('user')->group(function(){
 
 
 //  *************for admin *************//
+	Route::get('admin', function () {
+    return redirect()->route('admin.login');
+    });
 
 Route::prefix('admin')->name('admin.')->group(function(){
 Route::any('/login', 'admin\AdminController@adminLogin')->name('login');

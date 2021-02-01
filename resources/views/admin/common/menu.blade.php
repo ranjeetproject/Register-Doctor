@@ -39,17 +39,26 @@
             <a href="{{ route('admin.users') }}" class="nav-link {{ Request::is('admin/user*') ? 'active' : '' }}">
               <i class="nav-icon fa fa-users" aria-hidden="true"></i> 
               <p>
-                Users
+                Doctor
               </p>
             </a>
           </li>
 
 
           <li class="nav-item">
-            <a href="{{ route('admin.categories') }}" class="nav-link {{ Request::is('admin/categor*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="#" class="nav-link {{ Request::is('admin/categor*') ? 'active' : '' }}">
+              <i class="nav-icon fa fa-users" aria-hidden="true"></i> 
               <p>
-                Categories
+                Pharmacy
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ Request::is('admin/categor*') ? 'active' : '' }}">
+              <i class="nav-icon fa fa-users" aria-hidden="true"></i> 
+              <p>
+                Patients
               </p>
             </a>
           </li>
