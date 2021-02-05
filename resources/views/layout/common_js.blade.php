@@ -30,6 +30,9 @@
 
   <!-- toastr js-->
   <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.min.js" defer></script>
+  
   
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js')}}"></script>
@@ -96,6 +99,10 @@ $(document).ready(function(){
 $('body').overlayScrollbars({
   className: "os-theme-dark"
 }); 
+
+$(function () {
+    $('.textarea').summernote()
+  })
 
 
 // var instance = OverlayScrollbars(document.getElementById('overlayScrollbars')); 

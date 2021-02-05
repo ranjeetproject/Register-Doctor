@@ -53,11 +53,12 @@ Route::get('user/block/{user}', 'UserController@blockUser')->name('user.block');
 Route::get('user/active/{user}', 'UserController@activeUser')->name('user.active');
 Route::match(['get','post'],'user/delete/{id?}', 'UserController@userDelete')->name('user.delete');
 
-Route::get('categories/{id?}', 'CategoryController@index')->name('categories');
-Route::match(['get','post'],'category/create/{id?}', 'CategoryController@categoryCreate')->name('category.create');
-Route::get('category/edit/{id}', 'CategoryController@categoryEdit')->name('category.edit');
-Route::post('category/update', 'CategoryController@categoryUpdate')->name('category.update');
-Route::get('category/delete/{id}', 'CategoryController@categoryDelete')->name('category.delete');
+
+Route::match(['get','post'],'news/index', 'NewsController@index')->name('news');
+Route::match(['get','post'],'news/create', 'NewsController@create')->name('news.create');
+Route::match(['get','post'],'news/edit/{id}', 'NewsController@edit')->name('news.edit');
+Route::match(['get','post'],'news/delete/{id?}', 'NewsController@delete')->name('news.delete');
+
 
 
 });

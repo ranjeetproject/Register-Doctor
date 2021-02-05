@@ -145,7 +145,7 @@ class UserController extends Controller
 	      return redirect()->route('admin.users');
 	    }
 
-     public function userDelete($uid='', Request $request)
+  public function userDelete($uid='', Request $request)
     {
       // dd($request->all());
       if ($request->isMethod('post')) {

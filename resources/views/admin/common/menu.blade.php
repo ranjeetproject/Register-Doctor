@@ -46,7 +46,7 @@
 
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ Request::is('admin/categor*') ? 'active' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('admin/user*') ? 'active' : '' }}">
               <i class="nav-icon fa fa-users" aria-hidden="true"></i> 
               <p>
                 Pharmacy
@@ -55,10 +55,19 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ Request::is('admin/categor*') ? 'active' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('admin/user*') ? 'active' : '' }}">
               <i class="nav-icon fa fa-users" aria-hidden="true"></i> 
               <p>
                 Patients
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.news')}}" class="nav-link {{ Request::is('admin/news*') ? 'active' : '' }}">
+              <i class="nav-icon fa fa-newspaper" aria-hidden="true"></i>
+              <p>
+                News
               </p>
             </a>
           </li>
