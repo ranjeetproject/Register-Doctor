@@ -3,16 +3,16 @@
 @section('title', 'admin-dashboard')
 
 @section('body')
-          @section('header', 'News')
+          @section('header', 'Cms pages')
           @section('badge')
-           <li class="breadcrumb-item"><a href="{{ route('admin.news') }}">News</a></li>
+           <li class="breadcrumb-item"><a href="{{ route('admin.cms') }}">Cms pages</a></li>
           @endsection
    
     <!-- /.col -->
 
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title">News list</h3>
+              <h3 class="card-title">Page list</h3>
 
               <div class="card-tools">
                 <form action="" method="GET">
@@ -30,7 +30,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-                <form action="{{ route('admin.news.delete') }}" method="post">
+                <form action="{{ route('admin.cms.delete') }}" method="post">
                           @csrf
           
               <div class="mailbox-controls">
@@ -43,7 +43,7 @@
                   <a href="" class="btn btn-default btn-sm"><i class="fas fa-edit"></i></a> --}}
                   <a href="" data-toggle="tooltip" title="Refresh" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></a>
                 </div>
-                  <a href="{{ route('admin.news.create') }}" data-toggle="tooltip" title="Add new user" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> New</a>
+                  <a href="{{ route('admin.cms.create') }}" data-toggle="tooltip" title="Add new user" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> New</a>
                 <!-- /.btn-group -->
         
                 
@@ -55,31 +55,31 @@
                   <thead>
                   <tr>
                     <th># No</th>
-                    <th>Heading</th>
+                    <th>Page name</th>
+                    <th>Title</th>
                     <th>Content</th>
-                    <th>Created date</th>
                     <th></th>
                   </tr>
                   </thead>
 
                   <tbody id="search_result">
-                    @forelse ($news as $news)
+                    @forelse ($pages as $page)
                       <tr>
                          <tr onmouseover="showActionBtn('{{ $loop->iteration }}');" onmouseout="hideActionBtn('{{ $loop->iteration }}')">
                 
                         <td>
                       <div class="icheck-primary">
-                        <input type="checkbox" name="news_id[]" value="{{ $news->id }}" id="check{{ $loop->iteration }}">
+                        <input type="checkbox" name="page_id[]" value="{{ $page->id }}" id="check{{ $loop->iteration }}">
                         <label for="check{{ $loop->iteration }}">#{{ $loop->iteration }}</label>
                       </div>
                     </td>
-                        <td>{{ $news->heading }}</td>
-                        <td>{!! $news->content !!}</td>
-                        <td>{{ date('M-d-Y H:i:s',strtotime($news->created_at)) }}</td>
+                        <td>{{ $page->page_name }}</td>
+                        <td>{{ $page->title }}</td>
+                        <td>{!! $page->content !!}</td>
                         <td>
-                        {{-- <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.news', $news->id) }}"> <i class="fas fa-eye"></i> View</a> --}}
-                        <a class="btn btn-sm btn-outline-warning" href="{{ route('admin.news.edit', $news->id) }}"> <i class="fas fa-edit"></i> Edit</a>
-                        <a class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure want to delete?');" href="{{ route('admin.news.delete', $news->id) }}"> <i class="fas fa-trash-alt"></i> Delete</a>
+                        {{-- <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.cms', $cms->id) }}"> <i class="fas fa-eye"></i> View</a> --}}
+                        <a class="btn btn-sm btn-outline-warning" href="{{ route('admin.cms.edit', $page->id) }}"> <i class="fas fa-edit"></i> Edit</a>
+                        <a class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure want to delete?');" href="{{ route('admin.cms.delete', $page->id) }}"> <i class="fas fa-trash-alt"></i> Delete</a>
 
                         </td>
                       </tr>

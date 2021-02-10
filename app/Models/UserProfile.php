@@ -13,7 +13,7 @@ class UserProfile extends Model
 
     public function getProfilePhotoAttribute($profile_photo)
     {
-        return ($profile_photo != null ) ? url('uploads/users/'.$profile_photo) : url('common_img/defoult_profile_image.png');
+        return ($profile_photo != null ) ? url('public/uploads/users/'.$profile_photo) : url('public/common_img/defoult_profile_image.png');
     }
 
     public function setDobAttribute($dob)

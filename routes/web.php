@@ -60,6 +60,12 @@ Route::match(['get','post'],'news/edit/{id}', 'NewsController@edit')->name('news
 Route::match(['get','post'],'news/delete/{id?}', 'NewsController@delete')->name('news.delete');
 
 
+Route::match(['get','post'],'cms/index', 'CmsController@index')->name('cms');
+Route::match(['get','post'],'cms/create', 'CmsController@create')->name('cms.create');
+Route::match(['get','post'],'cms/edit/{id}', 'CmsController@edit')->name('cms.edit');
+Route::match(['get','post'],'cms/delete/{id?}', 'CmsController@delete')->name('cms.delete');
+
+
 
 });
 //  *************for admin *************//

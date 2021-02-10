@@ -73,6 +73,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('admin.cms')}}" class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}">
+              <i class="nav-icon fa fa-newspaper" aria-hidden="true"></i>
+              <p>
+                CMS
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{ route('admin.settings') }}" class="nav-link {{ Request::is('admin/settings*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
