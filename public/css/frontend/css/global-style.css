@@ -4,7 +4,9 @@
 *{padding: 0px; margin: 0px; box-sizing: border-box;}
  .for-w-100{width: 100%; float: left; }
 body { background-color: #fff;    color: #868d6c;    font-family: 'Roboto', sans-serif;    font-size: 14px;}
-
+.fa, .fab, .fad, .fal, .far, .fas {
+    line-height: inherit !important;
+}
 a {color: #24b3fe;    text-decoration: none;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -63,7 +65,7 @@ ol,ul { margin: 0; padding: 0;    list-style: none;}
 }
 .btn.blue-button:hover{
     background: #0351d2;
-    
+
 }
 
 /* Header Start */
@@ -202,7 +204,7 @@ a.for-email:hover{
     padding-right: 0px;
 }
 .ser-log a.ser-log-list img{
-    width: 28px;    
+    width: 28px;
 }
 /* -------------------- Nav Type 2 End ---------------------- */
 /* Header End */
@@ -377,17 +379,17 @@ ul.left-nav {
 ul.left-nav li{
     display: block;
     width: 100%;
-    border-top: 1px solid #dceaf6;    
+    border-top: 1px solid #dceaf6;
 }
 ul.left-nav li:nth-child(1){
-    border: none;  
+    border: none;
 }
 ul.left-nav li a{
     display: block;
     width: 100%;
     padding: 16px 0px 16px  4px;
     font-size: 16px;
-    line-height: 35px;  
+    line-height: 35px;
     color:#7f7f7f;
 }
 ul.left-nav li a:hover, ul.left-nav li.active a{
@@ -409,19 +411,19 @@ nav .breadcrumb.Pharmacist-doc-com {
     display: initial;
     position: relative;
   }
-  
+
   nav .breadcrumb.Pharmacist-doc-com li::before {
     display: none;
   }
-  
+
   nav .breadcrumb.Pharmacist-doc-com li a {
     color: #294876;
   }
-  
+
   nav .breadcrumb.Pharmacist-doc-com li a i {
     padding: 0 12px;
   }
-  
+
   nav .breadcrumb.Pharmacist-doc-com li a span {
     border-bottom: 1px solid;
   }
@@ -429,17 +431,17 @@ nav .breadcrumb.Pharmacist-doc-com {
 border: none;
 font-size: 18px;
 }
-  
+
   nav .breadcrumb.Pharmacist-doc-com li.active {
     color: #004cac;
   }
-  
+
   nav .breadcrumb.Pharmacist-doc-com li small {
     display: block;
     font-size: 15px;
     color: #4d4d4d;
   }
-  
+
   nav .breadcrumb.Pharmacist-doc-com li small a {
     color: #004cac;
   }
