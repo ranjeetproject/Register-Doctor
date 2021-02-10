@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <a href="index.html" class="footer-ligo"><img src="{{ asset('images/frontend/images/footer-logo.png') }}" alt=""></a>
+                <a href="index.html" class="footer-ligo"><img src="{{ asset('public/images/frontend/images/footer-logo.png') }}" alt=""></a>
                 <div class="socil-media">
                     <a href="http://" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f social"></i></a>
                     <a href="http://" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter social"></i></a>
