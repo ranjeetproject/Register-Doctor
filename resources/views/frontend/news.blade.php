@@ -19,7 +19,7 @@
                         </div>
                         <div class="news-listing-bottom for-w-100">
                             <div class="news-img for-w-100">
-                                <img src="images/news-listing2.jpg" alt="">
+                                <img src="{{ asset('public/images/frontend/images/news-listing2.jpg') }}" alt="">
                             </div>
                             <div class="news-cont for-w-100">
                                 <p>There’s an old maxim that states, “No fun for the writer, no fun for the reader.” No matter what industry you’re working in, as a blogger, you should live and die by this statement.There’s an old maxim that states, “No fun for the writer, no fun for the reader.” No matter what industry you’re working in, as a blogger, you should live and die by this statement.</p>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="news-listing-bottom for-w-100">
                             <div class="news-img for-w-100">
-                                <img src="images/news-listing1.jpg" alt="">
+                                <img src="{{ asset('public/images/frontend/images/news-listing1.jpg') }}" alt="">
                             </div>
                             <div class="news-cont for-w-100">
                                 <p>There’s an old maxim that states, “No fun for the writer, no fun for the reader.” No matter what industry you’re working in, as a blogger, you should live and die by this statement.There’s an old maxim that states, “No fun for the writer, no fun for the reader.” No matter what industry you’re working in, as a blogger, you should live and die by this statement.</p>
