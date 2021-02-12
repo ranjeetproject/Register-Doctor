@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <a href="index.html" class="footer-ligo"><img src="{{ asset('images/frontend/images/footer-logo.png') }}" alt=""></a>
+                <a href="index.html" class="footer-ligo"><img src="{{ asset('public/images/frontend/images/footer-logo.png') }}" alt=""></a>
                 <div class="socil-media">
                     <a href="http://" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f social"></i></a>
                     <a href="http://" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter social"></i></a>
@@ -13,13 +13,15 @@
             <div class="col-sm-6">
                 <h3 class="title">Menu</h3>
                 <ul class="footer-menu">
-                    <li><a href="http://">Home </a></li>
-                    <li><a href="http://">About</a></li>
-                    <li><a href="http://">News</a></li>
-                    <li><a href="http://">FAQs</a></li>
-                    <li><a href="http://">Contact Us</a></li>
-                    <li><a href="http://">Login</a></li>
-                    <li><a href="http://">Registration</a></li>
+                    <li><a href="{{ route('home') }}">Home </a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="{{ route('news') }}">News</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    @guest
+                        <li><a href="{{route('login')}}">Login</a></li>
+                        <li><a href="{{route('registration')}}">Registration</a></li>
+                    @endguest
                     <li><a href="http://">Terms & Conditions</a></li>
                     <li><a href="http://">Privacy & Policy</a></li>
                 </ul>

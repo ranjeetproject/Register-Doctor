@@ -1,6 +1,9 @@
 <?php
 
-Route::get('/home', 'frontend\FrontendController@index');
+Route::get('/', 'frontend\FrontendController@index')->name('home');
+Route::get('/news', 'frontend\FrontendController@getNews')->name('news');
+Route::get('/contact-us', 'frontend\FrontendController@contactUs')->name('contactUs');
+//Route::get('/home', 'frontend\FrontendController@index');
 Route::any('search/{model}/{type?}', 'SearchController')->name('search');
 
 Route::middleware(['isUser:siteUser',"can:isUser",'emailVerified','activeUser'])->name('user.')->group(function(){
@@ -14,7 +17,7 @@ Route::get('/profile', 'user\UserController@profile')->name('profile');
 
 Route::get('/admin-post', 'user\UserController@post');
 Route::namespace('user')->group(function(){
-	Route::any('/', 'UserController@login')->name('login');
+	Route::any('/login', 'UserController@login')->name('login');
 	Route::get('registration', 'UserController@registration')->name('registration');
 	Route::post('create-user', 'UserController@createUser')->name('create-user');
 	Route::get('email-verification/{id}', 'UserController@emailVerification')->name('email-verification');

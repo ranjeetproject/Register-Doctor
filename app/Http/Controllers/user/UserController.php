@@ -57,7 +57,7 @@ class UserController extends Controller
         return redirect()->route('login');
         }
         }
-        return view('frontend.index');
+        return view('frontend.Auth.login');
     }
 
 

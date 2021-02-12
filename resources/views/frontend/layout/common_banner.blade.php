@@ -14,7 +14,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="bann-img">
-                    <img src="{{ asset('images/frontend/images/homebanner.png') }}" alt="">
+                    <img src="{{ asset('public/images/frontend/images/homebanner.png') }}" alt="">
                 </div>
             </div>
         </div>
