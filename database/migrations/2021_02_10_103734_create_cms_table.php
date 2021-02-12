@@ -17,7 +17,7 @@ class CreateCmsTable extends Migration
             $table->bigIncrements('id');
             $table->string('page_name');
             $table->string('title');
-            $table->longText('content');
+            $table->longText('content'); 
             $table->string('featured_image')->nullable();
             $table->tinyInteger('status')->default('1');
             $table->softDeletes();
