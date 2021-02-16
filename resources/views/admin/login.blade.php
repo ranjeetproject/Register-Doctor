@@ -8,12 +8,13 @@
 
 <div class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
+  {{-- <div class="login-logo">
     <a href="{{ url('/') }}">{{env('APP_NAME')}}</a>
-  </div>
+  </div> --}}
   <!-- /.login-logo -->
   <div class="card">
-    <div class="card-body login-card-body">
+    <div class="card-body login-card-body" style="text-align: center;">
+        <img src="{{ asset('public/images/frontend/images/logo.jpg')}}" alt="" style="max-width: 200px">
       <p class="login-box-msg">Sign in to start your session</p>
 
       @include('common.alert')
@@ -28,7 +29,7 @@
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-          
+
         </div>
           <span class="text-danger">{{$errors->first('email')}}</span>
 
@@ -44,8 +45,8 @@
           <span class="text-danger">{{$errors->first('password')}}</span>
 
 
-        <div class="row">
-          <div class="col-8">
+        <div class="row forgot-sign-in">
+          <div class="col-12">
             <div class="icheck-primary">
               {{-- <input type="checkbox" id="remember"> --}}
               <label for="remember">
@@ -56,14 +57,14 @@
             </div>
           </div>
           <!-- /.col -->
-          <div class="col-4">
+          <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-    
+
     </div>
     <!-- /.login-card-body -->
   </div>
