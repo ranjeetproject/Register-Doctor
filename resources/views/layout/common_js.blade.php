@@ -1,46 +1,46 @@
 <!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('public/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<script src="{{ asset('public/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('public/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <!-- jQuery Knob Chart -->
-<script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+<script src="{{ asset('public/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
 <!-- daterangepicker -->
 <!-- Sparkline -->
-<script src="{{ asset('plugins/sparklines/sparkline.js')}}"></script>
-<script src="{{ asset('plugins/moment/moment.min.js')}}"></script>
-<script src="{{ asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+<script src="{{ asset('public/plugins/sparklines/sparkline.js')}}"></script>
+<script src="{{ asset('public/plugins/moment/moment.min.js')}}"></script>
+<script src="{{ asset('public/plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-<script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+<script src="{{ asset('public/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+<script src="{{ asset('public/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{ asset('public/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
 <!-- overlayScrollbars -->
-{{-- <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script> --}}
+{{-- <script src="{{ asset('public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.13.0/js/OverlayScrollbars.min.js" integrity="sha512-5R3ngaUdvyhXkQkIqTf/k+Noq3phjmrqlUQyQYbgfI34Mzcx7vLIIYTy/K1VMHkL33T709kfh5y6R9Xy/Cbt7Q==" crossorigin="anonymous"></script>
 <!-- spce js for loader -->
-  <script src="{{ asset('plugins/spce/js/spce.min.js')}}"></script>
+  <script src="{{ asset('public/plugins/spce/js/spce.min.js')}}"></script>
   <!-- toastr js-->
-  <script src="{{ asset('plugins/toastr/toastr.min.js')}}"></script>
+  <script src="{{ asset('public/plugins/toastr/toastr.min.js')}}"></script>
 
   <!-- toastr js-->
-  <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
+  <script src="{{ asset('public/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.min.js" defer></script>
   
   
 <!-- AdminLTE App -->
-<script src="{{ asset('dist/js/adminlte.js')}}"></script>
+<script src="{{ asset('public/dist/js/adminlte.js')}}"></script>
 
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('public/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('public/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('public/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{ asset('public/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 @include('common.toastr')
 @include('common.sweetalert')
 

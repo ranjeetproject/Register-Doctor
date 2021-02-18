@@ -47,7 +47,7 @@ Route::post('profile', 'AdminController@updateProfile')->name('updateProfile');
 Route::match(['get','post'],'settings', 'AdminController@settings')->name('settings');
 Route::get('logout', 'AdminController@logout')->name('logout');
 
-Route::get('users', 'UserController@userList')->name('users');
+Route::get('users/{type}', 'UserController@userList')->name('users');
 Route::match(['get','post'],'user/add', 'UserController@addUser')->name('user.add');
 Route::get('user/view/{id}', 'UserController@userView')->name('user.view');
 Route::get('user/edit/{id}', 'UserController@userEdit')->name('user.edit');

@@ -16,16 +16,16 @@ use Session;
 
 class UserController extends Controller
 {
-    public function userList(Request $request)
+    public function userList(Request $request,$type)
     {
 
-      $users = User::whereRole(2);
+      $users = User::whereRole($type);
         if ($request->search) {
               $users = $users->where('name', 'LIKE',"%{$request->search}%");
         }
       $users = $users->latest()->paginate($this->per_page);
       $users = $users->appends(request()->query());
-      $total_users = User::whereStatus(1)->whereRole(2)->count();
+      $total_users = User::whereStatus(1)->whereRole($type)->count();
       return view('admin.user.list',compact('users','total_users'));
     }
 
