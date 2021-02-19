@@ -1,0 +1,117 @@
+.login-page {
+    background: #3fd8f4;
+    background: -moz-linear-gradient(left, #569ee3 0%, #67d7f6 30%, #3fd8f4 100%);
+    background: -webkit-linear-gradient(left, #569ee3 0%, #67d7f6 30%, #3fd8f4 100%);
+    background: linear-gradient(left, #569ee3 0%, #67d7f6 30%, #3fd8f4 100%);
+}
+
+.login-page .login-logo a {
+    color: #01105c;
+    font-weight: 700;
+    text-shadow: 0px 0px 8px #fff;
+}
+.login-page .card{
+    background: transparent;
+    box-shadow: none;
+}
+.login-page .card-body.login-card-body {
+    border-radius: 0px 50px 0px 50px;
+    background: #fff;
+    border: 8px solid #60bfee;
+}
+
+.login-page p.login-box-msg {
+    color: #01105c;
+    font-size: 17px;
+    font-weight: 600;
+}
+.row.forgot-sign-in label{
+    width: 100%;
+    text-align: center;
+    padding: 0 !important;
+    margin-bottom: 6px !important;
+}
+.row.forgot-sign-in label p a{
+    color: #01105c;
+    text-align: center;
+}
+
+.row.forgot-sign-in button.btn.btn-primary.btn-block {
+    border-radius: 50px;
+    background: #58d8f5;
+    border: 1px solid #58d8f5;
+}
+.row.forgot-sign-in button.btn.btn-primary.btn-block:hover {
+    background: #60bfee;
+    border: 1px solid #60bfee;
+}
+.layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*=navbar]) {
+    background-color: #01105c;
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #01105c;
+    color: #fff;
+}
+.layout-navbar-fixed.layout-fixed .wrapper .sidebar {
+    background: #3fd8f4;
+    background: -moz-linear-gradient(bottom, #569ee3 0%,  #3fd8f4 100%);
+    background: -webkit-linear-gradient(bottom, #569ee3 0%,  #3fd8f4 100%);
+    background: linear-gradient(bottom, #569ee3 0%,  #3fd8f4 100%);
+}
+
+.nav-sidebar .nav-item>.nav-link {
+    color: #fff;
+}
+.sidebar .user-panel .info a {
+    color: #fff;
+}
+.card-primary.card-outline {
+    border-top: 3px solid #01105c;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #01105c;
+    border-color: #01105c;
+    box-shadow: none;
+}
+ol.breadcrumb.float-sm-right li a {
+    color: #01105c;
+}
+ol.breadcrumb.float-sm-right li a {
+    color: #01105c;
+    background: #fff;
+    padding: 4px 16px;
+    font-size: 12px;
+    border-radius: 50px;
+    font-weight: 700;
+}
+ol.breadcrumb.float-sm-right li a:hover{
+    opacity: 0.58;
+}
+#os-dummy-scrollbar-size:before,
+#os-dummy-scrollbar-size:after,
+.os-content:before,
+.os-content:after{
+    display: none !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #01105c;
+}
+.card-primary:not(.card-outline)>.card-header {
+    background-color: #01105c;
+}
+
+.main-footer strong a{
+    color: #01105c;
+}
+.btn-outline-primary {
+    color: #01105c;
+    border-color: #01105c;
+}
+.icheck-success>input:first-child:checked+input[type=hidden]+label::before, .icheck-success>input:first-child:checked+label::before {
+    background-color: #41d3f2;
+    border-color: #40d6f3;
+}

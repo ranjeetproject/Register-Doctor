@@ -64,7 +64,7 @@ Route::post('profile', 'AdminController@updateProfile')->name('updateProfile');
 Route::match(['get','post'],'settings', 'AdminController@settings')->name('settings');
 Route::get('logout', 'AdminController@logout')->name('logout');
 
-Route::get('users', 'UserController@userList')->name('users');
+Route::get('users/{type}', 'UserController@userList')->name('users');
 Route::match(['get','post'],'user/add', 'UserController@addUser')->name('user.add');
 Route::get('user/view/{id}', 'UserController@userView')->name('user.view');
 Route::get('user/edit/{id}', 'UserController@userEdit')->name('user.edit');
@@ -78,6 +78,12 @@ Route::match(['get','post'],'news/index', 'NewsController@index')->name('news');
 Route::match(['get','post'],'news/create', 'NewsController@create')->name('news.create');
 Route::match(['get','post'],'news/edit/{id}', 'NewsController@edit')->name('news.edit');
 Route::match(['get','post'],'news/delete/{id?}', 'NewsController@delete')->name('news.delete');
+
+
+Route::match(['get','post'],'cms/index', 'CmsController@index')->name('cms');
+Route::match(['get','post'],'cms/create', 'CmsController@create')->name('cms.create');
+Route::match(['get','post'],'cms/edit/{id}', 'CmsController@edit')->name('cms.edit');
+Route::match(['get','post'],'cms/delete/{id?}', 'CmsController@delete')->name('cms.delete');
 
 
 

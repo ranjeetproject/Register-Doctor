@@ -1,5 +1,5 @@
 <?php
-
+// vendor\laravel\framework\src\Illuminate\Foundation\helpers.php
 return [
 
     /*

@@ -18,6 +18,11 @@ class NewsController extends Controller
     public function create(Request $request)
     {
     	if ($request->isMethod('post')) {
+            $validator = $request->validate(
+           [
+              "heading"=>"required",
+              "content"=>"required",
+            ]);
     	$news = new News;
     	$news->heading = $request->heading;
     	$news->news_type = $request->news_type;
@@ -46,7 +51,7 @@ class NewsController extends Controller
       if ($request->isMethod('post')) {
             foreach ($request->news_id as $id) {
                 $news = News::find($id);
-                $news->profile->delete();
+                // $news->profile->delete();
                 $news->delete();
             }
       } elseif ($request->isMethod('get')) {

@@ -2,17 +2,35 @@
 
 @section('title', 'admin-dashboard')
 
+@php
+   $user_type = '';
+         if(Request::segment(3) == 2){
+           $user_type = 'Doctors';
+           }elseif(Request::segment(3) == 3){
+            $user_type = 'Pharmacy';
+           }elseif(Request::segment(3) == 1){
+            $user_type = 'Patients';
+          }
+@endphp
 @section('body')
-          @section('header', 'Users')
+
+
+
+          @section('header',  $user_type)
           @section('badge')
-           <li class="breadcrumb-item"><a href="{{ route('admin.users') }}">Users</a></li>
+           <li class="breadcrumb-item"><a href="{{ route('admin.users',Request::segment(3)) }}">
+            {{$user_type}}
+
+         </a></li>
           @endsection
    
     <!-- /.col -->
 
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title">User list</h3>
+              <h3 class="card-title">
+                {{$user_type}}
+            list</h3>
 
               <div class="card-tools">
                 <form action="" method="GET">
@@ -43,7 +61,7 @@
                   <a href="" class="btn btn-default btn-sm"><i class="fas fa-edit"></i></a> --}}
                   <a href="" data-toggle="tooltip" title="Refresh" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></a>
                 </div>
-                  <a href="{{ route('admin.user.add') }}" data-toggle="tooltip" title="Add new user" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> New</a>
+                  {{-- <a href="{{ route('admin.user.add') }}" data-toggle="tooltip" title="Add new user" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> New</a> --}}
                 <!-- /.btn-group -->
         
                 
