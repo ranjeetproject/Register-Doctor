@@ -1,4 +1,4 @@
-@extends('frontend.layout.app')
+@extends('frontend.beforeloginlayout.app')
 
 @section('content')
     <section class="for-w-100 main-content innerpage  Contact-Us-page">
