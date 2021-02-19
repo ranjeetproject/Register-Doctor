@@ -28,4 +28,8 @@ class DoctorController extends Controller
         return view('frontend.doctor.dashboard');
     }
 
+    public function profile() {
+        return view('frontend.doctor.profile');
+    }
+
 }

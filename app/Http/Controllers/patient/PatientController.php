@@ -28,4 +28,8 @@ class PatientController extends Controller
         return view('frontend.patient.dashboard');
     }
 
+    public function profile() {
+        return view('frontend.patient.profile');
+    }
+
 }

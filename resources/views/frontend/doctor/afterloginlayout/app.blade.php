@@ -34,4 +34,5 @@
             @include('frontend.doctor.afterloginlayout.common_js')
         <!-- Common js library end-->
     </body>
+    @yield('scripts')
 </html>

@@ -40,7 +40,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 tex-center">
-                    &copy 2020 Registered-Doctor.com, All Right Reserved.
+                    &copy; {{date('Y')}} Registered-Doctor.com, All Right Reserved.
                 </div>
             </div>
         </div>

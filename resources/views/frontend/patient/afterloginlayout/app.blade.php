@@ -31,5 +31,6 @@
             @include('frontend.patient.afterloginlayout.common_footer')
             @include('frontend.patient.afterloginlayout.common_js')
         <!-- Footer end -->
+        @yield('scripts')
     </body>
 </html>

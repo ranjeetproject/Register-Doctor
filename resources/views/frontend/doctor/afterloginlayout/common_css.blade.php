@@ -8,3 +8,4 @@
 <link href="{{ asset('public/css/frontend/css/media-queries.css') }}" rel="stylesheet" type="text/css">
 <!-- Fontawesome -->
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+<link href="{{ asset('public/css/frontend/css/responsive-calendar.css') }}" rel="stylesheet" type="text/css">

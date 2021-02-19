@@ -31,5 +31,6 @@
         @include('frontend.pharmacist.afterloginlayout.common_footer')
         @include('frontend.pharmacist.afterloginlayout.common_js')
         <!-- Footer end -->
+        @yield('scripts')
     </body>
 </html>
