@@ -23,7 +23,7 @@ class EmailVerification
           return $next($request);
         }else{
             Session::flush();
-            Auth::guard("siteUser")->logout();
+            Auth::guard("sitePatient")->logout();
            return redirect()->route('login')->with('Warning-sweet','Your email not verified');
         }
 

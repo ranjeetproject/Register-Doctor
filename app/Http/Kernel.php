@@ -62,7 +62,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAdmin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
-        'isUser' => \App\Http\Middleware\RedirectIfNotUser::class,
+        'isPatient' => \App\Http\Middleware\RedirectIfNotPatient::class,
+        'isDoctor' => \App\Http\Middleware\RedirectIfNotDoctor::class,
+        'isPharmacist' => \App\Http\Middleware\RedirectIfNotPharmacist::class,
         'emailVerified' => \App\Http\Middleware\EmailVerification::class,
         'activeUser' => \App\Http\Middleware\ActiveUser::class,
     ];

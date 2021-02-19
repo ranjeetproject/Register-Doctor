@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class RedirectIfAuthenticated
 {
@@ -15,12 +16,22 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = 'web')
+    public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+        //dd(Auth::guard('siteDoctor')->user());
+        
+        if(Auth::guard('sitePatient')->check()){
+            return redirect(RouteServiceProvider::PATIENT_HOME);
         }
-
+        if (Auth::guard('siteDoctor')->check()) {
+            return redirect(RouteServiceProvider::DOCTOR_HOME);
+        }
+        if (Auth::guard('sitePharmacist')->check()) {
+            return redirect(RouteServiceProvider::PHARMACIST_HOME);
+        }
+        if (Auth::guard($guard)->check()) {
+            return redirect('/');
+        }
         return $next($request);
     }
 }

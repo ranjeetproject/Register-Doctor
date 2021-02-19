@@ -6,24 +6,41 @@ Route::get('/contact-us', 'frontend\FrontendController@contactUs')->name('contac
 //Route::get('/home', 'frontend\FrontendController@index');
 Route::any('search/{model}/{type?}', 'SearchController')->name('search');
 
-Route::middleware(['isUser:siteUser',"can:isUser",'emailVerified','activeUser'])->name('user.')->group(function(){
-Route::get('/dashboard', 'user\UserController@dashboard')->name('dashboard');
-Route::get('/profile', 'user\UserController@profile')->name('profile');
+Route::group(['namespace' => 'patient',"prefix"=>"patient",'middleware' => ['isPatient:sitePatient']], function() {
+    Route::get('/dashboard', 'PatientController@dashboard')->name('patientDashboard');
+    Route::get('/profile', 'PatientController@profile')->name('patientProfile');
+});
+
+Route::group(['namespace' => 'doctor',"prefix"=>"doctor",'middleware' => ['isDoctor:siteDoctor']], function() {
+    Route::get('/dashboard', 'DoctorController@dashboard')->name('doctorDashboard');
+    Route::get('/profile', 'DoctorController@profile')->name('doctorProfile');
+});
+
+Route::group(['namespace' => 'pharmacist',"prefix"=>"pharmacist",'middleware' => ['isPharmacist:sitePharmacist']], function() {
+    Route::get('/dashboard', 'PharmacistController@dashboard')->name('pharmacistDashboard');
+    //Route::get('/profile', 'PharmacistController@profile')->name('pharmacistProfile');
 });
 
 
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::namespace('user')->group(function(){
+	Route::get('registration', 'UserController@registration')->name('registration');
+});
 // Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 // Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/admin-post', 'user\UserController@post');
-Route::namespace('user')->group(function(){
-	Route::any('/login', 'UserController@login')->name('login');
-	Route::get('registration', 'UserController@registration')->name('registration');
-	Route::post('create-user', 'UserController@createUser')->name('create-user');
-	Route::get('email-verification/{id}', 'UserController@emailVerification')->name('email-verification');
-	Route::match(['get','post'],'profile', 'UserController@profile')->name('profile');
-	Route::	get('logout', 'UserController@logout')->name('logout');
-});
+// Route::namespace('user')->group(function(){
+// 	Route::any('/login', 'UserController@login')->name('login');
+// 	Route::get('registration', 'UserController@registration')->name('registration');
+// 	Route::post('create-user', 'UserController@createUser')->name('create-user');
+// 	Route::get('email-verification/{id}', 'UserController@emailVerification')->name('email-verification');
+// 	Route::match(['get','post'],'profile', 'UserController@profile')->name('profile');
+// 	Route::	get('logout', 'UserController@logout')->name('logout');
+// });
 
 
 	Route::any('forgot-password', 'CommonController@forgotPassword')->name('forgot-password');

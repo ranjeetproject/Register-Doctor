@@ -51,9 +51,19 @@ return [
             'provider' => 'siteAdmins',
         ],
 
-        'siteUser' => [
+        'sitePatient' => [
             'driver' => 'session',
-            'provider' => 'siteUser',
+            'provider' => 'sitePatients',
+        ],
+
+        'siteDoctor' => [
+            'driver' => 'session',
+            'provider' => 'siteDoctors',
+        ],
+
+        'sitePharmacist' => [
+            'driver' => 'session',
+            'provider' => 'sitePharmacists',
         ],
     ],
 
@@ -83,9 +93,17 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        'siteUser' => [
+        'sitePatients' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\UserPatient::class,
+        ],
+        'siteDoctors' => [
+            'driver' => 'eloquent',
+            'model' => App\UserDoctor::class,
+        ],
+        'sitePharmacists' => [
+            'driver' => 'eloquent',
+            'model' => App\UserPharmacist::class,
         ],
     ],
 

@@ -17,6 +17,18 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\Http\Controllers';
 
     /**
+     * The path to the "home" route for your application.
+     *
+     * @var string
+     */
+
+    public const PATIENT_HOME = 'patient/dashboard';
+
+    public const DOCTOR_HOME = 'doctor/dashboard';
+
+    public const PHARMACIST_HOME = 'pharmacist/dashboard';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
@@ -40,6 +52,10 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapPatientRoutes();
+
+        $this->mapDoctorRoutes();
+        
+        $this->mapPharmacistRoutes();
 
         //
     }
@@ -67,9 +83,37 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapPatientRoutes()
     {
-        Route::middleware('patient')
+        Route::middleware('sitePatient')
              ->namespace($this->namespace)
              ->group(base_path('routes/patient.php'));
+    }
+
+    /**
+     * Define the "doctor" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapDoctorRoutes()
+    {
+        Route::middleware('siteDoctor')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/doctor.php'));
+    }
+
+    /**
+     * Define the "doctor" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapPharmacistRoutes()
+    {
+        Route::middleware('sitePharmacist')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/pharmacist.php'));
     }
 
     /**

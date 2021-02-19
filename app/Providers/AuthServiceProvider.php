@@ -31,8 +31,16 @@ class AuthServiceProvider extends ServiceProvider
             return ($user->role == 0 ) ? true : false;
         });
 
-         Gate::define('isUser',function($user) {
-            return ($user->role == 1 || $user->role == 2 || $user->role == 3) ? true : false;
+         Gate::define('sitePatient',function($user) {
+            return ($user->role == 1) ? true : false;
+        });
+
+        Gate::define('siteDoctor',function($user) {
+            return ($user->role == 2) ? true : false;
+        });
+
+        Gate::define('sitePharmacist',function($user) {
+            return ($user->role == 3) ? true : false;
         });
     }
 }

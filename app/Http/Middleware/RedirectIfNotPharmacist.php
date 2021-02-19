@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfNotUser
+class RedirectIfNotPharmacist
 {
     /**
      * Handle an incoming request.
@@ -14,10 +14,10 @@ class RedirectIfNotUser
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = 'siteUser')
+    public function handle($request, Closure $next, $guard = 'sitePharmacist')
     {
         if (!Auth::guard($guard)->check()) {
-            return redirect()->route('login');
+            return redirect()->route('home');
         }
         return $next($request);
     }

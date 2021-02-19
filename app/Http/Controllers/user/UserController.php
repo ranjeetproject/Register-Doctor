@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Session;
 use Validator;
+use Redirect;
 
 class UserController extends Controller
 {
@@ -30,10 +31,16 @@ class UserController extends Controller
 
     function login(Request $request)
     {
-        if( Auth::guard('siteUser')->user() ) {
-        return redirect("dashboard");
-        }
-        if ( $request->all() ) {
+      if( Auth::guard('sitePatient')->user() ) {
+        return redirect()->route('patientDashboard');
+      }
+      if( Auth::guard('siteDoctor')->user() ) {
+        return redirect()->route('doctorDashboard');
+      }
+      if( Auth::guard('sitePharmacist')->user() ) {
+        return redirect()->route('pharmacistDashboard');
+      }
+      if ( $request->all() ) {
         $validator = $request->validate(
         [
         "email"=>"required|email",
@@ -48,16 +55,38 @@ class UserController extends Controller
         "email"=>$request->email,
         "password"=>$request->password,
         );
-
-        if (Auth::guard("siteUser")->attempt($user_info) && Auth::attempt($user_info) ) {
-        $user_details = Auth::guard("siteUser")->user();
-        return redirect("dashboard");
-        } else {
-        Session::flash('Error-toastr', 'envalid credentials.');
-        return redirect()->route('login');
+        if($request->user_type == '1') {
+          if (Auth::guard("sitePatient")->attempt($user_info) && Auth::attempt($user_info) ) {
+            $user_details = Auth::guard("sitePatient")->user();
+            return redirect()->route('patientDashboard');
+          }else {
+            return redirect()->back()->withErrors([
+              'credentials' => 'Please, check your credentials'
+            ]);
+          }
         }
+        if($request->user_type == '2') {
+          if (Auth::guard("siteDoctor")->attempt($user_info) && Auth::attempt($user_info) ) {
+            $user_details = Auth::guard("siteDoctor")->user();
+            return redirect()->route('doctorDashboard');
+          }else {
+            return redirect()->back()->withErrors([
+              'credentials' => 'Please, check your credentials'
+            ]);
+          }
         }
-        return view('frontend.Auth.login');
+        if($request->user_type == '3') {
+          if (Auth::guard("sitePharmacist")->attempt($user_info) && Auth::attempt($user_info) ) {
+            $user_details = Auth::guard("sitePharmacist")->user();
+            return redirect()->route('pharmacistDashboard');
+          }else {
+            return redirect()->back()->withErrors([
+              'credentials' => 'Please, check your credentials'
+            ]);
+          }
+        }
+      }
+      return view('frontend.auth.login');
     }
 
 
@@ -150,7 +179,7 @@ class UserController extends Controller
 
 
     try {
-     $user = Auth::guard('siteUser')->user();
+     $user = Auth::guard('sitePatient')->user();
       if(!empty($request->email) && ($user->email != $request->email)){
           $request->validate([
           'email' => 'sometimes|nullable|required|unique:users,email',
@@ -159,7 +188,7 @@ class UserController extends Controller
      if(!empty($request->name) ) $user->name = $request->name;
      if(!empty($request->email) && ($user->email != $request->email)) $user->email = $request->email;
       if (isset($request->old_password) && !empty($request->old_password)) {
-        if (!(Hash::check($request->old_password, Auth::guard('siteUser')->user()->password))) {
+        if (!(Hash::check($request->old_password, Auth::guard('sitePatient')->user()->password))) {
             Session::flash('Error-toastr', 'Your old password does not matches');
            return redirect()->back();
         } elseif (!empty($request->new_password)){
@@ -201,9 +230,9 @@ class UserController extends Controller
 
      function logout()
      {
+      Auth::guard()->logout();
      	Session::flush();
-     	Auth::guard("siteUser")->logout();
-     	return redirect()->route('login');
+     	return redirect()->route('home');
      }
 
 

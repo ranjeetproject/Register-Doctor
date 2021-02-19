@@ -1,4 +1,4 @@
-@extends('frontend.layout.app')
+@extends('frontend.beforeloginlayout.app')
 
 @section('content')
     <section class="for-w-100 main-content innerpage  login-page">
@@ -7,18 +7,21 @@
                 <div class="col-sm-12">
                     <form action="{{ route('login')}}" method="POST">
                         {{csrf_field()}}
+                        @error('credentials')
+                            <p>{{ $message }}</p>
+                        @enderror
                         <h1>Login</h1>
                         <p>Please login to your account</p>
                         <div class="form-group select">
-                            <select class="form-control">
-                                <option>Select user type</option>
-                                <option>Patient</option>
-                                <option>Doctor</option>
-                                <option>Pharmacist</option>
+                            <select name="user_type" class="form-control">
+                                <option value="">Select user type</option>
+                                <option value="1">Patient</option>
+                                <option value="2">Doctor</option>
+                                <option value="3">Pharmacist</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="@error('email') is-invalid @enderror form-control" placeholder="Username (this will usually be your Email)">
+                            <input type="email" name="email" class="@error('email') is-invalid @enderror form-control" placeholder="Username (this will usually be your Email)">
                             @error('email')
                                 <span class="invalid-message" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -27,7 +30,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="Password" class="@error('password') is-invalid @enderror form-control" placeholder="Password">
+                            <input type="Password" name="password" class="@error('password') is-invalid @enderror form-control" placeholder="Password">
                             @error('password')
                                 <span class="invalid-message" role="alert">
                                     <strong>{{ $message }}</strong>

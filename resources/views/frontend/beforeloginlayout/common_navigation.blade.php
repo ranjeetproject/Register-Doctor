@@ -23,16 +23,22 @@
 
         @auth
           <li class="nav-item">
+            @if(Auth::guard('siteDoctor')->check())
+            <a class="nav-link" href="{{ route('doctorDashboard')}}">Dashboard</a>
+            @elseif(Auth::guard('sitePatient')->check())
+            <a class="nav-link" href="{{ route('patientDashboard')}}">Dashboard</a>
+            @elseif(Auth::guard('sitePharmacist')->check())
+            <a class="nav-link" href="{{ route('pharmacistDashboard')}}">Dashboard</a>
+            @endif
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sign Out
             </a>
           </li>
-            <form id="logout-form" action="{{route('logout')}}" method="POST"
-                    style="display: none;">
-                @csrf
-            </form>
-          <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
-          </li>
+          <form id="logout-form" action="{{route('logout')}}" method="POST"
+                  style="display: none;">
+              @csrf
+          </form>
         @else
           <li class="nav-item">
             <a href="{{route('login')}}"> Login</a>
