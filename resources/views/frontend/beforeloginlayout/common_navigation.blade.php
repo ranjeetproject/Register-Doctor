@@ -5,19 +5,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto justify-content-end">
-        <li class="nav-item active">
+        <li class="nav-item {{ Request::routeIs('home') ? 'active' : '' }} ">
           <a class="nav-link" href="{{ route('home') }}">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+        <li class="nav-item {{ Request::routeIs('aboutUs') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('aboutUs')}}">About Us</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item {{ Request::routeIs('news') ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('news') }}">News</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">FAQ </a>
+        <li class="nav-item {{ Request::routeIs('userFaq') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('userFaq')}}">FAQ </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item {{ Request::routeIs('contactUs') ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('contactUs') }}">Contact Us</a>
         </li>
 

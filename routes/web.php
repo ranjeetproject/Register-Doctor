@@ -1,8 +1,12 @@
 <?php
 
 Route::get('/', 'frontend\FrontendController@index')->name('home');
+Route::get('/about-us', 'frontend\FrontendController@getaboutUs')->name('aboutUs');
 Route::get('/news', 'frontend\FrontendController@getNews')->name('news');
+Route::get('/faq', 'frontend\FrontendController@getFaq')->name('userFaq');
 Route::get('/contact-us', 'frontend\FrontendController@contactUs')->name('contactUs');
+Route::get('/terms-condition', 'frontend\FrontendController@getTermsCondition')->name('termsCondition');
+Route::get('/privacy-policy', 'frontend\FrontendController@getPrivacyPolicy')->name('privacyPolicy');
 //Route::get('/home', 'frontend\FrontendController@index');
 Route::any('search/{model}/{type?}', 'SearchController')->name('search');
 

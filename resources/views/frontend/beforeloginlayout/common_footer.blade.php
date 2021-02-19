@@ -14,16 +14,16 @@
                 <h3 class="title">Menu</h3>
                 <ul class="footer-menu">
                     <li><a href="{{ route('home') }}">Home </a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="{{ route('aboutUs')}}">About</a></li>
                     <li><a href="{{ route('news') }}">News</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{{ route('userFaq')}}">FAQs</a></li>
+                    <li><a href="{{ route('contactUs')}}">Contact Us</a></li>
                     @guest
                         <li><a href="{{route('login')}}">Login</a></li>
                         <li><a href="{{route('registration')}}">Registration</a></li>
                     @endguest
-                    <li><a href="http://">Terms & Conditions</a></li>
-                    <li><a href="http://">Privacy & Policy</a></li>
+                    <li><a href="{{ route('termsCondition')}}">Terms & Conditions</a></li>
+                    <li><a href="{{ route('privacyPolicy')}}">Privacy & Policy</a></li>
                 </ul>
             </div>
             <div class="col-sm-3 cont-details">
