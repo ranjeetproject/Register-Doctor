@@ -38,11 +38,11 @@
                         Contact Us
                     </h1>
                     <div class="contact-infodetails">
-                        <p>You can Contact Us on the following email address :<br><a href="#">admin@registered-doctor.com</a></p>
+                        <p>{!! $contact_us->content !!}</p>
 
                         <ul>
-                            <li><a href="#">Terms of Acceptable Use </a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="{{ route('termsCondition')}}">Terms of Acceptable Use </a></li>
+                            <li><a href="{{ route('privacyPolicy')}}">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>

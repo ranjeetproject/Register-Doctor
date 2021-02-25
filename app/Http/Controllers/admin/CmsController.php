@@ -20,7 +20,7 @@ class CmsController extends Controller
     	if ($request->isMethod('post')) {
             $validator = $request->validate(
            [
-              "page_name"=>"required",
+              "page_name"=>"required|unique:cms,page_name",
               "title"=>"required",
               "content"=>"required",
             ]);

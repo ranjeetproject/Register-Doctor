@@ -59,7 +59,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                    <input type="email" name="email" class="form-control effect-19" placeholder="" >
+                                    <input type="email" name="email" class="form-control effect-19" placeholder="" autocomplete="off">
                                     <label>Email </label>
                                   </div>
                             <span class="text-danger">{{$errors->first('email')}}</span>

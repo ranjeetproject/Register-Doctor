@@ -43,7 +43,7 @@
                   <a href="" class="btn btn-default btn-sm"><i class="fas fa-edit"></i></a> --}}
                   <a href="" data-toggle="tooltip" title="Refresh" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></a>
                 </div>
-                  <a href="{{ route('admin.cms.create') }}" data-toggle="tooltip" title="Add new user" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> New</a>
+                  {{-- <a href="{{ route('admin.cms.create') }}" data-toggle="tooltip" title="Add new user" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> New</a> --}}
                 <!-- /.btn-group -->
         
                 
@@ -54,11 +54,11 @@
 
                   <thead>
                   <tr>
-                    <th># No</th>
-                    <th>Page name</th>
-                    <th>Title</th>
-                    <th>Content</th>
-                    <th></th>
+                    <th width="5%"># No</th>
+                    <th width="10%">Page name</th>
+                    <th width="10%">Title</th>
+                    {{-- <th width="20%">Content</th> --}}
+                    <th width="20%"></th>
                   </tr>
                   </thead>
 
@@ -75,7 +75,7 @@
                     </td>
                         <td>{{ $page->page_name }}</td>
                         <td>{{ $page->title }}</td>
-                        <td>{!! $page->content !!}</td>
+                        {{-- <td>{!! substr( $page->content, 0,20) !!}</td> --}}
                         <td>
                         {{-- <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.cms', $cms->id) }}"> <i class="fas fa-eye"></i> View</a> --}}
                         <a class="btn btn-sm btn-outline-warning" href="{{ route('admin.cms.edit', $page->id) }}"> <i class="fas fa-edit"></i> Edit</a>
