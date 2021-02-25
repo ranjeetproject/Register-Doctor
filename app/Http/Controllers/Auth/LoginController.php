@@ -8,6 +8,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers; 
 use Illuminate\Validation\ValidationException;
 use Auth;
+use Session;
+use Redirect;
 
 class LoginController extends Controller
 {
@@ -34,8 +36,10 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         $user=Auth::user();
+            // dd($user);
 
         if($user->role == 1){
+            // exit;
             return redirect(RouteServiceProvider::PATIENT_HOME);
         }if($user->role == 2){
             return redirect(RouteServiceProvider::DOCTOR_HOME);
@@ -81,6 +85,7 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+        // echo 'string'; exit;
         $this->validateLogin($request);
         
 
@@ -129,21 +134,57 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        if($request->user_type == '1'){
-            if (Auth::guard("sitePatient")->attempt($this->credentials($request)) && Auth::attempt($this->credentials($request)) ) {
+       
+        if (Auth::attempt($this->credentials($request)) ) {
+
+
+                           
+                // if (Auth::user()->email_verified_at == '') {
+                //     Session::flash('Error-toastr', 'Your email is not verified.');
+                //     // echo 'string'; exit;
+                //     return redirect('login');
+                // }
+                if(Auth::user()->role == '1'){
+                Auth::guard("sitePatient")->attempt($this->credentials($request));
                 return redirect(RouteServiceProvider::PATIENT_HOME);
-            }
-        }
-        if($request->user_type == '2'){
-            if (Auth::guard("siteDoctor")->attempt($this->credentials($request)) && Auth::attempt($this->credentials($request)) ) {
+                }
+
+                if(Auth::user()->role == '2'){
+                Auth::guard("siteDoctor")->attempt($this->credentials($request));
                 return redirect(RouteServiceProvider::DOCTOR_HOME);
-            }
-        }
-        if($request->user_type == '3'){
-            if (Auth::guard("sitePharmacist")->attempt($this->credentials($request)) && Auth::attempt($this->credentials($request)) ) {
+                }
+
+                if(Auth::user()->role == '3'){
+                Auth::guard("sitePharmacist")->attempt($this->credentials($request));
                 return redirect(RouteServiceProvider::PHARMACIST_HOME);
-            }
+                }
         }
+
+
+
+        // if($request->user_type == '1'){
+        //     if (Auth::guard("sitePatient")->attempt($this->credentials($request)) && Auth::attempt($this->credentials($request)) ) {
+
+        //         echo Auth::user()->email_verified_at;
+        //         echo Auth::user()->role;
+        //          exit;
+
+        //         return redirect(RouteServiceProvider::PATIENT_HOME);
+        //     }
+        // }
+        // if($request->user_type == '2'){
+        //     if (Auth::guard("siteDoctor")->attempt($this->credentials($request)) && Auth::attempt($this->credentials($request)) ) {
+        //         return redirect(RouteServiceProvider::DOCTOR_HOME);
+        //     }
+        // }
+        // if($request->user_type == '3'){
+        //     if (Auth::guard("sitePharmacist")->attempt($this->credentials($request)) && Auth::attempt($this->credentials($request)) ) {
+        //         return redirect(RouteServiceProvider::PHARMACIST_HOME);
+        //     }
+        // }
+
+
+
         // if($request->user_type == '1'){
         //     return $this->guard('sitePatient')->attempt(
         //         $this->credentials($request), $request->filled('remember')
@@ -180,21 +221,23 @@ class LoginController extends Controller
      */
     protected function sendLoginResponse(Request $request)
     {
-        //dd($this->redirectPath());
+        // dd($this->redirectPath());
+        // echo Auth::user()->role; exit;
+
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
-        if($request->user_type == '1') {
+        if(Auth::user()->role == '1') {
 
             return $this->authenticated($request, $this->guard('sitePatient')->user())
                     ?: redirect()->intended($this->redirectPath());
         }
-        if($request->user_type == '2') {
+        if(Auth::user()->role == '2') {
 
             return $this->authenticated($request, $this->guard('siteDoctor')->user())
                     ?: redirect()->intended($this->redirectPath());
         }
-        if($request->user_type == '3') {
+        if(Auth::user()->role == '3') {
 
             return $this->authenticated($request, $this->guard('sitePharmacist')->user())
                     ?: redirect()->intended($this->redirectPath());
@@ -210,13 +253,26 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if($user->role == 1){
+                    // Session::flash('Error-toastr', 'Your email is not verified.');
+                    // Session::flash('Success-sweet', 'Your email is not verified.');
+
+        if($user && $user->role == 1){
+           // print_r($user); exit;
+              if ($user->email_verified_at == '') {
+                    Auth::guard('sitePatient')->logout();
+                    Auth::guard('web')->logout();
+                    Session::flash('Error-toastr', 'Your email is not verified.');
+
+                    
+                    return redirect()->route('login');
+                }
+
             return redirect(RouteServiceProvider::PATIENT_HOME);
-        } else if($user->role == 2) {
+        } else if($user && $user->role == 2) {
             return redirect(RouteServiceProvider::DOCTOR_HOME);
-        } else if($user->role == 3) {
+        } else if($user && $user->role == 3) {
             return redirect(RouteServiceProvider::PHARMACIST_HOME);
-        } else {
+        }else {
             return '/';
         }
     }

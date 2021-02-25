@@ -34,7 +34,7 @@
             </div>
 
 <div class="form-group row">
-<label class="col-md-2 form-control-label" for="name">News Type <span class="text-danger">*</span></label>
+<label class="col-md-2 form-control-label" for="name">News Type </label>
 
 <div class="col-md-10">
    <input class="form-control @error('news_type') is-invalid @enderror"
@@ -42,6 +42,41 @@
        placeholder="Please enter news news type"
       value="{{$news->news_type}}">
 @error('news_type')
+<span class="error invalid-feedback" id="error_description">{{ $message }}</span>
+@enderror
+</div>
+</div>
+
+
+<div class="form-group row">
+<label class="col-md-2 form-control-label" for="name">Posted By </label>
+
+<div class="col-md-10">
+   <input class="form-control @error('posted_by') is-invalid @enderror"
+       type="text" name="posted_by" id="posted_by"
+       placeholder="Posted by"
+       maxlength="191" value="{{$news->posted_by}}">
+@error('posted_by')
+<span class="error invalid-feedback" id="error_description">{{ $message }}</span>
+@enderror
+</div>
+</div>
+
+
+
+<div class="form-group row">
+
+
+<label class="col-md-2 form-control-label" for="name">Image </label>
+@if(!empty($news->image))
+<img width="100px" height="100px" src="{{asset('public/uploads/news/'.$news->image)}}">
+<br>
+@endif
+
+<div class="col-md-10">
+   <input class="form-control @error('image') is-invalid @enderror"
+       type="file" name="image" id="image">
+@error('image')
 <span class="error invalid-feedback" id="error_description">{{ $message }}</span>
 @enderror
 </div>

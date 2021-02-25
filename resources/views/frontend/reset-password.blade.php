@@ -60,10 +60,10 @@
 
 
       <p class="mt-3 mb-1">
-        @if($user->role == 2)
-         <a href="{{ route('login') }}">Login</a>
-        @elseif($user->role == 1)
+        @if($user->role == 0)
          <a href="{{ route('admin.login') }}">Login</a>
+        @else
+         <a href="{{ route('login') }}">Login</a>
         @endif
       </p>
     </div>

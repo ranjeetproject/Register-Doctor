@@ -12,14 +12,16 @@
                         @enderror
                         <h1>Login</h1>
                         <p>Please login to your account</p>
-                        <div class="form-group select">
+                       {{--  <div class="form-group select">
                             <select name="user_type" class="form-control">
                                 <option value="">Select user type</option>
                                 <option value="1">Patient</option>
                                 <option value="2">Doctor</option>
                                 <option value="3">Pharmacist</option>
                             </select>
-                        </div>
+                        </div> --}}
+
+                        
                         <div class="form-group">
                             <input type="email" name="email" class="@error('email') is-invalid @enderror form-control" placeholder="Username (this will usually be your Email)">
                             @error('email')
@@ -38,7 +40,7 @@
                             @enderror 
                         </div>
                         <div class="form-group Forgot">
-                            <a href="#" target="_blank" rel="noopener noreferrer">Forgot password ?</a>
+                            <a href="{{ route('forgot-password') }}" target="_blank" rel="noopener noreferrer">Forgot password ?</a>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary blue-button">Login</button>

@@ -103,10 +103,11 @@ class UserController extends Controller
 
        $validator = $request->validate(
            [
-              "name"=>"required",
+              "forename"=>"required",
+              "surname"=>"required",
               "email"=>"required|email|unique:users,email",
               "password"=>"required|min:6",
-              "con_password"=>"required|same:password",
+              "confirm_password"=>"required|same:password",
             ]
       );
 
@@ -114,21 +115,22 @@ class UserController extends Controller
     try {
   
       $user = new User;
-      $user->name = $request->name;
+      $user->forename = $request->forename;
+      $user->surname = $request->surname;
+      $user->name = $request->forename.' '.$request->surname;
       $user->email = $request->email;
+      $user->role = $request->role;
       $user->password = Hash::make($request->password);
       $user->save();
     
-    		$role = Role::where('role','user')->first();
-         $user->role = $role->id;
-         $user->save();
+    	
 
-         $notifyDetails['title'] = 'New user Registration';
-         $notifyDetails['user_id'] = $user->id;
-         $notifyDetails['type'] = 'registration';
-         $notifyDetails['body'] = ucfirst($request->name).' Registration in your site';
-         $admin = User::whereRole(1)->first();
-         $admin->notify(new UserNotification($notifyDetails));
+         // $notifyDetails['title'] = 'New user Registration';
+         // $notifyDetails['user_id'] = $user->id;
+         // $notifyDetails['type'] = 'registration';
+         // $notifyDetails['body'] = ucfirst($request->name).' Registration in your site';
+         // $admin = User::whereRole(1)->first();
+         // $admin->notify(new UserNotification($notifyDetails));
 
         Mail::to($request->email)->send(new Registration($user->id));
         DB::commit();
@@ -154,7 +156,7 @@ class UserController extends Controller
           $user_id = Crypt::decrypt($id);
           $user = User::find($user_id);
           if($user->email_verified_at != null){
-          return redirect()->route('login')->with('Info-sweet','Your email already verifyed.');
+          return redirect()->route('login')->with('Info-sweet','Your email already verified.');
           }
           $user->email_verified_at = date('Y-m-d H:i:s');
         if ($user->save()) {
