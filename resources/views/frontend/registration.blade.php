@@ -15,43 +15,54 @@
                         <div class="row main-form-fild input-effect">
                             <div class="col-sm-12">
                                 <div class="form-group select">
-                                    <select class="form-control" name="role">
-                                        <option>Select user type</option>
+                                    <select class="form-control" name="user_type">
+                                        <option value="">Select user type</option>
                                         <option value="1">Patient</option>
                                         <option value="2">Doctor</option>
                                         <option value="3">Pharmacist</option>
                                       </select>
                                   </div>
+                                     <span class="text-danger">{{$errors->first('user_type')}}</span>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                    <input type="text" name="forename" class="form-control effect-19" placeholder="" required="">
+                                    <input type="text" name="forename" class="form-control effect-19" placeholder="" >
                                     <label>Forename </label>
                                   </div>
+                                  <span class="text-danger">{{$errors->first('forename')}}</span>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                    <input type="text" name="surname" class="form-control effect-19" placeholder="" required="" autocomplete="off">
+                                    <input type="text" name="surname" class="form-control effect-19" placeholder=""  autocomplete="off">
                                     <label>Surname </label>
                                   </div>
+                                   <span class="text-danger">{{$errors->first('surname')}}</span>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                    <input type="password" name="password" class="form-control effect-19" placeholder="" required="" autocomplete="off">
+                                    <input type="password" name="password" class="form-control effect-19" placeholder=""  autocomplete="off">
                                     <label>Password </label>
                                   </div>
+                            <span class="text-danger">{{$errors->first('password')}}</span>
+
                             </div>
+
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                    <input type="password" name="confirm_password" class="form-control effect-19" placeholder="" required="">
+                                    <input type="password" name="confirm_password" class="form-control effect-19" placeholder="" >
                                     <label>Confirm Password</label>
                                 </div>
+                            <span class="text-danger">{{$errors->first('confirm_password')}}</span>
+
                             </div>
+
+
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                    <input type="email" name="email" class="form-control effect-19" placeholder="" required="">
+                                    <input type="email" name="email" class="form-control effect-19" placeholder="" >
                                     <label>Email </label>
                                   </div>
+                            <span class="text-danger">{{$errors->first('email')}}</span>
                             </div>
                           
                             <div class="col-sm-12 Submit-Medical-Record">
@@ -71,8 +82,9 @@
 @endsection
 
 @push('scripts')
-   <script>
-        $(window).load(function(){
+   {{-- <script> --}}
+    <script type="text/javascript">
+      $(window).on('load', function(){
     $(".tab-content #Patient-Profile input, .tab-content #Patient-Profile textarea").val("");
     
     $(".input-effect input, .input-effect textarea").focusout(function(){
@@ -83,5 +95,6 @@
     }
     })
   });
+    
     </script>
 @endpush

@@ -103,6 +103,7 @@ class UserController extends Controller
 
        $validator = $request->validate(
            [
+              "user_type"=>"required",
               "forename"=>"required",
               "surname"=>"required",
               "email"=>"required|email|unique:users,email",
@@ -119,7 +120,7 @@ class UserController extends Controller
       $user->surname = $request->surname;
       $user->name = $request->forename.' '.$request->surname;
       $user->email = $request->email;
-      $user->role = $request->role;
+      $user->role = $request->user_type;
       $user->password = Hash::make($request->password);
       $user->save();
     
@@ -148,7 +149,6 @@ class UserController extends Controller
             return redirect()->back();
         }
     }
-
    
 
     public function emailVerification($id)
