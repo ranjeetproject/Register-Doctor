@@ -37,18 +37,49 @@
             </div>
 
 <div class="form-group row">
-<label class="col-md-2 form-control-label" for="name">News Type <span class="text-danger">*</span></label>
+<label class="col-md-2 form-control-label" for="name">News Type </label>
 
 <div class="col-md-10">
    <input class="form-control @error('news_type') is-invalid @enderror"
        type="text" name="news_type" id="news_type"
-       placeholder="Please enter news news type"
+       placeholder="Please enter news type"
        maxlength="191" value="{{old('news_type')}}">
 @error('news_type')
 <span class="error invalid-feedback" id="error_description">{{ $message }}</span>
 @enderror
 </div>
 </div>
+
+
+
+<div class="form-group row">
+<label class="col-md-2 form-control-label" for="name">Posted By </label>
+
+<div class="col-md-10">
+   <input class="form-control @error('posted_by') is-invalid @enderror"
+       type="text" name="posted_by" id="posted_by"
+       placeholder="Posted by"
+       maxlength="191" value="{{old('posted_by')}}">
+@error('posted_by')
+<span class="error invalid-feedback" id="error_description">{{ $message }}</span>
+@enderror
+</div>
+</div>
+
+
+<div class="form-group row">
+<label class="col-md-2 form-control-label" for="name">Image </label>
+
+<div class="col-md-10">
+   <input class="form-control @error('image') is-invalid @enderror"
+       type="file" name="image" id="image">
+@error('image')
+<span class="error invalid-feedback" id="error_description">{{ $message }}</span>
+@enderror
+</div>
+</div>
+
+
 
 
 <div class="form-group row">

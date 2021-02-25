@@ -25,7 +25,22 @@ class NewsController extends Controller
             ]);
     	$news = new News;
     	$news->heading = $request->heading;
-    	$news->news_type = $request->news_type;
+        $news->news_type = $request->news_type;
+    	$news->posted_by = $request->posted_by;
+
+        if ($request->hasFile('image')){
+           
+            $rand_val           = date('YMDHIS') . rand(11111, 99999);
+            $image_file_name    = md5($rand_val);
+            $file               = $request->file('image');
+            $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
+            $destinationPath    = public_path().'/uploads/news';
+            $file->move($destinationPath,$fileName);
+            $news->image   = $fileName;
+      
+        }
+
+
     	$news->content = $request->content;
     	$news->save();
     	Session::flash('Success-toastr', 'Successfully added.');
@@ -37,9 +52,28 @@ class NewsController extends Controller
     {
         $news = News::find($id);
         if ($request->isMethod('post')) {
+            $validator = $request->validate(
+           [
+              "heading"=>"required",
+              "content"=>"required",
+            ]);
+            
         $news->heading = $request->heading;
         $news->news_type = $request->news_type;
         $news->content = $request->content;
+        $news->posted_by = $request->posted_by;
+
+        if ($request->hasFile('image')){
+           
+            $rand_val           = date('YMDHIS') . rand(11111, 99999);
+            $image_file_name    = md5($rand_val);
+            $file               = $request->file('image');
+            $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
+            $destinationPath    = public_path().'/uploads/news';
+            $file->move($destinationPath,$fileName);
+            $news->image   = $fileName;
+      
+        }
         $news->save();
         Session::flash('Success-toastr', 'Successfully Updated.');
         }

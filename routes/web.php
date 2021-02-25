@@ -30,21 +30,25 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::namespace('user')->group(function(){
-	Route::get('registration', 'UserController@registration')->name('registration');
-});
+// Route::namespace('user')->group(function(){
+// 	Route::get('registration', 'UserController@registration')->name('registration');
+//     Route::post('create-user', 'UserController@createUser')->name('create-user');
+
+// });
 // Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 // Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
+Route::namespace('user')->group(function(){
+	// Route::any('/login', 'UserController@login')->name('login');
+	Route::get('registration', 'UserController@registration')->name('registration');
+	Route::post('create-user', 'UserController@createUser')->name('create-user');
+	Route::get('email-verification/{id}', 'UserController@emailVerification')->name('email-verification');
+	// Route::match(['get','post'],'profile', 'UserController@profile')->name('profile');
+	// Route::	get('logout', 'UserController@logout')->name('logout');
+});
+
+
 Route::get('/admin-post', 'user\UserController@post');
-// Route::namespace('user')->group(function(){
-// 	Route::any('/login', 'UserController@login')->name('login');
-// 	Route::get('registration', 'UserController@registration')->name('registration');
-// 	Route::post('create-user', 'UserController@createUser')->name('create-user');
-// 	Route::get('email-verification/{id}', 'UserController@emailVerification')->name('email-verification');
-// 	Route::match(['get','post'],'profile', 'UserController@profile')->name('profile');
-// 	Route::	get('logout', 'UserController@logout')->name('logout');
-// });
 
 
 	Route::any('forgot-password', 'CommonController@forgotPassword')->name('forgot-password');

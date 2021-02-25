@@ -27,5 +27,10 @@
         <!-- Footer start -->
             @include('frontend.beforeloginlayout.common_footer')
         <!-- Footer end -->
+
+         <!-- common js start -->
+            @include('frontend.beforeloginlayout.common_js')
+        <!-- common js end -->
+           @stack('scripts')
     </body>
 </html>

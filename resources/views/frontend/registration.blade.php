@@ -1,109 +1,87 @@
-@extends('layout.frontend_layout')
+@extends('frontend.beforeloginlayout.app')
 
-@section('title', 'home')
-
-@section('body')
-<div class="hold-transition register-page">
-<div class="register-box">
-  <div class="register-logo">
-    <a href="{{ url('/') }}"><b>{{env('APP_NAME')}}</b></a>
-  </div>
-
-  <div class="card">
-    <div class="card-body register-card-body">
-      <p class="login-box-msg">Register a new membership</p>
-         @include('common.alert')
-     <form action="{{ route('create-user') }}" method="post">
-           @csrf
-        <div class="input-group mb-3">
-          <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Full name">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
+@section('content')
+    <section class="for-w-100 main-content innerpage  login-page">
+        <div class="container">
+            
+            <div class="row d-flax  align-items-center     justify-content-center  Patient-Profile-page">
+                <div class="col-sm-10">
+                    <form class="for-w-100" method="post" action="{{route('create-user')}}">
+                      @csrf
+                        <h1 class="inner-page-title">
+                            Create Account
+                        </h1>
+                        <p>Main Account Holders Must Be Over 18</p>
+                        <div class="row main-form-fild input-effect">
+                            <div class="col-sm-12">
+                                <div class="form-group select">
+                                    <select class="form-control" name="role">
+                                        <option>Select user type</option>
+                                        <option value="1">Patient</option>
+                                        <option value="2">Doctor</option>
+                                        <option value="3">Pharmacist</option>
+                                      </select>
+                                  </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group required">
+                                    <input type="text" name="forename" class="form-control effect-19" placeholder="" required="">
+                                    <label>Forename </label>
+                                  </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group required">
+                                    <input type="text" name="surname" class="form-control effect-19" placeholder="" required="" autocomplete="off">
+                                    <label>Surname </label>
+                                  </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group required">
+                                    <input type="password" name="password" class="form-control effect-19" placeholder="" required="" autocomplete="off">
+                                    <label>Password </label>
+                                  </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group required">
+                                    <input type="password" name="confirm_password" class="form-control effect-19" placeholder="" required="">
+                                    <label>Confirm Password</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group required">
+                                    <input type="email" name="email" class="form-control effect-19" placeholder="" required="">
+                                    <label>Email </label>
+                                  </div>
+                            </div>
+                          
+                            <div class="col-sm-12 Submit-Medical-Record">
+                                <button type="submit" class="btn blue-button smr-btn">Submit</button>
+                            </div>
+                            <div class="col-sm-12 form-group new-regis ">
+                                <p class="alre-tex-aling">Already having an account? <a href="{{route('login')}}">Login</a>  </p>
+                            </div>
+                        </div>
+                        </form>
+                      </div>
             </div>
-          </div>
         </div>
-        @error('name')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
-
-        <div class="input-group mb-3">
-          <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-
-          @error('email')
-            <small class="text-danger">{{ $message }}</small>
-          @enderror
-
-        <div class="input-group mb-3">
-          <input type="password" class="form-control  @error('password') is-invalid @enderror" name="password" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-
-          @error('password')
-            <small class="text-danger">{{ $message }}</small>
-          @enderror
-
-        <div class="input-group mb-3">
-          <input type="password" class="form-control @error('con_password') is-invalid @enderror" name="con_password" placeholder="Retype password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-          @error('con_password')
-            <small class="text-danger">{{ $message }}</small>
-          @enderror
-
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-              <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-          </div>
-          <!-- /.col -->
-        </div>
-
-      </form>
-
-      <div class="social-auth-links text-center">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i>
-          Sign up using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i>
-          Sign up using Google+
-        </a>
-      </div>
-
-      <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
-    </div>
-    <!-- /.form-box -->
-  </div><!-- /.card -->
-</div>
-<!-- /.register-box -->
-</div>
-
-
+    </section>
 
 
 @endsection
+
+@push('scripts')
+   <script>
+        $(window).load(function(){
+    $(".tab-content #Patient-Profile input, .tab-content #Patient-Profile textarea").val("");
+    
+    $(".input-effect input, .input-effect textarea").focusout(function(){
+    if($(this).val() != ""){
+    $(this).addClass("has-content");
+    }else{
+    $(this).removeClass("has-content");
+    }
+    })
+  });
+    </script>
+@endpush
