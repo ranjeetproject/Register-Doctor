@@ -1,13 +1,25 @@
 @extends('frontend.beforeloginlayout.app')
 
 @section('content')
+
 <section class="for-w-100 main-content innerpage  login-page">
         <div class="container">
-<h3 class="text-center text-dark">{{$get_faq->title}}</h3>
+        	<div class="row">
+                <div class="col-sm-12">
+                    <h1 class="inner-page-title">
+                        {{$get_faq->title}}
+                    </h1>
+                </div>
+            </div>
 <br>
-<div class="text-dark">
-{!! $get_faq->content !!}
+<div class="row">
+ <div class="col-sm-12">
+   {!! $get_faq->content !!}
+</div>
 </div>
 </div>
 </section>
+
+
+
 @endsection

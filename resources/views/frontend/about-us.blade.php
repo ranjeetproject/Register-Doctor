@@ -4,10 +4,19 @@
 
 <section class="for-w-100 main-content innerpage  login-page">
         <div class="container">
-<h3 class="text-center text-dark">{{$get_about_us->title}}</h3>
+        	<div class="row">
+                <div class="col-sm-12">
+                    <h1 class="inner-page-title">
+                        {{$get_about_us->title}}
+                    </h1>
+                </div>
+            </div>
+{{-- <h3 class="text-center text-dark"></h3> --}}
 <br>
-<div class="text-dark">
-{!! $get_about_us->content !!}
+<div class="row">
+ <div class="col-sm-12">
+   {!! $get_about_us->content !!}
+</div>
 </div>
 </div>
 </section>

@@ -99,9 +99,9 @@
                         <a class="btn btn-sm btn-outline-primary" data-toggle="tooltip" title="Click to view" href="{{ route('admin.user.view', $user->id) }}"> <i class="fas fa-eye"></i></a>
 
                         @if($user->status == 1)
-                        <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to Block" href="{{ route('admin.user.block', $user->id) }}"> <i class="fas fa-ban"></i></a>
+                        <a class="btn btn-sm btn-outline-success" data-toggle="tooltip" title="Click to Block" href="{{ route('admin.user.block', $user->id) }}"> <i class="fas fa-ban"></i></a>
                         @else
-                        <a class="btn btn-sm btn-outline-success" data-toggle="tooltip" title="Click to Active" href="{{ route('admin.user.active', $user->id) }}"> <i class="fas fa-ban"></i></a>
+                        <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to Active" href="{{ route('admin.user.active', $user->id) }}"> <i class="fas fa-ban"></i></a>
 
                         @endif
 
