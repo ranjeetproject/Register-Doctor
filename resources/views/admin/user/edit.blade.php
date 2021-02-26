@@ -6,7 +6,7 @@
 
          @section('header', 'User Edit')
           @section('badge')
-           <li class="breadcrumb-item"><a href="{{ route('admin.users') }}">Users</a></li>
+           <li class="breadcrumb-item"><a href="{{ route('admin.users', $user->role) }}">Users</a></li>
            <li class="breadcrumb-item"><a href="{{ route('admin.user.edit', $user->id) }}">User edit</a></li>
           @endsection
    
@@ -30,7 +30,7 @@
                   </li>
 
                   <li class="list-group-item">
-                    <b>Mobile</b> <a href="tel:{{$user->profile->mobile}}" class="float-right">{{$user->profile->mobile}}</a>
+                    <b>Telephone</b> <a href="tel:{{$user->profile->mobile}}" class="float-right">{{$user->profile->mobile}}</a>
                   </li>
 
                   <li class="list-group-item">
@@ -58,8 +58,8 @@
                   </p>
                 <hr>
 
-                <strong><i class="far fa-file-alt mr-1"></i> About me</strong>
-                  <p class="text-muted">{{$user->profile->about}}</p>
+               {{--  <strong><i class="far fa-file-alt mr-1"></i> About me</strong>
+                  <p class="text-muted">{{$user->profile->about}}</p> --}}
               </div>
               <!-- /.card-body -->
             </div>
@@ -98,11 +98,16 @@
                         </div>
                       </div>
 
+
+                      
+
                       <div class="form-group row">
                         <label  class="col-sm-2 col-form-label">DOB</label>
                         <div class="col-sm-10">
                           <div class="input-group date datepicker @error('dob') is-invalid @enderror" id="dob" data-target-input="nearest">
                         <input type="text" name="dob" class="form-control datetimepicker-input" data-target="#dob" value="{{ $user->profile->dob }}"/>
+
+
                         <div class="input-group-append" data-target="#dob" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -114,7 +119,7 @@
                       </div>
 
                       <div class="form-group row">
-                        <label  class="col-sm-2 col-form-label">Gender</label>
+                        <label  class="col-sm-2 col-form-label">Sex</label>
                         <div class="col-sm-10">
                        <div class="form-group clearfix">
                       <div class="icheck-success d-inline">
@@ -137,7 +142,7 @@
                       </div>
 
                       <div class="form-group row">
-                        <label  class="col-sm-2 col-form-label">Mobile</label>
+                        <label  class="col-sm-2 col-form-label">Telephone</label>
                         <div class="col-sm-10">
                           <input type="text" name="mobile" class="form-control @error('mobile') is-invalid @enderror" placeholder="mobile" value="{{$user->profile->mobile}}">
                        @error('mobile')
@@ -156,7 +161,7 @@
                         </div>
                       </div>
 
-                      <div class="form-group row">
+                      {{-- <div class="form-group row">
                         <label  class="col-sm-2 col-form-label">About me</label>
                         <div class="col-sm-10">
                           <textarea name="about" class="form-control @error('about') is-invalid @enderror" placeholder="about me">{{$user->profile->about}}</textarea>
@@ -164,7 +169,7 @@
                            <span class="error invalid-feedback" id="error_description">{{ $message }}</span>
                           @enderror
                         </div>
-                      </div>
+                      </div> --}}
                       
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">

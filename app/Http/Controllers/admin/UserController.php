@@ -142,7 +142,7 @@ class UserController extends Controller
         }
             // return redirect()->back();
   
-	      return redirect()->route('admin.users');
+	      return redirect()->route('admin.users',$user->role);
 	    }
 
   public function userDelete($uid='', Request $request)
@@ -160,7 +160,7 @@ class UserController extends Controller
                 $user->delete();
       }
        Session::flash('Success-toastr', 'Successfully deleted.');
-      return redirect()->route('admin.users');
+      return redirect()->back();
     }
 
     public function blockUser(User $user)

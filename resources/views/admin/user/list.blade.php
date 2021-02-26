@@ -75,7 +75,7 @@
                     <th># No</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Phone</th>
+                    {{-- <th>Phone</th> --}}
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -92,11 +92,11 @@
                     </td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->mobile }}</td>
+                        {{-- <td>{{ $user->mobile }}</td> --}}
                         <td width="150px">
 
                         {{-- <div id="list_button{{$loop->iteration}}" style="display: none"> --}}
-                       {{--  <a class="btn btn-sm btn-outline-primary" data-toggle="tooltip" title="Click to view" href="{{ route('admin.user.view', $user->id) }}"> <i class="fas fa-eye"></i></a>
+                        <a class="btn btn-sm btn-outline-primary" data-toggle="tooltip" title="Click to view" href="{{ route('admin.user.view', $user->id) }}"> <i class="fas fa-eye"></i></a>
 
                         @if($user->status == 1)
                         <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to Block" href="{{ route('admin.user.block', $user->id) }}"> <i class="fas fa-ban"></i></a>
@@ -106,7 +106,7 @@
                         @endif
 
                         <a class="btn btn-sm btn-outline-warning" data-toggle="tooltip" title="Click to edit" href="{{ route('admin.user.edit', $user->id) }}"> <i class="fas fa-edit"></i></a>
-                        <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to delete" onclick="return confirm('Are you sure want to delete?');" href="{{ route('admin.user.delete', $user->id) }}"> <i class="fas fa-trash-alt"></i></a> --}}
+                        <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to delete" onclick="return confirm('Are you sure want to delete?');" href="{{ route('admin.user.delete', $user->id) }}"> <i class="fas fa-trash-alt"></i></a>
                        {{-- </div> --}}
                        
 

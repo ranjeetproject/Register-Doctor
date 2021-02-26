@@ -17,7 +17,9 @@ class FrontendController extends Controller
 
     public function getaboutUs()
     {
-        return view('frontend.about-us');
+           $get_about_us = Cms::where('page_name','About Us')->first();
+        return view('frontend.about-us', compact('get_about_us'));
+        // return view('frontend.about-us');
     }
 
     public function getNews(Request $request)

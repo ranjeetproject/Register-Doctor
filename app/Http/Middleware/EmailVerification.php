@@ -24,7 +24,7 @@ class EmailVerification
         }else{
             Session::flush();
             Auth::guard("sitePatient")->logout();
-           return redirect()->route('login')->with('Warning-sweet','Your email not verified');
+           return redirect()->route('login')->with('Warning-sweet','Your email is not verified.');
         }
 
     }

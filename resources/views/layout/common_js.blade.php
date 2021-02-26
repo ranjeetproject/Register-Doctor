@@ -41,6 +41,9 @@
 <script src="{{ asset('public/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{ asset('public/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{ asset('public/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js" integrity="sha512-+UiyfI4KyV1uypmEqz9cOIJNwye+u+S58/hSwKEAeUMViTTqM9/L4lqu8UxJzhmzGpms8PzFJDzEqXL9niHyjA==" crossorigin="anonymous"></script> --}}
+
 @include('common.toastr')
 @include('common.sweetalert')
 
@@ -72,8 +75,9 @@ $(document).ready(function(){
 
   //*********** for datetimepicker ***********///
    $('.datepicker').datetimepicker({
+        // format: 'L',
+         format: '{{ getSetting('date_format') ?? 'DD-MM-YYYY' }}',
         // format: 'DD-MM-YYYY',
-        format: '{{ getSetting('date_format') ?? 'DD-MM-YYYY' }}',
     });
 
 

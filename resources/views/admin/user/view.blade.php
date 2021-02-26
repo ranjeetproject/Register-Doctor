@@ -6,7 +6,7 @@
 
          @section('header', 'User View')
           @section('badge')
-           <li class="breadcrumb-item"><a href="{{ route('admin.users') }}">Users</a></li>
+           <li class="breadcrumb-item"><a href="{{ route('admin.users', $user->role) }}">Users</a></li>
            <li class="breadcrumb-item"><a href="{{ route('admin.user.view', $user->id) }}">User view</a></li>
           @endsection
    
@@ -72,12 +72,19 @@
         
         <li class="nav-item">
           <a href="tel:{{ $user->profile->mobile}}" class="nav-link">
-            <strong><i class="fas fa-mobile mr-1"></i> Phone : {{ $user->profile->mobile}}</strong>
+            <strong><i class="fas fa-mobile mr-1"></i> Telephone : {{ $user->profile->mobile}}</strong>
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <strong><i class="fas fa-mobile mr-1"></i> DOB : {{ $user->profile->dob}}</strong>
+            <strong><i class="fas fa-calendar mr-1"></i> DOB : {{ $user->profile->dob}}</strong>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <strong><i class="far fa-file-alt mr-1"></i> Sex</strong>
+            <p class="text-muted">{{ $user->profile->gender}}</p>
           </a>
         </li>
 
@@ -87,12 +94,6 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <strong><i class="far fa-file-alt mr-1"></i> About</strong>
-            <p class="text-muted">{{ $user->profile->about}}</p>
-          </a>
-        </li>
          
       </ul>
      

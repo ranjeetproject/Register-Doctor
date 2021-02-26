@@ -253,20 +253,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-                    // Session::flash('Error-toastr', 'Your email is not verified.');
-                    // Session::flash('Success-sweet', 'Your email is not verified.');
-
         if($user && $user->role == 1){
-           // print_r($user); exit;
-              if ($user->email_verified_at == '') {
-                    Auth::guard('sitePatient')->logout();
-                    Auth::guard('web')->logout();
-                    Session::flash('Error-toastr', 'Your email is not verified.');
-
-                    
-                    return redirect()->route('login');
-                }
-
             return redirect(RouteServiceProvider::PATIENT_HOME);
         } else if($user && $user->role == 2) {
             return redirect(RouteServiceProvider::DOCTOR_HOME);
