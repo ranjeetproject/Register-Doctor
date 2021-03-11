@@ -11,51 +11,81 @@
                     </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link btn"   href="Patient-Payment-Details.html">Payment Details</a>
+                    <a class="nav-link btn" href="#">Payment Details</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="Patient-Profile">
-                        <form class="for-w-100">
+                        <form class="for-w-100" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="for-profile-image">
-                                <input type="file" id="imgInp">
-                                <img id="blah" src="{{ asset('public/images/frontend/images/msg-pic3.png') }}" alt="your image"><br>
+                                <input type="file" name="profile_photo" id="imgInp">
+                                
+                                <img id="blah" src="{{ $user->profile->profile_photo }}" alt="your image">
+                                
+                                <br>
+
                                 <span>Update Profile Image</span>
+
                             </div>
                             <div class="row main-form-fild">
                                 <div class="col-sm-12">
                                     <div class="form-group required">
-                                        <input type="text" class="form-control" placeholder="Unique Patient Number (UPN)" required>
+                                        <input type="text" name="upn" class="form-control" placeholder="Unique Patient Number (UPN)">
+                                    @error('upn')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group required">
-                                        <input type="text" class="form-control" placeholder="Forename" required>
+                                        <input type="text" name="forename" class="form-control" placeholder="Forename" value="{{$user->forename}}">
+                                    @error('forename')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group required">
-                                        <input type="text" class="form-control" placeholder="Surname" required>
+                                        <input type="text" name="surname" class="form-control" placeholder="Surname" value="{{$user->surname}}">
+                                    @error('surname')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group required">
-                                        <input type="text" class="form-control" placeholder="Sex" required>
+                                        <select name="gender" class="form-control" >
+                                            <option value="">Select</option>
+                                            <option value="male" {{($user->profile->gender == 'male') ? 'Selected':''}}>Male</option>
+                                            <option value="female" {{($user->profile->gender == 'female') ? 'Selected':''}} >Female</option>
+                                            <option value="other" {{($user->profile->gender == 'other') ? 'Selected':''}} >Others</option>
+                                        </select>
+                                    @error('gender')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group required">
-                                        <input onfocus="(this.type='date')" class="form-control" placeholder="Date of Birth" required>
+                                        <input onfocus="(this.type='date')" class="form-control" placeholder="Date of Birth" name="dob" value="{{$user->profile->dob}}">
+                                    @error('dob')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group required">
-                                        <input type="text" class="form-control" placeholder="Address" required>
+                                        <input type="text" class="form-control" name="address" placeholder="Address" value="{{$user->profile->address}}">
+                                    @error('address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group required">
-                                        <input type="email" class="form-control" placeholder="Email" required>
+                                        <input type="email" name="email" class="form-control" placeholder="Email" value="{{$user->email}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -63,12 +93,18 @@
                                 </div>
                                 <div class="col-sm-6 ">
                                     <div class="form-group required">
-                                        <input type="tel" class="form-control" placeholder="Telephone 1" required>
+                                        <input type="tel" name="telephone1" class="form-control" placeholder="Telephone 1" value="{{$user->profile->telephone1}}">
+                                        @error('telephone1')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="tel" class="form-control" placeholder="Telephone 2">
+                                        <input type="tel" name="telephone2" class="form-control" placeholder="Telephone 2" value="{{$user->profile->telephone2}}">
+                                        @error('telephone2')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -76,22 +112,34 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name">
+                                        <input type="text" name="gp_name" class="form-control" placeholder="Name" value="{{$user->profile->gp_name}}">
+                                        @error('gp_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Address">
+                                        <input type="text" name="gp_address" class="form-control" placeholder="Address" value="{{$user->profile->gp_address}}">
+                                        @error('gp_address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="tel" class="form-control" placeholder="Telephone ">
+                                        <input type="tel" name="gp_telephone" value="{{$user->profile->gp_telephone}}" class="form-control" placeholder="Telephone ">
+                                        @error('gp_telephone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Email">
+                                        <input type="text" name="gp_email" value="{{$user->profile->gp_email}}" class="form-control" placeholder="Email">
+                                        @error('gp_email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -99,26 +147,38 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name ">
+                                        <input type="text" name="n_of_kin_name" value="{{$user->profile->n_of_kin_name}}" class="form-control" placeholder="Name">
+                                        @error('n_of_kin_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Address">
+                                        <input type="text"  name="n_of_kin_address" value="{{$user->profile->n_of_kin_address}}"  class="form-control" placeholder="Address">
+                                        @error('n_of_kin_address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Relationship">
+                                        <input type="text" name="n_of_kin_relationship" value="{{$user->profile->n_of_kin_relationship}}" class="form-control" placeholder="Relationship">
+                                        @error('n_of_kin_relationship')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Phone No.">
+                                        <input type="text" name="n_of_kin_phone" value="{{$user->profile->n_of_kin_phone}}"  class="form-control" placeholder="Phone No.">
+                                        @error('n_of_kin_phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-12 Mandator">
-                                    <label>To change password to <a href="#">Click here</a>  <span><sup>*</sup>Mandatory</span> </label>
+                                    <label>To change password to <a href="{{route('patient.change-password')}}">Click here</a>  <span><sup>*</sup>Mandatory</span> </label>
                                 </div>
                                 <div class="col-sm-12 Submit-Medical-Record">
                                     <button type="submit" class="btn blue-button smr-btn">Submit</button>

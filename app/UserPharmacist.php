@@ -40,15 +40,22 @@ class UserPharmacist extends Authenticatable
         return ($this->email_verified_at != null) ? true : false;
     }
 
-    // public function userRoles()
-    // {
-    //     return $this->hasMany('App\Models\UserRole');
-        
-    // }
 
     public function profile()
     {
-        return $this->hasOne('App\Models\UserProfile')->withDefault();
+       return $this->hasOne('App\Models\UserProfile','user_id','id')->withDefault();
+    }
+
+    public function openingTime()
+    {
+        return $this->hasOne('App\Models\PharmacyOpeningTime','user_id','id')->withDefault();
+        
+    }
+
+    public function deliveryOption()
+    {
+        return $this->hasOne('App\Models\DeliveryOptions','user_id','id')->withDefault();
+        
     }
 
     public function otp()

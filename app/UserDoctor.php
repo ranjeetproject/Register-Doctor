@@ -48,7 +48,7 @@ class UserDoctor extends Authenticatable
 
     public function profile()
     {
-        return $this->hasOne('App\Models\UserProfile')->withDefault();
+        return $this->hasOne('App\Models\UserProfile','user_id','id')->withDefault();
     }
 
     public function otp()

@@ -57,6 +57,8 @@ class RouteServiceProvider extends ServiceProvider
         
         $this->mapPharmacistRoutes();
 
+        $this->mapAdminRoutes();
+
         //
     }
 
@@ -83,7 +85,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapPatientRoutes()
     {
-        Route::middleware('sitePatient')
+        Route::middleware(['web','isPatient'])
              ->namespace($this->namespace)
              ->group(base_path('routes/patient.php'));
     }
@@ -97,7 +99,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapDoctorRoutes()
     {
-        Route::middleware('siteDoctor')
+        Route::middleware(['web','isDoctor'])
              ->namespace($this->namespace)
              ->group(base_path('routes/doctor.php'));
     }
@@ -111,9 +113,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapPharmacistRoutes()
     {
-        Route::middleware('sitePharmacist')
+       Route::middleware(['web','isPharmacist'])
              ->namespace($this->namespace)
              ->group(base_path('routes/pharmacist.php'));
+    }
+
+
+      protected function mapAdminRoutes()
+    {
+       Route::middleware(['web','isAdmin','can:isAdmin'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/admin.php'));
     }
 
     /**
@@ -130,4 +140,6 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
+
+
 }

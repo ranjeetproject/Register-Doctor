@@ -31,7 +31,7 @@ if (isset($request->category) && !empty($request->category)) {
 
 if (isset($request->search_value) && !empty($request->search_value)) {
         $newses = $newses->where(function($query) use($request){
-            $query->where('heading','LIKE',$request->search_value)->orWhere('posted_by','LIKE',$request->search_value);
+            $query->where('heading','LIKE',"%$request->search_value%")->orWhere('posted_by','LIKE',"%$request->search_value%");
         });
 }
 

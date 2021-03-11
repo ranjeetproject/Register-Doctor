@@ -136,7 +136,7 @@ class UserController extends Controller
         Mail::to($request->email)->send(new Registration($user->id));
         DB::commit();
     	if(!empty($user->id)){
-            Session::flash('Success-sweet', 'Thank you for Registration.');
+            Session::flash('Success-sweet', 'Thank you for your Registration. Please check your email and activate your account.');
           } else {
             Session::flash('Error-toastr', 'Something want wrong. Please try again.');
           }

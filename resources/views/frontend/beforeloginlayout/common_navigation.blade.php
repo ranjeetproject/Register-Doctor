@@ -24,11 +24,11 @@
         @auth
           <li class="nav-item">
             @if(Auth::guard('siteDoctor')->check())
-            <a class="nav-link" href="{{ route('doctorDashboard')}}">Dashboard</a>
+            <a class="nav-link" href="{{ route('doctor.dashboard')}}">Dashboard</a>
             @elseif(Auth::guard('sitePatient')->check())
-            <a class="nav-link" href="{{ route('patientDashboard')}}">Dashboard</a>
+            <a class="nav-link" href="{{ route('patient.dashboard')}}">Dashboard</a>
             @elseif(Auth::guard('sitePharmacist')->check())
-            <a class="nav-link" href="{{ route('pharmacistDashboard')}}">Dashboard</a>
+            <a class="nav-link" href="{{ route('pharmacist.dashboard')}}">Dashboard</a>
             @endif
           </li>
           <li class="nav-item">
@@ -41,10 +41,10 @@
           </form>
         @else
           <li class="nav-item">
-            <a href="{{route('login')}}"> Login</a>
+            <a href="{{route('login')}}" class="nav-link"> Login</a>
           </li>
           <li class="nav-item">
-            <a href="{{route('registration')}}">Registration</a>
+            <a href="{{route('registration')}}" class="nav-link">Registration</a>
           </li>
           @endauth
       </ul>
