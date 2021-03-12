@@ -130,4 +130,50 @@ class PatientController extends Controller
         return view('frontend.patient.change_password');
     }
 
+
+    public function saveCases(Request $request)
+    {
+        return view('frontend.patient.save_cases');
+      
+    }
+
+     public function medicalRecord(Request $request)
+    {
+        return view('frontend.patient.medical_record');
+      
+    }
+
+    public function myFavoriteDoctors(Request $request)
+    {
+        return view('frontend.patient.my-favorite-doctors');
+      
+    }
+
+
+    public function requestedConsults(Request $request)
+    {
+        return view('frontend.patient.requested_consults');
+      
+    }
+
+    public function closedCases(Request $request)
+    {
+        return view('frontend.patient.closed_cases');
+      
+    }
+
+    public function prescriptionsIssued(Request $request)
+    {
+        return view('frontend.patient.prescriptions_issued');
+      
+    }
+
+    public function pharmacies(Request $request)
+    {
+        return view('frontend.patient.pharmacies');
+      
+    }
+
+
+
 }

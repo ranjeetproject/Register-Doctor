@@ -160,6 +160,11 @@ class DoctorController extends Controller
         return view('frontend.doctor.change_password');
     }
 
+    public function name(Request $request)
+    {
+        return view('frontend.doctor.change_password');
+    }
+
 
 
 }
