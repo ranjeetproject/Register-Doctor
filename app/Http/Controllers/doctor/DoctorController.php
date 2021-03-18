@@ -77,15 +77,21 @@ class DoctorController extends Controller
 
 
        if(!empty($request->dr_standard_fee) ) $profile->dr_standard_fee = $request->dr_standard_fee;
-       if(!empty($request->dr_standard_fee_notification) ) $profile->dr_standard_fee_notification = $request->dr_standard_fee_notification ?? '0';
        if(!empty($request->dr_live_video_fee) ) $profile->dr_live_video_fee = $request->dr_live_video_fee;
-       if(!empty($request->dr_live_video_fee_notification) ) $profile->dr_live_video_fee_notification = $request->dr_live_video_fee_notification ?? '0';
        if(!empty($request->dr_live_chat_fee) ) $profile->dr_live_chat_fee = $request->dr_live_chat_fee;
-       if(!empty($request->dr_live_chat_fee_notification) ) $profile->dr_live_chat_fee_notification = $request->dr_live_chat_fee_notification ?? '0';
        if(!empty($request->dr_qa_fee) ) $profile->dr_qa_fee = $request->dr_qa_fee;
-       if(!empty($request->dr_qa_fee_notification) ) $profile->dr_qa_fee_notification = $request->dr_qa_fee_notification ?? '0';
+       // if(!empty($request->dr_qa_fee_notification)) $profile->dr_qa_fee_notification = $request->dr_qa_fee_notification;
+       if($request->profile=='profile'){
+       $profile->dr_live_video_fee_notification = ($request->dr_live_video_fee_notification == null) ? 1:0;
+       $profile->dr_standard_fee_notification = ($request->dr_standard_fee_notification == null) ? 1:0;
+       $profile->dr_live_chat_fee_notification = ($request->dr_live_chat_fee_notification == null) ? 1:0;
+       $profile->dr_qa_fee_notification = ($request->dr_qa_fee_notification == null) ? 1:0;
 
-       if(!empty($request->dr_ratings_comments) ) $profile->dr_ratings_comments = $request->dr_ratings_comments ?? '0';
+        $profile->dr_ratings_comments = ($request->dr_ratings_comments == null) ? 1:0;
+      }
+
+       // dd($request->profile);
+
        if(!empty($request->dr_see) ) $profile->dr_see = $request->dr_see;
        if(!empty($request->dr_signature) ) $profile->dr_signature = $request->dr_signature;
 
@@ -127,7 +133,7 @@ class DoctorController extends Controller
 
 
         $user = Auth::guard('siteDoctor')->user();
-        // return $user->profile;
+        // return $user->profile->dr_qa_fee_notification;
         return view('frontend.doctor.profile', compact('user'));
        
     }
@@ -160,9 +166,39 @@ class DoctorController extends Controller
         return view('frontend.doctor.change_password');
     }
 
-    public function name(Request $request)
+    public function handyDocument(Request $request)
     {
-        return view('frontend.doctor.change_password');
+        return view('frontend.doctor.handy_document');
+    }
+
+    public function getThumbsUp(Request $request)
+    {
+        return view('frontend.doctor.get_thumbsUp');
+    }
+
+     public function appointment(Request $request)
+    {
+        return view('frontend.doctor.appointment');
+    }
+
+     public function sendPatientMessage(Request $request)
+    {
+        return view('frontend.doctor.send_patient_message');
+    }
+
+     public function createPrescription(Request $request)
+    {
+        return view('frontend.doctor.create_prescription');
+    }
+
+     public function prescriptionIssues(Request $request)
+    {
+        return view('frontend.doctor.prescription_issues');
+    }
+
+     public function closeCases(Request $request)
+    {
+        return view('frontend.doctor.close_cases');
     }
 
 

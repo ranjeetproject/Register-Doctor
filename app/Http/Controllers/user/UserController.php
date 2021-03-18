@@ -123,6 +123,9 @@ class UserController extends Controller
       $user->role = $request->user_type;
       $user->password = Hash::make($request->password);
       $user->save();
+      $userProfile = new UserProfile;
+      $userProfile->user_id = $user->id;
+      $userProfile->save(); 
     
     	
 

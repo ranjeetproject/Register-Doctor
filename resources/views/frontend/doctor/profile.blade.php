@@ -129,8 +129,8 @@
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
-                                            <input type="checkbox" name="dr_standard_fee_notification" class="form-check-input" value="1" {{($user->profile->dr_standard_fee_notification == 1) ? 'checked':''}}>
-                                            <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_standard_fee_notification == 1) ? 'of':'on'}}"></span></div>
+                                            <input type="checkbox" name="dr_standard_fee_notification" class="form-check-input" value="0" {{($user->profile->dr_standard_fee_notification == 0) ? 'checked':''}}>
+                                            <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_standard_fee_notification == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -144,8 +144,8 @@
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
-                                            <input type="checkbox" name="dr_live_video_fee_notification" class="form-check-input" value="1" {{($user->profile->dr_live_video_fee_notification == 1) ? 'checked':''}} >
-                                            <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_live_video_fee_notification == 1) ? 'of':'on'}}"></span></div>
+                                            <input type="checkbox" name="dr_live_video_fee_notification" class="form-check-input" value="0" {{($user->profile->dr_live_video_fee_notification == 0) ? 'checked':''}} >
+                                            <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_live_video_fee_notification == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -158,8 +158,8 @@
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
-                                            <input type="checkbox" name="dr_live_chat_fee_notification" class="form-check-input" value="1" {{($user->profile->dr_live_chat_fee_notification == 1) ? 'checked':''}}>
-                                            <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_live_chat_fee_notification == 1) ? 'of':'on'}}"></span></div>
+                                            <input type="checkbox" name="dr_live_chat_fee_notification" class="form-check-input" value="0" {{($user->profile->dr_live_chat_fee_notification == 0) ? 'checked':''}}>
+                                            <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_live_chat_fee_notification == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -178,18 +178,20 @@
 
                                                 <select class="form-control form-control-lg" name="dr_turnaround_time">
                                                     @for($i = 1; $i <= 10; $i++)
-                                                     <option value="{{$i}}" {{($get_dr_turnaround_time[0]==$i) ? 'selected':''}}>{{$i}}</option>
+                                                     <option value="{{$i}}" {{(isset($get_dr_turnaround_time[0]) && $get_dr_turnaround_time[0]==$i) ? 'selected':''}}>{{$i}}</option>
                                                     @endfor
                                                 </select> or <select class="form-control form-control-lg" name="dr_turnaround_time_type">
-                                                    <option value="days" {{($get_dr_turnaround_time[1]=='days') ? 'selected':''}}>Days</option>
-                                                    <option value="hours" {{($get_dr_turnaround_time[1]=='hours') ? 'selected':''}}>Hours</option>
+                                                    <option value="days" {{( isset($get_dr_turnaround_time[1]) && $get_dr_turnaround_time[1]=='days') ? 'selected':''}}>Days</option>
+                                                    <option value="hours" {{(isset($get_dr_turnaround_time[1]) && $get_dr_turnaround_time[1]=='hours') ? 'selected':''}}>Hours</option>
 
                                                 </select> 
                                             </div>
                                         </div>
+
+                                       
                                         <div class="Notifications-on-of">
-                                            <input type="checkbox" class="form-check-input" name="dr_qa_fee_notification" value="1" {{($user->profile->dr_qa_fee_notification == 1) ? 'checked':''}}>
-                                            <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_qa_fee_notification == 1) ? 'of':'on'}}"></span></div>
+                                            <input type="checkbox" class="form-check-input" name="dr_qa_fee_notification" value="0" {{($user->profile->dr_qa_fee_notification == 0) ? 'checked':''}}>
+                                            <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_qa_fee_notification == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -250,8 +252,8 @@
                                     <div class="form-group">
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Comments</label>
                                         <div class="Notifications-on-of">
-                                            <input type="checkbox" name="dr_ratings_comments" class="form-check-input" value="1" {{($user->profile->dr_ratings_comments == 1) ? 'checked':''}}>
-                                            Turn Ratings & Comments <div class="on-and-off"><span class="{{($user->profile->dr_ratings_comments == 1) ? 'of':'on'}}"></span></div>
+                                            <input type="checkbox" name="dr_ratings_comments" class="form-check-input" value="0" {{($user->profile->dr_ratings_comments == 0) ? 'checked':''}}>
+                                            Turn Ratings & Comments <div class="on-and-off"><span class="{{($user->profile->dr_ratings_comments == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -262,7 +264,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 for-msg">
-                                    <button type="submit" class="btn blue-button">Save</button>
+                                    <button type="submit" name="profile" value="profile" class="btn blue-button">Save</button>
                                 </div>
                             </div>
                         </form>

@@ -44,6 +44,12 @@ class User extends Authenticatable
         
     // }
 
+      public function userFavDoc()
+    {
+        return $this->hasMany('App\Models\FavouriteDoctor');
+        
+    }
+
     public function profile()
     {
         

@@ -1,10 +1,120 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col Choose-Your-Doctor-right Doctor-Manage-Account-Profile-page">
+    <div class="col Choose-Your-Doctor-right innerpage  Handy-Documents-page">
         <div class="row">
             <div class="col-sm-12">
-                <h1>blank page</h1>
+                <div class="col Incoming-Prescription-Requests-right">
+                    <h2>Handy Documents</h2>
+                    <div class="for-w-100 Incoming-Prescription-Requests-right-table">
+                        <h3>Documents</h3>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                      <label>Show</label>
+                                      <select class="form-control">
+                                        <option>10</option>
+                                      </select>
+                                      <span>entries</span>
+                                    </div>
+                                  </form>
+                            </div>
+                            <div class="col-sm-4">
+                                <form action="">
+                                    <input type="text"  class="form-control"  placeholder="Search...">
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                      <thead>
+                                          <tr>
+                                              <td>File Name </td>
+                                              <td>Date</td>
+                                              <td>Action</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription.pdf</td>
+                                            <td>08-10-2018</td>
+                                            <td class="for-divider"><a href="#"><i class="fal fa-eye"></i></a><a href="#"><i class="fal fa-cloud-download"></i></a></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-end">
+                                      <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                      </li>
+                                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                      <li class="page-item clickabled">
+                                        <a class="page-link" href="#">Next</a>
+                                      </li>
+                                    </ul>
+                                  </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>

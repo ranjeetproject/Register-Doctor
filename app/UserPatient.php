@@ -13,6 +13,7 @@ class UserPatient extends Authenticatable
     use Notifiable,SoftDeletes;
   
     protected $table = 'users';
+    protected $primaryKey = 'id';
 
     protected $guard = 'sitePatient';
 
@@ -40,11 +41,11 @@ class UserPatient extends Authenticatable
         return ($this->email_verified_at != null) ? true : false;
     }
 
-    // public function userRoles()
-    // {
-    //     return $this->hasMany('App\Models\UserRole');
+    public function userFavDoc()
+    {
+        return $this->hasMany('App\Models\FavouriteDoctor');
         
-    // }
+    }
 
     public function profile()
     {

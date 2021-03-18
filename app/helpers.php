@@ -1,6 +1,8 @@
 <?php 
 use App\Members;
 use App\Models\SiteSetting;
+use App\Models\FavouriteDoctor;
+
 
  function dateDifferent($date1, $date2)
 {
@@ -93,5 +95,12 @@ function getSetting($key)
 //              $dt->setTimezone($tz);
 //              $ping->poll_time = $dt->format('Y-m-d H:i:s');
 // }
+
+function getFavDoc($doctor_id)
+{
+  $fav_doc = FavouriteDoctor::where('user_id', auth()->guard('sitePatient')->user()->id)->where('favourite_user_id',$doctor_id)->where('status',1)->first();
+  // dd($fav_doc);
+  return $fav_doc ? true : false;
+}
 
 ?>

@@ -95,15 +95,19 @@ return [
         ],
         'sitePatients' => [
             'driver' => 'eloquent',
-            'model' => App\UserPatient::class,
+            'model' => App\User::class,
+            // 'model' => App\UserPatient::class,
         ],
         'siteDoctors' => [
             'driver' => 'eloquent',
-            'model' => App\UserDoctor::class,
+            'model' => App\User::class,
+            
+            // 'model' => App\UserDoctor::class,
         ],
         'sitePharmacists' => [
             'driver' => 'eloquent',
-            'model' => App\UserPharmacist::class,
+            'model' => App\User::class,
+            // 'model' => App\UserPharmacist::class,
         ],
     ],
 
