@@ -30,7 +30,7 @@
                                 
                                 <br>
 
-                                <span>Update Profile Image</span>
+                                <span>Upload file</span>
 
                                  <div class="col-sm-12 ">
 
