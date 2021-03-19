@@ -106,32 +106,32 @@
                                     <label >Opening Hours</label>
                                     
                                     <div class="form-check form-check-inline active" >
-                                        <input class="form-check-input" type="checkbox" name="monday" {{($user->openingTime->monday == 1) ? 'checked':''}}>
+                                        <input class="form-check-input" type="checkbox" name="monday" {{(isset($user->openingTime->monday) && $user->openingTime->monday == 1) ? 'checked':''}}>
                                         <span>MON</span>
                                     </div>
 
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="tuesday" {{($user->openingTime->tuesday == 1) ? 'checked':''}}>
+                                        <input class="form-check-input" type="checkbox" name="tuesday" {{(isset($user->openingTime->tuesday) &&  $user->openingTime->tuesday == 1) ? 'checked':''}}>
                                         <span>TUE</span>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="wednesday" {{($user->openingTime->wednesday == 1) ? 'checked':''}}>
+                                        <input class="form-check-input" type="checkbox" name="wednesday" {{(isset($user->openingTime->wednesday) &&  $user->openingTime->wednesday == 1) ? 'checked':''}}>
                                         <span>WED</span>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="thursday" {{($user->openingTime->thursday == 1) ? 'checked':''}}>
+                                        <input class="form-check-input" type="checkbox" name="thursday" {{(isset($user->openingTime->thursday) &&  $user->openingTime->thursday == 1) ? 'checked':''}}>
                                         <span>THU</span>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="friday" {{($user->openingTime->friday == 1) ? 'checked':''}}>
+                                        <input class="form-check-input" type="checkbox" name="friday" {{(isset($user->openingTime->friday) &&  $user->openingTime->friday == 1) ? 'checked':''}}>
                                         <span>FRI</span>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="saturday" {{($user->openingTime->saturday == 1) ? 'checked':''}}>
+                                        <input class="form-check-input" type="checkbox" name="saturday" {{(isset($user->openingTime->saturday) &&  $user->openingTime->saturday == 1) ? 'checked':''}}>
                                         <span>SAT</span>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="sunday" {{($user->openingTime->sunday == 1) ? 'checked':''}}>
+                                        <input class="form-check-input" type="checkbox" name="sunday" {{(isset($user->openingTime->sunday) &&  $user->openingTime->sunday == 1) ? 'checked':''}}>
                                         <span>SUN</span>
                                     </div>
                                   </div>

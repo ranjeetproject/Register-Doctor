@@ -159,7 +159,7 @@ class PatientController extends Controller
          $case->save();
 
          if ($request->hasFile('case_file')) {
-            $rand_val           = date('YMDHIS').rand(11111,99999);
+            $rand_val           = date('YMDHis').rand(11111,99999);
             $image_file_name    = md5($rand_val);
             $file               = $request->file('case_file');
             $extension          = $request->file('case_file')->extension();
