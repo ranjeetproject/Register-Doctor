@@ -135,7 +135,8 @@
                                                     <i class="far fa-thumbs-up reting"></i>
                                                     
                                                 </div>
-                                                <button type="submit" class="btn blue-button rating-list-profile">Full Profile</button>
+                                               
+                                                <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
                                             </div>
                                             <h5 class="card-title">{{ $doctor->forename.' '.$doctor->surname }}<br><small> {{ $doctor->profile->dr_speciality }}</small> </h5>
                                             <p>{{ $doctor->profile->dr_qualifications }}</p>
@@ -200,7 +201,7 @@
                                                     <i class="far fa-thumbs-up reting"></i>
                                                     
                                                 </div>
-                                                <button type="submit" class="btn blue-button rating-list-profile">Full Profile</button>
+                                                 <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
                                             </div>
                                             <h5 class="card-title">{{ $doctor->forename.' '.$doctor->surname }}<br><small> {{ $doctor->doctor->profile->dr_speciality }}</small> </h5>
                                             <p>{{ $doctor->doctor->profile->dr_qualifications }}</p>

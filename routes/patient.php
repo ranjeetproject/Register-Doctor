@@ -18,5 +18,8 @@
     Route::match(['get','post'],'/requested-consults', 'PatientController@requestedConsults')->name('requested-consults');
     Route::match(['get','post'],'/closed-cases', 'PatientController@closedCases')->name('closed-cases');
     Route::match(['get','post'],'/prescriptions-issued', 'PatientController@prescriptionsIssued')->name('prescriptions-issued');
+
     Route::match(['get','post'],'/pharmacies', 'PatientController@pharmacies')->name('pharmacies');
+
+    Route::get('/view-doctor-profile/{id}', 'PatientController@viewDoctorProfile')->name('view-doctor-profile');
 });

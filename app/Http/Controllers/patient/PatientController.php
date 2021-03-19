@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Session;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
 
 
 class PatientController extends Controller 
@@ -305,6 +307,14 @@ class PatientController extends Controller
     public function pharmacies(Request $request)
     {
         return view('frontend.patient.pharmacies');
+      
+    }
+
+    public function viewDoctorProfile($id)
+    {
+        $id = Crypt::decryptString($id);
+        $doctor = User::findOrFail($id);
+        return view('frontend.patient.view_doctor_profile',compact('doctor'));
       
     }
 
