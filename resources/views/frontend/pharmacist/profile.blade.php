@@ -154,7 +154,7 @@
                             <div class="col-sm-12 Customer-Pick-up">
                                 <label >Delivery Options</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="customer_pick_up" id="Customer-Pick-up" value="1" {{($user->deliveryOption->customer_pick_up == 1) ? 'checked':''}}>
+                                    <input class="form-check-input" type="checkbox" name="customer_pick_up" id="Customer-Pick-up" value="1" {{(isset($user->deliveryOption->customer_pick_up) && $user->deliveryOption->customer_pick_up == 1) ? 'checked':''}}>
                                     <label class="form-check-label" for="Customer-Pick-up">
                                         Customer Pick up
                                     </label>
@@ -164,7 +164,7 @@
 
                             <div class="col-sm-4 Customer-Pick-up">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="local_delivery" id="Local-Delivery" value="1" {{($user->deliveryOption->local_delivery == 1) ? 'checked':''}}>
+                                    <input class="form-check-input" type="checkbox" name="local_delivery" id="Local-Delivery" value="1" {{(isset($user->deliveryOption->local_delivery) && $user->deliveryOption->local_delivery == 1) ? 'checked':''}}>
                                     <label class="form-check-label" for="Local-Delivery">
                                         Local Delivery (car/courier)
                                     </label>
@@ -184,7 +184,7 @@
 
                             <div class="col-sm-12 Customer-Pick-up">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="posts_within_uk" id="Posts-within-UK" value="1" {{($user->deliveryOption->posts_within_uk == 1) ? 'checked':''}}>
+                                    <input class="form-check-input" type="checkbox" name="posts_within_uk" id="Posts-within-UK" value="1" {{(isset($user->deliveryOption->posts_within_uk) && $user->deliveryOption->posts_within_uk == 1) ? 'checked':''}}>
                                     <label class="form-check-label" for="Posts-within-UK">
                                         Posts within UK
                                     </label>
@@ -192,7 +192,7 @@
                             </div>
                             <div class="col-sm-12 Customer-Pick-up">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="sends_international" id="Sends-International" value="1" {{($user->deliveryOption->sends_international == 1) ? 'checked':''}}>
+                                    <input class="form-check-input" type="checkbox" name="sends_international" id="Sends-International" value="1" {{(isset($user->deliveryOption->sends_international) && $user->deliveryOption->sends_international == 1) ? 'checked':''}}>
                                     <label class="form-check-label" for="Sends-International">
                                         Sends International
                                     </label>
