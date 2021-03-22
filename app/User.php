@@ -50,6 +50,19 @@ class User extends Authenticatable
         
     }
 
+     public function openingTime()
+    {
+        return $this->hasOne('App\Models\PharmacyOpeningTime','user_id','id')->withDefault();
+        
+    }
+
+    public function deliveryOption()
+    {
+        return $this->hasOne('App\Models\DeliveryOptions','user_id','id')->withDefault();
+        
+    }
+    
+
     public function profile()
     {
         

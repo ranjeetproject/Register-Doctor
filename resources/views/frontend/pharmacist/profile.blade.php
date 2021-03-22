@@ -57,6 +57,9 @@
                                 <div class="form-group">
                                     <label >Telephone Number 1</label>
                                     <input type="tel" name="telephone1" class="form-control" placeholder="+91 41854548" value="{{$user->profile->telephone1}}">
+                                    @error('telephone1')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                   </div>
                             </div>
 
@@ -105,32 +108,32 @@
 
                                     <label >Opening Hours</label>
                                     
-                                    <div class="form-check form-check-inline active" >
+                                    <div class="form-check form-check-inline {{(isset($user->openingTime->monday) && $user->openingTime->monday == 1) ? 'active':''}}" >
                                         <input class="form-check-input" type="checkbox" name="monday" {{(isset($user->openingTime->monday) && $user->openingTime->monday == 1) ? 'checked':''}}>
                                         <span>MON</span>
                                     </div>
 
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline {{(isset($user->openingTime->tuesday) &&  $user->openingTime->tuesday == 1) ? 'active':''}}">
                                         <input class="form-check-input" type="checkbox" name="tuesday" {{(isset($user->openingTime->tuesday) &&  $user->openingTime->tuesday == 1) ? 'checked':''}}>
                                         <span>TUE</span>
                                     </div>
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline {{(isset($user->openingTime->wednesday) &&  $user->openingTime->wednesday == 1) ? 'active':''}}">
                                         <input class="form-check-input" type="checkbox" name="wednesday" {{(isset($user->openingTime->wednesday) &&  $user->openingTime->wednesday == 1) ? 'checked':''}}>
                                         <span>WED</span>
                                     </div>
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline {{(isset($user->openingTime->thursday) &&  $user->openingTime->thursday == 1) ? 'active':''}}">
                                         <input class="form-check-input" type="checkbox" name="thursday" {{(isset($user->openingTime->thursday) &&  $user->openingTime->thursday == 1) ? 'checked':''}}>
                                         <span>THU</span>
                                     </div>
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline {{(isset($user->openingTime->friday) &&  $user->openingTime->friday == 1) ? 'active':''}}">
                                         <input class="form-check-input" type="checkbox" name="friday" {{(isset($user->openingTime->friday) &&  $user->openingTime->friday == 1) ? 'checked':''}}>
                                         <span>FRI</span>
                                     </div>
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline {{(isset($user->openingTime->saturday) &&  $user->openingTime->saturday == 1) ? 'active':''}}">
                                         <input class="form-check-input" type="checkbox" name="saturday" {{(isset($user->openingTime->saturday) &&  $user->openingTime->saturday == 1) ? 'checked':''}}>
                                         <span>SAT</span>
                                     </div>
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline {{(isset($user->openingTime->sunday) &&  $user->openingTime->sunday == 1) ? 'active':''}}">
                                         <input class="form-check-input" type="checkbox" name="sunday" {{(isset($user->openingTime->sunday) &&  $user->openingTime->sunday == 1) ? 'checked':''}}>
                                         <span>SUN</span>
                                     </div>
