@@ -48,7 +48,7 @@
             <tr>
                 <td align="center" valign="top" style="font-weight:bold;font-size:13px;padding:10px; border-bottom: 2px solid #f42a6c;">
 
-                <img src="{{ (!empty(getSetting('logo'))) ? asset('common_img/'.getSetting('logo')) : asset('common_img/logo.png') }}" alt="{{ env('APP_NAME') }}" border="0" height="75px" width="180px" />
+                <img src="{{ (!empty(getSetting('logo'))) ? asset('common_img/'.getSetting('logo')) : asset('public/common_img/logo.png') }}" alt="{{ env('APP_NAME') }}" border="0" height="75px" width="180px" />
                    
                 </td>
             </tr>

@@ -163,7 +163,7 @@ class UserController extends Controller
           }
           $user->email_verified_at = date('Y-m-d H:i:s');
         if ($user->save()) {
-          return redirect()->route('login')->with('Success-sweet','Your email successfully verifyed.');
+          return redirect()->route('login')->with('Success-sweet','Your email successfully verified.');
         } else {
           return redirect()->route('login')->with('Error-sweet','Something went wrong.');
         }

@@ -51,7 +51,7 @@
 <div class="form-group row">
   <label class="col-md-2 form-control-label" for="description">Content<span class="text-danger">*</span></label>
   <div class="col-md-10">
-    <textarea class="form-control textarea @error('content') is-invalid @enderror"
+    <textarea class="form-control @error('content') is-invalid @enderror"
     type="text" name="content" id="content" placeholder="content"  style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" 
     >{{$page->content}}</textarea>
    
@@ -77,3 +77,8 @@
       </div>
 
 @endsection
+@push('scripts')
+<script type="text/javascript">
+CKEDITOR.replace('content');
+</script>
+ @endpush

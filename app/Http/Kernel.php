@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'isPharmacist' => \App\Http\Middleware\RedirectIfNotPharmacist::class,
         'emailVerified' => \App\Http\Middleware\EmailVerification::class,
         'activeUser' => \App\Http\Middleware\ActiveUser::class,
+        'adminVerified' => \App\Http\Middleware\AdminVerified::class,
     ];
 
     /**

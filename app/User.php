@@ -38,6 +38,11 @@ class User extends Authenticatable
         return ($this->email_verified_at != null) ? true : false;
     }
 
+      public function adminVerification()
+    {
+        return ($this->admin_verified_at != null) ? true : false;
+    }
+
     // public function userRoles()
     // {
     //     return $this->hasMany('App\Models\UserRole');

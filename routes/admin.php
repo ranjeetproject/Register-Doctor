@@ -26,6 +26,8 @@ Route::get('user/block/{user}', 'UserController@blockUser')->name('user.block');
 Route::get('user/active/{user}', 'UserController@activeUser')->name('user.active');
 Route::match(['get','post'],'user/delete/{id?}', 'UserController@userDelete')->name('user.delete');
 
+Route::get('verify-user/{user}', 'UserController@verifyUser')->name('user.verify-user');
+
 
 Route::match(['get','post'],'news/index', 'NewsController@index')->name('news');
 Route::match(['get','post'],'news/create', 'NewsController@create')->name('news.create');

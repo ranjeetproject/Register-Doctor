@@ -104,6 +104,15 @@
                         <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to Active" href="{{ route('admin.user.active', $user->id) }}"> <i class="fas fa-ban"></i></a>
 
                         @endif
+                         @if(Request::segment(3) == 2)
+                         @if($user->admin_verified_at != null)
+                          <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to unverify" href="{{ route('admin.user.verify-user', $user->id) }}"> <i class="fa fa-check-circle" aria-hidden="true"></i></a>
+                          @else
+                          <a class="btn btn-sm btn-outline-success" data-toggle="tooltip" title="Click to verify" href="{{ route('admin.user.verify-user', $user->id) }}"> <i class="fa fa-check-circle" aria-hidden="true"></i></a>
+
+                         @endif
+                        @endif
+
 
                         <a class="btn btn-sm btn-outline-warning" data-toggle="tooltip" title="Click to edit" href="{{ route('admin.user.edit', $user->id) }}"> <i class="fas fa-edit"></i></a>
                         <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to delete" onclick="return confirm('Are you sure want to delete?');" href="{{ route('admin.user.delete', $user->id) }}"> <i class="fas fa-trash-alt"></i></a>

@@ -176,4 +176,18 @@ class UserController extends Controller
       $user->save();
       return redirect()->back()->with('Success-toastr', 'Successfully activeted.');
     }
+
+      public function verifyUser(User $user)
+    {
+      if($user->admin_verified_at == null ){
+        $user->admin_verified_at = now();
+        $message = 'Successfully verified.';
+      }else{
+        $user->admin_verified_at = null;
+        $message = 'Successfully unverified.';
+       }
+      $user->save();
+
+      return redirect()->back()->with('Success-toastr', $message);
+    }
 }

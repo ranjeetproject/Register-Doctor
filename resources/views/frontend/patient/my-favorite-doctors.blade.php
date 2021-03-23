@@ -60,7 +60,7 @@
                       @endif
                     
                       <div class="col-sm-5">
-                        <label class="mr-sm-2">Short By :</label>
+                        <label class="mr-sm-2">Sort By :</label>
                         <select class="custom-select">
                             <option selected>Ratings</option>
                             <option value="1">One</option>
