@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-sm-12">
 
-               
+
                 <div class="col Choose-Your-Doctor-right">
                     <nav aria-label="breadcrumb ">
                         <ol class="breadcrumb Pharmacist-doc-com">
@@ -18,8 +18,8 @@
                         <div class="card Choose-Your-Doctor-card-cont">
                             <div class="card-body">
                               <h5 class="card-title">You have 3 options to consult a doctor:</h5>
-                                <p><strong>Live Video -</strong> book 15 min live time slots with a doctor</p> 
-                                <p><strong>Live Chat -</strong> book 15 min live time slots with a doctor</p> 
+                                <p><strong>Live Video -</strong> book 15 min live time slots with a doctor</p>
+                                <p><strong>Live Chat -</strong> book 15 min live time slots with a doctor</p>
                                 <p><strong>Typed Q&A -</strong> not live - Send Question, Get Answer. Book 15 min time slots of doctor's time for him
                                 to answer question. View turnaround times of doctors. Max 3 exchanges.</p>
                             </div>
@@ -34,7 +34,7 @@
                             <option value="">Select Speciality </option>
                             @foreach($doctors_speciality as $doctor_speciality)
                             <option value="{{$doctor_speciality['dr_speciality']}}" {{(isset($_GET['dr_speciality']) && ($_GET['dr_speciality'] == $doctor_speciality['dr_speciality'])) ? 'selected':''}}>{{$doctor_speciality['dr_speciality']}}</option>
-                           
+
                             @endforeach
                           </select>
                       </div>
@@ -44,9 +44,9 @@
                       <div class="col-sm-12">
                         <p><img src="images/ex-icon.png" alt="" data-toggle="tooltip" data-placement="top" title="One line Definition"> Do you need a prescription ?</p>
                       </div>
-                     
+
                     </div>
-                    
+
                   </form>
 
                     <form>
@@ -58,7 +58,7 @@
                       @if(isset($_GET['dr_speciality']) && !empty($_GET['dr_speciality']))
                       <input type="hidden" name="dr_speciality" value="{{$_GET['dr_speciality']}}">
                       @endif
-                    
+
                       <div class="col-sm-5">
                         <label class="mr-sm-2">Sort By :</label>
                         <select class="custom-select">
@@ -73,7 +73,7 @@
                             <option value="asc">Low-High</option>
                           </select>
                       </div>
-                      <div class="col-sm-7">
+                      <div class="col-sm-7 pl-md-1">
                         <label class="mr-sm-2">Filter :</label>
                         <select class="custom-select" name="video_consult">
                             <option value="" >Video Consult </option>
@@ -91,15 +91,18 @@
                             <option value="">Prescribers</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
-                           
+
                           </select>
                       </div>
-                    
+
 
                   </div>
 
                 <div class="row">
-                  <button type="submit" class="btn btn-primary btn-sm float-right">Apply</button>
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-lg px-5 mb-2">Apply</button>
+                    </div>
+
                 </div>
 
                     </form>
@@ -123,19 +126,19 @@
                                                 <div class="rating-list">
                                                     <i class="fas fa-star reting"></i>
                                                      <i class="fas fa-star reting"></i>
-                                                    <i class="fas fa-star-half-alt reting"></i> 
+                                                    <i class="fas fa-star-half-alt reting"></i>
                                                       <i class="fas fa-star"></i>
                                                       <i class="fas fa-star"></i>
                                                       <span>0.4</span>
-                                                      
+
                                                       <i id='doctor_{{$doctor->id}}' class="fas fa-heart {{ (getFavDoc($doctor->id)) ? 'marks':''}}" style="cursor: pointer;" onclick="addToFavorite({{$doctor->id}});" data-toggle="tooltip" title="Add To Favorite"></i>
                                                 </div>
                                                 <div class="rating-list-bottom">
                                                     <i class="far fa-thumbs-up reting"></i>
                                                     <i class="far fa-thumbs-up reting"></i>
-                                                    
+
                                                 </div>
-                                               
+
                                                 <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
                                             </div>
                                             <h5 class="card-title">{{ $doctor->forename.' '.$doctor->surname }}<br><small> {{ $doctor->profile->dr_speciality }}</small> </h5>
@@ -145,7 +148,7 @@
                                             <p>Communication : {{ ($doctor->profile->dr_live_chat_fee_notification == 1) ? 'Live Chat,':'' }} {{ ($doctor->profile->dr_live_video_fee_notification == 1) ? ' Live Video,':'' }}{{ ($doctor->profile->dr_qa_fee_notification == 1) ? ' Typed Q&A,':'' }}</p>
                                             <p>Sees : {{ $doctor->profile->dr_see }}</p>
                                             <p>Prescriber online : {{ (!empty($doctor->admin_verified_at)) ? 'Yes':'No'}} </p>
-                                            
+
                                         </div>
 
                                     </div>
@@ -164,7 +167,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                           </div>
 
@@ -190,7 +193,7 @@
                                                 <div class="rating-list">
                                                     <i class="fas fa-star reting"></i>
                                                      <i class="fas fa-star reting"></i>
-                                                    <i class="fas fa-star-half-alt reting"></i> 
+                                                    <i class="fas fa-star-half-alt reting"></i>
                                                       <i class="fas fa-star"></i>
                                                       <i class="fas fa-star"></i>
                                                       <span>0.4</span>
@@ -199,7 +202,7 @@
                                                 <div class="rating-list-bottom">
                                                     <i class="far fa-thumbs-up reting"></i>
                                                     <i class="far fa-thumbs-up reting"></i>
-                                                    
+
                                                 </div>
                                                  <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
                                             </div>
@@ -210,7 +213,7 @@
                                             <p>Communication : {{ ($doctor->doctor->profile->dr_live_chat_fee_notification == 1) ? 'Live Chat,':'' }} {{ ($doctor->doctor->profile->dr_live_video_fee_notification == 1) ? ' Live Video,':'' }}{{ ($doctor->doctor->profile->dr_qa_fee_notification == 1) ? ' Typed Q&A,':'' }}</p>
                                             <p>Sees : {{ $doctor->doctor->profile->dr_see }}</p>
                                             <p>Prescriber online : {{ (!empty($doctor->admin_verified_at)) ? 'Yes':'No'}} </p>
-                                            
+
                                         </div>
 
                                     </div>
@@ -229,7 +232,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                           </div>
 
@@ -239,7 +242,7 @@
 
 @endif
 
-                          
+
 
 
                     <div class="col-sm-12">
@@ -254,7 +257,7 @@
                         @endif
                     </div>
 
-                          
+
                   </div>
                 </div>
             </div>
@@ -263,7 +266,7 @@
 
         </div>
     </div>
-   
+
 @endsection
 @section('scripts')
     <script>
@@ -282,7 +285,7 @@
                      }else if(response.data == '2'){
                       $('#doctor_'+doctorId).removeClass('marks');
                      }
-                      
+
                      toastr.success(response.message);
                     }
                 });
