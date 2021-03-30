@@ -48,7 +48,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                     <input type="file" name="telephone1" class="form-control effect-19" placeholder="" value="{{old('telephone1')}}">
+                                     <input type="text" name="telephone1" class="form-control effect-19" placeholder="" value="{{old('telephone1')}}">
                                     <label>Contact Number</label>
                                   </div>
                                   <span class="text-danger">{{$errors->first('telephone1')}}</span>

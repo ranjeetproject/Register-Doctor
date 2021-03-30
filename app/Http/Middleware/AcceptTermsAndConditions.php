@@ -24,7 +24,7 @@ class AcceptTermsAndConditions
         }else{
             Session::flush();
             Auth::guard("sitePatient")->logout();
-           return redirect()->route('login')->with('Warning-sweet','You have not accepted the privacy policy and terms conditions. Please accept.');
+           return redirect()->route('login')->with('Warning-sweet','You have not accepted the privacy policy and terms conditions. Please check email and accept.');
         }
 
     }

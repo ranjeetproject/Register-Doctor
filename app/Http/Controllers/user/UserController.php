@@ -176,7 +176,7 @@ class UserController extends Controller
               "dr_gmc_licence"=>"sometimes|nullable|required",
               "telephone1"=>"sometimes|nullable|required",
               "location"=>"sometimes|nullable|required",
-           ]
+           ],['telephone1.required'=>'contact number is required']
       );
 
 
