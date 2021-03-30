@@ -42,12 +42,12 @@
 </head>
 <body>
 
-    <div style="width:600px;margin:0 auto;padding:0;border:2px solid #f42a6c;padding:10px; border-radius: 13px;">
+    <div style="width:600px;margin:0 auto;padding:0;border:2px solid #25b5ff;padding:10px; border-radius: 13px;">
     <table width="600" border="0" cellspacing="0">
         <tbody>
-            {{-- <tr bgcolor="#f42a6c"> --}}
+            {{-- <tr bgcolor="#25b5ff"> --}}
             <tr>
-                <td align="center" valign="top" style="font-weight:bold;font-size:13px;padding:10px; border-bottom: 2px solid #f42a6c;">
+                <td align="center" valign="top" style="font-weight:bold;font-size:13px;padding:10px; border-bottom: 2px solid #25b5ff;">
 
                 <img src="{{ (!empty(getSetting('logo'))) ? asset('public/common_img/'.getSetting('logo')) : asset('public/common_img/logo.png') }}" alt="{{ env('APP_NAME') }}" border="0" height="75px" width="180px" />
                    
@@ -115,9 +115,9 @@
             <tr><td>&nbsp;</td></tr>
             <tr><td style="font-weight:bold;font-size:12px;padding-left:12px"><p>Thanks & Regards,<br />{{env('APP_NAME')}}</p></td></tr>
             <tr><td>&nbsp;</td></tr>
-            <tr bgcolor="#f42a6c">
+            <tr bgcolor="#25b5ff">
                 <td style="font-weight:bold;font-size:12px;padding-left:12px">    
-                    <p style="background:#f42a6c;font-size:12px;text-align:center;padding:10px;border-top:1px solid #000;color:#FFFFFF;">Please do not reply to this email, as this is an unmonitored email address. You can contact to <span style="color: #FFFFFF;">{{env('SITE_EMAIL')}}</span> for any related query.<br />&copy; {{ env('APP_NAME') }} @php
+                    <p style="background:#25b5ff;font-size:12px;text-align:center;padding:10px;border-top:1px solid #000;color:#FFFFFF;">Please do not reply to this email, as this is an unmonitored email address. You can contact to <span style="color: #FFFFFF;">{{env('SITE_EMAIL')}}</span> for any related query.<br />&copy; {{ env('APP_NAME') }} @php
                         echo date('Y');
                     @endphp</p>
                 </td>

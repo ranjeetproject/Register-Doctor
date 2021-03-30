@@ -178,7 +178,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 Mandator">
-                                    <label>To change password to <a href="{{route('patient.change-password')}}">Click here</a>  <span><sup>*</sup>Mandatory</span> </label>
+                                    <label>Change password to <a href="{{route('patient.change-password')}}">Click here</a>  <span><sup>*</sup>Mandatory</span> </label>
                                 </div>
                                 <div class="col-sm-12 Submit-Medical-Record">
                                     <button type="submit" class="btn blue-button smr-btn">Submit</button>

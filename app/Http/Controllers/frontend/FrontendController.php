@@ -45,7 +45,7 @@ if (isset($request->search_value) && !empty($request->search_value)) {
 
     public function contactUs()
     {
-          $contact_us = Cms::where('page_name','Contact Us')->first();
+        $contact_us = Cms::where('page_name','Contact Us')->first();
         return view('frontend.contact-us', compact('contact_us'));
         
     }

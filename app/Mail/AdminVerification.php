@@ -22,6 +22,6 @@ class AdminVerification extends Mailable
     {
         return $this->from(env('MAIL_USERNAME'), env('APP_NAME'))
                      ->view('email.admin_verification')
-                    ->subject('Registration');
+                    ->subject('Admin-Verification');
     }
 }

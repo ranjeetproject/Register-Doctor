@@ -263,6 +263,12 @@
                                         
                                     </div>
                                 </div>
+
+                                <div class="col-sm-12 Mandator">
+                                    <label>Change password to <a href="{{route('doctor.change-password')}}">Click here</a>  </label>
+                                </div>
+
+
                                 <div class="col-sm-12 for-msg">
                                     <button type="submit" name="profile" value="profile" class="btn blue-button">Save</button>
                                 </div>

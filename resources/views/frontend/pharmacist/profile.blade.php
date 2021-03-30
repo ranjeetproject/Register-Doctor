@@ -204,7 +204,7 @@
 
 
                              <div class="col-sm-12 Mandator">
-                                    <label>To change password to <a href="{{route('pharmacist.change-password')}}">Click here</a>  </label>
+                                    <label>Change password to <a href="{{route('pharmacist.change-password')}}">Click here</a>  </label>
                                 </div>
                             
                             <div class="col-sm-12">
