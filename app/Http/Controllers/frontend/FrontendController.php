@@ -57,7 +57,7 @@ if (isset($request->search_value) && !empty($request->search_value)) {
      
     }
 
-    public function getTermsCondition($type='patient')
+    public function getTermsCondition($type='PATIENT') 
     {
         $page_name = 'TERMS AND CONDITIONS FOR '.strtoupper($type);
         $get_terms_condition = Cms::where('page_name',$page_name)->first();
