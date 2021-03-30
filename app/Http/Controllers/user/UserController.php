@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AfterVerificationMailForDoc;
+use App\Mail\CompleteRegistration;
 use App\Mail\ForgotPassword;
 use App\Mail\Registration;
 use App\Models\OtpVerification;
 use App\Models\Role;
-use App\Models\UserRole;
 use App\Models\UserProfile;
+use App\Models\UserRole;
 use App\Notifications\UserNotification;
 use App\User;
 use Auth;
@@ -17,9 +19,9 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Redirect;
 use Session;
 use Validator;
-use Redirect;
 
 class UserController extends Controller
 {
@@ -109,7 +111,9 @@ class UserController extends Controller
               "email"=>"required|email|unique:users,email",
               "password"=>"required|min:6",
               "confirm_password"=>"required|same:password",
-            ]
+              "terms_conditions"=>"required",
+              "privacy_policy"=>"required",
+            ],['terms_conditions.required'=>'Please read and tick to accept','privacy_policy.required'=>'Please read and tick to accept']
       );
 
         DB::beginTransaction();
@@ -125,7 +129,7 @@ class UserController extends Controller
       $user->save();
       $userProfile = new UserProfile;
       $userProfile->user_id = $user->id;
-      $userProfile->save(); 
+      $userProfile->save();
     
     	
 
@@ -143,6 +147,67 @@ class UserController extends Controller
           } else {
             Session::flash('Error-toastr', 'Something want wrong. Please try again.');
           }
+          if($user->role != 1){
+            return redirect()->route('registration-step2', Crypt::encrypt($user->id));
+          } else {
+             return redirect()->route('registration');
+          }
+
+
+        } catch (\Exception $e) {
+          print_r($e->getMessage()); exit;
+            Session::flash('Error-toastr', $e->getMessage());
+            DB::rollback();
+            return redirect()->back();
+        }
+    }
+
+
+     function registrationStep2(Request $request,$id)
+    {
+       $user_id = Crypt::decrypt($id);
+       $user = User::find($user_id);
+
+
+      if ($request->isMethod('post')) {
+      
+       $validator = $request->validate(
+           [
+              "dr_gmc_licence"=>"sometimes|nullable|required",
+              "telephone1"=>"sometimes|nullable|required",
+              "location"=>"sometimes|nullable|required",
+           ]
+      );
+
+
+
+        DB::beginTransaction();
+    try {
+      $userProfile = UserProfile::where('user_id',$user->id)->first();
+      // dd($userProfile);
+      if ($request->hasFile('dr_gmc_licence')) {
+            $rand_val           = date('YMDHIS').rand(11111,99999);
+            $image_file_name    = md5($rand_val);
+            $file               = $request->file('dr_gmc_licence');
+            $extension          = $request->file('dr_gmc_licence')->extension();
+            $fileName           = $image_file_name.'.'.$extension;
+            $destinationPath    = public_path().'/uploads/users/dr_gmc_licence/';
+            $file->move($destinationPath,$fileName);
+            // $profile->profile_photo = $fileName;
+            $userProfile->dr_gmc_licence = $fileName;
+          }
+
+      $userProfile->telephone1 = $request->telephone1;
+      $userProfile->location = $request->location;
+      $userProfile->save();
+    
+        // Mail::to($request->email)->send(new Registration($user->id));
+        DB::commit();
+      if(!empty($user->id)){
+            Session::flash('Success-sweet', 'Successfully updated');
+          } else {
+            Session::flash('Error-toastr', 'Something want wrong. Please try again.');
+          }
 
         return redirect()->route('registration');
         } catch (\Exception $e) {
@@ -151,6 +216,11 @@ class UserController extends Controller
             DB::rollback();
             return redirect()->back();
         }
+      }
+
+
+      return view('frontend.registration_step2', compact('user'));
+
     }
    
 
@@ -162,12 +232,46 @@ class UserController extends Controller
           return redirect()->route('login')->with('Info-sweet','Your email already verified.');
           }
           $user->email_verified_at = date('Y-m-d H:i:s');
+            if($user->role == 1){
+              $user->terms_conditions = date('Y-m-d H:i:s');
+              $user->privacy_policy = date('Y-m-d H:i:s');
+            }
         if ($user->save()) {
+          if($user->role == 1){
+          Mail::to($user->email)->send(new CompleteRegistration($user->id));
+          }
+          if($user->role == 2){
+          Mail::to($user->email)->send(new AfterVerificationMailForDoc($user->id));
+          }
+            if($user->role == 3){
+          Mail::to($user->email)->send(new AfterVerificationMailForDoc($user->id));
+          }
+
           return redirect()->route('login')->with('Success-sweet','Your email successfully verified.');
         } else {
           return redirect()->route('login')->with('Error-sweet','Something went wrong.');
         }
     }
+
+
+    public function acceptTermsAndConditions($id)
+    {
+          $user_id = Crypt::decrypt($id);
+          $user = User::find($user_id);
+          if($user->terms_conditions != null) {
+          return redirect()->route('login')->with('Info-sweet','Already accepted.');
+          }
+          $user->terms_conditions = date('Y-m-d H:i:s');
+          $user->privacy_policy = date('Y-m-d H:i:s');
+        if ($user->save()) {
+          Mail::to($user->email)->send(new CompleteRegistration($user->id));
+          return redirect()->route('login')->with('Success-toastr','Successfully accepted.');
+        } else {
+          return redirect()->route('login')->with('Error-toastr','Something went wrong.');
+        }
+    }
+
+
 
     public function profile(Request $request)
     {

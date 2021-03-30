@@ -49,7 +49,7 @@
             <tr>
                 <td align="center" valign="top" style="font-weight:bold;font-size:13px;padding:10px; border-bottom: 2px solid #f42a6c;">
 
-                <img src="{{ (!empty(getSetting('logo'))) ? asset('public/common_img/'.getSetting('logo')) : asset('public/common_img/logo.png') }}" alt="{{ env('APP_NAME') }}" border="0" height="75px" width="180px" />
+                <img src="{{ (!empty(getSetting('logo'))) ? asset('common_img/'.getSetting('logo')) : asset('public/common_img/logo.png') }}" alt="{{ env('APP_NAME') }}" border="0" height="75px" width="180px" />
                    
                 </td>
             </tr>
@@ -57,64 +57,27 @@
             <tr>
                 <td style="font-size:14px;padding-left:12px">
                   <center><h1>Welcome to Registered-Doctor.com</h1></center>
-<br>
-
-{{-- Hi, {{$user->name}} --}}
-
-@if($user->role == 1)
-Please read and accept:
-<br>
-<p>1. <a href="{{route('termsCondition')}}"> Terms & Conditions</a></p>
-
-<p>2. <a href="{{route('privacyPolicy')}}">Privacy policy</a></p>
-
-Click the link below to activate your account 
-<center>
-  <a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
- </center>
- <br>
- Please watch your email  - also  watch your junk mail and whitelist Registered-Doctor.com 
-
-@endif
-
-@if($user->role == 2)
-<p>Click the link below to activate your account </p>
-<br>
-<center>
-<a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
-</center>
-<br>
-
-<p>Please watch your email as we will email you details on how to register as a healthcare professional   - also  watch your junk mail and whitelist Registered-Doctor.com </p>
-
-@endif
-
-@if($user->role == 3)
-<p>Thank you for your interest in registering as one of our linked Pharmacies.</p>
-
-<p>Please send us your pharmacy address and a contact phone number to Admin@Registered-Doctor.com.</p>
-
-<p>We are mainly interested in pharmacies with locations covering areas we have not yet covered or those with extended opening hours and online pharmacists</p>
-
-<p>We will be in touch shortly if you meet one of our current criteria so please watch your email - also  watch your junk mail and whitelist Registered-Doctor.com</p>
-
-<br>
-<center>
-<a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
-</center>
-
-@endif
 
 
+ <b> Click the link below to activate your account 
+    <br>
+
+Please watch your email as we will email you details on how to register as a healthcare professional   - also  watch your junk mail and whitelist Registered-Doctor.com 
+</b>
 
 {{-- <br>
+
+Hi, {{$user->name}}
+<br>
 <br>
  Than you for your Registration. Your verification link given below.
 <br>
 <br> --}}
  {{-- @component('mail::button', ['url' => route('email-verification', Crypt::encrypt($user->id)) ]) --}}
  
- 
+ <center>
+  <a class="btn btn-primary" href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
+ </center>
 
 </td>
             </tr>
@@ -136,15 +99,4 @@ Click the link below to activate your account
  
 
 </body>
-{{-- <script type="text/javascript">
-    function myFunction() {
-      var x = document.getElementById("tr_con").required;
-
-      document.getElementById("demo").innerHTML = x;
-    }
-</script> --}}
 </html>
-
-{{-- @php
-exit;
-@endphp --}}

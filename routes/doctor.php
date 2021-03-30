@@ -1,6 +1,6 @@
 <?php
 
-Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVerified'])->namespace('doctor')->prefix('doctor')->name('doctor.')->group(function(){
+Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVerified','acceptTermsAndConditions'])->namespace('doctor')->prefix('doctor')->name('doctor.')->group(function(){
 
     Route::get('/dashboard', 'DoctorController@dashboard')->name('dashboard');
     Route::match(['get','post'],'/profile', 'DoctorController@profile')->name('profile');

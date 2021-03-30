@@ -5,7 +5,7 @@ Route::get('/about-us', 'frontend\FrontendController@getaboutUs')->name('aboutUs
 Route::get('/news', 'frontend\FrontendController@getNews')->name('news');
 Route::get('/faq', 'frontend\FrontendController@getFaq')->name('userFaq');
 Route::get('/contact-us', 'frontend\FrontendController@contactUs')->name('contactUs');
-Route::get('/terms-condition', 'frontend\FrontendController@getTermsCondition')->name('termsCondition');
+Route::get('/terms-condition/{type?}', 'frontend\FrontendController@getTermsCondition')->name('termsCondition');
 Route::get('/privacy-policy', 'frontend\FrontendController@getPrivacyPolicy')->name('privacyPolicy');
 //Route::get('/home', 'frontend\FrontendController@index');
 Route::any('search/{model}/{type?}', 'SearchController')->name('search');
@@ -33,8 +33,10 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::namespace('user')->group(function(){
 	// Route::any('/login', 'UserController@login')->name('login');
 	Route::get('registration', 'UserController@registration')->name('registration');
+	Route::match(['get','post'],'registration-step2/{id}', 'UserController@registrationStep2')->name('registration-step2');
 	Route::post('create-user', 'UserController@createUser')->name('create-user');
 	Route::get('email-verification/{id}', 'UserController@emailVerification')->name('email-verification');
+	Route::get('accept-term-and-conditions/{id}', 'UserController@acceptTermsAndConditions')->name('accept-term-and-conditions');
 	// Route::match(['get','post'],'profile', 'UserController@profile')->name('profile');
 	// Route::	get('logout', 'UserController@logout')->name('logout');
 });

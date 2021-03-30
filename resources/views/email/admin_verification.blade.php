@@ -56,64 +56,56 @@
             <tr><td colspan="2" valign="top">&nbsp;</td></tr>
             <tr>
                 <td style="font-size:14px;padding-left:12px">
-                  <center><h1>Welcome to Registered-Doctor.com</h1></center>
+                  {{-- <center><h1>Welcome to Registered-Doctor.com</h1></center> --}}
 <br>
-
-{{-- Hi, {{$user->name}} --}}
-
-@if($user->role == 1)
-Please read and accept:
-<br>
-<p>1. <a href="{{route('termsCondition')}}"> Terms & Conditions</a></p>
-
-<p>2. <a href="{{route('privacyPolicy')}}">Privacy policy</a></p>
-
-Click the link below to activate your account 
-<center>
-  <a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
- </center>
- <br>
- Please watch your email  - also  watch your junk mail and whitelist Registered-Doctor.com 
-
-@endif
 
 @if($user->role == 2)
-<p>Click the link below to activate your account </p>
-<br>
-<center>
-<a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
-</center>
+<p>Dear Doctor</p>
+
+<p>Your medical licence has been successfully verified.  To complete registration please read the following and tick if you agree: </p>
+
+<p>1. <a href="{{route('termsCondition')}}">Ts and Cs </a></p>
+<p>2. <a href="{{route('privacyPolicy')}}">Privacy policy </a></p>
+<p>3. I will read the relevant guidelines from the Handy Documents section of my account before accepting any patient </p>
+
+<p>Please  confirm:</p>
+
+<p>1. I have appropriate professional indemnity in place</p>
+<p>2. For doctors planing to consult adult patients (aged 18 or above) -  I have up to date adult safeguarding training (UK level 3 or equivalent)*</p>
+<p>3. For doctors planning to take consults on children (aged less than 18) - I have up to date child safeguarding training (UK level 3 or equivalent)*</p>
 <br>
 
-<p>Please watch your email as we will email you details on how to register as a healthcare professional   - also  watch your junk mail and whitelist Registered-Doctor.com </p>
+<b>* If you are employed as a clinician in the UK (eg by the NHS or a private clinic) you will ordinarily have done these safeguarding courses depending on whether you see adults and/or child patients - if unsure check with your employer. Online Safeguarding guidance will also be found in the Handy Documents section.</b>
+<br>
+
+<p>When you click the submit button below you will be given access to your personal account where you fill in the mandatory fields. An administrator will then give you practicing rights on the website. You can obtain also obtain advice from the Handy Documents section in your menu.</p>
+
+<br>
+<center>
+  <a class="btn btn-primary"  href="{{ route('accept-term-and-conditions', Crypt::encrypt($user->id)) }}">SUBMIT</a>
+</center>
 
 @endif
 
 @if($user->role == 3)
-<p>Thank you for your interest in registering as one of our linked Pharmacies.</p>
+<p>Your  pharmacy licence has been successfully verified.  To complete registration please read the following and click if you agree: </p>
 
-<p>Please send us your pharmacy address and a contact phone number to Admin@Registered-Doctor.com.</p>
+<p>1. <a href="{{route('termsCondition')}}">Ts and Cs </a></p>
+<p>2. <a href="{{route('privacyPolicy')}}">Privacy policy </a></p>
 
-<p>We are mainly interested in pharmacies with locations covering areas we have not yet covered or those with extended opening hours and online pharmacists</p>
 
-<p>We will be in touch shortly if you meet one of our current criteria so please watch your email - also  watch your junk mail and whitelist Registered-Doctor.com</p>
+<p>When you click the submit button below you will be given access to your personal account where you fill in the mandatory fields. An administrator will then give you pharmacy rights on the website.</p>
 
 <br>
+<br>
 <center>
-<a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
+  <a class="btn btn-primary"  href="{{ route('accept-term-and-conditions', Crypt::encrypt($user->id)) }}">SUBMIT</a>
 </center>
 
 @endif
 
 
 
-{{-- <br>
-<br>
- Than you for your Registration. Your verification link given below.
-<br>
-<br> --}}
- {{-- @component('mail::button', ['url' => route('email-verification', Crypt::encrypt($user->id)) ]) --}}
- 
  
 
 </td>
@@ -136,15 +128,9 @@ Click the link below to activate your account
  
 
 </body>
-{{-- <script type="text/javascript">
-    function myFunction() {
-      var x = document.getElementById("tr_con").required;
 
-      document.getElementById("demo").innerHTML = x;
-    }
-</script> --}}
 </html>
 
-{{-- @php
-exit;
-@endphp --}}
+@php
+// exit;
+@endphp

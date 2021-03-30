@@ -43,6 +43,11 @@ class User extends Authenticatable
         return ($this->admin_verified_at != null) ? true : false;
     }
 
+     public function acceptTermsAndConditions()
+    {
+        return ($this->terms_conditions != null) ? true : false;
+    }
+
     // public function userRoles()
     // {
     //     return $this->hasMany('App\Models\UserRole');

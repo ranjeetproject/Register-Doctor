@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AdminVerification;
 use App\Mail\Registration;
 use App\Models\Role;
 use App\Models\UserProfile;
@@ -178,14 +179,15 @@ class UserController extends Controller
     }
 
       public function verifyUser(User $user)
-    {
+      {
       if($user->admin_verified_at == null ){
         $user->admin_verified_at = now();
         $message = 'Successfully verified.';
-      }else{
+         Mail::to($user->email)->send(new AdminVerification($user->id));
+        } else {
         $user->admin_verified_at = null;
         $message = 'Successfully unverified.';
-       }
+        }
       $user->save();
 
       return redirect()->back()->with('Success-toastr', $message);

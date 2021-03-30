@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'emailVerified' => \App\Http\Middleware\EmailVerification::class,
         'activeUser' => \App\Http\Middleware\ActiveUser::class,
         'adminVerified' => \App\Http\Middleware\AdminVerified::class,
+        'acceptTermsAndConditions' => \App\Http\Middleware\AcceptTermsAndConditions::class,
     ];
 
     /**

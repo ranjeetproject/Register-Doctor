@@ -104,7 +104,7 @@
                         <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to Active" href="{{ route('admin.user.active', $user->id) }}"> <i class="fas fa-ban"></i></a>
 
                         @endif
-                         @if(Request::segment(3) == 2)
+                         @if(Request::segment(3) != 1)
                          @if($user->admin_verified_at != null)
                           <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to unverify" href="{{ route('admin.user.verify-user', $user->id) }}"> <i class="fa fa-check-circle" aria-hidden="true"></i></a>
                           @else

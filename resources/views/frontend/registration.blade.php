@@ -17,23 +17,23 @@
                                 <div class="form-group select">
                                     <select class="form-control" name="user_type">
                                         <option value="">Select user type</option>
-                                        <option value="1">Patient</option>
-                                        <option value="2">Doctor</option>
-                                        <option value="3">Pharmacist</option>
+                                        <option value="1" {{ (old('user_type')==1) ? 'selected':'' }}>Patient</option>
+                                        <option value="2" {{ (old('user_type')==2) ? 'selected':'' }}>Doctor</option>
+                                        <option value="3" {{ (old('user_type')==3) ? 'selected':'' }}>Pharmacist</option>
                                       </select>
                                   </div>
                                      <span class="text-danger">{{$errors->first('user_type')}}</span>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                    <input type="text" name="forename" class="form-control effect-19" placeholder="" >
+                                    <input type="text" name="forename" class="form-control effect-19" placeholder="" value="{{old('forename')}}">
                                     <label>Forename </label>
                                   </div>
                                   <span class="text-danger">{{$errors->first('forename')}}</span>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                    <input type="text" name="surname" class="form-control effect-19" placeholder=""  autocomplete="off">
+                                    <input type="text" name="surname" class="form-control effect-19" placeholder=""  autocomplete="off" value="{{old('surname')}}">
                                     <label>Surname </label>
                                   </div>
                                    <span class="text-danger">{{$errors->first('surname')}}</span>
@@ -59,11 +59,31 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group required">
-                                    <input type="email" name="email" class="form-control effect-19" placeholder="" autocomplete="off">
+                                    <input type="email" name="email" class="form-control effect-19" placeholder="" autocomplete="off" value="{{old('email')}}">
                                     <label>Email </label>
                                   </div>
                             <span class="text-danger">{{$errors->first('email')}}</span>
                             </div>
+
+
+                            <div class="col-sm-12">
+                                <div class="">
+                                    <input type="checkbox" name="terms_conditions" class="" required>
+                                    <a href="{{route('termsCondition')}}">Terms & Conditions </a>
+                                  </div>
+                            <span class="text-danger">{{$errors->first('terms_conditions')}}</span>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="">
+                                    <input type="checkbox" name="privacy_policy" class="" required>
+                                    <a href="{{route('privacyPolicy')}}">Privacy Policy</a>
+                                  </div>
+                            <span class="text-danger">{{$errors->first('privacy_policy')}}</span>
+                            </div>
+
+
+
                           
                             <div class="col-sm-12 Submit-Medical-Record">
                                 <button type="submit" class="btn blue-button smr-btn">Submit</button>

@@ -56,55 +56,31 @@
             <tr><td colspan="2" valign="top">&nbsp;</td></tr>
             <tr>
                 <td style="font-size:14px;padding-left:12px">
-                  <center><h1>Welcome to Registered-Doctor.com</h1></center>
-<br>
 
-{{-- Hi, {{$user->name}} --}}
+
 
 @if($user->role == 1)
-Please read and accept:
+                  <center><h1>Welcome to Registered-Doctor.com</h1></center>
 <br>
-<p>1. <a href="{{route('termsCondition')}}"> Terms & Conditions</a></p>
-
-<p>2. <a href="{{route('privacyPolicy')}}">Privacy policy</a></p>
-
-Click the link below to activate your account 
-<center>
-  <a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
- </center>
- <br>
- Please watch your email  - also  watch your junk mail and whitelist Registered-Doctor.com 
-
+<p>Your account is now active. </p>
 @endif
 
 @if($user->role == 2)
-<p>Click the link below to activate your account </p>
-<br>
-<center>
-<a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
-</center>
-<br>
+<b>Dear Doctor</b>
 
-<p>Please watch your email as we will email you details on how to register as a healthcare professional   - also  watch your junk mail and whitelist Registered-Doctor.com </p>
+<p>Congratulations your practicing rights on Registered-Doctor.com  are now active and you may take patient requests  on the website. Before taking questions from patients you must read the relevant sections under Handy Documents e.g. Guidance and Safeguarding.</p>
 
 @endif
 
 @if($user->role == 3)
-<p>Thank you for your interest in registering as one of our linked Pharmacies.</p>
-
-<p>Please send us your pharmacy address and a contact phone number to Admin@Registered-Doctor.com.</p>
-
-<p>We are mainly interested in pharmacies with locations covering areas we have not yet covered or those with extended opening hours and online pharmacists</p>
-
-<p>We will be in touch shortly if you meet one of our current criteria so please watch your email - also  watch your junk mail and whitelist Registered-Doctor.com</p>
-
-<br>
-<center>
-<a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>
-</center>
+<p>Congratulations your Pharmacy is now active on Registered-Doctor.com  and you may take patient requests  on the website.  These will also be emailed to you. Patients may also phone you with their Registered-Doctor.com prescription number so please remember to mark these as accepted and then as dispensed.</p>
 
 @endif
 
+
+<br>
+<center> <a class="btn btn-primary"  href="{{ route('login') }}">To login click here</a>
+</center>
 
 
 {{-- <br>
