@@ -147,11 +147,11 @@ class UserController extends Controller
           } else {
             Session::flash('Error-toastr', 'Something want wrong. Please try again.');
           }
-          if($user->role != 1){
-            return redirect()->route('registration-step2', Crypt::encrypt($user->id));
-          } else {
+          // if($user->role != 1){
+          //   return redirect()->route('registration-step2', Crypt::encrypt($user->id));
+          // } else {
              return redirect()->route('registration');
-          }
+          // }
 
 
         } catch (\Exception $e) {
@@ -239,15 +239,18 @@ class UserController extends Controller
         if ($user->save()) {
           if($user->role == 1){
           Mail::to($user->email)->send(new CompleteRegistration($user->id));
+          return redirect()->route('login')->with('Success-sweet','Your email successfully verified.');
           }
           if($user->role == 2){
           Mail::to($user->email)->send(new AfterVerificationMailForDoc($user->id));
+           // return redirect()->route('registration-step2', Crypt::encrypt($user->id));
+          return redirect()->route('registration-step2', Crypt::encrypt($user->id))->with('Success-sweet','Your email successfully verified.');
           }
-            if($user->role == 3){
+            if($user->role == 3) {
           Mail::to($user->email)->send(new AfterVerificationMailForDoc($user->id));
+           return redirect()->route('registration-step2', Crypt::encrypt($user->id))->with('Success-sweet','Your email successfully verified.');
           }
 
-          return redirect()->route('login')->with('Success-sweet','Your email successfully verified.');
         } else {
           return redirect()->route('login')->with('Error-sweet','Something went wrong.');
         }
