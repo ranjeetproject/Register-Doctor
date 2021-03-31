@@ -106,9 +106,9 @@
                         @endif
                          @if(Request::segment(3) != 1)
                          @if($user->admin_verified_at != null)
-                          <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to unverify" href="{{ route('admin.user.verify-user', $user->id) }}"> <i class="fa fa-check-circle" aria-hidden="true"></i></a>
+                          <a class="btn btn-sm btn-outline-success" data-toggle="tooltip" title="Click to unverify" href="{{ route('admin.user.verify-user', $user->id) }}"> <i class="fa fa-check-circle" aria-hidden="true"></i></a>
                           @else
-                          <a class="btn btn-sm btn-outline-success" data-toggle="tooltip" title="Click to verify" href="{{ route('admin.user.verify-user', $user->id) }}"> <i class="fa fa-check-circle" aria-hidden="true"></i></a>
+                          <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Click to verify" href="{{ route('admin.user.verify-user', $user->id) }}"> <i class="fa fa-check-circle" aria-hidden="true"></i></a>
 
                          @endif
                         @endif

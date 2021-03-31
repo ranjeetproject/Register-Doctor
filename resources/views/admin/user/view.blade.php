@@ -83,8 +83,8 @@
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <strong><i class="far fa-file-alt mr-1"></i> Sex</strong>
-            <p class="text-muted">{{ $user->profile->gender}}</p>
+            <strong><i class="far fa-file-alt mr-1"></i> Sex : {{ $user->profile->gender}}</strong>
+            {{-- <p class="text-muted">{{ $user->profile->gender}}</p> --}}
           </a>
         </li>
 
@@ -100,6 +100,29 @@
     </div>
   </div>
 </div>
+
+<div class="card">
+  <div class="card-header">
+    Other information
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col">
+        <label>Location: {{ $user->profile->location}}</label>
+      </div>
+       <div class="col">
+        <label>Contact number: {{ $user->profile->telephone1}}</label>
+      </div>
+      <div class="col">
+        <label>GMC licence: </label> <br><img src="{{ asset('public/uploads/users/dr_gmc_licence/'.$user->profile->dr_gmc_licence)}}" width="100px" height="100px"> 
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
 <!-- /.widget-user -->
 
         </div>
