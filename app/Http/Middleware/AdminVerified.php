@@ -24,7 +24,7 @@ class AdminVerified
         }else{
             Session::flush();
             Auth::guard("sitePatient")->logout();
-           return redirect()->route('login')->with('Warning-sweet','Your are not verified. Please wait for admin verification.');
+           return redirect()->route('login')->with('Warning-sweet','You are not verified. Please wait for admin verification. Please check your email.');
         }
 
     }

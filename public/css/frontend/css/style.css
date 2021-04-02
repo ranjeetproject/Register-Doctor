@@ -1293,12 +1293,11 @@
 }
 
 .Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check.active {
-
   background: #dbe5f8;
   color: #004cac;
 }
 
-.Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check input[type="checkbox"] {
+.Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check input[type="radio"] {
   width: 50px;
   height: 50px;
   position: absolute;
@@ -6452,11 +6451,21 @@ tr.only-remv:after {
   font-size: 20px;
 }
 
-.Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check input:checked ~ span {
-    background: #dbe5f8;
-    color: #004cac;
-    height: 100%;
-    width: 100%;
-    line-height: 50px;
+.Doctor-Manage-Account-Profile-page .main-form-fild .form-group.required {
+  position: relative;
+}
+
+.Doctor-Manage-Account-Profile-page .main-form-fild .form-group.required::before {
+  top: 8px;
+  content: "*";
+  color: #e00;
+  top: 15px;
+  left: 10px;
+  position: absolute;
+  font-size: 16px;
+}
+
+.Doctor-Manage-Account-Profile-page .main-form-fild .form-group.required .form-control {
+  padding-left: 20px;
 }
 /*# sourceMappingURL=style.css.map */

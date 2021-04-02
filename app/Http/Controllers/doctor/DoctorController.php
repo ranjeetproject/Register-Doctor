@@ -32,23 +32,30 @@ class DoctorController extends Controller
 
     public function profile(Request $request) {
 
+       $form_name = 'profile';
+
         if($request->isMethod('post')){
             // dd($request->all());
          $data = $request->validate([
       "forename"=>"sometimes|nullable|required|min:3|max:100",
       "surname"=>"sometimes|nullable|required|min:3|max:100",
       "telephone1"=>"sometimes|nullable|required|digits:10",
-      // "gender"=>"required",
-      "address"=>"sometimes|nullable|required",
-      // "dob"=>"date|before_or_equal:".now()->subYears(13)->format('Y-m-d'),
       "profile_photo"=>"sometimes|nullable|image|mimes:jpeg,png,jpg|max:2048",
+      "address"=>"sometimes|nullable|required",
+      "dr_name_of_medical_licencer"=>"sometimes|nullable|required",
+      "dr_medical_license_no"=>"sometimes|nullable|required",
+      "dr_speciality"=>"sometimes|nullable|required",
+      "dr_see"=>"sometimes|nullable|required",
+      // "gender"=>"required",
+      // "dob"=>"date|before_or_equal:".now()->subYears(13)->format('Y-m-d'),
      
-      ]);
+      ],['required'=>'This field is required']);
 
 // dd($request->all());
 
     // try {
      $user = Auth::guard('siteDoctor')->user();
+
       // if(!empty($request->email) && ($user->email != $request->email)){
       //     $request->validate([
       //     'email' => 'sometimes|nullable|required|unique:users,email',
@@ -81,7 +88,7 @@ class DoctorController extends Controller
        if(!empty($request->dr_live_chat_fee) ) $profile->dr_live_chat_fee = $request->dr_live_chat_fee;
        if(!empty($request->dr_qa_fee) ) $profile->dr_qa_fee = $request->dr_qa_fee;
        // if(!empty($request->dr_qa_fee_notification)) $profile->dr_qa_fee_notification = $request->dr_qa_fee_notification;
-       if($request->profile=='profile'){
+       if($request->form_name=='profile'){
        $profile->dr_live_video_fee_notification = ($request->dr_live_video_fee_notification == null) ? 1:0;
        $profile->dr_standard_fee_notification = ($request->dr_standard_fee_notification == null) ? 1:0;
        $profile->dr_live_chat_fee_notification = ($request->dr_live_chat_fee_notification == null) ? 1:0;
@@ -129,12 +136,12 @@ class DoctorController extends Controller
        //      Session::flash('Error-toastr', $e->getMessage());
        //  }
        //      return redirect()->back();
+         $form_name = $request->form_name;
       }
-
 
         $user = Auth::guard('siteDoctor')->user();
         // return $user->profile->dr_qa_fee_notification;
-        return view('frontend.doctor.profile', compact('user'));
+        return view('frontend.doctor.profile', compact('user','form_name'));
        
     }
 

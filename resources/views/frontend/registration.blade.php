@@ -66,18 +66,18 @@
                             </div>
 
 
-                            <div class="col-sm-12">
+                            {{-- <div class="col-sm-12">
                                 <div class="">
                                     <input type="checkbox" name="terms_conditions" class="" required>
                                     <a href="{{route('termsCondition')}}" style="color: #01105c; font-weight: 600;">Terms & Conditions </a>
                                   </div>
                             <span class="text-danger">{{$errors->first('terms_conditions')}}</span>
-                            </div>
+                            </div> --}}
 
                             <div class="col-sm-12">
                                 <div class="">
                                     <input type="checkbox" name="privacy_policy" class="" required>
-                                    <a href="{{route('privacyPolicy')}}" style="color: #01105c; font-weight: 600;">Privacy Policy</a>
+                                    <a href="{{route('privacyPolicy')}}" style="color: #01105c; font-weight: 600;">Private Policy</a>
                                   </div>
                             <span class="text-danger">{{$errors->first('privacy_policy')}}</span>
                             </div>

@@ -66,7 +66,7 @@ Please read and accept:
 <br>
 <p>1. <a href="{{route('termsCondition')}}"> Terms & Conditions</a></p>
 
-<p>2. <a href="{{route('privacyPolicy')}}">Privacy policy</a></p>
+{{-- <p>2. <a href="{{route('privacyPolicy')}}">Privacy policy</a></p> --}}
 
 Click the link below to activate your account 
 <center>
@@ -78,7 +78,17 @@ Click the link below to activate your account
 @endif
 
 @if($user->role == 2)
-<p>Click the link below to activate your account </p>
+
+<b>PLEASE READ CAREFULLY</b>
+
+<p>On clicking the activation link below you will be asked to upload a copy of your GMC licence to practice medicine (or equivalent for non-UK doctors). <p>
+
+<p>You can download a copy from your GMC online account. Attach a screenshot (e.g. JPEG) or the PDF. We will then check your details. Please watch your email and junk mail - whitelist Registered-Doctor.com.</p> 
+
+<p>We usually verify details within 2 working days. Contact admin@registered-doctor.com if you have any queries.</p>
+
+<p>Click the link below to activate your account</p>
+
 <br>
 <center>
 <a class="btn btn-primary"  href="{{ route('email-verification', Crypt::encrypt($user->id)) }}">Click to verify</a>

@@ -22,8 +22,8 @@
                         <li><a href="{{route('login')}}">Login</a></li>
                         <li><a href="{{route('registration')}}">Registration</a></li>
                     @endguest
-                    <li><a href="http://">Terms & Conditions</a></li>
-                    <li><a href="http://">Privacy & Policy</a></li>
+                    <li><a href="{{route('termsCondition','doctor')}}">Terms & Conditions</a></li>
+                    <li><a href="{{route('privacyPolicy')}}">Private Policy</a></li>
                 </ul>
             </div>
             <div class="col-sm-3 cont-details">

@@ -6055,3 +6055,21 @@ tr.only-remv:after {
     font-weight: 700;
     font-size: 20px;
 }
+
+.Doctor-Manage-Account-Profile-page .main-form-fild .form-group.required
+{
+    position: relative;
+    &::before {
+        top: 8px;
+        content: "*";
+        color: #e00;
+        top: 15px;
+        left: 10px;
+        position: absolute;
+        font-size: 16px;
+    
+    }
+    .form-control{
+        padding-left: 20px;
+    }
+}

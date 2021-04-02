@@ -12,7 +12,7 @@
                 </h1>
             </div>
         </div>
-        <div class="row">
+       {{--  <div class="row">
             <div class="col-sm-12 mb-3 mt-2">
                 <ul class="nav nav-pills t-c-page">
                     <li class="nav-item">
@@ -28,7 +28,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-sm-12">
                 <p> {!! $get_terms_condition->content !!}</p>

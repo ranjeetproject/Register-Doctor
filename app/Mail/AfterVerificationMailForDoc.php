@@ -23,7 +23,7 @@ class AfterVerificationMailForDoc extends Mailable
     public function build()
     {
        return $this->from(env('MAIL_USERNAME'), env('APP_NAME'))
-                    ->view('email.registration')
+                    ->view('email.after_verification_mail_for_doc')
                     ->subject('Registration');
     }
 }

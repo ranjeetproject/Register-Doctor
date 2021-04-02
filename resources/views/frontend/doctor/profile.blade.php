@@ -11,17 +11,17 @@
                         </a>
                     </li> --}}
                     <li class="nav-item">
-                    <a class="nav-link "  data-toggle="tab" href="#Manage-Profile">
+                    <a class="nav-link {{($form_name == 'profile') ? 'active':''}}"  data-toggle="tab" href="#Manage-Profile">
                         Manage Profile
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link active"   data-toggle="tab" href="#Payment-Details">
+                        <a class="nav-link {{($form_name == 'account') ? 'active':''}}"   data-toggle="tab" href="#Payment-Details">
                             Payment Details
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  data-toggle="tab" href="#Contact-Details">
+                        <a class="nav-link {{($form_name == 'contact_details') ? 'active':''}}"  data-toggle="tab" href="#Contact-Details">
                             Contact Details
                         </a>
                     </li>
@@ -31,10 +31,10 @@
                         
                         
                     </div>
-                    <div class="tab-pane fade " id="Manage-Profile" >
+                    <div class="tab-pane fade show {{($form_name == 'profile') ? 'active':''}} input-effect" id="Manage-Profile" >
                         <form method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="row Doctor-contact">
+                            <div class="row Doctor-contact main-form-fild">
                                 <div class="col-sm-2 pad-lef-0">
                                     <div class="for-profile-image">
                                         <input type="file" name="profile_photo" id="imgInp">
@@ -48,11 +48,11 @@
                                     <a class="btn add-btn" >Ad Hoc Timeslots</a>
                                 </div>
                             </div>
-                            <div class="row Doctor-contact">
+                            <div class="row Doctor-contact main-form-fild">
                                 <div class="col-sm-6">
-                                    <div class="form-group">
+                                    <div class="form-group required">
+                                        <input name="forename" class="form-control effect-19 {{!empty($user->forename) ? 'has-content':''}} " type="text" value="{{$user->forename}}">
                                         <label>Forename</label>
-                                        <input name="forename" class="form-control" type="text" placeholder="Forename" value="{{$user->forename}}">
                                     </div>
                                     @error('forename')
                                     <span class="text-danger">{{ $message }}</span>
@@ -60,9 +60,10 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <div class="form-group">
+                                    <div class="form-group required">
+                                        <input class="form-control effect-19 {{!empty($user->surname) ? 'has-content':''}}" name="surname" type="text" value="{{$user->surname}}" placeholder="Surname">
                                         <label>Surname</label>
-                                        <input class="form-control" name="surname" type="text" value="{{$user->surname}}" placeholder="Surname">
+                                        
                                     </div>
 
                                     @error('forename')
@@ -72,48 +73,83 @@
 
 
                                 <div class="col-sm-12">
-                                    <div class="form-group">
+                                    <div class="form-group required">
+                                        <input class="form-control effect-19 {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" type="text"  name="dr_speciality" value="{{$user->profile->dr_speciality}}">
                                         <label>Speciality or Interest <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"></label>
-                                        <input class="form-control" type="text" placeholder="" name="dr_speciality" value="{{$user->profile->dr_speciality}}">
+                                    @error('dr_speciality')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
 
 
                                 <div class="col-sm-12">
                                     <div class="form-group">
+                                        <textarea class="form-control effect-19 {{!empty($user->profile->about) ? 'has-content':''}}" name="about" rows="4">{{$user->profile->about}}</textarea>
                                         <label>About </label>
-                                        <textarea class="form-control" name="about" rows="4">{{$user->profile->about}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->dr_experience) ? 'has-content':''}}" name="dr_experience" type="text"  value="{{$user->profile->dr_experience}}">
                                         <label>Experience</label>
-                                        <input class="form-control" name="dr_experience" type="text" placeholder="" value="{{$user->profile->dr_experience}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->dr_qualifications) ? 'has-content':''}}" type="text" name="dr_qualifications" value="{{$user->profile->dr_qualifications}}">
                                         <label>Qualifications</label>
-                                        <input class="form-control" type="text" name="dr_qualifications" value="{{$user->profile->dr_qualifications}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
+                                        <input class="form-control effect-19 {{!empty($user->profile->dr_medical_license_no) ? 'has-content':''}}" type="text" name="dr_medical_license_no" value="{{$user->profile->dr_medical_license_no}}" >
                                         <label>Medical License No. (National/State)</label>
-                                        <input class="form-control" type="text" name="dr_medical_license_no" value="{{$user->profile->dr_medical_license_no}}" placeholder="">
+                                    @error('dr_medical_license_no')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="form-group">
+                                    <div class="form-group required">
+                                        <input class="form-control effect-19 {{!empty($user->profile->dr_name_of_medical_licencer) ? 'has-content':''}}" type="text" name="dr_name_of_medical_licencer" value="{{$user->profile->dr_name_of_medical_licencer}}" >
                                         <label>Name of Medical Licencer</label>
-                                        <input class="form-control" type="text" name="dr_name_of_medical_licencer" value="{{$user->profile->dr_name_of_medical_licencer}}" placeholder="">
+                                        @error('dr_name_of_medical_licencer')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->dr_registered_no) ? 'has-content':''}}" type="text" name="dr_registered_no" value="{{$user->profile->dr_registered_no}}" >
                                         <label>Registered-Doctor No.</label>
-                                        <input class="form-control" type="text" name="dr_registered_no" value="{{$user->profile->dr_registered_no}}" placeholder="">
                                     </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group Tick-one ">
+                                        <div class="form-check form-check-inline">
+                                            <label class="Tick-lab"><sup>*</sup> Tick one or both - Do you see</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="dr_see" id="inlineRadio1" value="adult" {{($user->profile->dr_see == 'adult' || $user->profile->dr_see == '') ? 'checked':'' }}>
+                                        <span class="dot"><span></span></span>
+                                        <label class="form-check-label" for="inlineRadio1">Adult</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="dr_see" id="inlineRadio2" value="child" {{($user->profile->dr_see == 'child') ? 'checked':'' }} >
+                                            <span class="dot"><span></span></span>
+                                            <label class="form-check-label" for="inlineRadio2">Child</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="dr_see" id="inlineRadio3" value="both" {{($user->profile->dr_see == 'both') ? 'checked':'' }} >
+                                            <span class="dot"><span></span></span>
+                                            <label class="form-check-label" for="inlineRadio3">Both</label>
+                                        </div>
+                                    @error('dr_see')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    </div>
+                                    
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group Communication">
@@ -125,7 +161,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Quick question</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Fee : <input class="form-control" type="text" placeholder="" name="dr_standard_fee" value="{{$user->profile->dr_standard_fee}}">  First Doctor to Take Case
+                                                <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Fee : <input class="form-control " type="text"  name="dr_standard_fee" value="{{$user->profile->dr_standard_fee}}">  First Doctor to Take Case
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
@@ -140,7 +176,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Video</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" class="" disabled>  Set your own fee : <input class="form-control" type="text" name="dr_live_video_fee" placeholder="" value="{{$user->profile->dr_live_video_fee}}">  Set availability in Your Calendar above
+                                                <input type="checkbox" class="" disabled>  Set your own fee : <input class="form-control " type="text" name="dr_live_video_fee"  value="{{$user->profile->dr_live_video_fee}}">  Set availability in Your Calendar above
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
@@ -154,7 +190,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Chat</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" name="" class="" disabled>  Set your own fee : <input class="form-control" type="text" placeholder="" name="dr_live_chat_fee" value="{{$user->profile->dr_live_chat_fee}}">  Set availability in Your Calendar above
+                                                <input type="checkbox" name="" class="" disabled>  Set your own fee : <input class="form-control " type="text"  name="dr_live_chat_fee" value="{{$user->profile->dr_live_chat_fee}}">  Set availability in Your Calendar above
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
@@ -168,7 +204,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Booked Q&A</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" class="" disabled>  <span>Set your own fee :</span> <input class="form-control" name="dr_qa_fee" type="text" value="{{$user->profile->dr_qa_fee}}" placeholder=""> Set your max turnaround time
+                                                <input type="checkbox" class="" disabled>  <span>Set your own fee :</span> <input class="form-control " name="dr_qa_fee" type="text" value="{{$user->profile->dr_qa_fee}}" > Set your max turnaround time
                                                 for response in Hours or Days 
 
                                                 @php
@@ -176,11 +212,11 @@
                                                 // print_r($get_dr_turnaround_time);
                                                 @endphp
 
-                                                <select class="form-control form-control-lg" name="dr_turnaround_time">
+                                                <select class="form-control  form-control -lg" name="dr_turnaround_time">
                                                     @for($i = 1; $i <= 10; $i++)
                                                      <option value="{{$i}}" {{(isset($get_dr_turnaround_time[0]) && $get_dr_turnaround_time[0]==$i) ? 'selected':''}}>{{$i}}</option>
                                                     @endfor
-                                                </select> or <select class="form-control form-control-lg" name="dr_turnaround_time_type">
+                                                </select> or <select class="form-control  form-control -lg" name="dr_turnaround_time_type">
                                                     <option value="days" {{( isset($get_dr_turnaround_time[1]) && $get_dr_turnaround_time[1]=='days') ? 'selected':''}}>Days</option>
                                                     <option value="hours" {{(isset($get_dr_turnaround_time[1]) && $get_dr_turnaround_time[1]=='hours') ? 'selected':''}}>Hours</option>
 
@@ -200,7 +236,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Tick to offer prescription online (only UK Doctors)</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" class="" disabled>  Upload Signature <input class="form-control" type="text" placeholder="" name="dr_signature" value="{{$user->profile->dr_signature}}">  
+                                                <input type="checkbox" class="" disabled>  Upload Signature <input class="form-control " type="text"  name="dr_signature" value="{{$user->profile->dr_signature}}">  
                                             </div>
                                         </div>
                                     </div>
@@ -215,29 +251,7 @@
                                     </div>
                                     
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group Tick-one ">
-                                        <div class="form-check form-check-inline">
-                                            <label class="Tick-lab"><sup>*</sup> Tick one or both - Do you see</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="dr_see" id="inlineRadio1" value="adult" {{($user->profile->dr_see == 'adult') ? 'checked':'' }} >
-                                        <span class="dot"><span></span></span>
-                                        <label class="form-check-label" for="inlineRadio1">Adult</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="dr_see" id="inlineRadio2" value="child" {{($user->profile->dr_see == 'child') ? 'checked':'' }} >
-                                            <span class="dot"><span></span></span>
-                                            <label class="form-check-label" for="inlineRadio2">Child</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="dr_see" id="inlineRadio3" value="both" {{($user->profile->dr_see == 'both') ? 'checked':'' }} >
-                                            <span class="dot"><span></span></span>
-                                            <label class="form-check-label" for="inlineRadio3">Both</label>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
+                                
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <h4>Ratings</h4>
@@ -270,12 +284,12 @@
 
 
                                 <div class="col-sm-12 for-msg">
-                                    <button type="submit" name="profile" value="profile" class="btn blue-button">Save</button>
+                                    <button type="submit" name="form_name" value="profile" class="btn blue-button">Save</button>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade show active" id="Payment-Details" >
+                    <div class="tab-pane fade {{($form_name == 'account') ? 'active':''}}" id="Payment-Details" >
                        <form method="POST" enctype="multipart/form-data">
 
                             @csrf
@@ -284,8 +298,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <p class="form-title-tab">Paypal Account</p>
+                                        <input class="form-control effect-19 {{!empty($user->email) ? 'has-content':''}} col-sm-6" type="email" name="email" value="{{$user->email}}"  readonly>
                                         <label>Email</label>
-                                        <input class="form-control col-sm-6" type="email" name="email" value="{{$user->email}}" placeholder="" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -293,41 +307,41 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->account_number) ? 'has-content':''}}" name="account_number" type="number"  value="{{$user->profile->account_number}}">
                                         <label>Account No.</label>
-                                        <input class="form-control" name="account_number" type="number" placeholder="" value="{{$user->profile->account_number}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->sort_code) ? 'has-content':''}}" type="text" name="sort_code" value="{{$user->profile->sort_code}}" >
                                         <label>Sort Code </label>
-                                        <input class="form-control" type="text" name="sort_code" value="{{$user->profile->sort_code}}" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->account_name) ? 'has-content':''}}" name="account_name" value="{{$user->profile->account_name}}" type="text" >
                                         <label>Account Name </label>
-                                        <input class="form-control" name="account_name" value="{{$user->profile->account_name}}" type="text" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->bank_name) ? 'has-content':''}}" name="bank_name" type="text"  value="{{$user->profile->bank_name}}">
                                         <label>Bank Name </label>
-                                        <input class="form-control" name="bank_name" type="text" placeholder="" value="{{$user->profile->bank_name}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->iban_or_swift_code) ? 'has-content':''}}" name="iban_or_swift_code" type="text" value="{{$user->profile->iban_or_swift_code}}">
                                         <label>For non-UK banks IBAN/Swift Code</label>
-                                        <input class="form-control" name="iban_or_swift_code" type="text" placeholder="" value="{{$user->profile->iban_or_swift_code}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn blue-button">Save</button>
+                                    <button type="submit" name="form_name" value="account"  class="btn blue-button">Save</button>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="Contact-Details" >
+                    <div class="tab-pane fade {{($form_name == 'contact_details') ? 'active':''}}" id="Contact-Details" >
                           <form method="POST" enctype="multipart/form-data">
 
                             @csrf
@@ -336,7 +350,7 @@
                                 {{-- <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input class="form-control" type="text" placeholder="Your Name">
+                                        <input class="form-control effect-19 {{!empty($user->forename) ? 'has-content':''}}" type="text" placeholder="Your Name">
                                     </div>
                                 </div> --}}
 
@@ -345,9 +359,9 @@
                                     
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Contact Phone No. 1<sup>*</sup></label>
-                                        <input class="form-control" name="telephone1" value="{{$user->profile->telephone1}}" type="tel" placeholder="">
+                                    <div class="form-group required">
+                                        <input class="form-control effect-19 {{!empty($user->profile->telephone1) ? 'has-content':''}}" name="telephone1" value="{{$user->profile->telephone1}}" type="tel" >
+                                        <label>Contact Phone No. 1</label>
                                     @error('telephone1')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -356,17 +370,17 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->telephone2) ? 'has-content':''}}"  name="telephone2" value="{{$user->profile->telephone2}}"  type="tel" >
                                         <label>Contact Phone No. 2 </label>
-                                        <input class="form-control"  name="telephone2" value="{{$user->profile->telephone2}}"  type="tel" placeholder="">
                                     @error('telephone2')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>Professional Address<sup>*</sup> </label>
-                                        <textarea class="form-control" name="address" rows="5">{{$user->profile->address}}</textarea>
+                                    <div class="form-group required">
+                                        <textarea class="form-control effect-19 {{!empty($user->profile->address) ? 'has-content':''}}" name="address" rows="5">{{$user->profile->address}}</textarea>
+                                        <label>Professional Address </label>
                                     @error('address')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -376,7 +390,7 @@
                                     <p><sup>*</sup>Mandatory in case you need to be contacted eg by Pharmacist, Admin</p>
                                 </div>
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn blue-button">Save</button>
+                                    <button type="submit" name="form_name" value="contact_details"  class="btn blue-button">Save</button>
                                 </div>
                             </div>
                         </form>
@@ -413,6 +427,17 @@
             $(this).parent().find('.on-and-off span').toggleClass("of"); 
         });
 
+    $(window).on('load', function(){
+    // $(".tab-content #Patient-Profile input, .tab-content #Patient-Profile textarea").val("");
     
+    $(".input-effect input, .input-effect textarea").focusout(function(){
+    if($(this).val() != ""){
+    $(this).addClass("has-content");
+    }else{
+    $(this).removeClass("has-content");
+    }
+    })
+  });
+
     </script>
 @endsection

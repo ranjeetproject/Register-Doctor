@@ -111,7 +111,7 @@ class UserController extends Controller
               "email"=>"required|email|unique:users,email",
               "password"=>"required|min:6",
               "confirm_password"=>"required|same:password",
-              "terms_conditions"=>"required",
+              // "terms_conditions"=>"required",
               "privacy_policy"=>"required",
             ],['terms_conditions.required'=>'Please read and tick to accept','privacy_policy.required'=>'Please read and tick to accept']
       );
@@ -242,12 +242,12 @@ class UserController extends Controller
           return redirect()->route('login')->with('Success-sweet','Your email successfully verified.');
           }
           if($user->role == 2){
-          Mail::to($user->email)->send(new AfterVerificationMailForDoc($user->id));
+          // Mail::to($user->email)->send(new AfterVerificationMailForDoc($user->id));
            // return redirect()->route('registration-step2', Crypt::encrypt($user->id));
           return redirect()->route('registration-step2', Crypt::encrypt($user->id))->with('Success-sweet','Your email successfully verified.');
           }
             if($user->role == 3) {
-          Mail::to($user->email)->send(new AfterVerificationMailForDoc($user->id));
+          // Mail::to($user->email)->send(new AfterVerificationMailForDoc($user->id));
            return redirect()->route('registration-step2', Crypt::encrypt($user->id))->with('Success-sweet','Your email successfully verified.');
           }
 
