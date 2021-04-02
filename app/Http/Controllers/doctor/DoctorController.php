@@ -27,6 +27,10 @@ class DoctorController extends Controller
 
 
     public function dashboard() {
+
+      if($user = Auth::guard('siteDoctor')->user()->dr_name_of_medical_licencer == ''){
+        return redirect()->route('doctor.profile');
+      }
         return view('frontend.doctor.dashboard');
     }
 
@@ -35,6 +39,8 @@ class DoctorController extends Controller
        $form_name = 'profile';
 
         if($request->isMethod('post')){
+            $form_name = $request->form_name;
+           
             // dd($request->all());
          $data = $request->validate([
       "forename"=>"sometimes|nullable|required|min:3|max:100",
@@ -136,7 +142,8 @@ class DoctorController extends Controller
        //      Session::flash('Error-toastr', $e->getMessage());
        //  }
        //      return redirect()->back();
-         $form_name = $request->form_name;
+        
+
       }
 
         $user = Auth::guard('siteDoctor')->user();

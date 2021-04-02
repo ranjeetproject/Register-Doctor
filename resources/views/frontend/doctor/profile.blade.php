@@ -4,6 +4,7 @@
     <div class="col Choose-Your-Doctor-right Doctor-Manage-Account-Profile-page">
         <div class="row">
             <div class="col-sm-12">
+               
                 <ul class="nav Choose-Your-tab" id="myTab" role="tablist">
                     {{-- <li class="nav-item">
                     <a class="nav-link "   href="Detailed-Doctor-Profile.html">
@@ -31,7 +32,7 @@
                         
                         
                     </div>
-                    <div class="tab-pane fade show {{($form_name == 'profile') ? 'active':''}} input-effect" id="Manage-Profile" >
+                    <div class="tab-pane fade {{($form_name == 'profile') ? 'show active':''}} input-effect" id="Manage-Profile" >
                         <form method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row Doctor-contact main-form-fild">
@@ -289,7 +290,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade {{($form_name == 'account') ? 'active':''}}" id="Payment-Details" >
+                    <div class="tab-pane fade {{($form_name == 'account') ? 'show active':''}}" id="Payment-Details" >
                        <form method="POST" enctype="multipart/form-data">
 
                             @csrf
@@ -341,7 +342,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade {{($form_name == 'contact_details') ? 'active':''}}" id="Contact-Details" >
+                    <div class="tab-pane fade {{($form_name == 'contact_details') ? 'show active':''}}" id="Contact-Details" >
                           <form method="POST" enctype="multipart/form-data">
 
                             @csrf
@@ -390,6 +391,7 @@
                                     <p><sup>*</sup>Mandatory in case you need to be contacted eg by Pharmacist, Admin</p>
                                 </div>
                                 <div class="col-sm-12">
+                                    {{-- <button type="submit" name="form_name" value="contact_details"  class="btn blue-button">Save</button> --}}
                                     <button type="submit" name="form_name" value="contact_details"  class="btn blue-button">Save</button>
                                 </div>
                             </div>

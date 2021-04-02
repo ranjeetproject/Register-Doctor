@@ -21,8 +21,8 @@
                         <div class="row main-form-fild">
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                     <input type="text" name="forename" class="form-control effect-19 {{!empty($user->forename) ? 'has-content':''}}" value="{{$user->forename}}">
                                      <label >Forename</label>
-                                     <input type="text" name="forename" class="form-control" placeholder="Forename" value="{{$user->forename}}">
                                     @error('forename')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -31,8 +31,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                     <input type="text" name="surname" class="form-control effect-19 {{!empty($user->surname) ? 'has-content':''}}" value="{{$user->surname}}">
                                      <label >Surname</label>
-                                     <input type="text" name="surname" class="form-control" placeholder="Surname" value="{{$user->surname}}">
                                     @error('surname')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -40,23 +40,23 @@
                             </div>
 
                             <div class="col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group ">
+                                    <input type="text" name="location" class="form-control effect-19 {{!empty($user->profile->location) ? 'has-content':''}}" value="{{$user->profile->location}}">
                                     <label >Location</label>
-                                    <input type="text" name="location" class="form-control" placeholder="Location" value="{{$user->profile->location}}">
                                   </div>
                             </div>
 
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                    <input type="text" name="address" class="form-control effect-19 {{!empty($user->profile->address) ? 'has-content':''}}" value="{{$user->profile->address}}">
                                     <label >Address</label>
-                                    <input type="text" name="address" class="form-control" placeholder="Address" value="{{$user->profile->address}}">
                                   </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    <input type="tel" name="telephone1" class="form-control effect-19 {{!empty($user->profile->telephone1) ? 'has-content':''}}"  value="{{$user->profile->telephone1}}">
                                     <label >Telephone Number 1</label>
-                                    <input type="tel" name="telephone1" class="form-control" placeholder="+91 41854548" value="{{$user->profile->telephone1}}">
                                     @error('telephone1')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -65,36 +65,36 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    <input type="tel" name="telephone2" class="form-control effect-19 {{!empty($user->profile->telephone2) ? 'has-content':''}}"  value="{{$user->profile->telephone2}}">
                                     <label >Telephone Number 2</label>
-                                    <input type="tel" name="telephone2" class="form-control" placeholder="+91 41854548" value="{{$user->profile->telephone2}}">
                                   </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    <input type="tel" name="telephone3" class="form-control effect-19 {{!empty($user->profile->telephone3) ? 'has-content':''}}"  value="{{$user->profile->telephone3}}">
                                     <label >Telephone Number 3</label>
-                                    <input type="tel" name="telephone3" class="form-control" placeholder="+91 41854548" value="{{$user->profile->telephone3}}">
                                   </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    <input type="email" name="email" class="form-control effect-19 {{!empty($user->email) ? 'has-content':''}}" value="{{$user->email}}" readonly>
                                     <label >Email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="stevedoe@gmail.com" value="{{$user->email}}" readonly>
                                   </div>
                             </div>
 
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                    <input type="url" name="website" class="form-control effect-19 {{!empty($user->profile->website) ? 'has-content':''}}" required  value="{{$user->profile->website}}">
                                     <label >Link to Website</label>
-                                    <input type="url" name="website" class="form-control" required placeholder="Pharmacy.co.in" value="{{$user->profile->website}}">
                                   </div>
                             </div>
 
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                    <textarea class="form-control effect-19 {{!empty($user->profile->about) ? 'has-content':''}}" name="about" rows="3">{{$user->profile->about}}</textarea>
                                     <label >About <span>e.g. 24 hours, extended opening hours, can deliver anywhere in Glasgow, within M25 etc.</span></label>
-                                    <textarea class="form-control" name="about" rows="3">{{$user->profile->about}}</textarea>
                                   </div>
                             </div>
 
@@ -148,8 +148,8 @@
                                   </div>
 
                                   <div class="form-group">
-                                    <label >Till</span></label>
-                                    <input id="Till-date" name="closing_time" class="form-control" type="time" value="{{ $user->openingTime->monday_closing_time  ?? '22:00' }}"/>
+                                    <label >Till</label>
+                                    <input id="Till-date" name="closing_time" class="form-control " type="time" value="{{ $user->openingTime->monday_closing_time  ?? '22:00' }}"/>
                                   </div>
 
                             </div>
@@ -180,7 +180,7 @@
                                     <label class="">
                                         Details e.g. We deliver anywhere in London, We deliver up to 5 miles from Glasgow
                                     </label>
-                                    <input class="form-control" name="notes" type="text" value=""/>
+                                    <input class="form-control" name="notes" type="text" value="{{$user->deliveryOption->notes}}"/>
                                   </div> 
                             </div>
                             

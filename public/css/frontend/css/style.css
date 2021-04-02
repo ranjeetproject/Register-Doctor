@@ -6468,4 +6468,21 @@ tr.only-remv:after {
 .Doctor-Manage-Account-Profile-page .main-form-fild .form-group.required .form-control {
   padding-left: 20px;
 }
+
+.Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check input:checked ~ span {
+  background: #dbe5f8;
+  color: #004cac;
+  height: 100%;
+  width: 100%;
+  line-height: 50px;
+}
+
+.Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check input ~ span {
+  position: relative;
+  left: -10px;
+}
+
+.Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check input {
+  opacity: 0;
+}
 /*# sourceMappingURL=style.css.map */
