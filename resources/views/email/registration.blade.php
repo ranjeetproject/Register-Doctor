@@ -50,7 +50,6 @@
                 <td align="center" valign="top" style="font-weight:bold;font-size:13px;padding:10px; border-bottom: 2px solid #25b5ff;">
 
                 <img src="{{ (!empty(getSetting('logo'))) ? asset('public/common_img/'.getSetting('logo')) : asset('public/common_img/logo.png') }}" alt="{{ env('APP_NAME') }}" border="0" height="75px" width="180px" />
-                   
                 </td>
             </tr>
             <tr><td colspan="2" valign="top">&nbsp;</td></tr>
@@ -64,7 +63,7 @@
 @if($user->role == 1)
 Please read and accept:
 <br>
-<p>1. <a href="{{route('termsCondition')}}"> Terms & Conditions</a></p>
+<p><a href="{{route('termsCondition')}}"> Terms & Conditions</a></p>
 
 {{-- <p>2. <a href="{{route('privacyPolicy')}}">Privacy policy</a></p> --}}
 
@@ -95,7 +94,7 @@ Click the link below to activate your account
 </center>
 <br>
 
-<p>Please watch your email as we will email you details on how to register as a healthcare professional   - also  watch your junk mail and whitelist Registered-Doctor.com </p>
+{{-- <p>Please watch your email as we will email you details on how to register as a healthcare professional   - also  watch your junk mail and whitelist Registered-Doctor.com </p> --}}
 
 @endif
 

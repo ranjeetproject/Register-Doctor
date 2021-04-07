@@ -20,7 +20,7 @@
 
                         <div class="row main-form-fild">
                             <div class="col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group required">
                                      <input type="text" name="forename" class="form-control effect-19 {{!empty($user->forename) ? 'has-content':''}}" value="{{$user->forename}}">
                                      <label >Forename</label>
                                     @error('forename')
@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group required">
                                      <input type="text" name="surname" class="form-control effect-19 {{!empty($user->surname) ? 'has-content':''}}" value="{{$user->surname}}">
                                      <label >Surname</label>
                                     @error('surname')
@@ -40,21 +40,47 @@
                             </div>
 
                             <div class="col-sm-6">
-                                <div class="form-group ">
+                                <div class="form-group required">
                                     <input type="text" name="location" class="form-control effect-19 {{!empty($user->profile->location) ? 'has-content':''}}" value="{{$user->profile->location}}">
                                     <label >Location</label>
-                                  </div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <input type="text" name="address" class="form-control effect-19 {{!empty($user->profile->address) ? 'has-content':''}}" value="{{$user->profile->address}}">
-                                    <label >Address</label>
+                                     @error('location')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                   </div>
                             </div>
 
                             <div class="col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group required">
+                                    <input type="text" name="pharmacy_numbar" class="form-control effect-19 {{!empty($user->profile->pharmacy_numbar) ? 'has-content':''}}" value="{{$user->profile->pharmacy_numbar}}">
+                                    <label >Registared-Doctor Pharmacy No</label>
+                                     @error('pharmacy_numbar')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                  </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group required">
+                                    <input type="text" name="pharmacy_name" class="form-control effect-19 {{!empty($user->profile->pharmacy_name) ? 'has-content':''}}" value="{{$user->profile->pharmacy_name}}">
+                                    <label >Pharmacy Name</label>
+                                     @error('pharmacy_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                  </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group required">
+                                    <input type="text" name="address" class="form-control effect-19 {{!empty($user->profile->address) ? 'has-content':''}}" value="{{$user->profile->address}}">
+                                    <label >Address</label>
+                                     @error('address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                  </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group required">
                                     <input type="tel" name="telephone1" class="form-control effect-19 {{!empty($user->profile->telephone1) ? 'has-content':''}}"  value="{{$user->profile->telephone1}}">
                                     <label >Telephone Number 1</label>
                                     @error('telephone1')

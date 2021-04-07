@@ -86,7 +86,7 @@
 @if($user->role == 3)
 <p>Your  pharmacy licence has been successfully verified.  To complete registration please read the following and click if you agree: </p>
 
-<p>1. <a href="{{route('termsCondition','pharmacist')}}">Terms & Conditions</a></p>
+<p><a href="{{route('termsCondition','pharmacist')}}">Terms & Conditions</a></p>
 {{-- <p>2. <a href="{{route('privacyPolicy')}}">Privacy policy </a></p> --}}
 
 
