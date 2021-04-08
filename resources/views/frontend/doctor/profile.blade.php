@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <input class="form-control effect-19 {{!empty($user->profile->dr_registered_no) ? 'has-content':''}}" type="text" name="dr_registered_no" value="{{$user->profile->dr_registered_no}}" >
+                                        <input class="form-control effect-19 {{!empty($user->registration_number) ? 'has-content':''}}" type="text" name="dr_registered_no" value="{{$user->registration_number}}" readonly>
                                         <label>Registered-Doctor No.</label>
                                     </div>
                                 </div>

@@ -120,6 +120,7 @@ class UserController extends Controller
     try {
   
       $user = new User;
+      $user->registration_number = 'REGD'.date('YmdHis');
       $user->forename = $request->forename;
       $user->surname = $request->surname;
       $user->name = $request->forename.' '.$request->surname;
@@ -173,9 +174,10 @@ class UserController extends Controller
       
        $validator = $request->validate(
            [
-              "dr_gmc_licence"=>"sometimes|nullable|required",
-              "telephone1"=>"sometimes|nullable|required",
-              "location"=>"sometimes|nullable|required",
+              "dr_gmc_licence"=>"sometimes|required",
+              "telephone1"=>"sometimes|required",
+              "pharmacy_name"=>"sometimes|required",
+              "location"=>"sometimes|required",
            ],['telephone1.required'=>'contact number is required']
       );
 
@@ -197,6 +199,7 @@ class UserController extends Controller
             $userProfile->dr_gmc_licence = $fileName;
           }
 
+      $userProfile->pharmacy_name = $request->pharmacy_name;
       $userProfile->telephone1 = $request->telephone1;
       $userProfile->location = $request->location;
       $userProfile->save();

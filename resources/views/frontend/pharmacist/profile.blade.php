@@ -51,7 +51,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group required">
-                                    <input type="text" name="pharmacy_numbar" class="form-control effect-19 {{!empty($user->profile->pharmacy_numbar) ? 'has-content':''}}" value="{{$user->profile->pharmacy_numbar}}">
+                                    <input type="text" name="pharmacy_numbar" class="form-control effect-19 {{!empty($user->registration_number) ? 'has-content':''}}" value="{{$user->registration_number}}" readonly>
                                     <label >Registared-Doctor Pharmacy No</label>
                                      @error('pharmacy_numbar')
                                     <span class="text-danger">{{ $message }}</span>

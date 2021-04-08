@@ -40,6 +40,14 @@
                             @if($user->role == 3)
                             <div class="col-sm-12">
                                 <div class="form-group required">
+                                    <textarea name="pharmacy_name" class="form-control effect-19">{{old('pharmacy_name')}}</textarea>
+                                    <label>Pharmacy Name</label>
+                                  </div>
+                                  <span class="text-danger">{{$errors->first('pharmacy_name')}}</span>
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <div class="form-group required">
                                     <textarea name="location" class="form-control effect-19">{{old('location')}}</textarea>
                                     <label>Location</label>
                                   </div>

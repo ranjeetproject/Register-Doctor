@@ -16,6 +16,7 @@ class AddAcceptTermsAndConditionsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->timestamp('terms_conditions')->after('admin_verified_at')->nullable();
             $table->timestamp('privacy_policy')->after('terms_conditions')->nullable();
+            $table->string('registration_number')->after('id')->nullable();
         });
     }
 
@@ -29,6 +30,7 @@ class AddAcceptTermsAndConditionsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
              $table->dropColumn('terms_conditions');
              $table->dropColumn('privacy_policy');
+             $table->dropColumn('registration_number');
         });
     }
 }

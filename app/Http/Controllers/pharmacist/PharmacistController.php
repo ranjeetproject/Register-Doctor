@@ -66,7 +66,8 @@ class PharmacistController extends Controller
      if(!empty($request->surname) ) $user->surname = $request->surname;
      if(!empty($request->forename) && !empty($request->surname)) $user->name = $request->forename.' '.$request->surname;
      if(!empty($request->email) && ($user->email != $request->email)) $user->email = $request->email;
-      
+     
+     // $user->registration_number = $request->email;
      
      $user->save();
      $profile = UserProfile::where('user_id',$user->id)->first();
@@ -74,6 +75,7 @@ class PharmacistController extends Controller
      $profile->user_id = $user->id;
 
      
+      $profile->pharmacy_name = $request->pharmacy_name;
       $profile->telephone1 = $request->telephone1;
       $profile->telephone2 = $request->telephone2;
       $profile->telephone3 = $request->telephone3;
