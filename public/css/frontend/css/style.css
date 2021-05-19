@@ -6485,23 +6485,26 @@ tr.only-remv:after {
 .Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check input {
   opacity: 0;
 }
-.Manage-Profile .main-form-fild .form-group{
-    position: relative;
-  }
+
+.Manage-Profile .main-form-fild .form-group.required {
+  position: relative;
+}
 
 .Manage-Profile .main-form-fild .form-group.required::before {
-    top: 8px;
-    content: "*";
-    color: #e00;
-    top: 15px;
-    left: 10px;
-    position: absolute;
-    font-size: 16px;
-  }
+  top: 8px;
+  content: "*";
+  color: #e00;
+  top: 15px;
+  left: 10px;
+  position: absolute;
+  font-size: 16px;
+}
 
-  .Manage-Profile .main-form-fild .form-group.required .form-control {
-    padding-left: 20px;
-  }
+.Manage-Profile .main-form-fild .form-group.required .form-control {
+  padding-left: 20px;
+}
 
+.col.Choose-Your-Doctor-right.innerpage.Prescriptions-Dispensed-page {
+  max-width: calc(100% - 240px);
+}
 /*# sourceMappingURL=style.css.map */
-

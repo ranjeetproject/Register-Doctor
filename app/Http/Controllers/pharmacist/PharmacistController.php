@@ -39,7 +39,8 @@ class PharmacistController extends Controller
             // dd($request->all());
 
 
-         $data = $request->validate([
+         // $data = $request->validate([
+            $validator = Validator::make($request->all(), [ 
       "forename"=>"required|min:3|max:100",
       "surname"=>"required|min:3|max:100",
       "telephone1"=>"required|digits:10",
@@ -52,6 +53,11 @@ class PharmacistController extends Controller
       // "new_password"=>"sometimes|nullable|required|min:6",
       // "confirm_password"=>"sometimes|nullable|required|same:new_password",
       ]);
+
+              if ($validator->fails()) { 
+              Session::flash('Error-toastr','Please fill in all the fields before proceeding');
+              return redirect()->back();
+            }
 
 // dd($request->all());
  DB::beginTransaction();
@@ -194,6 +200,72 @@ class PharmacistController extends Controller
 
         }
         return view('frontend.pharmacist.change_password');
+    }
+
+
+    function openingHours(Request $request)
+    {
+       $user = Auth::guard('sitePharmacist')->user();
+
+      if ($request->isMethod('post')) {
+
+         $opening_time = PharmacyOpeningTime::where('user_id',$user->id)->first();
+         $opening_time = $opening_time ?? new PharmacyOpeningTime;
+
+         $opening_time->user_id =  $user->id;
+
+         // $opening_time->monday =  ($request->monday) ? 1 : 0;
+         $opening_time->monday_opening_time =  $request->monday_opening_time;
+         $opening_time->monday_closing_time =  $request->monday_closing_time;
+         $opening_time->monday = (!empty($request->monday_opening_time) && !empty($request->monday_closing_time) ) ? 1 : 0;
+
+
+         // $opening_time->tuesday =  ($request->tuesday) ? 1 : 0;
+         $opening_time->tuesday_opening_time =  $request->tuesday_opening_time;
+         $opening_time->tuesday_closing_time =  $request->tuesday_closing_time;
+         $opening_time->tuesday = (!empty($request->tuesday_opening_time) && !empty($request->tuesday_closing_time) ) ? 1 : 0;
+
+
+         // $opening_time->wednesday =  ($request->wednesday) ? 1 : 0;
+         $opening_time->wednesday_opening_time =  $request->wednesday_opening_time;
+         $opening_time->wednesday_closing_time =  $request->wednesday_closing_time;
+         $opening_time->wednesday = (!empty($request->wednesday_opening_time) && !empty($request->wednesday_closing_time) ) ? 1 : 0;
+
+
+
+         // $opening_time->thursday =  ($request->thursday) ? 1 : 0;
+         $opening_time->thursday_opening_time =  $request->thursday_opening_time;
+         $opening_time->thursday_closing_time =  $request->thursday_closing_time;
+         $opening_time->thursday = (!empty($request->thursday_opening_time) && !empty($request->thursday_closing_time) ) ? 1 : 0;
+
+
+
+         // $opening_time->friday =  ($request->friday) ? 1 : 0;
+         $opening_time->friday_opening_time =  $request->friday_opening_time;
+         $opening_time->friday_closing_time =  $request->friday_closing_time;
+         $opening_time->friday = (!empty($request->friday_opening_time) && !empty($request->friday_closing_time) ) ? 1 : 0;
+
+
+         // $opening_time->saturday =  ($request->saturday) ? 1 : 0;
+         $opening_time->saturday_opening_time =  $request->saturday_opening_time;
+         $opening_time->saturday_closing_time =  $request->saturday_closing_time;
+         $opening_time->saturday = (!empty($request->saturday_opening_time) && !empty($request->saturday_closing_time) ) ? 1 : 0;
+
+
+         $opening_time->sunday_opening_time =  $request->sunday_opening_time;
+         $opening_time->sunday_closing_time =  $request->sunday_closing_time;
+         // $opening_time->sunday =  ($request->sunday) ? 1 : 0;
+         $opening_time->sunday = (!empty($request->sunday_opening_time) && !empty($request->sunday_closing_time) ) ? 1 : 0;
+         $opening_time->notes =  $request->notes;
+
+
+
+         $opening_time->save();
+         Session::flash('Success-toastr','Successfully updated');
+
+      }
+
+      return view('frontend.pharmacist.opening_hours',compact('user'));
     }
 
 }

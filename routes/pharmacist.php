@@ -8,5 +8,6 @@ Route::middleware(['isPharmacist:sitePharmacist','activeUser','emailVerified','a
     Route::get('/dashboard', 'PharmacistController@dashboard')->name('dashboard');
      Route::match(['get','post'],'/profile', 'PharmacistController@profile')->name('profile');
     Route::match(['get','post'],'/change-password', 'PharmacistController@changePassword')->name('change-password');
+    Route::match(['get','post'],'/opening-hours', 'PharmacistController@openingHours')->name('opening-hours');
 });
 

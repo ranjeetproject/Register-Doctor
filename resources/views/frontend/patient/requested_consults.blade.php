@@ -47,70 +47,52 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                         @forelse ($cases as $case)
                                         <tr>
-                                            <td>08-10-2020</td>
-                                            <td>06:15 pm</td>
-                                            <td>Dr John Smith</td>
-                                            <td>52595</td>
-                                            <td><a href="#">Live Chat</a></td>
-                                            <td>Pending </td>
-                                        </tr>
-                                        <tr>
-                                            <td>08-10-2020</td>
-                                            <td>06:15 pm</td>
-                                            <td>Dr John Smith</td>
-                                            <td>52595</td>
-                                            <td><a href="#">Live Video</a></td>
-                                            <td>Pending </td>
-                                        </tr>
-                                        <tr>
-                                            <td>08-10-2020</td>
-                                            <td>06:15 pm</td>
-                                            <td>Dr John Smith</td>
-                                            <td>52595</td>
-                                            <td>Prescription<br><a href="#">Max 3 Exchanges</a></td>
-                                            <td>Pending </td>
-                                        </tr>
-                                        <tr>
-                                            <td>08-10-2020</td>
-                                            <td>06:15 pm</td>
-                                            <td>Dr John Smith</td>
-                                            <td>52595</td>
-                                            <td>Prescription<br><a href="#">Live Chat</a><br> </td>
-                                            <td>Pending </td>
-                                        </tr>
-                                        <tr>
-                                            <td>08-10-2020</td>
-                                            <td>06:15 pm</td>
-                                            <td>Dr John Smith</td>
-                                            <td>52595</td>
-                                            <td>Prescription<br><a href="#">Live Video</a><br> </td>
-                                            <td>Pending </td>
-                                        </tr>
-                                        <tr>
-                                            <td>08-10-2020</td>
-                                            <td>06:15 pm</td>
-                                            <td>Dr John Smith</td>
-                                            <td>52595</td>
-                                            <td>Prescription<br><a href="#">Live Chat</a><br> </td>
-                                            <td>Pending </td>
-                                        </tr>
-                                        <tr>
-                                            <td>08-10-2020</td>
-                                            <td>06:15 pm</td>
-                                            <td>Dr John Smith</td>
-                                            <td>52595</td>
-                                            <td>Prescription<br> Typed Q & A <br><a href="#">Max 3 Exchanges</a><br> </td>
-                                            <td>Pending </td>
-                                        </tr>
-                                        <tr>
-                                            <td>08-10-2020</td>
-                                            <td>06:15 pm</td>
-                                            <td>Dr John Smith</td>
-                                            <td>52595</td>
-                                            <td>Prescription<br> Typed Q & A <br><a href="#">Max 3 Exchanges</a><br> </td>
-                                            <td>Pending </td>
-                                        </tr>
+                                            <td>{{date('m-d-Y', strtotime($case->booking_date))}}</td>
+                                            <td>
+                                              {{-- @if($case->getSlot) --}}
+                                              @forelse($case->getBookingSlot as $time_slot)
+
+                                              {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} -- {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>
+
+                                              @empty
+
+                                              @endforelse
+                                              {{-- @endif --}}
+                                            </td>
+                                            <td>{{$case->doctor->name}}</td>
+                                            <td>{{$case->case_id}}</td>
+                                            <td><a href="{{route('patient.chats',$case->case_id)}}">@if($case->questions_type == 1)
+                                                Live Chat
+                                                @endif
+
+                                                @if($case->questions_type == 2)
+                                                Live Video
+                                                @endif
+
+                                                 @if($case->questions_type == 3)
+                                                Quick Questions
+                                                @endif
+
+                                                @if($case->questions_type == 4)
+                                                Typed Q&A
+                                                @endif
+                                              </a></td>
+                                            <td>
+                                              @if($case->accept_status == 1)
+                                              Accepted
+                                              @else
+                                               Pending 
+                                              @endif
+                                          </td>
+                                        </tr>  
+                                         @empty
+                                         <tr>
+                                           <td colspan="6">No data found</td>
+                                         </tr>
+                                         @endforelse
+                                        
                                       </tbody>
                                     </table>
                                   </div>
@@ -120,17 +102,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-end">
-                                      <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                      </li>
-                                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                      <li class="page-item clickabled">
-                                        <a class="page-link" href="#">Next</a>
-                                      </li>
-                                    </ul>
+                                     {{ $cases->onEachSide(1)->links() }}
                                   </nav>
                             </div>
                         </div>

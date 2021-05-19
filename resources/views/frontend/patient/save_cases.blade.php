@@ -22,7 +22,8 @@
                                           <tr>
                                               <td>Date Created</td>
                                               <td>Case ID</td>
-                                              <td>View </td>
+                                              <td>Type</td>
+                                              {{-- <td>View </td> --}}
                                               <td>Action</td>
                                           </tr>
                                       </thead>
@@ -32,8 +33,21 @@
                                         <tr>
                                             <td>{{$case->created_at}}</td>
                                             <td>{{$case->case_id}}</td>
-                                            <td><a href="#" class="btn blue-button lineheight">View details</a></td>
-                                            <td><a href="#" class="btn blue-button lineheight">Resume - send to Doctor</a></td>
+                                            <td>
+                                                @if($case->questions_type == 1)
+                                                Live Chat
+                                                @endif
+                                                 @if($case->questions_type == 3)
+                                                Quick Questions
+                                                @endif
+                                            </td>
+                                            {{-- <td><a href="#" class="btn blue-button lineheight">View details</a></td> --}}
+                                            <td>
+                                                <a href="{{route('patient.chats',$case->case_id)}}" target="_blank" class="btn blue-button lineheight">Reply</a>
+
+                                                <a href="#" class="btn blue-button lineheight">View details</a>
+                                                
+                                                <a href="#" class="btn blue-button lineheight">Resume - send to Doctor</a></td>
                                         </tr>
                                         @empty
                                   <p>No data found</p>

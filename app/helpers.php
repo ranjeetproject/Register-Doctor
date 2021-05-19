@@ -1,7 +1,8 @@
 <?php 
 use App\Members;
-use App\Models\SiteSetting;
 use App\Models\FavouriteDoctor;
+use App\Models\SiteSetting;
+use App\User;
 
 
  function dateDifferent($date1, $date2)
@@ -77,7 +78,7 @@ return $time;
 
 function getUserDetails($id)
 {
-  $member = Members::find($id);
+  $member = User::find($id);
   return $member ? $member : false ;
 }
 
@@ -102,5 +103,25 @@ function getFavDoc($doctor_id)
   // dd($fav_doc);
   return $fav_doc ? true : false;
 }
+
+function getChild()
+{
+  if(!empty(Session::get('parent_id')) ){
+  $childs = User::find(Session::get('parent_id'));
+  // print_r($childs); exit;
+  // echo 'g'; exit;
+  $childs = $childs->childs;
+  }else{
+  $childs = Auth::guard('sitePatient')->user()->childs;
+  }
+  // print_r($childs); exit;
+  return $childs;
+
+}
+
+// function getTimeSlot($case_id)
+// {
+//   $get_time_slots_id = BookTimeSlot
+// }
 
 ?>

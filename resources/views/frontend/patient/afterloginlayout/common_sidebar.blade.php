@@ -5,6 +5,8 @@
 
       <li><a href="{{route('patient.medical-record')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Medical Record</a></li>
 
+      {{-- <li><a href="{{route('patient.view-childs')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Child Account</a></li> --}}
+
       <li><a href="{{route('patient.save-cases')}}"><img src="{{ asset('public/images/frontend/images/icon10.png') }}" alt="">Saved Cases</a></li>
 
       <li><a href="{{route('patient.requested-consults')}}"><img src="{{ asset('public/images/frontend/images/icon9.png') }}" alt="">Requested Consults</a></li>

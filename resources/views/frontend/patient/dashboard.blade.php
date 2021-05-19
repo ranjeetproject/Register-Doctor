@@ -118,25 +118,35 @@
                     <div class="Prescriptions-top">
                         <h3>Prescriptions<br><small>In 3 Easy Steps</small></h3>
                         <img src="{{ asset('public/images/frontend/images/m-pr-pic1.jpg') }}" alt="">
-                        <button type="submit" class="btn blue-button">Find Out More</button>
+                        <a class="btn blue-button" href="{{route('patient.show-prescriptions-rules')}}">Find Out More</a>
+                        {{-- <button type="submit" class="btn blue-button">Find Out More</button> --}}
                     </div>
+                      @if(Auth::guard('sitePatient')->user()->role == 1)
                     <div class="Prescriptions-bottom">
                         <h4>Children</h4>
                         <img src="{{ asset('public/images/frontend/images/m-pr-pic2.png') }}" alt="">
-                        <button type="submit" class="btn blue-button">Find Out More</button>
+                        <a href="{{route('patient.view-childs')}}" class="btn blue-button">Find Out More</a>
                     </div>
+                    @endif
+
                 </div>
             </div>
             <div class="col-sm">
                 <h2>Option 2</h2>
                 <h3>Quick Question <small class="orange">Ask a Doctor</small></h3>
                 <div class="opction-two">
-                    <form>
+                    <form method="post" id="upload_form" action="{{route('patient.create-case')}}" enctype="multipart/form-data">
+                        @csrf
+
+                        <input type="hidden" name="questions_type" value="3">
+                       
+
+
                         <div class="form-group">
-                            <textarea placeholder="Type your health query here " class="form-control" rows="6"></textarea>
+                            <textarea placeholder="Type your health query here " class="form-control" name="health_problem" rows="6" required></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <input type="file" name="case_file" class="form-control-file" id="exampleFormControlFile1" required>
                             <span>Upload Attachments <i class="far fa-paperclip"></i></span>
                         </div>
                         <button type="submit" class="btn orange-button">Submit Your query</button>
@@ -160,16 +170,16 @@
             </div>
         </div>
         <div class="row pad-apt-details">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="pd-btm-details">
                     <div class="pd-btm-details-cont">
-                        <p>upcoming appointments</p>
+                        <p>Sonsults Quick Questions</p>
                         <img src="{{ asset('public/images/frontend/images/pd-icon3.png') }}" alt="">
                         
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="pd-btm-details">
                     <div class="pd-btm-details-cont">
                         <p>Messages from Doctor,
@@ -179,7 +189,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="pd-btm-details">
                     <div class="pd-btm-details-cont">
                         <p>Your Prescriptions</p>
@@ -188,7 +198,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            {{-- <div class="col-sm-3">
                 <div class="pd-btm-details">
                     <div class="pd-btm-details-cont">
                         <p>Answered Questions</p>
@@ -196,7 +206,11 @@
                         
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
+
+@push('scripts')
+ 
+@endpush

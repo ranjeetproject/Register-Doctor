@@ -197,7 +197,8 @@
                                 </div>
                                 <div class="col-sm-12 Submit-Medical-Record">
                                     <button type="submit" class="btn blue-button smr-btn">Submit</button>
-                                    <button type="submit" class="btn smr-btn mr">Medical Record</button>
+                                    {{-- <button type="submit" class="btn smr-btn mr">Medical Record</button> --}}
+                                    <a href="{{route('patient.medical-record')}}" class="btn smr-btn mr">Medical Record</a>
                                 </div>
                             </div>
                         </form>
@@ -229,6 +230,7 @@
     <!-- Prescriptions Issued Modal end -->
 @endsection
 @section('scripts')
+
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()

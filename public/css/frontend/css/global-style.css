@@ -552,3 +552,92 @@ font-size: 18px;
     width: auto !important;
     border-radius: 8px;
 }
+
+
+/ choose your doctor Prescription p11 new /
+.gp-Specialists .gp-s-det{
+    justify-content: center;
+    color: #000;
+    font-size: 18px;
+}
+.gp-Specialists .gp-s-det button.btn.btn-primary.Send-Requests {
+    background: transparent;
+    color: #000;
+    border: 2px solid;
+}
+.pick-a-prescriber ul{
+    list-style: decimal;
+}
+.pick-a-prescriber ul li{
+    padding-left: 32px;
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    position: relative;
+}
+.pick-a-prescriber ul li:nth-child(even)::after,
+.pick-a-prescriber ul li::after{
+    content: "";
+    position: absolute;
+    left: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius:50%;
+    top: 10px;
+    
+}
+.pick-a-prescriber ul li:nth-child(even)::after{
+    background-color: #ff4d0f;
+}
+.pick-a-prescriber ul li::after{
+    background-color: #868d6c;
+}
+.pick-a-prescriber ul li:nth-child(even){
+    color: #ff4d0f;
+}
+.pick-a-prescriber h3{
+    font-weight: 700;
+    color: #0047a8;
+    font-size: 20px;
+}
+.pick-a-prescriber h3 sup{
+    top: -20px;
+    position: relative;
+}
+.prescription-fees h2{
+    font-size: 20px;
+    font-weight: 700;
+    color: #0047a8;
+    margin-bottom: 10px;
+}
+.prescription-fees p{
+    font-size: 18px;
+    color: #0047a8;
+    margin-bottom: 10px;
+}
+.pick-a-prescriber .ask-all-doc{
+    display: block;
+    border-radius: 10px;
+    border: 1px solid #0047a8;
+    padding: 30px;
+    margin-bottom: 12px;
+}
+.pick-a-prescriber .ask-all-doc h3{
+color: #000;
+}
+.ask-all-d{
+margin-bottom: 12px;
+}
+.ask-all-d .ask-a-d {
+    position: relative;
+    color: #0047a8;
+    padding-left: 150px;
+
+}
+.ask-all-d .ask-a-d span{
+    font-weight: 700;
+    font-size: 20px;
+    position: relative;
+    bottom: -82px;
+}

@@ -21,11 +21,11 @@
                             Payment Details
                         </a>
                     </li>
-                    <li class="nav-item">
+                   {{--  <li class="nav-item">
                         <a class="nav-link {{($form_name == 'contact_details') ? 'active':''}}"  data-toggle="tab" href="#Contact-Details">
                             Contact Details
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
                 <div class="tab-content Choose-Your-tab-con" id="myTabContent">
                     <div class="tab-pane fade " id="Doctor-Profile">
@@ -45,8 +45,8 @@
                                 </div>
                                 <div class="col-sm-10 profile-info">
                                     <h2>Manage your Diary in the 2 Calendars Below.</h2>
-                                    <a class="btn" >Regular Weekly Timetable</a>
-                                    <a class="btn add-btn" >Ad Hoc Timeslots</a>
+                                    <a class="btn btn-primary" href="{{route('doctor.available-days')}}">Regular Weekly Timetable</a>
+                                    <a href="{{route('doctor.available-days')}}" class="btn add-btn" >Ad Hoc Timeslots</a>
                                 </div>
                             </div>
                             <div class="row Doctor-contact main-form-fild">
@@ -152,6 +152,53 @@
                                     </div>
                                     
                                 </div>
+
+
+                               <div class="col-sm-12">
+                                    <div class="form-group Communication">
+                                        <label> <img src="{{ asset('public/images/frontend/images/Communication-icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Contact Details</label>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-12">
+                                        <label>The following details will not be available to patients :</label>
+                                    
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group required">
+                                        <input class="form-control effect-19 {{!empty($user->profile->telephone1) ? 'has-content':''}}" name="telephone1" value="{{$user->profile->telephone1}}" type="tel" >
+                                        <label>Contact Phone No. 1</label>
+                                    @error('telephone1')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control effect-19 {{!empty($user->profile->telephone2) ? 'has-content':''}}"  name="telephone2" value="{{$user->profile->telephone2}}"  type="tel" >
+                                        <label>Contact Phone No. 2 </label>
+                                    @error('telephone2')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group required">
+                                        <textarea class="form-control effect-19 {{!empty($user->profile->address) ? 'has-content':''}}" name="address" rows="5">{{$user->profile->address}}</textarea>
+                                        <label>Professional Address </label>
+                                    @error('address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    </div>
+                                </div>
+
+
+
+
+
                                 <div class="col-sm-12">
                                     <div class="form-group Communication">
                                         <label> <img src="{{ asset('public/images/frontend/images/Communication-icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Communication Options</label>
@@ -283,6 +330,10 @@
                                     <label>Change password to <a href="{{route('doctor.change-password')}}">Click here</a>  </label>
                                 </div>
 
+                                 <div class="col-sm-12">
+                                    <p><sup>*</sup>Mandatory in case you need to be contacted eg by Pharmacist, Admin</p>
+                                </div>
+
 
                                 <div class="col-sm-12 for-msg">
                                     <button type="submit" name="form_name" value="profile" class="btn blue-button">Save</button>
@@ -355,7 +406,7 @@
                                     </div>
                                 </div> --}}
 
-                                <div class="col-sm-12">
+                                {{-- <div class="col-sm-12">
                                         <label>The following details will not be available to patinents :</label>
                                     
                                 </div>
@@ -386,7 +437,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-sm-12">
                                     <p><sup>*</sup>Mandatory in case you need to be contacted eg by Pharmacist, Admin</p>
                                 </div>

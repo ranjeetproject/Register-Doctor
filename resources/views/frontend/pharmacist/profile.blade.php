@@ -52,7 +52,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group required">
                                     <input type="text" name="pharmacy_numbar" class="form-control effect-19 {{!empty($user->registration_number) ? 'has-content':''}}" value="{{$user->registration_number}}" readonly>
-                                    <label >Registared-Doctor Pharmacy No</label>
+                                    <label >Registered-Doctor Pharmacy No</label>
                                      @error('pharmacy_numbar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -126,8 +126,8 @@
 
 
 
-
-                            <div class="col-sm-12">
+<a href="{{ route('pharmacist.opening-hours')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Set Opening Hours</a>
+                            {{-- <div class="col-sm-12">
                                      
                                 <div class="form-group Opening-Hours">
 
@@ -178,7 +178,7 @@
                                     <input id="Till-date" name="closing_time" class="form-control " type="time" value="{{ $user->openingTime->monday_closing_time  ?? '22:00' }}"/>
                                   </div>
 
-                            </div>
+                            </div> --}}
 
                             <div class="col-sm-12 Customer-Pick-up">
                                 <label >Delivery Options</label>

@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\doctor;
 
 use App\Http\Controllers\Controller;
+use App\Models\DoctorAvailableDays;
+use App\Models\PatientCase;
+use App\Models\TimeSlot;
 use App\Models\UserProfile;
+use App\Models\WeeklyAvailableDays;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Session;
@@ -28,7 +34,7 @@ class DoctorController extends Controller
 
     public function dashboard() {
 
-      if($user = Auth::guard('siteDoctor')->user()->dr_name_of_medical_licencer == ''){
+      if(empty(Auth::guard('siteDoctor')->user()->profile->dr_name_of_medical_licencer)){
         return redirect()->route('doctor.profile');
       }
         return view('frontend.doctor.dashboard');
@@ -42,7 +48,8 @@ class DoctorController extends Controller
             $form_name = $request->form_name;
            
             // dd($request->all());
-         $data = $request->validate([
+         // $data = $request->validate([
+              $validator = Validator::make($request->all(), [ 
       "forename"=>"sometimes|nullable|required|min:3|max:100",
       "surname"=>"sometimes|nullable|required|min:3|max:100",
       "telephone1"=>"sometimes|nullable|required|digits:10",
@@ -56,6 +63,11 @@ class DoctorController extends Controller
       // "dob"=>"date|before_or_equal:".now()->subYears(13)->format('Y-m-d'),
      
       ],['required'=>'This field is required']);
+
+            if ($validator->fails()) { 
+              Session::flash('Error-toastr','Please fill in all the fields before proceeding');
+              return redirect()->back();
+            }
 
 // dd($request->all());
 
@@ -190,10 +202,12 @@ class DoctorController extends Controller
         return view('frontend.doctor.get_thumbsUp');
     }
 
-     public function appointment(Request $request)
+    public function appointment(Request $request)
     {
-        return view('frontend.doctor.appointment');
+      $cases = PatientCase::where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->latest()->paginate(8);
+        return view('frontend.doctor.appointment',compact('cases'));
     }
+
 
      public function sendPatientMessage(Request $request)
     {
@@ -215,6 +229,383 @@ class DoctorController extends Controller
         return view('frontend.doctor.close_cases');
     }
 
+     public function availableDays(Request $request)
+    {
+         $user = Auth::guard('siteDoctor')->user();
+
+      if ($request->isMethod('post')) {
+        try{
+        $data = $request->validate([
+             "date"=>"required",
+             "from_time"=>"required|date_format:H:i",
+             "to_time"=>"required|date_format:H:i|after:from_time",
+         ]);
+
+         $date = str_replace("/", "-", $request->date);
+         $date = date('Y-m-d',strtotime($date));
+
+
+         $from_date_time =  $date.' '.$request->from_time;
+         $to_date_time =  $date.' '.$request->to_time;
+
+         $from_date_time = Carbon::parse($from_date_time);
+
+         $total_minutes = $from_date_time->diffInMinutes($to_date_time);
+         // $total_time = (new Carbon($request->to_time))->diff(new Carbon($request->from_time))->format('%h:%I');
+        // $slot = $total_minutes%15 ;
+
+        if($total_minutes%15 != 0){
+         Session::flash('Error-toastr','Please match the 15 minute slot.');
+         return redirect()->back();
+        }
+        
+          DB::beginTransaction();
+        $available_day = new DoctorAvailableDays;
+        $available_day->user_id = $user->id;
+        $available_day->date = $date;
+        $available_day->from_time = $request->from_time;
+        $available_day->to_time = $request->to_time;
+        $available_day->save();
+
+        $number_of_slot = $total_minutes/15;
+        $from_time = Carbon::parse($request->from_time);
+        $to_time =Carbon::parse($request->from_time)->addMinutes(15);
+      
+     
+
+       for ($i = 1; $i <= $number_of_slot; $i++) {
+        $time_slot = new TimeSlot;
+        $time_slot->user_id = $user->id;
+        $time_slot->available_day_id = $available_day->id;
+        $time_slot->start_time = $from_time->format('H:i');
+        $time_slot->end_time = $to_time->format('H:i');
+        $from_time = $from_time->addMinutes(15);        
+        $to_time = $to_time->addMinutes(15);
+        $time_slot->save();
+        // echo '<pre>';   
+        //    print_r($time_slot);
+       }
+        // exit;   
+      DB::commit();
+
+         Session::flash('Success-toastr','Successfully added');
+         } catch (\Exception $e) {
+            Session::flash('Error-toastr', $e->getMessage());
+            DB::rollback();
+            return redirect()->back();
+        }
+
+
+      }
+
+      $available_days = DoctorAvailableDays::where('user_id',$user->id)->get();
+      $get_current_day = DoctorAvailableDays::where('user_id',$user->id)->where('date',date('Y-m-d'))->get();
+      $weekly_available_days = WeeklyAvailableDays::where('user_id',$user->id)->orderBy('num_val_for_day')->get();
+        return view('frontend.doctor.available_days', compact('available_days','weekly_available_days','get_current_day'));
+    }
+
+    public function editAvailableDay(Request $request)
+    {
+
+      if(!empty($request->available_day_id)){
+      $id = $request->available_day_id;
+      $available_day = DoctorAvailableDays::find($id);
+      }elseif (!empty($request->date)) {
+         $date = str_replace('/','-',$request->date);
+         $date = date('Y-m-d',strtotime($date));
+         $available_day = DoctorAvailableDays::where('date',$date)->get();
+      }
+
+      if ($request->isMethod('post')) {
+          $data = $request->validate([
+             "date"=>"required",
+             "from_time"=>"required",
+             "to_time"=>"required",
+         ]);
+
+         $date = str_replace("/", "-", $request->date) ;
+         $date = date('Y-m-d',strtotime($date));
+
+        // $available_day->user_id = $user->id;
+        $available_day->date = $date;
+        $available_day->from_time = $request->from_time;
+        $available_day->to_time = $request->to_time;
+        $available_day->save();
+         Session::flash('Success-toastr','Successfully updated');
+         return redirect()->back();
+      
+
+      }
+      if(isset( $available_day)){
+      return response()->json(['success' =>true, 'message'=>'success','data'=>$available_day], 200);
+      }else{
+      return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_day], 200);
+      }
+    }
+
+    public function deleteAvailableDay($id)
+    {
+      $available_day = DoctorAvailableDays::find($id);
+      $available_day->delete();
+      Session::flash('Success-toastr','Successfully deleted');
+      return redirect()->back();
+    }
+
+    function addWeeklyDay(Request $request)
+    {
+      try{
+      $user = Auth::guard('siteDoctor')->user();
+      $weekly_day = new WeeklyAvailableDays;
+      $weekly_day->user_id = $user->id;
+      $weekly_day->day = $request->day;
+
+switch ($request->day) {
+  case "monday":
+      $weekly_day->num_val_for_day = 1;
+    break;
+  case "tuesday":
+      $weekly_day->num_val_for_day = 2;
+    break;
+  case "wednesday":
+    $weekly_day->num_val_for_day = 3;
+    break;
+
+      case "thursday":
+    $weekly_day->num_val_for_day = 4;
+    break;
+      case "friday":
+    $weekly_day->num_val_for_day = 5;
+    break;
+      case "saturday":
+    $weekly_day->num_val_for_day = 6;
+    break;
+    case "sunday":
+    $weekly_day->num_val_for_day = 7;
+    break;
+
+  default:
+    $weekly_day->num_val_for_day = 0;
+}
+  DB::beginTransaction();
+      $weekly_day->day = $request->day;
+      $weekly_day->from_time = $request->from_time;
+      $weekly_day->to_time = $request->to_time;
+      $weekly_day->save();
+$startDate = date('Y-m-d');
+$endDate = date('Y').'-12-31';
+      $endDate = strtotime($endDate);
+for($i = strtotime(ucfirst($request->day), strtotime($startDate)); $i <= $endDate; $i = strtotime('+1 week', $i)){
+    $date = date('Y-m-d', $i);
+
+         $from_date_time =  $date.' '.$request->from_time;
+         $to_date_time =  $date.' '.$request->to_time;
+
+         $from_date_time = Carbon::parse($from_date_time);
+
+         $total_minutes = $from_date_time->diffInMinutes($to_date_time);
+
+
+        $available_day = new DoctorAvailableDays;
+        $available_day->user_id = $user->id;
+        $available_day->date = $date;
+        $available_day->from_time = $request->from_time;
+        $available_day->to_time = $request->to_time;
+        $available_day->save();
+
+        $number_of_slot = $total_minutes/15;
+        $from_time = Carbon::parse($request->from_time);
+        $to_time =Carbon::parse($request->from_time)->addMinutes(15);
+      
+     
+
+       for ($j = 1; $j <= $number_of_slot; $j++) {
+        $time_slot = new TimeSlot;
+        $time_slot->user_id = $user->id;
+        $time_slot->available_day_id = $available_day->id;
+        $time_slot->start_time = $from_time->format('H:i');
+        $time_slot->end_time = $to_time->format('H:i');
+        $from_time = $from_time->addMinutes(15);        
+        $to_time = $to_time->addMinutes(15);
+        $time_slot->save();
+        // echo '<pre>';   
+        //    print_r($time_slot);
+       }
+        // exit;   
+
+}
+      DB::commit();
+
+      } catch (\Exception $e) {
+            Session::flash('Error-toastr', $e->getMessage());
+            DB::rollback();
+            return redirect()->back();
+        }
+ // exit;
+      Session::flash('Success-toastr','Successfully added');
+      return redirect()->back();
+    }
+ public function deleteWeeklyDay($id)
+    {
+      $available_day = WeeklyAvailableDays::find($id);
+      $available_day->delete();
+      Session::flash('Success-toastr','Successfully deleted');
+      return redirect()->back();
+    }
+
+
+     public function editWeeklyDay(Request $request)
+    {
+      $id = $request->weekly_day_id;
+      $weekly_day = WeeklyAvailableDays::find($id);
+      if ($request->isMethod('post')) {
+         //  $data = $request->validate([
+         //     "day"=>"required",
+         //     "from_time"=>"required",
+         //     "to_time"=>"required",
+         // ]);
+switch ($request->day) {
+  case "monday":
+      $weekly_day->num_val_for_day = 1;
+    break;
+  case "tuesday":
+      $weekly_day->num_val_for_day = 2;
+    break;
+  case "wednesday":
+    $weekly_day->num_val_for_day = 3;
+    break;
+
+      case "thursday":
+    $weekly_day->num_val_for_day = 4;
+    break;
+      case "friday":
+    $weekly_day->num_val_for_day = 5;
+    break;
+      case "saturday":
+    $weekly_day->num_val_for_day = 6;
+    break;
+    case "sunday":
+    $weekly_day->num_val_for_day = 7;
+    break;
+
+  default:
+    $weekly_day->num_val_for_day = 0;
+}
+      
+        $weekly_day->day = $request->day;
+        $weekly_day->from_time = $request->from_time;
+        $weekly_day->to_time = $request->to_time;
+        $weekly_day->save();
+         Session::flash('Success-toastr','Successfully updated');
+         return redirect()->back();
+      
+
+      }
+      return response()->json(['success' =>true, 'message'=>'success','data'=>$weekly_day], 200);
+    }
+
+
+    public function cases(Request $request, $questions_type, $status=null)
+    {
+      $cases = PatientCase::select('*');
+
+      if($status == 'accepted'){
+      $cases = $cases->where('accept_status',1);
+      }else{
+      $cases = $cases->where('accept_status',null);
+      }
+      
+      // if($questions_type == 'live-chat'){
+      //   $cases = $cases->where('questions_type',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id);
+        
+      // }
+      //  if($questions_type == 'live-video'){
+      //   $cases = $cases->where('questions_type',2)->where('doctor_id',Auth::guard('siteDoctor')->user()->id);
+      // }
+      //  if($questions_type == 'quick-questions'){
+      //   $cases = $cases->where('questions_type',3)->where(function($query){
+      //     $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_reply',null);
+      //   });
+      // }
+      //  if($questions_type == 'book-qa'){
+      //    $cases = $cases->where('questions_type',4)->where('doctor_id',Auth::guard('siteDoctor')->user()->id);
+      // }
+
+       $cases = $cases->where(function($query){
+          $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_reply',null);
+           });
+
+      $cases = $cases->orderBy('id','desc')->paginate(6);
+      // echo $q_type; exit;
+
+
+       
+        return view('frontend.doctor.cases', compact('cases'));
+      
+    }
+
+
+
+     public function quickQuestions(Request $request)
+    {
+        $quick_questions = PatientCase::where('questions_type',3)->where(function($query){
+          $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_reply',null);
+        })->orderBy('id','desc')->paginate(6);
+        return view('frontend.doctor.quick_questions', compact('quick_questions'));
+      
+    }
+
+    public function liveChats(Request $request)
+    {
+        $live_chats = PatientCase::where('questions_type',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orderBy('id','desc')->paginate(6);
+        return view('frontend.doctor.live_chat', compact('live_chats'));
+      
+    }
+
+    public function liveVideo(Request $request)
+    {
+        $live_chats = PatientCase::where('questions_type',2)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orderBy('id','desc')->paginate(6);
+        return view('frontend.doctor.live_video', compact('live_chats'));
+    }
+
+    public function viewCase(Request $request,$id)
+    {
+        $case = PatientCase::where('case_id',$id)->first();
+        return view('frontend.doctor.view_case', compact('case'));
+      
+    }
+
+    public function viewMedicalRecorde(Request $request,$id)
+    {
+        $case = PatientCase::where('case_id',$id)->first();
+        // $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
+        return view('frontend.doctor.medical_record', compact('case'));
+      
+    }
+
+    public function chats(Request $request, $id)
+    {
+      $case = PatientCase::where('case_id',$id)->first();
+      return view('frontend.doctor.chats', compact('case'));
+    }
+
+    public function doctorReplyCase(Request $request)
+    {
+      $case = PatientCase::where('case_id',$request->case_id)->first();
+      $case->doctor_id = Auth::guard('siteDoctor')->user()->id;
+      $case->doctor_reply = 1;
+      $case->save();
+       return response()->json(['success' =>true, 'message'=>'success.','data'=>$case], 200);
+    }
+
+    public function doctorAcceptCase(Request $request,$id)
+    {
+      $case = PatientCase::find($id);
+      $case->doctor_id = Auth::guard('siteDoctor')->user()->id;
+      $case->accept_status = 1;
+      $case->save();
+      Session::flash('Success-toastr','Successfully Accepted');
+      return redirect()->back();
+    }
 
 
 }

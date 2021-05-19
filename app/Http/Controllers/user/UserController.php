@@ -156,7 +156,7 @@ class UserController extends Controller
 
 
         } catch (\Exception $e) {
-          print_r($e->getMessage()); exit;
+          // print_r($e->getMessage()); exit;
             Session::flash('Error-toastr', $e->getMessage());
             DB::rollback();
             return redirect()->back();

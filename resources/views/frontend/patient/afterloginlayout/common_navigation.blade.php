@@ -2,8 +2,12 @@
   <a class="navbar-brand" href="{{ route('home')}}"><img src="{{ asset('public/images/frontend/images/logo.jpg') }}" alt=""></a>
   <div class="log-user-details">
       <form>
-          <label>choose profile : </label> <select>
-              <option>Myself</option>
+          <label>choose profile : </label> <select onchange="changeAccount(this.value)">
+              <option value="{{Session::get('parent_id')}}">Myself</option>
+              @foreach(getChild() as $child)
+              <option value="{{$child->childDetails->id}}" {{(Auth::guard('sitePatient')->user()->id == $child->childDetails->id) ? 'selected':''}}>{{$child->childDetails->name}}</option>
+              @endforeach
+
             </select>
       </form>
       <a href="#" class="for-email">{{Auth::user()->email}}</a>

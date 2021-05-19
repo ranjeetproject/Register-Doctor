@@ -7,12 +7,14 @@
 
 
                 <div class="col Choose-Your-Doctor-right">
+
                     <nav aria-label="breadcrumb ">
                         <ol class="breadcrumb Pharmacist-doc-com">
                           <!-- <li class="breadcrumb-item"><a href="#">Dashboard <i class="fal fa-long-arrow-right"></i></a></li> -->
                           <li class="breadcrumb-item active">Choose Your Doctor</li>
                         </ol>
                       </nav>
+
                    <div class="row">
                        <div class="col-sm-12">
                         <div class="card Choose-Your-Doctor-card-cont">
@@ -32,6 +34,7 @@
                       <div class="col-sm-7">
                         <select class="custom-select mr-sm-2" name="dr_speciality" id="inlineFormCustomSelect">
                             <option value="">Select Speciality </option>
+                            <option value="all">All</option>
                             @foreach($doctors_speciality as $doctor_speciality)
                             <option value="{{$doctor_speciality['dr_speciality']}}" {{(isset($_GET['dr_speciality']) && ($_GET['dr_speciality'] == $doctor_speciality['dr_speciality'])) ? 'selected':''}}>{{$doctor_speciality['dr_speciality']}}</option>
 
@@ -155,15 +158,17 @@
                                     <div class="row books-btn">
                                         <div class="col">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_chat_fee }} per 15 mins</p>
-                                            <button type="submit" class="btn btn-block Book-Live">Book Live Chat</button>
+                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a>
                                         </div>
                                         <div class="col">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_video_fee }} per 15 mins</p>
-                                            <button type="submit" class="btn btn-block Book-Live">Book Live Video</button>
+
+                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a>
+                                            {{-- <button type="submit" class="btn btn-block Book-Live">Book Live Video</button> --}}
                                         </div>
                                         <div class="col-sm-5">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_qa_fee }} per 15 mins</p>
-                                            <button type="submit" class="btn btn-block Request">Request Q&A <br> <small>Turnaround Time 5 hrs 2 days</small></button>
+                                            <button type="button"  onclick="bookLiveChats('{{$doctor->id}}')" class="btn btn-block Request">Request Q&A <br> <small>Turnaround Time 5 hrs 2 days</small></button>
                                         </div>
                                     </div>
                                 </div>
@@ -220,15 +225,15 @@
                                     <div class="row books-btn">
                                         <div class="col">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins</p>
-                                            <button type="submit" class="btn btn-block Book-Live">Book Live Chat</button>
+                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a>
                                         </div>
                                         <div class="col">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->doctor->profile->dr_live_video_fee }} per 15 mins</p>
-                                            <button type="submit" class="btn btn-block Book-Live">Book Live Video</button>
+                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a>
                                         </div>
                                         <div class="col-sm-5">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins</p>
-                                            <button type="submit" class="btn btn-block Request">Request Q&A <br> <small>Turnaround Time 5 hrs 2 days</small></button>
+                                            <button type="button" onclick="bookLiveChats('{{$doctor->id}}')" class="btn btn-block Request">Request Q&A <br> <small>Turnaround Time 5 hrs 2 days</small></button>
                                         </div>
                                     </div>
                                 </div>
@@ -267,6 +272,46 @@
         </div>
     </div>
 
+
+
+
+    {{-- model --}}
+
+    <div class="modal fade bd-example-modal-lg how-it-works" tabindex="-1" id="myModal3" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="fal fa-times-circle"></i>
+              </button>
+            <form method="POST" action="{{route('patient.create-case')}}" enctype="multipart/form-data">
+
+                @csrf
+                <input type="hidden" name="questions_type" value="4">
+                <input type="hidden" name="doctor_id" id="doctor_id">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <textarea class="form-control" name="health_problem" id="exampleFormControlTextarea1" rows="5" placeholder="Type your helth query here..."></textarea>
+                          </div>                        
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Upload Attachments <i class="fal fa-paperclip"></i></label>
+                            <input type="file" name="case_file" class="form-control-file" id="exampleFormControlFile1" style="opacity: 0;"><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
+                          </div>
+                         
+                    </div>
+                    <div class="col-sm-12 ask-submit">
+                        <button type="submit" class="btn orange-button">Submit Your Query</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        </div>
+      </div>
+
 @endsection
 @section('scripts')
     <script>
@@ -289,6 +334,12 @@
                      toastr.success(response.message);
                     }
                 });
+            }
+
+
+            function bookLiveChats(doctor_id) {
+               $('#myModal3').modal('show');
+               $('#doctor_id').val(doctor_id);
             }
 
     </script>

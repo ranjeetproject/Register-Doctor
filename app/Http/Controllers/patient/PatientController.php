@@ -3,19 +3,24 @@
 namespace App\Http\Controllers\patient;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserProfile;
+use App\Models\BookTimeSlot;
+use App\Models\CaseFile;
+use App\Models\ChildsAccountsHolder;
+use App\Models\DoctorAvailableDays;
 use App\Models\FavouriteDoctor;
 use App\Models\PatientCase;
-use App\Models\CaseFile;
-use App\UserDoctor;
+use App\Models\UserProfile;
+use App\Models\WeeklyAvailableDays;
 use App\User;
+use App\UserDoctor;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Session;
-use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Support\Facades\Crypt;
 
 
 class PatientController extends Controller 
@@ -29,8 +34,9 @@ class PatientController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','isPatient']);
-        
     }
+
+
 
 
     public function dashboard() {
@@ -39,7 +45,8 @@ class PatientController extends Controller
 
     public function profile(Request $request) {
         if($request->isMethod('post')){
-         $data = $request->validate([
+         // $data = $request->validate([
+      $validator = Validator::make($request->all(), [ 
       "forename"=>"required|min:3|max:100",
       "surname"=>"required|min:3|max:100",
       "telephone1"=>"required|digits:10",
@@ -52,6 +59,12 @@ class PatientController extends Controller
       // "confirm_password"=>"sometimes|nullable|required|same:new_password",
       ], ['dob.before_or_equal'=>'You must be 13 years old or above.']);
 
+
+           if ($validator->fails()) { 
+
+              Session::flash('Error-toastr','Please fill in all the fields before proceeding');
+              return redirect()->back();
+            }
 // dd($request->all());
 
     try {
@@ -140,7 +153,7 @@ class PatientController extends Controller
 
     public function saveCases(Request $request)
     {
-        $cases = PatientCase::latest()->paginate(10);
+        $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
         return view('frontend.patient.save_cases', compact('cases'));
       
     }
@@ -149,15 +162,35 @@ class PatientController extends Controller
     {
 
         if($request->isMethod('post')) {
-         $data = $request->validate([
+         // $data = $request->validate([
+          $validator = Validator::make($request->all(), [ 
              "health_problem"=>"required",
-             "case_file"=>"image|mimes:jpeg,png,jpg,mp4,3gp,flv,mov,avi,wmv|max:10000",
+             "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
          ]);
+
+            if ($validator->fails()) { 
+              // echo $validator->errors()->first(); exit;
+              Session::flash('Error-toastr','Please fill in all the fields before proceeding');
+              return redirect()->back();
+            }
+         // print_r($request->all()); exit;
+
 
          $case = new PatientCase;
          $case->user_id = Auth::guard('sitePatient')->user()->id;
          $case->case_id = 'C'.Auth::guard('sitePatient')->user()->id.date('YmdHis');
+         $case->doctor_id = $request->doctor_id;
          $case->health_problem = $request->health_problem;
+         $case->questions_type = $request->questions_type;
+
+         $booking_date = str_replace('/','-',$request->booking_date);
+         $booking_date = date('Y-m-d',strtotime($booking_date));
+
+         // echo $booking_date; exit;
+
+         $case->booking_date = $booking_date;
+         $case->booking_time = $request->booking_time;
+         $case->time_duration = ($request->time_duration) ? $request->time_duration * 15 : '';
          $case->save();
 
          if ($request->hasFile('case_file')) {
@@ -173,8 +206,24 @@ class PatientController extends Controller
             $case_file->file_name = $fileName;
             $case_file->save();
           }
-        Session::flash('Success-toastr','Successfully created');
-        return redirect()->route('patient.save-cases');
+
+          if (isset($request->time_slot) && !empty($request->time_slot)) {
+
+            foreach ($request->time_slot as $time_slot) {
+             $booking_time_slot = new BookTimeSlot;
+             $booking_time_slot->user_id = Auth::guard('sitePatient')->user()->id;
+             $booking_time_slot->patient_case_id = $case->id;
+             $booking_time_slot->time_slot_id = $time_slot;
+             $booking_time_slot->save();
+            }
+            
+          }
+
+        Session::flash('Success-toastr','Successfully submited');
+        if($request->questions_type == 1 || $request->questions_type == 2){
+        return redirect()->route('patient.symptoms-checker');
+        }
+        return redirect()->back();
         }
 
 
@@ -202,7 +251,9 @@ class PatientController extends Controller
         $search_doctors = '';
         if(!empty($request->dr_speciality)) {
            $search_doctors = User::where('role',2)->whereHas('profile',function($query) use($request){
+            if($request->dr_speciality != 'all'){
             $query->where('dr_speciality',$request->dr_speciality);
+            }
 
            
 
@@ -237,11 +288,83 @@ class PatientController extends Controller
             }
 
            $search_doctors = $search_doctors->paginate(5);
+                $search_doctors = $search_doctors->appends(request()->query());
         }
 
 
         return view('frontend.patient.my-favorite-doctors', compact('doctors','doctors_speciality','search_doctors'));
     }
+
+
+   public function showPrescriptionsRules(Request $request)
+    {
+      return view('frontend.patient.show-prescriptions-rules');
+    }
+
+
+
+    public function searchDoctors(Request $request)
+    {
+        // $doctors = UserDoctor::where('role',2)->paginate(5);
+        $doctors_speciality = UserProfile::select('dr_speciality')->where('dr_speciality','!=',null)->orderBy('dr_speciality')->get()->toArray();
+
+         $doctors_speciality = array_map("unserialize", array_unique(array_map("serialize", $doctors_speciality)));
+         // return $doctors_speciality;
+        $login_user = Auth::guard('sitePatient')->user();
+
+        $doctors = User::where('role',2)->with('profile')->paginate(4);
+        // return $doctors;
+
+        $search_doctors = '';
+        if(!empty($request->dr_speciality)) {
+           $search_doctors = User::where('role',2)->whereHas('profile',function($query) use($request){
+            if($request->dr_speciality != 'all'){
+            $query->where('dr_speciality',$request->dr_speciality);
+            }
+
+           
+
+            if(!empty($request->video_consult)){
+              if($request->video_consult == 'live_video'){
+              $query->where('dr_live_video_fee_notification', 1);
+              }
+              if($request->video_consult == 'live_chat'){
+              $query->where('dr_live_chat_fee_notification', 1);
+              }
+              if($request->video_consult == 'qa'){
+              $query->where('dr_qa_fee_notification', 1);
+              }
+            }
+
+            if(!empty($request->dr_see)){
+            $query->where('dr_see', $request->dr_see);
+            }
+
+           if(!empty($request->price)){
+            $query->orderBy('dr_standard_fee', $request->price);
+            }
+
+           })->with('profile');
+
+            if(!empty($request->prescribers)){
+              if($request->prescribers == 'yes'){
+                $search_doctors->where('admin_verified_at', '<>', null);
+              }else{
+                $search_doctors->where('admin_verified_at', null);
+              }
+            }
+
+           $search_doctors = $search_doctors->paginate(5);
+                $search_doctors = $search_doctors->appends(request()->query());
+        }
+
+
+        return view('frontend.patient.search-doctors', compact('doctors','doctors_speciality','search_doctors'));
+    }
+
+
+
+
 
 
      public function addToFavorite(Request $request)
@@ -288,7 +411,8 @@ class PatientController extends Controller
 
     public function requestedConsults(Request $request)
     {
-        return view('frontend.patient.requested_consults');
+      $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
+        return view('frontend.patient.requested_consults', compact('cases'));
       
     }
 
@@ -314,10 +438,189 @@ class PatientController extends Controller
     {
         $id = Crypt::decryptString($id);
         $doctor = User::findOrFail($id);
-        return view('frontend.patient.view_doctor_profile',compact('doctor'));
+        $available_days = DoctorAvailableDays::where('user_id',$doctor->id)->where('date','>=',date('Y-m-d'))->get();
+        // return $available_days;
+      $get_current_day = DoctorAvailableDays::where('user_id',$doctor->id)->where('date',date('Y-m-d'))->get();
+      $weekly_available_days = WeeklyAvailableDays::where('user_id',$doctor->id)->orderBy('num_val_for_day')->get();
+
+        return view('frontend.patient.view_doctor_profile',compact('doctor','available_days','get_current_day','weekly_available_days'));
       
     }
 
+    public function viewChilds(Request $request)
+    {
+            $user = Auth::guard('sitePatient')->user();
+         return view('frontend.patient.view_childs',compact('user'));
+    }
+
+    public function addChild(Request $request)
+    {
+            // echo 'string'; exit;
+          $validator = Validator::make($request->all(), [ 
+            'forename' => 'required',
+            'surname' => 'required',
+            'email' => 'required|email|unique:users,email',
+            // 'address' => 'required',
+            'sex' => 'required',
+            "dob"=>"date|before_or_equal:".now()->format('Y-m-d'),
+            // 'telephone1' => 'required',
+            'first_account_holder' => 'required',
+            'relationship_fch' => 'required',
+            'email_fch' => 'required',
+            'telephone1_fch' => 'required',
+            // 'second_account_holder' => 'required',
+            // 'relationship_sch' => 'required',
+            // 'email_sch' => 'required',
+            // 'telephone1_sch' => 'required',
+            ]);
+          // .$validator->errors()->first()
+
+          if ($validator->fails()) { 
+              Session::flash('Error-toastr','Please fill in all the fields befor proceed');
+              return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+
+              DB::beginTransaction();
+    try {
+            $user = Auth::guard('sitePatient')->user();
+
+      $child_account = new User;
+      $child_account->registration_number = 'REGD'.date('YmdHis');
+      $child_account->forename = $request->forename;
+      $child_account->surname = $request->surname;
+      $child_account->name = $request->forename.' '.$request->surname;
+      $child_account->email = $request->email;
+      $child_account->email_verified_at = date('Y-m-d H:i:s');
+      $child_account->admin_verified_at = date('Y-m-d H:i:s');
+      $child_account->terms_conditions = date('Y-m-d H:i:s');
+      $child_account->privacy_policy = date('Y-m-d H:i:s');
+      $child_account->role = 4;
+      $child_account->password = Hash::make(123456);
+      $child_account->save();
+      $userProfile = new UserProfile;
+      $userProfile->user_id = $child_account->id;
+
+            // $child_account = new ChildsAccounts;
+            // $child_account->child_id = 'RD'.date('YmdHis').rand(10,99);
+            // $child_account->forename = $request->forename;
+            // $child_account->surname = $request->surname;
+            // $child_account->name = $request->forename.' '.$request->surname;
+            // $child_account->email = $request->email;
+            $userProfile->address = $request->address;
+            $userProfile->gender = $request->sex;
+            $dob = str_replace("/", "-", $request->dob);
+            $dob = date("Y-m-d", strtotime($request->dob));
+            $userProfile->dob = $dob;
+            $userProfile->telephone1 = $request->telephone1;
+            $userProfile->telephone2 = $request->telephone2;
+            $userProfile->first_account_holder = $request->first_account_holder;
+            $userProfile->relationship_fch = $request->relationship_fch;
+            $userProfile->email_fch = $request->email_fch;
+            $userProfile->address_fch = $request->address_fch;
+            $userProfile->telephone1_fch = $request->telephone1_fch;
+            $userProfile->telephone2_fch = $request->telephone2_fch;
+            $userProfile->second_account_holder = $request->second_account_holder;
+            $userProfile->email_sch = $request->email_sch;
+            $userProfile->address_sch = $request->address_sch;
+            $userProfile->telephone1_sch = $request->telephone1_sch;
+            $userProfile->telephone2_sch = $request->telephone2_sch;
+            $userProfile->save();
+      
+
+            $child_account_holder = new ChildsAccountsHolder;
+            $child_account_holder->user_id = $user->id;
+            $child_account_holder->child_id = $child_account->id;
+            $child_account_holder->save();
+            
+
+            DB::commit();
+            Session::flash('Success-toastr','Successfully added');
+            return redirect()->back();
+
+
+  } catch (\Exception $e) {
+            Session::flash('Error-toastr', $e->getMessage());
+            DB::rollback();
+            return redirect()->back();
+        }
+    }
+
+
+    public function changeAccount(Request $request)
+    {
+      $user_id = $request->user_id;
+      $user_info = User::find($user_id);
+      if(Auth::guard('sitePatient')->user()->role == 1){
+      $request->session()->put('parent_id', Auth::guard('sitePatient')->user()->id);
+      }
+       Auth::guard('sitePatient')->logout();
+       // Session::flush();
+
+       $user_info = array(
+        "email"=>$user_info->email,
+        "password"=>123456,
+        );
+
+       if (Auth::guard("sitePatient")->attempt($user_info) && Auth::attempt($user_info) ) {
+            $user_details = Auth::guard("sitePatient")->user();
+           return response()->json(['success' =>true, 'message'=>'success'], 200);
+            
+          }else{
+
+      return response()->json(['success' =>false, 'message'=>'error'], 200);
+          }
+
+    }
+
+     public function chats(Request $request, $id)
+    {
+         $case = PatientCase::where('case_id',$id)->first();
+
+         return view('frontend.patient.chats', compact('case'));
+      
+    }
+
+    public function doctorAvailableDay(Request $request)
+    {
+        $date = str_replace('/','-',$request->date);
+        $date = date('Y-m-d',strtotime($date));
+        // echo $request->doctor_id; exit;
+
+        $getBookedSlot = BookTimeSlot::select('time_slot_id')->get()->toArray();
+
+        $available_days = DoctorAvailableDays::where(function($query) use($date, $request){
+          $query->where('date',$date)->where('user_id', $request->doctor_id);
+        })->get();
+
+     $time_slot = '';
+
+         foreach($available_days as $current_day){
+            foreach($current_day->getSlot()->whereNotIn('id',$getBookedSlot)->get() as $slot){
+              
+              $time_slot.= '<tr>
+              <td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td>
+              <td>'.date('H:i a', strtotime($slot->start_time)).'</td>
+              <td>'.date('H:i a', strtotime($slot->end_time)).'</td>
+              <td style="text-align: center;"><input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()"></td>
+              </tr>';
+            }
+         }
+
+         if(isset( $available_days)){
+      return response()->json(['success' =>true, 'message'=>'success','data'=>$available_days,'time_slot'=>$time_slot], 200);
+      }else{
+      return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_days], 200);
+      }
+
+      
+    }
+
+
+    function symptomsChecker(Request $request)
+    {
+         return view('frontend.patient.symptoms-checker');
+    }
 
 
 }

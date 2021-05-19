@@ -84,4 +84,18 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\OtpVerification')->withDefault();
     }
 
+    public function childs()
+    {
+        return $this->hasMany('App\Models\ChildsAccountsHolder','user_id','id');
+        
+    }
+
+    
+     public function weeklyAvailableDays()
+    {
+        return $this->hasMany('App\Models\WeeklyAvailableDays');
+        
+    }
+
+
 }
