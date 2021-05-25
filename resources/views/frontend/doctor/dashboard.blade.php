@@ -8,7 +8,7 @@
                 <h3>INCOMING REQUESTS FOR YOU</h3>
                 <div class="row incoming-request">
                     
-                    <a href="#" class="card col mr-2">
+                    <a href="{{route('doctor.prescriptions')}}" class="card col mr-2">
                         <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" class="for-tool-tip" data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" alt="">
                         <div class="card-cont">
                             <img src="{{ asset('public/images/frontend/images/Prescriptions.png') }}" alt="">

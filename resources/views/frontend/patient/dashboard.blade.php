@@ -190,6 +190,7 @@
                 </div>
             </div>
             <div class="col-sm-4">
+                <a href="{{route('patient.prescriptions')}}">
                 <div class="pd-btm-details">
                     <div class="pd-btm-details-cont">
                         <p>Your Prescriptions</p>
@@ -197,6 +198,7 @@
                         
                     </div>
                 </div>
+                </a>
             </div>
             {{-- <div class="col-sm-3">
                 <div class="pd-btm-details">

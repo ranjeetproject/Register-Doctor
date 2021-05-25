@@ -181,6 +181,8 @@ class PatientController extends Controller
          $case->case_id = 'C'.Auth::guard('sitePatient')->user()->id.date('YmdHis');
          $case->doctor_id = $request->doctor_id;
          $case->health_problem = $request->health_problem;
+         $case->medicine_name = $request->medicine_name;
+         $case->case_type = $request->case_type;
          $case->questions_type = $request->questions_type;
 
          $booking_date = str_replace('/','-',$request->booking_date);
@@ -411,8 +413,18 @@ class PatientController extends Controller
 
     public function requestedConsults(Request $request)
     {
-      $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
+      $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',1)->latest()->paginate(10);
         return view('frontend.patient.requested_consults', compact('cases'));
+      
+    }
+
+
+    public function prescriptions(Request $request)
+    {
+      $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->latest()->paginate(10);
+      $accepted_cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->where('accept_status',1)->latest()->paginate(10);
+      $ready_cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->latest()->paginate(10);
+        return view('frontend.patient.prescriptions', compact('cases','accepted_cases','ready_cases'));
       
     }
 

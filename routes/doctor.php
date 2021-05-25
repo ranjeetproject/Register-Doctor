@@ -19,6 +19,7 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::get('delete-weekly-day/{id}', 'DoctorController@deleteWeeklyDay')->name('delete-weekly-day');
     Route::match(['get','post'],'edit-weekly-day', 'DoctorController@editWeeklyDay')->name('edit-weekly-day');
     Route::match(['get','post'],'quick-questions', 'DoctorController@quickQuestions')->name('quick-questions');
+    Route::match(['get','post'],'prescriptions', 'DoctorController@prescriptions')->name('prescriptions');
     Route::match(['get','post'],'live-chats', 'DoctorController@liveChats')->name('live-chats');
     Route::match(['get','post'],'view-case/{id}', 'DoctorController@viewCase')->name('view-case');
     Route::match(['get','post'],'chats/{id}', 'DoctorController@chats')->name('chats');

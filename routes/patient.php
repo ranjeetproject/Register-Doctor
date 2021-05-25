@@ -18,6 +18,9 @@
     Route::match(['get','post'],'/add-to-favorite', 'PatientController@addToFavorite')->name('add-to-favorite');
 
     Route::match(['get','post'],'/requested-consults', 'PatientController@requestedConsults')->name('requested-consults');
+
+    Route::match(['get','post'],'/prescriptions', 'PatientController@prescriptions')->name('prescriptions');
+
     Route::match(['get','post'],'/closed-cases', 'PatientController@closedCases')->name('closed-cases');
     Route::match(['get','post'],'/prescriptions-issued', 'PatientController@prescriptionsIssued')->name('prescriptions-issued');
 

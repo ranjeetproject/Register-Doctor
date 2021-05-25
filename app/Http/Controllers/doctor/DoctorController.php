@@ -554,6 +554,17 @@ switch ($request->day) {
       
     }
 
+
+     public function prescriptions(Request $request)
+    {
+        $quick_questions = PatientCase::where('case_type',2)->where(function($query){
+          $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id);
+        })->orderBy('id','desc')->paginate(6);
+        return view('frontend.doctor.prescriptions', compact('quick_questions'));
+      
+    }
+
+
     public function liveChats(Request $request)
     {
         $live_chats = PatientCase::where('questions_type',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orderBy('id','desc')->paginate(6);

@@ -386,7 +386,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form class="modal-body">
+        {{-- <form class="modal-body"> --}}
 
 
           <form class="modal-body" method="POST" action="{{route('patient.create-case')}}" enctype="multipart/form-data">
@@ -394,6 +394,8 @@
                 @csrf
                 <input type="hidden" name="questions_type" value="3">
                 <input type="hidden" name="doctor_id" id="doctor_id">
+                <input type="hidden" name="case_type" value="2">
+
                 
 
                 <div class="row">
@@ -419,11 +421,11 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
                          
                     </div>
                     <div class="col-sm-12 mb-2">
-                      <p>If there is any specific medicie you have in mind you may mention it here.</p>
+                      <p>If there is any specific medicine you have in mind you may mention it here.</p>
                     </div>
                       <div class="col-sm-12">
                           <div class="form-group">
-                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Type here..."></textarea>
+                              <textarea class="form-control" name="medicine_name" id="exampleFormControlTextarea1" rows="5" placeholder="Type here..."></textarea>
                             </div>                        
                       </div>
                       <div class="col-sm-12 mb-2">
@@ -448,13 +450,14 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form class="modal-body">
+        {{-- <form class="modal-body"> --}}
 
 
           <form class="modal-body" method="POST" action="{{route('patient.create-case')}}" enctype="multipart/form-data">
 
                 @csrf
-                <input type="hidden" name="questions_type" value="3">
+                <input type="hidden" name="questions_type" value="4">
+                <input type="hidden" name="case_type" value="2">
 
                 <div class="row">
                   <div class="col-sm-12 mb-2">
@@ -479,11 +482,11 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
                          
                     </div>
                     <div class="col-sm-12 mb-2">
-                      <p>If there is any specific medicie you have in mind you may mention it here.</p>
+                      <p>If there is any specific medicine you have in mind you may mention it here.</p>
                     </div>
                       <div class="col-sm-12">
                           <div class="form-group">
-                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Type here..."></textarea>
+                              <textarea class="form-control" name="medicine_name" id="exampleFormControlTextarea1" rows="5" placeholder="Type here..."></textarea>
                             </div>                        
                       </div>
                       <div class="col-sm-12 mb-2">

@@ -50,11 +50,11 @@
                                          @forelse ($cases as $case)
                                         <tr>
                                             <td>{{date('m-d-Y', strtotime($case->booking_date))}}</td>
-                                            <td>
+                                            <td style="text-align: center;">
                                               {{-- @if($case->getSlot) --}}
                                               @forelse($case->getBookingSlot as $time_slot)
 
-                                              {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} -- {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>
+                                              {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br>
 
                                               @empty
 
