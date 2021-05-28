@@ -4554,6 +4554,12 @@ a.btn.blue-button.Finish-Exchange {
   margin-bottom: 50px;
 }
 
+.Doctor-Dashboard-page .incoming-request a.card.new-crd {
+  width: 48%;
+  max-width: 48%;
+  min-height: 220px;
+}
+
 .Doctor-Dashboard-page .incoming-request a.card:nth-child(even) {
   -webkit-box-shadow: 2px 4px 11px #fad6ca;
           box-shadow: 2px 4px 11px #fad6ca;
