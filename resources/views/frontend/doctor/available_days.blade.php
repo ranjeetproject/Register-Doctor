@@ -23,7 +23,7 @@
                                   </ul>
                                   <div class="tab-content Calendar-Regular-tab-con" id="myTabContent">
                                     <div class="tab-pane fade show active" id="Regular-Weekly-Timetable">
-                                        <form class="calanderilest">
+                                        <div class="calanderilest">
                                             <div class="row for-box-sad">
                                                 <div class="col-lg-4 col-md-4 col-sm-12 calend_status">
                                                <h2 class="show_date">{!!date('l',strtotime(now())) .'  '. date('F d Y',strtotime(now()))!!}</h2>
@@ -67,7 +67,10 @@
 
   <div class="col-sm-6">
     <h5 class="Available-Time">Add or Delete Regular Weekly Timeslots</h5>
-    <button type="button" class="btn btn-primary" onclick="addweeklyday()">Add</button>
+    
+    <div class="d-block text-right">
+      <button type="button" class="btn btn-primary" onclick="addweeklyday()">Add</button>
+    </div>
     {{-- <a href="#"></a> --}}
     <div class="accordion my-2 re-ah-titme" id="accordionExample">
       <div class="card">
@@ -76,6 +79,7 @@
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
               Monday - May 31 2021 <span>1:00pm  - 2:00pm</span>
             </button>
+            <span class="accetion"><a href="#" onclick="#"><i class="fas fa-pencil-alt"></i></a> | <a href="#" onclick="#"><i class="far fa-trash-alt"></i></a></span>
           </h2>
         </div>
 
@@ -112,6 +116,7 @@
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             Monday - May 30 2021 <span>1:00pm  - 2:00pm</span>
             </button>
+            <span class="accetion"><a href="#" onclick="#"><i class="fas fa-pencil-alt"></i></a> | <a href="#" onclick="#"><i class="far fa-trash-alt"></i></a></span>
           </h2>
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -147,6 +152,7 @@
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
             Monday - May 29 2021 <span>1:00pm  - 2:00pm</span>
             </button>
+            <span class="accetion"><a href="#" onclick="#"><i class="fas fa-pencil-alt"></i></a> | <a href="#" onclick="#"><i class="far fa-trash-alt"></i></a></span>
           </h2>
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
@@ -182,15 +188,30 @@
   </div>
   <div class="col-sm-6">
     <h5 class="Available-Time">Add or Delete Ad Hoc Timeslots</h5>
-    <button type="button" class="btn btn-primary" onclick="addweeklyday()">Add</button>
+    <div class="d-block">
+      
+      <form class="form-inline filter-buy d-flex">
+        <div class="form-group mb-2 mr-1">
+          <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Form Date">
+        </div>
+        <div class="form-group mb-2 mr-1">
+          <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="To Date">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mb-2">Search</button>
+      </form>
+    </div>
+    <div class="d-block text-right mt-2">
+      <button type="button" class="btn btn-primary" onclick="addweeklyday()">Add</button>
+    </div>
     {{-- <a href="#"></a> --}}
     <div class="accordion my-2 re-ah-titme" id="accordionExample2">
       <div class="card">
         <div class="card-header" id="headingOne">
           <h2 class="mb-0">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#acone" aria-expanded="false" aria-controls="acone">
-              Monday - May 31 2021 <span>1:00pm  - 2:00pm</span>
+              Monday - May 31 2021 <span>1:00pm  - 2:00pm</span> 
             </button>
+            <span class="accetion"><a href="#" onclick="#"><i class="fas fa-pencil-alt"></i></a> | <a href="#" onclick="#"><i class="far fa-trash-alt"></i></a></span>
           </h2>
         </div>
 
@@ -227,6 +248,7 @@
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#acTwo" aria-expanded="false" aria-controls="acTwo">
             Monday - May 30 2021 <span>1:00pm  - 2:00pm</span>
             </button>
+            <span class="accetion"><a href="#" onclick="#"><i class="fas fa-pencil-alt"></i></a> | <a href="#" onclick="#"><i class="far fa-trash-alt"></i></a></span>
           </h2>
         </div>
         <div id="acTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample2">
@@ -262,6 +284,7 @@
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#acTwoThree" aria-expanded="false" aria-controls="acTwoThree">
             Monday - May 29 2021 <span>1:00pm  - 2:00pm</span>
             </button>
+            <span class="accetion"><a href="#" onclick="#"><i class="fas fa-pencil-alt"></i></a> | <a href="#" onclick="#"><i class="far fa-trash-alt"></i></a></span>
           </h2>
         </div>
         <div id="acTwoThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample2">
@@ -314,7 +337,7 @@
                                                     <button type="submit" class="btn blue-button">Submit</button>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="Ad-Hoc-Timeslots" >
                                         <form class="calanderilest">

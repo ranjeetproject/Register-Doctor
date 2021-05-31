@@ -6121,16 +6121,24 @@ tr.only-remv:after {
 }
 
 .re-ah-titme{
+    
     .card-header {
         padding: 0px;
         h2{
             button{
-                display: block;
                 color: #000;
                 text-decoration: none;
                 box-shadow: none;
                 text-align: left;
-                width: 100%;
+                width: calc(100% - 50px);
+            }
+            span.accetion {
+                float: right;
+                font-size: 12px;
+                padding: 15px 8px;
+                a{
+                    color: #000;
+                }
             }
         }
  
@@ -6148,4 +6156,21 @@ tr.only-remv:after {
     }
     
    
+}
+
+
+form.form-inline.filter-buy.d-flex {
+    .form-group.mb-2.mr-1 {
+        max-width: calc(50% - 4px);
+        input.form-control {
+            width: 100%;
+        }
+    }
+}
+form.form-inline.filter-buy.d-flex {
+    
+    background: #f2f2f2;
+    padding: 12px 8px 4px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px;
 }
