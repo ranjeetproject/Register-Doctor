@@ -459,6 +459,19 @@ class PatientController extends Controller
       
     }
 
+    public function bookPrescriptions($id)
+    {
+        $id = Crypt::decryptString($id);
+        $doctor = User::findOrFail($id);
+        $available_days = DoctorAvailableDays::where('user_id',$doctor->id)->where('date','>=',date('Y-m-d'))->get();
+        // return $available_days;
+      $get_current_day = DoctorAvailableDays::where('user_id',$doctor->id)->where('date',date('Y-m-d'))->get();
+      $weekly_available_days = WeeklyAvailableDays::where('user_id',$doctor->id)->orderBy('num_val_for_day')->get();
+
+        return view('frontend.patient.book_prespriptions',compact('doctor','available_days','get_current_day','weekly_available_days'));
+      
+    }
+
     public function viewChilds(Request $request)
     {
             $user = Auth::guard('sitePatient')->user();

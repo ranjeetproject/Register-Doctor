@@ -23,7 +23,7 @@
                                   </ul>
                                   <div class="tab-content Calendar-Regular-tab-con" id="myTabContent">
                                     <div class="tab-pane fade show active" id="Regular-Weekly-Timetable">
-                                        <div class="calanderilest">
+                                        <form class="calanderilest">
                                             <div class="row for-box-sad">
                                                 <div class="col-lg-4 col-md-4 col-sm-12 calend_status">
                                                <h2 class="show_date">{!!date('l',strtotime(now())) .'  '. date('F d Y',strtotime(now()))!!}</h2>
@@ -59,136 +59,37 @@
                                             </div>
                                             <div class="row Available-table-details">
                                                 <div class="col-sm-12">
-                                                    
+                                                    <h4 class="Available-Time">Add or Delete Regular Weekly Timeslots</h4>
                                                 </div>
 
                                                 
 
 
-  <div class="col-sm-6">
-    <h5 class="Available-Time">Add or Delete Regular Weekly Timeslots</h5>
-    
-    <div class="d-block text-right">
-      <button type="button" class="btn btn-primary" onclick="addweeklyday()">Add</button>
-    </div>
+  <div class="col-sm-12">
+    <button type="button" class="btn btn-primary" onclick="addweeklyday()">Add</button>
     {{-- <a href="#"></a> --}}
-    <div class="accordion my-2 re-ah-titme" id="accordionExample">
-
-
-@foreach($weekly_available_days as $day)
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h2 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-              {{ucfirst($day->day)}} - <span>{{date('H:i a', strtotime($day->from_time))}} - {{date('H:i a', strtotime($day->to_time))}}</span> 
-            </button>
-            <span class="accetion"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></span>
-          </h2>
-        </div>
-
-        <div id="collapseOnee" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-          <div class="card-body p-2">
-          <div class="table-responsive">
-            <table border="0"> 
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>From</th>
-                        <th>Till</th>
-                        <th style="text-align: center;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  @foreach($weekly_available_days as $day)
-                    <tr>
-                        <td>{{ucfirst($day->day)}}</td>
-                        <td>{{date('H:i a', strtotime($day->from_time))}}</td>
-                        <td>{{date('H:i a', strtotime($day->to_time))}}</td>
-                        <td style="text-align: center;"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-          </div>
-        </div>
+      <div class="table-responsive">
+          <table border="0"> 
+              <thead>
+                  <tr>
+                      <th>Day</th>
+                      <th>From</th>
+                      <th>Till</th>
+                      <th style="text-align: center;">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                @foreach($weekly_available_days as $day)
+                  <tr>
+                      <td>{{ucfirst($day->day)}}</td>
+                      <td>{{date('H:i a', strtotime($day->from_time))}}</td>
+                      <td>{{date('H:i a', strtotime($day->to_time))}}</td>
+                      <td style="text-align: center;"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
+                  </tr>
+                  @endforeach
+              </tbody>
+          </table>
       </div>
-  @endforeach
-
-
-
-      
-    </div>
-      
-      
-  </div>
-  <div class="col-sm-6">
-    <h5 class="Available-Time">Add or Delete Ad Hoc Timeslots</h5>
-    <div class="d-block">
-      
-      <form class="form-inline filter-buy d-flex">
-        <div class="form-group mb-2 mr-1">
-          <input type="text" name="from_date" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Form Date">
-        </div>
-        <div class="form-group mb-2 mr-1">
-          <input type="text" name="to_date"  onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="To Date">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block mb-2">Search</button>
-      </form>
-    </div>
-    <div class="d-block text-right mt-2">
-      <button type="button" class="btn btn-primary" onclick="$('#myModal2').modal('show');">Add</button>
-    </div>
-    {{-- <a href="#"></a> --}}
-    <div class="accordion my-2 re-ah-titme" id="accordionExample2">
-      
-   @forelse($available_days_for_month as $available_day)
-
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h2 class="mb-0">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#acone_{{$available_day->id}}" aria-expanded="false" aria-controls="acone">
-              {{ ucfirst(date('l',strtotime($available_day->date)) )}} - {{date('F d Y',strtotime($available_day->date))}} <span>{{date('H:i a', strtotime($available_day->from_time))}}  - {{date('H:i a', strtotime($available_day->to_time))}}</span> 
-            </button>
-            <span class="accetion"><a href="#" onclick="editAvailableDay('{{$available_day->id}}');"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-available-day',$available_day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></span>
-          </h2>
-        </div>
-
-
-        <div id="acone_{{$available_day->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample2">
-          <div class="card-body p-2">
-          <div class="table-responsive">
-            <table border="0"> 
-                <thead>
-                    <tr>
-                        {{-- <th>Day</th> --}}
-                        <th>From</th>
-                        <th>Till</th>
-                        <th style="text-align: center;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  @foreach($available_day->getSlot as $day)
-                    <tr>
-                        {{-- <td>{{ucfirst($day->day)}}</td> --}}
-                        <td>{{date('H:i a', strtotime($day->start_time))}}</td>
-                        <td>{{date('H:i a', strtotime($day->end_time))}}</td>
-                        <td style="text-align: center;"><a href="#" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-          </div>
-        </div>
-      </div>
-    @endforeach
-
-
-
-      
-      
-    </div>
       
   </div>
                                                 <!-- <div class="col-sm-6 tile-pick">
@@ -207,11 +108,11 @@
                                                         <input id="Till-date" class="form-control" type="time" value="09:15">
                                                       </div>
                                                 </div> -->
-                                                {{-- <div class="submit-btn col-sm-12">
+                                                <div class="submit-btn col-sm-12">
                                                     <button type="submit" class="btn blue-button">Submit</button>
-                                                </div> --}}
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                     <div class="tab-pane fade" id="Ad-Hoc-Timeslots" >
                                         <form class="calanderilest">
@@ -338,21 +239,16 @@
                 @csrf
 
                 <div class="form-group">
-                  <label>Date</label>
                     <input type="text" onfocus="(this.type='date')" name="date" id="date" class="form-control" required>
                 </div>
 
               <div class="form-group">
-                  <label>Form Time</label>
-
-                    <input type="text" name="from_time" id="from_time" class="form-control jsdatetimepicker" autocomplete="off" required>
+                    <input type="text" onfocus="(this.type='time')" name="from_time" id="from_time" class="form-control" autocomplete="off" required>
                 </div>
 
 
                 <div class="form-group">
-                  <label>To Time</label>
-
-                    <input type="text"  name="to_time" id="to_time" class="form-control jsdatetimepicker" autocomplete="off" required>
+                    <input type="text" onfocus="(this.type='time')" name="to_time" id="to_time" class="form-control" autocomplete="off" required>
                 </div>
 
                 <button class="btn btn-primary">Submit</button>
@@ -379,12 +275,12 @@
                 </div>
 
               <div class="form-group">
-                    <input type="text" name="from_time" id="edit_from_time" class="form-control jsdatetimepicker" autocomplete="off" required>
+                    <input type="text" onfocus="(this.type='time')" name="from_time" id="edit_from_time" class="form-control" autocomplete="off" required>
                 </div>
 
 
                 <div class="form-group">
-                    <input type="text" name="to_time" id="edit_to_time" class="form-control jsdatetimepicker" autocomplete="off" required>
+                    <input type="text" onfocus="(this.type='time')" name="to_time" id="edit_to_time" class="form-control" autocomplete="off" required>
                 </div>
 
                 <button class="btn btn-primary">Submit</button>
@@ -463,13 +359,13 @@
 
               <div class="form-group">
                   <label>From</label>
-                    <input type="text" name="from_time" id="weekly_from_time" class="form-control jsdatetimepicker" autocomplete="off" required>
+                    <input type="text" onfocus="(this.type='time')" name="from_time" id="weekly_from_time" class="form-control" autocomplete="off" required>
                 </div>
 
 
                 <div class="form-group">
                   <label>Till</label>
-                    <input type="text" name="to_time" id="weekly_to_time" class="form-control jsdatetimepicker" autocomplete="off" required>
+                    <input type="text" onfocus="(this.type='time')" name="to_time" id="weekly_to_time" class="form-control" autocomplete="off" required>
                 </div>
 
                 <button class="btn btn-primary">Submit</button>
@@ -543,8 +439,8 @@
         day = (day<=9) ? '0'+day : day;
         month = (month<=9) ? '0'+month : month;
         var date = day+'/'+month+'/'+year;
-        // $('#myModal2').modal('show');
-        // $('#date').val(date);
+        $('#myModal2').modal('show');
+        $('#date').val(date);
         var fromDate = new Date(year+'-'+month+'-'+day);
                            var formatedDate = new Date(fromDate).toDateString();
         // alert(formatedDate);

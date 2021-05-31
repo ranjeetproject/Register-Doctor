@@ -8,7 +8,7 @@
                     <nav aria-label="breadcrumb ">
                         <ol class="breadcrumb Pharmacist-doc-com">
 
-      @if(Request::segment(3) == 'live-chat')
+      {{-- @if(Request::segment(3) == 'live-chat')
          <li class="breadcrumb-item active">Live Chat</li>
       @endif
       
@@ -22,7 +22,12 @@
 
        @if(Request::segment(3) == 'book-qa')
            <li class="breadcrumb-item active">Book Q & A</li>
-       @endif
+       @endif --}}
+        @if(Request::segment(4) && (Request::segment(4) == 'accepted'))
+         <li class="breadcrumb-item active">Accepted Request</li>
+         @else
+         <li class="breadcrumb-item active">Booking Request</li>
+          @endif
       
                           
                         </ol>

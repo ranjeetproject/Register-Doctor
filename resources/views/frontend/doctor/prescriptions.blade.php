@@ -7,7 +7,7 @@
                 <div class="col Prescriptions-Dispensed-right">
                     <nav aria-label="breadcrumb ">
                         <ol class="breadcrumb Pharmacist-doc-com">
-                            <li class="breadcrumb-item active">Quick Questions</li>
+                            <li class="breadcrumb-item active">Prescriptions</li>
                         </ol>
                       </nav>
                       

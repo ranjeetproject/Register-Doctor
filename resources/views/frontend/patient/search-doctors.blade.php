@@ -206,7 +206,7 @@
 
                                                 </div>
 
-                                                <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
+                                                <a href="{{route('patient.book-prescriptions',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
                                             </div>
                                             <h5 class="card-title">{{ $doctor->forename.' '.$doctor->surname }}<br><small> {{ $doctor->profile->dr_speciality }}</small> </h5>
                                             <p>{{ $doctor->profile->dr_qualifications }}</p>
@@ -273,7 +273,7 @@
                                                     <i class="far fa-thumbs-up reting"></i>
 
                                                 </div>
-                                                 <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
+                                                 <a href="{{route('patient.book-prescriptions',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
                                             </div>
                                             <h5 class="card-title">{{ $doctor->forename.' '.$doctor->surname }}<br><small> {{ $doctor->profile->dr_speciality }}</small> </h5>
                                             <p>{{ $doctor->profile->dr_qualifications }}</p>
@@ -456,7 +456,7 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
           <form class="modal-body" method="POST" action="{{route('patient.create-case')}}" enctype="multipart/form-data">
 
                 @csrf
-                <input type="hidden" name="questions_type" value="4">
+                <input type="hidden" name="questions_type" value="3">
                 <input type="hidden" name="case_type" value="2">
 
                 <div class="row">

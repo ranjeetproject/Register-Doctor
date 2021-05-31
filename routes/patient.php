@@ -27,6 +27,7 @@
     Route::match(['get','post'],'/pharmacies', 'PatientController@pharmacies')->name('pharmacies');
 
     Route::get('/view-doctor-profile/{id}', 'PatientController@viewDoctorProfile')->name('view-doctor-profile');
+    Route::get('/book-prescriptions/{id}', 'PatientController@bookPrescriptions')->name('book-prescriptions');
     Route::get('/view-childs', 'PatientController@viewChilds')->name('view-childs');
     Route::match(['get','post'],'/add-child', 'PatientController@addChild')->name('add-child');
     Route::match(['get','post'],'/change-account', 'PatientController@changeAccount')->name('change-account');
