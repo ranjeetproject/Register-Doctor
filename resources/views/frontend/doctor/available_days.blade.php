@@ -59,37 +59,239 @@
                                             </div>
                                             <div class="row Available-table-details">
                                                 <div class="col-sm-12">
-                                                    <h4 class="Available-Time">Add or Delete Regular Weekly Timeslots</h4>
+                                                    
                                                 </div>
 
                                                 
 
 
-  <div class="col-sm-12">
+  <div class="col-sm-6">
+    <h5 class="Available-Time">Add or Delete Regular Weekly Timeslots</h5>
     <button type="button" class="btn btn-primary" onclick="addweeklyday()">Add</button>
     {{-- <a href="#"></a> --}}
-      <div class="table-responsive">
-          <table border="0"> 
-              <thead>
-                  <tr>
-                      <th>Day</th>
-                      <th>From</th>
-                      <th>Till</th>
-                      <th style="text-align: center;">Action</th>
-                  </tr>
-              </thead>
-              <tbody>
-                @foreach($weekly_available_days as $day)
-                  <tr>
-                      <td>{{ucfirst($day->day)}}</td>
-                      <td>{{date('H:i a', strtotime($day->from_time))}}</td>
-                      <td>{{date('H:i a', strtotime($day->to_time))}}</td>
-                      <td style="text-align: center;"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
-                  </tr>
-                  @endforeach
-              </tbody>
-          </table>
+    <div class="accordion my-2 re-ah-titme" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              Monday - May 31 2021 <span>1:00pm  - 2:00pm</span>
+            </button>
+          </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body p-2">
+          <div class="table-responsive">
+            <table border="0"> 
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>From</th>
+                        <th>Till</th>
+                        <th style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach($weekly_available_days as $day)
+                    <tr>
+                        <td>{{ucfirst($day->day)}}</td>
+                        <td>{{date('H:i a', strtotime($day->from_time))}}</td>
+                        <td>{{date('H:i a', strtotime($day->to_time))}}</td>
+                        <td style="text-align: center;"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+          </div>
+        </div>
       </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Monday - May 30 2021 <span>1:00pm  - 2:00pm</span>
+            </button>
+          </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+          <div class="card-body p-2">
+            <div class="table-responsive">
+              <table border="0"> 
+                  <thead>
+                      <tr>
+                          <th>Day</th>
+                          <th>From</th>
+                          <th>Till</th>
+                          <th style="text-align: center;">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($weekly_available_days as $day)
+                      <tr>
+                          <td>{{ucfirst($day->day)}}</td>
+                          <td>{{date('H:i a', strtotime($day->from_time))}}</td>
+                          <td>{{date('H:i a', strtotime($day->to_time))}}</td>
+                          <td style="text-align: center;"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
+                      </tr>
+                      @endforeach
+                  </tbody>
+              </table>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingThree">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Monday - May 29 2021 <span>1:00pm  - 2:00pm</span>
+            </button>
+          </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+          <div class="card-body p-2">
+          <div class="table-responsive">
+            <table border="0"> 
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>From</th>
+                        <th>Till</th>
+                        <th style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach($weekly_available_days as $day)
+                    <tr>
+                        <td>{{ucfirst($day->day)}}</td>
+                        <td>{{date('H:i a', strtotime($day->from_time))}}</td>
+                        <td>{{date('H:i a', strtotime($day->to_time))}}</td>
+                        <td style="text-align: center;"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+      
+  </div>
+  <div class="col-sm-6">
+    <h5 class="Available-Time">Add or Delete Ad Hoc Timeslots</h5>
+    <button type="button" class="btn btn-primary" onclick="addweeklyday()">Add</button>
+    {{-- <a href="#"></a> --}}
+    <div class="accordion my-2 re-ah-titme" id="accordionExample2">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#acone" aria-expanded="false" aria-controls="acone">
+              Monday - May 31 2021 <span>1:00pm  - 2:00pm</span>
+            </button>
+          </h2>
+        </div>
+
+        <div id="acone" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample2">
+          <div class="card-body p-2">
+          <div class="table-responsive">
+            <table border="0"> 
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>From</th>
+                        <th>Till</th>
+                        <th style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach($weekly_available_days as $day)
+                    <tr>
+                        <td>{{ucfirst($day->day)}}</td>
+                        <td>{{date('H:i a', strtotime($day->from_time))}}</td>
+                        <td>{{date('H:i a', strtotime($day->to_time))}}</td>
+                        <td style="text-align: center;"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#acTwo" aria-expanded="false" aria-controls="acTwo">
+            Monday - May 30 2021 <span>1:00pm  - 2:00pm</span>
+            </button>
+          </h2>
+        </div>
+        <div id="acTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample2">
+          <div class="card-body p-2">
+            <div class="table-responsive">
+              <table border="0"> 
+                  <thead>
+                      <tr>
+                          <th>Day</th>
+                          <th>From</th>
+                          <th>Till</th>
+                          <th style="text-align: center;">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($weekly_available_days as $day)
+                      <tr>
+                          <td>{{ucfirst($day->day)}}</td>
+                          <td>{{date('H:i a', strtotime($day->from_time))}}</td>
+                          <td>{{date('H:i a', strtotime($day->to_time))}}</td>
+                          <td style="text-align: center;"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
+                      </tr>
+                      @endforeach
+                  </tbody>
+              </table>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingThree">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#acTwoThree" aria-expanded="false" aria-controls="acTwoThree">
+            Monday - May 29 2021 <span>1:00pm  - 2:00pm</span>
+            </button>
+          </h2>
+        </div>
+        <div id="acTwoThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample2">
+          <div class="card-body p-2">
+          <div class="table-responsive">
+            <table border="0"> 
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>From</th>
+                        <th>Till</th>
+                        <th style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach($weekly_available_days as $day)
+                    <tr>
+                        <td>{{ucfirst($day->day)}}</td>
+                        <td>{{date('H:i a', strtotime($day->from_time))}}</td>
+                        <td>{{date('H:i a', strtotime($day->to_time))}}</td>
+                        <td style="text-align: center;"><a href="#" onclick="editWeeklyDay('{{$day->id}}')"><i class="fas fa-pencil-alt"></i></a> | <a href="{{route('doctor.delete-weekly-day',$day->id)}}" onclick="return confirm('Are you sure ?');"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
       
   </div>
                                                 <!-- <div class="col-sm-6 tile-pick">

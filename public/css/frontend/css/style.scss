@@ -6119,3 +6119,33 @@ tr.only-remv:after {
 .col.Choose-Your-Doctor-right.innerpage.Prescriptions-Dispensed-page {
     max-width: calc(100% - 240px);
 }
+
+.re-ah-titme{
+    .card-header {
+        padding: 0px;
+        h2{
+            button{
+                display: block;
+                color: #000;
+                text-decoration: none;
+                box-shadow: none;
+                text-align: left;
+                width: 100%;
+            }
+        }
+ 
+    }
+    .card-body{
+        .table-responsive{
+            table{
+                tbody{
+                    td{
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+    
+   
+}
