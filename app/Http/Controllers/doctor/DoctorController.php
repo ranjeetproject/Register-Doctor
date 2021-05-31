@@ -310,7 +310,7 @@ class DoctorController extends Controller
       }else{
  $available_days_for_month = $available_days_for_month->whereMonth('date',date('m'));
       }
-       $available_days_for_month =  $available_days_for_month->get();
+       $available_days_for_month =  $available_days_for_month->orderBy('date')->get();
 
       $available_days = DoctorAvailableDays::where('user_id',$user->id)->get();
       $get_current_day = DoctorAvailableDays::where('user_id',$user->id)->where('date',date('Y-m-d'))->get();
