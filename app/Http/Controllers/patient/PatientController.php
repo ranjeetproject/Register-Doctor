@@ -713,7 +713,7 @@ class PatientController extends Controller
             }
 
             Session::flash('Success-toastr','Successfully submited');
-            return redirect()->route('requested-consults');
+            return redirect()->route('patient.requested-consults');
            
         }
 
