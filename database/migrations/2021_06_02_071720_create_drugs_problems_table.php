@@ -16,7 +16,7 @@ class CreateDrugsProblemsTable extends Migration
         Schema::create('drugs_problems', function (Blueprint $table) {
             $table->bigIncrements('id');
              $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('patient_case_id');
+            $table->unsignedBigInteger('patient_case_id')->nullable();
             $table->string('drug_name')->nullable();
             $table->string('what_happened')->nullable();
             $table->tinyInteger('status')->default('1')->comment('1:active, 2:inactive');

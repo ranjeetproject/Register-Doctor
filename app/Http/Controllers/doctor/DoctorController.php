@@ -4,7 +4,11 @@ namespace App\Http\Controllers\doctor;
 
 use App\Http\Controllers\Controller;
 use App\Models\DoctorAvailableDays;
+use App\Models\DrugsDetails;
+use App\Models\DrugsProblem;
+use App\Models\PastSymptoms;
 use App\Models\PatientCase;
+use App\Models\SymptromsDetails;
 use App\Models\TimeSlot;
 use App\Models\UserProfile;
 use App\Models\WeeklyAvailableDays;
@@ -732,8 +736,15 @@ switch ($request->day) {
     public function viewMedicalRecorde(Request $request,$id)
     {
         $case = PatientCase::where('case_id',$id)->first();
-        // $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
-        return view('frontend.doctor.medical_record', compact('case'));
+         $symptroms_details = SymptromsDetails::where('user_id',$case->user->id)->get();
+        $last_symptroms_details = SymptromsDetails::where('user_id',$case->user->id)->orderBy('id','DESC')->first();
+        $past_symptoms = PastSymptoms::where('user_id',$case->user->id)->where('type',1)->get();
+        $past_symptoms2 = PastSymptoms::where('user_id',$case->user->id)->where('type',2)->get();
+        $drugs_details = DrugsDetails::where('user_id',$case->user->id)->get();
+        $drugs_problem = DrugsProblem::where('user_id',$case->user->id)->get();
+        $cases = PatientCase::where('user_id',$case->user->id)->latest()->get();
+        
+        return view('frontend.doctor.medical_record', compact('case','symptroms_details','past_symptoms','drugs_details','drugs_problem','past_symptoms2','cases','last_symptroms_details'));
       
     }
 

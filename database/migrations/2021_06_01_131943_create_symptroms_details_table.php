@@ -16,11 +16,11 @@ class CreateSymptromsDetailsTable extends Migration
         Schema::create('symptroms_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('patient_case_id');
+            $table->unsignedBigInteger('patient_case_id')->nullable();
             $table->text('cond_not_covered')->nullable();
             $table->text('cond_not_covered2')->nullable();
             $table->text('details')->nullable();
-            $table->string('width')->nullable();
+            $table->string('weight')->nullable();
             $table->string('height')->nullable();
             $table->text('doctor_to_know')->nullable();
             $table->string('gp_doctor_name')->nullable();

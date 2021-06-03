@@ -240,7 +240,17 @@ class PatientController extends Controller
 
      public function medicalRecord(Request $request)
     {
-        return view('frontend.patient.medical_record');
+        $login_user = Auth::guard('sitePatient')->user();
+
+        $symptroms_details = SymptromsDetails::where('user_id',$login_user->id)->get();
+        $last_symptroms_details = SymptromsDetails::where('user_id',$login_user->id)->orderBy('id','DESC')->first();
+        $past_symptoms = PastSymptoms::where('user_id',$login_user->id)->where('type',1)->get();
+        $past_symptoms2 = PastSymptoms::where('user_id',$login_user->id)->where('type',2)->get();
+        $drugs_details = DrugsDetails::where('user_id',$login_user->id)->get();
+        $drugs_problem = DrugsProblem::where('user_id',$login_user->id)->get();
+        $cases = PatientCase::where('user_id',$login_user->id)->latest()->get();
+
+        return view('frontend.patient.medical_record',compact('symptroms_details','past_symptoms','drugs_details','drugs_problem','login_user','past_symptoms2','cases','last_symptroms_details'));
       
     }
 
@@ -681,7 +691,7 @@ class PatientController extends Controller
             $symptoms_details->cond_not_covered = $request->cond_not_covered;
             $symptoms_details->cond_not_covered2 = $request->cond_not_covered2;
             $symptoms_details->details = $request->details;
-            $symptoms_details->width = $request->width;
+            $symptoms_details->weight = $request->weight;
             $symptoms_details->height = $request->height;
             $symptoms_details->doctor_to_know = $request->doctor_to_know;
             $symptoms_details->gp_doctor_name = $request->gp_doctor_name;
@@ -697,6 +707,7 @@ class PatientController extends Controller
             $drugs_details->drug_name = $value;
             $drugs_details->dose = $request->dose[$i];
             $drugs_details->frequency = $request->frequency[$i];
+            $drugs_details->currently_taking = $request->currently_taking[$i] ?? '2';
             $drugs_details->save();
             $i++;
             }

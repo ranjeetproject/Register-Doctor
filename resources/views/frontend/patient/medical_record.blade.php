@@ -16,11 +16,12 @@
                             <div class="col-sm-12">
                                 <div class="card">
                                     <div class="card-body">
-                                      <p><span>Name : </span> Jonny Lange</p>
-                                      <p><span>Sex :  </span> Male</p>
-                                      <p><span>Date of Birth  : </span> 4th October 1980 </p>
-                                      <p><span>Address : </span>  Fargo, North Dakota, United States</p>
-                                      <p><span>Unique Patient Number (UPN) : </span>  569</p>
+                                      <p><span>Name : </span> {{$login_user->name}}</p>
+                                       <p><span>Sex :  </span> {{$login_user->profile->gender}}</p>
+                                      <p><span>Date of Birth  : </span> {{ date('d F Y', strtotime($login_user->profile->dob))}} </p>
+                                      
+                                      <p><span>Address : </span> {{$login_user->profile->address}}</p>
+                                      <p><span>Unique Patient Number (UPN) : </span>  {{$login_user->registration_number}}</p>
                                     </div>
                                   </div>
                             </div>
@@ -31,10 +32,11 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
-                                      <p><label>Asthma </label>  Entry Dated :  28.3.2020</p>
-                                      <p><label>Cancer </label>  Entry Dated :  28.3.2020</p>
-                                      <p><label>Cardica Disease </label>  Entry Dated :  28.3.2020</p>
-                                      <p><label>Skin Rashes </label>  Entry Dated :  28.3.2020</p>
+
+                                        @foreach($past_symptoms as $past_symptom)
+                                         <p><label>{{$past_symptom->symptom}} </label>  Entry Dated :  {{ date('d.m.Y', strtotime($past_symptom->created_at))}}</p>
+                                        @endforeach
+
                                     </div>
                                   </div>
                             </div>
@@ -45,7 +47,9 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
-                                      <p><label>Sore Throat </label>  Entry Dated :  28.3.2020</p>
+                                       @foreach($past_symptoms2 as $past_symptom)
+                                         <p><label>{{$past_symptom->symptom}} </label>  Entry Dated :  {{ date('d.m.Y', strtotime($past_symptom->created_at))}}</p>
+                                        @endforeach
                                     </div>
                                   </div>
                             </div>
@@ -66,27 +70,17 @@
                                               </tr>
                                             </thead>
                                             <tbody>
+                                            @foreach($cases as $case)
                                                 <tr>
-                                                    <td>C00012345</td>
+                                                    <td>{{$case->case_id}}</td>
                                                     <td>Allergy</td>
-                                                    <td>Dr. Shubha Agarwal</td>
+                                                    <td>{{$case->doctor->name}}</td>
                                                     <td><a href="#" class="btn">View Case</a><a href="#" class="btn">Print Case Summary</a></td>
-                                                    <td>08.10.2019</td>
+                                                    <td>{{ date('d.m.Y', strtotime($past_symptom->created_at))}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>C00012345</td>
-                                                    <td>Allergy</td>
-                                                    <td>Dr. Shubha Agarwal</td>
-                                                    <td><a href="#" class="btn">View Case</a><a href="#" class="btn">Print Case Summary</a></td>
-                                                    <td>08.10.2019</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>C00012345</td>
-                                                    <td>Allergy</td>
-                                                    <td>Dr. Shubha Agarwal</td>
-                                                    <td><a href="#" class="btn">View Case</a><a href="#" class="btn">Print Case Summary</a></td>
-                                                    <td>08.10.2019</td>
-                                                </tr>
+                                            @endforeach
+
+                                                
                                             </tbody>
                                           </table>
                                     </div>
@@ -114,34 +108,26 @@
                                                   </tr>
                                                 </thead>
                                                 <tbody>
+                                       @foreach($drugs_details as $drug)
+
                                                     <tr>
-                                                        <td>Flucloxacillin </td>
-                                                        <td>500 mg</td>
-                                                        <td>4x a day </td>
-                                                        <td>Yes</td>
-                                                        <td>08.10.2019</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Erythromycin </td>
-                                                        <td>150 mg</td>
-                                                        <td>qid</td>
-                                                        <td>No </td>
-                                                        <td>08.10.2019</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Maxidex </td>
-                                                        <td>700 mg  </td>
-                                                        <td>bd</td>
+                                                        <td>{{$drug->drug_name}} </td>
+                                                        <td>{{$drug->dose}} </td>
+                                                        <td>{{$drug->frequency}}  </td>
                                                         <td>No</td>
-                                                        <td>08.10.2019</td>
+                                                        <td>{{date('d.m.Y', strtotime($drug->created_at))}} </td>
                                                     </tr>
+                                            @endforeach
+                                                    
                                                 </tbody>
                                             </table>
                                         </div>
                                         
                                           <div class="bottom-cont">
-                                            <p><label><strong>Weight</strong> : 85kg  </label>  Entry Dated :  28.3.2020</p>
-                                            <p><label><strong>Height</strong> : 186 cm  </label>  Entry Dated :  28.3.2020</p>
+                                            <p><label><strong>Weight</strong> : {{$last_symptroms_details->weight ?? ''}}  </label>  Entry Dated :  @if(isset($last_symptroms_details->created_at)) {{date('d.m.Y', strtotime($last_symptroms_details->created_at))}}
+                                            @endif</p>
+                                            <p><label><strong>Height</strong> : {{$last_symptroms_details->height ?? ''}}  </label>  Entry Dated :  @if(isset($last_symptroms_details->created_at)) {{date('d.m.Y', strtotime($last_symptroms_details->created_at))}}
+                                            @endif</p>
                                           </div>
                                           <div class="comm-title-details">
                                             <h4>List any drug allergies. What happened </h4>
@@ -156,16 +142,14 @@
                                               </tr>
                                             </thead>
                                             <tbody>
+                                       @foreach($drugs_problem as $drug)
                                                 <tr>
-                                                    <td>Flucloxacillin </td>
-                                                    <td>Rash, breathing difficulty</td>
-                                                    <td>28.3.2020 </td>
+                                                    <td>{{$drug->drug_name}} </td>
+                                                    <td>{{$drug->what_happened}}</td>
+                                                    <td>{{date('d.m.Y', strtotime($drug->created_at))}} </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Aspirin </td>
-                                                    <td>Stomach upset  </td>
-                                                    <td>28.3.2020 </td>
-                                                </tr>
+                                       @endforeach
+                                                
                                             </tbody>
                                           </table>
                                           <div class="comm-title-details">
@@ -215,10 +199,10 @@
                                     </div>
                                     <div class="card">
                                         <div class="card-body">
-                                          <p>Doctor name : jony jon</p>
-                                          <p>Doctor address :  3a, Ho Chi Minh Sarani, Little Russel</p>
-                                          <p>Email :  jony_demo@gmail.com</p>
-                                          <p>Phone No :  +91 8670235469</p>
+                                          <p>Doctor name : {{$login_user->profile->gp_name}}</p>
+                                          <p>Doctor address :  {{$login_user->profile->gp_address}}</p>
+                                          <p>Email :  {{$login_user->profile->gp_email}}</p>
+                                          <p>Phone No :  {{$login_user->profile->gp_telephone}}</p>
                                         </div>
                                       </div>
                                 </div>

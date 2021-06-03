@@ -158,7 +158,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox"  value="dizzy spells or vertigo">
+                                                            <input class="form-check-input" type="checkbox" name="currently_taking[]"  value="1">
                                                             <label class="form-check-label lable-title">Tick if currently on drug</label>
                                                         </div>
                                                     </div>
@@ -193,10 +193,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label class="lable-title">What happened ?<span> (e.g. - rash)</span> </label>
-                                                    <select id="inputState" name="what_happened[]" class="form-control">
-                                                        <option selected></option>
-                                                        <option value="rash">rash</option>
-                                                      </select>
+                                                    <input class="form-control" id="inputState" name="what_happened[]">
                                                 </div>
                                             </div>
                                         </div>
@@ -251,12 +248,12 @@
             var count = $("#List-any-drug-list").children().length;                             
             $("#drugs-taken .add-drugs-drugs").click(function(){
                 count++;
-                $("#drugs-taken").append('<div class="form-inline"><div class="remove-drugs-drugs"><i class="fal fa-minus"></i></div><label class="my-1 mr-2" >Drug name</label><input type="text" name="drug_name[]" id="NEW'+count+'" class="form-control my-1 mr-sm-2"  placeholder="e g flucloxacillin"><label class="my-1 mr-2" >Dose </label><input type="text" class="form-control my-1 mr-sm-2" name="dose[]" placeholder="eg 500 milligrams"><label class="my-1 mr-2" >Frequency</label><input type="text" class="form-control my-1 mr-sm-2" name="frequency[]" placeholder="frequency 4x a day"><div class="form-group"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox"  value="dizzy spells or vertigo"><label class="form-check-label lable-title">Tick if currently on drug</label></div></div></div></div>');
+                $("#drugs-taken").append('<div class="form-inline"><div class="remove-drugs-drugs"><i class="fal fa-minus"></i></div><label class="my-1 mr-2" >Drug name</label><input type="text" name="drug_name[]" id="NEW'+count+'" class="form-control my-1 mr-sm-2"  placeholder="e g flucloxacillin"><label class="my-1 mr-2" >Dose </label><input type="text" class="form-control my-1 mr-sm-2" name="dose[]" placeholder="eg 500 milligrams"><label class="my-1 mr-2" >Frequency</label><input type="text" class="form-control my-1 mr-sm-2" name="frequency[]" placeholder="frequency 4x a day"><div class="form-group"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="currently_taking[]" value="1"><label class="form-check-label lable-title">Tick if currently on drug</label></div></div></div></div>');
                 
             }); 
             $("#List-any-drug .add-List-any-drug").click(function(){
                 count++;
-                $("#List-any-drug").append('<div class="row" id="List-any-drug-list"><div class="remove-List-any-drug"><i class="fal fa-minus"></i></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">List any drug allergies<span>(Drug name)</span> </label><input class="form-control" name="drug_name2[]"></div></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">What happened ?<span>(eg - rash)</span> </label><select id="inputState" name="what_happened[]" class="form-control"><option selected></option><option>...</option></select></div></div></div>');
+                $("#List-any-drug").append('<div class="row" id="List-any-drug-list"><div class="remove-List-any-drug"><i class="fal fa-minus"></i></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">List any drug allergies<span>(Drug name)</span> </label><input class="form-control" name="drug_name2[]"></div></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">What happened ?<span>(eg - rash)</span> </label><input class="form-control" id="inputState" name="what_happened[]"></div></div></div>');
                 
             }); 
         });
