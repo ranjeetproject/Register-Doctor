@@ -33,7 +33,7 @@
     Route::match(['get','post'],'/change-account', 'PatientController@changeAccount')->name('change-account');
     Route::match(['get','post'],'/chats/{id}', 'PatientController@chats')->name('chats');
     Route::match(['get','post'],'/doctor-available-day', 'PatientController@doctorAvailableDay')->name('doctor-available-day');
-    Route::match(['get','post'],'/symptoms-checker', 'PatientController@symptomsChecker')->name('symptoms-checker');
+    Route::match(['get','post'],'/symptoms-checker/{case_id}', 'PatientController@symptomsChecker')->name('symptoms-checker');
     Route::get('/show-prescriptions-rules', 'PatientController@showPrescriptionsRules')->name('show-prescriptions-rules');
 
 });

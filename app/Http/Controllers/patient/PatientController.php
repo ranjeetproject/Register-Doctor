@@ -7,8 +7,12 @@ use App\Models\BookTimeSlot;
 use App\Models\CaseFile;
 use App\Models\ChildsAccountsHolder;
 use App\Models\DoctorAvailableDays;
+use App\Models\DrugsDetails;
+use App\Models\DrugsProblem;
 use App\Models\FavouriteDoctor;
+use App\Models\PastSymptoms;
 use App\Models\PatientCase;
+use App\Models\SymptromsDetails;
 use App\Models\UserProfile;
 use App\Models\WeeklyAvailableDays;
 use App\User;
@@ -165,6 +169,7 @@ class PatientController extends Controller
          // $data = $request->validate([
           $validator = Validator::make($request->all(), [ 
              "health_problem"=>"required",
+             "questions_type"=>"required",
              "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
          ]);
 
@@ -182,7 +187,7 @@ class PatientController extends Controller
          $case->doctor_id = $request->doctor_id;
          $case->health_problem = $request->health_problem;
          $case->medicine_name = $request->medicine_name;
-         $case->case_type = $request->case_type;
+         $case->case_type = $request->case_type ?? 1;
          $case->questions_type = $request->questions_type;
 
          $booking_date = str_replace('/','-',$request->booking_date);
@@ -223,7 +228,7 @@ class PatientController extends Controller
 
         Session::flash('Success-toastr','Successfully submited');
         if($request->questions_type == 1 || $request->questions_type == 2){
-        return redirect()->route('patient.symptoms-checker');
+        return redirect()->route('patient.symptoms-checker',$case->case_id);
         }
         return redirect()->back();
         }
@@ -642,8 +647,76 @@ class PatientController extends Controller
     }
 
 
-    function symptomsChecker(Request $request)
+ function symptomsChecker(Request $request,$case_id)
     {
+        $user = Auth::guard('sitePatient')->user();
+
+
+        if($request->isMethod('post')){
+            // return $request->all();
+            $case = PatientCase::where('case_id',$case_id)->first();
+
+
+            foreach ($request->symptom as $value) {
+            $symptoms = new PastSymptoms;
+            $symptoms->user_id = $user->id;
+            $symptoms->patient_case_id = $case->id;
+            $symptoms->symptom = $value;
+            $symptoms->type = 1;
+            $symptoms->save();
+            }
+
+            foreach ($request->symptom as $value) {
+            $symptoms = new PastSymptoms;
+            $symptoms->user_id = $user->id;
+            $symptoms->patient_case_id = $case->id;
+            $symptoms->symptom = $value;
+            $symptoms->type = 2;
+            $symptoms->save();
+            }
+
+            $symptoms_details = new SymptromsDetails;
+            $symptoms_details->user_id = $user->id;
+            $symptoms_details->patient_case_id = $case->id;
+            $symptoms_details->cond_not_covered = $request->cond_not_covered;
+            $symptoms_details->cond_not_covered2 = $request->cond_not_covered2;
+            $symptoms_details->details = $request->details;
+            $symptoms_details->width = $request->width;
+            $symptoms_details->height = $request->height;
+            $symptoms_details->doctor_to_know = $request->doctor_to_know;
+            $symptoms_details->gp_doctor_name = $request->gp_doctor_name;
+            $symptoms_details->gp_doctor_address = $request->gp_doctor_address;
+            $symptoms_details->save();
+
+
+            $i = 0;
+             foreach ($request->drug_name as $value) {
+            $drugs_details = new DrugsDetails;
+            $drugs_details->user_id = $user->id;
+            $drugs_details->patient_case_id = $case->id;
+            $drugs_details->drug_name = $value;
+            $drugs_details->dose = $request->dose[$i];
+            $drugs_details->frequency = $request->frequency[$i];
+            $drugs_details->save();
+            $i++;
+            }
+
+            $j = 0;
+            foreach ($request->drug_name2 as $value) {
+            $drug_problems = new DrugsProblem;
+            $drug_problems->user_id = $user->id;
+            $drug_problems->patient_case_id = $case->id;
+            $drug_problems->drug_name = $value;
+            $drug_problems->what_happened = $request->what_happened[$j];
+            $j++;
+            $drug_problems->save();
+            }
+
+            Session::flash('Success-toastr','Successfully submited');
+            return redirect()->route('requested-consults');
+           
+        }
+
          return view('frontend.patient.symptoms-checker');
     }
 
