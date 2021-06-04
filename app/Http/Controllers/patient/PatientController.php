@@ -457,7 +457,8 @@ class PatientController extends Controller
 
     public function pharmacies(Request $request)
     {
-        return view('frontend.patient.pharmacies');
+        $pharmacies = User::whereRole(3)->latest()->get();
+        return view('frontend.patient.pharmacies',compact('pharmacies'));
       
     }
 
@@ -666,7 +667,7 @@ class PatientController extends Controller
             // return $request->all();
             $case = PatientCase::where('case_id',$case_id)->first();
 
-
+            if(isset($request->symptom) && !empty($request->symptom)){
             foreach ($request->symptom as $value) {
             $symptoms = new PastSymptoms;
             $symptoms->user_id = $user->id;
@@ -675,7 +676,6 @@ class PatientController extends Controller
             $symptoms->type = 1;
             $symptoms->save();
             }
-
             foreach ($request->symptom as $value) {
             $symptoms = new PastSymptoms;
             $symptoms->user_id = $user->id;
@@ -684,6 +684,11 @@ class PatientController extends Controller
             $symptoms->type = 2;
             $symptoms->save();
             }
+         }
+
+           
+
+             // if(isset($request->weight) && !empty($request->weight)){
 
             $symptoms_details = new SymptromsDetails;
             $symptoms_details->user_id = $user->id;
@@ -697,8 +702,9 @@ class PatientController extends Controller
             $symptoms_details->gp_doctor_name = $request->gp_doctor_name;
             $symptoms_details->gp_doctor_address = $request->gp_doctor_address;
             $symptoms_details->save();
+            // }
 
-
+             if(isset($request->drug_name) && !empty($request->drug_name)){
             $i = 0;
              foreach ($request->drug_name as $value) {
             $drugs_details = new DrugsDetails;
@@ -711,7 +717,8 @@ class PatientController extends Controller
             $drugs_details->save();
             $i++;
             }
-
+        }
+         if(isset($request->drug_name2) && !empty($request->drug_name2)){
             $j = 0;
             foreach ($request->drug_name2 as $value) {
             $drug_problems = new DrugsProblem;
@@ -722,6 +729,7 @@ class PatientController extends Controller
             $j++;
             $drug_problems->save();
             }
+        }
 
             Session::flash('Success-toastr','Successfully submited');
             return redirect()->route('patient.requested-consults');

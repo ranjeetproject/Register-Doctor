@@ -113,7 +113,7 @@
                                                         <td>{{$drug->drug_name}} </td>
                                                         <td>{{$drug->dose}} </td>
                                                         <td>{{$drug->frequency}}  </td>
-                                                        <td>No</td>
+                                                        <td>{{($drug->currently_taking == 1)?'Yes':'No'}}</td>
                                                         <td>{{date('d.m.Y', strtotime($drug->created_at))}} </td>
                                                     </tr>
                                             @endforeach

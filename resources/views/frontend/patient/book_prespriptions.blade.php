@@ -188,22 +188,39 @@
 
 
 
-                          <div class="col-sm-12 mt-3">
-                                    <div id="case_details" style="display: none;">
+<div class="col-sm-12 mt-3">
+    <div id="case_details" style="display: none;">
 
-                                      @csrf
+      @csrf
+        <input type="hidden" name="case_type" value="2">
 
-                                      <input type="hidden" name="booking_date" id="booking_date" value="{{date('Y-m-d')}}">
-                                      <input type="hidden" name="doctor_id" value=" {{ Crypt::decryptString(Request::segment(3)) }}">
+      <input type="hidden" name="booking_date" id="booking_date" value="{{date('Y-m-d')}}">
+      
+      <input type="hidden" name="doctor_id" value=" {{ Crypt::decryptString(Request::segment(3)) }}">
 
-                                      <div class="form-group">
-                                        <textarea placeholder="Type your health query here " class="form-control" name="health_problem" rows="6" required></textarea>
-                                      </div>
+      <div class="form-group">
+        <textarea placeholder="Type your health query here " class="form-control" name="health_problem" rows="6" required></textarea>
+      </div>
 
                                       <div class="form-group">
                             <label for="exampleFormControlFile1">Upload Attachments <i class="fal fa-paperclip"></i></label>
                             <input type="file" name="case_file" class="form-control-file" id="exampleFormControlFile1" style="opacity: 0;"><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
                           </div>
+
+
+                          <div class="col-sm-12 mb-2">
+                      <p>If there is any specific medicine you have in mind you may mention it here.</p>
+                    </div>
+                      <div class="col-sm-12">
+                          <div class="form-group">
+                              <textarea class="form-control" name="medicine_name" id="exampleFormControlTextarea1" rows="5" placeholder="Type here..."></textarea>
+                            </div>                        
+                      </div>
+                      <div class="col-sm-12 mb-2">
+                        <p>The doctor will prescribe what he feels is the most appropriate medicine</p>
+                      </div>
+
+
                                     </div>
                                     </div>
 

@@ -62,7 +62,7 @@
                                                     <td style="text-align: center;">
                                                       @forelse($case->getBookingSlot as $time_slot)
 
-                                              {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>
+                                              {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br>
 
                                               @empty
 

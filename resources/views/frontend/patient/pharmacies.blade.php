@@ -59,16 +59,20 @@
                                             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="search..">
                                         </div>
                                     </div>
+
+                                     @foreach($pharmacies as $pharmaci)
+
+
                                     <div class="card pharmacy-details">
                                         <div class="card-header">
                                           <img src="{{ asset('public/images/frontend/images/pharmacy-icon.png')}}" alt=""> H Pharmacy
                                         </div>
                                         <div class="card-body">
-                                         <p><span>pharmacy Name : </span> h pharmacy, Sw chemists</p>
-                                         <p><span>Location : </span> Eastern Europe ,earls court london, marble arch london, chelsea london</p>
-                                         <p><span>address : </span> aberdeen, birmingham, cardiff</p>
-                                         <p><span>contact : </span> 2699335563</p>
-                                         <p><span>email : </span>  h@gmail.com</p>
+                                         <p><span>pharmacy Name : </span> {{$pharmaci->profile->pharmacy_name}}</p>
+                                         <p><span>Location : </span> {{$pharmaci->profile->location}}</p>
+                                         <p><span>address : </span> {{$pharmaci->profile->address}}</p>
+                                         <p><span>contact : </span> {{$pharmaci->profile->telephone1}}</p>
+                                         <p><span>email : </span>  {{$pharmaci->email}}</p>
                                          <p><span>opening hours uk : </span> 10:00 AM -12:00 pm</p>
                                          <p><span>delivery options : </span>  customer pick up</p>
                                          <p><span>local delivery : </span> Car/courier</p>
@@ -76,23 +80,12 @@
                                          <p><a href="" class="btn blue-button">Send Prescription</a></p>
                                         </div>
                                       </div>
-                                      <div class="card pharmacy-details">
-                                        <div class="card-header">
-                                          <img src="{{ asset('public/images/frontend/images/pharmacy-icon.png')}}" alt=""> H Pharmacy
-                                        </div>
-                                        <div class="card-body">
-                                         <p><span>pharmacy Name : </span> h pharmacy, Sw chemists</p>
-                                         <p><span>Location : </span> Eastern Europe ,earls court london, marble arch london, chelsea london</p>
-                                         <p><span>address : </span> aberdeen, birmingham, cardiff</p>
-                                         <p><span>contact : </span> 2699335563</p>
-                                         <p><span>email : </span>  h@gmail.com</p>
-                                         <p><span>opening hours uk : </span> 10:00 AM -12:00 pm</p>
-                                         <p><span>delivery options : </span>  customer pick up</p>
-                                         <p><span>local delivery : </span> Car/courier</p>
-                                         <p><span>address : </span> max distance for delivery e.g. within london</p>
-                                         <p><a href="" class="btn blue-button">Send Prescription</a></p>
-                                        </div>
-                                      </div>
+
+
+                                  @endforeach
+
+
+                                      
                                 </div>
                                 <div class="tab-pane fade" id="Send-to-all-Pharmacist">
                                    ...
