@@ -40,10 +40,10 @@
               @csrf
           </form>
         @else
-          <li class="nav-item">
+          <li class="nav-item {{ Request::routeIs('login') ? 'active' : '' }}">
             <a href="{{route('login')}}" class="nav-link"> Login</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{ Request::routeIs('registration') ? 'active' : '' }}">
             <a href="{{route('registration')}}" class="nav-link">Registration</a>
           </li>
           @endauth

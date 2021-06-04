@@ -6556,4 +6556,9 @@ form.form-inline.filter-buy.d-flex {
   -webkit-box-shadow: 0px 0px 8px;
           box-shadow: 0px 0px 8px;
 }
+
+.min-wid-40 {
+  min-width: 40%;
+  max-width: 100%;
+}
 /*# sourceMappingURL=style.css.map */

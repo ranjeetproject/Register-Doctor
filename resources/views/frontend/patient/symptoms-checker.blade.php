@@ -149,11 +149,11 @@
                                         <div class="add-drugs-drugs"><i class="fal fa-plus"></i></div>
                                         <div class="form-inline">
                                             <label class="my-1 mr-2" >Drug name</label>
-                                            <input type="text" class="form-control my-1 mr-sm-2"  placeholder="e g flucloxacillin" name="drug_name[]">
+                                            <input type="text" class="form-control my-1 mr-sm-2 min-wid-40"  placeholder="e g flucloxacillin" name="drug_name[]">
                                             <label class="my-1 mr-2" >Dose </label>
-                                            <input type="text" name="dose[]" class="form-control my-1 mr-sm-2"  placeholder="eg 500 milligrams">
+                                            <input type="text" name="dose[]" class="form-control my-1 mr-sm-2 min-wid-40"  placeholder="eg 500 milligrams">
                                             <label class="my-1 mr-2" >Frequency</label>
-                                            <input type="text" name="frequency[]" class="form-control my-1 mr-sm-2"  placeholder="frequency 4x a day">
+                                            <input type="text" name="frequency[]" class="form-control my-1 mr-sm-2 min-wid-40"  placeholder="frequency 4x a day">
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">

@@ -59,7 +59,7 @@
 
 
                     <div class="row">
-                        <div class="col-sm-12 Page navigation ">
+                        <div class="col-sm-12 Page navigation my-4 d-flex justify-content-end">
                           
                            {{ $newses->onEachSide(2)->links() }}
                           
