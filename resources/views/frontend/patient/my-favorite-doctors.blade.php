@@ -20,9 +20,9 @@
                         <div class="card Choose-Your-Doctor-card-cont">
                             <div class="card-body">
                               <h5 class="card-title">You have 3 options to consult a doctor:</h5>
-                                <p><strong>Live Video -</strong> book 15 min live time slots with a doctor</p>
-                                <p><strong>Live Chat -</strong> book 15 min live time slots with a doctor</p>
-                                <p><strong>Typed Q&A -</strong> not live - Send Question, Get Answer. Book 15 min time slots of doctor's time for him
+                                <p><strong>Live Video -</strong> Book 15 min live time slots with a doctor</p>
+                                <p><strong>Live Chat -</strong> Book 15 min live time slots with a doctor</p>
+                                <p><strong>Typed Q&A -</strong> Not live - Send Question, Get Answer. Book 15 min time slots of doctor's time for him
                                 to answer question. View turnaround times of doctors. Max 3 exchanges.</p>
                             </div>
                           </div>
@@ -36,7 +36,7 @@
                             <option value="">Select Speciality </option>
                             <option value="all">All</option>
                             @foreach($doctors_speciality as $doctor_speciality)
-                            <option value="{{$doctor_speciality['dr_speciality']}}" {{(isset($_GET['dr_speciality']) && ($_GET['dr_speciality'] == $doctor_speciality['dr_speciality'])) ? 'selected':''}}>{{$doctor_speciality['dr_speciality']}}</option>
+                            <option value="{{$doctor_speciality['dr_speciality']}}" {{(isset($_GET['dr_speciality']) && ($_GET['dr_speciality'] == $doctor_speciality['dr_speciality'])) ? 'selected':''}}>{{ ucfirst( $doctor_speciality['dr_speciality'])}}</option>
 
                             @endforeach
                           </select>
@@ -85,10 +85,10 @@
                             <option value="qa">Q&A</option>
                           </select>
                           <select class="custom-select" name="dr_see">
-                            <option value="">adult/kids/both</option>
-                            <option value="1">adult</option>
-                            <option value="child">kids</option>
-                            <option value="both">both</option>
+                            <option value="">Adult/Kids/Both</option>
+                            <option value="1">Adult</option>
+                            <option value="child">Kids</option>
+                            <option value="both">Both</option>
                           </select>
                           <select class="custom-select" name="prescribers">
                             <option value="">Prescribers</option>
@@ -120,6 +120,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-body-img">
+
                                     <img src="{{ $doctor->profile->profile_photo }}" alt="">
                                 </div>
                                 <div class="card-body-cont">
@@ -142,14 +143,14 @@
 
                                                 </div>
 
-                                                <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
+                                                <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">View Profile</a>
                                             </div>
-                                            <h5 class="card-title">{{ $doctor->forename.' '.$doctor->surname }}<br><small> {{ $doctor->profile->dr_speciality }}</small> </h5>
+                                            <h5 class="card-title">{{ ucfirst($doctor->forename.' '.$doctor->surname) }}<br><small> {{ ucfirst($doctor->profile->dr_speciality) }}</small> </h5>
                                             <p>{{ $doctor->profile->dr_qualifications }}</p>
-                                            <p>Location  : {{ $doctor->profile->address }}</p>
+                                            <p>Location  : {{ ucfirst($doctor->profile->address) }}</p>
                                             <p>Language    : English,hindi </p>
                                             <p>Communication : {{ ($doctor->profile->dr_live_chat_fee_notification == 1) ? 'Live Chat,':'' }} {{ ($doctor->profile->dr_live_video_fee_notification == 1) ? ' Live Video,':'' }}{{ ($doctor->profile->dr_qa_fee_notification == 1) ? ' Typed Q&A,':'' }}</p>
-                                            <p>Sees : {{ $doctor->profile->dr_see }}</p>
+                                            <p>Sees : {{ ucfirst($doctor->profile->dr_see) }}</p>
                                             <p>Prescriber online : {{ (!empty($doctor->admin_verified_at)) ? 'Yes':'No'}} </p>
 
                                         </div>
@@ -189,6 +190,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-body-img">
+                                    
                                     <img src="{{ $doctor->doctor->profile->profile_photo }}" alt="">
                                 </div>
                                 <div class="card-body-cont">
@@ -209,14 +211,14 @@
                                                     <i class="far fa-thumbs-up reting"></i>
 
                                                 </div>
-                                                 <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
+                                                 <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->doctor->id))}}" class="btn blue-button rating-list-profile">View Profile</a>
                                             </div>
-                                            <h5 class="card-title">{{ $doctor->forename.' '.$doctor->surname }}<br><small> {{ $doctor->doctor->profile->dr_speciality }}</small> </h5>
+                                            <h5 class="card-title">{{ ucfirst($doctor->doctor->name) }}<br><small> {{ ucfirst($doctor->doctor->profile->dr_speciality) }}</small> </h5>
                                             <p>{{ $doctor->doctor->profile->dr_qualifications }}</p>
-                                            <p>Location  : {{ $doctor->doctor->profile->address }}</p>
+                                            <p>Location  : {{ ucfirst($doctor->doctor->profile->address) }}</p>
                                             <p>Language    : English,hindi </p>
                                             <p>Communication : {{ ($doctor->doctor->profile->dr_live_chat_fee_notification == 1) ? 'Live Chat,':'' }} {{ ($doctor->doctor->profile->dr_live_video_fee_notification == 1) ? ' Live Video,':'' }}{{ ($doctor->doctor->profile->dr_qa_fee_notification == 1) ? ' Typed Q&A,':'' }}</p>
-                                            <p>Sees : {{ $doctor->doctor->profile->dr_see }}</p>
+                                            <p>Sees : {{ ucfirst($doctor->doctor->profile->dr_see) }}</p>
                                             <p>Prescriber online : {{ (!empty($doctor->admin_verified_at)) ? 'Yes':'No'}} </p>
 
                                         </div>
@@ -225,15 +227,15 @@
                                     <div class="row books-btn">
                                         <div class="col">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins</p>
-                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a>
+                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a>
                                         </div>
                                         <div class="col">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->doctor->profile->dr_live_video_fee }} per 15 mins</p>
-                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a>
+                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a>
                                         </div>
                                         <div class="col-sm-5">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins</p>
-                                            <button type="button" onclick="bookLiveChats('{{$doctor->id}}')" class="btn btn-block Request">Request Q&A <br> <small>Turnaround Time 5 hrs 2 days</small></button>
+                                            <button type="button" onclick="bookLiveChats('{{$doctor->doctor->id}}')" class="btn btn-block Request">Request Q&A <br> <small>Turnaround Time 5 hrs 2 days</small></button>
                                         </div>
                                     </div>
                                 </div>

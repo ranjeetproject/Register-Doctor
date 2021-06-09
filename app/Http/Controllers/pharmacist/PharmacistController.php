@@ -106,46 +106,46 @@ class PharmacistController extends Controller
 
 
          // $opening_time = PharmacyOpeningTime::findOrCreate($user->id);
-         $opening_time = PharmacyOpeningTime::where('user_id',$user->id)->first();
-         $opening_time = $opening_time ?? new PharmacyOpeningTime;
+         // $opening_time = PharmacyOpeningTime::where('user_id',$user->id)->first();
+         // $opening_time = $opening_time ?? new PharmacyOpeningTime;
 
-         $opening_time->user_id =  $user->id;
+         // $opening_time->user_id =  $user->id;
 
-         $opening_time->monday =  ($request->monday) ? 1 : 0;
-         $opening_time->monday_opening_time =  $request->opening_time;
-         $opening_time->monday_closing_time =  $request->closing_time;
-
-
-         $opening_time->tuesday =  ($request->tuesday) ? 1 : 0;
-         $opening_time->tuesday_opening_time =  $request->opening_time;
-         $opening_time->tuesday_closing_time =  $request->closing_time;
+         // $opening_time->monday =  ($request->monday) ? 1 : 0;
+         // $opening_time->monday_opening_time =  $request->opening_time;
+         // $opening_time->monday_closing_time =  $request->closing_time;
 
 
-         $opening_time->wednesday =  ($request->wednesday) ? 1 : 0;
-         $opening_time->wednesday_opening_time =  $request->opening_time;
-         $opening_time->wednesday_closing_time =  $request->closing_time;
+         // $opening_time->tuesday =  ($request->tuesday) ? 1 : 0;
+         // $opening_time->tuesday_opening_time =  $request->opening_time;
+         // $opening_time->tuesday_closing_time =  $request->closing_time;
 
 
-         $opening_time->thursday =  ($request->thursday) ? 1 : 0;
-         $opening_time->thursday_opening_time =  $request->opening_time;
-         $opening_time->thursday_closing_time =  $request->closing_time;
+         // $opening_time->wednesday =  ($request->wednesday) ? 1 : 0;
+         // $opening_time->wednesday_opening_time =  $request->opening_time;
+         // $opening_time->wednesday_closing_time =  $request->closing_time;
 
 
-         $opening_time->friday =  ($request->friday) ? 1 : 0;
-         $opening_time->friday_opening_time =  $request->opening_time;
-         $opening_time->friday_closing_time =  $request->closing_time;
+         // $opening_time->thursday =  ($request->thursday) ? 1 : 0;
+         // $opening_time->thursday_opening_time =  $request->opening_time;
+         // $opening_time->thursday_closing_time =  $request->closing_time;
 
 
-         $opening_time->saturday =  ($request->saturday) ? 1 : 0;
-         $opening_time->saturday_opening_time =  $request->opening_time;
-         $opening_time->saturday_closing_time =  $request->closing_time;
+         // $opening_time->friday =  ($request->friday) ? 1 : 0;
+         // $opening_time->friday_opening_time =  $request->opening_time;
+         // $opening_time->friday_closing_time =  $request->closing_time;
 
 
-         $opening_time->sunday =  ($request->sunday) ? 1 : 0;
-         $opening_time->sunday_opening_time =  $request->opening_time;
-         $opening_time->sunday_closing_time =  $request->closing_time;
+         // $opening_time->saturday =  ($request->saturday) ? 1 : 0;
+         // $opening_time->saturday_opening_time =  $request->opening_time;
+         // $opening_time->saturday_closing_time =  $request->closing_time;
 
-         $opening_time->save();
+
+         // $opening_time->sunday =  ($request->sunday) ? 1 : 0;
+         // $opening_time->sunday_opening_time =  $request->opening_time;
+         // $opening_time->sunday_closing_time =  $request->closing_time;
+
+         // $opening_time->save();
 
 
           $delivery_option = DeliveryOptions::where('user_id',$user->id)->first();

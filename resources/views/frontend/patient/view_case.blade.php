@@ -1,4 +1,4 @@
-@extends('frontend.doctor.afterloginlayout.app')
+@extends('frontend.patient.afterloginlayout.app')
 
 @section('content')
     <div class="col Choose-Your-Doctor-right innerpage  case-page">
@@ -24,14 +24,12 @@
                     </div>
                     <h2>Patient Query <i class="fas fa-caret-down"></i></h2>
                     <div class="view-case-details">
-                        <p>{{$case->health_problem}}</p>
+                        <b>{{$case->health_problem}}</b>
                     </div>
                     <h2>Attachments</h2>
                     <div class="view-case-details">
                         <p><img width="500px" height="300px" src="{{asset('public/uploads/cases/'.$case->casefile->file_name)}}"></p>
                     </div>
-
-
                     @if(!empty($case->medicine_name))
                     <h4>If there is any specific medicine you have in mind you may mention it here.</h4>
                     <div class="view-case-details">
@@ -39,7 +37,7 @@
                     </div>
                     <p>The doctor will prescribe what he feels is the most appropriate medicine</p>
                     @endif
-                    
+
                 </div>
             </div>
             {{-- <div class="row Doctor Replies">

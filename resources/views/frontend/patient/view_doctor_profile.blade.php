@@ -39,18 +39,22 @@
                             <div class="col-sm-12">
                                 <div class="blank-card">
                                     <h4>Select Communication Options</h4>
+                                    @if($doctor->profile->dr_live_video_fee_notification == 1)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="questions_type" onclick="$('#book_slot').show();" id="exampleRadios1" value="2">
                                         <label class="form-check-label" for="exampleRadios1">
                                             Live Video: Price : {{$doctor->profile->dr_live_video_fee}}  per 15 mins Check availability in Calendar below
                                         </label>
                                     </div>
+                                    @endif
+                                     @if($doctor->profile->dr_live_chat_fee_notification == 1)
                                      <div class="form-check">
                                         <input class="form-check-input" type="radio" name="questions_type" onclick="$('#book_slot').show();" id="exampleRadios2" value="1">
                                         <label class="form-check-label" for="exampleRadios2">
                                             Live Chat : Price : {{$doctor->profile->dr_live_chat_fee}}  per 15 mins  Check availability in Calendar below
                                         </label>
                                     </div>
+                                    @endif
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="questions_type" onclick="$('#book_slot').hide(); $('#case_details').show();" id="exampleRadios2" value="4">
                                         <label class="form-check-label" for="exampleRadios2">

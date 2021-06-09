@@ -253,7 +253,7 @@
             }); 
             $("#List-any-drug .add-List-any-drug").click(function(){
                 count++;
-                $("#List-any-drug").append('<div class="row" id="List-any-drug-list"><div class="remove-List-any-drug"><i class="fal fa-minus"></i></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">List any drug allergies<span>(Drug name)</span> </label><input class="form-control" name="drug_name2[]"></div></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">What happened ?<span>(eg - rash)</span> </label><input class="form-control" id="inputState" name="what_happened[]"></div></div></div>');
+                $("#List-any-drug").append('<div class="row" id="List-any-drug-list"><div class="remove-List-any-drug"><i class="fal fa-minus"></i></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">List any drug allergies<span>(Drug name)</span> </label><input class="form-control" name="drug_name2[]"></div></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">What happened ? <span> (eg - rash)</span> </label><input class="form-control" id="inputState" name="what_happened[]"></div></div></div>');
                 
             }); 
         });

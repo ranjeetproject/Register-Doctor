@@ -220,7 +220,8 @@ class DoctorController extends Controller
 
      public function createPrescription(Request $request)
     {
-        return view('frontend.doctor.create_prescription');
+        $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
+        return view('frontend.doctor.create_prescription',compact('cases'));
     }
 
      public function prescriptionIssues(Request $request)
@@ -661,7 +662,10 @@ switch ($request->day) {
       }else{
       $cases = $cases->where('accept_status',null);
       }
+
+      $cases = $cases->where('case_type',1);
       
+
       // if($questions_type == 'live-chat'){
       //   $cases = $cases->where('questions_type',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id);
         
@@ -706,7 +710,7 @@ switch ($request->day) {
      public function prescriptions(Request $request)
     {
         $quick_questions = PatientCase::where('case_type',2)->where(function($query){
-          $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id);
+          $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_id',null);
         })->orderBy('id','desc')->paginate(6);
         return view('frontend.doctor.prescriptions', compact('quick_questions'));
       

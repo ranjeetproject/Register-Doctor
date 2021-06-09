@@ -49,7 +49,7 @@
                                       <tbody>
                                          @forelse ($cases as $case)
                                         <tr>
-                                            <td>{{($case->booking_date) ? date('m-d-Y', strtotime($case->booking_date)) : ''}}</td>
+                                            <td>{{date('m-d-Y', strtotime($case->booking_date))}}</td>
                                             <td style="text-align: center;">
                                               {{-- @if($case->getSlot) --}}
                                               @forelse($case->getBookingSlot as $time_slot)
@@ -63,38 +63,25 @@
                                             </td>
                                             <td>{{$case->doctor->name}}</td>
                                             <td>{{$case->case_id}}</td>
-                                            <td><a href="{{route('patient.chats',$case->case_id)}}">
-                                                @if($case->questions_type == 1)
+                                            <td><a href="{{route('patient.chats',$case->case_id)}}">@if($case->questions_type == 1)
                                                 Live Chat
-                                                <br><img src="{{ asset('public/images/frontend/images/Live-Text-Chat.png')}}" alt="">
                                                 @endif
 
                                                 @if($case->questions_type == 2)
                                                 Live Video
-                                                <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt=""> <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
                                                 @endif
 
                                                  @if($case->questions_type == 3)
                                                 Quick Questions
-                                                <br>
-                                            <p>Max 3 Exchanges</p><br>
-                                            <img src="{{ asset('public/images/frontend/images/Quick-Question.png')}}" alt="">
                                                 @endif
 
                                                 @if($case->questions_type == 4)
                                                 Typed Q&A
-                                                <br>
-                                                <p>Max 3 Exchanges</p><br>
-                                                <img src="{{ asset('public/images/frontend/images/Booked-Question.png')}}" alt="">
                                                 @endif
                                               </a></td>
                                             <td>
                                               @if($case->accept_status == 1)
-                                              <font style="font-size: 18px;">Confirmed</font> <br>
-                                                <strong style="font-size: 20px;">{{date('d F Y', strtotime($case->booking_date))}} 
-
-                                                    
-
+                                              Accepted
                                               @else
                                                Pending 
                                               @endif

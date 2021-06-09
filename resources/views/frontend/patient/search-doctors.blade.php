@@ -100,7 +100,7 @@
                             <option value="">Select Speciality </option>
                             <option value="all">All</option>
                             @foreach($doctors_speciality as $doctor_speciality)
-                            <option value="{{$doctor_speciality['dr_speciality']}}" {{(isset($_GET['dr_speciality']) && ($_GET['dr_speciality'] == $doctor_speciality['dr_speciality'])) ? 'selected':''}}>{{$doctor_speciality['dr_speciality']}}</option>
+                            <option value="{{$doctor_speciality['dr_speciality']}}" {{(isset($_GET['dr_speciality']) && ($_GET['dr_speciality'] == $doctor_speciality['dr_speciality'])) ? 'selected':''}}>{{ucfirst($doctor_speciality['dr_speciality'])}}</option>
 
                             @endforeach
                           </select>
@@ -149,10 +149,10 @@
                             <option value="qa">Q&A</option>
                           </select>
                           <select class="custom-select" name="dr_see">
-                            <option value="">adult/kids/both</option>
-                            <option value="1">adult</option>
-                            <option value="child">kids</option>
-                            <option value="both">both</option>
+                            <option value="">Adult/Kids/Both</option>
+                            <option value="1">Adult</option>
+                            <option value="child">Kids</option>
+                            <option value="both">Both</option>
                           </select>
                           <select class="custom-select" name="prescribers">
                             <option value="">Prescribers</option>
@@ -206,7 +206,7 @@
 
                                                 </div>
 
-                                                <a href="{{route('patient.book-prescriptions',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
+                                                <a href="{{route('patient.book-prescriptions',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">View Profile</a>
                                             </div>
                                             <h5 class="card-title">{{ $doctor->forename.' '.$doctor->surname }}<br><small> {{ $doctor->profile->dr_speciality }}</small> </h5>
                                             <p>{{ $doctor->profile->dr_qualifications }}</p>
@@ -273,7 +273,7 @@
                                                     <i class="far fa-thumbs-up reting"></i>
 
                                                 </div>
-                                                 <a href="{{route('patient.book-prescriptions',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">Full Profile</a>
+                                                 <a href="{{route('patient.book-prescriptions',Crypt::encryptString($doctor->id))}}" class="btn blue-button rating-list-profile">View Profile</a>
                                             </div>
                                             <h5 class="card-title">{{ $doctor->forename.' '.$doctor->surname }}<br><small> {{ $doctor->profile->dr_speciality }}</small> </h5>
                                             <p>{{ $doctor->profile->dr_qualifications }}</p>

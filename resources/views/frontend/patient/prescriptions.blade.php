@@ -91,7 +91,7 @@
                                                         
                                                     </td>
                                                     <td>
-                                                        <a href="#"><i class="fal fa-eye"></i></a>
+                                                        <a href="{{route('patient.view-case',$case->case_id)}}"><i class="fal fa-eye"></i></a>
                                                     </td>
                                               
                                                     <td>
@@ -116,17 +116,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <nav aria-label="Page navigation example">
-                                            <ul class="pagination justify-content-end">
-                                              <li class="page-item disabled">
-                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                              </li>
-                                              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                              <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                              <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                              <li class="page-item clickabled">
-                                                <a class="page-link" href="#">Next</a>
-                                              </li>
-                                            </ul>
+                                            {{$cases->links()}}
                                           </nav>
                                     </div>
                                 </div>
@@ -202,7 +192,7 @@
                                                         
                                                     </td>
                                                     <td>
-                                                        <a href="#"><i class="fal fa-eye"></i></a>
+                                                        <a href="{{route('patient.view-case',$case->case_id)}}"><i class="fal fa-eye"></i></a>
                                                     </td>
                                               
                                                     <td>
@@ -316,7 +306,7 @@
                                                         
                                                     </td>
                                                     <td>
-                                                        <a href="#"><i class="fal fa-eye"></i></a>
+                                                        <a href="{{route('patient.view-case',$case->case_id)}}"><i class="fal fa-eye"></i></a>
                                                     </td>
                                               
                                                     <td>

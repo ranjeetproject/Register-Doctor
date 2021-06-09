@@ -192,10 +192,13 @@ class PatientController extends Controller
 
          $booking_date = str_replace('/','-',$request->booking_date);
          $booking_date = date('Y-m-d',strtotime($booking_date));
-
-         // echo $booking_date; exit;
-
+         if(($request->questions_type == 1) || ($request->questions_type == 2)){
+             $booking_date = $booking_date;
+         }else{
+             $booking_date = null;
+         }
          $case->booking_date = $booking_date;
+
          $case->booking_time = $request->booking_time;
          $case->time_duration = ($request->time_duration) ? $request->time_duration * 15 : '';
          $case->save();
@@ -436,7 +439,7 @@ class PatientController extends Controller
 
     public function prescriptions(Request $request)
     {
-      $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->latest()->paginate(10);
+      $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->where('accept_status',null)->latest()->paginate(10);
       $accepted_cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->where('accept_status',1)->latest()->paginate(10);
       $ready_cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->latest()->paginate(10);
         return view('frontend.patient.prescriptions', compact('cases','accepted_cases','ready_cases'));
@@ -738,6 +741,15 @@ class PatientController extends Controller
 
          return view('frontend.patient.symptoms-checker');
     }
+
+
+   public function viewCase(Request $request,$id)
+    {
+        $case = PatientCase::where('case_id',$id)->first();
+        return view('frontend.patient.view_case', compact('case'));
+      
+    }
+
 
 
 }
