@@ -153,7 +153,7 @@
                                             <label class="my-1 mr-2" >Dose </label>
                                             <input type="text" name="dose[]" class="form-control my-1 mr-sm-2 min-wid-40"  placeholder="eg 500 milligrams">
                                             <label class="my-1 mr-2" >Frequency</label>
-                                            <input type="text" name="frequency[]" class="form-control my-1 mr-sm-2 min-wid-40"  placeholder="frequency 4x a day">
+                                            <input type="text" name="frequency[]" class="form-control my-1 mr-sm-2 min-wid-40"  placeholder="frequency 4x a day/week">
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">

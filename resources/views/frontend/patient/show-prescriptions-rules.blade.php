@@ -80,7 +80,7 @@ your local Pharmacy to collect drug. <span>Limited to UK Pharmacies & UK deliver
                     <p>Option B. In a hurry? Have the Prescription sent electronically to one of our
                         special Pharmacies (immediate). Before using OPTION B it is important you check
                         the special Pharmacy is local or can deliver to you
-                        To check List of Pharmacies <a href="#">click here</a> </p>
+                        To check List of Pharmacies <a href="{{route('patient.search-pharmacies')}}">click here</a> </p>
                         
                 </div>
             </div>

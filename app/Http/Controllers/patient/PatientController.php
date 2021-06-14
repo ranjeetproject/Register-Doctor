@@ -465,6 +465,15 @@ class PatientController extends Controller
       
     }
 
+
+     public function searchPharmacies(Request $request)
+    {
+        $pharmacies = User::whereRole(3)->latest()->get();
+        return view('frontend.patient.search_pharmacies',compact('pharmacies'));
+      
+    }
+
+
     public function viewDoctorProfile($id)
     {
         $id = Crypt::decryptString($id);

@@ -29,6 +29,7 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::match(['get','post'],'cases/{questions_type}/{status?}', 'DoctorController@cases')->name('cases');
 
     Route::match(['get','post'],'view-medical-recorde/{id}', 'DoctorController@viewMedicalRecorde')->name('view-medical-recorde');
+    Route::match(['get','post'],'summary-diagnosis/{id}', 'DoctorController@summaryDiagnosis')->name('summary-diagnosis');
 
 
 

@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="comm-title-details">
-                                    <h4>Recorded Past Medical History</h4>
+                                    <h4>Recorded Past Symptoms History</h4>
                                     <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div>
                                 </div>
                                 <div class="card">
@@ -73,7 +73,7 @@
                                             @foreach($cases as $case)
                                                 <tr>
                                                     <td>{{$case->case_id}}</td>
-                                                    <td>Allergy</td>
+                                                    <td>{{$case->getSummaryDiagnosis->summary_diagnose ?? ''}}</td>
                                                     <td>{{$case->doctor->name}}</td>
                                                     <td><a href="#" class="btn">View Case</a><a href="#" class="btn">Print Case Summary</a></td>
                                                     <td>{{ date('d.m.Y', strtotime($past_symptom->created_at))}}</td>
@@ -183,16 +183,7 @@
                                     </div>
                                   </div>
                                   <div class="col-sm-12">
-                                    <div class="comm-title-details">
-                                        <h4>Recorded Past Medical History <i class="fas fa-caret-down"></i></h4>
-                                        <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-body Medical-History">
-                                          <p><label>Family history cataracts :  squint eye, poor vision, diabetes </label>  Entry Dated :  28.3.2020</p>
-                                          <p><label>History of alcoholism</label>  Entry Dated :  28.3.2020</p>                     
-                                      </div>
-                                </div>
+                                  
                                 <div class="col-sm-12">
                                     <div class="comm-title-details">
                                         <h4>Please provide your Family Doctor or GP Details <i class="fas fa-caret-down"></i></h4>

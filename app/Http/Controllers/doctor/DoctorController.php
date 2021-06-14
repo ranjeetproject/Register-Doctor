@@ -8,6 +8,7 @@ use App\Models\DrugsDetails;
 use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
+use App\Models\SummaryDiagnosis;
 use App\Models\SymptromsDetails;
 use App\Models\TimeSlot;
 use App\Models\UserProfile;
@@ -775,6 +776,30 @@ switch ($request->day) {
       $case->save();
       Session::flash('Success-toastr','Successfully Accepted');
       return redirect()->back();
+    }
+
+    public function summaryDiagnosis(Request $request,$id)
+    {
+      $case = PatientCase::where('case_id',$id)->first();
+
+      if($request->isMethod('post')){
+
+
+        $summary_diagnosis = SummaryDiagnosis::where('patient_case_id',$case->id)->first();
+        if(empty($summary_diagnosis)){
+        $summary_diagnosis = new SummaryDiagnosis;
+        }
+
+
+        $summary_diagnosis->user_id = $case->user_id;
+        $summary_diagnosis->patient_case_id = $case->id;
+        $summary_diagnosis->summary_diagnose = $request->summary_diagnose;
+        $summary_diagnosis->future_reference = $request->future_reference;
+        $summary_diagnosis->save();
+        Session::flash('Success-toastr','Successfully added');
+      }
+
+      return view('frontend.doctor.summary_diagnosis', compact('case'));
     }
 
 

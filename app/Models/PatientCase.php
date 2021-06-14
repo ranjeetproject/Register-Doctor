@@ -25,4 +25,9 @@ class PatientCase extends Model
     {
         return $this->hasMany('App\Models\BookTimeSlot','patient_case_id','id');
     }
+
+    function getSummaryDiagnosis()
+    {
+        return $this->hasOne('App\Models\SummaryDiagnosis','patient_case_id','id');
+    }
 }
