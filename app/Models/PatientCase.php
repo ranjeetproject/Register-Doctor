@@ -18,12 +18,18 @@ class PatientCase extends Model
 
      public function casefile()
     {
-        return $this->hasOne('App\Models\CaseFile','patient_case_id','id')->withDefault();
+        return $this->hasMany('App\Models\CaseFile','patient_case_id','id');
     }
 
     function getBookingSlot()
     {
         return $this->hasMany('App\Models\BookTimeSlot','patient_case_id','id');
+    }
+
+
+    function getAccepedDoctor()
+    {
+        return $this->hasMany('App\Models\AcceptedPrescriptionDoc','patient_case_id','id');
     }
 
     function getSummaryDiagnosis()

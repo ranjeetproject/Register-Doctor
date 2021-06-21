@@ -128,11 +128,9 @@
                                         <div class="col-sm-12">
                                             <div class="reting-and-other-info">
                                                 <div class="rating-list">
-                                                    <i class="fas fa-star reting"></i>
-                                                     <i class="fas fa-star reting"></i>
-                                                    <i class="fas fa-star-half-alt reting"></i>
-                                                      <i class="fas fa-star"></i>
-                                                      <i class="fas fa-star"></i>
+                                                    <span onclick="doctorRating('{{$doctor->id}}')">
+                                                    {!!getReview($doctor->id)!!}
+                                                   </span>
                                                       <span>0.4</span>
 
                                                       <i id='doctor_{{$doctor->id}}' class="fas fa-heart {{ (getFavDoc($doctor->id)) ? 'marks':''}}" style="cursor: pointer;" onclick="addToFavorite({{$doctor->id}});" data-toggle="tooltip" title="Add To Favorite"></i>
@@ -198,11 +196,11 @@
                                         <div class="col-sm-12">
                                             <div class="reting-and-other-info">
                                                 <div class="rating-list">
-                                                    <i class="fas fa-star reting"></i>
-                                                     <i class="fas fa-star reting"></i>
-                                                    <i class="fas fa-star-half-alt reting"></i>
-                                                      <i class="fas fa-star"></i>
-                                                      <i class="fas fa-star"></i>
+                                                    <span onclick="doctorRating('{{$doctor->doctor->id}}')">
+                                                     {!!getReview($doctor->doctor->id)!!}
+                                                  </span>
+
+
                                                       <span>0.4</span>
                                                       <i id='doctor_{{$doctor->doctor->id}}' class="fas fa-heart marks" style="cursor: pointer;" onclick="addToFavorite({{$doctor->doctor->id}});" data-toggle="tooltip" title="Add To Favorite"></i>
                                                 </div>
@@ -300,7 +298,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Upload Attachments <i class="fal fa-paperclip"></i></label>
-                            <input type="file" name="case_file" class="form-control-file" id="exampleFormControlFile1" style="opacity: 0;"><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
+                            <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" style="opacity: 0;" multiple><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
                           </div>
                          
                     </div>
@@ -313,6 +311,98 @@
         </div>
         </div>
       </div>
+
+
+
+
+
+
+      <div class="modal fade" id="doct-review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="modal-body" method="POST" action="{{route('patient.doctor-review')}}">
+
+            @csrf
+                <input type="hidden" name="review_doctor_id" id="review_doctor_id" value="">
+                <div class="row">
+                  <div class="col-sm-12 mb-2">
+                    <h5>
+                      Please rate your experience with doctor from 1 to 5 star
+                    </h5>
+                    
+                  </div>
+                  <div class="col-sm-12 py-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="rating" id="1star" value="5">
+                      <span>
+                          Good
+                      </span>
+                      <label class="form-check-label" for="1star">
+                        <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="rating" id="2star" value="4">
+                      <span>
+                        Satisfactory
+                      </span>
+                      <label class="form-check-label" for="2star">
+                        <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star "></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="rating" id="3star" value="3">
+                      <span>
+                        Room for improvement
+                      </span>
+                      <label class="form-check-label" for="3star">
+                        <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star"></i> <i class="fas fa-star "></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="rating" id="4star" value="2">
+                      <span>
+                        Cloud be a lot better
+                      </span>
+                      <label class="form-check-label" for="4star">
+                        <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="rating" id="5star" value="1">
+                      <span>
+                        Poor
+                      </span>
+                      <label class="form-check-label" for="5star">
+                        <i class="fas fa-star active"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                      </label>
+                    </div>
+                  </div>
+                    <div class="col-sm-12 mb-2">
+                      <p>You may add comments:</p>
+                    </div>
+                      <div class="col-sm-12">
+                          <div class="form-group">
+                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type here..." name="review" required></textarea>
+                            </div>                        
+                      </div>
+                      <div class="col-sm-12 mb-2">
+                        <p>To bookmark this doctor in case you want to consult them again click here</p>
+                      </div>
+                    <div class="col-sm-12 ask-submit">
+                        <button type="submit" class="btn orange-button">Submit</button>
+                    </div>
+                </div>
+        </form>
+      </div>
+        </div>
+      </div>
+    </div>
 
 @endsection
 @section('scripts')
@@ -342,6 +432,13 @@
             function bookLiveChats(doctor_id) {
                $('#myModal3').modal('show');
                $('#doctor_id').val(doctor_id);
+            }
+
+
+            function doctorRating(doctor_id) {
+               $('#doct-review').modal('show');
+               $('#review_doctor_id').val(doctor_id);
+
             }
 
     </script>

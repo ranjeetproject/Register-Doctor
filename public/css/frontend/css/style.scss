@@ -6179,3 +6179,93 @@ form.form-inline.filter-buy.d-flex {
     min-width: 40%;
     max-width: 100%;
 }
+
+#doct-review{
+    .modal-dialog {
+        max-width: 100%;
+        width: 800px;
+        .modal-header{
+            border: none;
+            h5{
+                &.modal-title {
+                    text-align: center;
+                    width: 100%;
+                    color: #000;
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin: 16px 0px;
+                }
+            }
+        }
+        .modal-body {
+            padding: 0px 30px;
+            .form-check {
+                display: block;
+                width: 100%;
+                margin-bottom: 8px;
+                padding-left: 0px;
+                float: left;
+                cursor: pointer;
+                input{
+                    width: 0px;
+                    &:checked {
+                        & ~ label i.active {
+                            text-shadow: 0px 0px 8px;
+                        }
+                    }
+                }
+            }
+            .form-check span {
+                float: left;
+                color: #000;
+                font-weight: 600;
+                min-width: 180px;
+            }
+            .form-check label {
+                i{
+                    color: #ccc;
+                    &.active{
+                        color: #ECBE24;
+                    }
+                }
+                float: left;
+                color: #777;
+                font-weight: 600;
+                min-width: calc(100% - 180px);
+            }
+            textarea{
+                border-radius: 0px;
+                font-size: 18px;
+                padding: 16px;
+                font-weight: 300;
+                color:#aeaeae;
+            }
+            .form-group{
+                position: relative;
+                label{
+                    color: #074ccb;
+                    font-size: 16px;
+                    margin: 0px
+                }
+                img{
+                    cursor: pointer;
+                }
+                input {
+                    position: absolute;
+                    top: 0;
+                    cursor: pointer;
+                    width: 100%;
+                    opacity: 0;
+                }
+            }
+            .ask-submit {
+                text-align: center;
+                padding: 0px 0px 30px;
+                
+            }
+
+        }
+        
+    } 
+
+}

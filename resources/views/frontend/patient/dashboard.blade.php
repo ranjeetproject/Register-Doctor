@@ -146,7 +146,7 @@
                             <textarea placeholder="Type your health query here " class="form-control" name="health_problem" rows="6" required></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="file" name="case_file" class="form-control-file" id="exampleFormControlFile1" required>
+                            <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" required multiple>
                             <span>Upload Attachments <i class="far fa-paperclip"></i></span>
                         </div>
                         <button type="submit" class="btn orange-button">Submit Your query</button>

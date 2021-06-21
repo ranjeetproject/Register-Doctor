@@ -28,7 +28,10 @@
                     </div>
                     <h2>Attachments</h2>
                     <div class="view-case-details">
-                        <p><img width="500px" height="300px" src="{{asset('public/uploads/cases/'.$case->casefile->file_name)}}"></p>
+                        @foreach($case->casefile as $casefile)
+                        <p><img width="500px" height="300px" class="img-thumbnail" src="{{asset('public/uploads/cases/'.$casefile->file_name)}}"></p>
+                        <br>
+                        @endforeach
                     </div>
                     @if(!empty($case->medicine_name))
                     <h4>If there is any specific medicine you have in mind you may mention it here.</h4>

@@ -1,7 +1,10 @@
 <?php 
 use App\Members;
+use App\Models\BookTimeSlot;
+use App\Models\DoctorReview;
 use App\Models\FavouriteDoctor;
 use App\Models\SiteSetting;
+use App\Models\TimeSlot;
 use App\User;
 
 
@@ -119,9 +122,52 @@ function getChild()
 
 }
 
-// function getTimeSlot($case_id)
-// {
-//   $get_time_slots_id = BookTimeSlot
-// }
+function getReview($doctor_id)
+{
+  $user = User::withCount('doctorReview')->find($doctor_id);
+  $get_review = DoctorReview::where('doctor_id',$doctor_id)->sum('rating');
+  $review = 0;
+  if($user->doctor_review_count > 0){
+  $review = round(($get_review/$user->doctor_review_count));
+  }
+
+  if ($review==5) {
+    return '<i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star reting"></i>';
+  }
+
+  elseif ($review==4) {
+    return '<i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star"></i>';
+  }
+
+  elseif ($review==3) {
+    return '<i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
+  }
+
+  if ($review==2) {
+    return '<i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
+  }
+
+  elseif ($review==1) {
+    return '<i class="fas fa-star reting"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
+  }else{
+    return '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
+  }
+
+
+}
+
+
+ function getNearestSlot($doctor_id)
+{
+  $user = User::find($doctor_id);
+  $booked_slot = BookTimeSlot::select('time_slot_id')->get()->toArray();
+  $nearest_day = TimeSlot::select('*')->where('user_id',$doctor_id)->whereHas('availableDays',function($query){
+    $query->where('date','>=',date('Y-m-d'));
+  })->whereDoesntHave('bookedSlot',function($query) use($booked_slot){
+    $query->whereIn('time_slot_id',$booked_slot);
+  })->first();
+
+  return $nearest_day;
+}
 
 ?>

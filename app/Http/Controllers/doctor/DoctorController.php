@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\doctor;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcceptedPrescriptionDoc;
 use App\Models\DoctorAvailableDays;
 use App\Models\DrugsDetails;
 use App\Models\DrugsProblem;
@@ -771,7 +772,19 @@ switch ($request->day) {
     public function doctorAcceptCase(Request $request,$id)
     {
       $case = PatientCase::find($id);
+      if(($case->case_type == 2) && ($case->questions_type == 3)){
+
+        $accept_case = new AcceptedPrescriptionDoc;
+        $accept_case->patient_case_id = $case->id;
+        $accept_case->doctor_id = Auth::guard('siteDoctor')->user()->id;
+        $accept_case->save();
+      Session::flash('Success-toastr','Successfully Accepted');
+      return redirect()->back();
+
+      }else{
       $case->doctor_id = Auth::guard('siteDoctor')->user()->id;
+      }
+
       $case->accept_status = 1;
       $case->save();
       Session::flash('Success-toastr','Successfully Accepted');

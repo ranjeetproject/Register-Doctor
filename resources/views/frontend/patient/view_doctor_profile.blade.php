@@ -168,7 +168,12 @@
                                             <tbody id="time_slot">
 
                                               @foreach($get_current_day as $current_day)
-                                              @foreach($current_day->getSlot as $slot)
+@php
+$time_slots = $current_day->getSlot()->whereDoesntHave('bookedSlot',function($query) use($getBookedSlot){
+$query->whereIn('time_slot_id',$getBookedSlot);
+})->get()
+@endphp
+                                              @foreach($time_slots as $slot)
 
                                                 <tr>
                                                     <td>{!!date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date))!!}
@@ -206,7 +211,7 @@
 
                                       <div class="form-group">
                             <label for="exampleFormControlFile1">Upload Attachments <i class="fal fa-paperclip"></i></label>
-                            <input type="file" name="case_file" class="form-control-file" id="exampleFormControlFile1" style="opacity: 0;"><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
+                            <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" style="opacity: 0;" multiple><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
                           </div>
                                     </div>
                                     </div>

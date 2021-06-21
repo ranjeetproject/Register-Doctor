@@ -31,15 +31,17 @@
                                     <table class="table Prescriptions-Dispensed-table">
                                       <thead>
                                           <tr>
+                                            
                                               <td>Date</td>
-                                              <td>Issued</td>
+                                              <td>Time</td>
+                                              <td>Communication</td>
+                                              <td>type</td>
                                               <td>Patient’s<br> Name  </td>
                                               <td>Case No.</td>
                                               <td> View <br>Case</td>
                                               <td>View Medical <br>Record</td>
-                                              <td> Prescription No.</td>
                                               <td style="min-width: 250px;"> Action</td>
-                                              <td >Delete</td>
+                                             
                                           </tr>
                                       </thead>
                                       <tbody>
@@ -48,6 +50,7 @@
 
                                          <tr >
                                             <td>{{date('m-d-Y', strtotime($case->booking_date))}}</td>
+
                                             <td>
                                               @forelse($case->getBookingSlot as $time_slot)
 
@@ -57,21 +60,50 @@
 
                                               @endforelse
                                              </td>
+
+                                            <td><a href="{{route('patient.chats',$case->case_id)}}">
+                                                @if($case->questions_type == 1)
+                                                Live Chat
+                                                <br><img src="{{ asset('public/images/frontend/images/Live-Text-Chat.png')}}" alt="">
+                                                @endif
+
+                                                @if($case->questions_type == 2)
+                                                Live Video
+                                                <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt=""> <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
+                                                @endif
+
+                                                 @if($case->questions_type == 3)
+                                                Quick Questions
+                                                <br>
+                                            <p>Max 3 Exchanges</p><br>
+                                            <img src="{{ asset('public/images/frontend/images/Quick-Question.png')}}" alt="">
+                                                @endif
+
+                                                @if($case->questions_type == 4)
+                                                Typed Q&A
+                                                <br>
+                                                <p>Max 3 Exchanges</p><br>
+                                                <img src="{{ asset('public/images/frontend/images/Booked-Question.png')}}" alt="">
+                                                @endif
+                                              </a></td>
+
+                                            <td>
+                                                 @if($case->case_type == 2)
+                                                Prescriptions
+
+                                                @endif
+                                              
+                                             </td>
                                            <td>{{$case->user->name}}</td>
                                             <td>{{$case->case_id}}</td>
                                             
                                             <td><a href="{{route('doctor.view-case',$case->case_id)}}"><i class="fal fa-eye"></i></a></td>
                                             <td><a href="{{route('doctor.view-medical-recorde',$case->case_id)}}"><i class="fal fa-eye"></i></a></td> 
-                                            <td></td>
+                                   
                                             <td class="masg-dep-tol">
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button> 
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br>
-                                                <a href="#"  target="_blank" class="btn blue-button btn-block Print-GP-Note">Print GP Note</a>
+                                                
                                              </td>
-                                             <td>
-                                               <a href="#" style="background: #f2f2f2; color: #f00" target="_blank" class="btn  btn-block Print-GP-Note"><i class="fa fa-trash" aria-hidden="true"></i>
-                                               </a>
-                                             </td>
+                                             
                                         </tr>
 
                                          @endforeach

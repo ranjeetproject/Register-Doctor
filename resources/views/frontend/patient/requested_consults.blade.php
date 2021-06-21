@@ -44,6 +44,7 @@
                                             <td> Case ID</td>
                                             <td>Communication</td>
                                             <td>Status</td>
+                                            <td>Action</td>
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -99,6 +100,14 @@
                                                Pending 
                                               @endif
                                           </td>
+
+                                          <td>
+                                              @if(($case->case_type == 2) && ($case->questions_type == 3))
+<a href="{{route('patient.accepted-consults',$case->case_id)}}" class="btn btn-sm btn-primary"> Doctors</a>
+@endif
+                                              
+                                          </td>
+
                                         </tr>  
                                          @empty
                                          <tr>

@@ -7,6 +7,7 @@ use App\Models\BookTimeSlot;
 use App\Models\CaseFile;
 use App\Models\ChildsAccountsHolder;
 use App\Models\DoctorAvailableDays;
+use App\Models\DoctorReview;
 use App\Models\DrugsDetails;
 use App\Models\DrugsProblem;
 use App\Models\FavouriteDoctor;
@@ -170,7 +171,8 @@ class PatientController extends Controller
           $validator = Validator::make($request->all(), [ 
              "health_problem"=>"required",
              "questions_type"=>"required",
-             "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
+             "case_file"=>"required|max:2000",
+             // "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
          ]);
 
             if ($validator->fails()) { 
@@ -203,19 +205,40 @@ class PatientController extends Controller
          $case->time_duration = ($request->time_duration) ? $request->time_duration * 15 : '';
          $case->save();
 
-         if ($request->hasFile('case_file')) {
-            $rand_val           = date('YMDHis').rand(11111,99999);
+        $img_did = [];
+        if ($request->hasFile('case_file')){
+         foreach($request->file('case_file') as $image)
+            // echo $image; exit;
+            {
+            $rand_val           = date('YMDHIS') . rand(11111, 99999);
             $image_file_name    = md5($rand_val);
-            $file               = $request->file('case_file');
-            $extension          = $request->file('case_file')->extension();
-            $fileName           = $image_file_name.'.'.$extension;
+            // $file               = $request->file('image');
+            $file               = $image;
+            $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
             $destinationPath    = public_path().'/uploads/cases/';
             $file->move($destinationPath,$fileName);
-            $case_file = new CaseFile;
-            $case_file->patient_case_id = $case->id;
-            $case_file->file_name = $fileName;
-            $case_file->save();
+            $images['file_name']    = $fileName;
+            $images['patient_case_id']    = $case->id;
+            array_push($img_did, $images);
           }
+        }
+        // print_r($img_did); exit;
+
+        CaseFile::insert($img_did);
+
+         // if ($request->hasFile('case_file')) {
+         //    $rand_val           = date('YMDHis').rand(11111,99999);
+         //    $image_file_name    = md5($rand_val);
+         //    $file               = $request->file('case_file');
+         //    $extension          = $request->file('case_file')->extension();
+         //    $fileName           = $image_file_name.'.'.$extension;
+         //    $destinationPath    = public_path().'/uploads/cases/';
+         //    $file->move($destinationPath,$fileName);
+         //    $case_file = new CaseFile;
+         //    $case_file->patient_case_id = $case->id;
+         //    $case_file->file_name = $fileName;
+         //    $case_file->save();
+         //  }
 
           if (isset($request->time_slot) && !empty($request->time_slot)) {
 
@@ -431,8 +454,17 @@ class PatientController extends Controller
 
     public function requestedConsults(Request $request)
     {
-      $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',1)->latest()->paginate(10);
+      $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
         return view('frontend.patient.requested_consults', compact('cases'));
+      
+    }
+
+
+    public function acceptedConsults(Request $request,$id)
+    {
+      $case = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->where('case_id',$id)->first();
+
+        return view('frontend.patient.accepted_consults', compact('case'));
       
     }
 
@@ -478,12 +510,14 @@ class PatientController extends Controller
     {
         $id = Crypt::decryptString($id);
         $doctor = User::findOrFail($id);
+        $getBookedSlot = BookTimeSlot::select('time_slot_id')->get()->toArray();
+
         $available_days = DoctorAvailableDays::where('user_id',$doctor->id)->where('date','>=',date('Y-m-d'))->get();
         // return $available_days;
       $get_current_day = DoctorAvailableDays::where('user_id',$doctor->id)->where('date',date('Y-m-d'))->get();
       $weekly_available_days = WeeklyAvailableDays::where('user_id',$doctor->id)->orderBy('num_val_for_day')->get();
 
-        return view('frontend.patient.view_doctor_profile',compact('doctor','available_days','get_current_day','weekly_available_days'));
+        return view('frontend.patient.view_doctor_profile',compact('doctor','available_days','get_current_day','weekly_available_days','getBookedSlot'));
       
     }
 
@@ -491,12 +525,14 @@ class PatientController extends Controller
     {
         $id = Crypt::decryptString($id);
         $doctor = User::findOrFail($id);
+        $getBookedSlot = BookTimeSlot::select('time_slot_id')->get()->toArray();
+
         $available_days = DoctorAvailableDays::where('user_id',$doctor->id)->where('date','>=',date('Y-m-d'))->get();
         // return $available_days;
       $get_current_day = DoctorAvailableDays::where('user_id',$doctor->id)->where('date',date('Y-m-d'))->get();
       $weekly_available_days = WeeklyAvailableDays::where('user_id',$doctor->id)->orderBy('num_val_for_day')->get();
 
-        return view('frontend.patient.book_prespriptions',compact('doctor','available_days','get_current_day','weekly_available_days'));
+        return view('frontend.patient.book_prespriptions',compact('doctor','available_days','get_current_day','weekly_available_days','getBookedSlot'));
       
     }
 
@@ -757,6 +793,52 @@ class PatientController extends Controller
         $case = PatientCase::where('case_id',$id)->first();
         return view('frontend.patient.view_case', compact('case'));
       
+    }
+
+    public function doctorReview(Request $request)
+    {
+            $validator = Validator::make($request->all(), [ 
+            "review_doctor_id"=>"required",
+            "rating"=>"required",
+            "review"=>"required",
+            ]);
+
+
+            if ($validator->fails()) { 
+              Session::flash('Error-toastr','Please fill in all the fields before proceeding');
+              return redirect()->back();
+            }
+
+            $user = Auth::guard('sitePatient')->user();
+            $review = new DoctorReview;
+            $review->user_id = $user->id;
+            $review->doctor_id = $request->review_doctor_id;
+            $review->review = $request->review;
+            $review->rating = $request->rating;
+            $review->save();
+
+            Session::flash('Success-toastr','Successfully submited');
+            return redirect()->back();
+        
+    }
+
+
+
+    public function accepteDoctor(Request $request)
+    {
+         $case = PatientCase::find($id);
+          $case->doctor_id = $request->doctor_id;
+          $case->accept_status = 1;
+          $case->booking_date = $request->booking_date;
+          $case->questions_type = $request->comu_type;
+          $case->save();
+
+             $booking_time_slot = new BookTimeSlot;
+             $booking_time_slot->user_id = Auth::guard('sitePatient')->user()->id;
+             $booking_time_slot->patient_case_id = $case->id;
+             $booking_time_slot->time_slot_id = $request->slot_id;
+             $booking_time_slot->save();
+
     }
 
 

@@ -91,10 +91,22 @@ class User extends Authenticatable
     }
 
     
-     public function weeklyAvailableDays()
+    public function weeklyAvailableDays()
     {
         return $this->hasMany('App\Models\WeeklyAvailableDays');
         
+    }
+
+     public function availableDays()
+    {
+        return $this->hasMany('App\Models\DoctorAvailableDays');
+        
+    }
+
+
+    public function doctorReview()
+    {
+        return $this->hasMany('App\Models\DoctorReview','doctor_id','id');
     }
 
 
