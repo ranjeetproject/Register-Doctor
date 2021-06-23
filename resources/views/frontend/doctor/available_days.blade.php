@@ -65,7 +65,7 @@
                                                 
 
 
-  <div class="col-sm-6">
+  <div class="col-sm-6 regular-weekly-timeslots">
     <h5 class="Available-Time">Add or Delete Regular Weekly Timeslots</h5>
     
     <div class="d-block text-right">
@@ -122,7 +122,7 @@
       
       
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-6 regular-weekly-timeslots">
     <h5 class="Available-Time">Add or Delete Ad Hoc Timeslots</h5>
     <div class="d-block">
       

@@ -8,7 +8,7 @@
                 <h3 class="text-center mb-3">INCOMING REQUESTS</h3>
                 <div class="row incoming-request">
                     
-                    <a href="{{route('doctor.cases','quick-questions')}}" class="card new-crd col-sm-6">
+                    <a href="{{route('doctor.cases','quick-questions')}}" class="card new-crd col-12 col-md-6">
                         <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" class="for-tool-tip" data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" alt="">
                         <div class="card-cont">
                             <img src="{{ asset('public/images/frontend/images/Live-Text-Chat.png') }}" alt="">

@@ -12,9 +12,9 @@
                           <li class="breadcrumb-item active">Message Patient</li>
                         </ol>
                       </nav>
-                      <div class="row" style="margin-bottom: 12px;">
+                      <div class="row send-patient-message-details-search" style="margin-bottom: 12px;">
                         <div class="col-sm-5"></div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-7 send-patient-message-details-search">
                             <form class="form-inline for-chat-search">
                                     <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
                                         <option selected>Patient Name</option>
@@ -26,7 +26,7 @@
                               </form>
                             </div>
                       </div>
-                    <div class="row">
+                    <div class="row send-patient-message-details">
                         <div class="col-sm-4">
                             <div class="contacts-details">
                                 <div class="contacts-title">

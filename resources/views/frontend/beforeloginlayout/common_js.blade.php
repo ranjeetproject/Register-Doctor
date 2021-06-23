@@ -9,7 +9,11 @@
 
   <!-- toastr js-->
 <script src="{{ asset('public/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
+<script>
+$("button.navbar-toggler").click(function(){
+  $("#navbarSupportedContent").toggleClass("show");
+});
 
-
+</script>
 @include('common.toastr')
 @include('common.sweetalert')
