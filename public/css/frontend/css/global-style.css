@@ -641,3 +641,34 @@ margin-bottom: 12px;
     position: relative;
     bottom: -82px;
 }
+
+tr.only-remv:after{
+    display: none;
+}
+.add-edit-prs .modal-content button.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 9999;
+}
+.add-edit-prs .modal-content .input-effect .form-group{
+        position: relative;
+} 
+.add-edt-table-details tr td a {
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    background: #004cac;
+    color: #fff !important;
+    display: block;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    float: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+.add-edt-table-details tr td a.delt{
+    background: #e92b02;
+    color: #fff !important;
+}

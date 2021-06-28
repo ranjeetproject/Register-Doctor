@@ -6403,6 +6403,7 @@ form.form-inline.filter-buy.d-flex {
     max-height: 100vh;
     transform: translate(-100%);
     transition: all 0.8s;
+    height: 100vh;
 }
 button.btn.sider-bar-toggle ~ ul.left-nav.main{
     transform: translate(0%);
@@ -6422,6 +6423,7 @@ button.btn.sider-bar-toggle {
     background: linear-gradient(right, #0351d2 0%, #25b5ff 100%);
     color: #fff;
     padding: 10px;
+    
     margin-bottom: 12px;
     
 }
