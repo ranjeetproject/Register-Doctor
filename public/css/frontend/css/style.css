@@ -6766,9 +6766,17 @@ form.form-inline.filter-buy.d-flex {
   }
 }
 
-@media (max-width: 767px) and (min-width: 466px) {
+@media (max-width: 767px) and (min-width: 576px) {
+  .col.Post-prescription-right.Message-Doctor-to-Patient-via-Left-Hand-Navigation-page,
+  .col.Post-prescription-right.innerpage.Post-prescription-page.select.pharmacy.Pharmacy-locator,
+  .col.Post-prescription-right.Incoming-Prescription-Requests-page {
+    max-width: calc(100% - 240px);
+  }
   .topn-nav-details a:after {
     top: 2px;
+  }
+  .col.Post-prescription-right.innerpage.Choose-Your-Doctor-page {
+    width: calc(100% - 240px);
   }
 }
 
@@ -6800,6 +6808,7 @@ form.form-inline.filter-buy.d-flex {
             transform: translate(-100%);
     -webkit-transition: all 0.8s;
     transition: all 0.8s;
+    height: 100vh;
   }
   button.btn.sider-bar-toggle ~ ul.left-nav.main {
     -webkit-transform: translate(0%);
