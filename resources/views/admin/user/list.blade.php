@@ -93,7 +93,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         {{-- <td>{{ $user->mobile }}</td> --}}
-                        <td width="150px">
+                        <td width="180px">
 
                         {{-- <div id="list_button{{$loop->iteration}}" style="display: none"> --}}
                         <a class="btn btn-sm btn-outline-primary" data-toggle="tooltip" title="Click to view" href="{{ route('admin.user.view', $user->id) }}"> <i class="fas fa-eye"></i></a>
