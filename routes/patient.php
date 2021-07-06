@@ -46,3 +46,10 @@
     
 
 });
+
+
+    Route::middleware(['isPatient:sitePatient','activeUser','emailVerified'])->prefix('patient')->name('patient.')->group(function(){
+
+        Route::get('payment/{case_id}','CheckoutController@checkout')->name('payment');
+        Route::post('payment','CheckoutController@afterpayment')->name('payment.credit-card');
+});
