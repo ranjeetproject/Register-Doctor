@@ -19,7 +19,7 @@
                         </div>
 
                         <div class="row main-form-fild">
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                      <input type="text" name="forename" class="form-control effect-19 {{!empty($user->forename) ? 'has-content':''}}" value="{{$user->forename}}">
                                      <label >Forename</label>
@@ -29,7 +29,7 @@
                                   </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                      <input type="text" name="surname" class="form-control effect-19 {{!empty($user->surname) ? 'has-content':''}}" value="{{$user->surname}}">
                                      <label >Surname</label>
@@ -39,7 +39,7 @@
                                   </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                     <input type="text" name="location" class="form-control effect-19 {{!empty($user->profile->location) ? 'has-content':''}}" value="{{$user->profile->location}}">
                                     <label >Location</label>
@@ -49,7 +49,7 @@
                                   </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                     <input type="text" name="pharmacy_numbar" class="form-control effect-19 {{!empty($user->registration_number) ? 'has-content':''}}" value="{{$user->registration_number}}" readonly>
                                     <label >Registered-Doctor Pharmacy No</label>
@@ -59,7 +59,7 @@
                                   </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                     <input type="text" name="pharmacy_name" class="form-control effect-19 {{!empty($user->profile->pharmacy_name) ? 'has-content':''}}" value="{{$user->profile->pharmacy_name}}">
                                     <label >Pharmacy Name</label>
@@ -69,7 +69,7 @@
                                   </div>
                             </div>
 
-                            <div class="col-sm-12">
+                            <div class="col-md-12">
                                 <div class="form-group required">
                                     <input type="text" name="address" class="form-control effect-19 {{!empty($user->profile->address) ? 'has-content':''}}" value="{{$user->profile->address}}">
                                     <label >Address</label>
@@ -79,7 +79,7 @@
                                   </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-group required">
                                     <input type="tel" name="telephone1" class="form-control effect-19 {{!empty($user->profile->telephone1) ? 'has-content':''}}"  value="{{$user->profile->telephone1}}">
                                     <label >Telephone Number 1</label>
@@ -89,35 +89,35 @@
                                   </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="tel" name="telephone2" class="form-control effect-19 {{!empty($user->profile->telephone2) ? 'has-content':''}}"  value="{{$user->profile->telephone2}}">
                                     <label >Telephone Number 2</label>
                                   </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="tel" name="telephone3" class="form-control effect-19 {{!empty($user->profile->telephone3) ? 'has-content':''}}"  value="{{$user->profile->telephone3}}">
                                     <label >Telephone Number 3</label>
                                   </div>
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="email" name="email" class="form-control effect-19 {{!empty($user->email) ? 'has-content':''}}" value="{{$user->email}}" readonly>
                                     <label >Email</label>
                                   </div>
                             </div>
 
-                            <div class="col-sm-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="url" name="website" class="form-control effect-19 {{!empty($user->profile->website) ? 'has-content':''}}" required  value="{{$user->profile->website}}">
                                     <label >Link to Website</label>
                                   </div>
                             </div>
 
-                            <div class="col-sm-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <textarea class="form-control effect-19 {{!empty($user->profile->about) ? 'has-content':''}}" name="about" rows="3">{{$user->profile->about}}</textarea>
                                     <label >About <span>e.g. 24 hours, extended opening hours, can deliver anywhere in Glasgow, within M25 etc.</span></label>
@@ -126,8 +126,8 @@
 
 
 
-<a href="{{ route('pharmacist.opening-hours')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Set Opening Hours</a>
-                            {{-- <div class="col-sm-12">
+<a href="{{ route('pharmacist.opening-hours')}}" class="Set-Opening-Hours"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Set Opening Hours</a>
+                            {{-- <div class="col-md-12">
                                      
                                 <div class="form-group Opening-Hours">
 
@@ -167,7 +167,7 @@
                             </div>
 
 
-                            <div class="col-sm-12 tile-pick">
+                            <div class="col-md-12 tile-pick">
                                 <div class="form-group">
                                      <label >From</label>
                                      <input id="From-date" name="opening_time" class="form-control" type="time" value="{{ $user->openingTime->monday_opening_time  ?? '09:00' }}"/>
@@ -180,7 +180,7 @@
 
                             </div> --}}
 
-                            <div class="col-sm-12 Customer-Pick-up">
+                            <div class="col-md-12 Customer-Pick-up">
                                 <label >Delivery Options</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="customer_pick_up" id="Customer-Pick-up" value="1" {{(isset($user->deliveryOption->customer_pick_up) && $user->deliveryOption->customer_pick_up == 1) ? 'checked':''}}>
@@ -191,7 +191,7 @@
                                   
                             </div>
 
-                            <div class="col-sm-4 Customer-Pick-up">
+                            <div class="col-md-4 Customer-Pick-up">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="local_delivery" id="Local-Delivery" value="1" {{(isset($user->deliveryOption->local_delivery) && $user->deliveryOption->local_delivery == 1) ? 'checked':''}}>
                                     <label class="form-check-label" for="Local-Delivery">
@@ -201,7 +201,7 @@
                                   
                             </div>
 
-                            <div class="col-sm-8">
+                            <div class="col-md-8">
                                 <div class="form-group-deliver-details">
                                     <label class="">
                                         Details e.g. We deliver anywhere in London, We deliver up to 5 miles from Glasgow
@@ -211,7 +211,7 @@
                             </div>
                             
 
-                            <div class="col-sm-12 Customer-Pick-up">
+                            <div class="col-md-12 Customer-Pick-up">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="posts_within_uk" id="Posts-within-UK" value="1" {{(isset($user->deliveryOption->posts_within_uk) && $user->deliveryOption->posts_within_uk == 1) ? 'checked':''}}>
                                     <label class="form-check-label" for="Posts-within-UK">
@@ -219,7 +219,7 @@
                                     </label>
                                   </div>
                             </div>
-                            <div class="col-sm-12 Customer-Pick-up">
+                            <div class="col-md-12 Customer-Pick-up">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="sends_international" id="Sends-International" value="1" {{(isset($user->deliveryOption->sends_international) && $user->deliveryOption->sends_international == 1) ? 'checked':''}}>
                                     <label class="form-check-label" for="Sends-International">
@@ -229,11 +229,11 @@
                             </div>
 
 
-                             <div class="col-sm-12 Mandator">
+                             <div class="col-md-12 Mandator">
                                     <label>Change password to <a href="{{route('pharmacist.change-password')}}">Click here</a>  </label>
                                 </div>
                             
-                            <div class="col-sm-12">
+                            <div class="col-md-12">
                                 <button type="submit" class="btn blue-button mgp-btn">Save</button>
                             </div>
                             

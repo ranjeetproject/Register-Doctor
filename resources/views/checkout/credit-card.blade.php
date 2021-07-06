@@ -8,18 +8,82 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+      .login-page .form-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 50px 0px;
+    -webkit-box-shadow: 0px 0px 8px #dbf3ff;
+    box-shadow: 0px 0px 8px #dbf3ff;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center center;
+}
+.for-title {
+    text-align: center;
+    font-weight: 300;
+    font-size: 24px;
+}
+.for-title span{
+    font-weight: 700;
+    font-size: 24px;
+    color:#294876;
+}
+.card-footer, .card-header {
+    background: transparent;
+    border: none;
+}
+.card-header{
+    font-weight: 600;
+    font-size: 18px;
+    color:#294876;
+}
+form#payment-form {
+    border-radius: 10px;
+    padding: 00px 30px;
+}
+button#card-button {
+    background: linear-gradient(right, #0351d2 0%, #25b5ff 100%);
+    background: -webkit-linear-gradient(right, #0351d2 0%, #25b5ff 100%);
+    width: 100%;
+    border-radius: 50px;
+    padding: 10px;
+    border:0px;
+}
+.crd-logo {
+    text-align: center;
+}
+.crd-logo img{
+    width:120px;
+}
+@media(max-width:767px){
+form#payment-form {
+    border-radius: 10px;
+    padding: 00px 0px;
+}
+}
+  </style>
 </head>
 <body>
+    
     @php
         $stripe_key = env('STRIPE_KEY');
     @endphp
-    <div class="container" style="margin-top:10%;margin-bottom:10%">
+    <div class="for-w-100 main-content innerpage login-page">
+    <div class="container " style="margin-top:10%;margin-bottom:10%">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="">
-                    <p>You will be charged rs {{$amount}}</p>
-                </div>
-                <div class="card">
+                
+                <div class="card form-card">
+                    <div class="crd-logo">
+                        <a href="#" class="brand-link">
+                        <img src="{{  asset('public/images/frontend/images/'.getSetting('logo')) }}/logo.jpg"  class="brand-image img-circle elevation-3"
+                           >
+                        </a>
+                    </div>
+                    <div class="for-title">
+                        <p>You will be charged <span>${{$amount}}</span></p>
+                    </div>
                     <form action="{{route('patient.payment.credit-card')}}"  method="post" id="payment-form">
                         @csrf
                         <input type="hidden" name="case_id" value="{{ Request::segment(3) }}">
@@ -51,6 +115,8 @@
             </div>
         </div>
     </div>
+    </div>
+    
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         // Custom styling can be passed to options when creating an Element.

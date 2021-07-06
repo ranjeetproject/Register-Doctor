@@ -209,9 +209,15 @@ $query->whereIn('time_slot_id',$getBookedSlot);
                                         <textarea placeholder="Type your health query here " class="form-control" name="health_problem" rows="6" required></textarea>
                                       </div>
 
-                                      <div class="form-group">
+                                      <div class="form-group m-0">
                             <label for="exampleFormControlFile1">Upload Attachments <i class="fal fa-paperclip"></i></label>
-                            <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" style="opacity: 0;" multiple><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
+                            <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" style="opacity: 0; margin-top: -35px;" multiple><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
+                          </div>
+                          <div class="form-group">
+                            <div class="file-count">
+                                <span>3</span>
+                                <i class="fas fa-file-medical-alt"></i>
+                            </div>
                           </div>
                                     </div>
                                     </div>
