@@ -6373,10 +6373,19 @@ form.form-inline.filter-buy.d-flex {
         min-height: 38px;
     }
 }
-@media(max-width:767px) and (min-width:466px){
+@media(max-width:767px) and (min-width:576px){
+    .col.Post-prescription-right.Message-Doctor-to-Patient-via-Left-Hand-Navigation-page,
+    .col.Post-prescription-right.innerpage.Post-prescription-page.select.pharmacy.Pharmacy-locator,
+    .col.Post-prescription-right.Incoming-Prescription-Requests-page {
+        max-width: calc(100% - 240px);
+    }
     .topn-nav-details a:after {
         top: 2px;
     }
+    .col.Post-prescription-right.innerpage.Choose-Your-Doctor-page {
+        width: calc(100% - 240px);
+    }
+
 }
 @media(max-width:575px){
     .Doctor-Dashboard-page .incoming-request a.card {
@@ -6403,10 +6412,12 @@ form.form-inline.filter-buy.d-flex {
     max-height: 100vh;
     transform: translate(-100%);
     transition: all 0.8s;
+    height: 100vh;
 }
 button.btn.sider-bar-toggle ~ ul.left-nav.main{
     transform: translate(0%);
 }
+
 }
 @media(min-width:576px){
     button.btn.sider-bar-toggle {
@@ -6418,10 +6429,10 @@ button.btn.sider-bar-toggle {
     text-align: center;
     width: 100%;
     background: #0351d2;
-    background: -webkit-gradient(linear, right top, left top, from(#0351d2), to(#25b5ff));
     background: linear-gradient(right, #0351d2 0%, #25b5ff 100%);
     color: #fff;
     padding: 10px;
+    
     margin-bottom: 12px;
     
 }

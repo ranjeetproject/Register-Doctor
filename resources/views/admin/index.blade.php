@@ -15,7 +15,7 @@
                 <p>Doctor</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="nav-icon fa fa-user-md" aria-hidden="true"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -30,7 +30,7 @@
                 <p>Patients</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+              <i class="nav-icon fa fa-male" aria-hidden="true"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -45,7 +45,7 @@
                 <p>Pharmacy</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+              <i class="nav-icon fa fa-flask" aria-hidden="true"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

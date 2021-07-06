@@ -166,7 +166,7 @@
 
                                 </div>
 
-                                <div class="col-sm-12 Drug-Prescribed-list">
+                                <div class="col-sm-12 Drug-Prescribed-list mt-3">
 
                                     <!-- <p>Drug Prescribed</p> -->
 
@@ -177,14 +177,9 @@
                                         <div class="add-and-edit">
 
                                             <a data-toggle="modal" data-target="#add-pop"><i class="fas fa-plus"></i></a>
-
-                                            <a data-toggle="modal" data-target="#edit-pop"><i class="fas fa-pencil-alt"></i></a> 
-
-                                            
-
                                         </div>
 
-                                        <table class="table Live-Chat" id="add-tr"> 
+                                        <table class="table Live-Chat add-edt-table-details" id="add-tr"> 
 
                                           <thead>
 
@@ -203,7 +198,7 @@
                                                   <td>Duration</td>
 
                                                   <td>Comments</td>
-
+                                                  <td style="min-width:120px;"></td>
                                               </tr>
 
                                             </thead>
@@ -224,8 +219,12 @@
 
                                                     <td>One Week</td>
 
-                                                    <td><strong>See GP</strong> for weekly weight check <br>Reduce prednisolone by 10mg a day</td>
-
+                                                    <td>
+                                                        <strong>See GP</strong> for weekly weight check <br>Reduce prednisolone by 10mg a day</td>
+                                                    <td>
+                                                        <a data-toggle="modal" data-target="#edit-pop"><i class="fas fa-pencil-alt"></i></a> 
+                                                        <a class="delt"><i class="far fa-trash-alt"></i></a> 
+                                                    </td>
                                                 </tr>
 
                                                 <!-- <tr >
@@ -488,7 +487,7 @@
 
 });
 
-     $(window).on('load', function(){
+ $(window).on('load', function(){
   $(".input-effect input, .input-effect textarea").focusout(function(){
   if($(this).val() != ""){
   $(this).addClass("has-content");
@@ -498,5 +497,5 @@
   })
 });
 
-    </script>
+</script>
 @endsection

@@ -208,6 +208,9 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
 }
 
 @media(min-width:768px) and (max-width:991px){
+    .col.Post-prescription-right.Incoming-Prescription-Requests-page {
+        max-width: calc(100% - 240px);
+    }
     .socil-media a {
         line-height: 25px;
         height: 25px;
@@ -231,7 +234,7 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     }
 }
 @media(min-width:320px) and (max-width:767px){
-
+    
     /* header and footer */
     nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand:after {
         box-shadow: none;
@@ -368,7 +371,7 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     }
     .Choose-Your-Doctor-Prescription-page .reting-and-other-info .rating-list-profile.blue-button, .Choose-Your-Doctor-page .reting-and-other-info .rating-list-profile.blue-button {
     
-        position: absolute;
+        position: relative;
         right: 0;
         top: -4px;
     }

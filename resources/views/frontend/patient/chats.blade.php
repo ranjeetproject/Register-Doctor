@@ -4,7 +4,7 @@
     <!-- <div class="col Post-prescription-right innerpage  Message-Doctor-to-Patient-Prescription-EL-Live-Chat-b-patient-end-page"> -->
     <div class="col Post-prescription-right Message-Doctor-to-Patient-via-Left-Hand-Navigation-page">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-md-12">
                
 
                 <div class="col">
@@ -18,10 +18,10 @@
                       <div class="row mb-20" style="
     margin-bottom: 12px;
 ">
-        <div class="col-sm-5"></div>
-        <div class="col-sm-7">
+        <div class="col-md-5"></div>
+        <div class="col-md-7">
             <form class="form-inline for-chat-search">
-                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <select class="custom-select my-1 mr-md-2" id="inlineFormCustomSelectPref">
                         <option selected>Patient Name</option>
                         <option value="1">Patient ID</option>
                       </select>
@@ -31,7 +31,7 @@
             </div>
     </div>
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                             <div class="contacts-details">
                                 <div class="contacts-title">
                                     <span>Contacts</span>
@@ -43,9 +43,9 @@
                                         </div>
                                         <div class="profile-colnt">
                                             <div class="profile-colnt-det">
-                                                {{-- <h3>Steve Doe <small>11:20 am</small></h3> --}}
+                                                {{-- <h3>Steve Doe <mdall>11:20 am</mdall></h3> --}}
                                                 @if(!empty($case->doctor_id))
-                                                <h3> {{$case->doctor->name}} <small></small></h3>
+                                                <h3> {{$case->doctor->name}} <mdall></mdall></h3>
                                                 @endif
                                             <p>Case Id. {{$case->case_id}} </p>
                                             </div>
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-md-8">
                             <div class="chat-body" id="chat_list" style="height: 300px;">
 
                              <div class="chat-body-me">
@@ -64,7 +64,7 @@
                                         <img src="{{ Auth::guard('sitePatient')->user()->profile->profile_photo }}" alt="">
                                     </div>
                                     <div class="chat-body-right">
-                                        <h3>You <small>{{date('d-m-Y h:i:s',strtotime($case->created_at))}}</small></h3>
+                                        <h3>You <mdall>{{date('d-m-Y h:i:s',strtotime($case->created_at))}}</mdall></h3>
                                         <p>{{$case->health_problem}}</p>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                         <img src="{{ Auth::guard('sitePatient')->user()->profile->profile_photo }}" alt="">
                                     </div>
                                     <div class="chat-body-right">
-                                        <h3>You <small>{{date('d-m-Y h:i:s',strtotime($case->created_at))}}</small></h3>
+                                        <h3>You <mdall>{{date('d-m-Y h:i:s',strtotime($case->created_at))}}</mdall></h3>
                                         <p></p>
                                  <img class="img-thumbnail mb-3" src="{{asset('public/uploads/cases/'.$case->casefile->file_name)}}">
                                     </div>
@@ -142,7 +142,7 @@
 
 <script>
    var firebaseConfig = {
-    apiKey: "AIzaSyBsMAZz3cv4jvbQ0TIOJkuNyg2R4E92PKY",
+    apiKey: "AIzaSyBmdAZz3cv4jvbQ0TIOJkuNyg2R4E92PKY",
     authDomain: "registered-doctor.firebaseapp.com",
     projectId: "registered-doctor",
     storageBucket: "registered-doctor.appspot.com",
@@ -219,10 +219,10 @@ function loadData() {
 $.each(chatDetails, function (key, value) {
   var time = moment(value.created_at).format("DD-MM-YYYY h:mm:ss");
       if(value.sender_id != '{{Auth::guard('sitePatient')->user()->id}}' ){
-         chatData += '<div class="chat-body-you"><div class="chat-body-left"><img src="{{$case->doctor->profile->profile_photo}}" alt=""></div><div class="chat-body-right"><h3>{{$case->doctor->name}}  <small>'+time+'</small></h3><p>'+value.message+'</p></div></div>';
+         chatData += '<div class="chat-body-you"><div class="chat-body-left"><img src="{{$case->doctor->profile->profile_photo}}" alt=""></div><div class="chat-body-right"><h3>{{$case->doctor->name}}  <mdall>'+time+'</mdall></h3><p>'+value.message+'</p></div></div>';
         
       }else{
-            chatData += '<div class="chat-body-me"><div class="chat-body-left"><img src="{{ Auth::guard('sitePatient')->user()->profile->profile_photo }}" alt=""></div><div class="chat-body-right"><h3>You <small>'+time+'</small></h3><p>'+value.message+'</p></div></div>';
+            chatData += '<div class="chat-body-me"><div class="chat-body-left"><img src="{{ Auth::guard('sitePatient')->user()->profile->profile_photo }}" alt=""></div><div class="chat-body-right"><h3>You <mdall>'+time+'</mdall></h3><p>'+value.message+'</p></div></div>';
       }
   });
 // $(".overlay").hide();

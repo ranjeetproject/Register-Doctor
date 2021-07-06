@@ -11,6 +11,16 @@
     });
 </script>
 
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+$(document).ready(function(){
+  $("button.btn.sider-bar-toggle, button.btn.sider-bar-toggle ~ ul.left-nav li a").click(function(){
+    $("button.btn.sider-bar-toggle ~ ul.left-nav").toggleClass("main");
+  });
+});
+</script>
   <!-- toastr js-->
  <script src="{{ asset('public/plugins/toastr/toastr.min.js')}}"></script>
 
