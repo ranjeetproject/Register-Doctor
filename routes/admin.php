@@ -40,7 +40,7 @@ Route::match(['get','post'],'cms/create', 'CmsController@create')->name('cms.cre
 Route::match(['get','post'],'cms/edit/{id}', 'CmsController@edit')->name('cms.edit');
 Route::match(['get','post'],'cms/delete/{id?}', 'CmsController@delete')->name('cms.delete');
 
-
+Route::get('video_call_test','TestController@video_call');
 
 });
 //  *************for admin *************//
