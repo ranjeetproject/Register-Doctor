@@ -253,14 +253,17 @@ class PatientController extends Controller
           }
 
         Session::flash('Success-toastr','Successfully submited');
-        if($request->questions_type == 1 || $request->questions_type == 2){
-        return redirect()->route('patient.symptoms-checker',$case->case_id);
+
+
+        if($request->questions_type == 1 || $request->questions_type == 2 || $request->questions_type == 4){
+        return redirect()->route('patient.payment',$case->case_id);
+        // return redirect()->route('patient.symptoms-checker',$case->case_id);
         }
         return redirect()->back();
         }
 
 
-        return view('frontend.patient.create_case');
+        // return view('frontend.patient.create_case');
       
     }
 
@@ -724,7 +727,7 @@ class PatientController extends Controller
             $symptoms->type = 1;
             $symptoms->save();
             }
-            foreach ($request->symptom as $value) {
+            foreach ($request->symptom2 as $value) {
             $symptoms = new PastSymptoms;
             $symptoms->user_id = $user->id;
             $symptoms->patient_case_id = $case->id;

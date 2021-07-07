@@ -171,6 +171,7 @@
         </div>
         <div class="row pad-apt-details">
             <div class="col-sm-4">
+                <a href="{{route('patient.requested-consults')}}">
                 <div class="pd-btm-details">
                     <div class="pd-btm-details-cont">
                         <p>Sonsults Quick Questions</p>
@@ -178,6 +179,7 @@
                         
                     </div>
                 </div>
+              </a>
             </div>
             <div class="col-sm-4">
                 <div class="pd-btm-details">
