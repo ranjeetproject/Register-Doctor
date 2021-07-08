@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Validator;
 use Session;
 
 
-class DoctorController extends Controller 
+class DoctorController extends Controller
 {
 
     /**
@@ -34,7 +34,7 @@ class DoctorController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','isDoctor']);
-        
+
     }
 
 
@@ -52,10 +52,10 @@ class DoctorController extends Controller
 
         if($request->isMethod('post')){
             $form_name = $request->form_name;
-           
+
             // dd($request->all());
          // $data = $request->validate([
-              $validator = Validator::make($request->all(), [ 
+              $validator = Validator::make($request->all(), [
       "forename"=>"sometimes|nullable|required|min:3|max:100",
       "surname"=>"sometimes|nullable|required|min:3|max:100",
       "telephone1"=>"sometimes|nullable|required|digits:10",
@@ -67,10 +67,10 @@ class DoctorController extends Controller
       "dr_see"=>"sometimes|nullable|required",
       // "gender"=>"required",
       // "dob"=>"date|before_or_equal:".now()->subYears(13)->format('Y-m-d'),
-     
+
       ],['required'=>'This field is required']);
 
-            if ($validator->fails()) { 
+            if ($validator->fails()) {
               Session::flash('Error-toastr','Please fill in all the fields before proceeding');
               return redirect()->back();
             }
@@ -89,13 +89,13 @@ class DoctorController extends Controller
      if(!empty($request->surname) ) $user->surname = $request->surname;
      if(!empty($request->forename) && !empty($request->surname)) $user->name = $request->forename.' '.$request->surname;
      // if(!empty($request->email) && ($user->email != $request->email)) $user->email = $request->email;
-      
-     
-    
+
+
+
 
     $profile = UserProfile::where('user_id',$user->id)->first();
      $profile = $profile ?? new UserProfile;
-     
+
      $profile->user_id = $user->id;
 
        if(!empty($request->dr_speciality) ) $profile->dr_speciality = $request->dr_speciality;
@@ -137,8 +137,8 @@ class DoctorController extends Controller
        if(!empty($request->account_name) ) $profile->account_name = $request->account_name;
        if(!empty($request->bank_name) ) $profile->bank_name = $request->bank_name;
        if(!empty($request->iban_or_swift_code) ) $profile->iban_or_swift_code = $request->iban_or_swift_code;
-       
- 
+
+
       if ($request->hasFile('profile_photo')) {
             $rand_val           = date('YMDHIS').rand(11111,99999);
             $image_file_name    = md5($rand_val);
@@ -150,24 +150,24 @@ class DoctorController extends Controller
             $profile->profile_photo = $fileName;
           }
           // print_r($profile); exit;
-        
+
           $profile->save();
            $user->save();
-        
+
           Session::flash('Success-toastr','Profile Successfully updated');
 
        // } catch (\Exception $e) {
        //      Session::flash('Error-toastr', $e->getMessage());
        //  }
        //      return redirect()->back();
-        
+
 
       }
 
         $user = Auth::guard('siteDoctor')->user();
         // return $user->profile->dr_qa_fee_notification;
         return view('frontend.doctor.profile', compact('user','form_name'));
-       
+
     }
 
     public function changePassword(Request $request)
@@ -265,7 +265,7 @@ class DoctorController extends Controller
          Session::flash('Error-toastr','Please match the 15 minute slot.');
          return redirect()->back();
         }
-        
+
           DB::beginTransaction();
         $available_day = new DoctorAvailableDays;
         $available_day->user_id = $user->id;
@@ -277,8 +277,8 @@ class DoctorController extends Controller
         $number_of_slot = $total_minutes/15;
         $from_time = Carbon::parse($request->from_time);
         $to_time =Carbon::parse($request->from_time)->addMinutes(15);
-      
-     
+
+
 
        for ($i = 1; $i <= $number_of_slot; $i++) {
         $time_slot = new TimeSlot;
@@ -286,13 +286,13 @@ class DoctorController extends Controller
         $time_slot->available_day_id = $available_day->id;
         $time_slot->start_time = $from_time->format('H:i');
         $time_slot->end_time = $to_time->format('H:i');
-        $from_time = $from_time->addMinutes(15);        
+        $from_time = $from_time->addMinutes(15);
         $to_time = $to_time->addMinutes(15);
         $time_slot->save();
-        // echo '<pre>';   
+        // echo '<pre>';
         //    print_r($time_slot);
        }
-        // exit;   
+        // exit;
       DB::commit();
 
          Session::flash('Success-toastr','Successfully added');
@@ -365,7 +365,7 @@ $user = Auth::guard('siteDoctor')->user();
          Session::flash('Error-toastr','Please match the 15 minute slot.');
          return redirect()->back();
         }
-        
+
 
         foreach ($available_day->getSlot as $slot) {
           $slot->delete();
@@ -384,8 +384,8 @@ $user = Auth::guard('siteDoctor')->user();
         $number_of_slot = $total_minutes/15;
         $from_time = Carbon::parse($request->from_time);
         $to_time =Carbon::parse($request->from_time)->addMinutes(15);
-      
-     
+
+
 
        for ($i = 1; $i <= $number_of_slot; $i++) {
         $time_slot = new TimeSlot;
@@ -393,13 +393,13 @@ $user = Auth::guard('siteDoctor')->user();
         $time_slot->available_day_id = $available_day->id;
         $time_slot->start_time = $from_time->format('H:i');
         $time_slot->end_time = $to_time->format('H:i');
-        $from_time = $from_time->addMinutes(15);        
+        $from_time = $from_time->addMinutes(15);
         $to_time = $to_time->addMinutes(15);
         $time_slot->save();
-        // echo '<pre>';   
+        // echo '<pre>';
         //    print_r($time_slot);
        }
-        // exit;   
+        // exit;
       // DB::commit();
 
 
@@ -430,7 +430,7 @@ $user = Auth::guard('siteDoctor')->user();
 
          Session::flash('Success-toastr','Successfully updated');
          return redirect()->back();
-      
+
 
       }
 
@@ -513,8 +513,8 @@ for($i = strtotime(ucfirst($request->day), strtotime($startDate)); $i <= $endDat
         $number_of_slot = $total_minutes/15;
         $from_time = Carbon::parse($request->from_time);
         $to_time =Carbon::parse($request->from_time)->addMinutes(15);
-      
-     
+
+
 
        for ($j = 1; $j <= $number_of_slot; $j++) {
         $time_slot = new TimeSlot;
@@ -522,13 +522,13 @@ for($i = strtotime(ucfirst($request->day), strtotime($startDate)); $i <= $endDat
         $time_slot->available_day_id = $available_day->id;
         $time_slot->start_time = $from_time->format('H:i');
         $time_slot->end_time = $to_time->format('H:i');
-        $from_time = $from_time->addMinutes(15);        
+        $from_time = $from_time->addMinutes(15);
         $to_time = $to_time->addMinutes(15);
         $time_slot->save();
-        // echo '<pre>';   
+        // echo '<pre>';
         //    print_r($time_slot);
        }
-        // exit;   
+        // exit;
 
 }
       DB::commit();
@@ -553,7 +553,7 @@ for($i = strtotime(ucfirst($request->day), strtotime($startDate)); $i <= $endDat
       $endDate = date('Y').'-12-31';
       $endDate = strtotime($endDate);
 for($i = strtotime(ucfirst($available_day->day), strtotime($startDate)); $i <= $endDate; $i = strtotime('+1 week', $i)){
-         $date = date('Y-m-d', $i); 
+         $date = date('Y-m-d', $i);
 $get_day = DoctorAvailableDays::where('date',$date)->where('user_id',$user->id)->where('from_time',$available_day->from_time)->where('to_time',$available_day->to_time)->first();
 
 if($get_day){
@@ -578,8 +578,8 @@ $get_day = $get_day->delete();
        //  $number_of_slot = $total_minutes/15;
        //  $from_time = Carbon::parse($request->from_time);
        //  $to_time =Carbon::parse($request->from_time)->addMinutes(15);
-      
-     
+
+
 
        // for ($j = 1; $j <= $number_of_slot; $j++) {
        //  $time_slot = new TimeSlot;
@@ -587,13 +587,13 @@ $get_day = $get_day->delete();
        //  $time_slot->available_day_id = $available_day->id;
        //  $time_slot->start_time = $from_time->format('H:i');
        //  $time_slot->end_time = $to_time->format('H:i');
-       //  $from_time = $from_time->addMinutes(15);        
+       //  $from_time = $from_time->addMinutes(15);
        //  $to_time = $to_time->addMinutes(15);
        //  $time_slot->save();
-       //  // echo '<pre>';   
+       //  // echo '<pre>';
        //  //    print_r($time_slot);
        // }
-        // exit;   
+        // exit;
 
 }
 
@@ -641,14 +641,14 @@ switch ($request->day) {
   default:
     $weekly_day->num_val_for_day = 0;
 }
-      
+
         $weekly_day->day = $request->day;
         $weekly_day->from_time = $request->from_time;
         $weekly_day->to_time = $request->to_time;
         $weekly_day->save();
          Session::flash('Success-toastr','Successfully updated');
          return redirect()->back();
-      
+
 
       }
       return response()->json(['success' =>true, 'message'=>'success','data'=>$weekly_day], 200);
@@ -666,11 +666,11 @@ switch ($request->day) {
       }
 
       $cases = $cases->where('case_type',1);
-      
+
 
       // if($questions_type == 'live-chat'){
       //   $cases = $cases->where('questions_type',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id);
-        
+
       // }
       //  if($questions_type == 'live-video'){
       //   $cases = $cases->where('questions_type',2)->where('doctor_id',Auth::guard('siteDoctor')->user()->id);
@@ -692,9 +692,9 @@ switch ($request->day) {
       // echo $q_type; exit;
 
 
-       
+
         return view('frontend.doctor.cases', compact('cases'));
-      
+
     }
 
 
@@ -705,7 +705,7 @@ switch ($request->day) {
           $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_reply',null);
         })->orderBy('id','desc')->paginate(6);
         return view('frontend.doctor.quick_questions', compact('quick_questions'));
-      
+
     }
 
 
@@ -715,7 +715,7 @@ switch ($request->day) {
           $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_id',null);
         })->orderBy('id','desc')->paginate(6);
         return view('frontend.doctor.prescriptions', compact('quick_questions'));
-      
+
     }
 
 
@@ -723,7 +723,7 @@ switch ($request->day) {
     {
         $live_chats = PatientCase::where('questions_type',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orderBy('id','desc')->paginate(6);
         return view('frontend.doctor.live_chat', compact('live_chats'));
-      
+
     }
 
     public function liveVideo(Request $request)
@@ -736,7 +736,7 @@ switch ($request->day) {
     {
         $case = PatientCase::where('case_id',$id)->first();
         return view('frontend.doctor.view_case', compact('case'));
-      
+
     }
 
     public function viewMedicalRecorde(Request $request,$id)
@@ -749,9 +749,9 @@ switch ($request->day) {
         $drugs_details = DrugsDetails::where('user_id',$case->user->id)->get();
         $drugs_problem = DrugsProblem::where('user_id',$case->user->id)->get();
         $cases = PatientCase::where('user_id',$case->user->id)->latest()->get();
-        
+
         return view('frontend.doctor.medical_record', compact('case','symptroms_details','past_symptoms','drugs_details','drugs_problem','past_symptoms2','cases','last_symptroms_details'));
-      
+
     }
 
     public function chats(Request $request, $id)
@@ -815,5 +815,9 @@ switch ($request->day) {
       return view('frontend.doctor.summary_diagnosis', compact('case'));
     }
 
+    public function videoCallDoc($id)
+    {
+        return view('common.video_call_test',compact('id'));
+    }
 
 }

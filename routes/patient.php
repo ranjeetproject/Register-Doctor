@@ -43,7 +43,8 @@
     Route::match(['get','post'],'view-case/{id}', 'PatientController@viewCase')->name('view-case');
     Route::post('doctor-review', 'PatientController@doctorReview')->name('doctor-review');
     Route::post('accept-doctor', 'PatientController@accepteDoctor')->name('accept-doctor');
-    
+
+    Route::get('video-cal/{id}','PatientController@videoCall')->name('video-call');
 
 });
 

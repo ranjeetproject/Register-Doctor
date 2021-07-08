@@ -11,11 +11,11 @@
       {{-- @if(Request::segment(3) == 'live-chat')
          <li class="breadcrumb-item active">Live Chat</li>
       @endif
-      
+
        @if(Request::segment(3) == 'live-video')
          <li class="breadcrumb-item active">Live Video</li>
        @endif
-      
+
        @if(Request::segment(3) == 'quick-questions')
          <li class="breadcrumb-item active">Quick Questions</li>
        @endif
@@ -28,11 +28,11 @@
          @else
          <li class="breadcrumb-item active">Booking Request</li>
           @endif
-      
-                          
+
+
                         </ol>
                       </nav>
-                      
+
                     <div class="for-w-100 Prescriptions-Dispensed-right-table">
                         <div class="row">
                             <div class="col-sm-12">
@@ -62,7 +62,7 @@
                                               {{-- @if(Request::segment(3) == 'live-chat' || Request::segment(3) == 'live-video') --}}
                                               <td>View Medical <br>Record</td>
                                               {{-- @endif --}}
-                                           
+
                                               <td style="min-width: 150px;"> Action</td>
                                           </tr>
                                       </thead>
@@ -78,7 +78,7 @@
 
                                       	@foreach($cases as $case)
                                         <tr >
-                                           
+
                                             <td>{{$case->user->name}}</td>
                                             <td style="text-align: center;">
                                                @forelse($case->getBookingSlot as $time_slot)
@@ -111,26 +111,29 @@
                                                 @endif
                                               </a>
                                               </td>
-                                            
+
                                             <td><a href="{{route('doctor.view-case',$case->case_id)}}" target="_blank" ><i class="fal fa-eye"></i></a></td>
                                              {{-- @if(Request::segment(3) == 'live-chat' || Request::segment(3) == 'live-video') --}}
-                                            <td><a  href="{{route('doctor.view-medical-recorde',$case->case_id)}}" target="_blank"><i class="fal fa-eye"></i></a></td> 
+                                            <td><a  href="{{route('doctor.view-medical-recorde',$case->case_id)}}" target="_blank"><i class="fal fa-eye"></i></a></td>
                                             {{-- @endif --}}
-                                   
+
                                             <td class="masg-dep-tol">
-                                               
+
                                               @if($case->accept_status == null)
                                                <a href="{{route('doctor.doctor-accept-case',$case->id)}}" target="_blank" class="btn blue-button Finish-Exchange">Accept</a>
 
                                                 {{-- <a href="{{route('doctor.doctor-accept-case',$case->id)}}" class="btn blue-button btn-primary">Accept</a> --}}
                                                 @endif
                                                  <button class="btn Decline">Decline</button><br>
+                                                 {{-- @if($case->questions_type == 2)
+                                                 <a href="{{route('doctor.chats',$case->case_id)}}" target="_blank" class="btn blue-button Finish-Exchange">Live Video</a>
 
+                                                 @else --}}
                                                 <a href="{{route('doctor.chats',$case->case_id)}}" target="_blank" class="btn blue-button Finish-Exchange">Message</a>
-                                                
+                                                {{-- @endif --}}
 
                                              </td>
-                                             
+
                                         </tr>
                                         @endforeach
                                         @endif
@@ -138,7 +141,7 @@
                                       </tbody>
                                     </table>
                                   </div>
-                                  
+
                             </div>
                         </div>
                         <div class="row">
@@ -156,6 +159,6 @@
 @endsection
 @section('scripts')
     <script>
-       
+
     </script>
 @endsection

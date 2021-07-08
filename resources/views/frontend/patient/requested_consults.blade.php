@@ -4,11 +4,11 @@
     <div class="col Post-prescription-right Incoming-Prescription-Requests-page">
         <div class="row">
             <div class="col-sm-12">
-               
+
                 <div class="col Incoming-Prescription-Requests-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb Pharmacist-doc-com">
-                            
+
                           <li class="breadcrumb-item active">Requested Consultations</li>
                         </ol>
                       </nav>
@@ -64,40 +64,49 @@
                                             </td>
                                             <td>{{$case->doctor->name}}</td>
                                             <td>{{$case->case_id}}</td>
-                                            <td><a href="{{route('patient.chats',$case->case_id)}}">
-                                                @if($case->questions_type == 1)
-                                                Live Chat
-                                                <br><img src="{{ asset('public/images/frontend/images/Live-Text-Chat.png')}}" alt="">
-                                                @endif
-
+                                            <td>
                                                 @if($case->questions_type == 2)
-                                                Live Video
-                                                <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt=""> <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
-                                                @endif
+                                                <a href="{{route('patient.video-call',$case->case_id)}}" target="_blank">
+                                                    Live Video
+                                                    <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt="">
+                                                    <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
+                                                </a>
+                                                @else
+                                                    <a href="{{route('patient.chats',$case->case_id)}}">
+                                                    @if($case->questions_type == 1)
+                                                    Live Chat
+                                                    <br><img src="{{ asset('public/images/frontend/images/Live-Text-Chat.png')}}" alt="">
+                                                    @endif
 
-                                                 @if($case->questions_type == 3)
-                                                Quick Questions
-                                                <br>
-                                            <p>Max 3 Exchanges</p><br>
-                                            <img src="{{ asset('public/images/frontend/images/Quick-Question.png')}}" alt="">
-                                                @endif
+                                                    @if($case->questions_type == 2)
 
-                                                @if($case->questions_type == 4)
-                                                Typed Q&A
-                                                <br>
-                                                <p>Max 3 Exchanges</p><br>
-                                                <img src="{{ asset('public/images/frontend/images/Booked-Question.png')}}" alt="">
-                                                @endif
-                                              </a></td>
+                                                    @endif
+
+                                                    @if($case->questions_type == 3)
+                                                        Quick Questions
+                                                        <br>
+                                                        <p>Max 3 Exchanges</p><br>
+                                                        <img src="{{ asset('public/images/frontend/images/Quick-Question.png')}}" alt="">
+                                                    @endif
+
+                                                    @if($case->questions_type == 4)
+                                                    Typed Q&A
+                                                    <br>
+                                                    <p>Max 3 Exchanges</p><br>
+                                                    <img src="{{ asset('public/images/frontend/images/Booked-Question.png')}}" alt="">
+                                                    @endif
+                                                </a>
+                                              @endif
+                                            </td>
                                             <td>
                                               @if($case->accept_status == 1)
                                               <font style="font-size: 18px;">Confirmed</font> <br>
-                                                <strong style="font-size: 20px;">{{date('d F Y', strtotime($case->booking_date))}} 
+                                                <strong style="font-size: 20px;">{{date('d F Y', strtotime($case->booking_date))}}
 
-                                                    
+
 
                                               @else
-                                               Pending 
+                                               Pending
                                               @endif
                                           </td>
 
@@ -105,20 +114,20 @@
                                               @if(($case->case_type == 2) && ($case->questions_type == 3))
 <a href="{{route('patient.accepted-consults',$case->case_id)}}" class="btn btn-sm btn-primary"> Doctors</a>
 @endif
-                                              
+
                                           </td>
 
-                                        </tr>  
+                                        </tr>
                                          @empty
                                          <tr>
                                            <td colspan="6">No data found</td>
                                          </tr>
                                          @endforelse
-                                        
+
                                       </tbody>
                                     </table>
                                   </div>
-                                  
+
                             </div>
                         </div>
                         <div class="row">
@@ -131,15 +140,15 @@
                     </div>
                 </div>
             </div>
-                
+
             </div>
         </div>
     </div>
-   
+
 @endsection
 @section('scripts')
     <script>
-        
+
 
     </script>
 @endsection

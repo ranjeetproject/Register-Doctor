@@ -82,9 +82,9 @@
         }
     }
 
-
+    // 7177121012021120405
     var roomid = document.getElementById('txt-roomid');
-    roomid.value = '7177121012021120405';
+    roomid.value = '{{ $id }}';
 
     document.getElementById('btn-open-or-join-room').onclick = function () {
         console.log('join Room Button');
@@ -142,7 +142,7 @@
         });
         var formData = new FormData();
         formData.append('video_blob', file);
-        formData.append('room_id', '7177121012021120405');
+        formData.append('room_id', '{{ $id }}');
         formData.append('_token', 'yz2RRZcw4QTL0LpbnwWJigudAblwJHLyenpGSU5l');
         makeXMLHttpRequest('http://localhost/vim/public/admin/profile-verification-call-record-video', formData, function () {
             console.log('File upload is complete');
