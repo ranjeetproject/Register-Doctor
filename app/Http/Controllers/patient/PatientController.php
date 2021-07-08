@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Validator;
 use Session;
 
 
-class PatientController extends Controller 
+class PatientController extends Controller
 {
 
     /**
@@ -51,7 +51,7 @@ class PatientController extends Controller
     public function profile(Request $request) {
         if($request->isMethod('post')){
          // $data = $request->validate([
-      $validator = Validator::make($request->all(), [ 
+      $validator = Validator::make($request->all(), [
       "forename"=>"required|min:3|max:100",
       "surname"=>"required|min:3|max:100",
       "telephone1"=>"required|digits:10",
@@ -65,7 +65,7 @@ class PatientController extends Controller
       ], ['dob.before_or_equal'=>'You must be 13 years old or above.']);
 
 
-           if ($validator->fails()) { 
+           if ($validator->fails()) {
 
               Session::flash('Error-toastr','Please fill in all the fields before proceeding');
               return redirect()->back();
@@ -83,8 +83,8 @@ class PatientController extends Controller
      if(!empty($request->surname) ) $user->surname = $request->surname;
      if(!empty($request->forename) && !empty($request->surname)) $user->name = $request->forename.' '.$request->surname;
      if(!empty($request->email) && ($user->email != $request->email)) $user->email = $request->email;
-      
-     
+
+
      $user->save();
      $profile = UserProfile::where('user_id',$user->id)->first();
      $profile = $profile ?? new UserProfile;
@@ -102,7 +102,7 @@ class PatientController extends Controller
       $profile->n_of_kin_name = $request->n_of_kin_name;
       $profile->n_of_kin_address = $request->n_of_kin_address;
       $profile->n_of_kin_relationship = $request->n_of_kin_relationship;
- 
+
       if ($request->hasFile('profile_photo')) {
             $rand_val           = date('YMDHIS').rand(11111,99999);
             $image_file_name    = md5($rand_val);
@@ -160,7 +160,7 @@ class PatientController extends Controller
     {
         $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
         return view('frontend.patient.save_cases', compact('cases'));
-      
+
     }
 
     public function createCase(Request $request)
@@ -168,14 +168,14 @@ class PatientController extends Controller
 
         if($request->isMethod('post')) {
          // $data = $request->validate([
-          $validator = Validator::make($request->all(), [ 
+          $validator = Validator::make($request->all(), [
              "health_problem"=>"required",
              "questions_type"=>"required",
              "case_file"=>"required|max:2000",
              // "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
          ]);
 
-            if ($validator->fails()) { 
+            if ($validator->fails()) {
               // echo $validator->errors()->first(); exit;
               Session::flash('Error-toastr','Please fill in all the fields before proceeding');
               return redirect()->back();
@@ -249,7 +249,7 @@ class PatientController extends Controller
              $booking_time_slot->time_slot_id = $time_slot;
              $booking_time_slot->save();
             }
-            
+
           }
 
         Session::flash('Success-toastr','Successfully submited');
@@ -264,7 +264,7 @@ class PatientController extends Controller
 
 
         // return view('frontend.patient.create_case');
-      
+
     }
 
      public function medicalRecord(Request $request)
@@ -280,7 +280,7 @@ class PatientController extends Controller
         $cases = PatientCase::where('user_id',$login_user->id)->latest()->get();
 
         return view('frontend.patient.medical_record',compact('symptroms_details','past_symptoms','drugs_details','drugs_problem','login_user','past_symptoms2','cases','last_symptroms_details'));
-      
+
     }
 
     public function myFavoriteDoctors(Request $request)
@@ -301,7 +301,7 @@ class PatientController extends Controller
             $query->where('dr_speciality',$request->dr_speciality);
             }
 
-           
+
 
             if(!empty($request->video_consult)){
               if($request->video_consult == 'live_video'){
@@ -368,7 +368,7 @@ class PatientController extends Controller
             $query->where('dr_speciality',$request->dr_speciality);
             }
 
-           
+
 
             if(!empty($request->video_consult)){
               if($request->video_consult == 'live_video'){
@@ -436,7 +436,7 @@ class PatientController extends Controller
         $satus = $get_fav_doc->status;
 
         }else{
-         
+
          $fav_doctor = new FavouriteDoctor;
          $fav_doctor->user_id = $login_user_id;
          $fav_doctor->favourite_user_id = $request->doctor_id;
@@ -445,9 +445,9 @@ class PatientController extends Controller
 
        }
 
-      
+
              return response()->json(['success' =>true, 'message'=>$message,'data'=>$satus], 200);
-          
+
 
            } catch (\Exception $e) {
               return response()->json(['success' =>false, 'message'=>'Something went worng.'], 401);
@@ -459,7 +459,7 @@ class PatientController extends Controller
     {
       $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
         return view('frontend.patient.requested_consults', compact('cases'));
-      
+
     }
 
 
@@ -468,7 +468,7 @@ class PatientController extends Controller
       $case = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->where('case_id',$id)->first();
 
         return view('frontend.patient.accepted_consults', compact('case'));
-      
+
     }
 
 
@@ -478,26 +478,26 @@ class PatientController extends Controller
       $accepted_cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->where('accept_status',1)->latest()->paginate(10);
       $ready_cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_type',2)->latest()->paginate(10);
         return view('frontend.patient.prescriptions', compact('cases','accepted_cases','ready_cases'));
-      
+
     }
 
     public function closedCases(Request $request)
     {
         return view('frontend.patient.closed_cases');
-      
+
     }
 
     public function prescriptionsIssued(Request $request)
     {
         return view('frontend.patient.prescriptions_issued');
-      
+
     }
 
     public function pharmacies(Request $request)
     {
         $pharmacies = User::whereRole(3)->latest()->get();
         return view('frontend.patient.pharmacies',compact('pharmacies'));
-      
+
     }
 
 
@@ -505,7 +505,7 @@ class PatientController extends Controller
     {
         $pharmacies = User::whereRole(3)->latest()->get();
         return view('frontend.patient.search_pharmacies',compact('pharmacies'));
-      
+
     }
 
 
@@ -521,7 +521,7 @@ class PatientController extends Controller
       $weekly_available_days = WeeklyAvailableDays::where('user_id',$doctor->id)->orderBy('num_val_for_day')->get();
 
         return view('frontend.patient.view_doctor_profile',compact('doctor','available_days','get_current_day','weekly_available_days','getBookedSlot'));
-      
+
     }
 
     public function bookPrescriptions($id)
@@ -536,7 +536,7 @@ class PatientController extends Controller
       $weekly_available_days = WeeklyAvailableDays::where('user_id',$doctor->id)->orderBy('num_val_for_day')->get();
 
         return view('frontend.patient.book_prespriptions',compact('doctor','available_days','get_current_day','weekly_available_days','getBookedSlot'));
-      
+
     }
 
     public function viewChilds(Request $request)
@@ -548,7 +548,7 @@ class PatientController extends Controller
     public function addChild(Request $request)
     {
             // echo 'string'; exit;
-          $validator = Validator::make($request->all(), [ 
+          $validator = Validator::make($request->all(), [
             'forename' => 'required',
             'surname' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -567,7 +567,7 @@ class PatientController extends Controller
             ]);
           // .$validator->errors()->first()
 
-          if ($validator->fails()) { 
+          if ($validator->fails()) {
               Session::flash('Error-toastr','Please fill in all the fields befor proceed');
               return redirect()->back()->withErrors($validator)->withInput();
             }
@@ -618,13 +618,13 @@ class PatientController extends Controller
             $userProfile->telephone1_sch = $request->telephone1_sch;
             $userProfile->telephone2_sch = $request->telephone2_sch;
             $userProfile->save();
-      
+
 
             $child_account_holder = new ChildsAccountsHolder;
             $child_account_holder->user_id = $user->id;
             $child_account_holder->child_id = $child_account->id;
             $child_account_holder->save();
-            
+
 
             DB::commit();
             Session::flash('Success-toastr','Successfully added');
@@ -657,7 +657,7 @@ class PatientController extends Controller
        if (Auth::guard("sitePatient")->attempt($user_info) && Auth::attempt($user_info) ) {
             $user_details = Auth::guard("sitePatient")->user();
            return response()->json(['success' =>true, 'message'=>'success'], 200);
-            
+
           }else{
 
       return response()->json(['success' =>false, 'message'=>'error'], 200);
@@ -670,7 +670,7 @@ class PatientController extends Controller
          $case = PatientCase::where('case_id',$id)->first();
 
          return view('frontend.patient.chats', compact('case'));
-      
+
     }
 
     public function doctorAvailableDay(Request $request)
@@ -689,7 +689,7 @@ class PatientController extends Controller
 
          foreach($available_days as $current_day){
             foreach($current_day->getSlot()->whereNotIn('id',$getBookedSlot)->get() as $slot){
-              
+
               $time_slot.= '<tr>
               <td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td>
               <td>'.date('H:i a', strtotime($slot->start_time)).'</td>
@@ -705,7 +705,7 @@ class PatientController extends Controller
       return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_days], 200);
       }
 
-      
+
     }
 
 
@@ -737,7 +737,7 @@ class PatientController extends Controller
             }
          }
 
-           
+
 
              // if(isset($request->weight) && !empty($request->weight)){
 
@@ -784,7 +784,7 @@ class PatientController extends Controller
 
             Session::flash('Success-toastr','Successfully submited');
             return redirect()->route('patient.requested-consults');
-           
+
         }
 
          return view('frontend.patient.symptoms-checker');
@@ -795,19 +795,19 @@ class PatientController extends Controller
     {
         $case = PatientCase::where('case_id',$id)->first();
         return view('frontend.patient.view_case', compact('case'));
-      
+
     }
 
     public function doctorReview(Request $request)
     {
-            $validator = Validator::make($request->all(), [ 
+            $validator = Validator::make($request->all(), [
             "review_doctor_id"=>"required",
             "rating"=>"required",
             "review"=>"required",
             ]);
 
 
-            if ($validator->fails()) { 
+            if ($validator->fails()) {
               Session::flash('Error-toastr','Please fill in all the fields before proceeding');
               return redirect()->back();
             }
@@ -822,7 +822,7 @@ class PatientController extends Controller
 
             Session::flash('Success-toastr','Successfully submited');
             return redirect()->back();
-        
+
     }
 
 
@@ -844,6 +844,8 @@ class PatientController extends Controller
 
     }
 
-
-
+    public function videoCall($id)
+    {
+        return view('common.video_call_test',compact('id'));
+    }
 }
