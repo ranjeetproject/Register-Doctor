@@ -6309,6 +6309,7 @@ a.Set-Opening-Hours {
         margin-left: 0;
         padding-top: 0px;
     }
+    
 }
 @media(max-width:1200px) and (min-width:992px) {
     .Doctor-Manage-Account-Profile-page {
@@ -6454,13 +6455,19 @@ a.Set-Opening-Hours {
     overflow: auto;
     max-height: 100vh;
     transform: translate(-100%);
-    transition: all 0.8s;
+    
     height: 100vh;
 }
 button.btn.sider-bar-toggle ~ ul.left-nav.main{
     transform: translate(0%);
+    transition: all 0.8s;
 }
-
+.login-page .form-group .form-control {
+    font-size: 14px;
+}
+.col.Choose-Your-Doctor-right.innerpage.Prescriptions-Dispensed-page {
+    max-width: 100%;
+}
 }
 @media(min-width:576px){
     button.btn.sider-bar-toggle {

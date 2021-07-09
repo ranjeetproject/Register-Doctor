@@ -156,8 +156,11 @@
                                         <h4 class="Available-Time">Available Timesolots</h4>
                                     </div>
                                     <div class="col-sm-12">
-                                        <table border="0"> 
-                                            <thead>
+                                        <div class="table-responsive">
+
+                                        
+                                        <table border="0" style=" box-shadow: 0px 0px 32px #ccc;"> 
+                                            <thead >
                                                 <tr>
                                                     <th>Day</th>
                                                     <th>From</th>
@@ -187,6 +190,7 @@ $query->whereIn('time_slot_id',$getBookedSlot);
                                                 
                                             </tbody>
                                         </table>
+                                        </div>
                                     </div>
 
                                     
