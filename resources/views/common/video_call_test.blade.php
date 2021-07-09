@@ -102,7 +102,7 @@ a.btn.back-button{
     width: 100%;
 }
 .local_video_div, .remote_video_div {
-    max-width: 50%;
+    width: 50%;
     height: 100%;
     display: block;
     float: left;
@@ -147,6 +147,9 @@ a.btn.back-button{
 .card-body.live-v-chat-body .videocallBg {
     flex-wrap: wrap;
 }
+}
+canvas {
+    display: none !important;
 }
     </style>
 
