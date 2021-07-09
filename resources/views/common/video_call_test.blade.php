@@ -86,6 +86,7 @@ a.btn.back-button{
     padding: 20px;
     box-shadow: 0px 0px 8px #ccc;
     display:none;
+    background:#fff;
 }
 .card-body.live-v-chat-body {
     width: 100%;
@@ -101,7 +102,7 @@ a.btn.back-button{
     width: 100%;
 }
 .local_video_div, .remote_video_div {
-    width: 50%;
+    max-width: 50%;
     height: 100%;
     display: block;
     float: left;
@@ -123,6 +124,29 @@ a.btn.back-button{
     position: absolute;
     left: 50%;
     transform: translate(-125px);
+}
+@media(max-width:768px){
+    .btn.blue-button,
+.btn.orange-button,
+a.btn.back-button{
+    padding: 10px 14px;
+    font-size:12px;
+}
+.local_video_div, .remote_video_div {
+    width: 100%;
+    max-width:100%;
+    height: auto;
+    display: block;
+    float: left;
+    max-height: 50%;
+}
+.local_video_div video, .remote_video_div video {
+    height: 100%;
+    width: 100%;
+}
+.card-body.live-v-chat-body .videocallBg {
+    flex-wrap: wrap;
+}
 }
     </style>
 
@@ -308,12 +332,11 @@ a.btn.back-button{
         });
         connection.closeSocket();
     };
-$(document).ready(function(){
   $(".btn.btn-success.btn.blue-button.larch").click(function(){
     $(".btn.btn-success.btn.blue-button.larch").hide();
     $(".card-footer.live-v-chat-footer").show();
   });
-});
+
 </script>
 </body>
 </html>
