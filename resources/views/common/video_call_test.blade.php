@@ -8,29 +8,181 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
     <style type="text/css">
+    *{
+        margin:0px;
+        padding:0px;
+        box-sizing: border-box;
+    }
+    header.live-v-chat {
+    position: static;
+    box-shadow: 0px 0px 14px #ccc;
+}
         button.dt-button, div.dt-button, a.dt-button {
             margin-left: 5px;
             padding: 0.3em 1em;
         }
+        header.live-v-chat {
+    padding: 10px;
+    width: 100%;
+    float: left;
+}
+header.live-v-chat img{
+    width: 100px;
+    float: left;
+}
+.btn.blue-button {
+    padding: 12px 24px;
+    border-radius: 50px;
+    background: #0351d2;
+    background: -moz-linear-gradient(right, #0351d2 0%, #25b5ff 100%);
+    background: -webkit-linear-gradient(right, #0351d2 0%, #25b5ff 100%);
+    background: linear-gradient(right, #0351d2 0%, #25b5ff 100%);
+    border: 0px;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+     cursor: pointer;
+}
+.btn.blue-button:hover{
+    background: #0351d2;
+}
+.btn.orange-button {
+    padding: 12px 24px;
+    border-radius: 50px;
+    background: #fc490d;
+    background: -moz-linear-gradient(left, #fc490d 0%, #e92b02 100%);
+    background: -webkit-linear-gradient(left, #fc490d 0%, #e92b02 100%);
+    background: linear-gradient(left, #fc490d 0%, #e92b02 100%);
+    border: 0px;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.btn.orange-button:hover {
+    background: #fc490d;
+
+}
+a.btn.back-button{
+    padding: 10px 24px;
+    border-radius: 50px;
+    border:2px solid #0351d2;
+    color:#0351d2;
+    text-decoration: none;
+    font-size: 16px;
+    outline: none;
+    text-transform: uppercase;
+}
+.btn.back-button:hover{
+    border:2px solid #000;
+    color:#000;
+}
+.card-footer.live-v-chat-footer {
+    float: left;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px 0px 8px #ccc;
+    display:none;
+    background:#fff;
+}
+.card-body.live-v-chat-body {
+    width: 100%;
+    float: left;
+    height: calc(100vh - 157px);
+}
+.card-body.live-v-chat-body .videocallBg {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 100%;
+    float: left;
+    width: 100%;
+}
+.local_video_div, .remote_video_div {
+    width: 50%;
+    height: 100%;
+    display: block;
+    float: left;
+}
+.local_video_div video, .remote_video_div video {
+    height: calc(100vh - 157px);
+    width: 100%;
+}
+.col-md-6.text-center {
+    float: right;
+    padding: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color:#0351d2;
+}
+.btn.btn-success.btn.blue-button.larch {
+    width: 250px;
+    padding: 23px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-125px);
+}
+@media(max-width:768px){
+    .btn.blue-button,
+.btn.orange-button,
+a.btn.back-button{
+    padding: 10px 14px;
+    font-size:12px;
+}
+.local_video_div, .remote_video_div {
+    width: 100%;
+    max-width:100%;
+    height: auto;
+    display: block;
+    float: left;
+    max-height: 50%;
+}
+.local_video_div video, .remote_video_div video {
+    height: 100%;
+    width: 100%;
+}
+.card-body.live-v-chat-body .videocallBg {
+    flex-wrap: wrap;
+}
+}
+canvas {
+    display: none !important;
+}
     </style>
 
 </head>
 <body>
-<div class="card-body">
+<header class="live-v-chat">
+<div class="contanir">
+            <div class="col-md-3">
+                <img src="https://demos.mydevfactory.com/debkumar/registered-doctor/public/images/frontend/images/logo.jpg" alt="">
+            </div>
+            <div class="col-md-6 text-center">
+                live Video Chat
+            </div>
+
+        </div>
+</header>
+<div class="card-body live-v-chat-body">
+        
     <div class="videocallBg">
+    <button id="btn-open-or-join-room" class="btn btn-success btn blue-button larch">Join Room</button>
         <div id="remote-video-container" class="remote_video_div"></div>
         <div id="local-video-container" class="local_video_div"></div>
     </div>
 </div>
-<div class="card-footer">
+<div class="card-footer live-v-chat-footer">
     <input type="hidden" id="txt-roomid" class="form-control" placeholder="unique room Id">
-    <button id="btn-open-or-join-room" class="btn btn-success">Join Room</button>
+    <button id="btn-open-or-join-room" class="btn btn-success btn blue-button">Join Room</button>
     {{-- <button id="start-recording" class="btn btn-warning">Record</button> --}}
-    <button id="stop-recording" class="btn btn-danger" disabled>Call End</button>
+    <button id="stop-recording" class="btn btn-danger btn orange-button" disabled>Call End</button>
 
 
-    <a id="save-recording" class="btn btn-dark float-right"
-       href="{{ route('admin.dashboard') }}"> Back</a>
+    <a id="save-recording" class="btn btn-dark float-right back-button"
+       href="{{ route('admin.dashboard') }}"> Back </a>
 </div>
 
 
@@ -183,6 +335,11 @@
         });
         connection.closeSocket();
     };
+  $(".btn.btn-success.btn.blue-button.larch").click(function(){
+    $(".btn.btn-success.btn.blue-button.larch").hide();
+    $(".card-footer.live-v-chat-footer").show();
+  });
+
 </script>
 </body>
 </html>

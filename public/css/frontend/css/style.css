@@ -6858,13 +6858,19 @@ a.Set-Opening-Hours img {
     max-height: 100vh;
     -webkit-transform: translate(-100%);
             transform: translate(-100%);
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
     height: 100vh;
   }
   button.btn.sider-bar-toggle ~ ul.left-nav.main {
     -webkit-transform: translate(0%);
             transform: translate(0%);
+    -webkit-transition: all 0.8s;
+    transition: all 0.8s;
+  }
+  .login-page .form-group .form-control {
+    font-size: 14px;
+  }
+  .col.Choose-Your-Doctor-right.innerpage.Prescriptions-Dispensed-page {
+    max-width: 100%;
   }
 }
 
