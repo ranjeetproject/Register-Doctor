@@ -846,6 +846,8 @@ class PatientController extends Controller
 
     public function videoCall($id)
     {
-        return view('common.video_call_test',compact('id'));
+        $case = PatientCase::where('accept_status',1)->where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_id',$id)->first();
+
+        return view('common.video_call_test',compact('case'));
     }
 }

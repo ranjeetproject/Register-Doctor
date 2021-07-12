@@ -817,7 +817,8 @@ switch ($request->day) {
 
     public function videoCallDoc($id)
     {
-        return view('common.video_call_test',compact('id'));
+        $case = PatientCase::where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('case_id',$id)->first();
+        return view('common.video_call_test',compact('case'));
     }
 
 }
