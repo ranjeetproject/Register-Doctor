@@ -9,6 +9,7 @@ use App\Models\DrugsDetails;
 use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
+use App\Prescription;
 use App\Models\SummaryDiagnosis;
 use App\Models\SymptromsDetails;
 use App\Models\TimeSlot;
@@ -215,15 +216,61 @@ class DoctorController extends Controller
     }
 
 
-     public function sendPatientMessage(Request $request)
+    public function sendPatientMessage(Request $request)
     {
         return view('frontend.doctor.send_patient_message');
     }
 
-     public function createPrescription(Request $request)
+    public function createPrescription(Request $request)
+    { 
+      //print_r($request->drug);
+      if($request->drug !=''){
+        $priscription = new Prescription();
+        $priscription->doc_id = $request->d_id;
+        $priscription->p_id = $request->p_id;
+        $priscription->case_no = $request->c_id;
+        $priscription->guardian_name = '';
+        $priscription->upn = '';//$request->d_id;
+        $priscription->drug = $request->drug;
+        $priscription->dose = $request->dose;
+        $priscription->frequency = $request->frequency;
+        $priscription->route = $request->route;
+        $priscription->duration = $request->duration;
+        $priscription->comments = $request->comments;
+        $priscription->created_at = date("Y-m-d h:i:s");
+        $priscription->updated_at = date("Y-m-d h:i:s");
+        $priscription->save();
+        print_r($priscription);
+      }
+
+
+      $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
+      return view('frontend.doctor.create_prescription',compact('cases'));
+    }
+    // public function AddPrescription(Request $request)
+    // {
+    //     $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
+    //     return view('frontend.doctor.create_prescription',compact('cases'));
+    // }
+    public function ajaxCasedetails(Request $request)
     {
-        $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
-        return view('frontend.doctor.create_prescription',compact('cases'));
+        //print_r($request->case_id);
+        $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
+        $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
+        // foreach($case as $d){
+        //   print_r($d->user->name);
+        // }
+        $return = array('case_details'=>$case, 'prescription'=>$prescription);
+        return response()->json( $return);
+        // //$case = PatientCase::where( 'case_id', $request->case_id)->get();
+        // $case =  PatientCase::find( $request->case_id, 'case_id')->user();
+        // //$user_details = $case->user()->get();
+        // //print_r($case);
+        // foreach($case as $c){
+        //   echo $c->user_id;
+        // }
+        //$cases = Prescription::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
+        //return view('frontend.doctor.create_prescription',compact('cases'));
     }
 
      public function prescriptionIssues(Request $request)

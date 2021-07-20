@@ -46,7 +46,7 @@
 
                                                 <li>
 
-                                                    For Adults if this is the first prescription being issued on this website they require live video consultation. However if the adult has previously been issued a prescription (for any drug) you may use any from of communication including accepting typed requests, as per your professional judgment.
+                                                    For Adults if this is the first prescription being issued on this website they require live video consultation. However if the adult has previously been issued a prescription (for any drug) you may use any from of communication including accepting typed requests, as per your professional judgment.
 
                                                 </li>
 
@@ -499,3 +499,4 @@
 
 </script>
 @endsection
+{"mode":"full","isActive":false}
