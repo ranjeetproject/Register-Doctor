@@ -6658,6 +6658,52 @@ form.form-inline.filter-buy.d-flex {
   padding: 0px 0px 30px;
 }
 
+.file-count {
+  position: relative;
+  max-width: 50px;
+}
+
+.file-count span {
+  position: absolute;
+  background-color: #ffc107;
+  right: -14px;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  border-radius: 50%;
+  bottom: 0;
+}
+
+.file-count i {
+  font-size: 50px;
+  color: #294876;
+}
+
+a.Set-Opening-Hours {
+  border-radius: 10px;
+  background: #f9fafc;
+  margin-left: 15px;
+  padding: 8px;
+  font-size: 16px;
+  line-height: 16px;
+  border: 1px solid #f2f2f2;
+  color: #000;
+}
+
+a.Set-Opening-Hours img {
+  width: 25px;
+  margin-top: -2px;
+}
+
+@media (max-width: 1080px) {
+  .Manage-Profile .main-form-fild .form-group-deliver-details {
+    margin-left: 0;
+    padding-top: 0px;
+  }
+}
+
 @media (max-width: 1200px) and (min-width: 992px) {
   .Doctor-Manage-Account-Profile-page {
     max-width: calc(100% - 240px);
@@ -6766,13 +6812,27 @@ form.form-inline.filter-buy.d-flex {
   }
 }
 
-@media (max-width: 767px) and (min-width: 466px) {
+@media (max-width: 767px) and (min-width: 576px) {
+  .col.Post-prescription-right.Message-Doctor-to-Patient-via-Left-Hand-Navigation-page,
+  .col.Post-prescription-right.innerpage.Post-prescription-page.select.pharmacy.Pharmacy-locator,
+  .col.Post-prescription-right.Incoming-Prescription-Requests-page {
+    max-width: calc(100% - 240px);
+  }
   .topn-nav-details a:after {
     top: 2px;
+  }
+  .col.Post-prescription-right.innerpage.Choose-Your-Doctor-page {
+    width: calc(100% - 240px);
+  }
+  .Manage-Profile .main-form-fild .form-group-deliver-details {
+    margin-bottom: 10px;
   }
 }
 
 @media (max-width: 575px) {
+  .Manage-Profile .main-form-fild .form-group-deliver-details {
+    margin-bottom: 10px;
+  }
   .Doctor-Dashboard-page .incoming-request a.card {
     min-width: 100%;
   }
@@ -6798,12 +6858,19 @@ form.form-inline.filter-buy.d-flex {
     max-height: 100vh;
     -webkit-transform: translate(-100%);
             transform: translate(-100%);
-    -webkit-transition: all 0.8s;
-    transition: all 0.8s;
+    height: 100vh;
   }
   button.btn.sider-bar-toggle ~ ul.left-nav.main {
     -webkit-transform: translate(0%);
             transform: translate(0%);
+    -webkit-transition: all 0.8s;
+    transition: all 0.8s;
+  }
+  .login-page .form-group .form-control {
+    font-size: 14px;
+  }
+  .col.Choose-Your-Doctor-right.innerpage.Prescriptions-Dispensed-page {
+    max-width: 100%;
   }
 }
 

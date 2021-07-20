@@ -93,3 +93,11 @@ Route::any('/login', 'admin\AdminController@adminLogin')->name('login');
 // //  *************for admin *************//
 
 
+// Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => 'PaypalController@payWithPaypal',));
+// Route::post('paypal', array('as' => 'paypal','uses' => 'PaypalController@postPaymentWithpaypal',));
+// Route::get('paypal', array('as' => 'status','uses' => 'PaypalController@getPaymentStatus',));
+
+Route::get('payment/{case_id}','CheckoutController@checkout');
+Route::post('payment','CheckoutController@afterpayment')->name('payment.credit-card');
+
+

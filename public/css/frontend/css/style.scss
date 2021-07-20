@@ -6270,8 +6270,47 @@ form.form-inline.filter-buy.d-flex {
 
 }
 
-
-
+.file-count{
+    position: relative;
+    max-width: 50px;
+    span{
+        position: absolute;
+        background-color: #ffc107;
+        right: -14px;
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        border-radius: 50%;
+        bottom: 0;;
+    }
+     i {
+    font-size: 50px;
+    color: #294876;
+} 
+}
+a.Set-Opening-Hours {
+    border-radius: 10px;
+    background: #f9fafc;
+    margin-left: 15px;
+    padding: 8px;
+    font-size: 16px;
+    line-height: 16px;
+    border: 1px solid #f2f2f2;
+    color: #000;
+    img{
+        width: 25px;
+        margin-top: -2px;
+    }
+}
+@media(max-width:1080px) {
+    .Manage-Profile .main-form-fild .form-group-deliver-details {
+        margin-left: 0;
+        padding-top: 0px;
+    }
+    
+}
 @media(max-width:1200px) and (min-width:992px) {
     .Doctor-Manage-Account-Profile-page {
         max-width: calc(100% - 240px);
@@ -6373,12 +6412,26 @@ form.form-inline.filter-buy.d-flex {
         min-height: 38px;
     }
 }
-@media(max-width:767px) and (min-width:466px){
+@media(max-width:767px) and (min-width:576px){
+    .col.Post-prescription-right.Message-Doctor-to-Patient-via-Left-Hand-Navigation-page,
+    .col.Post-prescription-right.innerpage.Post-prescription-page.select.pharmacy.Pharmacy-locator,
+    .col.Post-prescription-right.Incoming-Prescription-Requests-page {
+        max-width: calc(100% - 240px);
+    }
     .topn-nav-details a:after {
         top: 2px;
     }
+    .col.Post-prescription-right.innerpage.Choose-Your-Doctor-page {
+        width: calc(100% - 240px);
+    }
+    .Manage-Profile .main-form-fild .form-group-deliver-details {
+        margin-bottom: 10px;
+    }
 }
 @media(max-width:575px){
+    .Manage-Profile .main-form-fild .form-group-deliver-details {
+        margin-bottom: 10px;
+    }
     .Doctor-Dashboard-page .incoming-request a.card {
         min-width: 100%;
     }
@@ -6402,10 +6455,18 @@ form.form-inline.filter-buy.d-flex {
     overflow: auto;
     max-height: 100vh;
     transform: translate(-100%);
-    transition: all 0.8s;
+    
+    height: 100vh;
 }
 button.btn.sider-bar-toggle ~ ul.left-nav.main{
     transform: translate(0%);
+    transition: all 0.8s;
+}
+.login-page .form-group .form-control {
+    font-size: 14px;
+}
+.col.Choose-Your-Doctor-right.innerpage.Prescriptions-Dispensed-page {
+    max-width: 100%;
 }
 }
 @media(min-width:576px){
@@ -6418,10 +6479,10 @@ button.btn.sider-bar-toggle {
     text-align: center;
     width: 100%;
     background: #0351d2;
-    background: -webkit-gradient(linear, right top, left top, from(#0351d2), to(#25b5ff));
     background: linear-gradient(right, #0351d2 0%, #25b5ff 100%);
     color: #fff;
     padding: 10px;
+    
     margin-bottom: 12px;
     
 }

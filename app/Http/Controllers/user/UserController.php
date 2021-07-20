@@ -141,8 +141,8 @@ class UserController extends Controller
          // $admin = User::whereRole(1)->first();
          // $admin->notify(new UserNotification($notifyDetails));
 
-        Mail::to($request->email)->send(new Registration($user->id));
         DB::commit();
+        Mail::to($request->email)->send(new Registration($user->id));
     	if(!empty($user->id)){
             Session::flash('Success-sweet', 'Thank you for your Registration. Please check your email and activate your account.');
           } else {

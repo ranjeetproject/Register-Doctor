@@ -155,17 +155,17 @@
 
                                     </div>
                                     <div class="row books-btn">
-                                        <div class="col">
+                                        <div class="col-md">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_chat_fee }} per 15 mins</p>
                                             <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-md">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_video_fee }} per 15 mins</p>
 
                                             <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a>
                                             {{-- <button type="submit" class="btn btn-block Book-Live">Book Live Video</button> --}}
                                         </div>
-                                        <div class="col-sm-5">
+                                        <div class="col-md-5">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_qa_fee }} per 15 mins</p>
                                             <button type="button"  onclick="bookLiveChats('{{$doctor->id}}')" class="btn btn-block Request">Request Q&A <br> <small>Turnaround Time 5 hrs 2 days</small></button>
                                         </div>
@@ -223,15 +223,15 @@
 
                                     </div>
                                     <div class="row books-btn">
-                                        <div class="col">
+                                        <div class="col-md">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins</p>
                                             <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-md">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->doctor->profile->dr_live_video_fee }} per 15 mins</p>
                                             <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a>
                                         </div>
-                                        <div class="col-sm-5">
+                                        <div class="col-md-5">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins</p>
                                             <button type="button" onclick="bookLiveChats('{{$doctor->doctor->id}}')" class="btn btn-block Request">Request Q&A <br> <small>Turnaround Time 5 hrs 2 days</small></button>
                                         </div>
