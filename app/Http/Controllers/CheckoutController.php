@@ -6,11 +6,12 @@ use App\Models\PatientCase;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Session;
+use Stripe;
 
 class CheckoutController extends Controller
 {
     public function checkout($case_id='')
-    {   
+    {
 
         $case = PatientCase::where('case_id',$case_id)->with('doctor.profile')->withCount('getBookingSlot')->first();
 
@@ -35,11 +36,11 @@ if($case->questions_type == 4){
 
         // Enter Your Stripe Secret
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-                
+
         // $amount = 10;
         $amount_for_stripe = $amount * 100;
         $amount_for_stripe = (int) $amount_for_stripe;
-        
+
         $payment_intent = \Stripe\PaymentIntent::create([
             'description' => 'Stripe Test Payment',
             'amount' => $amount_for_stripe,

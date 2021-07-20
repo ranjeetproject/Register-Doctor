@@ -169,32 +169,7 @@ canvas {
 <div class="card-body live-v-chat-body">
 
     <div class="videocallBg">
-        @php
-            $diff_timer = 0;
-            $diff_timer_ref = 0;
-        @endphp
-        @foreach ($case->getBookingSlot as $time_slot)
-            @if (date('H:i:s', strtotime($time_slot->getSlot->start_time)) <= date('H:i:s') and date('H:i:s', strtotime($time_slot->getSlot->end_time)) > date('H:i:s'))
-            @php
-                $diff = strtotime(date('H:i:s', strtotime($time_slot->getSlot->end_time)))-strtotime(date('H:i:s'));
-                $diff_timer = $diff*1000;
-            @endphp
-            <button id="btn-open-or-join-room" class="btn btn-success btn blue-button larch join">Join Room</button>
-            @else
-            @php
-            // dd($time_slot->getSlot->start_time);
-                $diff = strtotime(date('H:i:s', strtotime($time_slot->getSlot->start_time)))-strtotime(date('H:i:s'));
-                $diff_timer_ref = $diff*1000;
-            @endphp
-            <button class="btn btn-success btn blue-button larch">Calling time {{date('h:i a', strtotime($time_slot->getSlot->start_time)).' -- '.date('h:i a', strtotime($time_slot->getSlot->end_time))}}</button>
-            @endif
-
-        @endforeach
-        {{-- @if ($case->booking_date==date('Y-m-d'))
-        <button id="btn-open-or-join-room" class="btn btn-success btn blue-button larch join">Join Room</button>
-        @else
-        <button class="btn btn-success btn blue-button larch">Calling Date {{date('m-d-Y', strtotime($case->booking_date))}}</button>
-        @endif --}}
+    <button id="btn-open-or-join-room" class="btn btn-success btn blue-button larch">Join Room</button>
         <div id="remote-video-container" class="remote_video_div"></div>
         <div id="local-video-container" class="local_video_div"></div>
     </div>
@@ -207,11 +182,10 @@ canvas {
 
 
     <a id="save-recording" class="btn btn-dark float-right back-button"
-       href="{{ Auth::guard('siteDoctor')->check() ? route('doctor.dashboard') : route('patient.dashboard') }}"> Back </a>
+       href="{{ route('admin.dashboard') }}"> Back </a>
 </div>
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="../../resources/js/jquery-3.5.1.min.js" ></script>
 <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
 <script src="https://cdn.webrtc-experiment.com:443/FileBufferReader.js"></script>
 <script src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js"></script>
@@ -261,7 +235,7 @@ canvas {
 
     // 7177121012021120405
     var roomid = document.getElementById('txt-roomid');
-    roomid.value = '{{ $case->case_id }}';
+    roomid.value = '{{ $id }}';
 
     document.getElementById('btn-open-or-join-room').onclick = function () {
         console.log('join Room Button');
@@ -319,7 +293,7 @@ canvas {
         });
         var formData = new FormData();
         formData.append('video_blob', file);
-        formData.append('room_id', '{{ $case->case_id }}');
+        formData.append('room_id', '{{ $id }}');
         formData.append('_token', 'yz2RRZcw4QTL0LpbnwWJigudAblwJHLyenpGSU5l');
         makeXMLHttpRequest('http://localhost/vim/public/admin/profile-verification-call-record-video', formData, function () {
             console.log('File upload is complete');
@@ -360,39 +334,8 @@ canvas {
         });
         connection.closeSocket();
     };
-
-    var doIt = function() {
-        $("div.my").text("My message");this.disabled = true;
-        mediaRecorder.stop();
-        $("#start-recording").prop("disabled", false);
-        $("#save-recording").prop("disabled", false);
-        $("#btn-open-or-join-room").prop("disabled", false);
-
-        // connection closed code are below
-        connection.getAllParticipants().forEach(function (pid) {
-            connection.disconnectWith(pid);
-        });
-        connection.attachStreams.forEach(function (localStream) {
-            localStream.stop();
-        });
-        connection.closeSocket();
-    }
-    if ({{ $diff_timer }}>0) {
-
-     window.setTimeout(doIt, {{ $diff_timer }});
-    }
-
-    var doRef = function() = {
-        window.location.reload();
-    }
-
-    if ({{ $diff_timer_ref }}>0) {
-
-        window.setTimeout(doRef, {{ $diff_timer_ref }});
-    }
-
-  $(".btn.btn-success.btn.blue-button.larch.join").click(function(){
-    $(".btn.btn-success.btn.blue-button.larch.join").hide();
+  $(".btn.btn-success.btn.blue-button.larch").click(function(){
+    $(".btn.btn-success.btn.blue-button.larch").hide();
     $(".card-footer.live-v-chat-footer").show();
   });
 

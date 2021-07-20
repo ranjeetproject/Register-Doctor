@@ -517,8 +517,8 @@ class PatientController extends Controller
 
         $available_days = DoctorAvailableDays::where('user_id',$doctor->id)->where('date','>=',date('Y-m-d'))->get();
         // return $available_days;
-      $get_current_day = DoctorAvailableDays::where('user_id',$doctor->id)->where('date',date('Y-m-d'))->get();
-      $weekly_available_days = WeeklyAvailableDays::where('user_id',$doctor->id)->orderBy('num_val_for_day')->get();
+        $get_current_day = DoctorAvailableDays::where('user_id',$doctor->id)->where('date',date('Y-m-d'))->get();
+        $weekly_available_days = WeeklyAvailableDays::where('user_id',$doctor->id)->orderBy('num_val_for_day')->get();
 
         return view('frontend.patient.view_doctor_profile',compact('doctor','available_days','get_current_day','weekly_available_days','getBookedSlot'));
 
@@ -848,6 +848,6 @@ class PatientController extends Controller
     {
         $case = PatientCase::where('accept_status',1)->where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_id',$id)->first();
 
-        return view('common.video_call_test',compact('case'));
+        return view('common.video_call_test',compact('case','id'));
     }
 }

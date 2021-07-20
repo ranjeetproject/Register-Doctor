@@ -22,9 +22,9 @@
                                 All prescription fees are inclusive of multiple drugs if clinically indicated
                             </h2>
                             <p>
-                                Doctors will only provide a prescription if clinically indicated and will not issue a refund if they decide not prescride a drug Controlled drugs cannot be prescribed. 
+                                Doctors will only provide a prescription if clinically indicated and will not issue a refund if they decide not prescride a drug Controlled drugs cannot be prescribed.
                                 <a href="#"> Click to see examples</a>
-                            </p>    
+                            </p>
                           </div>
                       </div>
                       <div class="row my-3 pick-a-prescriber">
@@ -72,7 +72,7 @@
                                     After consultation prescription is posted to you(take to any Pharmacist) or electronically to participating pharmacist
                                   </li>
                                   <li>
-                                    You pay pharmacist for drug 
+                                    You pay pharmacist for drug
                                   </li>
                               </ul>
                           </div>
@@ -221,12 +221,14 @@
                                     <div class="row books-btn">
                                         <div class="col">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_chat_fee }} per 15 mins</p>
-                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a>
+                                            {{-- <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a> --}}
+                                            <a href="{{route('patient.book-prescriptions',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a>
                                         </div>
                                         <div class="col">
                                             <p><i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_video_fee }} per 15 mins</p>
 
-                                            <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a>
+                                            {{-- <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a> --}}
+                                            <a href="{{route('patient.book-prescriptions',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a>
                                             {{-- <button type="submit" class="btn btn-block Book-Live">Book Live Video</button> --}}
                                         </div>
                                         <div class="col-sm-5">
@@ -259,7 +261,7 @@
                                         <div class="col-sm-12">
                                             <div class="reting-and-other-info">
                                                 <div class="rating-list">
-                                                    
+
                                                 <span onclick="doctorRating('{{$doctor->id}}')">
                                                      {!!getReview($doctor->id)!!}
                                                   </span>
@@ -356,14 +358,14 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <textarea class="form-control" name="health_problem" id="exampleFormControlTextarea1" rows="5" placeholder="Type your helth query here..."></textarea>
-                          </div>                        
+                          </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Upload Attachments <i class="fal fa-paperclip"></i></label>
                             <input type="file" name="case_file" class="form-control-file" id="exampleFormControlFile1" ><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
                           </div>
-                         
+
                     </div>
                     <div class="col-sm-12 ask-submit">
                         <button type="submit" class="btn orange-button">Submit Your Query</button>
@@ -395,7 +397,7 @@
                 <input type="hidden" name="doctor_id" id="doctor_id">
                 <input type="hidden" name="case_type" value="2">
 
-                
+
 
                 <div class="row">
                   <div class="col-sm-12 mb-2">
@@ -410,14 +412,14 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
                     <div class="col-sm-12">
                         <div class="form-group">
                             <textarea class="form-control"  name="health_problem" id="exampleFormControlTextarea1" rows="5" placeholder="Type your helth query here..."></textarea>
-                          </div>                        
+                          </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Upload Attachments <i class="fal fa-paperclip"></i></label>
                             <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" multiple><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
                           </div>
-                         
+
                     </div>
                     <div class="col-sm-12 mb-2">
                       <p>If there is any specific medicine you have in mind you may mention it here.</p>
@@ -425,7 +427,7 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
                       <div class="col-sm-12">
                           <div class="form-group">
                               <textarea class="form-control" name="medicine_name" id="exampleFormControlTextarea1" rows="5" placeholder="Type here..."></textarea>
-                            </div>                        
+                            </div>
                       </div>
                       <div class="col-sm-12 mb-2">
                         <p>The doctor will prescribe what he feels is the most appropriate medicine</p>
@@ -471,14 +473,14 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
                     <div class="col-sm-12">
                         <div class="form-group">
                             <textarea class="form-control"  name="health_problem" id="exampleFormControlTextarea1" rows="5" placeholder="Type your helth query here..."></textarea>
-                          </div>                        
+                          </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Upload Attachments <i class="fal fa-paperclip"></i></label>
                             <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" multiple><br> <img  data-toggle="tooltip" data-placement="right" title="" data-original-title="One line definition" src="images/ex-icon.png" alt="">
                           </div>
-                         
+
                     </div>
                     <div class="col-sm-12 mb-2">
                       <p>If there is any specific medicine you have in mind you may mention it here.</p>
@@ -486,7 +488,7 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
                       <div class="col-sm-12">
                           <div class="form-group">
                               <textarea class="form-control" name="medicine_name" id="exampleFormControlTextarea1" rows="5" placeholder="Type here..."></textarea>
-                            </div>                        
+                            </div>
                       </div>
                       <div class="col-sm-12 mb-2">
                         <p>The doctor will prescribe what he feels is the most appropriate medicine</p>
@@ -523,7 +525,7 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
                     <h5>
                       Please rate your experience with doctor from 1 to 5 star
                     </h5>
-                    
+
                   </div>
                   <div class="col-sm-12 py-4">
                     <div class="form-check">
@@ -578,7 +580,7 @@ No fever, usually gets better on antibiotics, Quite painful, What should take?
                       <div class="col-sm-12">
                           <div class="form-group">
                               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type here..." name="review" required></textarea>
-                            </div>                        
+                            </div>
                       </div>
                       <div class="col-sm-12 mb-2">
                         <p>To bookmark this doctor in case you want to consult them again click here</p>

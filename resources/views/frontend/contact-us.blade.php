@@ -3,35 +3,36 @@
 @section('content')
     <section class="for-w-100 main-content innerpage  Contact-Us-page">
         <div class="container">
-            
+
             <div class="row">
                 <div class="col-sm-8 cont-in-left">
                     <h1 class="inner-page-title">
                         Get in touch
                     </h1>
-                    <form>
+                    <form method="POST" action="{{ url('contact-us') }}">
+                        @csrf
                         <div class="row">
                             <div class="col">
                             <label for="formGroupExampleInput">Name</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="name" required>
                             </div>
                             <div class="col">
                             <label for="formGroupExampleInput">Contact No</label>
-                            <input type="tel" class="form-control">
+                            <input type="tel" class="form-control" name="contact_no" required>
                             </div>
                             <div class="col-sm-12">
                             <label for="formGroupExampleInput">Email Address</label>
-                            <input type="email" class="form-control" >
+                            <input type="email" class="form-control" name="email_id" required>
                             </div>
                             <div class="col-sm-12">
                             <label for="formGroupExampleInput">Comment</label>
-                            <textarea class="form-control"  rows="4"></textarea>
+                            <textarea class="form-control"  rows="4" name="comment" required></textarea>
                             </div>
                             <div class="col-sm-12">
                             <button type="submit" class="btn btn-primary blue-button">Submit</button>
                             </div>
                         </div>
-                        </form>
+                    </form>
                 </div>
                 <div class="col-sm-4 cont-in-right">
                     <h1 class="inner-page-title">

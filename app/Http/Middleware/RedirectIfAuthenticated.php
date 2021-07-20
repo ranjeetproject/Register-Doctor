@@ -19,9 +19,9 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         //dd(Auth::guard('siteDoctor')->user());
-        
+
         if(Auth::guard('sitePatient')->check()){
-            return redirect(RouteServiceProvider::PATIENT_HOME);
+            return redirect()->intended(RouteServiceProvider::PATIENT_HOME);
         }
         if (Auth::guard('siteDoctor')->check()) {
             return redirect(RouteServiceProvider::DOCTOR_HOME);

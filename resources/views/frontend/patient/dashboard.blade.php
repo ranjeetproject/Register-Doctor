@@ -5,7 +5,7 @@
         <div class="row pd-mr-top">
             <div class="col-sm">
                 <h2>Option 1</h2>
-                <h3>Choose & Book  <small class="blue">Pick a Doctor</small></h3>
+                <h3>Choose & Book  <a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" target="_blank" rel="noopener noreferrer"><small class="blue">Pick a Doctor</small></a></h3>
                 <div class="opction-one">
                     <div class="opction-one-top-image">
                         <img src="{{ asset('public/images/frontend/images/opction-one-top-image3.png') }}" alt="">
@@ -29,7 +29,7 @@
                                             or Typed Q&A</li>
                                     </ul>
                                     <div class="Book-Appointment">
-                                        <span>Book Appointment</span><a href="#" target="_blank" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
+                                        <span>Book Appointment</span><a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" target="_blank" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
                                     </div>
                                 </div>
 
