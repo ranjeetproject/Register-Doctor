@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="home-banner-left-cont">
-                    <a href="" class="banner-left">
+                    <a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" class="banner-left">
                         <h1>
                             <small>Membership is <span>Free</span></small><br>
                             Click for a Specialist

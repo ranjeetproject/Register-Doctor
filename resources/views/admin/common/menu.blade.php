@@ -82,6 +82,24 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('admin.h_doc')}}" class="nav-link {{ Request::is('admin/handy-document*') ? 'active' : '' }}">
+            <i class="nav-icon fa fa-file" aria-hidden="true"></i>
+              <p>
+                Handy document
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.c_us')}}" class="nav-link {{ Request::is('admin/contact-us*') ? 'active' : '' }}">
+            <i class="nav-icon far fa-address-book" aria-hidden="true"></i>
+              <p>
+                Contact us
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{ route('admin.settings') }}" class="nav-link {{ Request::is('admin/settings*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-cogs"></i>
               <p>

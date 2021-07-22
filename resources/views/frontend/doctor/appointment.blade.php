@@ -54,7 +54,7 @@
                                             <td>
                                               @forelse($case->getBookingSlot as $time_slot)
 
-                                              {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} -- {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>
+                                              {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} -- {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br>
 
                                               @empty
 
@@ -63,14 +63,16 @@
 
                                             <td>
                                                 @if($case->questions_type == 2)
-                                                <a href="{{route('doctor.video-call',$case->case_id)}}" target="_blank">
-                                                    Live Video
-                                                    <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt="">
-                                                    <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
-                                                </a>
+                                                    @if($case->booking_date==date('Y-m-d'))
+                                                    <a href="{{route('doctor.video-call',$case->case_id)}}" target="_blank">
+                                                        Live Video
+                                                        <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt="">
+                                                        <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
+                                                    </a>
+                                                    @endif
                                                 @else
 
-                                                    <a href="{{route('patient.chats',$case->case_id)}}">
+                                                    <a href="{{route('doctor.chats',$case->case_id)}}">
                                                     @if($case->questions_type == 1)
                                                     Live Chat
                                                     <br><img src="{{ asset('public/images/frontend/images/Live-Text-Chat.png')}}" alt="">

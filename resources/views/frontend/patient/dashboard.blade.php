@@ -5,7 +5,7 @@
         <div class="row pd-mr-top">
             <div class="col-sm">
                 <h2>Option 1</h2>
-                <h3>Choose & Book  <small class="blue">Pick a Doctor</small></h3>
+                <h3>Choose & Book  <a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" target="_blank" rel="noopener noreferrer"><small class="blue">Pick a Doctor</small></a></h3>
                 <div class="opction-one">
                     <div class="opction-one-top-image">
                         <img src="{{ asset('public/images/frontend/images/opction-one-top-image3.png') }}" alt="">
@@ -17,7 +17,7 @@
                                 <div class="opction-one-bottom-left">
                                     <h4>In Option 1</h4>
                                     <img src="{{ asset('public/images/frontend/images/doc-pic.jpg') }}" class="d-block" alt="...">
-                                    
+
                                 </div>
                                 <div class="opction-one-bottom-right">
                                     <ul>
@@ -29,11 +29,11 @@
                                             or Typed Q&A</li>
                                     </ul>
                                     <div class="Book-Appointment">
-                                        <span>Book Appointment</span><a href="#" target="_blank" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
+                                        <span>Book Appointment</span><a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" target="_blank" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
                                     </div>
                                 </div>
-                                
-                                
+
+
                             </div>
                             <div class="carousel-item ">
                                 <div class="opction-one-bottom-left">
@@ -41,19 +41,19 @@
                                 <img src="{{ asset('public/images/frontend/images/doc-pic.jpg') }}" class="d-block" alt="...">
                                 <div class="reting-and-other-info" style="color: #ffc107;margin-top: 5px;font-size: 10px;">
                                     <div class="rating-list">
-                                    
+
                                         <i class="fas fa-star reting"></i>
                                         <i class="fas fa-star reting"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt reting"></i> 
+                                        <i class="fas fa-star-half-alt reting"></i>
                                     </div>
                                     <div class="rating-list-bottom">
                                         <i class="far fa-thumbs-up reting"></i>
                                         <i class="far fa-thumbs-up reting"></i>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
                                 </div>
                                 <div class="opction-one-bottom-right">
@@ -76,19 +76,19 @@
                                 <img src="{{ asset('public/images/frontend/images/doc-pic.jpg') }}" class="d-block" alt="...">
                                 <div class="reting-and-other-info" style="color: #ffc107;margin-top: 5px;font-size: 10px;">
                                     <div class="rating-list">
-                                    
+
                                         <i class="fas fa-star reting"></i>
                                         <i class="fas fa-star reting"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt reting"></i> 
+                                        <i class="fas fa-star-half-alt reting"></i>
                                     </div>
                                     <div class="rating-list-bottom">
                                         <i class="far fa-thumbs-up reting"></i>
                                         <i class="far fa-thumbs-up reting"></i>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
                                 </div>
                                 <div class="opction-one-bottom-right">
@@ -106,7 +106,7 @@
                             </div>
                             </div>
                             </div>
-                        
+
                         </div>
                     </div>
 
@@ -139,7 +139,7 @@
                         @csrf
 
                         <input type="hidden" name="questions_type" value="3">
-                       
+
 
 
                         <div class="form-group">
@@ -150,20 +150,20 @@
                             <span>Upload Attachments <i class="far fa-paperclip"></i></span>
                         </div>
                         <button type="submit" class="btn orange-button">Submit Your query</button>
-                    </form> 
+                    </form>
                     <h4>In Option 2</h4>
                     <ul>
                         <li>
                             Your query is sent to a panel of Doctors free
                         </li>
                         <li>
-                            Standard Fee     <spna>14.99</spna> charged only if Doctor takes case 
+                            Standard Fee     <spna>14.99</spna> charged only if Doctor takes case
                         </li>
                         <li>
                             Includes up to 3 exchanges with doctor
                         </li>
                         <li>
-                            Rate your Doctor 
+                            Rate your Doctor
                         </li>
                     </ul>
                 </div>
@@ -174,9 +174,9 @@
                 <a href="{{route('patient.requested-consults')}}">
                 <div class="pd-btm-details">
                     <div class="pd-btm-details-cont">
-                        <p>Sonsults Quick Questions</p>
+                        <p>Consults Quick Questions</p>
                         <img src="{{ asset('public/images/frontend/images/pd-icon3.png') }}" alt="">
-                        
+
                     </div>
                 </div>
               </a>
@@ -187,7 +187,7 @@
                         <p>Messages from Doctor,
                             Pharmacist, Admin</p>
                         <img src="{{ asset('public/images/frontend/images/pd-icon4.png') }}" alt="">
-                        
+
                     </div>
                 </div>
             </div>
@@ -197,7 +197,7 @@
                     <div class="pd-btm-details-cont">
                         <p>Your Prescriptions</p>
                         <img src="{{ asset('public/images/frontend/images/pd-icon2.png') }}" alt="">
-                        
+
                     </div>
                 </div>
                 </a>
@@ -207,7 +207,7 @@
                     <div class="pd-btm-details-cont">
                         <p>Answered Questions</p>
                         <img src="{{ asset('public/images/frontend/images/pd-icon1.png') }}" alt="">
-                        
+
                     </div>
                 </div>
             </div> --}}
@@ -216,5 +216,5 @@
 @endsection
 
 @push('scripts')
- 
+
 @endpush

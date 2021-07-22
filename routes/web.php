@@ -5,6 +5,7 @@ Route::get('/about-us', 'frontend\FrontendController@getaboutUs')->name('aboutUs
 Route::get('/news', 'frontend\FrontendController@getNews')->name('news');
 Route::get('/faq', 'frontend\FrontendController@getFaq')->name('userFaq');
 Route::get('/contact-us', 'frontend\FrontendController@contactUs')->name('contactUs');
+Route::post('/contact-us', 'frontend\FrontendController@contactUsPost');
 Route::get('/terms-condition/{type?}', 'frontend\FrontendController@getTermsCondition')->name('termsCondition');
 Route::get('/privacy-policy', 'frontend\FrontendController@getPrivacyPolicy')->name('privacyPolicy');
 //Route::get('/home', 'frontend\FrontendController@index');

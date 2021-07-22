@@ -10,7 +10,7 @@
                <div class="opction-one">
                   <div class="opction-one-top-image">
                      <img src="{{ asset('public/images/frontend/images/opction-one-top-image3.png') }}" alt="">
-                     
+
                   </div>
                   <div class="opction-one-bottom">
                      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
@@ -30,7 +30,7 @@
                                        or Typed Q&A</li>
                                  </ul>
                                  <div class="Book-Appointment">
-                                    <span>Book Appointment</span><a href="#" target="_blank" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
+                                    <span>Book Appointment</span><a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
                                  </div>
                               </div>
                            </div>
@@ -45,12 +45,12 @@
                      <div class="Prescriptions-top">
                         <h3>Prescriptions<br><small>In 3 Easy Steps</small></h3>
                         <img src="{{ asset('public/images/frontend/images/m-pr-pic1.jpg') }}" alt="">
-                        <button type="submit" class="btn blue-button">Find Out More</button>
+                        <a href="{{ route('patient.show-prescriptions-rules') }}" class="btn blue-button">Find Out More</a>
                      </div>
                      <div class="Prescriptions-bottom">
                         <h4>Children</h4>
                         <img src="{{ asset('public/images/frontend/images/m-pr-pic2.png') }}" alt="">
-                        <button type="submit" class="btn blue-button">Find Out More</button>
+                        <a href="{{ route('patient.view-childs') }}" class="btn blue-button">Find Out More</a>
                      </div>
                </div>
             </div>
@@ -58,7 +58,7 @@
                <h2>Option 2</h2>
                <h3>Quick Question <small class="orange">Ask a Doctor</small></h3>
                <div class="opction-two">
-                     <form>
+                     {{-- <form>
                         <div class="form-group">
                            <textarea placeholder="Type your health query here " class="form-control" rows="9"></textarea>
                         </div>
@@ -67,20 +67,36 @@
                            <span>Upload Attachments <i class="far fa-paperclip"></i></span>
                         </div>
                         <button type="submit" class="btn orange-button">Submit Your query</button>
-                     </form> 
+                     </form> --}}
+                     <form method="post" id="upload_form" action="{{route('patient.create-case')}}" enctype="multipart/form-data">
+                        @csrf
+
+                        <input type="hidden" name="questions_type" value="3">
+
+
+
+                        <div class="form-group">
+                            <textarea placeholder="Type your health query here " class="form-control" name="health_problem" rows="6" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" required multiple>
+                            <span>Upload Attachments <i class="far fa-paperclip"></i></span>
+                        </div>
+                        <button type="submit" class="btn orange-button">Submit Your query</button>
+                    </form>
                      <h4>Option 2</h4>
                      <ul>
                         <li>
                            Your query is sent to a panel of Doctors free
                         </li>
                         <li>
-                           Standard Fee     <spna><i class="fas fa-pound-sign"></i>14.99</spna> charged only if Doctor takes case 
+                           Standard Fee     <spna><i class="fas fa-pound-sign"></i>14.99</spna> charged only if Doctor takes case
                         </li>
                         <li>
                            Includes up to 3 exchanges with doctor
                         </li>
                         <li>
-                           Rate your Doctor 
+                           Rate your Doctor
                         </li>
                      </ul>
                </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers; 
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Validation\ValidationException;
 use Auth;
 use Session;
@@ -32,7 +32,7 @@ class LoginController extends Controller
      * @var string
      */
     //protected $redirectTo = RouteServiceProvider::PATIENT_HOME;
-    
+
     protected function redirectTo()
     {
         $user=Auth::user();
@@ -40,7 +40,7 @@ class LoginController extends Controller
 
         if($user->role == 1){
             // exit;
-            return redirect(RouteServiceProvider::PATIENT_HOME);
+            return redirect()->intended(RouteServiceProvider::PATIENT_HOME);
         }if($user->role == 2){
             return redirect(RouteServiceProvider::DOCTOR_HOME);
         }if($user->role == 3){
@@ -60,7 +60,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    
+
 
     protected function guard($guard_name)
     {
@@ -87,7 +87,7 @@ class LoginController extends Controller
     {
         // echo 'string'; exit;
         $this->validateLogin($request);
-        
+
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -134,11 +134,11 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-       
+
         if (Auth::attempt($this->credentials($request)) ) {
 
 
-                           
+
                 // if (Auth::user()->email_verified_at == '') {
                 //     Session::flash('Error-toastr', 'Your email is not verified.');
                 //     // echo 'string'; exit;
@@ -146,7 +146,7 @@ class LoginController extends Controller
                 // }
                 if(Auth::user()->role == '1'){
                 Auth::guard("sitePatient")->attempt($this->credentials($request));
-                return redirect(RouteServiceProvider::PATIENT_HOME);
+                return redirect()->intended(RouteServiceProvider::PATIENT_HOME);
                 }
 
                 if(Auth::user()->role == '2'){
@@ -254,7 +254,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if($user && $user->role == 1){
-            return redirect(RouteServiceProvider::PATIENT_HOME);
+            return redirect()->intended(RouteServiceProvider::PATIENT_HOME);
         } else if($user && $user->role == 2) {
             return redirect(RouteServiceProvider::DOCTOR_HOME);
         } else if($user && $user->role == 3) {

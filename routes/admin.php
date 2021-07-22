@@ -40,6 +40,16 @@ Route::match(['get','post'],'cms/create', 'CmsController@create')->name('cms.cre
 Route::match(['get','post'],'cms/edit/{id}', 'CmsController@edit')->name('cms.edit');
 Route::match(['get','post'],'cms/delete/{id?}', 'CmsController@delete')->name('cms.delete');
 
+Route::match(['get','post'],'handy-document/index', 'HandyDocumentController@index')->name('h_doc');
+Route::match(['get','post'],'handy-document/create', 'HandyDocumentController@create')->name('h_doc.create');
+Route::match(['get','post'],'handy-document/edit/{id}', 'HandyDocumentController@edit')->name('h_doc.edit');
+Route::match(['get','post'],'handy-document/delete/{id?}', 'HandyDocumentController@delete')->name('h_doc.delete');
+
+Route::match(['get','post'],'contact-us/index', 'ContactusController@index')->name('c_us');
+// Route::match(['get','post'],'handy-document/create', 'HandyDocumentController@create')->name('h_doc.create');
+// Route::match(['get','post'],'handy-document/edit/{id}', 'HandyDocumentController@edit')->name('h_doc.edit');
+Route::match(['get','post'],'contact-us/delete/{id?}', 'ContactusController@delete')->name('c_us.delete');
+
 Route::get('video_call_test','TestController@video_call');
 
 });

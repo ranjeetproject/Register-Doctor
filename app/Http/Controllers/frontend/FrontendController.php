@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Cms;
+use App\Models\ContactUs;
+use App\Mail\ThankYou;
+use App\Mail\AfterContactUsMailForAdmin;
+use Illuminate\Support\Facades\Mail;
+use Session;
 
 class FrontendController extends Controller
 {
@@ -25,15 +30,15 @@ class FrontendController extends Controller
     public function getNews(Request $request)
     {
         $newses = News::select('*');
-if (isset($request->category) && !empty($request->category)) {
-        $newses = $newses->where('news_type',$request->category);
-}
+        if (isset($request->category) && !empty($request->category)) {
+                $newses = $newses->where('news_type',$request->category);
+        }
 
-if (isset($request->search_value) && !empty($request->search_value)) {
-        $newses = $newses->where(function($query) use($request){
-            $query->where('heading','LIKE',"%$request->search_value%")->orWhere('posted_by','LIKE',"%$request->search_value%");
-        });
-}
+        if (isset($request->search_value) && !empty($request->search_value)) {
+                $newses = $newses->where(function($query) use($request){
+                    $query->where('heading','LIKE',"%$request->search_value%")->orWhere('posted_by','LIKE',"%$request->search_value%");
+                });
+        }
 
         $newses = $newses->orderBy('created_at','DESC')->paginate(2);
         $latest_news = News::select('id','heading','created_at','posted_by')->orderBy('created_at','DESC')->limit(5)->get();
@@ -47,14 +52,32 @@ if (isset($request->search_value) && !empty($request->search_value)) {
     {
         $contact_us = Cms::where('page_name','Contact Us')->first();
         return view('frontend.contact-us', compact('contact_us'));
-        
+
+    }
+
+    public function contactUsPost(Request $request)
+    {
+        // $contact_us = Cms::where('page_name','Contact Us')->first();
+        // return view('frontend.contact-us', compact('contact_us'));
+        $contact_us = new ContactUs;
+        $contact_us->name = $request->name;
+        $contact_us->contact_no = $request->contact_no;
+        $contact_us->email_id = $request->email_id;
+        $contact_us->comment = $request->comment;
+        $contact_us->save();
+
+        Mail::to($request->email_id)->send(new ThankYou($contact_us->id));
+        // Mail::to($request->email_id)->send(new AfterContactUsMailForAdmin($contact_us->id));
+
+        Session::flash('Success-toastr','Successfully added');
+        return redirect()->back();
     }
 
     public function getFaq()
     {
         $get_faq = Cms::where('page_name','FAQ')->first();
         return view('frontend.faq', compact('get_faq'));
-     
+
     }
 
     public function getTermsCondition($type='PATIENT')

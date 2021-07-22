@@ -9,6 +9,7 @@ use App\Models\DrugsDetails;
 use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
+use App\Prescription;
 use App\Models\SummaryDiagnosis;
 use App\Models\SymptromsDetails;
 use App\Models\TimeSlot;
@@ -215,15 +216,61 @@ class DoctorController extends Controller
     }
 
 
-     public function sendPatientMessage(Request $request)
+    public function sendPatientMessage(Request $request)
     {
         return view('frontend.doctor.send_patient_message');
     }
 
-     public function createPrescription(Request $request)
+    public function createPrescription(Request $request)
+    { 
+      //print_r($request->drug);
+      if($request->drug !=''){
+        $priscription = new Prescription();
+        $priscription->doc_id = $request->d_id;
+        $priscription->p_id = $request->p_id;
+        $priscription->case_no = $request->c_id;
+        $priscription->guardian_name = '';
+        $priscription->upn = '';//$request->d_id;
+        $priscription->drug = $request->drug;
+        $priscription->dose = $request->dose;
+        $priscription->frequency = $request->frequency;
+        $priscription->route = $request->route;
+        $priscription->duration = $request->duration;
+        $priscription->comments = $request->comments;
+        $priscription->created_at = date("Y-m-d h:i:s");
+        $priscription->updated_at = date("Y-m-d h:i:s");
+        $priscription->save();
+        print_r($priscription);
+      }
+
+
+      $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
+      return view('frontend.doctor.create_prescription',compact('cases'));
+    }
+    // public function AddPrescription(Request $request)
+    // {
+    //     $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
+    //     return view('frontend.doctor.create_prescription',compact('cases'));
+    // }
+    public function ajaxCasedetails(Request $request)
     {
-        $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
-        return view('frontend.doctor.create_prescription',compact('cases'));
+        //print_r($request->case_id);
+        $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
+        $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
+        // foreach($case as $d){
+        //   print_r($d->user->name);
+        // }
+        $return = array('case_details'=>$case, 'prescription'=>$prescription);
+        return response()->json( $return);
+        // //$case = PatientCase::where( 'case_id', $request->case_id)->get();
+        // $case =  PatientCase::find( $request->case_id, 'case_id')->user();
+        // //$user_details = $case->user()->get();
+        // //print_r($case);
+        // foreach($case as $c){
+        //   echo $c->user_id;
+        // }
+        //$cases = Prescription::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
+        //return view('frontend.doctor.create_prescription',compact('cases'));
     }
 
      public function prescriptionIssues(Request $request)
@@ -240,88 +287,86 @@ class DoctorController extends Controller
     {
          $user = Auth::guard('siteDoctor')->user();
 
-      if ($request->isMethod('post')) {
-        try{
-        $data = $request->validate([
-             "date"=>"required|after_or_equal:today",
-             "from_time"=>"required|date_format:H:i",
-             "to_time"=>"required|date_format:H:i|after:from_time",
-         ]);
+        if ($request->isMethod('post')) {
+            try{
+                $data = $request->validate([
+                    "date"=>"required|after_or_equal:today",
+                    "from_time"=>"required|date_format:H:i",
+                    "to_time"=>"required|date_format:H:i|after:from_time",
+                ]);
 
-         $date = str_replace("/", "-", $request->date);
-         $date = date('Y-m-d',strtotime($date));
+                $date = str_replace("/", "-", $request->date);
+                $date = date('Y-m-d',strtotime($date));
 
 
-         $from_date_time =  $date.' '.$request->from_time;
-         $to_date_time =  $date.' '.$request->to_time;
+                $from_date_time =  $date.' '.$request->from_time;
+                $to_date_time =  $date.' '.$request->to_time;
 
-         $from_date_time = Carbon::parse($from_date_time);
+                $from_date_time = Carbon::parse($from_date_time);
 
-         $total_minutes = $from_date_time->diffInMinutes($to_date_time);
-         // $total_time = (new Carbon($request->to_time))->diff(new Carbon($request->from_time))->format('%h:%I');
-        // $slot = $total_minutes%15 ;
+                $total_minutes = $from_date_time->diffInMinutes($to_date_time);
+                // $total_time = (new Carbon($request->to_time))->diff(new Carbon($request->from_time))->format('%h:%I');
+                // $slot = $total_minutes%15 ;
 
-        if($total_minutes%15 != 0){
-         Session::flash('Error-toastr','Please match the 15 minute slot.');
-         return redirect()->back();
+                if($total_minutes%15 != 0){
+                    Session::flash('Error-toastr','Please match the 15 minute slot.');
+                    return redirect()->back();
+                }
+
+                DB::beginTransaction();
+                $available_day = new DoctorAvailableDays;
+                $available_day->user_id = $user->id;
+                $available_day->date = $date;
+                $available_day->from_time = $request->from_time;
+                $available_day->to_time = $request->to_time;
+                $available_day->save();
+
+                $number_of_slot = $total_minutes/15;
+                $from_time = Carbon::parse($request->from_time);
+                $to_time =Carbon::parse($request->from_time)->addMinutes(15);
+
+
+
+                for ($i = 1; $i <= $number_of_slot; $i++) {
+                    $time_slot = new TimeSlot;
+                    $time_slot->user_id = $user->id;
+                    $time_slot->available_day_id = $available_day->id;
+                    $time_slot->start_time = $from_time->format('H:i');
+                    $time_slot->end_time = $to_time->format('H:i');
+                    $from_time = $from_time->addMinutes(15);
+                    $to_time = $to_time->addMinutes(15);
+                    $time_slot->save();
+                    // echo '<pre>';
+                    //    print_r($time_slot);
+                }
+                // exit;
+                DB::commit();
+
+                Session::flash('Success-toastr','Successfully added');
+            } catch (\Exception $e) {
+                Session::flash('Error-toastr', $e->getMessage());
+                DB::rollback();
+                return redirect()->back();
+            }
         }
 
-          DB::beginTransaction();
-        $available_day = new DoctorAvailableDays;
-        $available_day->user_id = $user->id;
-        $available_day->date = $date;
-        $available_day->from_time = $request->from_time;
-        $available_day->to_time = $request->to_time;
-        $available_day->save();
+        $available_days_for_month = DoctorAvailableDays::where('user_id',$user->id);
+        if($request->from_date && $request->to_date){
+            $from_date = str_replace("/", "-", $request->from_date);
+            $from_date = date('Y-m-d',strtotime($from_date));
 
-        $number_of_slot = $total_minutes/15;
-        $from_time = Carbon::parse($request->from_time);
-        $to_time =Carbon::parse($request->from_time)->addMinutes(15);
+            $to_date = str_replace("/", "-", $request->to_date);
+            $to_date = date('Y-m-d',strtotime($to_date));
 
-
-
-       for ($i = 1; $i <= $number_of_slot; $i++) {
-        $time_slot = new TimeSlot;
-        $time_slot->user_id = $user->id;
-        $time_slot->available_day_id = $available_day->id;
-        $time_slot->start_time = $from_time->format('H:i');
-        $time_slot->end_time = $to_time->format('H:i');
-        $from_time = $from_time->addMinutes(15);
-        $to_time = $to_time->addMinutes(15);
-        $time_slot->save();
-        // echo '<pre>';
-        //    print_r($time_slot);
-       }
-        // exit;
-      DB::commit();
-
-         Session::flash('Success-toastr','Successfully added');
-         } catch (\Exception $e) {
-            Session::flash('Error-toastr', $e->getMessage());
-            DB::rollback();
-            return redirect()->back();
+            $available_days_for_month = $available_days_for_month->where('date','>=',$from_date)->where('date','<=',$to_date);
+        }else{
+            $available_days_for_month = $available_days_for_month->whereMonth('date',date('m'));
         }
+        $available_days_for_month =  $available_days_for_month->orderBy('date')->get();
 
-
-      }
-
-      $available_days_for_month = DoctorAvailableDays::where('user_id',$user->id);
-      if($request->from_date && $request->to_date){
-         $from_date = str_replace("/", "-", $request->from_date);
-         $from_date = date('Y-m-d',strtotime($from_date));
-
-         $to_date = str_replace("/", "-", $request->to_date);
-         $to_date = date('Y-m-d',strtotime($to_date));
-
- $available_days_for_month = $available_days_for_month->where('date','>=',$from_date)->where('date','<=',$to_date);
-      }else{
- $available_days_for_month = $available_days_for_month->whereMonth('date',date('m'));
-      }
-       $available_days_for_month =  $available_days_for_month->orderBy('date')->get();
-
-      $available_days = DoctorAvailableDays::where('user_id',$user->id)->get();
-      $get_current_day = DoctorAvailableDays::where('user_id',$user->id)->where('date',date('Y-m-d'))->get();
-      $weekly_available_days = WeeklyAvailableDays::where('user_id',$user->id)->orderBy('num_val_for_day')->get();
+        $available_days = DoctorAvailableDays::where('user_id',$user->id)->orderBy('date')->get();
+        $get_current_day = DoctorAvailableDays::where('user_id',$user->id)->where('date',date('Y-m-d'))->get();
+        $weekly_available_days = WeeklyAvailableDays::where('user_id',$user->id)->orderBy('num_val_for_day')->get();
         return view('frontend.doctor.available_days', compact('available_days','weekly_available_days','get_current_day','available_days_for_month'));
     }
 
@@ -817,7 +862,8 @@ switch ($request->day) {
 
     public function videoCallDoc($id)
     {
-        return view('common.video_call_test',compact('id'));
+        $case = PatientCase::where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('case_id',$id)->first();
+        return view('common.video_call_test',compact('case'));
     }
 
 }
