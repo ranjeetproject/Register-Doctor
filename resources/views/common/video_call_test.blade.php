@@ -167,7 +167,7 @@ canvas {
         </div>
 </header>
 <div class="card-body live-v-chat-body">
-        
+
     <div class="videocallBg">
     <button id="btn-open-or-join-room" class="btn btn-success btn blue-button larch">Join Room</button>
         <div id="remote-video-container" class="remote_video_div"></div>
@@ -185,8 +185,7 @@ canvas {
        href="{{ route('admin.dashboard') }}"> Back </a>
 </div>
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="../../resources/js/jquery-3.5.1.min.js" ></script>
 <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
 <script src="https://cdn.webrtc-experiment.com:443/FileBufferReader.js"></script>
 <script src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js"></script>
