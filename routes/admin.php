@@ -45,10 +45,10 @@ Route::match(['get','post'],'handy-document/create', 'HandyDocumentController@cr
 Route::match(['get','post'],'handy-document/edit/{id}', 'HandyDocumentController@edit')->name('h_doc.edit');
 Route::match(['get','post'],'handy-document/delete/{id?}', 'HandyDocumentController@delete')->name('h_doc.delete');
 
-Route::match(['get','post'],'contact-us/index', 'ContactusController@index')->name('c_us');
+Route::match(['get','post'],'contact-us/index', 'ContactUsController@index')->name('c_us');
 // Route::match(['get','post'],'handy-document/create', 'HandyDocumentController@create')->name('h_doc.create');
 // Route::match(['get','post'],'handy-document/edit/{id}', 'HandyDocumentController@edit')->name('h_doc.edit');
-Route::match(['get','post'],'contact-us/delete/{id?}', 'ContactusController@delete')->name('c_us.delete');
+Route::match(['get','post'],'contact-us/delete/{id?}', 'ContactUsController@delete')->name('c_us.delete');
 
 Route::get('video_call_test','TestController@video_call');
 
