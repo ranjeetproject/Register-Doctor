@@ -222,7 +222,7 @@ class DoctorController extends Controller
     }
 
     public function createPrescription(Request $request)
-    { 
+    {
       //print_r($request->drug);
       if($request->drug !=''){
         $priscription = new Prescription();
@@ -863,7 +863,7 @@ switch ($request->day) {
     public function videoCallDoc($id)
     {
         $case = PatientCase::where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('case_id',$id)->first();
-        return view('common.video_call_test',compact('case'));
+        return view('common.video_call_test',compact('case','id'));
     }
 
 }

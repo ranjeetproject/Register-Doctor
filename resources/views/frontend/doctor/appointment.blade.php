@@ -63,13 +63,13 @@
 
                                             <td>
                                                 @if($case->questions_type == 2)
-                                                    @if($case->booking_date==date('Y-m-d'))
+                                                    {{-- @if($case->booking_date==date('Y-m-d')) --}}
                                                     <a href="{{route('doctor.video-call',$case->case_id)}}" target="_blank">
                                                         Live Video
                                                         <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt="">
                                                         <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
                                                     </a>
-                                                    @endif
+                                                    {{-- @endif --}}
                                                 @else
 
                                                     <a href="{{route('doctor.chats',$case->case_id)}}">
