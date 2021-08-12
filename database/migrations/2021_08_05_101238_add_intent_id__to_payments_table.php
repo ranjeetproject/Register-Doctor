@@ -15,6 +15,8 @@ class AddIntentIdToPaymentsTable extends Migration
     {
         Schema::table('payments', function (Blueprint $table) {
             $table->dropColumn('case_id');
+        });
+        Schema::table('payments', function (Blueprint $table) {
             $table->string('intent_id',100)->after('payment_date')->nullable();
             $table->string('secure_token',100)->after('intent_id')->nullable();
             $table->string('case_id',100)->nullable();
