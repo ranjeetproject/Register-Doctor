@@ -9,7 +9,7 @@
     Route::match(['get','post'],'/save-cases', 'PatientController@saveCases')->name('save-cases');
 
     Route::match(['get','post'],'/create-case', 'PatientController@createCase')->name('create-case');
-
+    Route::match(['get','post'],'/ajaxPatientCasedetails', 'PatientController@ajaxPatientCasedetails')->name('ajaxPatientCasedetails');
     Route::match(['get','post'],'/medical-record', 'PatientController@medicalRecord')->name('medical-record');
     Route::match(['get','post'],'/my-favorite-doctors', 'PatientController@myFavoriteDoctors')->name('my-favorite-doctors');
 
