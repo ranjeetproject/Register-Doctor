@@ -15,21 +15,21 @@ class CheckoutController extends Controller
 
         $case = PatientCase::where('case_id',$case_id)->with('doctor.profile')->withCount('getBookingSlot')->first();
 
-if($case->questions_type == 1){
-    $amount = $case->doctor->profile->dr_live_chat_fee * $case->get_booking_slot_count;
-}
+        if($case->questions_type == 1){
+            $amount = $case->doctor->profile->dr_live_chat_fee * $case->get_booking_slot_count;
+        }
 
-if($case->questions_type == 2){
-    $amount = $case->doctor->profile->dr_live_video_fee * $case->get_booking_slot_count;
-}
+        if($case->questions_type == 2){
+            $amount = $case->doctor->profile->dr_live_video_fee * $case->get_booking_slot_count;
+        }
 
-if($case->questions_type == 3){
-    $amount = $case->doctor->profile->dr_standard_fee;
-}
+        if($case->questions_type == 3){
+            $amount = $case->doctor->profile->dr_standard_fee;
+        }
 
-if($case->questions_type == 4){
-    $amount = $case->doctor->profile->dr_qa_fee;
-}
+        if($case->questions_type == 4){
+            $amount = $case->doctor->profile->dr_qa_fee;
+        }
 
         // return $amount;
         // return $case->get_booking_slot_count;
@@ -47,37 +47,41 @@ if($case->questions_type == 4){
             'currency' => 'INR',
             // 'payment_method_types' => ['card'],
         ]);
+        // dd($payment_intent);
         $intent = $payment_intent->client_secret;
+        $intent_id = $payment_intent->id;
 
-        return view('checkout.credit-card',compact('intent','amount'));
+        return view('checkout.credit-card',compact('intent','amount','intent_id'));
 
     }
 
     public function afterPayment(Request $request)
     {
 
-        // return $request->all();
+        // dd($request->all());
          $case = PatientCase::where('case_id',$request->case_id)->with('doctor.profile')->withCount('getBookingSlot')->first();
 
-if($case->questions_type == 1){
-    $amount = $case->doctor->profile->dr_live_chat_fee * $case->get_booking_slot_count;
-}
+        if($case->questions_type == 1){
+            $amount = $case->doctor->profile->dr_live_chat_fee * $case->get_booking_slot_count;
+        }
 
-if($case->questions_type == 2){
-    $amount = $case->doctor->profile->dr_live_video_fee * $case->get_booking_slot_count;
-}
+        if($case->questions_type == 2){
+            $amount = $case->doctor->profile->dr_live_video_fee * $case->get_booking_slot_count;
+        }
 
-if($case->questions_type == 3){
-    $amount = $case->doctor->profile->dr_standard_fee;
-}
+        if($case->questions_type == 3){
+            $amount = $case->doctor->profile->dr_standard_fee;
+        }
 
-if($case->questions_type == 4){
-    $amount = $case->doctor->profile->dr_qa_fee;
-}
+        if($case->questions_type == 4){
+            $amount = $case->doctor->profile->dr_qa_fee;
+        }
 
         $payment = new Payment;
-        $payment->case_id = $request->id;
+        $payment->case_id = $request->case_id;
         $payment->user_id = $case->user_id;
+        $payment->intent_id = $case->intent_id;
+        $payment->secure_token = $case->_token;
         $payment->amount = $amount;
         $payment->payment_date = date('Y-m-d H:i:s');
         $payment->save();
@@ -89,8 +93,6 @@ if($case->questions_type == 4){
         }else{
         return redirect()->route('patient.dashboard');
         }
-
-
                // return view('checkout.payment_success',compact('payment','case'));
     }
 

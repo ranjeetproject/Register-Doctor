@@ -15,6 +15,14 @@ class CreateThumbsUpsTable extends Migration
     {
         Schema::create('thumbs_ups', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('doc_name');
+            $table->string('doc_speciality');
+            $table->string('country');
+            $table->string('city');
+            $table->string('email');
+            $table->longText('comment');
+            $table->longText('opinion_leader');
+            $table->string('created_by');
             // $table->string('max_share')
             $table->timestamps();
         });

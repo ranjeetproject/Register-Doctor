@@ -9,5 +9,8 @@ Route::middleware(['isPharmacist:sitePharmacist','activeUser','emailVerified','a
      Route::match(['get','post'],'/profile', 'PharmacistController@profile')->name('profile');
     Route::match(['get','post'],'/change-password', 'PharmacistController@changePassword')->name('change-password');
     Route::match(['get','post'],'/opening-hours', 'PharmacistController@openingHours')->name('opening-hours');
+
+    Route::match(['get','post'],'/handy-document', 'PharmacistController@handyDocument')->name('handy-document');
+    Route::get('view-handy-document/{id}', 'PharmacistController@viewHandyDocument')->name('view-handy-document');
 });
 

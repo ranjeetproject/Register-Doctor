@@ -65,7 +65,7 @@ form#payment-form {
   </style>
 </head>
 <body>
-    
+
     @php
         $stripe_key = env('STRIPE_KEY');
     @endphp
@@ -73,7 +73,7 @@ form#payment-form {
     <div class="container " style="margin-top:10%;margin-bottom:10%">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                
+
                 <div class="card form-card">
                     <div class="crd-logo">
                         <a href="#" class="brand-link">
@@ -87,6 +87,7 @@ form#payment-form {
                     <form action="{{route('patient.payment.credit-card')}}"  method="post" id="payment-form">
                         @csrf
                         <input type="hidden" name="case_id" value="{{ Request::segment(3) }}">
+                        <input type="hidden" name="intent_id" value="{{ $intent_id }}">
                         <div class="form-group">
                             <div class="card-header">
                                 <label for="card-element">
@@ -116,7 +117,7 @@ form#payment-form {
         </div>
     </div>
     </div>
-    
+
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         // Custom styling can be passed to options when creating an Element.
@@ -138,15 +139,15 @@ form#payment-form {
                 iconColor: '#fa755a'
             }
         };
-    
+
         const stripe = Stripe('{{ $stripe_key }}', { locale: 'en' }); // Create a Stripe client.
         const elements = stripe.elements(); // Create an instance of Elements.
         const cardElement = elements.create('card', { style: style }); // Create an instance of the card Element.
         const cardButton = document.getElementById('card-button');
         const clientSecret = cardButton.dataset.secret;
-    
+
         cardElement.mount('#card-element'); // Add an instance of the card Element into the `card-element` <div>.
-    
+
         // Handle real-time validation errors from the card Element.
         cardElement.addEventListener('change', function(event) {
             var displayError = document.getElementById('card-errors');
@@ -156,13 +157,13 @@ form#payment-form {
                 displayError.textContent = '';
             }
         });
-    
+
         // Handle form submission.
         var form = document.getElementById('payment-form');
-    
+
         form.addEventListener('submit', function(event) {
             event.preventDefault();
-    
+
         stripe.handleCardPayment(clientSecret, cardElement, {
                 payment_method_data: {
                     //billing_details: { name: cardHolderName.value }

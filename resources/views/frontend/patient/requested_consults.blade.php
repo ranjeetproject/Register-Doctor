@@ -49,11 +49,15 @@
                                       </thead>
                                       <tbody>
                                          @forelse ($cases as $case)
+                                         {{-- @dump($case) --}}
                                         <tr>
                                             <td>{{($case->booking_date) ? date('m-d-Y', strtotime($case->booking_date)) : ''}}</td>
                                             <td style="text-align: center;">
                                               {{-- @if($case->getSlot) --}}
                                               @forelse($case->getBookingSlot as $time_slot)
+                                              @php
+                                                  $start_time = $time_slot->getSlot->start_time;
+                                              @endphp
 
                                               {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br>
 
@@ -108,12 +112,21 @@
                                               @else
                                                Pending
                                               @endif
+
                                           </td>
 
                                           <td>
                                               @if(($case->case_type == 2) && ($case->questions_type == 3))
-<a href="{{route('patient.accepted-consults',$case->case_id)}}" class="btn btn-sm btn-primary"> Doctors</a>
-@endif
+                                                <a href="{{route('patient.accepted-consults',$case->case_id)}}" class="btn btn-sm btn-primary"> Doctors</a>
+                                            @endif
+                                            @if(($case->questions_type == 2) || ($case->questions_type == 1))
+                                                @if (getDiffOfTwoDateInMinute($case->booking_date.' '.$start_time) > 4320)
+                                                    <a href="{{route('patient.cancel-booking',$case->case_id)}}" class="btn btn-sm btn-primary"> Cancel booking</a>
+                                                @endif
+
+                                                {{-- @dump(getDiffOfTwoDateInMinute($case->booking_date.' '.$start_time)) --}}
+                                            @endif
+
 
                                           </td>
 

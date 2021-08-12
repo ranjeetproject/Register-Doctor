@@ -9,6 +9,7 @@
       {{-- <li><a href="{{route('patient.view-childs')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Child Account</a></li> --}}
 
       {{-- <li><a href="{{route('patient.save-cases')}}"><img src="{{ asset('public/images/frontend/images/icon10.png') }}" alt="">Saved Cases</a></li> --}}
+      <li><a href="{{route('patient.handy-document')}}"><img src="{{ asset('public/images/frontend/images/icon13.png') }}" alt="">Handy document</a></li>
 
       <li><a href="{{route('patient.requested-consults')}}"><img src="{{ asset('public/images/frontend/images/icon9.png') }}" alt="">Requested Consults</a></li>
 

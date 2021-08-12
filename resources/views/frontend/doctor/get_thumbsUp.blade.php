@@ -14,48 +14,55 @@
                     <h2>Criterion: You would recommend this doctor to family or friends to consult </h2>
                     <button class="btn Next-Name-btn"><i class="fal fa-plus-circle"></i> Next Name</button>
                     <div class="for-w-100 How-Thumbs-Up-Work-cont">
-                            <form action="" method="get" class="">
+                            <form action="{{ route('doctor.get-thumbs-up') }}" method="post" class="">
+                                @csrf
                                 <div class="row Doctor-contact">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label><sup>*</sup> Doctor Name </label>
-                                            <input class="form-control" type="text" placeholder="">
+                                            <input class="form-control" type="text" placeholder="" name="doctor_name" required>
                                          </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label><sup>*</sup> Speciality </label>
-                                            <input class="form-control" type="tel" placeholder="">
+                                            <input class="form-control" type="tel" placeholder="" name="speciality" required>
                                          </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label><sup>*</sup> Country  </label>
-                                            <input class="form-control" type="tel" placeholder="">
+                                            <input class="form-control" type="tel" name="country" placeholder="" required>
                                          </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label><sup>*</sup> City or Location   </label>
-                                            <input class="form-control" type="tel" placeholder="">
+                                            <input class="form-control" type="tel" name="city" placeholder="" required>
+                                         </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label><sup>*</sup> Email Id   </label>
+                                            <input class="form-control" type="tel" placeholder="" name=email_id required>
                                          </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Comments  e.g. Dr. Smith is an expert in children's asthma. Great bedside manner. Parents and kids love her.</label>
-                                            <textarea class="form-control"  rows="4"></textarea>
+                                            <textarea class="form-control" name="comment" rows="4"></textarea>
                                          </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>If this doctor is an Opinion Leader please specify the area below e.g. asthma, pituitary surgery. </label>
-                                            <textarea class="form-control"  rows="4"></textarea>
+                                            <textarea class="form-control" name="opinion_leader" rows="4"></textarea>
                                          </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label><sup>*</sup> Asterisked fields are mandatory </label>
-                                           
+
                                          </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -72,6 +79,6 @@
 @endsection
 @section('scripts')
     <script>
-       
+
     </script>
 @endsection

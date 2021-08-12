@@ -3,6 +3,7 @@
   <ul class="left-nav">
       <li class="active"><a href="{{ route('pharmacist.dashboard')}}"><img src="{{ asset('public/images/frontend/images/icon1.png') }}" alt="">Dashboard</a></li>
       <li><a href="{{ route('pharmacist.profile')}}"><img src="{{ asset('public/images/frontend/images/icon2.png') }}" alt="">Manage Profile </a></li>
+      <li><a href="{{ route('pharmacist.handy-document')}}"><img src="{{ asset('public/images/frontend/images/icon13.png') }}" alt="">Handy document </a></li>
       <li><a href="#"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Accepted Prescriptions</a></li>
       <li><a href="{{ route('pharmacist.opening-hours')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Opening Hours</a></li>
       <li><a href="#"><img src="{{ asset('public/images/frontend/images/icon4.png') }}" alt="">Dispensed Prescriptions</a></li>

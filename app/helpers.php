@@ -1,44 +1,44 @@
-<?php 
+<?php
 use App\Members;
 use App\Models\BookTimeSlot;
 use App\Models\DoctorReview;
 use App\Models\FavouriteDoctor;
 use App\Models\SiteSetting;
 use App\Models\TimeSlot;
+use App\Models\ThumbsUp;
 use App\User;
-
 
  function dateDifferent($date1, $date2)
 {
     $date1 = $date1 ? $date1 : date('Y-m-d H:i:s');
     $date2 = $date2 ? $date2 : date('Y-m-d H:i:s');
   $date1 = strtotime($date1);
-  $date2 = strtotime($date2);  
+  $date2 = strtotime($date2);
 
-$diff = abs($date2 - $date1);  
+$diff = abs($date2 - $date1);
 
-$years = floor($diff / (365*60*60*24));  
+$years = floor($diff / (365*60*60*24));
 
-$months = floor(($diff - $years * 365*60*60*24) 
-                               / (30*60*60*24));  
+$months = floor(($diff - $years * 365*60*60*24)
+                               / (30*60*60*24));
 
-$days = floor(($diff - $years * 365*60*60*24 -  
-             $months*30*60*60*24)/ (60*60*24)); 
-  
-$hours = floor(($diff - $years * 365*60*60*24  
-       - $months*30*60*60*24 - $days*60*60*24) 
-                                   / (60*60));  
-  
-$minutes = floor(($diff - $years * 365*60*60*24  
-         - $months*30*60*60*24 - $days*60*60*24  
-                          - $hours*60*60)/ 60);  
-  
-$seconds = floor(($diff - $years * 365*60*60*24  
-         - $months*30*60*60*24 - $days*60*60*24 
+$days = floor(($diff - $years * 365*60*60*24 -
+             $months*30*60*60*24)/ (60*60*24));
+
+$hours = floor(($diff - $years * 365*60*60*24
+       - $months*30*60*60*24 - $days*60*60*24)
+                                   / (60*60));
+
+$minutes = floor(($diff - $years * 365*60*60*24
+         - $months*30*60*60*24 - $days*60*60*24
+                          - $hours*60*60)/ 60);
+
+$seconds = floor(($diff - $years * 365*60*60*24
+         - $months*30*60*60*24 - $days*60*60*24
                 - $hours*60*60 - $minutes*60));
 
 // return $time = ("%d years, %d months, %d days, %d hours, "
-//      . "%d minutes, %d seconds", $years, $months, 
+//      . "%d minutes, %d seconds", $years, $months,
 //              $days, $hours, $minutes, $seconds);
 
 $time = '';
@@ -168,6 +168,28 @@ function getReview($doctor_id)
   })->first();
 
   return $nearest_day;
+}
+
+function getThumbsUp($created_by) {
+   $thumbsup =  ThumbsUp::where('created_by',$created_by)->count();
+   if($thumbsup) {
+       (int)$asd = $thumbsup/12;
+       if($asd>5) {
+           return 5;
+       }
+       return $asd;
+   }
+   return $thumbsup;
+}
+
+function getDiffOfTwoDateInMinute($date1)
+{
+    // $time = new DateTime();
+    // $diff = $time->diff(new DateTime($date1));
+    // return $minutes = ($diff->days * 24 * 60) +
+    //            ($diff->h * 60) + $diff->i;
+    return (strtotime($date1) - time()) / 60;
+
 }
 
 ?>

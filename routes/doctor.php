@@ -6,6 +6,7 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::match(['get','post'],'/profile', 'DoctorController@profile')->name('profile');
     Route::match(['get','post'],'/change-password', 'DoctorController@changePassword')->name('change-password');
     Route::match(['get','post'],'/handy-document', 'DoctorController@handyDocument')->name('handy-document');
+    Route::get('view-handy-document/{id}', 'DoctorController@viewHandyDocument')->name('view-handy-document');
     Route::match(['get','post'],'/get-thumbs-up', 'DoctorController@getThumbsUp')->name('get-thumbs-up');
     Route::match(['get','post'],'/appointment', 'DoctorController@appointment')->name('appointment');
     Route::match(['get','post'],'/send-patient-message', 'DoctorController@sendPatientMessage')->name('send-patient-message');

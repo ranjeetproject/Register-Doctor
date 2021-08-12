@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DeliveryOptions;
 use App\Models\PharmacyOpeningTime;
 use App\Models\UserProfile;
+use App\Models\HandyDocument;
 use Auth, Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 // use Session;
 
 
-class PharmacistController extends Controller 
+class PharmacistController extends Controller
 {
 
     /**
@@ -25,7 +26,7 @@ class PharmacistController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','isPharmacist']);
-        
+
     }
 
 
@@ -40,7 +41,7 @@ class PharmacistController extends Controller
 
 
          // $data = $request->validate([
-            $validator = Validator::make($request->all(), [ 
+            $validator = Validator::make($request->all(), [
       "forename"=>"required|min:3|max:100",
       "surname"=>"required|min:3|max:100",
       "telephone1"=>"required|digits:10",
@@ -54,7 +55,7 @@ class PharmacistController extends Controller
       // "confirm_password"=>"sometimes|nullable|required|same:new_password",
       ]);
 
-              if ($validator->fails()) { 
+              if ($validator->fails()) {
               Session::flash('Error-toastr','Please fill in all the fields before proceeding');
               return redirect()->back();
             }
@@ -72,15 +73,15 @@ class PharmacistController extends Controller
      if(!empty($request->surname) ) $user->surname = $request->surname;
      if(!empty($request->forename) && !empty($request->surname)) $user->name = $request->forename.' '.$request->surname;
      if(!empty($request->email) && ($user->email != $request->email)) $user->email = $request->email;
-     
+
      // $user->registration_number = $request->email;
-     
+
      $user->save();
      $profile = UserProfile::where('user_id',$user->id)->first();
      $profile = $profile ?? new UserProfile;
      $profile->user_id = $user->id;
 
-     
+
       $profile->pharmacy_name = $request->pharmacy_name;
       $profile->telephone1 = $request->telephone1;
       $profile->telephone2 = $request->telephone2;
@@ -90,8 +91,8 @@ class PharmacistController extends Controller
       $profile->about = $request->about;
       $profile->website = $request->website;
       // $profile->delivery_option = $request->delivery_option;
-     
- 
+
+
       if ($request->hasFile('profile_photo')) {
             $rand_val           = date('YMDHIS').rand(11111,99999);
             $image_file_name    = md5($rand_val);
@@ -266,6 +267,18 @@ class PharmacistController extends Controller
       }
 
       return view('frontend.pharmacist.opening_hours',compact('user'));
+    }
+
+    public function handyDocument(Request $request)
+    {
+        $handy_docs = HandyDocument::where('user_role',3)->latest()->paginate(10);
+        return view('frontend.pharmacist.handy_document',compact('handy_docs'));
+    }
+
+    public function viewHandyDocument($id)
+    {
+        $handy_doc = HandyDocument::where('user_role',3)->where('id',$id)->first();
+        return view('frontend.pharmacist.view_handy_doc',compact('handy_doc'));
     }
 
 }
