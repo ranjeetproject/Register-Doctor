@@ -35,7 +35,11 @@
                                             menu (Prescriptions Issued) e.g. give the Pharmacist's telephone number</li>
                                     </ul>
                                     <p class="pmarg-top">Click to check your delivery address is correct</p>
-                                    <a href="" class="btn blue-button mr-lf-top">Post prescription</a>
+                                    <form action="" method="post" class="Pharmacy-loc">
+                                        @csrf
+                                        <input class="btn blue-button mr-lf-top" type="submit" name="post_sub" value="Post prescription" />
+                                    </form>
+                                    
                                 </div>
 
 
@@ -59,7 +63,7 @@
                                     <p>Click to check your delivery address is correct</p>
                                     <div class="row justify-content-end">
                                         <div class="col-sm-6">
-                                            <form action="" class="Pharmacy-loc">
+                                            <form action="" method="post" class="Pharmacy-loc">
                                                 <input type="text" class="form-control" placeholder="Search for Special Pharmacy – Location">
                                             </form>
                                         </div>

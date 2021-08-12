@@ -12,6 +12,9 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::match(['get','post'],'/send-patient-message', 'DoctorController@sendPatientMessage')->name('send-patient-message');
     Route::match(['get','post'],'/create-prescription', 'DoctorController@createPrescription')->name('create-prescription');
     Route::match(['get','post'],'/ajaxCasedetails', 'DoctorController@ajaxCasedetails')->name('ajaxCasedetails');
+    Route::match(['get','post'],'/ajaxAddpriscription', 'DoctorController@ajaxAddpriscription')->name('ajaxAddpriscription');
+    Route::match(['get','post'],'/ajaxFinalpriscription', 'DoctorController@ajaxFinalpriscription')->name('ajaxFinalpriscription');
+
     Route::match(['get','post'],'/prescription-issues', 'DoctorController@prescriptionIssues')->name('prescription-issues');
     Route::match(['get','post'],'/close-cases', 'DoctorController@closeCases')->name('close-cases');
     Route::match(['get','post'],'/available-days', 'DoctorController@availableDays')->name('available-days');

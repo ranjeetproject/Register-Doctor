@@ -249,27 +249,6 @@ class DoctorController extends Controller
 
     public function createPrescription(Request $request)
     {
-      //print_r($request->drug);
-      if($request->drug !=''){
-        $priscription = new Prescription();
-        $priscription->doc_id = $request->d_id;
-        $priscription->p_id = $request->p_id;
-        $priscription->case_no = $request->c_id;
-        $priscription->guardian_name = '';
-        $priscription->upn = '';//$request->d_id;
-        $priscription->drug = $request->drug;
-        $priscription->dose = $request->dose;
-        $priscription->frequency = $request->frequency;
-        $priscription->route = $request->route;
-        $priscription->duration = $request->duration;
-        $priscription->comments = $request->comments;
-        $priscription->created_at = date("Y-m-d h:i:s");
-        $priscription->updated_at = date("Y-m-d h:i:s");
-        $priscription->save();
-        print_r($priscription);
-      }
-
-
       $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
       return view('frontend.doctor.create_prescription',compact('cases'));
     }
@@ -297,6 +276,53 @@ class DoctorController extends Controller
         // }
         //$cases = Prescription::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
         //return view('frontend.doctor.create_prescription',compact('cases'));
+    }
+    public function ajaxAddpriscription(Request $request){
+      //print_r($_POST);
+      if( !empty($_POST)){
+        $priscription = new Prescription();
+        $priscription->doc_id = $_POST['d_id'];
+        $priscription->p_id = $_POST['p_id'];
+        $priscription->case_no = $_POST['case_id'];
+        $priscription->guardian_name = $_POST['g_name'];
+        $priscription->prescription_no = '';
+        $priscription->upn = $_POST['upn'];
+        $priscription->drug = $_POST['drug'];
+        $priscription->dose = $_POST['dose'];
+        $priscription->frequency = $_POST['frequency'];
+        $priscription->route = $_POST['route'];
+        $priscription->duration = $_POST['duration'];
+        $priscription->comments = $_POST['comments'];
+        $priscription->created_at = date("Y-m-d h:i:s");
+        $priscription->updated_at = date("Y-m-d h:i:s");
+        $priscription->save();
+        //print_r($priscription);
+        if(!empty($priscription)){
+          $case = PatientCase::where( 'case_id', $_POST['case_id'])->with('user')->get();
+          $prescription = PatientCase::where( 'case_id', $_POST['case_id'])->with('prescription')->get();
+          
+          $return = array('case_details'=>$case, 'prescription'=>$prescription);
+          return response()->json( $return);
+        }else{
+          $return = array();
+          return response()->json( $return);
+        }
+      }
+    }
+    public function ajaxFinalpriscription(Request $request){
+        //print_r($request->case_id);
+        if($request->case_id !=''){
+          $prescription_no = uniqid();
+          $Prescription = Prescription::where(['case_no'=>$request->case_id])->update(['prescription_no'=>$prescription_no,'status'=>'y']);
+          //print_r($Prescription);
+
+          $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
+          $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
+          
+          $return = array('case_details'=>$case, 'prescription'=>$prescription);
+          return response()->json( $return);
+        }
+        
     }
 
      public function prescriptionIssues(Request $request)

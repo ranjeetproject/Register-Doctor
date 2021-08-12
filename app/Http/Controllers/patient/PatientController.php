@@ -491,8 +491,19 @@ class PatientController extends Controller
 
     public function prescriptionsIssued(Request $request)
     {
-        return view('frontend.patient.prescriptions_issued');
+        $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->where('accept_status',1)->get();
+        return view('frontend.patient.prescriptions_issued',compact('cases'));
 
+    }
+    public function ajaxPatientCasedetails(Request $request)
+    {
+       
+        $case = PatientCase::where( 'case_id', $request->case_id)->with('doctor')->get();
+        $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
+    
+        $return = array('case_details'=>$case, 'prescription'=>$prescription);
+        return response()->json( $return);
+      
     }
 
     public function pharmacies(Request $request)

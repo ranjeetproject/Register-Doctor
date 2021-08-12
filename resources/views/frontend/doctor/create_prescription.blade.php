@@ -97,12 +97,13 @@
                                     <div class="row">
 
                                         <div class="col-sm-6">
+                                            
 
                                             <div class="form-group">
 
                                                 <label >Case No.</label>
 
-                                                <select class="form-control">
+                                                <select name="case_no" id="case_no" class="form-control">
 
                                                     <option value="">Select Case No.</option>
 
@@ -110,9 +111,9 @@
                                                    <option value="{{$case->case_id}}">{{$case->case_id}}</option>
                                                    @endforeach
 
-                                                  </select>
+                                                </select>
 
-                                              </div>
+                                            </div>
 
                                         </div>
 
@@ -122,7 +123,7 @@
 
                                                 <label >Patient Name</label>
 
-                                                <input type="text" class="form-control"  placeholder="">
+                                                <input name="p_name" id="p_name" type="text" class="form-control"  placeholder="">
 
                                               </div>
 
@@ -134,7 +135,7 @@
 
                                                 <label >Guardian Name (Optional)</label>
 
-                                                <input type="text" class="form-control"  placeholder="">
+                                                <input name="g_name" id="g_name" type="text" class="form-control"  placeholder="">
 
                                               </div>
 
@@ -146,7 +147,7 @@
 
                                                 <label >Unique Patient No. (UPN)</label>
 
-                                                <input type="text" class="form-control"  placeholder="">
+                                                <input name="upn" id="upn" type="text" class="form-control"  placeholder="">
 
                                               </div>
 
@@ -205,7 +206,7 @@
 
                                             <tbody>
 
-                                                <tr class="only-remv">
+                                                <!-- <tr class="only-remv">
 
                                                     <td>e.g. 12345</td>
 
@@ -225,7 +226,7 @@
                                                         <a data-toggle="modal" data-target="#edit-pop"><i class="fas fa-pencil-alt"></i></a> 
                                                         <a class="delt"><i class="far fa-trash-alt"></i></a> 
                                                     </td>
-                                                </tr>
+                                                </tr> -->
 
                                                 <!-- <tr >
 
@@ -287,10 +288,25 @@
 
                                 </div>
 
-                                <div class="col-sm-12">
+                                <div class="col-sm-12" id="befour_sub" style="display:none;">
+                                    <div id="final_sucess" class="alert alert-success" role="alert" style="display:none;">
+                                        Priscription submited
+                                    </div>
+                                    <div id="final_error" class="alert alert-danger" role="alert" style="display:none;">
+                                        Please select Case ID first..
+                                    </div>
+                                    <div data-toggle="modal" data-target="#finalprisc" id="final_priscription" class="btn blue-button Prescription-submit ">Finalize Prescription</div>
 
-                                    <div class="btn blue-button Prescription-submit ">Submit</div>
-
+                                </div>
+                                <div class="col-sm-12" id="after_sub" style="display:none;">
+                                    <div id="final_sucess" class="alert alert-success" role="alert" style="display:none;">
+                                        Priscription submited
+                                    </div>
+                                    <div id="final_error" class="alert alert-danger" role="alert" style="display:none;">
+                                        Please select Case ID first..
+                                    </div>
+                                    <div data-toggle="modal" data-target="#finalprisc" id="edit_prisc" class="btn blue-button Prescription-submit ">Edit Priscription</div>
+                                    <a id="msg_doc" href="#" target="_blank" class="btn blue-button">Message Patient</a>
                                 </div>
 
                             </div>
@@ -314,6 +330,7 @@
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-pop">
         Edit
        </button> --}}
+      
     <div class="modal fade Prescribed-Modal" id="Prescribed-Modal" >
 
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -333,16 +350,46 @@
                     The prescription is now available to the patient who will decide whether to have the Prescription posted to them or sent electronically to a Pharmacist of their choice. CHECK YOUR MESSAGES AS YOU WILL BE REQUIRED TO DOWNLOAD AND POST THE SIGNED PRESCRIPTION TO EITHER THE PATIENT OR A PHARMACIST. Pharmacists may seek clarification on prescriptions before dispensing them. They may also ring you. If going abroad please ensure you are contactable or make appropriate cover. <b>Issued Prescriptions show in your Menu in the Iefthand navigation.</b>
 
                 </p>
-
+                
             </div>
 
           </div>
 
         </div>
 
-      </div>
+    </div>
 
+<div class="modal fade add-edit-prs" id="finalprisc" >
 
+<div class="modal-dialog modal-dialog-centered" role="document">
+
+  <div class="modal-content">
+    <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+            <span aria-hidden="true">&times;</span>
+
+          </button>
+        <div class="col-sm-12 Prescription-form-fild">
+            <h1 class="inner-page-title text-center mb-4">
+                Please check after theat the prescription will visible for patients
+            </h1>
+            <form class="row" action="">
+                <div class="col-sm-12 input-effect">
+
+                    <div class="form-group text-center">
+                        <button type="button" id="final_prisc" class="add-submit btn blue-button Prescription-submit ">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
 
       <!-- add and edit -->
       <div class="modal fade add-edit-prs" id="add-pop" >
@@ -360,36 +407,44 @@
                     <h1 class="inner-page-title text-center mb-4">
                         Add Drug Prescribed
                     </h1>
-                    <form class="row">
+                    <form class="row" action="">
                         <div class="col-sm-12 input-effect">
                             
                             <div class="form-group">
                                 
-                                <input type="text" class="form-control effect-19" >
+                                <input name="drug" id="drug" type="text" class="form-control effect-19" >
                                 <label>Drug</label>
                             </div>
                             <div class="form-group">
                                 
-                                <input type="text" class="form-control effect-19" >
+                                <input name="dose" id="dose" type="text" class="form-control effect-19" >
                                 <label>Dose</label>
                             </div>
                             <div class="form-group">
                                 
-                                <input type="text" class="form-control effect-19">
+                                <input name="route" id="route" type="text" class="form-control effect-19">
                                 <label>Frequency</label>
                             </div>
                             <div class="form-group">
                                 
-                                <input type="text" class="form-control effect-19">
+                                <input name="frequency" id="frequency" type="text" class="form-control effect-19">
+                                <label>Frequency</label>
+                            </div>
+                            <div class="form-group">
+                                
+                                <input name="duration" id="duration" type="text" class="form-control effect-19">
                                 <label>Duration</label>
                             </div>
                             <div class="form-group">
                                 
-                                <textarea name="" id="" class="form-control effect-19" rows="4"></textarea>
+                                <textarea name="comments" id="comments" class="form-control effect-19" rows="4"></textarea>
                                 <label>Comments</label>
                             </div>
+
                             <div class="form-group text-center">
-                                <button class="add-submit btn blue-button Prescription-submit ">Submit</button>
+                                <input name="d_id" id="d_id" type="hidden" value="">
+                                <input name="p_id" id="p_id" type="hidden" value="">
+                                <button type="button" id="add_pris" class="add-submit btn blue-button Prescription-submit ">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -402,7 +457,7 @@
 
       </div>
 
-      <div class="modal fade add-edit-prs" id="edit-pop" >
+    <div class="modal fade add-edit-prs" id="edit-pop" >
 
         <div class="modal-dialog modal-dialog-centered" role="document">
 
@@ -466,8 +521,8 @@
       </div>
 @endsection
 @section('scripts')
-    <script>
-         $('#Prescribed-Modal').modal('show');
+<script>
+$('#Prescribed-Modal').modal('show');
 
     //      $(".add-and-edit").click(function(){
 
@@ -477,7 +532,7 @@
 
     // });
 
-    $("#add-tr").load(function() {
+$("#add-tr").load(function() {
 
         $('tr.only-remv').after().on('click',function(){
 
@@ -496,7 +551,151 @@
   }
   })
 });
+$('#case_no').on('change', function(){
+    var case_id = $(this).val();
+    var _token = $("input[name=_token]").val();
+    $.ajax({
+        url: "{{ url('doctor/ajaxCasedetails')}}",
+        type: 'POST',
+        data:{
+            case_id : case_id,
+            _token : _token
+        },
+        success:function(res){
+            console.log(res.case_details[0]);
+            $('#p_name').val(res.case_details[0].user.name);
+            $('#upn').val(res.case_details[0].user.UPN);
+            $('#p_id').val(res.case_details[0].user.id);
+            $('#d_id').val(res.case_details[0].doctor_id);
+            $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
+            var prescription =res.prescription[0].prescription;
+            var status = '';
+            if(prescription.length > 0){
+                for(i=0; i < prescription.length; i++){
+                    console.log(prescription[i]);
+                    $('#add-tr tbody').append('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
+                    status = prescription[i]['status'];
+                }
+                console.log(status);
+                if(status == 'no'){
+                    $('#befour_sub').css('display','block');
+                    $('#after_sub').css('display','none');
+                }
+                if(status == 'y'){
+                    $('.add-and-edit').css('display', 'none');
+                    $('#befour_sub').css('display','none');
+                    $('#after_sub').css('display','block');
+                }
+
+
+            }
+        }
+    })
+    
+});
+$('#add_pris').on('click', function(){
+    console.log('asd');
+    var case_id = $('#case_no').val();
+    var p_id = $('#p_id').val();
+    var d_id = $('#d_id').val();
+    var upn = $('#upn').val();
+    var g_name = $('#g_name').val();
+    var drug = $('#drug').val();
+    var dose = $('#dose').val();
+    var frequency = $('#frequency').val();
+    var duration = $('#duration').val();
+    var comments = $('#comments').val();
+    var route = $('#route').val();
+    var _token = $("input[name=_token]").val();
+    $.ajax({
+        url: "{{ url('doctor/ajaxAddpriscription')}}",
+        type: 'POST',
+        data:{
+            case_id : case_id,
+            p_id : p_id,
+            d_id : d_id,
+            upn : upn,
+            g_name : g_name,
+            drug : drug,
+            dose : dose,
+            frequency : frequency,
+            duration : duration,
+            comments : comments,
+            route : route,
+            _token : _token
+        },
+        success:function(res){
+            console.log(res);
+            $('#p_name').val(res.case_details[0].user.name);
+            $('#upn').val(res.case_details[0].user.UPN);
+            $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
+            var prescription = res.prescription[0].prescription;
+           
+            console.log(prescription);
+            $('#add-tr tbody').html('');
+            if(prescription.length > 0){
+                for(i=0; i < prescription.length; i++){
+                    console.log(prescription[i]);
+                    
+                    $('#add-tr tbody').append('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
+                    $('#add-pop').modal('hide')
+                }
+                
+            }
+        }
+    });
+    
+});
+$('#final_prisc').on('click', function(){
+    var case_id = $('#case_no').val();
+    var _token = $("input[name=_token]").val();
+    console.log(case_id);
+    if(case_id !='' ){
+    $.ajax({
+        url: "{{ url('doctor/ajaxFinalpriscription')}}",
+        type: 'POST',
+        data:{
+            case_id : case_id,
+            _token : _token
+        },
+        success:function(res){
+            console.log(res.case_details[0]);
+            $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
+            $('#p_name').val(res.case_details[0].user.name);
+            $('#upn').val(res.case_details[0].user.UPN);
+            $('#p_id').val(res.case_details[0].user.id);
+            $('#d_id').val(res.case_details[0].doctor_id);
+            var prescription =res.prescription[0].prescription;
+            var status = '';
+            if(prescription.length > 0){
+                for(i=0; i < prescription.length; i++){
+                    console.log(prescription[i]);
+                    status = prescription[i]['status'];
+                    $('#add-tr tbody').html('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
+                    $('#final_sucess').css('display', 'block');
+                    $('#final_error').css('display', 'none');
+                    $('#finalprisc').modal('hide')
+                }
+                if(status == 'no'){
+                    $('#befour_sub').css('display','block');
+                    $('#after_sub').css('display','none');
+                }
+                if(status == 'y'){
+                    $('.add-and-edit').css('display', 'none');
+                    $('#befour_sub').css('display','none');
+                    $('#after_sub').css('display','block');
+                }
+            }
+        }
+    });
+        
+    }else{
+        $('#final_error').css('display', 'block');
+        $('#final_sucess').css('display', 'none');
+        $('#finalprisc').modal('hide')
+    }
+    
+});
 
 </script>
 @endsection
-{"mode":"full","isActive":false}
