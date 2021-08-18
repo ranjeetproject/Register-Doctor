@@ -506,6 +506,9 @@ class PatientController extends Controller
 
     public function pharmacies(Request $request)
     {
+        if(isset($request->post_sub)){
+          
+        }
         $pharmacies = User::whereRole(3)->latest()->get();
         return view('frontend.patient.pharmacies',compact('pharmacies'));
 
