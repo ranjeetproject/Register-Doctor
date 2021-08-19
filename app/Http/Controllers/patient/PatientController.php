@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Prescription_req_doctor;
 use Session;
 
 
@@ -506,16 +507,47 @@ class PatientController extends Controller
 
     public function pharmacies(Request $request)
     {
+        $success = '';
+        $error = '';
         if(isset($request->post_sub)){
-          
+          //echo $request->c_id .' '.$request->s_id;
+          if($request->c_id !='' && $request->s_id != ''){
+            $case = Prescription_req_doctor::where( 'priscription_id', $request->s_id)->first();
+            if($case ==''){
+              $req = new Prescription_req_doctor();
+              $req->priscription_id = $request->s_id;
+              $req->case_id = $request->c_id;
+              $req->status = 1;
+              $req->send_status = 2;
+              $req->created_at = date("Y-m-d h:i:s");
+              $req->updated_at = date("Y-m-d h:i:s");
+              $req->save();
+              //print_r($priscription);
+              if(!empty($req)){
+                $success = 'Request send successfully';
+              }else{
+                $error = 'There is some problem please try again';
+              }
+            }else{
+              $error = 'Request already sended';
+              if($case->send_status == 1){
+                $success = 'Please check your mail Doctor already send the priscription';
+              }
+            }  
+          }else{
+            $error = 'There is some problem please try again';
+          }
+
         }
         $pharmacies = User::whereRole(3)->latest()->get();
-        return view('frontend.patient.pharmacies',compact('pharmacies'));
+        $data = array( 'pharmacies'=>$pharmacies, 'success' => $success, 'error' => $error);
+        //print_r($data->);
+        return view('frontend.patient.pharmacies',compact('data'));
 
     }
 
 
-     public function searchPharmacies(Request $request)
+    public function searchPharmacies(Request $request)
     {
         $pharmacies = User::whereRole(3)->latest()->get();
         return view('frontend.patient.search_pharmacies',compact('pharmacies'));

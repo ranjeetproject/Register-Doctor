@@ -9,6 +9,7 @@ use App\Models\DrugsDetails;
 use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
+use App\Models\Prescription_req_doctor;
 use App\Prescription;
 use App\Models\SummaryDiagnosis;
 use App\Models\SymptromsDetails;
@@ -235,21 +236,17 @@ class DoctorController extends Controller
     {
         //print_r($request->case_id);
         $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
+        $paitent_req = Prescription_req_doctor::where( 'case_id', $request->case_id)->first();
+        $req_status = 'inactive';
+        if($paitent_req !=''){
+          //print_r($paitent_req->case_id);
+          $req_status = ($paitent_req->status == 1) ? 'active' : 'inactive';
+        }
         $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
-        // foreach($case as $d){
-        //   print_r($d->user->name);
-        // }
-        $return = array('case_details'=>$case, 'prescription'=>$prescription);
+
+        $return = array('case_details'=>$case, 'prescription'=>$prescription, 'req_status'=> $req_status);
         return response()->json( $return);
-        // //$case = PatientCase::where( 'case_id', $request->case_id)->get();
-        // $case =  PatientCase::find( $request->case_id, 'case_id')->user();
-        // //$user_details = $case->user()->get();
-        // //print_r($case);
-        // foreach($case as $c){
-        //   echo $c->user_id;
-        // }
-        //$cases = Prescription::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
-        //return view('frontend.doctor.create_prescription',compact('cases'));
+
     }
     public function ajaxAddpriscription(Request $request){
       //print_r($_POST);
