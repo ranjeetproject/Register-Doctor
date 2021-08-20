@@ -307,6 +307,11 @@
                                     </div>
                                     <div data-toggle="modal" data-target="#finalprisc" id="edit_prisc" class="btn blue-button Prescription-submit ">Edit Priscription</div>
                                     <a id="msg_doc" href="#" target="_blank" class="btn blue-button">Message Patient</a>
+                                   
+                                    <div class="row" id="print">
+                                        
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -585,6 +590,9 @@ $('#case_no').on('change', function(){
                     $('.add-and-edit').css('display', 'none');
                     $('#befour_sub').css('display','none');
                     $('#after_sub').css('display','block');
+                    if(res.req_status == 'active'){
+                        $('#print').html('<p>Paitent requiest for priscrioption hard coppy please click the below button for print</p><br/><a id="print_prisc" href="#"  class="btn">Print Priscription</a>');
+                    }
                 }
 
 
@@ -684,6 +692,7 @@ $('#final_prisc').on('click', function(){
                     $('.add-and-edit').css('display', 'none');
                     $('#befour_sub').css('display','none');
                     $('#after_sub').css('display','block');
+                    
                 }
             }
         }

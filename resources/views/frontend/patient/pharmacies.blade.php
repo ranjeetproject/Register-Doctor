@@ -37,6 +37,16 @@
                                     <p class="pmarg-top">Click to check your delivery address is correct</p>
                                     <form action="" method="post" class="Pharmacy-loc">
                                         @csrf
+                                       
+                                        @if($data['success'] !='')
+                                        <div id="final_sucess" class="alert alert-success" role="alert" >
+                                            {{$data['success'] }}
+                                        </div>
+                                        @elseif($data['error'] !='')
+                                        <div id="final_error" class="alert alert-danger" role="alert" >
+                                            {{$data['error']}}
+                                        </div>
+                                        @endif
                                         <input class="btn blue-button mr-lf-top" type="submit" name="post_sub" value="Post prescription" />
                                     </form>
                                     
@@ -69,7 +79,7 @@
                                         </div>
                                       </div>
 
-                                      @foreach($pharmacies as $pharmaci)
+                                      @foreach($data['pharmacies'] as $pharmaci)
                                     
                                     <div class="card pharmacy-details">
                                         <div class="card-header">

@@ -217,7 +217,7 @@ $('#case_no').on('change', function(){
             var d_name = $('#doc_name').html();
             $('#doc_name').html(d_name + res.case_details[0].doctor.name);
             $('#msg_doc').attr('href',"{{url('patient/chats')}}/"+res.case_details[0].case_id);
-            $('#sub_prisc').attr('href',"{{url('patient/pharmacies/?c_id=')}}"+res.case_details[0].case_id);
+            
             //console.log(d_name);
            //$('#p_name').val(res.case_details[0].doctor.name);sub_prisc
            
@@ -235,6 +235,7 @@ $('#case_no').on('change', function(){
                     
                     $('#add-tr tbody').append('<tr class="only-remv"><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td></tr>');
                 }
+                $('#sub_prisc').attr('href',"{{url('patient/pharmacies')}}/?c_id="+res.case_details[0].case_id+"&s_id="+presc_no);
                 var d_name = $('#presc_no').html();
                 $('#presc_no').html(d_name + presc_no);
                 date_time =  date_time.split(" ");   
