@@ -26,9 +26,9 @@
                                   </form>
                             </div>
                             <div class="col-sm-4">
-                                <form action="">
+                                {{-- <form action="">
                                     <input type="text" class="form-control" placeholder="Search...">
-                                </form>
+                                </form> --}}
                             </div>
 
                         </div>
@@ -70,37 +70,65 @@
                                             <td>{{$case->case_id}}</td>
                                             <td>
                                                 @if($case->questions_type == 2)
-                                                <a href="{{route('patient.video-call',$case->case_id)}}" target="_blank">
-                                                    Live Video
-                                                    <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt="">
-                                                    <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
-                                                </a>
+                                                    @if($case->accept_status == 1)
+                                                        <a href="{{route('patient.video-call',$case->case_id)}}" target="_blank">
+                                                            Live Video
+                                                            <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt="">
+                                                            <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
+                                                        </a>
+                                                    @else
+                                                        Live video
+                                                    @endif
                                                 @else
+                                                    @if($case->accept_status == 1)
                                                     <a href="{{route('patient.chats',$case->case_id)}}">
-                                                    @if($case->questions_type == 1)
-                                                    Live Chat
-                                                    <br><img src="{{ asset('public/images/frontend/images/Live-Text-Chat.png')}}" alt="">
-                                                    @endif
+                                                        @if($case->questions_type == 1)
+                                                        Live Chat
+                                                        <br><img src="{{ asset('public/images/frontend/images/Live-Text-Chat.png')}}" alt="">
+                                                        @endif
 
-                                                    @if($case->questions_type == 2)
+                                                        @if($case->questions_type == 2)
 
-                                                    @endif
+                                                        @endif
 
-                                                    @if($case->questions_type == 3)
-                                                        Quick Questions
+                                                        @if($case->questions_type == 3)
+                                                            Quick Questions
+                                                            <br>
+                                                            <p>Max 3 Exchanges</p><br>
+                                                            <img src="{{ asset('public/images/frontend/images/Quick-Question.png')}}" alt="">
+                                                        @endif
+
+                                                        @if($case->questions_type == 4)
+                                                        Typed Q&A
                                                         <br>
                                                         <p>Max 3 Exchanges</p><br>
-                                                        <img src="{{ asset('public/images/frontend/images/Quick-Question.png')}}" alt="">
-                                                    @endif
+                                                        <img src="{{ asset('public/images/frontend/images/Booked-Question.png')}}" alt="">
+                                                        @endif
+                                                    </a>
+                                                    @else
+                                                        @if($case->questions_type == 1)
+                                                            Live Chat
+                                                            <br>
+                                                            <p>Max 3 Exchanges</p>
+                                                        @endif
 
-                                                    @if($case->questions_type == 4)
-                                                    Typed Q&A
-                                                    <br>
-                                                    <p>Max 3 Exchanges</p><br>
-                                                    <img src="{{ asset('public/images/frontend/images/Booked-Question.png')}}" alt="">
+                                                        @if($case->questions_type == 2)
+
+                                                        @endif
+
+                                                        @if($case->questions_type == 3)
+                                                            Quick Questions
+                                                            <br>
+                                                            <p>Max 3 Exchanges</p>
+                                                        @endif
+
+                                                        @if($case->questions_type == 4)
+                                                            Typed Q&A
+                                                            <br>
+                                                            <p>Max 3 Exchanges</p>
+                                                        @endif
                                                     @endif
-                                                </a>
-                                              @endif
+                                                @endif
                                             </td>
                                             <td>
                                               @if($case->accept_status == 1)
@@ -108,9 +136,12 @@
                                                 <strong style="font-size: 20px;">{{date('d F Y', strtotime($case->booking_date))}}
 
 
-
                                               @else
-                                               Pending
+                                                @if($case->status == 3)
+                                                Canceled
+                                                @else
+                                                Pending
+                                                @endif
                                               @endif
 
                                           </td>
@@ -120,8 +151,10 @@
                                                 <a href="{{route('patient.accepted-consults',$case->case_id)}}" class="btn btn-sm btn-primary"> Doctors</a>
                                             @endif
                                             @if(($case->questions_type == 2) || ($case->questions_type == 1))
+                                                @if($case->status < 3)
                                                 @if (getDiffOfTwoDateInMinute($case->booking_date.' '.$start_time) > 4320)
                                                     <a href="{{route('patient.cancel-booking',$case->case_id)}}" class="btn btn-sm btn-primary"> Cancel booking</a>
+                                                @endif
                                                 @endif
 
                                                 {{-- @dump(getDiffOfTwoDateInMinute($case->booking_date.' '.$start_time)) --}}

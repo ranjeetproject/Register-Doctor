@@ -4,11 +4,13 @@
     <div class="col Post-prescription-right Patient-Profile-page">
         <div class="row">
             <div class="col-sm-12">
-                
+
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active input-effect" id="Patient-Profile">
-                        <form class="for-w-100" method="POST" enctype="multipart/form-data">
+                        <form class="for-w-100" action="{{ route('patient.change-password') }}" method="POST">
+                            {{-- <input name="_token" type="hidden" value="{{ $token }}" SameSite="none" Secure/> --}}
                             @csrf
+                            {{-- @dump($token) --}}
                             <div class="row Manage-Account-title">
                                 <div class="col-sm-12">
                                     <h2>Change Password </h2>
@@ -17,7 +19,7 @@
                             <div class="row main-form-fild">
                                 <div class="col-sm-12">
                                     <div class="form-group required">
-                                        <input type="password" name="old_password" class="form-control effect-19" placeholder="">
+                                        <input type="password" name="old_password" class="form-control effect-19" placeholder="" autocomplete="cc-old_password">
                                         <label>Old Password </label>
                                       </div>
                                     @error('old_password')
@@ -26,8 +28,8 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group required">
-                                        
-                                        <input type="password" name="new_password" class="form-control effect-19" placeholder="">
+
+                                        <input type="password" name="new_password" class="form-control effect-19" placeholder="" autocomplete="cc-new_password">
                                         <label>New Password</label>
                                       </div>
                                       @error('new_password')
@@ -36,8 +38,8 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group required">
-                                        
-                                        <input type="password" class="form-control effect-19" placeholder="" name="confirm_password">
+
+                                        <input type="password" class="form-control effect-19" placeholder="" name="confirm_password" autocomplete="cc-confirm_password">
                                         <label>Confirm Password</label>
                                       </div>
                                       @error('confirm_password')
@@ -50,16 +52,16 @@
                             </div>
                         </form>
                     </div>
-                        
+
                     <div class="tab-pane fade " id="Payment-Details">
-                    
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-  
+
 @endsection
 @section('scripts')
     <script>
@@ -85,7 +87,7 @@
 
          $(window).on('load', function(){
     $(".tab-content #Patient-Profile input, .tab-content #Patient-Profile textarea").val("");
-    
+
     $(".input-effect input, .input-effect textarea").focusout(function(){
     if($(this).val() != ""){
     $(this).addClass("has-content");

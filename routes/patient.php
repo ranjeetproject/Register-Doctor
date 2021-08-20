@@ -48,6 +48,8 @@
 
     Route::get('video-cal/{id}','PatientController@videoCall')->name('video-call');
     Route::get('/cancel-booking/{id}', 'PatientController@cancelBooking')->name('cancel-booking');
+    Route::get('/payment-detail', 'PatientController@paymentDetail')->name('payment-detail');
+    Route::get('/print-case-summery/{id}', 'PatientController@printCaseSummery')->name('print-case-summery');
 
 });
 

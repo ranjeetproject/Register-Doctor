@@ -15,7 +15,7 @@ class CreateSummaryDiagnosesTable extends Migration
     {
         Schema::create('summary_diagnoses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('patient_case_id')->nullable();
+            $table->string('patient_case_id',50)->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->text('summary_diagnose')->nullable();
             $table->text('future_reference')->nullable();

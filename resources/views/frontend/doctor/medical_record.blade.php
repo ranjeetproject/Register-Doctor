@@ -4,7 +4,7 @@
     <div class="col Choose-Your-Doctor-right Medical-Record-page">
         <div class="row">
             <div class="col-sm-12">
-               
+
                 <div class="col Choose-Your-Doctor-right">
                     <nav aria-label="breadcrumb ">
                         <ol class="breadcrumb Pharmacist-doc-com">
@@ -31,10 +31,11 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
-
-                                        @foreach($past_symptoms as $past_symptom)
+                                        @forelse($past_symptoms as $past_symptom)
                                          <p><label>{{$past_symptom->symptom}} </label>  Entry Dated :  {{ date('d.m.Y', strtotime($past_symptom->created_at))}}</p>
-                                        @endforeach
+                                        @empty
+                                         <p> No record found.</p>
+                                        @endforelse
 
                                     </div>
                                   </div>
@@ -46,9 +47,11 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
-                                       @foreach($past_symptoms2 as $past_symptom)
-                                         <p><label>{{$past_symptom->symptom}} </label>  Entry Dated :  {{ date('d.m.Y', strtotime($past_symptom->created_at))}}</p>
-                                        @endforeach
+                                        @forelse($past_symptoms2 as $past_symptom2)
+                                         <p><label>{{$past_symptom2->symptom}} </label>  Entry Dated :  {{ date('d.m.Y', strtotime($past_symptom2->created_at))}}</p>
+                                        @empty
+                                         <p> No record found.</p>
+                                        @endforelse
                                     </div>
                                   </div>
                             </div>
@@ -75,11 +78,11 @@
                                                     <td>Allergy</td>
                                                     <td>{{$case->doctor->name}}</td>
                                                     <td><a href="{{route('doctor.view-case',$case->case_id)}}" class="btn">View Case</a><a href="#" class="btn">Print Case Summary</a></td>
-                                                    <td>{{ date('d.m.Y', strtotime($past_symptom->created_at))}}</td>
+                                                    <td>{{ date('d.m.Y', strtotime($case->created_at))}}</td>
                                                 </tr>
                                             @endforeach
 
-                                                
+
                                             </tbody>
                                           </table>
                                     </div>
@@ -117,11 +120,11 @@
                                                         <td>{{date('d.m.Y', strtotime($drug->created_at))}} </td>
                                                     </tr>
                                             @endforeach
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
+
                                           <div class="bottom-cont">
                                             <p><label><strong>Weight</strong> : {{$last_symptroms_details->weight ?? ''}}  </label>  Entry Dated :  @if(isset($last_symptroms_details->created_at)) {{date('d.m.Y', strtotime($last_symptroms_details->created_at))}}</p>
                                             <p><label><strong>Height</strong> : {{$last_symptroms_details->height ?? ''}}  </label>  Entry Dated :                                              @endif</p>
@@ -146,7 +149,7 @@
                                                     <td>{{date('d.m.Y', strtotime($drug->created_at))}} </td>
                                                 </tr>
                                        @endforeach
-                                                
+
                                             </tbody>
                                           </table>
                                           <div class="comm-title-details">
@@ -176,7 +179,7 @@
                                                 </tbody>
                                               </table>
                                         </div>
-                                        
+
                                     </div>
                                   </div>
                                   <div class="col-sm-12">
@@ -187,7 +190,7 @@
                                     <div class="card">
                                         <div class="card-body Medical-History">
                                           <p><label>Family history cataracts :  squint eye, poor vision, diabetes </label>  Entry Dated :  28.3.2020</p>
-                                          <p><label>History of alcoholism</label>  Entry Dated :  28.3.2020</p>                     
+                                          <p><label>History of alcoholism</label>  Entry Dated :  28.3.2020</p>
                                       </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -215,15 +218,15 @@
                 </div>
                 </div>
 
-                
+
             </div>
         </div>
     </div>
-   
+
 @endsection
 @section('scripts')
     <script>
-        
+
 
     </script>
 @endsection

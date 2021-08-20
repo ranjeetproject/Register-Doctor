@@ -11,7 +11,7 @@
                     </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link btn" href="#">Payment Details</a>
+                    <a class="nav-link btn" href="{{ route('patient.payment-detail') }}">Payment Details</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -20,25 +20,25 @@
                             @csrf
                             <div class="for-profile-image">
                                 <input type="file" name="profile_photo" id="imgInp">
-                                
+
                                 <img id="blah" src="{{ $user->profile->profile_photo }}" alt="your image">
-                                
+
                                 <br>
 
                                 <span>Update Profile Image</span>
 
                             </div>
                             <div class="row main-form-fild">
-                                <div class="col-sm-12">
+                                {{-- <div class="col-sm-12">
                                     <div class="form-group required">
                                         <input type="text" name="upn" class="form-control effect-19 " >
                                         <label>Unique Patient Number (UPN)</label>
                                     @error('upn')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                    
+
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-sm-6">
                                     <div class="form-group required">
                                         <input type="text" name="forename" class="form-control effect-19 {{!empty($user->forename) ? 'has-content':''}}" value="{{$user->forename}}">
@@ -203,9 +203,9 @@
                             </div>
                         </form>
                     </div>
-                        
+
                     <div class="tab-pane fade " id="Payment-Details">
-                    
+
                     </div>
                 </div>
             </div>
@@ -221,7 +221,7 @@
                 </button>
                 <div class="modal-body">
                     <p>Your Doctor has been messaged to post the Prescription to you.</p>
-                    <p>For queries you may message the Doctor using the 'Prescriptions Issued' option 
+                    <p>For queries you may message the Doctor using the 'Prescriptions Issued' option
                         [Lefthand Navigation Menu]</p>
                 </div>
             </div>
@@ -254,7 +254,7 @@
 
          $(window).on('load', function(){
     // $(".tab-content #Patient-Profile input, .tab-content #Patient-Profile textarea").val("");
-    
+
     $(".input-effect input, .input-effect textarea").focusout(function(){
     if($(this).val() != ""){
     $(this).addClass("has-content");

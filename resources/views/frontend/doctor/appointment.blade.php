@@ -45,7 +45,6 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-
                                          @foreach ($cases as $case)
 
                                          <tr >
@@ -69,7 +68,7 @@
                                                         <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt="">
                                                         <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
                                                     </a>
-                                                    @elseif($case->booking_date >date('Y-m-d') )
+                                                    @elseif($case->booking_date < date('Y-m-d') )
                                                         Your appointment date was {{ $case->booking_date }}
                                                     @else
                                                         Your appointment date is {{ $case->booking_date }}
@@ -134,7 +133,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <nav aria-label="Page navigation example">
-                                     {{ $cases->onEachSide(1)->links() }}
+                                     {{ $cases->links() }}
                                   </nav>
                             </div>
                         </div>

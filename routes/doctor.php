@@ -37,6 +37,7 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::match(['get','post'],'summary-diagnosis/{id}', 'DoctorController@summaryDiagnosis')->name('summary-diagnosis');
 
     Route::get('video-cal/{id}','DoctorController@videoCallDoc')->name('video-call');
+    Route::get('/cancel-booking/{id}', 'DoctorController@cancelBooking')->name('cancel-booking');
 
 
 });

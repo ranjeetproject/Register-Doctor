@@ -20,8 +20,8 @@ class CreateThumbsUpsTable extends Migration
             $table->string('country');
             $table->string('city');
             $table->string('email');
-            $table->longText('comment');
-            $table->longText('opinion_leader');
+            $table->longText('comment')->nullable();
+            $table->longText('opinion_leader')->nullable();
             $table->string('created_by');
             // $table->string('max_share')
             $table->timestamps();

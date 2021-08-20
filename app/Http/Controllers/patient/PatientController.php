@@ -18,6 +18,7 @@ use App\Models\UserProfile;
 use App\Models\WeeklyAvailableDays;
 use App\Models\HandyDocument;
 use App\Models\Payment;
+use App\Models\SummaryDiagnosis;
 use App\User;
 use App\UserDoctor;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -89,7 +90,16 @@ class PatientController extends Controller
 
      $user->save();
      $profile = UserProfile::where('user_id',$user->id)->first();
+     if($profile ) {
+        if($profile->UPN == '') {
+            $profile->UPN = uniqid('PA');
+        }
+     }
      $profile = $profile ?? new UserProfile;
+     if($profile->UPN == '') {
+        $profile->UPN = uniqid('PA');
+    }
+
      $profile->user_id = $user->id;
 
       $profile->dob = $request->dob;
@@ -154,7 +164,9 @@ class PatientController extends Controller
          return redirect()->back();
 
         }
-        return view('frontend.patient.change_password');
+        $token = csrf_token();
+
+        return view('frontend.patient.change_password',compact('token'));
     }
 
 
@@ -170,98 +182,97 @@ class PatientController extends Controller
 
         if($request->isMethod('post')) {
          // $data = $request->validate([
-          $validator = Validator::make($request->all(), [
-             "health_problem"=>"required",
-             "questions_type"=>"required",
-             "case_file"=>"required|max:2000",
-             // "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
-         ]);
+            $validator = Validator::make($request->all(), [
+                "health_problem"=>"required",
+                "questions_type"=>"required",
+                "case_file.*"=>"required|max:2000",
+                // "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
+            ]);
 
             if ($validator->fails()) {
-              // echo $validator->errors()->first(); exit;
-              Session::flash('Error-toastr','Please fill in all the fields before proceeding');
-              return redirect()->back();
+                // echo $validator->errors()->first(); exit;
+                Session::flash('Error-toastr','Please fill in all the fields before proceeding');
+                return redirect()->back();
             }
          // print_r($request->all()); exit;
 
 
-         $case = new PatientCase;
-         $case->user_id = Auth::guard('sitePatient')->user()->id;
-         $case->case_id = 'C'.Auth::guard('sitePatient')->user()->id.date('YmdHis');
-         $case->doctor_id = $request->doctor_id;
-         $case->health_problem = $request->health_problem;
-         $case->medicine_name = $request->medicine_name;
-         $case->case_type = $request->case_type ?? 1;
-         $case->questions_type = $request->questions_type;
+            $case = new PatientCase;
+            $case->user_id = Auth::guard('sitePatient')->user()->id;
+            $case->case_id = 'C'.Auth::guard('sitePatient')->user()->id.date('YmdHis');
+            $case->doctor_id = $request->doctor_id;
+            $case->health_problem = $request->health_problem;
+            $case->medicine_name = $request->medicine_name;
+            $case->case_type = $request->case_type ?? 1;
+            $case->questions_type = $request->questions_type;
 
-         $booking_date = str_replace('/','-',$request->booking_date);
-         $booking_date = date('Y-m-d',strtotime($booking_date));
-         if(($request->questions_type == 1) || ($request->questions_type == 2)){
-             $booking_date = $booking_date;
-         }else{
-             $booking_date = null;
-         }
-         $case->booking_date = $booking_date;
+            $booking_date = str_replace('/','-',$request->booking_date);
+            $booking_date = date('Y-m-d',strtotime($booking_date));
+            if(($request->questions_type == 1) || ($request->questions_type == 2)){
+                $booking_date = $booking_date;
+            }else{
+                $booking_date = null;
+            }
+            $case->booking_date = $booking_date;
 
-         $case->booking_time = $request->booking_time;
-         $case->time_duration = ($request->time_duration) ? $request->time_duration * 15 : '';
-         $case->save();
+            $case->booking_time = $request->booking_time;
+            $case->time_duration = ($request->time_duration) ? $request->time_duration * 15 : '';
+            $case->save();
 
-        $img_did = [];
-        if ($request->hasFile('case_file')){
-         foreach($request->file('case_file') as $image)
-            // echo $image; exit;
-            {
-            $rand_val           = date('YMDHIS') . rand(11111, 99999);
-            $image_file_name    = md5($rand_val);
-            // $file               = $request->file('image');
-            $file               = $image;
-            $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
-            $destinationPath    = public_path().'/uploads/cases/';
-            $file->move($destinationPath,$fileName);
-            $images['file_name']    = $fileName;
-            $images['patient_case_id']    = $case->id;
-            array_push($img_did, $images);
-          }
-        }
-        // print_r($img_did); exit;
+            $img_did = [];
+            if ($request->hasFile('case_file')){
+                foreach($request->file('case_file') as $image)
+                {
+                    $rand_val           = date('YMDHIS') . rand(11111, 99999);
+                    $image_file_name    = md5($rand_val);
+                    // $file               = $request->file('image');
+                    $file               = $image;
+                    $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
+                    $destinationPath    = public_path().'/uploads/cases/';
+                    $file->move($destinationPath,$fileName);
+                    $images['file_name']    = $fileName;
+                    $images['patient_case_id']    = $case->id;
+                    array_push($img_did, $images);
+                }
+            }
+            // print_r($img_did); exit;
 
-        CaseFile::insert($img_did);
+            CaseFile::insert($img_did);
 
-         // if ($request->hasFile('case_file')) {
-         //    $rand_val           = date('YMDHis').rand(11111,99999);
-         //    $image_file_name    = md5($rand_val);
-         //    $file               = $request->file('case_file');
-         //    $extension          = $request->file('case_file')->extension();
-         //    $fileName           = $image_file_name.'.'.$extension;
-         //    $destinationPath    = public_path().'/uploads/cases/';
-         //    $file->move($destinationPath,$fileName);
-         //    $case_file = new CaseFile;
-         //    $case_file->patient_case_id = $case->id;
-         //    $case_file->file_name = $fileName;
-         //    $case_file->save();
-         //  }
+            // if ($request->hasFile('case_file')) {
+            //    $rand_val           = date('YMDHis').rand(11111,99999);
+            //    $image_file_name    = md5($rand_val);
+            //    $file               = $request->file('case_file');
+            //    $extension          = $request->file('case_file')->extension();
+            //    $fileName           = $image_file_name.'.'.$extension;
+            //    $destinationPath    = public_path().'/uploads/cases/';
+            //    $file->move($destinationPath,$fileName);
+            //    $case_file = new CaseFile;
+            //    $case_file->patient_case_id = $case->id;
+            //    $case_file->file_name = $fileName;
+            //    $case_file->save();
+            //  }
 
-          if (isset($request->time_slot) && !empty($request->time_slot)) {
+            if (isset($request->time_slot) && !empty($request->time_slot)) {
 
-            foreach ($request->time_slot as $time_slot) {
-             $booking_time_slot = new BookTimeSlot;
-             $booking_time_slot->user_id = Auth::guard('sitePatient')->user()->id;
-             $booking_time_slot->patient_case_id = $case->id;
-             $booking_time_slot->time_slot_id = $time_slot;
-             $booking_time_slot->save();
+                foreach ($request->time_slot as $time_slot) {
+                    $booking_time_slot = new BookTimeSlot;
+                    $booking_time_slot->user_id = Auth::guard('sitePatient')->user()->id;
+                    $booking_time_slot->patient_case_id = $case->id;
+                    $booking_time_slot->time_slot_id = $time_slot;
+                    $booking_time_slot->save();
+                }
+
             }
 
-          }
-
-        Session::flash('Success-toastr','Successfully submited');
+            Session::flash('Success-toastr','Successfully submited');
 
 
-        if($request->questions_type == 1 || $request->questions_type == 2 || $request->questions_type == 4){
-        return redirect()->route('patient.payment',$case->case_id);
-        // return redirect()->route('patient.symptoms-checker',$case->case_id);
-        }
-        return redirect()->back();
+            if($request->questions_type == 1 || $request->questions_type == 2 || $request->questions_type == 4){
+                return redirect()->route('patient.payment',$case->case_id);
+                // return redirect()->route('patient.symptoms-checker',$case->case_id);
+            }
+            return redirect()->back();
         }
 
 
@@ -497,13 +508,13 @@ class PatientController extends Controller
     }
     public function ajaxPatientCasedetails(Request $request)
     {
-       
+
         $case = PatientCase::where( 'case_id', $request->case_id)->with('doctor')->get();
         $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
-    
+
         $return = array('case_details'=>$case, 'prescription'=>$prescription);
         return response()->json( $return);
-      
+
     }
 
     public function pharmacies(Request $request)
@@ -880,19 +891,42 @@ class PatientController extends Controller
     {
         PatientCase::where('case_id',$id)->update(['status' => 3,'cancel_by' =>Auth::guard('sitePatient')->user()->id, 'cancel_date' => date('Y-m-d H:i:s')]);
         $case_primary_id = PatientCase::where('case_id',$id)->value('id');
-        BookTimeSlot::where('patient_case_id',$case_primary_id)->update(['status'=> 3]);
         // return view('frontend.patient.view_handy_doc',compact('handy_doc'));
         $intent_id = Payment::where('case_id',$id)->value('intent_id');
+        Payment::where('case_id',$id)->update(['status' => 4]);
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $re = \Stripe\Refund::create([
             'payment_intent' => $intent_id,
         ]);
 
-        $intent = \Stripe\PaymentIntent::retrieve($intent_id);
-        $intent->cancel();
-
+        // $intent = \Stripe\PaymentIntent::retrieve($intent_id);
+        // $intent->cancel();
+        BookTimeSlot::where('patient_case_id',$case_primary_id)->update(['status'=> 3]);
+//needs to create table of refund details
+        // $refund = new RefundPayment;
+        // $refund->balance_transaction = $re->balance_transaction;
+        // $refund->charge = $re->charge;
+        // $refund->payment_intent = $re->payment_intent;
+        // $refund->status = $re->status;
+        // $refund->amount = $re->amount;
+        // $refund->case_id = $id;
+        // $refund->save();
+// dd($re);
         Session::flash('Success-toastr','Successfully canceled');
         return redirect()->back();
+    }
+
+    public function paymentDetail()
+    {
+        $payments = Payment::where('user_id',Auth::guard('sitePatient')->user()->id)->paginate(8);
+        return view('frontend.patient.payment_detail',compact('payments'));
+    }
+
+    public function printCaseSummery($id)
+    {
+        $summary = SummaryDiagnosis::where('patient_case_id',$id)->first();
+        $case_detail = PatientCase::where('case_id',$id)->first();
+        return view('frontend.patient.print_case_summery',compact('summary','case_detail'));
     }
 }

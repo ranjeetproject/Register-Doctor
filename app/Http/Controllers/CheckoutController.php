@@ -80,7 +80,7 @@ class CheckoutController extends Controller
         $payment = new Payment;
         $payment->case_id = $request->case_id;
         $payment->user_id = $case->user_id;
-        $payment->intent_id = $case->intent_id;
+        $payment->intent_id = $request->intent_id;
         $payment->secure_token = $case->_token;
         $payment->amount = $amount;
         $payment->payment_date = date('Y-m-d H:i:s');

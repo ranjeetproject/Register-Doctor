@@ -173,11 +173,11 @@ function getReview($doctor_id)
 function getThumbsUp($created_by) {
    $thumbsup =  ThumbsUp::where('created_by',$created_by)->count();
    if($thumbsup) {
-       (int)$asd = $thumbsup/12;
-       if($asd>5) {
+       $axd = (int)$asd = $thumbsup/12;
+       if($axd>5) {
            return 5;
        }
-       return $asd;
+       return $axd;
    }
    return $thumbsup;
 }

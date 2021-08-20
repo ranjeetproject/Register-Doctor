@@ -17,6 +17,8 @@ use App\Models\UserProfile;
 use App\Models\WeeklyAvailableDays;
 use App\Models\HandyDocument;
 use App\Models\ThumbsUp;
+use App\Models\Payment;
+use App\Models\BookTimeSlot;
 use App\UserDoctor;
 use App\helpers;
 use Illuminate\Http\Request;
@@ -300,7 +302,7 @@ class DoctorController extends Controller
         if(!empty($priscription)){
           $case = PatientCase::where( 'case_id', $_POST['case_id'])->with('user')->get();
           $prescription = PatientCase::where( 'case_id', $_POST['case_id'])->with('prescription')->get();
-          
+
           $return = array('case_details'=>$case, 'prescription'=>$prescription);
           return response()->json( $return);
         }else{
@@ -318,11 +320,11 @@ class DoctorController extends Controller
 
           $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
           $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
-          
+
           $return = array('case_details'=>$case, 'prescription'=>$prescription);
           return response()->json( $return);
         }
-        
+
     }
 
      public function prescriptionIssues(Request $request)
@@ -757,9 +759,9 @@ switch ($request->day) {
       $cases = PatientCase::select('*');
 
       if($status == 'accepted'){
-      $cases = $cases->where('accept_status',1);
+      $cases = $cases->where('accept_status',1)->where('status','!=',3);
       }else{
-      $cases = $cases->where('accept_status',null);
+      $cases = $cases->where('accept_status',null)->where('status','!=',3);
       }
 
       $cases = $cases->where('case_type',1);
@@ -910,6 +912,37 @@ switch ($request->day) {
       }
 
       return view('frontend.doctor.summary_diagnosis', compact('case'));
+    }
+
+    public function cancelBooking($id)
+    {
+        // dd($id);
+        PatientCase::where('case_id',$id)->update(['status' => 3,'cancel_by' =>Auth::guard('siteDoctor')->user()->id, 'cancel_date' => date('Y-m-d H:i:s')]);
+        $case_primary_id = PatientCase::where('case_id',$id)->value('id');
+        // return view('frontend.patient.view_handy_doc',compact('handy_doc'));
+        BookTimeSlot::where('patient_case_id',$case_primary_id)->update(['status'=> 3]);
+        $intent_id = Payment::where('case_id',$id)->value('intent_id');
+        Payment::where('case_id',$id)->update(['status' => 4]);
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $re = \Stripe\Refund::create([
+            'payment_intent' => $intent_id,
+        ]);
+
+        // $intent = \Stripe\PaymentIntent::retrieve($intent_id);
+        // $intent->cancel();
+        //needs to create table of refund details
+        // $refund = new RefundPayment;
+        // $refund->balance_transaction = $re->balance_transaction;
+        // $refund->charge = $re->charge;
+        // $refund->payment_intent = $re->payment_intent;
+        // $refund->status = $re->status;
+        // $refund->amount = $re->amount;
+        // $refund->case_id = $id;
+        // $refund->save();
+        // dd($re);
+        Session::flash('Success-toastr','Successfully canceled');
+        return redirect()->back();
     }
 
     public function videoCallDoc($id)

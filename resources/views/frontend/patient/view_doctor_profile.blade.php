@@ -85,8 +85,14 @@
                                             <i class="fas fa-heart {{ getFavDoc($doctor->id) ? 'marks' : '' }}"></i>
                                         </div>
                                         <div class="rating-list-bottom">
-                                            <i class="far fa-thumbs-up reting"></i>
-                                            <i class="far fa-thumbs-up reting"></i>
+                                            @php
+                                                $thumbsUpCount = getThumbsUp($doctor->id);
+                                            @endphp
+                                            @for ($i=0; $i<$thumbsUpCount; $i++)
+
+                                                <i class="far fa-thumbs-up reting"></i>
+                                            @endfor
+                                            {{-- <i class="far fa-thumbs-up reting"></i> --}}
                                         </div>
                                         <p>Comments:</p>
                                     </div>
@@ -244,7 +250,7 @@
                                                 class="fal fa-paperclip"></i></label>
                                         <input type="file" name="case_file[]" class="form-control-file"
                                             id="exampleFormControlFile1" style="opacity: 0; margin-top: -35px;"
-                                            multiple><br> <img data-toggle="tooltip" data-placement="right" title=""
+                                            multiple accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right" title=""
                                             data-original-title="One line definition" src="images/ex-icon.png" alt="">
                                     </div>
                                     <div class="form-group">

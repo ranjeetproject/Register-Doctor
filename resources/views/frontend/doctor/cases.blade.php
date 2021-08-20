@@ -124,7 +124,8 @@
 
                                                 {{-- <a href="{{route('doctor.doctor-accept-case',$case->id)}}" class="btn blue-button btn-primary">Accept</a> --}}
                                                 @endif
-                                                 <button class="btn Decline">Decline</button><br>
+                                                 {{-- <button class="btn Decline">Decline</button><br> --}}
+                                                 <a href="{{ route('doctor.cancel-booking',$case->case_id) }}" class="btn Decline">Decline</a><br>
                                                  {{-- @if($case->questions_type == 2)
                                                  <a href="{{route('doctor.chats',$case->case_id)}}" target="_blank" class="btn blue-button Finish-Exchange">Live Video</a>
 

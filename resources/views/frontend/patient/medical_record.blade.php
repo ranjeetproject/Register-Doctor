@@ -4,7 +4,7 @@
     <div class="col Post-prescription-right Medical-Record-page">
         <div class="row">
             <div class="col-sm-12">
-               
+
                 <div class="col Choose-Your-Doctor-right">
                     <nav aria-label="breadcrumb ">
                         <ol class="breadcrumb Pharmacist-doc-com">
@@ -19,7 +19,7 @@
                                       <p><span>Name : </span> {{$login_user->name}}</p>
                                        <p><span>Sex :  </span> {{$login_user->profile->gender}}</p>
                                       <p><span>Date of Birth  : </span> {{ date('d F Y', strtotime($login_user->profile->dob))}} </p>
-                                      
+
                                       <p><span>Address : </span> {{$login_user->profile->address}}</p>
                                       <p><span>Unique Patient Number (UPN) : </span>  {{$login_user->registration_number}}</p>
                                     </div>
@@ -28,7 +28,7 @@
                             <div class="col-sm-12">
                                 <div class="comm-title-details">
                                     <h4>Recorded Past Medical History <i class="fas fa-caret-down"></i></h4>
-                                    <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div>
+                                    {{-- <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div> --}}
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
@@ -43,7 +43,7 @@
                             <div class="col-sm-12">
                                 <div class="comm-title-details">
                                     <h4>Recorded Past Symptoms History</h4>
-                                    <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div>
+                                    {{-- <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div> --}}
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
@@ -75,12 +75,10 @@
                                                     <td>{{$case->case_id}}</td>
                                                     <td>{{$case->getSummaryDiagnosis->summary_diagnose ?? ''}}</td>
                                                     <td>{{$case->doctor->name}}</td>
-                                                    <td><a href="#" class="btn">View Case</a><a href="#" class="btn">Print Case Summary</a></td>
-                                                    <td>{{ date('d.m.Y', strtotime($past_symptom->created_at))}}</td>
+                                                    <td><a href="{{ route('patient.view-case', $case->case_id) }}" class="btn">View Case</a><a href="#" class="btn">Print Case Summary</a></td>
+                                                    <td>{{ date('d.m.Y', strtotime($case->created_at))}}</td>
                                                 </tr>
                                             @endforeach
-
-                                                
                                             </tbody>
                                           </table>
                                     </div>
@@ -94,7 +92,7 @@
                                     <div class="card-body">
                                         <div class="comm-title-details">
                                             <h4>If you can please provide details of drugs taken in the past 6 months</h4>
-                                            <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div>
+                                            {{-- <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div> --}}
                                         </div>
                                         <div class="card-body p-0">
                                             <table class="table border-0" border="0">
@@ -118,11 +116,11 @@
                                                         <td>{{date('d.m.Y', strtotime($drug->created_at))}} </td>
                                                     </tr>
                                             @endforeach
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
+
                                           <div class="bottom-cont">
                                             <p><label><strong>Weight</strong> : {{$last_symptroms_details->weight ?? ''}}  </label>  Entry Dated :  @if(isset($last_symptroms_details->created_at)) {{date('d.m.Y', strtotime($last_symptroms_details->created_at))}}
                                             @endif</p>
@@ -131,7 +129,7 @@
                                           </div>
                                           <div class="comm-title-details">
                                             <h4>List any drug allergies. What happened </h4>
-                                            <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div>
+                                            {{-- <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div> --}}
                                           </div>
                                           <table class="table border-0" border="0">
                                             <thead>
@@ -149,7 +147,7 @@
                                                     <td>{{date('d.m.Y', strtotime($drug->created_at))}} </td>
                                                 </tr>
                                        @endforeach
-                                                
+
                                             </tbody>
                                           </table>
                                           <div class="comm-title-details">
@@ -179,11 +177,11 @@
                                                 </tbody>
                                               </table>
                                         </div>
-                                        
+
                                     </div>
                                   </div>
                                   <div class="col-sm-12">
-                                  
+
                                 <div class="col-sm-12">
                                     <div class="comm-title-details">
                                         <h4>Please provide your Family Doctor or GP Details <i class="fas fa-caret-down"></i></h4>
@@ -209,15 +207,15 @@
                 </div>
                 </div>
 
-                
+
             </div>
         </div>
     </div>
-   
+
 @endsection
 @section('scripts')
     <script>
-        
+
 
     </script>
 @endsection

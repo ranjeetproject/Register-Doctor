@@ -4,7 +4,7 @@
     <div class="col Choose-Your-Doctor-right innerpage  case-page">
         <div class="row">
             <div class="col-sm-12">
-               
+
 
 
                <div class="container">
@@ -29,7 +29,12 @@
                     <h2>Attachments</h2>
                     <div class="view-case-details">
                         @foreach($case->casefile as $casefile)
-                        <p><img width="500px" height="300px" class="img-thumbnail" src="{{asset('public/uploads/cases/'.$casefile->file_name)}}"></p>
+                        @if (strpos($casefile->file_name, '.pdf') !== false)
+                            <p><embed src="{{asset('public/uploads/cases/'.$casefile->file_name)}}" width="500px" height="600px" class="img-thumbnail"/></p>
+                        @else
+
+                            <p><img width="500px" height="300px" class="img-thumbnail" src="{{asset('public/uploads/cases/'.$casefile->file_name)}}"></p>
+                        @endif
                         <br>
                         @endforeach
                     </div>
@@ -42,7 +47,7 @@
                     </div>
                     <p>The doctor will prescribe what he feels is the most appropriate medicine</p>
                     @endif
-                    
+
                 </div>
             </div>
             {{-- <div class="row Doctor Replies">
@@ -67,7 +72,7 @@
                     <p>Entry dated : 28.08.2020</p>
                 </div>
             </div> --}}
-            
+
         </div>
 
 
@@ -78,6 +83,6 @@
 @endsection
 @section('scripts')
     <script>
-       
+
     </script>
 @endsection
