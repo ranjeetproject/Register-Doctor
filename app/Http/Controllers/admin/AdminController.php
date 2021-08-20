@@ -17,7 +17,10 @@ class AdminController extends Controller
 {
     function index()
     {
-    	 return view('admin.index');
+        $doctor = User::where('role',2)->where('status',1)->count();
+        $patient = User::where('role',1)->where('status',1)->count();
+        $pharmacy = User::where('role',3)->where('status',1)->count();
+    	 return view('admin.index',compact('doctor','patient','pharmacy'));
     }
 
     function adminLogin(Request $request)
@@ -67,7 +70,7 @@ class AdminController extends Controller
     	echo $result ? 'success':'fail';
     }
 
-          
+
     function profile()
     {
       $user = request()->user();
@@ -99,7 +102,7 @@ class AdminController extends Controller
         $user->password = Hash::make($request->new_password);
         }
       }
-     
+
      $user->save();
      $profile = UserProfile::where('user_id',$user->id)->first();
      $profile = $profile ?? new UserProfile;
@@ -110,7 +113,7 @@ class AdminController extends Controller
      if(!empty($request->gender) ) $profile->gender = $request->gender;
      if(!empty($request->address) ) $profile->address = $request->address;
      if(!empty($request->about) ) $profile->about = $request->about;
- 
+
       if ($request->hasFile('profile_photo')) {
             $rand_val           = date('YMDHIS').rand(11111,99999);
             $image_file_name    = md5($rand_val);
@@ -132,7 +135,7 @@ class AdminController extends Controller
     function settings(Request $request)
     {
       if ($request->isMethod('post')) {
-        
+
         if ($request->hasFile('logo')) {
             // $rand_val           = date('YMDHIS').rand(11111,99999);
             // $image_file_name    = md5($rand_val);
@@ -166,7 +169,7 @@ class AdminController extends Controller
       return view('admin.settings');
     }
 
-    
+
      function logout()
      {
      	Session::flush();
