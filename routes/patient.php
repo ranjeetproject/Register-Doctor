@@ -14,6 +14,8 @@
     Route::match(['get','post'],'/my-favorite-doctors', 'PatientController@myFavoriteDoctors')->name('my-favorite-doctors');
 
      Route::match(['get','post'],'/search-doctors', 'PatientController@searchDoctors')->name('search-doctors');
+     Route::match(['get','post'],'/handy-document', 'PatientController@handyDocument')->name('handy-document');
+    Route::get('view-handy-document/{id}', 'PatientController@viewHandyDocument')->name('view-handy-document');
 
     Route::match(['get','post'],'/add-to-favorite', 'PatientController@addToFavorite')->name('add-to-favorite');
 
@@ -45,6 +47,7 @@
     Route::post('accept-doctor', 'PatientController@accepteDoctor')->name('accept-doctor');
 
     Route::get('video-cal/{id}','PatientController@videoCall')->name('video-call');
+    Route::get('/cancel-booking/{id}', 'PatientController@cancelBooking')->name('cancel-booking');
 
 });
 

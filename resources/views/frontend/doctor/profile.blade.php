@@ -4,7 +4,7 @@
     <div class="col Choose-Your-Doctor-right Doctor-Manage-Account-Profile-page">
         <div class="row">
             <div class="col-sm-12">
-               
+
                 <ul class="nav Choose-Your-tab" id="myTab" role="tablist">
                     {{-- <li class="nav-item">
                     <a class="nav-link "   href="Detailed-Doctor-Profile.html">
@@ -29,8 +29,8 @@
                 </ul>
                 <div class="tab-content Choose-Your-tab-con" id="myTabContent">
                     <div class="tab-pane fade " id="Doctor-Profile">
-                        
-                        
+
+
                     </div>
                     <div class="tab-pane fade {{($form_name == 'profile') ? 'show active':''}} input-effect" id="Manage-Profile" >
                         <form method="POST" enctype="multipart/form-data">
@@ -44,9 +44,9 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-10 profile-info">
-                                    <h2>Manage your Diary in the 2 Calendars Below.</h2>
-                                    <a class="btn btn-primary" href="{{route('doctor.available-days')}}">Regular Weekly Timetable</a>
-                                    <a href="{{route('doctor.available-days')}}" class="btn add-btn" >Ad Hoc Timeslots</a>
+                                    <h2>Manage your Diary in the Calendar Below.</h2>
+                                    <a class="btn btn-primary" href="{{route('doctor.available-days')}}">Regular Timetable</a>
+                                    {{-- <a href="{{route('doctor.available-days')}}" class="btn add-btn" >Ad Hoc Timeslots</a> --}}
                                 </div>
                             </div>
                             <div class="row Doctor-contact main-form-fild">
@@ -64,7 +64,7 @@
                                     <div class="form-group required">
                                         <input class="form-control effect-19 {{!empty($user->surname) ? 'has-content':''}}" name="surname" type="text" value="{{$user->surname}}" placeholder="Surname">
                                         <label>Surname</label>
-                                        
+
                                     </div>
 
                                     @error('forename')
@@ -150,7 +150,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     </div>
-                                    
+
                                 </div>
 
 
@@ -164,7 +164,7 @@
 
                                 <div class="col-sm-12">
                                         <label>The following details will not be available to patients :</label>
-                                    
+
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group required">
@@ -218,7 +218,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Video</label>
@@ -253,7 +253,7 @@
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
                                                 <input type="checkbox" class="" disabled>  <span>Set your own fee :</span> <input class="form-control " name="dr_qa_fee" type="text" value="{{$user->profile->dr_qa_fee}}" > Set your max turnaround time
-                                                for response in Hours or Days 
+                                                for response in Hours or Days
 
                                                 @php
                                                 $get_dr_turnaround_time = explode(' ',$user->profile->dr_turnaround_time);
@@ -268,11 +268,11 @@
                                                     <option value="days" {{( isset($get_dr_turnaround_time[1]) && $get_dr_turnaround_time[1]=='days') ? 'selected':''}}>Days</option>
                                                     <option value="hours" {{(isset($get_dr_turnaround_time[1]) && $get_dr_turnaround_time[1]=='hours') ? 'selected':''}}>Hours</option>
 
-                                                </select> 
+                                                </select>
                                             </div>
                                         </div>
 
-                                       
+
                                         <div class="Notifications-on-of">
                                             <input type="checkbox" class="form-check-input" name="dr_qa_fee_notification" value="0" {{($user->profile->dr_qa_fee_notification == 0) ? 'checked':''}}>
                                             <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_qa_fee_notification == 0) ? 'of':'on'}}"></span></div>
@@ -284,7 +284,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Tick to offer prescription online (only UK Doctors)</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" class="" disabled>  Upload Signature <input class="form-control " type="text"  name="dr_signature" value="{{$user->profile->dr_signature}}">  
+                                                <input type="checkbox" class="" disabled>  Upload Signature <input class="form-control " type="text"  name="dr_signature" value="{{$user->profile->dr_signature}}">
                                             </div>
                                         </div>
                                     </div>
@@ -297,9 +297,9 @@
                                             </strong>
                                         </p>
                                     </div>
-                                    
+
                                 </div>
-                                
+
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <h4>Ratings</h4>
@@ -321,8 +321,16 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group Thumbs-up">
-                                        <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Your Thumbs Up</label><br> <i class="far fa-thumbs-up"></i>
-                                        
+                                        <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Your Thumbs Up</label><br>
+                                        @php
+                                            $thumbsUP = getThumbsUp($user->id);
+                                            // $thumbsUP = 1;
+                                        @endphp
+                                        @for ($i = 1; $i <= $thumbsUP; $i++)
+
+                                            <i class="far fa-thumbs-up"></i>
+                                        @endfor
+
                                     </div>
                                 </div>
 
@@ -408,7 +416,7 @@
 
                                 {{-- <div class="col-sm-12">
                                         <label>The following details will not be available to patinents :</label>
-                                    
+
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group required">
@@ -461,11 +469,11 @@
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
-                
+
                     reader.onload = function(e) {
                         $('#blah').attr('src', e.target.result);
                     }
-                
+
                     reader.readAsDataURL(input.files[0]); // convert to base64 string
                 }
             }
@@ -476,13 +484,13 @@
         });
 
         $('.Notifications-on-of input[type="checkbox"]').click(function() {
-            $(this).parent().find('.on-and-off span').toggleClass("on"); 
-            $(this).parent().find('.on-and-off span').toggleClass("of"); 
+            $(this).parent().find('.on-and-off span').toggleClass("on");
+            $(this).parent().find('.on-and-off span').toggleClass("of");
         });
 
     $(window).on('load', function(){
     // $(".tab-content #Patient-Profile input, .tab-content #Patient-Profile textarea").val("");
-    
+
     $(".input-effect input, .input-effect textarea").focusout(function(){
     if($(this).val() != ""){
     $(this).addClass("has-content");

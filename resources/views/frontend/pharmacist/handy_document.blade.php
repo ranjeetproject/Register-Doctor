@@ -1,4 +1,4 @@
-@extends('frontend.doctor.afterloginlayout.app')
+@extends('frontend.pharmacist.afterloginlayout.app')
 
 @section('content')
     <div class="col Choose-Your-Doctor-right innerpage  Handy-Documents-page">
@@ -46,7 +46,7 @@
                                             <tr>
                                                 <td>{{ $handy_doc->topic_name }}</td>
                                                 <td>{{ date('d M Y', strtotime($handy_doc->created_at)) }}</td>
-                                                <td class="for-divider"><a href="{{ route('doctor.view-handy-document',['id'=>$handy_doc->id]) }}"><i class="fal fa-eye"></i></a><a href="{{ route('download.handy_doc',['id'=>encrypt($handy_doc->id)]) }}"><i class="fal fa-cloud-download"></i></a></td>
+                                                <td class="for-divider"><a href="{{ route('pharmacist.view-handy-document',['id'=>$handy_doc->id]) }}"><i class="fal fa-eye"></i></a><a href="{{ route('download.handy_doc',['id'=>encrypt($handy_doc->id)]) }}"><i class="fal fa-cloud-download"></i></a></td>
                                             </tr>
                                             @empty
                                             <tr>

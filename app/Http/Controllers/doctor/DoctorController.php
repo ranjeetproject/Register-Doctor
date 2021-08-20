@@ -16,6 +16,10 @@ use App\Models\SymptromsDetails;
 use App\Models\TimeSlot;
 use App\Models\UserProfile;
 use App\Models\WeeklyAvailableDays;
+use App\Models\HandyDocument;
+use App\Models\ThumbsUp;
+use App\UserDoctor;
+use App\helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -202,11 +206,33 @@ class DoctorController extends Controller
 
     public function handyDocument(Request $request)
     {
-        return view('frontend.doctor.handy_document');
+        $handy_docs = HandyDocument::where('user_role',2)->latest()->paginate(10);
+        return view('frontend.doctor.handy_document',compact('handy_docs'));
+    }
+
+    public function viewHandyDocument($id)
+    {
+        $handy_doc = HandyDocument::where('user_role',2)->where('id',$id)->first();
+        return view('frontend.doctor.view_handy_doc',compact('handy_doc'));
     }
 
     public function getThumbsUp(Request $request)
     {
+        // dd(getThumbsUp(Auth::guard('siteDoctor')->user()->id));s
+        if($request->isMethod('post')){
+            $thumbsup = new ThumbsUp;
+            $thumbsup->doc_name = $request->doctor_name;
+            $thumbsup->doc_speciality = $request->speciality;
+            $thumbsup->country = $request->country;
+            $thumbsup->city = $request->city;
+            $thumbsup->email = $request->email_id;
+            $thumbsup->comment = $request->comment;
+            $thumbsup->opinion_leader = $request->opinion_leader;
+            $thumbsup->created_by = Auth::guard('siteDoctor')->user()->id;
+            $thumbsup->save();
+            Session::flash('Success-toastr','Successfully added');
+            return redirect()->back();
+        }
         return view('frontend.doctor.get_thumbsUp');
     }
 
@@ -365,9 +391,9 @@ class DoctorController extends Controller
                 // exit;
                 DB::commit();
 
-                Session::flash('Success-toastr','Successfully added');
+                Session::flash('Success-sweet','Successfully added');
             } catch (\Exception $e) {
-                Session::flash('Error-toastr', $e->getMessage());
+                Session::flash('Error-sweet', $e->getMessage());
                 DB::rollback();
                 return redirect()->back();
             }

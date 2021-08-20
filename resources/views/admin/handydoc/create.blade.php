@@ -50,9 +50,9 @@
                         <select name="user_type" id="user_type"
                             class="form-control @error('user_type') is-invalid @enderror" required>
                             <option value="">Select user type</option>
-                            <option value="0">Patients</option>
-                            <option value="1">Doctor</option>
-                            <option value="2">Pharmacy</option>
+                            <option value="1">Patients</option>
+                            <option value="2">Doctor</option>
+                            <option value="3">Pharmacy</option>
                         </select>
                         @error('user_type')
                             <span class="error invalid-feedback" id="error_description">{{ $message }}</span>

@@ -13,19 +13,19 @@ class UserDoctor extends Authenticatable
     use Notifiable,SoftDeletes;
 
     protected $table = 'users';
-  
+
     protected $guard = 'siteDoctor';
 
     protected $fillable = [
         'name', 'email', 'password',
     ];
 
-    
+
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-   
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -43,7 +43,7 @@ class UserDoctor extends Authenticatable
     // public function userRoles()
     // {
     //     return $this->hasMany('App\Models\UserRole');
-        
+
     // }
 
     public function profile()
@@ -54,6 +54,11 @@ class UserDoctor extends Authenticatable
     public function otp()
     {
         return $this->hasOne('App\Models\OtpVerification')->withDefault();
+    }
+
+    public function thumbsups()
+    {
+        return $this->hasMany('App\Models\ThumbsUp','created_by','id');
     }
 
 }

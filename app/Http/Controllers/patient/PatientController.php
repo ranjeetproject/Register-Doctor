@@ -16,6 +16,8 @@ use App\Models\PatientCase;
 use App\Models\SymptromsDetails;
 use App\Models\UserProfile;
 use App\Models\WeeklyAvailableDays;
+use App\Models\HandyDocument;
+use App\Models\Payment;
 use App\User;
 use App\UserDoctor;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -725,7 +727,7 @@ class PatientController extends Controller
         $date = date('Y-m-d',strtotime($date));
         // echo $request->doctor_id; exit;
 
-        $getBookedSlot = BookTimeSlot::select('time_slot_id')->get()->toArray();
+        $getBookedSlot = BookTimeSlot::select('time_slot_id')->where('status','<',3)->get()->toArray();
 
         $available_days = DoctorAvailableDays::where(function($query) use($date, $request){
           $query->where('date',$date)->where('user_id', $request->doctor_id);
@@ -895,5 +897,37 @@ class PatientController extends Controller
         $case = PatientCase::where('accept_status',1)->where('user_id',Auth::guard('sitePatient')->user()->id)->where('case_id',$id)->first();
 
         return view('common.video_call_test',compact('case','id'));
+    }
+
+    public function handyDocument(Request $request)
+    {
+        $handy_docs = HandyDocument::where('user_role',1)->latest()->paginate(10);
+        return view('frontend.patient.handy_document',compact('handy_docs'));
+    }
+
+    public function viewHandyDocument($id)
+    {
+        $handy_doc = HandyDocument::where('user_role',1)->where('id',$id)->first();
+        return view('frontend.patient.view_handy_doc',compact('handy_doc'));
+    }
+
+    public function cancelBooking($id)
+    {
+        PatientCase::where('case_id',$id)->update(['status' => 3,'cancel_by' =>Auth::guard('sitePatient')->user()->id, 'cancel_date' => date('Y-m-d H:i:s')]);
+        $case_primary_id = PatientCase::where('case_id',$id)->value('id');
+        BookTimeSlot::where('patient_case_id',$case_primary_id)->update(['status'=> 3]);
+        // return view('frontend.patient.view_handy_doc',compact('handy_doc'));
+        $intent_id = Payment::where('case_id',$id)->value('intent_id');
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $re = \Stripe\Refund::create([
+            'payment_intent' => $intent_id,
+        ]);
+
+        $intent = \Stripe\PaymentIntent::retrieve($intent_id);
+        $intent->cancel();
+
+        Session::flash('Success-toastr','Successfully canceled');
+        return redirect()->back();
     }
 }

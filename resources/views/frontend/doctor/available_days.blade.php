@@ -6,7 +6,7 @@
             <div class="col-sm-12">
                 {{-- <h1>available_days page</h1> --}}
 
-                <ul class="nav Calendar-Regular-tab" id="myTab" role="tablist">
+                {{-- <ul class="nav Calendar-Regular-tab" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Regular-Weekly-Timetable">
                             Regular Weekly Timetable
@@ -22,7 +22,7 @@
                                 data-toggle="tooltip" data-placement="right" title=""
                                 data-original-title="One line definition"> How It Works</a>
                     </li>
-                </ul>
+                </ul> --}}
                 <div class="tab-content Calendar-Regular-tab-con" id="myTabContent">
                     <div class="tab-pane fade show active" id="Regular-Weekly-Timetable">
                         <div class="calanderilest">
@@ -253,7 +253,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="Ad-Hoc-Timeslots">
+                    {{-- <div class="tab-pane fade" id="Ad-Hoc-Timeslots">
                         <form class="calanderilest">
                             <div class="row mb-10">
                                 <p>Add or Delete Specific Timeslots by Clicking on the Calendar Date</p>
@@ -371,7 +371,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -616,9 +616,9 @@
         //   onDayClick: function(events) { alert('Day was clicked') }
         // });
         // window.location.reload(true)
-
+        setTimeout(function(){
         $(".day a").click(function() {
-            // alert('fjjdf');
+            //alert('fjjdf');
             var day = $(this).data('day');
             var year = $(this).data('year');
             var month = $(this).data('month');
@@ -629,7 +629,7 @@
             // $('#date').val(date);
             var fromDate = new Date(year + '-' + month + '-' + day);
             var formatedDate = new Date(fromDate).toDateString();
-            // alert(formatedDate);
+            //alert(formatedDate);
 
             $.ajax({
                 url: "{{ route('doctor.edit-available-day') }}",
@@ -654,7 +654,7 @@
                 }
             });
         });
-
+    }, 2000);
 
     });
 
@@ -719,5 +719,6 @@
             }
         });
     }
+
 </script>
 @endsection
