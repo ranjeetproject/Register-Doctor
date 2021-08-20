@@ -595,7 +595,6 @@ $('#case_no').on('change', function(){
                     }
                 }
 
-
             }
         }
     })
@@ -659,52 +658,48 @@ $('#final_prisc').on('click', function(){
     var _token = $("input[name=_token]").val();
     console.log(case_id);
     if(case_id !='' ){
-    $.ajax({
-        url: "{{ url('doctor/ajaxFinalpriscription')}}",
-        type: 'POST',
-        data:{
-            case_id : case_id,
-            _token : _token
-        },
-        success:function(res){
-            console.log(res.case_details[0]);
-            $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
-            $('#p_name').val(res.case_details[0].user.name);
-            $('#upn').val(res.case_details[0].user.UPN);
-            $('#p_id').val(res.case_details[0].user.id);
-            $('#d_id').val(res.case_details[0].doctor_id);
-            var prescription =res.prescription[0].prescription;
-            var status = '';
-            if(prescription.length > 0){
-                for(i=0; i < prescription.length; i++){
-                    console.log(prescription[i]);
-                    status = prescription[i]['status'];
-                    $('#add-tr tbody').html('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
-                    $('#final_sucess').css('display', 'block');
-                    $('#final_error').css('display', 'none');
-                    $('#finalprisc').modal('hide')
-                }
-                if(status == 'no'){
-                    $('#befour_sub').css('display','block');
-                    $('#after_sub').css('display','none');
-                }
-                if(status == 'y'){
-                    $('.add-and-edit').css('display', 'none');
-                    $('#befour_sub').css('display','none');
-                    $('#after_sub').css('display','block');
-                    
+        $.ajax({
+            url: "{{ url('doctor/ajaxFinalpriscription')}}",
+            type: 'POST',
+            data:{
+                case_id : case_id,
+                _token : _token
+            },
+            success:function(res){
+                console.log(res.case_details[0]);
+                $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
+                $('#p_name').val(res.case_details[0].user.name);
+                $('#upn').val(res.case_details[0].user.UPN);
+                $('#p_id').val(res.case_details[0].user.id);
+                $('#d_id').val(res.case_details[0].doctor_id);
+                var prescription =res.prescription[0].prescription;
+                var status = '';
+                if(prescription.length > 0){
+                    for(i=0; i < prescription.length; i++){
+                        console.log(prescription[i]);
+                        status = prescription[i]['status'];
+                        $('#add-tr tbody').html('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
+                        $('#final_sucess').css('display', 'block');
+                        $('#final_error').css('display', 'none');
+                        $('#finalprisc').modal('hide')
+                    }
+                    if(status == 'no'){
+                        $('#befour_sub').css('display','block');
+                        $('#after_sub').css('display','none');
+                    }
+                    if(status == 'y'){
+                        $('.add-and-edit').css('display', 'none');
+                        $('#befour_sub').css('display','none');
+                        $('#after_sub').css('display','block');
+                    }
                 }
             }
-        }
-    });
-        
+        }); 
     }else{
         $('#final_error').css('display', 'block');
         $('#final_sucess').css('display', 'none');
         $('#finalprisc').modal('hide')
     }
-    
 });
-
 </script>
 @endsection

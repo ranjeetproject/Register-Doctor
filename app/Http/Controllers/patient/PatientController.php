@@ -19,6 +19,7 @@ use App\Models\WeeklyAvailableDays;
 use App\Models\HandyDocument;
 use App\Models\Payment;
 use App\Models\SummaryDiagnosis;
+use App\Models\pharma_req_prescription;
 use App\User;
 use App\UserDoctor;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -526,7 +527,7 @@ class PatientController extends Controller
           //echo $request->c_id .' '.$request->s_id;
           if($request->c_id !='' && $request->s_id != ''){
             $case = Prescription_req_doctor::where( 'priscription_id', $request->s_id)->first();
-            if($case ==''){
+            if($case ==''){ 
               $req = new Prescription_req_doctor();
               $req->priscription_id = $request->s_id;
               $req->case_id = $request->c_id;
@@ -550,15 +551,35 @@ class PatientController extends Controller
           }else{
             $error = 'There is some problem please try again';
           }
-
         }
         $pharmacies = User::whereRole(3)->latest()->get();
         $data = array( 'pharmacies'=>$pharmacies, 'success' => $success, 'error' => $error);
         //print_r($data->);
         return view('frontend.patient.pharmacies',compact('data'));
-
     }
-
+    public function ajaxSend_req_to_Pharma(Request $request)
+    {
+      //print_r($request->pharma_id);
+      if( $request->pharma_id !=''){
+        $pharma = new pharma_req_prescription();
+        $pharma->case_id = $request->case_id;
+        $pharma->priscription_id = $request->prisc_id;
+        $pharma->pharma_id = $request->pharma_id;
+        $pharma->created_at = date("Y-m-d h:i:s");
+        $pharma->updated_at = date("Y-m-d h:i:s");
+        $pharma->save();
+        //print_r($pharma);
+        if(!empty($pharma)){
+          // $case = PatientCase::where( 'case_id', $_POST['case_id'])->with('user')->get();
+          // $prescription = PatientCase::where( 'case_id', $_POST['case_id'])->with('prescription')->get();
+          $return = array('sucess'=>'y', 'error'=>'');
+          return response()->json( $return);
+        }else{
+          $return = array('sucess'=>'', 'error'=>'n');
+          return response()->json( $return);
+        }
+      }
+    }
 
     public function searchPharmacies(Request $request)
     {

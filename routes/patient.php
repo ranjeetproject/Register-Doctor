@@ -27,6 +27,7 @@
 
     Route::match(['get','post'],'/closed-cases', 'PatientController@closedCases')->name('closed-cases');
     Route::match(['get','post'],'/prescriptions-issued', 'PatientController@prescriptionsIssued')->name('prescriptions-issued');
+    Route::match(['get','post'],'/ajaxSend_req_to_Pharma', 'PatientController@ajaxSend_req_to_Pharma')->name('ajaxSend_req_to_Pharma');
 
     Route::match(['get','post'],'/pharmacies', 'PatientController@pharmacies')->name('pharmacies');
 

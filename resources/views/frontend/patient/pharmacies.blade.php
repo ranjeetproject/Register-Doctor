@@ -152,7 +152,7 @@
                                                </tr>
                                                <tr>
                                                    <th>
-                                                       Saturday
+                                                       Saturday 
                                                    </th>
                                                    <td>
                                                        {{ $pharmaci->openingTime->saturday_opening_time ? date('h:i a',strtotime($pharmaci->openingTime->saturday_opening_time)) : '' }} - {{ $pharmaci->openingTime->saturday_closing_time ? date('h:i a',strtotime($pharmaci->openingTime->saturday_closing_time)) : '' }}
@@ -160,10 +160,13 @@
                                                </tr>
                                             </tbody>
                                         </table>
+                                        <form action="">
+                                        @csrf
                                          <p><span>Delivery options : </span>  {{(isset($pharmaci->deliveryOption->customer_pick_up) && $pharmaci->deliveryOption->customer_pick_up == 1) ? 'Customer pick up, ':''}} {{(isset($pharmaci->deliveryOption->local_delivery) && $pharmaci->deliveryOption->local_delivery == 1) ? 'Local Delivery (car/courier), ':''}} {{(isset($pharmaci->deliveryOption->posts_within_uk) && $pharmaci->deliveryOption->posts_within_uk == 1) ? 'Posts within UK, ':''}} {{(isset($pharmaci->deliveryOption->sends_international) && $pharmaci->deliveryOption->sends_international == 1) ? 'Sends International':''}} </p>
                                          <p><span>Notes : </span> {{$pharmaci->openingTime->notes}}</p>
                                          
-                                         <p>Contact Pharmacy with Prescription No. or <a href="" class="btn blue-button">send prescription No. electronically</a> <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="modal" data-target="#Pharmacy-popup"></p>
+                                         <p>Contact Pharmacy with Prescription No. or <a pharma_id="{{$pharmaci->id}}" c_id="{{$_GET['c_id']}}" prisc_id="{{$_GET['s_id']}}" href="" class="pharma_sub btn blue-button">send prescription No. electronically</a> <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="modal" data-target="#Pharmacy-popup"></p>
+                                        </form>
                                         </div>
                                       </div>
 
@@ -177,17 +180,61 @@
                     </div>
                 </div>
             </div>
-
-
-                
-            </div>
         </div>
     </div>
+</div>
    
 @endsection
 @section('scripts')
     <script>
-        
+        $('.pharma_sub').on('click', function(event){
+            event.preventDefault();
+            var case_id = $(this).attr('c_id');
+            var pharma_id = $(this).attr('pharma_id');
+            var prisc_id = $(this).attr('prisc_id');
+            //alert (c_id+' '+ pharma_id + ' '+ prisc_id);
+            var _token = $("input[name=_token]").val();
+            $.ajax({
+                url: "{{ url('patient/ajaxSend_req_to_Pharma')}}",
+                type: 'POST',
+                data:{
+                    case_id : case_id,
+                    pharma_id : pharma_id,
+                    prisc_id : prisc_id,
+                    _token : _token
+                },
+                success:function(res){
+                    console.log(res);
+                    
+                    // $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
+                    // $('#p_name').val(res.case_details[0].user.name);
+                    // $('#upn').val(res.case_details[0].user.UPN);
+                    // $('#p_id').val(res.case_details[0].user.id);
+                    // $('#d_id').val(res.case_details[0].doctor_id);
+                    // var prescription =res.prescription[0].prescription;
+                    // var status = '';
+                    // if(prescription.length > 0){
+                    //     for(i=0; i < prescription.length; i++){
+                    //         console.log(prescription[i]);
+                    //         status = prescription[i]['status'];
+                    //         $('#add-tr tbody').html('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
+                    //         $('#final_sucess').css('display', 'block');
+                    //         $('#final_error').css('display', 'none');
+                    //         $('#finalprisc').modal('hide')
+                    //     }
+                    //     if(status == 'no'){
+                    //         $('#befour_sub').css('display','block');
+                    //         $('#after_sub').css('display','none');
+                    //     }
+                    //     if(status == 'y'){
+                    //         $('.add-and-edit').css('display', 'none');
+                    //         $('#befour_sub').css('display','none');
+                    //         $('#after_sub').css('display','block');
+                    //     }
+                    // }
+                }
+            });
+        });
 
     </script>
 @endsection
