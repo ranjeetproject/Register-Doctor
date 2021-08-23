@@ -55,11 +55,13 @@
                                             <td style="text-align: center;">
                                               {{-- @if($case->getSlot) --}}
                                               @forelse($case->getBookingSlot as $time_slot)
-                                              @php
+                                              @dump($time_slot, $time_slot->getSlot)
+                                              {{-- @php
                                                   $start_time = $time_slot->getSlot->start_time;
-                                              @endphp
+                                              @endphp --}}
+                                              {{-- @dd($start_time) --}}
 
-                                              {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br>
+                                              {{-- {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br> --}}
 
                                               @empty
 
@@ -152,9 +154,9 @@
                                             @endif
                                             @if(($case->questions_type == 2) || ($case->questions_type == 1))
                                                 @if($case->status < 3)
-                                                @if (getDiffOfTwoDateInMinute($case->booking_date.' '.$start_time) > 4320)
+                                                {{-- @if (getDiffOfTwoDateInMinute($case->booking_date.' '.$start_time) > 4320)
                                                     <a href="{{route('patient.cancel-booking',$case->case_id)}}" class="btn btn-sm btn-primary"> Cancel booking</a>
-                                                @endif
+                                                @endif --}}
                                                 @endif
 
                                                 {{-- @dump(getDiffOfTwoDateInMinute($case->booking_date.' '.$start_time)) --}}
