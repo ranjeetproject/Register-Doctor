@@ -553,8 +553,14 @@ class PatientController extends Controller
           }
         }
         $pharmacies = User::whereRole(3)->latest()->get();
-        $data = array( 'pharmacies'=>$pharmacies, 'success' => $success, 'error' => $error);
-        //print_r($data->);
+        $pharma_ids = array();
+        $pharma_req = pharma_req_prescription::get();
+        foreach($pharma_req as $ph){
+         $pharma_ids[] = $ph->pharma_id;
+        }
+        //print_r($pharma_ids);
+        $data = array( 'pharma_ids'=> $pharma_ids, 'pharmacies'=>$pharmacies, 'success' => $success, 'error' => $error);
+        //print_r($data);
         return view('frontend.patient.pharmacies',compact('data'));
     }
     public function ajaxSend_req_to_Pharma(Request $request)
@@ -572,6 +578,7 @@ class PatientController extends Controller
         if(!empty($pharma)){
           // $case = PatientCase::where( 'case_id', $_POST['case_id'])->with('user')->get();
           // $prescription = PatientCase::where( 'case_id', $_POST['case_id'])->with('prescription')->get();
+          // need to send email//
           $return = array('sucess'=>'y', 'error'=>'');
           return response()->json( $return);
         }else{

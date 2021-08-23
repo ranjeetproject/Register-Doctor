@@ -72,11 +72,11 @@
                                     <p class="pmarg-top"><strong>FOR URGENT REQUESTS CONTACT PHARMACY FIRST TO ENSURE DRUG IS IN STOCK </strong></p>
                                     <p>Click to check your delivery address is correct</p>
                                     <div class="row justify-content-end">
-                                        <div class="col-sm-6">
+                                        <!-- <div class="col-sm-6">
                                             <form action="" method="post" class="Pharmacy-loc">
                                                 <input type="text" class="form-control" placeholder="Search for Special Pharmacy – Location">
                                             </form>
-                                        </div>
+                                        </div> -->
                                       </div>
 
                                       @foreach($data['pharmacies'] as $pharmaci)
@@ -164,15 +164,15 @@
                                         @csrf
                                          <p><span>Delivery options : </span>  {{(isset($pharmaci->deliveryOption->customer_pick_up) && $pharmaci->deliveryOption->customer_pick_up == 1) ? 'Customer pick up, ':''}} {{(isset($pharmaci->deliveryOption->local_delivery) && $pharmaci->deliveryOption->local_delivery == 1) ? 'Local Delivery (car/courier), ':''}} {{(isset($pharmaci->deliveryOption->posts_within_uk) && $pharmaci->deliveryOption->posts_within_uk == 1) ? 'Posts within UK, ':''}} {{(isset($pharmaci->deliveryOption->sends_international) && $pharmaci->deliveryOption->sends_international == 1) ? 'Sends International':''}} </p>
                                          <p><span>Notes : </span> {{$pharmaci->openingTime->notes}}</p>
-                                         
-                                         <p>Contact Pharmacy with Prescription No. or <a pharma_id="{{$pharmaci->id}}" c_id="{{$_GET['c_id']}}" prisc_id="{{$_GET['s_id']}}" href="" class="pharma_sub btn blue-button">send prescription No. electronically</a> <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="modal" data-target="#Pharmacy-popup"></p>
+                                         @if(!in_array($pharmaci->id, $data['pharma_ids']))
+                                         <p class="container_pharma{{$pharmaci->id}}">Contact Pharmacy with Prescription No. or <a pharma_id="{{$pharmaci->id}}" c_id="{{$_GET['c_id']}}" prisc_id="{{$_GET['s_id']}}" href="" class="pharma_sub btn blue-button">send prescription No. electronically</a> <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="modal" data-target="#Pharmacy-popup"></p>
+                                         @else
+                                         <p style="background: green;color: #fff;padding: 10px;"> Priscription already send to Pharmassist</p>
+                                         @endif
                                         </form>
                                         </div>
                                       </div>
-
                                         @endforeach
-
-                                      
                               </div>
                               
                         </div>
@@ -205,33 +205,15 @@
                 },
                 success:function(res){
                     console.log(res);
-                    
-                    // $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
-                    // $('#p_name').val(res.case_details[0].user.name);
-                    // $('#upn').val(res.case_details[0].user.UPN);
-                    // $('#p_id').val(res.case_details[0].user.id);
-                    // $('#d_id').val(res.case_details[0].doctor_id);
-                    // var prescription =res.prescription[0].prescription;
-                    // var status = '';
-                    // if(prescription.length > 0){
-                    //     for(i=0; i < prescription.length; i++){
-                    //         console.log(prescription[i]);
-                    //         status = prescription[i]['status'];
-                    //         $('#add-tr tbody').html('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
-                    //         $('#final_sucess').css('display', 'block');
-                    //         $('#final_error').css('display', 'none');
-                    //         $('#finalprisc').modal('hide')
-                    //     }
-                    //     if(status == 'no'){
-                    //         $('#befour_sub').css('display','block');
-                    //         $('#after_sub').css('display','none');
-                    //     }
-                    //     if(status == 'y'){
-                    //         $('.add-and-edit').css('display', 'none');
-                    //         $('#befour_sub').css('display','none');
-                    //         $('#after_sub').css('display','block');
-                    //     }
-                    // }
+                    if(res.sucess == 'y'){
+                        $('.container_pharma'+pharma_id).html('Send sucessfully');
+                        $('.container_pharma'+pharma_id).css('background', 'green');
+                        $('.container_pharma a'+pharma_id).removeClass('pharma_sub');
+                    }else if(res.error == 'n'){
+                        $('.pharma_sub').html('Please try agani');
+                        $('.pharma_sub').css('background', 'red');
+                       // $('.pharma_sub').removeClass('.pharma_sub');
+                    }   
                 }
             });
         });

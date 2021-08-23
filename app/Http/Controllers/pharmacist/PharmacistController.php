@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Prescription_req_doctor;
+use App\Prescription;
+use App\Models\pharma_req_prescription;
+use App\Models\PatientCase;
 // use Session;
 
 
@@ -279,6 +283,24 @@ class PharmacistController extends Controller
     {
         $handy_doc = HandyDocument::where('user_role',3)->where('id',$id)->first();
         return view('frontend.pharmacist.view_handy_doc',compact('handy_doc'));
+    }
+    public function acceptedPriscription(Request $request)
+    {
+        $priscriptions = Prescription::groupByRaw('prescription_no')->get();
+        //print_r($priscriptions);
+
+        return view('frontend.pharmacist.accepted_priscription',compact('priscriptions'));
+    }
+
+    public function ajaxAcceptPriscriptionDetails(Request $request)
+    {
+
+        $case = PatientCase::where( 'case_id', $request->case_id)->with('doctor')->get();
+        $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
+
+        $return = array('case_details'=>$case, 'prescription'=>$prescription);
+        return response()->json( $return);
+
     }
 
 }
