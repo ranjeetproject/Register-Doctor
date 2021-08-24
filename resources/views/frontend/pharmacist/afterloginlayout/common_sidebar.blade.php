@@ -6,7 +6,7 @@
       <li><a href="{{ route('pharmacist.handy-document')}}"><img src="{{ asset('public/images/frontend/images/icon13.png') }}" alt="">Handy document </a></li>
       <li><a href="{{ route('pharmacist.accepted-priscription')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Accepted Prescriptions</a></li>
       <li><a href="{{ route('pharmacist.opening-hours')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Opening Hours</a></li>
-      <li><a href="#"><img src="{{ asset('public/images/frontend/images/icon4.png') }}" alt="">Dispensed Prescriptions</a></li>
+      <li><a href="{{ route('pharmacist.dispensed-prescriptions')}}"><img src="{{ asset('public/images/frontend/images/icon4.png') }}" alt="">Dispensed Prescriptions</a></li>
       <li><a href="#"><img src="{{ asset('public/images/frontend/images/icon5.png') }}" alt="">Message Patient/Doctor</a></li>
   </ul>
 </div>
