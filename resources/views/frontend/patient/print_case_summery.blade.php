@@ -22,14 +22,17 @@
         <div style="float: left; width: 100%; box-sizing: border-box; text-align: center;"><img src="{{ asset('public/images/frontend/images/logo.jpg') }}" alt=""
                 style="max-width: 220px;"><br></div>
         <div style="float: left; box-sizing: border-box; width: 100%; font-size: 16px; ">
-            <span style="float: left;">Case Id : <span style="border-bottom: 2px dashed #000;">{{ ($summary)? $summary->patient_case_id : '' }}</span> </span>
+            {{-- @dd($case_detail) --}}
+            <span style="float: left;">Case Id : <span style="border-bottom: 2px dashed #000;">{{ $case_detail->case_id }}</span> </span>
             <span style="float: right;">Date : <span style="border-bottom: 2px dashed #000;"></span>{{ ($summary)? date('d-m-Y',strtotime($summary->created_at)) : '' }} </span>
         </div>
         <div style="float: left; box-sizing: border-box; width: 100%; font-size: 16px; margin-bottom: 16px;">
             <p>This patient sought online advice from a doctor.</p>
         </div>
         @php
-            $user = Auth::guard('sitePatient')->user();
+
+            // $user = Auth::guard('sitePatient')->user();
+            $user = $case_detail->user()->first();
             $user_profiles = $user->profile()->first();
             $doctor = $case_detail->doctor()->first();
             $doctor_profile = $doctor->profile()->first()
@@ -38,7 +41,7 @@
         <div style="float: left; box-sizing: border-box; width: 100%; font-size: 16px; margin-bottom: 16px;">
             <span style="float: left;">Patient name : {{ $user->name }} </span>
             <span style="float: right;">Unique Patient no. <span
-                    style="border-bottom: 2px dashed #000;">{{ $user->UPN }}</span></span>
+                    style="border-bottom: 2px dashed #000;">{{ $user->registration_number }}</span></span>
         </div>
         <div style="float: left; box-sizing: border-box; width: 100%; font-size: 16px; ">
             <span style="float: left;">Date of birth (DOB) : {{ $user_profiles->dob }}</span>
@@ -52,7 +55,8 @@
             style="float: left; box-sizing: border-box; width: 100%; font-size: 16px; margin-bottom: 16px; min-height: 60px;">
             <span style="float: left; width:180px; color: #294876;">Summary Diagnosis :</span> <span
                 style="float: left; width: calc(100% - 180px);">
-                {{ ($summary)? $summary->summary_diagnose }}
+                {{-- @dd($summary) --}}
+                {{ $summary ? $summary->summary_diagnose :'Not Completed'}}
                 {{-- But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born
                 and I will give you a complete account of the system, and expound the actual teachings of the great
                 explorer of the truth, the master-builder of human happiness.  --}}
@@ -61,7 +65,7 @@
         <div style="float: left; box-sizing: border-box; width: 100%; font-size: 16px; margin-bottom: 16px;">
             <span style="float: left; width:180px; color:#294876">Future Reference :</span> <span
                 style="float: left; width: calc(100% - 180px);">
-                {{ ($summary)? $summary->summary_diagnose }}
+                {{ $summary ? $summary->future_reference:'Not Completed' }}
                 {{-- But I must explain to you how all this mistaken idea of
                 denouncing pleasure and praising pain was born and I will give you a complete account of the system, and
                 expound the actual teachings of the great explorer of the truth, the master-builder of human
@@ -69,7 +73,7 @@
             </span>
         </div>
         <div style="float: left; box-sizing: border-box; width: 100%; font-size: 16px;">
-            <span style="float: left; width:180px; color: #000000;">Signed<br> Dr Jhon Smith <br> GMC No. {{  $doctor_profile->dr_gmc_licence }} </span>
+            <span style="float: left; width:180px; color: #000000;">Signed<br> Dr Jhon Smith <br> GMC No. {{  $doctor_profile->dr_medical_license_no }} </span>
             <span
                 style="float: left; width: calc(100% - 180px); text-align: right; margin-top: 40px;">Registered-Doctor.com
                 No. {{ $doctor_profile->dr_registered_no }}</span>

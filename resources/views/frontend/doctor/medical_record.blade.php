@@ -77,7 +77,7 @@
                                                     <td>{{$case->case_id}}</td>
                                                     <td>Allergy</td>
                                                     <td>{{$case->doctor->name}}</td>
-                                                    <td><a href="{{route('doctor.view-case',$case->case_id)}}" class="btn">View Case</a><a href="#" class="btn">Print Case Summary</a></td>
+                                                    <td><a href="{{route('doctor.view-case',$case->case_id)}}" class="btn">View Case</a><a href="{{route('doctor.print-case-summery',$case->case_id)}}" class="btn">Print Case Summary</a></td>
                                                     <td>{{ date('d.m.Y', strtotime($case->created_at))}}</td>
                                                 </tr>
                                             @endforeach

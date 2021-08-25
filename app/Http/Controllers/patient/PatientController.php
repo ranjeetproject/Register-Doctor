@@ -89,18 +89,12 @@ class PatientController extends Controller
      if(!empty($request->forename) && !empty($request->surname)) $user->name = $request->forename.' '.$request->surname;
      if(!empty($request->email) && ($user->email != $request->email)) $user->email = $request->email;
 
+    if($user->UPN == '') {
+        $user->UPN = uniqid('REGP');
+    }
 
      $user->save();
      $profile = UserProfile::where('user_id',$user->id)->first();
-     if($profile ) {
-        if($profile->UPN == '') {
-            $profile->UPN = uniqid('PA');
-        }
-     }
-     $profile = $profile ?? new UserProfile;
-     if($profile->UPN == '') {
-        $profile->UPN = uniqid('PA');
-    }
 
      $profile->user_id = $user->id;
 
@@ -527,7 +521,7 @@ class PatientController extends Controller
           //echo $request->c_id .' '.$request->s_id;
           if($request->c_id !='' && $request->s_id != ''){
             $case = Prescription_req_doctor::where( 'priscription_id', $request->s_id)->first();
-            if($case ==''){ 
+            if($case ==''){
               $req = new Prescription_req_doctor();
               $req->priscription_id = $request->s_id;
               $req->case_id = $request->c_id;
@@ -547,7 +541,7 @@ class PatientController extends Controller
               if($case->send_status == 1){
                 $success = 'Please check your mail Doctor already send the priscription';
               }
-            }  
+            }
           }else{
             $error = 'There is some problem please try again';
           }

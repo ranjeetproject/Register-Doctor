@@ -948,4 +948,11 @@ switch ($request->day) {
         return view('common.video_call_test',compact('case','id'));
     }
 
+    public function printCaseSummery($id)
+    {
+        $summary = SummaryDiagnosis::where('patient_case_id',$id)->first();
+        $case_detail = PatientCase::where('case_id',$id)->first();
+        return view('frontend.patient.print_case_summery',compact('summary','case_detail'));
+    }
+
 }
