@@ -11,3 +11,4 @@
 <link rel="stylesheet" href="{{ asset('public/plugins/toastr/toastr.min.css')}}">
 
   <link rel="stylesheet" href="{{ asset('public/plugins/sweetalert2/sweetalert2.min.css')}}">
+  <link href="{{ asset('public/css/frontend/css/select2.css') }}" rel="stylesheet" type="text/css">

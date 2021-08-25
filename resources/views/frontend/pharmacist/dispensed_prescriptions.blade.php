@@ -39,7 +39,7 @@
 
                                                 <label >Prescription No.</label>
 
-                                                <select name="case_no" id="case_no" class="form-control">
+                                                <select name="case_no" id="case_no" class="form-control select_search">
 
                                                     <option value="">Select Prescription No.</option>
 
@@ -253,7 +253,9 @@ $('#case_no').on('change', function(){
     })
     
 });
-
+$(document).ready(function() {
+    $('.select_search').select2();
+});
 
 </script>
    
