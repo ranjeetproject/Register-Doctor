@@ -15,6 +15,10 @@ class PatientCase extends Model
     {
         return $this->hasMany('App\Prescription','case_no','case_id');
     }
+    public function pharma_req_prescription()
+    {
+        return $this->hasMany('App\Models\pharma_req_prescription','case_id','case_id');
+    }
 
     public function doctor()
     {

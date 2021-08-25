@@ -39,12 +39,12 @@
 
                                                 <label >Prescription No.</label>
 
-                                                <select name="case_no" id="case_no"  class="form-control select_search">
+                                                <select name="case_no" id="case_no" class="form-control select_search">
 
                                                     <option value="">Select Prescription No.</option>
 
                                                    @foreach($priscriptions as $prisc)
-                                                   <option value="{{$prisc->case_id}}">{{$prisc->priscription_id}}</option>
+                                                   <option value="{{$prisc->case_no}}">{{$prisc->prescription_no}}</option>
                                                    @endforeach
 
                                                 </select>
@@ -210,7 +210,7 @@ $('#case_no').on('change', function(){
     $('#date').html('<strong>Date: </strong>');
     $('#issued').html('<strong>Issued: </strong>');
     $.ajax({
-        url: "{{ url('pharmacist/ajaxAcceptPriscriptionDetails')}}",
+        url: "{{ url('pharmacist/ajaxDispensedPrescriptions')}}",
         type: 'POST',
         data:{
             case_id : case_id,

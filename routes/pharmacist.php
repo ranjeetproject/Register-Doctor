@@ -12,6 +12,8 @@ Route::middleware(['isPharmacist:sitePharmacist','activeUser','emailVerified','a
 
     Route::match(['get','post'],'/accepted-priscription', 'PharmacistController@acceptedPriscription')->name('accepted-priscription');
     Route::match(['get','post'],'/ajaxAcceptPriscriptionDetails', 'PharmacistController@ajaxAcceptPriscriptionDetails')->name('ajaxAcceptPriscriptionDetails');
+    Route::match(['get','post'],'/dispensed-prescriptions', 'PharmacistController@dispensedPrescriptions')->name('dispensed-prescriptions');
+    Route::match(['get','post'],'/ajaxDispensedPrescriptions', 'PharmacistController@ajaxDispensedPrescriptions')->name('ajaxDispensedPrescriptions');
     Route::match(['get','post'],'/handy-document', 'PharmacistController@handyDocument')->name('handy-document');
     Route::get('view-handy-document/{id}', 'PharmacistController@viewHandyDocument')->name('view-handy-document');
 });

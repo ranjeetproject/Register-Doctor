@@ -286,13 +286,31 @@ class PharmacistController extends Controller
     }
     public function acceptedPriscription(Request $request)
     {
-        $priscriptions = Prescription::groupByRaw('prescription_no')->get();
+        $priscriptions = pharma_req_prescription::get();
         //print_r($priscriptions);
 
         return view('frontend.pharmacist.accepted_priscription',compact('priscriptions'));
     }
 
     public function ajaxAcceptPriscriptionDetails(Request $request)
+    {
+
+        $case = PatientCase::where( 'case_id', $request->case_id)->with('doctor')->get();
+        $prescription = PatientCase::where( 'case_id', $request->case_id)->with('pharma_req_prescription')->with('prescription')->get();
+
+        $return = array('case_details'=>$case, 'prescription'=>$prescription);
+        return response()->json( $return);
+
+    }
+    public function dispensedPrescriptions(Request $request)
+    {
+        $priscriptions = Prescription::groupByRaw('prescription_no')->get();
+        //print_r($priscriptions);
+
+        return view('frontend.pharmacist.dispensed_prescriptions',compact('priscriptions'));
+    }
+
+    public function ajaxDispensedPrescriptions(Request $request)
     {
 
         $case = PatientCase::where( 'case_id', $request->case_id)->with('doctor')->get();

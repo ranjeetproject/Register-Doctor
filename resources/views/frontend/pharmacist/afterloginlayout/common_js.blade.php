@@ -19,7 +19,7 @@
 
   <!-- toastr js-->
 <script src="{{ asset('public/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
-
+<script src="{{ asset('public/js/frontend/js/select2.full.js') }}"></script>
 
 @include('common.toastr')
 @include('common.sweetalert')
