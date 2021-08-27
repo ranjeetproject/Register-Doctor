@@ -22,12 +22,14 @@ use App\Models\Payment;
 use App\Models\BookTimeSlot;
 use App\UserDoctor;
 use App\helpers;
+use App\Mail\FinalizePrescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Session;
 
 
@@ -314,10 +316,13 @@ class DoctorController extends Controller
           $prescription_no = uniqid();
           $Prescription = Prescription::where(['case_no'=>$request->case_id])->update(['prescription_no'=>$prescription_no,'status'=>'y']);
           //print_r($Prescription);
-
           $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
+          $Prescription = 'asd';
+          if($Prescription !=''){
+            //email Finalize Prescription $case[0]->user->email
+            Mail::to("koustav.mondal@brainiuminfotech.com")->send(new FinalizePrescription($request->case_id));
+          }
           $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
-
           $return = array('case_details'=>$case, 'prescription'=>$prescription);
           return response()->json( $return);
         }

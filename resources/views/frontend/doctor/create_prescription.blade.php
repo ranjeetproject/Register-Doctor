@@ -157,9 +157,11 @@
 
                                             <p>For this prescription [you must use webcam and check ID OR you must use webcam but do not need to check ID OR you do not need to use webcam or check ID]</p>
 
-                                            <p><a href="#">Click</a> to see patient medical record including allergies and for UK patients their GP details</p>
+                                            <p><a target="_blank" id="medical_record" href="#">Click</a> to see patient medical record including allergies and for UK patients their GP details</p>
 
-                                            <p><a href="#">Click</a> to contact patient before issuing prescription</p>
+                                            <p><a target="_blank" id="msg_patient" href="#">Click</a> to contact patient before issuing prescription</p>
+
+                                            <p><a target="_blank" id="summary" href="#">Click</a> to fill up summary diagnosis</p>
 
                                         </div>
 
@@ -569,13 +571,18 @@ $('#case_no').on('change', function(){
         success:function(res){
             console.log(res.case_details[0]);
             $('#p_name').val(res.case_details[0].user.name);
-            $('#upn').val(res.case_details[0].user.UPN);
+            $('#upn').val(res.case_details[0].user.registration_number); 
             $('#p_id').val(res.case_details[0].user.id);
             $('#d_id').val(res.case_details[0].doctor_id);
             $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
+            $('#medical_record').attr('href',"{{url('doctor/view-medical-recorde')}}/"+res.case_details[0].case_id);
+            $('#msg_patient').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
+            $('#summary').attr('href',"{{url('doctor/summary-diagnosis')}}/"+res.case_details[0].case_id);
+            msg_patient
             var prescription =res.prescription[0].prescription;
             var status = '';
             if(prescription.length > 0){
+                console.log('ko');
                 for(i=0; i < prescription.length; i++){
                     console.log(prescription[i]);
                     $('#add-tr tbody').append('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
@@ -583,8 +590,10 @@ $('#case_no').on('change', function(){
                 }
                 console.log(status);
                 if(status == 'no'){
+                    $('.add-and-edit').css('display', 'block');
                     $('#befour_sub').css('display','block');
                     $('#after_sub').css('display','none');
+                    $('#print').html(' ');
                 }
                 if(status == 'y'){
                     $('.add-and-edit').css('display', 'none');
@@ -592,9 +601,17 @@ $('#case_no').on('change', function(){
                     $('#after_sub').css('display','block');
                     if(res.req_status == 'active'){
                         $('#print').html('<p>Paitent requiest for priscrioption hard coppy please click the below button for print</p><br/><a id="print_prisc" href="#"  class="btn">Print Priscription</a>');
+                    }else{
+                        $('#print').html('');
                     }
                 }
 
+            }else{
+                $('.add-and-edit').css('display', 'block');
+                $('#befour_sub').css('display','block');
+                $('#after_sub').css('display','none');
+                $('#add-tr tbody').html('');
+                
             }
         }
     })
@@ -634,7 +651,7 @@ $('#add_pris').on('click', function(){
         success:function(res){
             console.log(res);
             $('#p_name').val(res.case_details[0].user.name);
-            $('#upn').val(res.case_details[0].user.UPN);
+            $('#upn').val(res.case_details[0].user.registration_number);
             $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
             var prescription = res.prescription[0].prescription;
            
@@ -669,7 +686,7 @@ $('#final_prisc').on('click', function(){
                 console.log(res.case_details[0]);
                 $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
                 $('#p_name').val(res.case_details[0].user.name);
-                $('#upn').val(res.case_details[0].user.UPN);
+                $('#upn').val(res.case_details[0].user.registration_number);
                 $('#p_id').val(res.case_details[0].user.id);
                 $('#d_id').val(res.case_details[0].doctor_id);
                 var prescription =res.prescription[0].prescription;
