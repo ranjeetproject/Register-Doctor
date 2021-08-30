@@ -8,4 +8,8 @@ class Prescription extends Model
 {
     //
     protected $table = 'prescription';
+    public function doctor()
+    {
+        return $this->hasOne('App\User','id','doctor_id')->withDefault();
+    }
 }
