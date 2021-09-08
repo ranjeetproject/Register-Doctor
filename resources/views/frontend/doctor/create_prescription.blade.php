@@ -430,7 +430,7 @@
                             <div class="form-group">
                                 
                                 <input name="route" id="route" type="text" class="form-control effect-19">
-                                <label>Frequency</label>
+                                <label>Route</label>
                             </div>
                             <div class="form-group">
                                 
@@ -581,13 +581,23 @@ $('#case_no').on('change', function(){
             msg_patient
             var prescription =res.prescription[0].prescription;
             var status = '';
+            var data_table = '';
             if(prescription.length > 0){
                 console.log('ko');
                 for(i=0; i < prescription.length; i++){
                     console.log(prescription[i]);
-                    $('#add-tr tbody').append('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
+                    
                     status = prescription[i]['status'];
+                    if(status == 'no'){
+                        data_table +=  '<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a href="javascript:void(0)" class="delt" pris_id="'+prescription[i]['id']+'" onclick="delet_prisc(this);"><i class="far fa-trash-alt"></i></a></td></tr>';
+                        
+                    }
+                    if(status == 'y'){
+                        data_table +='<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td></td></tr>';
+                        
+                    }
                 }
+                $('#add-tr tbody').html(data_table);
                 console.log(status);
                 if(status == 'no'){
                     $('.add-and-edit').css('display', 'block');
@@ -654,16 +664,24 @@ $('#add_pris').on('click', function(){
             $('#upn').val(res.case_details[0].user.registration_number);
             $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
             var prescription = res.prescription[0].prescription;
-           
+            var data_table = '';
             console.log(prescription);
             $('#add-tr tbody').html('');
             if(prescription.length > 0){
                 for(i=0; i < prescription.length; i++){
                     console.log(prescription[i]);
-                    
-                    $('#add-tr tbody').append('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
-                    $('#add-pop').modal('hide')
+                    var status = prescription[i]['status']
+                    if(status == 'no'){
+                        data_table +=  '<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a href="javascript:void(0)" class="delt" pris_id="'+prescription[i]['id']+'" onclick="delet_prisc(this);"><i class="far fa-trash-alt"></i></a></td></tr>';
+                        
+                    }
+                    if(status == 'y'){
+                        data_table +='<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td></td></tr>';
+                        
+                    }
                 }
+                $('#add-tr tbody').html(data_table);
+                $('#add-pop').modal('hide');
                 
             }
         }
@@ -695,11 +713,20 @@ $('#final_prisc').on('click', function(){
                     for(i=0; i < prescription.length; i++){
                         console.log(prescription[i]);
                         status = prescription[i]['status'];
-                        $('#add-tr tbody').html('<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a class="delt"><i class="far fa-trash-alt"></i></a></td></tr>');
+                        if(status == 'no'){
+                        data_table +=  '<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a href="javascript:void(0)" class="delt" pris_id="'+prescription[i]['id']+'" onclick="delet_prisc(this);"><i class="far fa-trash-alt"></i></a></td></tr>';
+                        
+                        }
+                        if(status == 'y'){
+                            data_table +='<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td></td></tr>';
+                            
+                        }
+               
                         $('#final_sucess').css('display', 'block');
                         $('#final_error').css('display', 'none');
                         $('#finalprisc').modal('hide')
                     }
+                     $('#add-tr tbody').html(data_table);
                     if(status == 'no'){
                         $('#befour_sub').css('display','block');
                         $('#after_sub').css('display','none');
@@ -718,5 +745,35 @@ $('#final_prisc').on('click', function(){
         $('#finalprisc').modal('hide')
     }
 });
+
+function delet_prisc(obj){
+     
+   // alert('asdas');
+    var _token = $("input[name=_token]").val();
+    //var $this = $(obj).closest('tr').hide();;
+    var id = $(obj).attr('pris_id');
+    //alert(id);
+    if(id !='' ){
+        if(confirm('Are you sure to remove this item.')){
+            $.ajax({
+                url: "{{ url('doctor/ajaxDeletePriscription')}}",
+                type: 'POST',
+                data:{
+                    id : id,
+                    _token : _token
+                },
+                success:function(res){
+                    
+                    if(res.success == 'yes'){
+                        //console.log($this);
+                        $(obj).closest('tr').remove();//remove();
+
+                    }
+                }
+            }); 
+        }
+    }
+}
+
 </script>
 @endsection

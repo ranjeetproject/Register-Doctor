@@ -329,6 +329,19 @@ class DoctorController extends Controller
 
     }
 
+    public function ajaxDeletePriscription(Request $request){
+      //print_r($request->id);
+      $return = array('success'=>'no');
+      //exit;
+      if($request->id !=''){
+        $prescription_no = uniqid();
+        $Prescription = Prescription::where('id','=',$request['id'])->delete();
+        $return = array('success'=>'yes');
+      }
+      return response()->json( $return);
+
+  }
+
      public function prescriptionIssues(Request $request)
     {
         return view('frontend.doctor.prescription_issues');
@@ -376,7 +389,6 @@ class DoctorController extends Controller
                 $available_day->from_time = $request->from_time;
                 $available_day->to_time = $request->to_time;
                 $available_day->save();
-
                 $number_of_slot = $total_minutes/15;
                 $from_time = Carbon::parse($request->from_time);
                 $to_time =Carbon::parse($request->from_time)->addMinutes(15);
@@ -428,7 +440,7 @@ class DoctorController extends Controller
 
     public function editAvailableDay(Request $request)
     {
-$user = Auth::guard('siteDoctor')->user();
+      $user = Auth::guard('siteDoctor')->user();
       if(!empty($request->available_day_id)){
       $id = $request->available_day_id;
       $available_day = DoctorAvailableDays::find($id);
@@ -523,12 +535,6 @@ $user = Auth::guard('siteDoctor')->user();
         // $available_day->to_time = $request->to_time;
         // $available_day->save();
 
-
-
-
-
-
-
          Session::flash('Success-toastr','Successfully updated');
          return redirect()->back();
 
@@ -558,29 +564,29 @@ $user = Auth::guard('siteDoctor')->user();
       $weekly_day->user_id = $user->id;
       $weekly_day->day = $request->day;
 
-switch ($request->day) {
-  case "monday":
-      $weekly_day->num_val_for_day = 1;
-    break;
-  case "tuesday":
-      $weekly_day->num_val_for_day = 2;
-    break;
-  case "wednesday":
-    $weekly_day->num_val_for_day = 3;
-    break;
+  switch ($request->day) {
+    case "monday":
+        $weekly_day->num_val_for_day = 1;
+      break;
+    case "tuesday":
+        $weekly_day->num_val_for_day = 2;
+      break;
+    case "wednesday":
+      $weekly_day->num_val_for_day = 3;
+      break;
 
-      case "thursday":
-    $weekly_day->num_val_for_day = 4;
-    break;
-      case "friday":
-    $weekly_day->num_val_for_day = 5;
-    break;
-      case "saturday":
-    $weekly_day->num_val_for_day = 6;
-    break;
-    case "sunday":
-    $weekly_day->num_val_for_day = 7;
-    break;
+        case "thursday":
+      $weekly_day->num_val_for_day = 4;
+      break;
+        case "friday":
+      $weekly_day->num_val_for_day = 5;
+      break;
+        case "saturday":
+      $weekly_day->num_val_for_day = 6;
+      break;
+      case "sunday":
+      $weekly_day->num_val_for_day = 7;
+      break;
 
   default:
     $weekly_day->num_val_for_day = 0;
