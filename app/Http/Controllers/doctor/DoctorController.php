@@ -342,7 +342,7 @@ class DoctorController extends Controller
 
      public function availableDays(Request $request)
     {
-         $user = Auth::guard('siteDoctor')->user();
+        $user = Auth::guard('siteDoctor')->user();
 
         if ($request->isMethod('post')) {
             try{
@@ -558,29 +558,29 @@ class DoctorController extends Controller
       $weekly_day->user_id = $user->id;
       $weekly_day->day = $request->day;
 
-switch ($request->day) {
-  case "monday":
-      $weekly_day->num_val_for_day = 1;
-    break;
-  case "tuesday":
-      $weekly_day->num_val_for_day = 2;
-    break;
-  case "wednesday":
-    $weekly_day->num_val_for_day = 3;
-    break;
+  switch ($request->day) {
+    case "monday":
+        $weekly_day->num_val_for_day = 1;
+      break;
+    case "tuesday":
+        $weekly_day->num_val_for_day = 2;
+      break;
+    case "wednesday":
+      $weekly_day->num_val_for_day = 3;
+      break;
 
-      case "thursday":
-    $weekly_day->num_val_for_day = 4;
-    break;
-      case "friday":
-    $weekly_day->num_val_for_day = 5;
-    break;
-      case "saturday":
-    $weekly_day->num_val_for_day = 6;
-    break;
-    case "sunday":
-    $weekly_day->num_val_for_day = 7;
-    break;
+        case "thursday":
+      $weekly_day->num_val_for_day = 4;
+      break;
+        case "friday":
+      $weekly_day->num_val_for_day = 5;
+      break;
+        case "saturday":
+      $weekly_day->num_val_for_day = 6;
+      break;
+      case "sunday":
+      $weekly_day->num_val_for_day = 7;
+      break;
 
   default:
     $weekly_day->num_val_for_day = 0;
@@ -960,4 +960,16 @@ switch ($request->day) {
         return view('frontend.patient.print_case_summery',compact('summary','case_detail'));
     }
 
+    public function ajaxDeletePriscription(Request $request){
+        //print_r($request->id);
+        $return = array('success'=>'no');
+        //exit;
+        if($request->id !=''){
+          $prescription_no = uniqid();
+          $Prescription = Prescription::where('id','=',$request['id'])->delete();
+          $return = array('success'=>'yes');
+        }
+        return response()->json( $return);
+
+    }
 }
