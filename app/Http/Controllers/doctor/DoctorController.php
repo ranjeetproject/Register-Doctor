@@ -49,6 +49,7 @@ class DoctorController extends Controller
 
 
     public function dashboard() {
+        //dd(findOutBSTStartEndDate('2021'));
 
       if(empty(Auth::guard('siteDoctor')->user()->profile->dr_name_of_medical_licencer)){
         return redirect()->route('doctor.profile');
@@ -428,118 +429,117 @@ class DoctorController extends Controller
 
     public function editAvailableDay(Request $request)
     {
-$user = Auth::guard('siteDoctor')->user();
-      if(!empty($request->available_day_id)){
-      $id = $request->available_day_id;
-      $available_day = DoctorAvailableDays::find($id);
-      }elseif (!empty($request->date)) {
-         $date = str_replace('/','-',$request->date);
-         $date = date('Y-m-d',strtotime($date));
-         $available_day = DoctorAvailableDays::where('date',$date)->get();
-      }
+        $user = Auth::guard('siteDoctor')->user();
+        if(!empty($request->available_day_id)){
+            $id = $request->available_day_id;
+            $available_day = DoctorAvailableDays::find($id);
+        }elseif (!empty($request->date)) {
+            $date = str_replace('/','-',$request->date);
+            $date = date('Y-m-d',strtotime($date));
+            $available_day = DoctorAvailableDays::where('date',$date)->get();
+            // dd($available_day );
+            $time_zone = $user->profile->time_zone;
+            foreach($available_day as $available) {
+                if($time_zone == 2) {
 
-      if ($request->isMethod('post')) {
+                    $available_da['from_time'] = timezoneAdjustmentFetch($time_zone, $available->date, $available->from_time);
+                    $available_da['to_time'] = timezoneAdjustmentFetch($time_zone, $available->date, $available->to_time);
+                    $available_da['date'] = $available->date;
+                } else {
 
+                    $available_da['from_time'] = $available->from_time;
+                    $available_da['to_time'] = $available->to_time;
+                    $available_da['date'] = $available->date;
+                }
+                $available_d[] = $available_da;
+            }
+            $available_day = $available_d;
 
-
-// dd($request->all());
-         $data = $request->validate([
-             "date"=>"required",
-             "from_time"=>"required|date_format:H:i",
-             "to_time"=>"required|date_format:H:i|after:from_time",
-         ]);
-
-         $date = str_replace("/", "-", $request->date);
-         $date = date('Y-m-d',strtotime($date));
-
-
-         $from_date_time =  $date.' '.$request->from_time;
-         $to_date_time =  $date.' '.$request->to_time;
-
-         $from_date_time = Carbon::parse($from_date_time);
-
-         $total_minutes = $from_date_time->diffInMinutes($to_date_time);
-         // $total_time = (new Carbon($request->to_time))->diff(new Carbon($request->from_time))->format('%h:%I');
-        // $slot = $total_minutes%15 ;
-
-        if($total_minutes%15 != 0){
-         Session::flash('Error-toastr','Please match the 15 minute slot.');
-         return redirect()->back();
         }
 
+        if ($request->isMethod('post')) {
 
-        foreach ($available_day->getSlot as $slot) {
-          $slot->delete();
+            $data = $request->validate([
+                "date"=>"required",
+                "from_time"=>"required|date_format:H:i",
+                "to_time"=>"required|date_format:H:i|after:from_time",
+            ]);
+
+            $date = str_replace("/", "-", $request->date);
+            $date = date('Y-m-d',strtotime($date));
+
+
+            $from_date_time =  $date.' '.$request->from_time;
+            $to_date_time =  $date.' '.$request->to_time;
+
+            $from_date_time = Carbon::parse($from_date_time);
+
+            $total_minutes = $from_date_time->diffInMinutes($to_date_time);
+            // $total_time = (new Carbon($request->to_time))->diff(new Carbon($request->from_time))->format('%h:%I');
+            // $slot = $total_minutes%15 ;
+
+            if($total_minutes%15 != 0){
+                Session::flash('Error-toastr','Please match the 15 minute slot.');
+                return redirect()->back();
+            }
+
+
+            foreach ($available_day->getSlot as $slot) {
+                $slot->delete();
+            }
+
+            // DB::beginTransaction();
+            // $available_day = new DoctorAvailableDays;
+            $available_day->user_id = $user->id;
+            $available_day->date = $date;
+            $available_day->from_time = $request->from_time;
+            $available_day->to_time = $request->to_time;
+            $available_day->save();
+
+            $number_of_slot = $total_minutes/15;
+            $from_time = Carbon::parse($request->from_time);
+            $to_time =Carbon::parse($request->from_time)->addMinutes(15);
+
+
+
+            for ($i = 1; $i <= $number_of_slot; $i++) {
+                $time_slot = new TimeSlot;
+                $time_slot->user_id = $user->id;
+                $time_slot->available_day_id = $available_day->id;
+                $time_slot->start_time = $from_time->format('H:i');
+                $time_slot->end_time = $to_time->format('H:i');
+                $from_time = $from_time->addMinutes(15);
+                $to_time = $to_time->addMinutes(15);
+                $time_slot->save();
+                // echo '<pre>';
+                //    print_r($time_slot);
+            }
+            // exit;
+             // DB::commit();
+
+            //   $data = $request->validate([
+            //      "date"=>"required",
+            //      "from_time"=>"required",
+            //      "to_time"=>"required",
+            //  ]);
+
+            //  $date = str_replace("/", "-", $request->date) ;
+            //  $date = date('Y-m-d',strtotime($date));
+
+            // // $available_day->user_id = $user->id;
+            // $available_day->date = $date;
+            // $available_day->from_time = $request->from_time;
+            // $available_day->to_time = $request->to_time;
+            // $available_day->save();
+            Session::flash('Success-toastr','Successfully updated');
+            return redirect()->back();
         }
 
-
-
-          // DB::beginTransaction();
-        // $available_day = new DoctorAvailableDays;
-        $available_day->user_id = $user->id;
-        $available_day->date = $date;
-        $available_day->from_time = $request->from_time;
-        $available_day->to_time = $request->to_time;
-        $available_day->save();
-
-        $number_of_slot = $total_minutes/15;
-        $from_time = Carbon::parse($request->from_time);
-        $to_time =Carbon::parse($request->from_time)->addMinutes(15);
-
-
-
-       for ($i = 1; $i <= $number_of_slot; $i++) {
-        $time_slot = new TimeSlot;
-        $time_slot->user_id = $user->id;
-        $time_slot->available_day_id = $available_day->id;
-        $time_slot->start_time = $from_time->format('H:i');
-        $time_slot->end_time = $to_time->format('H:i');
-        $from_time = $from_time->addMinutes(15);
-        $to_time = $to_time->addMinutes(15);
-        $time_slot->save();
-        // echo '<pre>';
-        //    print_r($time_slot);
-       }
-        // exit;
-      // DB::commit();
-
-
-
-
-
-
-        //   $data = $request->validate([
-        //      "date"=>"required",
-        //      "from_time"=>"required",
-        //      "to_time"=>"required",
-        //  ]);
-
-        //  $date = str_replace("/", "-", $request->date) ;
-        //  $date = date('Y-m-d',strtotime($date));
-
-        // // $available_day->user_id = $user->id;
-        // $available_day->date = $date;
-        // $available_day->from_time = $request->from_time;
-        // $available_day->to_time = $request->to_time;
-        // $available_day->save();
-
-
-
-
-
-
-
-         Session::flash('Success-toastr','Successfully updated');
-         return redirect()->back();
-
-
-      }
-
-      if(isset( $available_day)) {
-      return response()->json(['success' =>true, 'message'=>'success','data'=>$available_day], 200);
-      } else{
-      return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_day], 200);
-      }
+        if(isset( $available_day)) {
+            return response()->json(['success' =>true, 'message'=>'success','data'=>$available_day], 200);
+        } else{
+            return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_day], 200);
+        }
     }
 
     public function deleteAvailableDay($id)

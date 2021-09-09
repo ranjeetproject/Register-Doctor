@@ -29,8 +29,20 @@
         </section>
         <!-- Footer start -->
             @include('frontend.patient.afterloginlayout.common_footer')
+            @include('common.timezone_setup')
             @include('frontend.patient.afterloginlayout.common_js')
         <!-- Footer end -->
         @yield('scripts')
+        <script>
+            $( document ).ready(function() {
+                <?php if(Auth::user()->profile->time_zone == 0) {
+            ?>
+                $('#exampleModal').modal('show');
+            <?php
+            }
+            ?>
+        });
+
+        </script>
     </body>
 </html>

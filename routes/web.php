@@ -101,5 +101,5 @@ Route::any('/login', 'admin\AdminController@adminLogin')->name('login');
 Route::get('payment/{case_id}','CheckoutController@checkout');
 Route::post('payment','CheckoutController@afterpayment')->name('payment.credit-card');
 Route::get('download-handydoc/{id}','common\CommHandyDocController@downloadHandyDoc')->name('download.handy_doc');
-
+Route::post('save-timezone','common\CommHandyDocController@setTimeZone')->name('save_timezone');
 

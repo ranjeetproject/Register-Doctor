@@ -1,6 +1,9 @@
 @extends('frontend.patient.afterloginlayout.app')
 
 @section('content')
+    @php
+    $time_zone = Auth::user()->profile->time_zone;
+    @endphp
     <div class="col Post-prescription-right Incoming-Prescription-Requests-page">
         <div class="row">
             <div class="col-sm-12">
@@ -57,9 +60,15 @@
                                               @forelse($case->getBookingSlot as $time_slot)
                                               {{-- @dump($time_slot, $time_slot->getSlot, $time_slot->getSlot->start_time) --}}
 
-                                              @if($time_slot->getSlot)
+                                                @if($time_slot->getSlot)
+                                                {{-- @dump($time_slot->getSlot->start_time) --}}
+                                                    @if ($time_zone ==2)
+                                                        {{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone, $case->booking_date, $time_slot->getSlot->start_time))) }} <br>to<br> {{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone, $case->booking_date, $time_slot->getSlot->end_time))) }} <br>
+                                                    @else
+                                                    {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br>
+                                                    @endif
 
-                                              {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br>
+
                                                 @endif
                                               @empty
 

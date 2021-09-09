@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use Session;
 use Response;
 use Validator;
+use Auth;
 
 class CommHandyDocController extends Controller
 {
@@ -38,6 +39,14 @@ class CommHandyDocController extends Controller
     public function viewHandyDoc(Type $var = null)
     {
         # code...
+    }
+
+    public function setTimeZone(Request $request)
+    {
+        $user_profile = Auth::user()->profile;
+        $user_profile->time_zone = $request->time_zone;
+        $user_profile->save();
+        return back();
     }
 
 }

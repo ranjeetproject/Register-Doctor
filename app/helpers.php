@@ -192,4 +192,62 @@ function getDiffOfTwoDateInMinute($date1)
 
 }
 
+function findOutBSTStartEndDate($year){
+    // $year = Date('Y');
+    $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));
+    $end_date = date('Y-m-d 02:00:00', strtotime('last sunday of October ' . $year));
+    return [$start_date, $end_date];
+}
+
+function timezoneAdjustmentFetch($timezone, $date, $time) {
+    $year = date('Y', strtotime($date));
+    $dateTime = $date.' '.$time;
+    // dd($dateTime);
+    $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));
+    $end_date = date('Y-m-d 01:00:00', strtotime('last sunday of October ' . $year));
+    // dd($dateTime, $start_date, strtotime($dateTime) - strtotime($start_date));
+    // $date1=date_create("2013-03-15");
+    // $date2=date_create("2013-12-12");
+    // $diff=date_diff($date1,$date2);
+    // echo $diff->format("%R%a");&& $date > $end_date)
+    if((strtotime($start_date) <= strtotime($dateTime) )&& ( strtotime($dateTime)<  strtotime($end_date)) ) {
+        $timestamp = strtotime($time) + 60*60;
+
+        return date('H:i', $timestamp);
+    } else {
+        return $time;
+    }
+    // switch ($timezone) {
+    //     case "GMT":
+    //         return $dateTime;
+    //       break;
+    //     case "BST":
+    //         return Carbon::parse($dateTime)->addHour();
+    //       break;
+    //     default:
+    //     return $dateTime;
+    // }
+}
+
+function timezoneAdjustmentStore($timezone, $dateTime) {
+    $year = date('Y', strtotime($dateTime));
+    $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));
+    $end_date = date('Y-m-d 02:00:00', strtotime('last sunday of October ' . $year));
+    if($start_date <= $dateTime && $dateTime > $end_date) {
+        return Carbon::parse($dateTime)->subHour();
+    } else {
+        return $dateTime;
+    }
+    // switch ($timezone) {
+    //     case "GMT":
+    //         return $dateTime;
+    //       break;
+    //     case "BST":
+    //         return Carbon::parse($dateTime)->subHour();
+    //       break;
+    //     default:
+    //     return $dateTime;
+    // }
+}
+
 ?>

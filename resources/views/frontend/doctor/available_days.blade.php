@@ -23,6 +23,9 @@
                                 data-original-title="One line definition"> How It Works</a>
                     </li>
                 </ul> --}}
+                @php
+                    $time_zone = Auth::user()->profile->time_zone;
+                @endphp
                 <div class="tab-content Calendar-Regular-tab-con" id="myTabContent">
                     <div class="tab-pane fade show active" id="Regular-Weekly-Timetable">
                         <div class="calanderilest">
@@ -32,8 +35,14 @@
                                     <h3>Your Availability :<br>
                                         <span class="show_time">
                                             @foreach ($get_current_day as $current_day)
+                                                @if ($time_zone == 2)
+                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->from_time))) }} -
+                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->to_time))) }}
+                                                @else
                                                 {{ date('H:i a', strtotime($current_day->from_time)) }} -
                                                 {{ date('H:i a', strtotime($current_day->to_time)) }}
+                                                @endif
+
                                             @endforeach
                                         </span>
                                     </h3>
@@ -84,8 +93,17 @@
                                                             data-target="#collapseOne" aria-expanded="false"
                                                             aria-controls="collapseOne">
                                                             {{ ucfirst($day->day) }} -
+                                                            {{-- @dump($day->day) --}}
+                                                            @if ($time_zone ==2)
+
+                                                            <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$day->day,$day->from_time))) }} -
+                                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$day->day,$day->to_time))) }}</span>
+                                                            @else
                                                             <span>{{ date('H:i a', strtotime($day->from_time)) }} -
                                                                 {{ date('H:i a', strtotime($day->to_time)) }}</span>
+
+                                                            @endif
+
                                                         </button>
                                                         <span class="accetion"><a href="#"
                                                                 onclick="editWeeklyDay('{{ $day->id }}')"><i
@@ -96,7 +114,7 @@
                                                     </h2>
                                                 </div>
 
-                                                <div id="collapseOnee" class="collapse" aria-labelledby="headingOne"
+                                                {{-- <div id="collapseOnee" class="collapse" aria-labelledby="headingOne"
                                                     data-parent="#accordionExample">
                                                     <div class="card-body p-2">
                                                         <div class="table-responsive">
@@ -130,7 +148,7 @@
                                                             </table>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         @endforeach
 
@@ -165,6 +183,7 @@
                                     {{-- <a href="#"></a> --}}
                                     <div class="accordion my-2 re-ah-titme" id="accordionExample2">
 
+
                                         @forelse($available_days_for_month as $available_day)
 
                                             <div class="card">
@@ -175,9 +194,16 @@
                                                             aria-expanded="false" aria-controls="acone">
                                                             {{ ucfirst(date('l', strtotime($available_day->date))) }} -
                                                             {{ date('F d Y', strtotime($available_day->date)) }}
+                                                            @if($time_zone ==2)
+
+                                                            <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$available_day->date,$available_day->from_time))) }}
+                                                                -
+                                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$available_day->date,$available_day->to_time))) }}</span>
+                                                            @else
                                                             <span>{{ date('H:i a', strtotime($available_day->from_time)) }}
                                                                 -
                                                                 {{ date('H:i a', strtotime($available_day->to_time)) }}</span>
+                                                            @endif
                                                         </button>
                                                         <span class="accetion"><a href="#"
                                                                 onclick="editAvailableDay('{{ $available_day->id }}');"><i
@@ -618,7 +644,7 @@
         // window.location.reload(true)
         setTimeout(function(){
         $(".day a").click(function() {
-            //alert('fjjdf');
+            // alert('fjjdf');
             var day = $(this).data('day');
             var year = $(this).data('year');
             var month = $(this).data('month');

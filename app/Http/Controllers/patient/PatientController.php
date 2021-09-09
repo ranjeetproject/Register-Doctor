@@ -766,16 +766,25 @@ class PatientController extends Controller
           $query->where('date',$date)->where('user_id', $request->doctor_id);
         })->get();
 
-     $time_slot = '';
+        $time_slot = '';
+
+        $time_zone = Auth::user()->profile->time_zone;
 
          foreach($available_days as $current_day){
             foreach($current_day->getSlot()->whereNotIn('id',$getBookedSlot)->get() as $slot){
 
               $time_slot.= '<tr>
-              <td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td>
-              <td>'.date('H:i a', strtotime($slot->start_time)).'</td>
-              <td>'.date('H:i a', strtotime($slot->end_time)).'</td>
-              <td style="text-align: center;"><input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()"></td>
+              <td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td>';
+              if ($time_zone ==1) {
+                $time_slot.= '<td>'.date('H:i a', strtotime($slot->start_time)).'</td>
+                <td>'.date('H:i a', strtotime($slot->end_time)).'</td>';
+                }
+
+                else {
+                    $time_slot.= '<td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td>
+                    <td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->end_time))).'</td>';
+                }
+              $time_slot.= '<td style="text-align: center;"><input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()"></td>
               </tr>';
             }
          }
@@ -976,7 +985,7 @@ class PatientController extends Controller
 
     public function paymentDetail()
     {
-        $payments = Payment::where('user_id',Auth::guard('sitePatient')->user()->id)->paginate(8);
+        $payments = Payment::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(8);
         return view('frontend.patient.payment_detail',compact('payments'));
     }
 

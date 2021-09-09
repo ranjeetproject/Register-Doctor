@@ -30,7 +30,19 @@
         <!-- Footer start -->
         @include('frontend.pharmacist.afterloginlayout.common_footer')
         @include('frontend.pharmacist.afterloginlayout.common_js')
+        @include('common.timezone_setup')
         <!-- Footer end -->
         @yield('scripts')
+        <script>
+            $( document ).ready(function() {
+                <?php if(Auth::user()->profile->time_zone == 0) {
+            ?>
+                $('#exampleModal').modal('show');
+            <?php
+            }
+            ?>
+        });
+
+        </script>
     </body>
 </html>

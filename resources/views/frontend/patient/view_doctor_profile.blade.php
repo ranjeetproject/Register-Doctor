@@ -108,7 +108,7 @@
 
                                 <div class="col-sm-12">
                                     <div class="blank-card">
-                                        <h4>Check Doctor's Availability <img src="images/ex-icon.png" alt=""
+                                        <h4>Check Doctor's Availability <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt=""
                                                 data-toggle="tooltip" data-placement="top" title=""
                                                 data-original-title="One line Definition"></h4>
                                     </div>
@@ -186,7 +186,7 @@
                                                             <th>From</th>
                                                             <th>Till</th>
                                                             <th style="text-align: center;">Select <img
-                                                                    src="images/ex-icon.png" alt="" data-toggle="tooltip"
+                                                                    src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="tooltip"
                                                                     data-placement="top" title=""
                                                                     data-original-title="One line Definition"></th>
                                                         </tr>
@@ -251,7 +251,7 @@
                                         <input type="file" name="case_file[]" class="form-control-file"
                                             id="exampleFormControlFile1" style="opacity: 0; margin-top: -35px;"
                                             multiple accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right" title=""
-                                            data-original-title="One line definition" src="images/ex-icon.png" alt="">
+                                            data-original-title="One line definition" src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="">
                                     </div>
                                     <div class="form-group">
                                         <div class="file-count">
@@ -290,7 +290,9 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-
+            // $(".day a").click(function() {
+            //     alert('hi');
+            // });
 
             $(".responsive-calendar").responsiveCalendar({
                 time: '{{ date('Y-m') }}',
@@ -298,7 +300,13 @@
                     @foreach ($available_days as $available_day)
                         "{{ $available_day->date }}":{ },
                     @endforeach
-                }
+                },
+                // onDayClick: function(events) {
+                //     alert('Day was clicked');
+                //     console.log('====================================');
+                //     console.log(events,$(this).data('day'));
+                //     console.log('====================================');
+                //  }
             });
 
             $('input#exampleFormControlFile1').change(function(){
@@ -313,47 +321,48 @@
 
         });
         $(window).on('load', function() {
-            $(".day a").click(function() {
-                var day = $(this).data('day');
-                var year = $(this).data('year');
-                var month = $(this).data('month');
-                day = (day <= 9) ? '0' + day : day;
-                month = (month <= 9) ? '0' + month : month;
-                var date = day + '/' + month + '/' + year;
-                $('#myModal2').modal('show');
-                $('#date').val(date);
-                var fromDate = new Date(year + '-' + month + '-' + day);
-                var formatedDate = new Date(fromDate).toDateString();
-                // alert(formatedDate);
-                $('#booking_date').val(date);
+            setTimeout(function(){
+                $(".day a").click(function() {
+                    var day = $(this).data('day');
+                    var year = $(this).data('year');
+                    var month = $(this).data('month');
+                    day = (day <= 9) ? '0' + day : day;
+                    month = (month <= 9) ? '0' + month : month;
+                    var date = day + '/' + month + '/' + year;
+                    $('#myModal2').modal('show');
+                    $('#date').val(date);
+                    var fromDate = new Date(year + '-' + month + '-' + day);
+                    var formatedDate = new Date(fromDate).toDateString();
+                    // alert(formatedDate);
+                    $('#booking_date').val(date);
 
 
-                $.ajax({
-                    url: "{{ route('patient.doctor-available-day') }}",
-                    type: 'get',
-                    dataType: "json",
-                    // data:{state:state,type:type,_token:token}
-                    data: {
-                        date: date,
-                        doctor_id: '{{ Crypt::decryptString(Request::segment(3)) }}'
-                    }
-                }).done(function(response) {
-                    if (typeof response != "undefined" && response.success) {
-                        $('.show_date').html(formatedDate);
-                        var available_time = '';
-                        $.each(response.data, function(index, value) {
-                            console.log(value.date);
-                            available_time += value.from_time + '-' + value.to_time;
-                            available_time += '<br>';
-                        });
-                        $('.show_time').html(available_time);
-                        $('#time_slot').html(response.time_slot);
+                    $.ajax({
+                        url: "{{ route('patient.doctor-available-day') }}",
+                        type: 'get',
+                        dataType: "json",
+                        // data:{state:state,type:type,_token:token}
+                        data: {
+                            date: date,
+                            doctor_id: '{{ Crypt::decryptString(Request::segment(3)) }}'
+                        }
+                    }).done(function(response) {
+                        if (typeof response != "undefined" && response.success) {
+                            $('.show_date').html(formatedDate);
+                            var available_time = '';
+                            $.each(response.data, function(index, value) {
+                                console.log(value.date);
+                                available_time += value.from_time + '-' + value.to_time;
+                                available_time += '<br>';
+                            });
+                            $('.show_time').html(available_time);
+                            $('#time_slot').html(response.time_slot);
 
 
-                    }
+                        }
+                    });
                 });
-            });
-
+            }, 5000);
 
         });
 
