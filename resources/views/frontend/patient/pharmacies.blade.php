@@ -164,7 +164,7 @@
                                         @csrf
                                          <p><span>Delivery options : </span>  {{(isset($pharmaci->deliveryOption->customer_pick_up) && $pharmaci->deliveryOption->customer_pick_up == 1) ? 'Customer pick up, ':''}} {{(isset($pharmaci->deliveryOption->local_delivery) && $pharmaci->deliveryOption->local_delivery == 1) ? 'Local Delivery (car/courier), ':''}} {{(isset($pharmaci->deliveryOption->posts_within_uk) && $pharmaci->deliveryOption->posts_within_uk == 1) ? 'Posts within UK, ':''}} {{(isset($pharmaci->deliveryOption->sends_international) && $pharmaci->deliveryOption->sends_international == 1) ? 'Sends International':''}} </p>
                                          <p><span>Notes : </span> {{$pharmaci->openingTime->notes}}</p>
-                                         @if(!in_array($pharmaci->id, $data['pharma_ids']))
+                                         @if(!in_array($pharmaci->id, $data['pharma_ids'])) 
                                          <p class="container_pharma{{$pharmaci->id}}">Contact Pharmacy with Prescription No. or <a pharma_id="{{$pharmaci->id}}" c_id="{{$_GET['c_id']}}" prisc_id="{{$_GET['s_id']}}" href="" class="pharma_sub btn blue-button">send prescription No. electronically</a> <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="modal" data-target="#Pharmacy-popup"></p>
                                          @else
                                          <p style="background: green;color: #fff;padding: 10px;"> Priscription already send to Pharmassist</p>

@@ -548,7 +548,7 @@ class PatientController extends Controller
         }
         $pharmacies = User::whereRole(3)->latest()->get();
         $pharma_ids = array();
-        $pharma_req = pharma_req_prescription::get();
+        $pharma_req = pharma_req_prescription::where('priscription_id','=',$request->s_id)->where('case_id','=',$request->c_id)->get();
         foreach($pharma_req as $ph){
          $pharma_ids[] = $ph->pharma_id;
         }
