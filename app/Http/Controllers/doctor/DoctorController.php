@@ -255,7 +255,7 @@ class DoctorController extends Controller
 
     public function createPrescription(Request $request)
     {
-      $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->get();
+      $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->where('prescriptions_issued', '=', 'no')->get();
       return view('frontend.doctor.create_prescription',compact('cases'));
     }
     // public function AddPrescription(Request $request)
@@ -316,9 +316,10 @@ class DoctorController extends Controller
         if($request->case_id !=''){
           $prescription_no = uniqid();
           $Prescription = Prescription::where(['case_no'=>$request->case_id])->update(['prescription_no'=>$prescription_no,'status'=>'y']);
+          $Prescription_case = PatientCase::where(['case_id'=>$request->case_id])->update(['prescriptions_issued'=>'yes']);
           //print_r($Prescription);
           $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
-          $Prescription = 'asd';
+          
           if($Prescription !=''){
             //email Finalize Prescription $case[0]->user->email
             Mail::to("koustav.mondal@brainiuminfotech.com")->send(new FinalizePrescription($request->case_id));
@@ -332,7 +333,27 @@ class DoctorController extends Controller
 
      public function prescriptionIssues(Request $request)
     {
-        return view('frontend.doctor.prescription_issues');
+      $cases = PatientCase::where('accept_status',1)->where('prescriptions_issued', '=', 'yes')->with('user')->with('prescription')->get();
+      
+      return view('frontend.doctor.prescription_issues',compact('cases'));
+    }
+    public function viewPrescription(Request $request,$cid)
+    {
+      
+      //$cases = PatientCase::where('accept_status',1)->where('prescriptions_issued', '=', 'yes')->with('user')->with('prescription')->get();
+      $case = PatientCase::where( 'case_id', $cid)->with('user')->first();
+      $paitent_req = Prescription_req_doctor::where( 'case_id', $cid)->first();
+      $req_status = 'inactive';
+      if($paitent_req !=''){
+        //print_r($paitent_req->case_id);
+        $req_status = ($paitent_req->status == 1) ? 'active' : 'inactive';
+      }
+      $prescription = Prescription::where( 'case_no', $cid)->get();
+      // print_r($prescription);
+      // exit;
+      $return = array('case_details'=>$case, 'prescription'=>$prescription, 'req_status'=> $req_status);
+      //return response()->json( $return);
+      return view('frontend.doctor.view_prescription',compact('return'));
     }
 
      public function closeCases(Request $request)

@@ -32,131 +32,37 @@
                                       <thead>
                                           <tr>
                                               <td>Date</td>
-                                              <td>Issued</td>
                                               <td>Patient’s<br> Name  </td>
                                               <td>Case No.</td>
                                               <td> View <br>Case</td>
                                               <td>View Medical <br>Record</td>
                                               <td> Prescription No.</td>
                                               <td style="min-width: 250px;"> Action</td>
-                                              <td >Delete</td>
+                                              
                                           </tr>
                                       </thead>
                                       <tbody>
+                                      @foreach($cases as $case)
+
                                         <tr >
-                                            <td>08-10-2020</td>
-                                            <td>06:15 PM </td>
-                                            <td>John Doe</td>
-                                            <td>C0024852</td>
+                                            <td>{{$case->updated_at}}</td>
                                             
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td> 
-                                            <td>984092</td>
-                                            <td class="masg-dep-tol">
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button> 
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br>
-                                                <a href="#"  target="_blank" class="btn blue-button btn-block Print-GP-Note">Print GP Note</a>
-                                             </td>
-                                             <td>
-                                               <a href="#" style="background: #f2f2f2; color: #f00" target="_blank" class="btn  btn-block Print-GP-Note"><i class="fa fa-trash" aria-hidden="true"></i>
-                                               </a>
-                                             </td>
-                                        </tr>
-                                        <tr >
-                                            <td>08-10-2020</td>
-                                            <td>06:15 PM </td>
-                                            <td>John Doe</td>
-                                            <td>C0024852</td>
+                                            <td>{{$case->user->name}}</td>
+                                            <td>{{$case->case_id}}</td>
                                             
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td> 
-                                            <td>984092</td>
+                                            <td><a target="_blank" href="{{url('doctor/view-case')}}/{{$case->case_id}}"><i class="fal fa-eye"></i></a></td>
+                                            <td><a target="_blank" href="{{url('doctor/view-medical-recorde')}}/{{$case->case_id}}"><i class="fal fa-eye"></i></a></td> 
+                                            <td>{{$case->prescription[0]->prescription_no}}</td>
                                             <td class="masg-dep-tol">
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button> 
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br>
-                                                <a href="#"  target="_blank" class="btn blue-button btn-block Print-GP-Note">Print GP Note</a>
+                                                <!-- <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button> 
+                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br> -->
+                                                <a href="{{url('doctor/viewPrescription')}}/{{$case->case_id}}"  target="_blank" class="btn blue-button btn-block Print-GP-Note"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""> Prescription</a>
                                              </td>
-                                             <td>
-                                               <a href="#" style="background: #f2f2f2; color: #f00" target="_blank" class="btn  btn-block Print-GP-Note"><i class="fa fa-trash" aria-hidden="true"></i>
-                                               </a>
-                                             </td>
+                                             
                                         </tr>
-                                        <tr >
-                                            <td>08-10-2020</td>
-                                            <td>06:15 PM </td>
-                                            <td>John Doe</td>
-                                            <td>C0024852</td>
-                                            
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td> 
-                                            <td>984092</td>
-                                            <td class="masg-dep-tol">
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button> 
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br>
-                                                <a href="#"  target="_blank" class="btn blue-button btn-block Print-GP-Note">Print GP Note</a>
-                                             </td>
-                                             <td>
-                                               <a href="#" style="background: #f2f2f2; color: #f00" target="_blank" class="btn  btn-block Print-GP-Note"><i class="fa fa-trash" aria-hidden="true"></i>
-                                               </a>
-                                             </td>
-                                        </tr>
-                                        <tr >
-                                            <td>08-10-2020</td>
-                                            <td>06:15 PM </td>
-                                            <td>John Doe</td>
-                                            <td>C0024852</td>
-                                            
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td> 
-                                            <td>984092</td>
-                                            <td class="masg-dep-tol">
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button> 
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br>
-                                                <a href="#"  target="_blank" class="btn blue-button btn-block Print-GP-Note">Print GP Note</a>
-                                             </td>
-                                             <td>
-                                               <a href="#" style="background: #f2f2f2; color: #f00" target="_blank" class="btn  btn-block Print-GP-Note"><i class="fa fa-trash" aria-hidden="true"></i>
-                                               </a>
-                                             </td>
-                                        </tr>
-                                        <tr >
-                                            <td>08-10-2020</td>
-                                            <td>06:15 PM </td>
-                                            <td>John Doe</td>
-                                            <td>C0024852</td>
-                                            
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td> 
-                                            <td>984092</td>
-                                            <td class="masg-dep-tol">
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button> 
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br>
-                                                <a href="#"  target="_blank" class="btn blue-button btn-block Print-GP-Note">Print GP Note</a>
-                                             </td>
-                                             <td>
-                                               <a href="#" style="background: #f2f2f2; color: #f00" target="_blank" class="btn  btn-block Print-GP-Note"><i class="fa fa-trash" aria-hidden="true"></i>
-                                               </a>
-                                             </td>
-                                        </tr>
-                                        <tr >
-                                            <td>08-10-2020</td>
-                                            <td>06:15 PM </td>
-                                            <td>John Doe</td>
-                                            <td>C0024852</td>
-                                            
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td> 
-                                            <td>984092</td>
-                                            <td class="masg-dep-tol">
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button> 
-                                                <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br>
-                                                <a href="#"  target="_blank" class="btn blue-button btn-block Print-GP-Note">Print GP Note</a>
-                                             </td>
-                                             <td>
-                                               <a href="#" style="background: #f2f2f2; color: #f00" target="_blank" class="btn  btn-block Print-GP-Note"><i class="fa fa-trash" aria-hidden="true"></i>
-                                               </a>
-                                             </td>
-                                        </tr>
+
+                                        @endforeach
+                                        
 
                                       </tbody>
                                     </table>
@@ -166,7 +72,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <nav aria-label="Page navigation example">
+                                <!-- <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-end">
                                       <li class="page-item disabled">
                                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -178,7 +84,7 @@
                                         <a class="page-link" href="#">Next</a>
                                       </li>
                                     </ul>
-                                  </nav>
+                                  </nav> -->
                             </div>
                         </div>
                     </div>

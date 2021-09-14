@@ -691,6 +691,7 @@ $('#add_pris').on('click', function(){
 $('#final_prisc').on('click', function(){
     var case_id = $('#case_no').val();
     var _token = $("input[name=_token]").val();
+    var data_table = '';
     console.log(case_id);
     if(case_id !='' ){
         $.ajax({
