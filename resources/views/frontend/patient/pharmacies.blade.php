@@ -4,8 +4,8 @@
     <div class="col Post-prescription-right innerpage  Post-prescription-page select pharmacy Pharmacy-locator">
         <div class="row">
             <div class="col-sm-12">
-               
-               
+
+
 
 <div class="col Post-prescription-right">
                     <nav aria-label="breadcrumb ">
@@ -37,7 +37,7 @@
                                     <p class="pmarg-top">Click to check your delivery address is correct</p>
                                     <form action="" method="post" class="Pharmacy-loc">
                                         @csrf
-                                       
+
                                         @if($data['success'] !='')
                                         <div id="final_sucess" class="alert alert-success" role="alert" >
                                             {{$data['success'] }}
@@ -49,14 +49,14 @@
                                         @endif
                                         <input class="btn blue-button mr-lf-top" type="submit" name="post_sub" value="Post prescription" />
                                     </form>
-                                    
+
                                 </div>
 
 
                                 <div class="tab-pane fade" id="Electronic-Direct-to-Pharmacy-Rapid">
                                     <ul>
                                         <li>In a hurry? Prescription will be sent electronically to one of our Special Pharmacists</li>
-                                        <li> Please check below that the special Pharmacy is local or can deliver to you (otherwise use postal option above) 
+                                        <li> Please check below that the special Pharmacy is local or can deliver to you (otherwise use postal option above)
                                             <ul class="sub-cont">
                                                 <li>
                                                      After selecting a Pharmacy contact them (details below)
@@ -80,7 +80,7 @@
                                       </div>
 
                                       @foreach($data['pharmacies'] as $pharmaci)
-                                    
+
                                     <div class="card pharmacy-details">
                                         <div class="card-header">
                                           <img src="{{ asset('public/images/frontend/images/pharmacy-icon.png')}}" alt=""> H Pharmacy
@@ -152,7 +152,7 @@
                                                </tr>
                                                <tr>
                                                    <th>
-                                                       Saturday 
+                                                       Saturday
                                                    </th>
                                                    <td>
                                                        {{ $pharmaci->openingTime->saturday_opening_time ? date('h:i a',strtotime($pharmaci->openingTime->saturday_opening_time)) : '' }} - {{ $pharmaci->openingTime->saturday_closing_time ? date('h:i a',strtotime($pharmaci->openingTime->saturday_closing_time)) : '' }}
@@ -165,7 +165,7 @@
                                          <p><span>Delivery options : </span>  {{(isset($pharmaci->deliveryOption->customer_pick_up) && $pharmaci->deliveryOption->customer_pick_up == 1) ? 'Customer pick up, ':''}} {{(isset($pharmaci->deliveryOption->local_delivery) && $pharmaci->deliveryOption->local_delivery == 1) ? 'Local Delivery (car/courier), ':''}} {{(isset($pharmaci->deliveryOption->posts_within_uk) && $pharmaci->deliveryOption->posts_within_uk == 1) ? 'Posts within UK, ':''}} {{(isset($pharmaci->deliveryOption->sends_international) && $pharmaci->deliveryOption->sends_international == 1) ? 'Sends International':''}} </p>
                                          <p><span>Notes : </span> {{$pharmaci->openingTime->notes}}</p>
                                          @if(!in_array($pharmaci->id, $data['pharma_ids']))
-                                         <p class="container_pharma{{$pharmaci->id}}">Contact Pharmacy with Prescription No. or <a pharma_id="{{$pharmaci->id}}" c_id="{{$_GET['c_id']}}" prisc_id="{{$_GET['s_id']}}" href="" class="pharma_sub btn blue-button">send prescription No. electronically</a> <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="modal" data-target="#Pharmacy-popup"></p>
+                                         <p class="container_pharma{{$pharmaci->id}}">Contact Pharmacy with Prescription No. or <a pharma_id="{{$pharmaci->id}}" c_id="{{$_GET['c_id']?? ''}}" prisc_id="{{$_GET['s_id']?? ''}}" href="" class="pharma_sub btn blue-button">send prescription No. electronically</a> <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="modal" data-target="#Pharmacy-popup"></p>
                                          @else
                                          <p style="background: green;color: #fff;padding: 10px;"> Priscription already send to Pharmassist</p>
                                          @endif
@@ -174,16 +174,16 @@
                                       </div>
                                         @endforeach
                               </div>
-                              
+
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-   
+
 @endsection
 @section('scripts')
     <script>
@@ -213,7 +213,7 @@
                         $('.pharma_sub').html('Please try agani');
                         $('.pharma_sub').css('background', 'red');
                        // $('.pharma_sub').removeClass('.pharma_sub');
-                    }   
+                    }
                 }
             });
         });
