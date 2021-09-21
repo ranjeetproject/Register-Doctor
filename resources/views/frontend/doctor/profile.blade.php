@@ -46,6 +46,7 @@
                                 <div class="col-sm-10 profile-info">
                                     <h2>Manage your Diary in the Calendar Below.</h2>
                                     <a class="btn btn-primary" href="{{route('doctor.available-days')}}">Regular Timetable</a>
+                                    <a class="btn add-btn" id="chng_time_zone">Change Timezone</a>
                                     {{-- <a href="{{route('doctor.available-days')}}" class="btn add-btn" >Ad Hoc Timeslots</a> --}}
                                 </div>
                             </div>
@@ -498,7 +499,16 @@
     $(this).removeClass("has-content");
     }
     })
+
   });
+
+  $( document ).ready(function() {
+    $('#chng_time_zone').click(function(){
+
+        $('#exampleModal').modal('show');
+    });
+
+});
 
     </script>
 @endsection

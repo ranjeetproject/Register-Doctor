@@ -38,12 +38,12 @@
         <script>
             $( document ).ready(function() {
                 <?php if(Auth::user()->profile->time_zone == 0) {
-            ?>
-                $('#exampleModal').modal('show');
-            <?php
-            }
-            ?>
-        });
+                ?>
+                    $('#exampleModal').modal('show');
+                <?php
+                }
+                ?>
+            });
 
         </script>
     </body>

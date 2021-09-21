@@ -45,4 +45,9 @@ class PatientCase extends Model
     {
         return $this->hasOne('App\Models\SummaryDiagnosis','patient_case_id','id');
     }
+
+    public function patientCaseCloseDate()
+    {
+        return $this->hasOne('App\Models\DoctorReview','case_id','case_id')->withDefault();
+    }
 }

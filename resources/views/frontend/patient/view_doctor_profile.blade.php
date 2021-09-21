@@ -15,7 +15,9 @@
                         </ol>
                     </nav>
 
-
+                    @php
+                        $time_zone = Auth::user()->profile->time_zone;
+                    @endphp
                     <form action="{{ route('patient.create-case') }}" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-sm-12">
@@ -115,7 +117,7 @@
                                 </div>
 
 
-                                <div class="col-sm-12 Timezone-cl-top">
+                                {{-- <div class="col-sm-12 Timezone-cl-top">
                                     <label>Confirm your Timezone <sup>*</sup></label>
                                     <select class="custom-select my-1 mr-sm-2" required>
                                         <option selected>GMT</option>
@@ -123,7 +125,7 @@
                                         <option value="2">Turkay GTM -3</option>
                                     </select>
                                     <span><sup>*</sup>Mandatory</span>
-                                </div>
+                                </div> --}}
 
 
                                 <div class="calanderilest">
@@ -136,8 +138,13 @@
                                             <h3>Doctor Availability :<br>
                                                 <span class="show_time">
                                                     @foreach ($get_current_day as $current_day)
+                                                        @if ($time_zone != 1)
+                                                        {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->from_time))) }} -
+                                                        {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->to_time))) }}
+                                                        @else
                                                         {{ date('H:i a', strtotime($current_day->from_time)) }} -
                                                         {{ date('H:i a', strtotime($current_day->to_time)) }}
+                                                        @endif
                                                     @endforeach
                                                 </span>
                                             </h3>
@@ -207,10 +214,16 @@
                                                                 <tr>
                                                                     <td>{!! date('l', strtotime($current_day->date)) . '  ' . date('F d Y', strtotime($current_day->date)) !!}
                                                                     </td>
+                                                                    @if ($time_zone !=1)
+
+                                                                    <td>{{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))) }} </td>
+                                                                        <td>{{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->end_time))) }}</td>
+                                                                    @else
                                                                     <td>{{ date('h:i a', strtotime($slot->start_time)) }}
                                                                     </td>
                                                                     <td>{{ date('h:i a', strtotime($slot->end_time)) }}
                                                                     </td>
+                                                                    @endif
                                                                     <td style="text-align: center;"><input type="checkbox"
                                                                             name="time_slot[]" onclick="caseDetails()"
                                                                             value="Bike"></td>
@@ -301,28 +314,11 @@
                         "{{ $available_day->date }}":{ },
                     @endforeach
                 },
-                // onDayClick: function(events) {
-                //     alert('Day was clicked');
-                //     console.log('====================================');
-                //     console.log(events,$(this).data('day'));
-                //     console.log('====================================');
-                //  }
-            });
-
-            $('input#exampleFormControlFile1').change(function(){
-                var files = $(this)[0].files;
-                $('#count_up_attach').html(files.length);
-                // if(files.length > 10){
-                //     alert("you can select max 10 files.");
-                // }else{
-                //     alert("correct, you have selected less than 10 files");
-                // }
-            });
-
-        });
-        $(window).on('load', function() {
-            setTimeout(function(){
-                $(".day a").click(function() {
+                onDayClick: function(events) {
+                    // alert('Day was clicked');
+                    // console.log('====================================');
+                    // console.log(events,$(this).data('day'));
+                    // console.log('====================================');
                     var day = $(this).data('day');
                     var year = $(this).data('year');
                     var month = $(this).data('month');
@@ -361,10 +357,28 @@
 
                         }
                     });
-                });
-            }, 5000);
+                 }
+            });
+
+            $('input#exampleFormControlFile1').change(function(){
+                var files = $(this)[0].files;
+                $('#count_up_attach').html(files.length);
+                // if(files.length > 10){
+                //     alert("you can select max 10 files.");
+                // }else{
+                //     alert("correct, you have selected less than 10 files");
+                // }
+            });
 
         });
+        // $(window).on('load', function() {
+        //     setTimeout(function(){
+        //         $(".day a").click(function() {
+
+        //         });
+        //     }, 5000);
+
+        // });
 
 
         function caseDetails() {

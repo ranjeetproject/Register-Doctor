@@ -319,7 +319,7 @@ class DoctorController extends Controller
           $Prescription_case = PatientCase::where(['case_id'=>$request->case_id])->update(['prescriptions_issued'=>'yes']);
           //print_r($Prescription);
           $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
-          
+
           if($Prescription !=''){
             //email Finalize Prescription $case[0]->user->email
             Mail::to("koustav.mondal@brainiuminfotech.com")->send(new FinalizePrescription($request->case_id));
@@ -334,12 +334,12 @@ class DoctorController extends Controller
      public function prescriptionIssues(Request $request)
     {
       $cases = PatientCase::where('accept_status',1)->where('prescriptions_issued', '=', 'yes')->with('user')->with('prescription')->get();
-      
+
       return view('frontend.doctor.prescription_issues',compact('cases'));
     }
     public function viewPrescription(Request $request,$cid)
     {
-      
+
       //$cases = PatientCase::where('accept_status',1)->where('prescriptions_issued', '=', 'yes')->with('user')->with('prescription')->get();
       $case = PatientCase::where( 'case_id', $cid)->with('user')->first();
       $paitent_req = Prescription_req_doctor::where( 'case_id', $cid)->first();
@@ -358,7 +358,8 @@ class DoctorController extends Controller
 
      public function closeCases(Request $request)
     {
-        return view('frontend.doctor.close_cases');
+        $close_cases = PatientCase::with('user')->where('case_closed', 'yes')->orderBy('closed_at','desc')->paginate(8);
+        return view('frontend.doctor.close_cases', compact('close_cases'));
     }
 
      public function availableDays(Request $request)
@@ -923,6 +924,7 @@ switch ($request->day) {
         $summary_diagnosis = SummaryDiagnosis::where('patient_case_id',$case->id)->first();
         if(empty($summary_diagnosis)){
         $summary_diagnosis = new SummaryDiagnosis;
+            PatientCase::where('case_id',$id)->update(['case_closed' => 'yes','closed_at' => date('Y-m-d')]);
         }
 
 

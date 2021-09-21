@@ -11,7 +11,11 @@
                     </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link btn" href="{{ route('patient.payment-detail') }}">Payment Details</a>
+                        <a class="nav-link btn" href="{{ route('patient.payment-detail') }}">Payment Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn" id="chng_time_zone">Change Timezone</a>
+
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -263,6 +267,12 @@
     }
     })
   });
+    $( document ).ready(function() {
+        $('#chng_time_zone').click(function(){
 
+            $('#exampleModal').modal('show');
+        });
+
+    });
     </script>
 @endsection

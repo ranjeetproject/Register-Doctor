@@ -15,6 +15,8 @@ class AddPrescriptionsIssuedToPatentCaseTable extends Migration
     {
         Schema::table('patient_cases', function (Blueprint $table) {
             $table->enum('prescriptions_issued', ['no', 'yes'])->default('no');
+            $table->enum('case_closed', ['no', 'yes'])->default('no');
+            $table->date('closed_at')->nullable();
         });
     }
 

@@ -492,7 +492,8 @@ class PatientController extends Controller
 
     public function closedCases(Request $request)
     {
-        return view('frontend.patient.closed_cases');
+        $closed_cases = PatientCase::with(['patientCaseCloseDate','doctor:id,name'])->where('status',4)->paginate(8);
+        return view('frontend.patient.closed_cases', compact('closed_cases'));
 
     }
 
@@ -602,7 +603,6 @@ class PatientController extends Controller
         $weekly_available_days = WeeklyAvailableDays::where('user_id',$doctor->id)->orderBy('num_val_for_day')->get();
 
         return view('frontend.patient.view_doctor_profile',compact('doctor','available_days','get_current_day','weekly_available_days','getBookedSlot'));
-
     }
 
     public function bookPrescriptions($id)
@@ -787,9 +787,26 @@ class PatientController extends Controller
               $time_slot.= '<td style="text-align: center;"><input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()"></td>
               </tr>';
             }
+
          }
 
          if(isset( $available_days)){
+            // foreach($available_days as $current_day1){
+            //     $avl_day['from_time'] = $current_day1->from_time;
+            //     $avl_day['to_time'] = $current_day1->to_time;
+            //     $avl_days[] = $avl_day;
+            // }
+            $available_days->each(function ($item, $key) use ($time_zone) {
+                // if (/* condition */) {
+                //     return false;
+                // }
+                if ($time_zone !=1) {
+                    $item->from_time = date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$item->date,$item->from_time)));
+                    $item->to_time = date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$item->date,$item->to_time)));
+                    return $item;
+                }
+                print_r($item);
+            });
       return response()->json(['success' =>true, 'message'=>'success','data'=>$available_days,'time_slot'=>$time_slot], 200);
       }else{
       return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_days], 200);
@@ -891,7 +908,7 @@ class PatientController extends Controller
     public function doctorReview(Request $request)
     {
             $validator = Validator::make($request->all(), [
-            "review_doctor_id"=>"required",
+            "case_id"=>"required",
             "rating"=>"required",
             "review"=>"required",
             ]);
@@ -901,11 +918,14 @@ class PatientController extends Controller
               Session::flash('Error-toastr','Please fill in all the fields before proceeding');
               return redirect()->back();
             }
+            $doctor_id = PatientCase::where('case_id',$request->case_id)->value('doctor_id');
+            PatientCase::where('case_id',$request->case_id)->update(['status' => 4]);
 
             $user = Auth::guard('sitePatient')->user();
             $review = new DoctorReview;
             $review->user_id = $user->id;
-            $review->doctor_id = $request->review_doctor_id;
+            $review->doctor_id = $doctor_id;
+            $review->case_id = $request->case_id;
             $review->review = $request->review;
             $review->rating = $request->rating;
             $review->save();

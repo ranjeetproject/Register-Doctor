@@ -10,7 +10,7 @@
                             <li class="breadcrumb-item active">Prescriptions Issued</li>
                         </ol>
                       </nav>
-                      
+
                     <div class="for-w-100 Prescriptions-Dispensed-right-table">
                         <div class="row">
                             <div class="col-sm-12">
@@ -38,36 +38,36 @@
                                               <td>View Medical <br>Record</td>
                                               <td> Prescription No.</td>
                                               <td style="min-width: 250px;"> Action</td>
-                                              
+
                                           </tr>
                                       </thead>
                                       <tbody>
                                       @foreach($cases as $case)
 
                                         <tr >
-                                            <td>{{$case->updated_at}}</td>
-                                            
+                                            <td>{{date('d-m-Y', strtotime($case->updated_at)) }}</td>
+
                                             <td>{{$case->user->name}}</td>
                                             <td>{{$case->case_id}}</td>
-                                            
+
                                             <td><a target="_blank" href="{{url('doctor/view-case')}}/{{$case->case_id}}"><i class="fal fa-eye"></i></a></td>
-                                            <td><a target="_blank" href="{{url('doctor/view-medical-recorde')}}/{{$case->case_id}}"><i class="fal fa-eye"></i></a></td> 
+                                            <td><a target="_blank" href="{{url('doctor/view-medical-recorde')}}/{{$case->case_id}}"><i class="fal fa-eye"></i></a></td>
                                             <td>{{$case->prescription[0]->prescription_no}}</td>
                                             <td class="masg-dep-tol">
-                                                <!-- <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button> 
+                                                <!-- <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button>
                                                 <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br> -->
                                                 <a href="{{url('doctor/viewPrescription')}}/{{$case->case_id}}"  target="_blank" class="btn blue-button btn-block Print-GP-Note"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""> Prescription</a>
                                              </td>
-                                             
+
                                         </tr>
 
                                         @endforeach
-                                        
+
 
                                       </tbody>
                                     </table>
                                   </div>
-                                  
+
                             </div>
                         </div>
                         <div class="row">
@@ -96,6 +96,6 @@
 @endsection
 @section('scripts')
     <script>
-       
+
     </script>
 @endsection

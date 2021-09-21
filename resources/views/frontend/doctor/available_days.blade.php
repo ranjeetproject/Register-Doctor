@@ -35,7 +35,7 @@
                                     <h3>Your Availability :<br>
                                         <span class="show_time">
                                             @foreach ($get_current_day as $current_day)
-                                                @if ($time_zone == 2)
+                                                @if ($time_zone != 1)
                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->from_time))) }} -
                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->to_time))) }}
                                                 @else
@@ -94,7 +94,7 @@
                                                             aria-controls="collapseOne">
                                                             {{ ucfirst($day->day) }} -
                                                             {{-- @dump($day->day) --}}
-                                                            @if ($time_zone ==2)
+                                                            @if ($time_zone !=1)
 
                                                             <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$day->day,$day->from_time))) }} -
                                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$day->day,$day->to_time))) }}</span>
@@ -630,22 +630,12 @@
                 // "2020-04-26": {},
 
                 // "2020-05-12": {}
-            }
-        });
-
-    });
-    $(window).on('load', function() {
-
-        // alert('fjjdf');
-
-        //       $('.responsive-calendar').responsiveCalendar({
-        //   onDayClick: function(events) { alert('Day was clicked') }
-        // });
-        // window.location.reload(true)
-        setTimeout(function(){
-        $(".day a").click(function() {
-            // alert('fjjdf');
-            var day = $(this).data('day');
+            },
+            onDayClick: function(events) {
+                alert('Day was clicked');
+                console.log('====================================');
+                console.log(events,$(this).data('day'));
+                var day = $(this).data('day');
             var year = $(this).data('year');
             var month = $(this).data('month');
             day = (day <= 9) ? '0' + day : day;
@@ -679,10 +669,60 @@
 
                 }
             });
+                console.log('====================================');
+            }
         });
-    }, 2000);
 
     });
+    // $(window).on('load', function() {
+
+        // alert('fjjdf');
+
+        //       $('.responsive-calendar').responsiveCalendar({
+        //   onDayClick: function(events) { alert('Day was clicked') }
+        // });
+        // window.location.reload(true)
+        // setTimeout(function(){
+        // $(".day a").click(function() {
+            // alert('fjjdf');
+            // var day = $(this).data('day');
+            // var year = $(this).data('year');
+            // var month = $(this).data('month');
+            // day = (day <= 9) ? '0' + day : day;
+            // month = (month <= 9) ? '0' + month : month;
+            // var date = day + '/' + month + '/' + year;
+            // // $('#myModal2').modal('show');
+            // // $('#date').val(date);
+            // var fromDate = new Date(year + '-' + month + '-' + day);
+            // var formatedDate = new Date(fromDate).toDateString();
+            // //alert(formatedDate);
+
+            // $.ajax({
+            //     url: "{{ route('doctor.edit-available-day') }}",
+            //     type: 'get',
+            //     dataType: "json",
+            //     // data:{state:state,type:type,_token:token}
+            //     data: {
+            //         date: date
+            //     }
+            // }).done(function(response) {
+            //     if (typeof response != "undefined" && response.success) {
+            //         $('.show_date').html(formatedDate);
+            //         var available_time = '';
+            //         $.each(response.data, function(index, value) {
+            //             console.log(value.date);
+            //             available_time += value.from_time + '-' + value.to_time;
+            //             available_time += '<br>';
+            //         });
+            //         $('.show_time').html(available_time);
+
+
+            //     }
+            // });
+    //     });
+    // }, 2000);
+
+    // });
 
     function editAvailableDay(available_day_id) {
 
