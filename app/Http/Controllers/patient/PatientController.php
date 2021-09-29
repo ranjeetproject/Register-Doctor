@@ -181,7 +181,7 @@ class PatientController extends Controller
             $validator = Validator::make($request->all(), [
                 "health_problem"=>"required",
                 "questions_type"=>"required",
-                "case_file.*"=>"required|max:2000",
+                "case_file.*"=>"nullable|max:2000",
                 // "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
             ]);
 

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <a href="index.html" class="footer-ligo"><img src="{{ asset('public/images/frontend/images/footer-logo.png') }}" alt=""></a>
+                <a href="{{ route('home') }}" class="footer-ligo"><img src="{{ asset('public/images/frontend/images/footer-logo.png') }}" alt=""></a>
                 <div class="socil-media">
                     <a href="http://" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f social"></i></a>
                     <a href="http://" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter social"></i></a>
@@ -14,10 +14,10 @@
                 <h3 class="title">Menu</h3>
                 <ul class="footer-menu">
                     <li><a href="{{ route('home') }}">Home </a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="{{ route('aboutUs')}}">About</a></li>
                     <li><a href="{{ route('news') }}">News</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{{ route('userFaq')}}">FAQs</a></li>
+                    <li><a href="{{ route('contactUs')}}">Contact Us</a></li>
                     @guest
                         <li><a href="{{route('login')}}">Login</a></li>
                         <li><a href="{{route('registration')}}">Registration</a></li>

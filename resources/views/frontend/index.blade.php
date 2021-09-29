@@ -4,7 +4,7 @@
    <section class="for-w-100 main-content homepage">
       <div class="container">
          <div class="row">
-            <div class="col-sm">
+            <div class="col-md">
                <h2>Option 1</h2>
                <h3>Choose & Book  <small class="blue">Pick a Doctor</small></h3>
                <div class="opction-one">
@@ -24,13 +24,13 @@
                                  <ul>
                                     <li>You Choose Your Doctor</li>
                                     <li>Check out Qualifications, Ratings</li>
-                                    <li>Filter by FEES</li>
+                                    <li>Filter by fees</li>
                                     <li>Specialists & GPs available</li>
                                     <li>Choose Live Video,<br> Live Chat
                                        or Typed Q&A</li>
                                  </ul>
                                  <div class="Book-Appointment">
-                                    <span>Book Appointment</span><a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
+                                    <span>BOOK APPOINTMENT</span><a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
                                  </div>
                               </div>
                            </div>
@@ -39,7 +39,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-md-3">
                <div class="Prescriptions">
                      <img src="{{ asset('public/images/frontend/images/pr-top.png') }}" alt="">
                      <div class="Prescriptions-top">
@@ -54,7 +54,7 @@
                      </div>
                </div>
             </div>
-            <div class="col-sm">
+            <div class="col-md mrt-sm-15">
                <h2>Option 2</h2>
                <h3>Quick Question <small class="orange">Ask a Doctor</small></h3>
                <div class="opction-two">
@@ -79,8 +79,9 @@
                             <textarea placeholder="Type your health query here " class="form-control" name="health_problem" rows="6" required></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" required multiple>
+                            <input type="file" name="case_file[]" class="form-control-file" id="exampleFormControlFile1" onchange="preview_image();" multiple>
                             <span>Upload Attachments <i class="far fa-paperclip"></i></span>
+                            <div id="preview_attachment"></div>
                         </div>
                         <button type="submit" class="btn orange-button">Submit Your query</button>
                     </form>
@@ -105,3 +106,62 @@
       </div>
    </section>
 @endsection
+
+@push('scripts')
+<script>
+// $(document).ready(function () {
+// 	var fileTypes = ['jpg', 'jpeg', 'png'];  //acceptable file types
+// 	$("input:file").change(function (evt) {
+//       // <div id=""></div>
+// 	    var parentEl = $('#preview_attachment');
+// 	    var tgt = evt.target || window.event.srcElement,
+// 	                    files = tgt.files;
+
+// 	    // FileReader support
+//        var str = '';
+// 	    if (FileReader && files && files.length) {
+//          console.log(files);
+// 	        var fr = new FileReader();
+//            console.log('====================================');
+//            console.log(extension);
+//            console.log('====================================');
+// 	        var extension = files[0].name.split('.').pop().toLowerCase();
+
+// 	        fr.onload = function (e) {
+// 	        	success = fileTypes.indexOf(extension) > -1;
+// 	        	if(success)
+// 		        	// $(parentEl).append('<img src="' + fr.result + '" class="preview"/>');
+// 		        	str +='<img src="' + fr.result + '" class="preview"/>';
+//                  console.log('====================================');
+//                  console.log(fr.result);
+//                  console.log('====================================');
+// 	        }
+// 	        fr.onloadend = function(e){
+// 	            console.debug("Load End");
+// 	        }
+// 	        fr.readAsDataURL(files[0]);
+// 	    }
+// 	});
+// });
+
+function preview_image()
+{
+    var total_file=document.getElementById("exampleFormControlFile1").files.length;
+    var str = '';
+    for(var i=0;i<total_file;i++)
+    {
+        console.log('====================================');
+        console.log(event.target.files[i],URL.createObjectURL(event.target.files[i]));
+        console.log('====================================');
+        if(event.target.files[i].type.split('/')[0] === 'image') {
+            str +=  "<img src='"+URL.createObjectURL(event.target.files[i])+"'><br>";
+        //   $('#preview_attachment').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'><br>");
+        } else {
+            str +=  "<embed src='"+URL.createObjectURL(event.target.files[i])+"' width='100%'><br>";
+            // $('#preview_attachment').append("<embed src='"+URL.createObjectURL(event.target.files[i])+"' width='100%'><br>");
+        }
+        $('#preview_attachment').html(str);
+    }
+}
+</script>
+@endpush

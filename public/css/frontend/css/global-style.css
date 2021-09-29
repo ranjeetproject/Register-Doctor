@@ -228,7 +228,7 @@ section.Banner .bann-img img{
     width: 100%;
     justify-content: center;
     align-items: center;
-    min-height: 200px;
+    min-height: 280px;
 }
 .home-banner-left-cont h1{
     color: #01105c;
@@ -244,9 +244,11 @@ section.Banner .bann-img img{
 .home-banner-left-cont p{
     color: #2d3767;
     font-size: 16px;
-    margin-top: 16px;
+    margin-top:4px;
 }
-
+.Banner .row{
+    align-items: flex-end;
+}
 /* banner end */
 /* innaer page conten-aria  Start*/
 section.innerpage {
