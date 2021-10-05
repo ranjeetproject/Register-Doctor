@@ -32,8 +32,8 @@
   <script src="{{ asset('public/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.min.js" defer></script>
-  
-  
+
+
 <!-- AdminLTE App -->
 <script src="{{ asset('public/dist/js/adminlte.js')}}"></script>
 
@@ -74,18 +74,18 @@ $(document).ready(function(){
     });
   });
 
-    
+
 
   //*********** for datetimepicker ***********///
    $('.datepicker').datetimepicker({
         // format: 'L',
-         format: '{{ getSetting('date_format') ?? 'DD-MM-YYYY' }}',
+         format: '{{ getSetting('date_format') ? getSetting('date_format') : 'DD-MM-YYYY' }}',
         // format: 'DD-MM-YYYY',
     });
 
 
 $(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();   
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 //Enable check and uncheck all functionality
@@ -105,14 +105,14 @@ $(document).ready(function(){
 
 $('body').overlayScrollbars({
   className: "os-theme-dark"
-}); 
+});
 
 $(function () {
     $('.textarea').summernote()
   })
 
 
-// var instance = OverlayScrollbars(document.getElementById('overlayScrollbars')); 
+// var instance = OverlayScrollbars(document.getElementById('overlayScrollbars'));
 </script>
 
 @stack('scripts')

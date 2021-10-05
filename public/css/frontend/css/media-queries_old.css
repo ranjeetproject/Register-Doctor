@@ -1,0 +1,721 @@
+/* media queries */
+section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.Pharmacy-locator .Post-prescription-right .nav.nav-pills li a {
+ 
+    padding: 22px;
+}
+@media(min-width:1080px) and (max-width:1200px){
+    .homepage .Prescriptions {
+    margin-top: 104px;
+}
+    .homepage {
+        padding: 20px 0px;
+    }
+    .Manage-Profile .main-form-fild .form-group-deliver-details {
+        margin-left: 0;
+        padding-top: 0px;
+        font-size: 12px;
+    }
+    .homepage h2 {
+        font-size: 36px;
+        margin-bottom: 0px;
+    }
+    .Patient-Dashboard-page .Prescriptions {
+        min-height: 515px;
+    }
+    .Patient-Dashboard-page .opction-two {
+        min-height: 520px;
+    }
+    section.Banner .bann-img img {
+        max-width: 52%;
+    }
+    .home-banner-left-cont {
+        min-height: 160px;
+    }
+    form.form-inline.for-chat-search button {
+        font-size: 16px;
+    }
+    .Medical-Record-page .comm-title-details h4 {
+        padding-right: 98px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Short-Filter select.custom-select, .Choose-Your-Doctor-page .Short-Filter select.custom-select {
+        background-position: calc(100% - -13px) -9px;
+        font-size: 12px;
+        padding: 0px 23px 0px 5px;
+    }
+    .Patient-Dashboard-page h3 {
+        font-size: 20px;
+    }
+    .Patient-Dashboard-page h3 small {
+        font-size: 12px;
+    }
+    .Patient-Dashboard-page h2 {
+        font-size: 30px;
+    }
+    .btn.blue-button {
+        font-size: 12px;
+    }
+    .col.Incoming-Prescription-Requests-right,
+    .col.Prescriptions-Dispensed-right, .col.Incoming-Prescription-Requests-right {
+        max-width: calc(100% - 240px);
+    }
+    .Incoming-Prescription-Requests-page .Incoming-Prescription-Requests-right-table .table-responsive,
+    .Prescriptions-Dispensed-page .Prescriptions-Dispensed-right-table .table-responsive, 
+    .Incoming-Live-Chat-Doctor-End-page .Incoming-Prescription-Requests-right-table .table-responsive {
+        border-radius: 12px;
+        overflow: auto;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Incoming-Prescription-Requests-right .sub-ti-liv-chat {
+        font-size: 16px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu ul.navbar-nav li a {
+        padding: 6px 10px;
+    }
+    .homepage h3 small {
+        font-size: 16px;
+    }
+    /* .home-banner-left-cont {
+        min-height: 230px;
+    } */
+    .home-banner-left-cont h1 {
+        font-size: 38px;
+    }
+    .home-banner-left-cont p {
+        font-size: 15px;
+    }
+    .topn-nav-details a:after {
+        top: 5px;
+    }
+    .topn-nav-details a {
+        padding: 0px 16px;
+        font-size: 13px;
+    }
+    .homepage .opction-one .opction-one-bottom-right .Book-Appointment {
+        font-size: 10px;
+    }
+    .homepage .opction-one .opction-one-bottom-right .Book-Appointment a {
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+    }
+    .Incoming-Prescription-Requests-page .Incoming-Prescription-Requests-right-table .table-responsive table tr td {
+        font-size: 10px;
+        padding: 16px 4px;
+    }
+    .homepage .Prescriptions, .homepage .opction-one,.homepage .opction-two{
+        min-height: 628px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Doctor-list-details .card-body-cont p, .Choose-Your-Doctor-page .Doctor-list-details .card-body-cont p {
+        font-size: 14px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Doctor-list-details .card-body-cont .row.books-btn button.Book-Live, .Choose-Your-Doctor-page .Doctor-list-details .card-body-cont .row.books-btn button.Book-Live {
+        font-size: 12px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Doctor-list-details .card-body-cont .row.books-btn p, .Choose-Your-Doctor-page .Doctor-list-details .card-body-cont .row.books-btn p {
+        font-size: 11px;
+    } 
+    .case-page h2 {
+        font-size: 18px;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Accepted-Prescription-doctor-end-table td.button-design .btn {
+        min-width: 122px !important;
+    }
+    .Doctor-Manage-Account-Profile-page .nav.Choose-Your-tab li a.nav-link {
+        font-size: 18px;
+    }
+}
+@media(min-width:992px) and (max-width:1080px){
+    section.Banner .bann-img img {
+        max-width: 52%;
+    }
+    .home-banner-left-cont {
+        min-height: 160px;
+    }
+    .Doctor-Manage-Account-Profile-page .nav.Choose-Your-tab li a.nav-link {
+        font-size: 18px;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Accepted-Prescription-doctor-end-table td.button-design .btn {
+        min-width: 122px !important;
+    }
+    .case-page h2 {
+        font-size: 18px;
+    }
+    .Medical-Record-page .comm-title-details h4 {
+        padding-right: 98px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Doctor-list-details .card-body-cont .row.books-btn button.Book-Live, .Choose-Your-Doctor-page .Doctor-list-details .card-body-cont .row.books-btn button.Book-Live {
+        font-size: 12px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Doctor-list-details .card-body-cont .row.books-btn p, .Choose-Your-Doctor-page .Doctor-list-details .card-body-cont .row.books-btn p {
+        font-size: 11px;
+    }    
+    .Choose-Your-Doctor-Prescription-page .Doctor-list-details .card-body-cont p, .Choose-Your-Doctor-page .Doctor-list-details .card-body-cont p {
+        font-size: 14px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Short-Filter select.custom-select, .Choose-Your-Doctor-page .Short-Filter select.custom-select {
+        background-position: calc(100% - -13px) -9px;
+        font-size: 12px;
+        padding: 0px 23px 0px 5px;
+    }
+
+    .topn-nav-details a:after {
+        top: 4px;
+    }
+    .topn-nav-details a {
+        font-size: 12px;
+        padding: 0px 20px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu ul.navbar-nav li a {
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu ul.navbar-nav li {
+        margin-left: 2.5%;
+    }
+    .home-banner-left-cont h1 {
+        font-size: 34px;
+    }
+    .home-banner-left-cont p {
+        font-size: 14px;
+    }
+    .homepage h3 {
+        font-size: 24px;
+    }
+    .homepage .opction-one .opction-one-bottom-right .Book-Appointment a {
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        border-radius: 50%;
+        margin: 0px 10px;
+    }
+    .homepage .opction-one .opction-one-bottom-right .Book-Appointment {
+        font-size: 12px;
+    }
+    .homepage .opction-two, .homepage .Prescriptions {
+        min-height: 636px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand img {
+        width: 240px;
+    }
+    nav .breadcrumb.Pharmacist-doc-com li {
+        font-size: 18px;
+    }
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .contacts-details .contacts-bottom .contacts-bottom-details .profile-colnt h3 {
+        font-size: 14px;
+    }
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .contacts-details .contacts-bottom .contacts-bottom-details .profile-colnt p {
+        font-size: 10px;
+    }
+}
+
+@media(min-width:768px) and (max-width:991px){
+    .col.Post-prescription-right.Incoming-Prescription-Requests-page {
+        max-width: calc(100% - 240px);
+    }
+    .socil-media a {
+        line-height: 25px;
+        height: 25px;
+        width: 25px;
+    }
+    .topn-nav-details a {
+        font-size: 10px;
+        padding: 0px 6px;
+    }
+    .topn-nav-details {
+        width: calc(100% - 260px);
+    }
+    .topn-nav-details a:after {
+        top: 2px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand {
+        margin-bottom: -68px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand img {
+        width: 200px;
+    }
+}
+@media(min-width:320px) and (max-width:767px){
+    
+    /* header and footer */
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand:after {
+        box-shadow: none;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-right: 4px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand img {
+        width: 100px;
+        border-radius: 0;
+    }
+    .log-user-details {
+        width: calc(100% - 108px);
+        font-size: 12px;
+        margin-top: -8px;
+    }
+    .profile-nav-img img {
+        height: 24px;
+        width: 24px;
+        border: 1px solid #0047a8;
+        margin-right: 4px;
+       
+    }
+    .topn-nav-details {
+        width: 100%;
+    }
+    .topn-nav-details a {
+        font-size: 10px;
+        padding: 0px 10px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand ~ button.navbar-toggler {
+        background: #f2f2f2;
+        color: #fff;
+        padding: 4px;
+        border-radius: 8px;
+    }
+    section.innerpage {
+        padding: 30px 0px;
+        
+    }
+    footer.footer.Banner.for-w-100 {
+        padding: 30px 0px 0px;
+        text-align: center;
+    }
+    footer.footer.Banner.for-w-100 ul.footer-menu {
+        column-count: 1;
+    }
+    footer.footer.Banner.for-w-100 h3 {
+        margin-top: 20px;
+    }
+    .for-w-100.copywright {
+        margin-top: 20px;
+    }
+    .profile-nav-img span {
+        display: inline-block;
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        margin-bottom: -5px;
+    }
+    .ser-log a.ser-log-list {
+        padding: 0px 4px;
+        font-size: 12px;
+    }
+    .ser-log a.ser-log-list img {
+        width: 18px;
+    }
+    a.for-email {
+        position: absolute;
+        bottom: 6px;
+        right: 0;
+    }
+    /* header and footer ned */
+    .news-page .news-listing .news-listing-top h2 {
+        font-size: 24px;
+    }
+    .news-page .news-listing .news-listing-top p {
+        font-size: 14px;
+    }
+    h1.inner-page-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #054bcc;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+    }
+    .col-sm-3.max-nav-width {
+        max-width: 100%;
+    }
+    .Patient-Dashboard-page .row.pd-mr-top {
+        margin-top: 00px;
+    }
+    .Patient-Dashboard-page h2 {
+        margin-top: 20px;
+    }
+    .Post-prescription-page .Post-prescription-right .nav.nav-pills li a {
+        padding: 8px;
+        min-height: auto;
+        font-size: 11px;
+    }
+    .Post-prescription-page .Post-prescription-right .tab-content .card.pharmacy-details .card-body {
+        padding-top: 0px;
+        padding-left: 20px;
+    }
+    .btn.blue-button {
+        padding: 10px 12px;
+        font-size: 12px;
+        margin-top: 6px;
+    }
+    .page-title {
+        margin-top: 20px;
+    }
+    nav .breadcrumb.Pharmacist-doc-com {
+        margin-top: 20px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Speciality-form button.btn.btn-primary.btn-block, .Choose-Your-Doctor-page .Speciality-form button.btn.btn-primary.btn-block {
+        margin-top: 12px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Doctor-list-details .card-body-cont, .Choose-Your-Doctor-page .Doctor-list-details .card-body-cont {
+        width: 100%;
+        float: left;
+        position: relative;
+        padding-left: 0px;
+        margin-top: 12px;
+    }
+    .Choose-Your-Doctor-Prescription-page .reting-and-other-info, .Choose-Your-Doctor-page .reting-and-other-info {
+        position: relative;
+        top: 0;
+        right: auto;
+        margin-bottom: 10px;
+    }
+    .Choose-Your-Doctor-Prescription-page .reting-and-other-info .rating-list-profile.blue-button, .Choose-Your-Doctor-page .reting-and-other-info .rating-list-profile.blue-button {
+    
+        position: relative;
+        right: 0;
+        top: -4px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Doctor-list-details .card-body-cont .row.books-btn p, .Choose-Your-Doctor-page .Doctor-list-details .card-body-cont .row.books-btn p {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .Choose-Your-Doctor-Prescription-page .Doctor-list-details .card-body-cont .row.books-btn, .Choose-Your-Doctor-page .Doctor-list-details .card-body-cont .row.books-btn {
+        margin-top: 0;
+    }
+    .Doctor-Profile-what-patient-views-page .calanderilest {
+        padding: 0px 30px;
+    }
+    .Doc-Diary-1-Create-Regular-weekly-timetable-page .for-box-sad .responsive-calendar .day a,
+    .Doctor-Profile-what-patient-views-page .for-box-sad .responsive-calendar .day a {
+        line-height: 23px;
+    }
+    .Doctor-Profile-what-patient-views-page .for-box-sad .calend_status {
+        padding-bottom: 30px;
+    }
+    .Medical-Record-page .comm-title-details h4 {
+        padding-right: 100px;
+    }
+    .Medical-Record-page .card-under-table {
+        overflow: auto;
+    }
+    .Medical-Record-page .card .card-body.p-0 {
+        overflow: auto;
+    }
+    .Medical-Record-page .card .card-body .bottom-cont p label {
+        width: 100%;
+    }
+    .Medical-Record-page .card .card-body p label {
+        width: auto;
+    }
+    .Incoming-Prescription-Requests-page .Incoming-Prescription-Requests-right-table .table-responsive {
+        border-radius: 12px;
+        overflow: auto;
+    }
+    .Doc-Diary-1-Create-Regular-weekly-timetable-page .nav.Calendar-Regular-tab li a {
+        padding: 8px;
+        font-size: 12px;
+    }
+    .Doc-Diary-1-Create-Regular-weekly-timetable-page .Calendar-Regular-tab-con {
+        border: 1px solid #efefef;
+        padding: 32px 0px;
+    }
+    .Doc-Diary-1-Create-Regular-weekly-timetable-page .for-box-sad .responsive-calendar .controls a.pull-right{
+        margin-left: 20px;
+    }
+    .Doc-Diary-1-Create-Regular-weekly-timetable-page .for-box-sad .responsive-calendar .controls a.pull-left {
+        margin-right: 20px;
+        
+    }
+    .Doc-Diary-1-Create-Regular-weekly-timetable-page .Available-table-details table tbody tr td {
+        min-width: 110px;
+    }
+    form.form-inline.for-chat-search button {
+        font-size: 16px;
+        margin-top: 0;
+        padding: 12px;
+    }
+    
+    .Incoming-Prescription-Requests-page .Incoming-Prescription-Requests-right h2 {
+        font-size: 18px;
+        margin-top: 24px;
+    }
+    .Incoming-Prescription-Requests-page .Incoming-Prescription-Requests-right-table .form-inline .form-group {
+        margin-bottom: 0px;
+    }
+    .Incoming-Prescription-Requests-page .Incoming-Prescription-Requests-right-table .form-inline select {
+        display: inline-block;
+    }
+    .Incoming-Prescription-Requests-page .Incoming-Prescription-Requests-right-table form input {
+        margin-bottom: 10px;
+    }
+    .Incoming-Prescription-Requests-page .Incoming-Prescription-Requests-right-table .table-responsive table tr td .btn.blue-button {
+        margin-bottom: 8px;
+    }
+    .home-banner-left-cont h1 {
+        font-size: 24px;
+    }
+    .homepage .opction-one .opction-one-top-image img {
+        margin-left: 0;
+        max-width: 100%;
+    }
+    .homepage h3 {
+        font-size: 18px;
+    }
+    .homepage h2 {
+        font-size: 30px;
+        margin-top: 16px;
+    }
+    .homepage .opction-one .opction-one-bottom-left {
+        width: 130px;
+        display: block;
+        float: none;
+        padding: 10px;
+        margin: 0 auto;
+    }
+    .homepage .opction-one .opction-one-bottom-right {
+        width: 100%;
+    }
+    .homepage .opction-one .opction-one-bottom ol.carousel-indicators {
+        top: auto;
+        right: -40px;
+        left: auto;
+        bottom: -35px;
+    }
+    .Prescriptions-bottom img {
+        display: block;
+        margin: 0 auto;
+    }
+    .Top-Doctors-detais img {
+        width: 60%;
+        margin-bottom: 12px;
+    }
+    .login-page form {
+        padding: 20px 20px;
+    }
+    .case-page .Doctor .dared {
+        text-align: left;
+    }
+    .case-page .Summary {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+    .Incoming-Prescription-Requests-page .Incoming-Prescription-Requests-right-table .table-responsive table tr td {
+        position: relative;
+    }
+    .Prescription-Print-dawnload.Dispensed a.btn {
+        min-width: 120px;
+    }
+    table tr td {
+        min-width: 100px;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Incoming-Prescription-Requests-right-table .form-inline select,
+    .Prescriptions-Dispensed-page .Prescriptions-Dispensed-right-table .form-inline select {
+        display: inline-block;
+    }
+    .Prescriptions-Dispensed-page .Prescriptions-Dispensed-right-table .table-responsive {
+        overflow: auto;
+    }
+    .Patient-Profile-page .Post-prescription-right .nav-pills .btn {
+        margin-right: 8px;
+        padding: 10px 24px;
+        font-size: 15px;
+        margin-top: 16px;
+    }
+    .Patient-Profile-page .main-form-fild label {
+        font-size: 14px;
+    }
+    .Patient-Profile-page .Submit-Medical-Record button.btn.smr-btn {
+        padding: 12px;
+        margin: 0px 10px;
+        min-width: 140px;
+        font-size: 14px;
+    }
+    .child-pathway-page .follow-opction {
+        flex-wrap: wrap;
+    }
+    .child-pathway-page .follow-opction-right,
+    .child-pathway-page .follow-opction-left {
+        width: 100%;
+    }
+    .child-pathway-page .follow-opction-left .follow-opction-top {
+        padding: 0px 0px 0px 0px;
+    }
+    .child-pathway-page .follow-opction-left .follow-opction-bottom {
+        overflow: auto;
+    }
+    .Symptoms-page .Symptoms-right h2.for-title,
+    .How-Thumbs-Up-Work-page .How-Thumbs-Up-Work-right h2 {
+        margin-top: 30px;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Incoming-Prescription-Requests-right-table form input {
+        margin-bottom: 16px;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Incoming-Prescription-Requests-right-table .table-responsive {
+        overflow: auto;
+    }
+    .Top-Doctors-page .follow-opction {
+        overflow: auto;
+    }
+    .Symptoms-page .Symptoms-right .form-group .from-g-cont.for-check-box {
+        grid-template-columns: 100%;
+    }
+    .registration-page .registration-tab a {
+        margin-bottom: 16px;
+    }
+
+    .Message-Back-from-Doctor-to-Pharmacist-page .col-sm-4,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .col-sm-4 {
+        padding-right: 15px;
+    }
+    .Message-Back-from-Doctor-to-Pharmacist-page .col-sm-8,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .col-sm-8 {
+        padding-left: 15px;
+    }
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-me .chat-body-left img,
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-you .chat-body-left img,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-me .chat-body-left img,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-you .chat-body-left img {
+        width: 30px;
+        height: 30px;
+    }
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-me .chat-body-left,
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-you .chat-body-left,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-me .chat-body-left,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-you .chat-body-left {
+        width: 35px;
+    }
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-me .chat-body-right,
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-you .chat-body-right,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-me .chat-body-right,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-you .chat-body-right {
+        padding: 8px 18px;
+        max-width: calc(100% - 40px);
+    }
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-me,
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-you,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-me,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-you {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-me .chat-body-right h3,
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-ypu .chat-body-right h3,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-me .chat-body-right h3,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-you .chat-body-right h3 {
+        font-size: 14px;
+    }
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-me .chat-body-right p,
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body .chat-body-you .chat-body-right p,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-you .chat-body-right p,
+    .Message-Doctor-to-Patient-via-Left-Hand-Navigation-page .chat-body .chat-body-me .chat-body-right p {
+        font-size: 12px;
+    }
+    .Message-Back-from-Doctor-to-Pharmacist-page .chat-body {
+        max-height: calc(100vh - 300px);
+    }
+    .Patient-Profile-page .Patient-Registration-child-account-title h1 {
+        margin-top: 30px;
+    }
+    .Your-Prescriptions-page .Incoming-Prescription-Requests-right-table .form-inline select {
+        display: inline-block;
+    }
+    .Your-Prescriptions-page .Incoming-Prescription-Requests-right-table form input {
+        margin-bottom: 16px;
+    }
+    .Your-Prescriptions-page .Incoming-Prescription-Requests-right-table .table-responsive {
+        border-radius: 12px;
+        overflow: auto;
+    }
+    .Doctor-Dashboard-page .incoming-request {
+        flex-wrap: wrap;
+    }
+    .Doctor-Dashboard-page .incoming-request a.card {
+        width: 48%;
+    }
+    .Doctor-Dashboard-page h3 {
+        margin-top: 30px;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Incoming-Prescription-Requests-right .sub-ti-liv-chat {
+        font-size: 18px;
+        position: relative;
+        right: auto !important;
+        top: 0 !important;
+    }
+    .col.Case-Conclusion-live-Video-and-live-Chat-right {
+        margin-top: 30px;
+    }
+    .Case-Conclusion-live-Video-and-live-Chat-page .Case-Conclusion-live-Video-and-live-Chat-right .card p span {
+        min-width: auto;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Incoming-Prescription-Requests-right-table .table-responsive table tr td .btn.blue-button {
+        min-width: 114px;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Incoming-Prescription-Requests-right-table .table-responsive table tr td .btn.Decline {
+        min-width: 101px;
+    }
+    .Incoming-Live-Chat-Doctor-End-page .Accepted-Prescription-doctor-end-table td.button-design .btn {
+        min-width: 122px !important;
+    }
+    .Handy-Documents-page .Incoming-Prescription-Requests-right h2 {
+        margin-top: 30px;
+    }
+    .Handy-Documents-page .Incoming-Prescription-Requests-right-table .table-responsive {
+        overflow: auto;
+    }
+    .Handy-Documents-page .Incoming-Prescription-Requests-right-table .table-responsive {
+        overflow: auto;
+    }
+    .Handy-Documents-page .Incoming-Prescription-Requests-right-table .table-responsive table tr td {
+       min-width: 124px;
+    }
+    .Handy-Documents-page .Incoming-Prescription-Requests-right-table .form-inline select {
+        display: inline-block;
+    }
+    .Handy-Documents-page .Incoming-Prescription-Requests-right-table form input {
+        margin-bottom: 16px;
+    }
+    .Doctor-Manage-Account-Profile-page .nav.Choose-Your-tab li a.nav-link {
+        font-size: 14px;
+    }
+    .Doctor-Manage-Account-Profile-page .nav.Choose-Your-tab {
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+    .Doctor-Manage-Account-Profile-page .nav.Choose-Your-tab li {
+        width: calc(100% / 2.2);
+        margin: 5px;
+    }
+    .Doctor-Manage-Account-Profile-page .profile-info button.btn {
+        margin-bottom: 12px;
+    }
+    .Doctor-Manage-Account-Profile-page .all-question-list .aql-comm input, .Doctor-Manage-Account-Profile-page .all-question-list .aql-comm select {
+        max-width: 108px;
+        margin: 8px 5px 0px 4px;
+    }
+    .row.all-question-list .col.aql-comm {
+        flex-wrap: wrap;
+    }
+    section.for-w-100.main-content.innerpage.Patient-Payment-Details-page.select.pharmacy.P-P-D-responsiv ul.nav.nav-pills {
+        margin-top: 30px;
+    }
+    section.for-w-100.main-content.innerpage.Patient-Payment-Details-page.select.pharmacy.P-P-D-responsiv  .Post-prescription-right .tab-content .nav.nav-pills li {
+        width: 160px !important;
+        margin-right: 5px;
+    }
+    .Patient-Payment-Details-page .Post-prescription-right .table-responsive {
+        overflow: auto;
+    }
+    .Detailed-Doctor-Profile-page .Doctor-list-details .card-body-cont {
+        width: 100%;
+        padding-left: 0;
+        margin-top: 20px;
+    }
+    td.Prescription-Print-dawnload a.btn {
+        min-width: 125px;
+        margin-bottom: 8px;
+    }
+    .cont-in-right h1.inner-page-title {
+        margin-top: 16px;
+    }
+}

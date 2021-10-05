@@ -11,6 +11,7 @@ use App\Models\OtpVerification;
 use App\Models\Role;
 use App\Models\UserProfile;
 use App\Models\UserRole;
+use App\Models\Cms;
 use App\Notifications\UserNotification;
 use App\User;
 use Auth;
@@ -95,7 +96,8 @@ class UserController extends Controller
 
     function registration(Request $request)
     {
-      return view('frontend.registration');
+        $get_privacy_policy = Cms::where('page_name','PRIVATE POLICY')->first();
+      return view('frontend.registration', compact('get_privacy_policy'));
     }
 
 
@@ -113,12 +115,15 @@ class UserController extends Controller
               "confirm_password"=>"required|same:password",
               // "terms_conditions"=>"required",
               "privacy_policy"=>"required",
-            ],['terms_conditions.required'=>'Please read and tick to accept','privacy_policy.required'=>'Please read and tick to accept']
+            ],[
+                'email.unique' => 'This email ID is already taken. Please use a different email ID',
+                'terms_conditions.required'=>'Please read and tick to accept','privacy_policy.required'=>'Please read and tick to accept'
+            ]
       );
 
         DB::beginTransaction();
     try {
-  
+
       $user = new User;
       $user->registration_number = 'REGD'.date('YmdHis');
       $user->forename = $request->forename;
@@ -131,8 +136,8 @@ class UserController extends Controller
       $userProfile = new UserProfile;
       $userProfile->user_id = $user->id;
       $userProfile->save();
-    
-    	
+
+
 
          // $notifyDetails['title'] = 'New user Registration';
          // $notifyDetails['user_id'] = $user->id;
@@ -144,7 +149,8 @@ class UserController extends Controller
         DB::commit();
         Mail::to($request->email)->send(new Registration($user->id));
     	if(!empty($user->id)){
-            Session::flash('Success-sweet', 'Thank you for your Registration. Please check your email and activate your account.');
+            // Session::flash('Success-sweet', 'Thank you for your Registration. Please check your email and activate your account.');
+            Session::flash('Success-sweet', 'Please check your email to activate your account. If no welcome email appears please check your spam box or contact Admin@Registered-Doctor.com.');
           } else {
             Session::flash('Error-toastr', 'Something want wrong. Please try again.');
           }
@@ -171,7 +177,7 @@ class UserController extends Controller
 
 
       if ($request->isMethod('post')) {
-      
+
        $validator = $request->validate(
            [
               "dr_gmc_licence"=>"sometimes|required",
@@ -203,7 +209,7 @@ class UserController extends Controller
       $userProfile->telephone1 = $request->telephone1;
       $userProfile->location = $request->location;
       $userProfile->save();
-    
+
         // Mail::to($request->email)->send(new Registration($user->id));
         DB::commit();
       if(!empty($user->id)){
@@ -225,7 +231,7 @@ class UserController extends Controller
       return view('frontend.registration_step2', compact('user'));
 
     }
-   
+
 
     public function emailVerification($id)
     {
@@ -239,6 +245,7 @@ class UserController extends Controller
               $user->terms_conditions = date('Y-m-d H:i:s');
               $user->privacy_policy = date('Y-m-d H:i:s');
             }
+            // 0:Admin, 1:Patients, 2:Doctor, 3:Pharmacy
         if ($user->save()) {
           if($user->role == 1){
           Mail::to($user->email)->send(new CompleteRegistration($user->id));
@@ -310,7 +317,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->new_password);
         }
       }
-     
+
      $user->save();
      $profile = UserProfile::where('user_id',$user->id)->first();
      $profile = $profile ?? new UserProfile;
@@ -321,7 +328,7 @@ class UserController extends Controller
      if(!empty($request->gender) ) $profile->gender = $request->gender;
      if(!empty($request->address) ) $profile->address = $request->address;
      if(!empty($request->about) ) $profile->about = $request->about;
- 
+
       if ($request->hasFile('profile_photo')) {
             $rand_val           = date('YMDHIS').rand(11111,99999);
             $image_file_name    = md5($rand_val);

@@ -28,6 +28,10 @@ Route::match(['get','post'],'user/delete/{id?}', 'UserController@userDelete')->n
 
 Route::get('verify-user/{user}', 'UserController@verifyUser')->name('user.verify-user');
 
+Route::get('deleted-users/{type}', 'UserController@deletedUserList')->name('deleted.users');
+Route::get('deleted-users/{user}', 'UserController@retriveUser')->name('retrive.users');
+
+
 
 Route::match(['get','post'],'news/index', 'NewsController@index')->name('news');
 Route::match(['get','post'],'news/create', 'NewsController@create')->name('news.create');

@@ -50,7 +50,7 @@ class UserController extends Controller
       $user->email = $request->email;
       $user->password = Hash::make($request->password);
       $user->save();
-    
+
         $role = Role::where('role','user')->first();
          $user->role = $role->id;
          $user->save();
@@ -88,7 +88,7 @@ class UserController extends Controller
 	    {
          $data = $request->validate([
       "name"=>"sometimes|required|min:3|max:100",
-      "mobile"=>"sometimes|nullable|digits:10",
+      "mobile"=>"sometimes|nullable|digits:11",
       "dob"=>"sometimes|nullable|date|before_or_equal:".now()->subYears(13)->format('Y-m-d'),
       "profile_photo"=>"sometimes|nullable|image|mimes:jpeg,png,jpg|max:2048",
       "old_password"=>"sometimes|nullable|required",
@@ -114,7 +114,7 @@ class UserController extends Controller
       //   $user->password = Hash::make($request->new_password);
       //   }
       // }
-     
+
      $user->save();
      $profile = UserProfile::where('user_id',$user->id)->first();
      $profile = $profile ?? new UserProfile;
@@ -125,7 +125,7 @@ class UserController extends Controller
      if(!empty($request->gender) ) $profile->gender = $request->gender;
      if(!empty($request->address) ) $profile->address = $request->address;
      if(!empty($request->about) ) $profile->about = $request->about;
- 
+
       if ($request->hasFile('profile_photo')) {
             $rand_val           = date('YMDHIS').rand(11111,99999);
             $image_file_name    = md5($rand_val);
@@ -142,7 +142,7 @@ class UserController extends Controller
             Session::flash('Error-toastr', $e->getMessage());
         }
             // return redirect()->back();
-  
+
 	      return redirect()->route('admin.users',$user->role);
 	    }
 
@@ -191,5 +191,25 @@ class UserController extends Controller
       $user->save();
 
       return redirect()->back()->with('Success-toastr', $message);
+    }
+
+    public function deletedUserList(Request $request,$type)
+    {
+
+      $users = User::onlyTrashed()->whereRole($type);
+        if ($request->search) {
+              $users = $users->where('name', 'LIKE',"%{$request->search}%");
+        }
+      $users = $users->latest()->paginate($this->per_page);
+      $users = $users->appends(request()->query());
+      $total_users = User::onlyTrashed()->whereStatus(1)->whereRole($type)->count();
+      return view('admin.deleted_user.list',compact('users','total_users'));
+    }
+
+    public function retriveUser(User $user)
+    {
+        $user->restore();
+        Session::flash('Success-toastr', 'Successfully Retrive.');
+        return redirect()->back();
     }
 }
