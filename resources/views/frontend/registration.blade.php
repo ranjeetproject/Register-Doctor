@@ -12,8 +12,8 @@
                             Create Account
                         </h1>
                         <p>Main Account Holders Must Be Over 18</p>
-                        <div class="row main-form-fild input-effect">
-                            <div class="col-sm-12">
+                        <div class="row main-form-fild">
+                            <div class="col-sm-12 reg-mrb-24">
                                 <div class="form-group select">
                                     <select class="form-control" name="user_type">
                                         <option value="">Select user type</option>
@@ -24,49 +24,49 @@
                                 </div>
                                 <span class="text-danger">{{ $errors->first('user_type') }}</span>
                             </div>
-                            <div class="col-sm-12">
-                                <div class="form-group required">
+                            <div class="col-sm-12 reg-mrb-24">
+                                <div class="form-group required has-float-label">
                                     <input type="text" name="forename"
-                                        class="form-control effect-19 {{ old('forename') ? 'has-content' : '' }}"
-                                        value="{{ old('forename') }}" id="forename">
-                                    <label>Forename </label>
+                                        class="form-control {{ old('forename') ? 'has-content' : '' }}"
+                                        value="{{ old('forename') }}" id="forename" placeholder="Enter Forename">
+                                    <label for="forename">Forename </label>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('forename') }}</span>
                             </div>
-                            <div class="col-sm-12">
-                                <div class="form-group required">
+                            <div class="col-sm-12 reg-mrb-24">
+                                <div class="form-group required has-float-label">
                                     <input type="text" name="surname"
-                                        class="form-control effect-19 {{ old('surname') ? 'has-content' : '' }}"
-                                        autocomplete="off" value="{{ old('surname') }}">
-                                    <label>Surname</label>
+                                        class="form-control {{ old('surname') ? 'has-content' : '' }}"
+                                        autocomplete="off" value="{{ old('surname') }}" id="surname" placeholder="Enter Surname">
+                                    <label for="surname">Surname</label>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('surname') }}</span>
                             </div>
-                            <div class="col-sm-12">
-                                <div class="form-group required">
-                                    <input type="password" name="password" class="form-control effect-19"
-                                        autocomplete="off">
-                                    <label>Password </label>
+                            <div class="col-sm-12 reg-mrb-24">
+                                <div class="form-group required has-float-label">
+                                    <input type="password" name="password" class="form-control"
+                                        autocomplete="off" id="password" placeholder="Enter Password">
+                                    <label for="password">Password </label>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
 
                             </div>
 
-                            <div class="col-sm-12">
-                                <div class="form-group required">
-                                    <input type="password" name="confirm_password" class="form-control effect-19">
-                                    <label>Confirm Password</label>
+                            <div class="col-sm-12 reg-mrb-24">
+                                <div class="form-group required has-float-label">
+                                    <input type="password" name="confirm_password" class="form-control" id="confirmpassword" placeholder="Enter Confirm Password">
+                                    <label for="confirmpassword">Confirm Password</label>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('confirm_password') }}</span>
 
                             </div>
 
 
-                            <div class="col-sm-12">
-                                <div class="form-group required">
-                                    <input type="email" name="email" class="form-control effect-19" autocomplete="off"
-                                        value="{{ old('email') }}">
-                                    <label>Email </label>
+                            <div class="col-sm-12 reg-mrb-24">
+                                <div class="form-group required has-float-label">
+                                    <input type="email" name="email" class="form-control" autocomplete="off"
+                                        value="{{ old('email') }}" id="email" placeholder="Enter Email">
+                                    <label for="email">Email </label>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             </div>
@@ -136,20 +136,4 @@
 @push('scripts')
     <script src="{{ asset('public/js/frontend/js/bootstrap.min.js') }}"></script>
     {{-- <script> --}}
-    <script type="text/javascript">
-        $(window).on('load', function() {
-
-
-            // $(".tab-content #Patient-Profile input, .tab-content #Patient-Profile textarea").val("");
-
-            $(".input-effect input, .input-effect textarea").focusout(function() {
-                if ($(this).val() != "") {
-                    $(this).addClass("has-content");
-                } else {
-                    $(this).removeClass("has-content");
-                }
-            })
-
-        });
-    </script>
 @endpush

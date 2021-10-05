@@ -217,11 +217,11 @@ section.Banner.for-w-100 {
     background: linear-gradient(left, #569ee3 0%,  #67d7f6 30%, #3fd8f4 100%);
 }
 section.Banner .bann-img{
-    widows: 100%;
+    width: 100%;
     text-align: center;
 }
 section.Banner .bann-img img{
-    max-width: 60%;
+    max-width: 90%;
 }
 .home-banner-left-cont {
     display: flex;
@@ -674,3 +674,4 @@ tr.only-remv:after{
     background: #e92b02;
     color: #fff !important;
 }
+

@@ -933,7 +933,13 @@
 .login-page form .form-group.select {
   position: relative;
 }
-
+.login-page form .form-group.select select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+.login-page form .form-group.select select::-ms-expand {
+  display: none;
+}
 .login-page form .form-group.select::after {
   content: "";
   position: absolute;
@@ -943,7 +949,7 @@
   border-left-color: transparent;
   border-right-color: transparent;
   border-bottom: transparent;
-  right: 2px;
+  right: 20px;
   top: 24px;
   pointer-events: none;
 }
@@ -4105,9 +4111,9 @@ a.btn.blue-button.Finish-Exchange {
 
 .Patient-Profile-page .main-form-fild label {
   color: #202020;
-  margin: 4px 0px 16px;
+  /* margin: 4px 0px 16px; */
   font-size: 18px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .Patient-Profile-page .main-form-fild label span {
@@ -6892,3 +6898,60 @@ button.btn.sider-bar-toggle {
   margin-bottom: 12px;
 }
 /*# sourceMappingURL=style.css.map */
+
+.has-float-label{
+  display:block;
+  position:relative;
+}
+.has-float-label label,
+.has-float-label>span,
+.has-float-label .form-control:focus~label, 
+.has-float-label .form-control~label,
+.has-float-label .form-control:-webkit-autofill~label{
+  position:absolute;
+  cursor:text;
+  font-size: 10px !important;
+  opacity:1;
+  -webkit-transition:all .2s;
+  transition:all .2s;
+  top:-.5em;
+  left:1.1rem;
+  z-index:3;
+  line-height:1;
+  padding:0 1px;
+  margin-bottom: 0;
+
+}
+.has-float-label label::after,
+.has-float-label>span::after{
+  content:" ";
+  display:block;
+  position:absolute;
+  background:#f9fafc;
+  height:2px;
+  top:50%;
+  left:-.4em;
+  right:-.4em;
+  z-index:-1;
+}
+.has-float-label .form-control::-webkit-input-placeholder{
+  opacity:0;
+  -webkit-transition:all .2s;transition:all .2s;
+}
+.has-float-label .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder{
+  opacity:0;
+}
+.has-float-label .form-control:placeholder-shown:not(:focus)+*{
+  font-size:18px !important;
+  top:1em;
+}
+.has-float-label .form-control:focus,
+.main-form-fild select.form-control:focus{
+  box-shadow: none;
+}
+.login-page form .reg-mrb-24{
+  margin-bottom: 14px;
+}
+.login-page form .reg-mrb-24 .form-group{
+  margin-bottom: 0;
+}
