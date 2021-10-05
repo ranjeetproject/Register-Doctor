@@ -29,7 +29,7 @@ Route::match(['get','post'],'user/delete/{id?}', 'UserController@userDelete')->n
 Route::get('verify-user/{user}', 'UserController@verifyUser')->name('user.verify-user');
 
 Route::get('deleted-users/{type}', 'UserController@deletedUserList')->name('deleted.users');
-Route::get('deleted-users/{user}', 'UserController@retriveUser')->name('retrive.users');
+Route::get('retrive-users/{id}', 'UserController@retriveUser')->name('retrive.users');
 
 
 

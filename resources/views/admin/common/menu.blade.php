@@ -62,6 +62,33 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.deleted.users',2) }}" class="nav-link {{ Request::is('admin/deleted-users/2') ? 'active' : '' }}">
+            <i class="nav-icon fa fa-user-md" aria-hidden="true"></i>
+              <p>
+                Deleted Doctor
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="{{ route('admin.deleted.users',3) }}" class="nav-link {{ Request::is('admin/deleted-users/3') ? 'active' : '' }}">
+            <i class="nav-icon fa fa-flask" aria-hidden="true"></i>
+              <p>
+                Deleted Pharmacy
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('admin.deleted.users',1) }}" class="nav-link {{ Request::is('admin/deleted-users/1') ? 'active' : '' }}">
+            <i class="nav-icon fa fa-male" aria-hidden="true"></i>
+              <p>
+                Deleted Patients
+              </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="{{route('admin.news')}}" class="nav-link {{ Request::is('admin/news*') ? 'active' : '' }}">

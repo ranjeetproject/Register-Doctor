@@ -148,20 +148,23 @@ function preview_image()
 {
     var total_file=document.getElementById("exampleFormControlFile1").files.length;
     var str = '';
+    str += '<ul>';
     for(var i=0;i<total_file;i++)
     {
         console.log('====================================');
         console.log(event.target.files[i],URL.createObjectURL(event.target.files[i]));
         console.log('====================================');
-        if(event.target.files[i].type.split('/')[0] === 'image') {
-            str +=  "<img src='"+URL.createObjectURL(event.target.files[i])+"'><br>";
-        //   $('#preview_attachment').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'><br>");
-        } else {
-            str +=  "<embed src='"+URL.createObjectURL(event.target.files[i])+"' width='100%'><br>";
-            // $('#preview_attachment').append("<embed src='"+URL.createObjectURL(event.target.files[i])+"' width='100%'><br>");
-        }
-        $('#preview_attachment').html(str);
+        str += "<li>"+event.target.files[i].name+"</li>";
+        // if(event.target.files[i].type.split('/')[0] === 'image') {
+        //     str +=  "<img src='"+URL.createObjectURL(event.target.files[i])+"'><br>";
+        // //   $('#preview_attachment').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'><br>");
+        // } else {
+        //     str +=  "<embed src='"+URL.createObjectURL(event.target.files[i])+"' width='100%'><br>";
+        //     // $('#preview_attachment').append("<embed src='"+URL.createObjectURL(event.target.files[i])+"' width='100%'><br>");
+        // }
     }
+    str += '</ul>';
+    $('#preview_attachment').html(str);
 }
 </script>
 @endpush

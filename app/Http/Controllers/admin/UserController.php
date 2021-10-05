@@ -206,8 +206,14 @@ class UserController extends Controller
       return view('admin.deleted_user.list',compact('users','total_users'));
     }
 
-    public function retriveUser(User $user)
+    public function retriveUser($id)
     {
+        // dd('hi');
+        $user = User::onlyTrashed()->find($id);
+        // dd($user->profile);
+        // return $this->hasOne('App\Models\UserProfile')->withDefault();
+        UserProfile::onlyTrashed()->where('user_id',$id)->restore();
+        // // ->restore();
         $user->restore();
         Session::flash('Success-toastr', 'Successfully Retrive.');
         return redirect()->back();
