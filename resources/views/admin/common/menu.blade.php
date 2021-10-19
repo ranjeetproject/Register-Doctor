@@ -109,6 +109,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('admin.faq')}}" class="nav-link {{ Request::is('admin/faq*') ? 'active' : '' }}">
+            <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
+              <p>
+                FAQ
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{route('admin.h_doc')}}" class="nav-link {{ Request::is('admin/handy-document*') ? 'active' : '' }}">
             <i class="nav-icon fa fa-file" aria-hidden="true"></i>
               <p>

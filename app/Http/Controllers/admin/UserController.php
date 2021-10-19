@@ -218,4 +218,12 @@ class UserController extends Controller
         Session::flash('Success-toastr', 'Successfully Retrive.');
         return redirect()->back();
     }
+
+    public function forcedelete($id)
+    {
+        User::where('id', $id)->forceDelete();
+        UserProfile::where('user_id', $id)->forceDelete();
+        Session::flash('Success-toastr', 'Successfully Deleted.');
+        return redirect()->back();;
+    }
 }

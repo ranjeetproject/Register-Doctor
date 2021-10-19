@@ -49,7 +49,7 @@
                             <div class="news-cont for-w-100">
                                 <p>There’s an old maxim that states, “No fun for the writer, no fun for the reader.” No matter what industry you’re working in, as a blogger, you should live and die by this statement.There’s an old maxim that states, “No fun for the writer, no fun for the reader.” No matter what industry you’re working in, as a blogger, you should live and die by this statement.</p>
                                 <p> Before you do any of the following steps, be sure to pick a topic that actually interests you. Noth
-                                    ing – and I mean NOTHING – will kill a blog  it’s a little embarrassing 
+                                    ing – and I mean NOTHING – will kill a blog  it’s a little embarrassing
                                     <a href="#">Read more</a></p>
                             </div>
                         </div>
@@ -60,9 +60,9 @@
 
                     <div class="row">
                         <div class="col-sm-12 Page navigation my-4 d-flex justify-content-end">
-                          
+
                            {{ $newses->onEachSide(2)->links() }}
-                          
+
 
                             {{-- <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-end">
@@ -79,7 +79,7 @@
                             </nav> --}}
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="col-sm-4">
                     <div class="resent-post for-w-100">
@@ -90,7 +90,7 @@
                              @foreach($news_category as $category)
                              <option value="{{$category->news_type}}">{{$category->news_type}}</option>
                              @endforeach
-                           
+
                         </select>
                             <input style="margin-bottom: 16px;border-radius: 12px;border: 2px solid #F2F2F3;min-height: 49px;box-shadow: 0px 0px 8px  #f2f2f2;" type="text" class="form-control" placeholder="Search..." name="search_value">
                             <button type="submit" class="btn btn-primary btn-block" style="    margin-bottom: 14px;">Search</button>
@@ -100,12 +100,12 @@
                             <ul>
                                  @forelse ($latest_news as $news)
                                 <li><i class="fal fa-angle-right"></i>
-                                    <span class="min-cont"><a href="#">{{ $news->heading }}</a><span>{{ date('M-d-Y H:i A',strtotime($news->created_at)) }} |<span>{{ $news->posted_by }}</span> </span>
+                                    <span class="min-cont"><a href="{{ route('detail_news',$news->heading) }}">{{ $news->heading }}</a><span>{{ date('M-d-Y H:i A',strtotime($news->created_at)) }} |<span>{{ $news->posted_by }}</span> </span>
                                 </li>
                                  @empty
                      <li><i class="fal fa-angle-right"></i>
                                     <span class="min-cont"><a href="#">No data found.</a> </span>
-                                </li>  
+                                </li>
                     @endforelse
                             </ul>
 

@@ -48,6 +48,13 @@ class FrontendController extends Controller
         return view('frontend.news', compact('newses','latest_news','news_category'));
     }
 
+    public function detailNews($heading)
+    {
+        $news = News::where('heading',$heading)->first();
+        return view('frontend.news_detail', compact('news'));
+
+    }
+
     public function contactUs()
     {
         $contact_us = Cms::where('page_name','Contact Us')->first();
@@ -92,5 +99,17 @@ class FrontendController extends Controller
     {
         $get_privacy_policy = Cms::where('page_name','PRIVATE POLICY')->first();
         return view('frontend.privacy-policy', compact('get_privacy_policy'));
+    }
+
+    public function getLatestOnCoronavirus()
+    {
+        $get_latest_on_coronavirus = Cms::where('page_name','LATEST ON CORONAVIRUS')->first();
+        return view('frontend.latest_on_coronavirus', compact('get_latest_on_coronavirus'));
+    }
+
+    public function getLivingAdvice()
+    {
+        $get_living_advice = Cms::where('page_name','LIVING ADVICE')->first();
+        return view('frontend.living_advice', compact('get_living_advice'));
     }
 }

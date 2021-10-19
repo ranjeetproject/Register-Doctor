@@ -86,6 +86,11 @@ if (Request::segment(3) == 2) {
                                         onclick="return confirm('Are you sure want to restore?');"
                                         href="{{ route('admin.retrive.users', $user->id) }}"> <i
                                             class="fas fa-trash-restore"></i></a>
+                                    {{-- <a class="btn btn-sm btn-outline-danger" data-toggle="tooltip"
+                                    title="Click to permanent delete"
+                                    onclick="return confirm('Are you sure want to permanently delete?');"
+                                    href="{{ route('admin.permanent_delete.users', $user->id) }}"> <i
+                                        class="fas fa-trash-alt"></i></a> --}}
                                     {{-- </div> --}}
 
 

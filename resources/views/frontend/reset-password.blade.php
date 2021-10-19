@@ -8,7 +8,7 @@
 <div class="login-box">
   <div class="login-logo">
     <a href="{{ url('/') }}">{{env('APP_NAME')}}</a>
-    
+
   </div>
   <!-- /.login-logo -->
   <div class="card">

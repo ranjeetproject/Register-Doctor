@@ -69,8 +69,8 @@ class DoctorController extends Controller
               $validator = Validator::make($request->all(), [
       "forename"=>"sometimes|nullable|required|min:3|max:100",
       "surname"=>"sometimes|nullable|required|min:3|max:100",
-      "telephone1"=>"sometimes|nullable|required|digits:10",
-      "profile_photo"=>"sometimes|nullable|image|mimes:jpeg,png,jpg|max:2048",
+      "telephone1"=>"sometimes|nullable|required|digits:11",
+      "profile_photo"=>"sometimes|nullable|image|mimes:jpeg,png,jpg",//|max:2048
       "address"=>"sometimes|nullable|required",
       "dr_name_of_medical_licencer"=>"sometimes|nullable|required",
       "dr_medical_license_no"=>"sometimes|nullable|required",

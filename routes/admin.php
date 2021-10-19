@@ -30,6 +30,7 @@ Route::get('verify-user/{user}', 'UserController@verifyUser')->name('user.verify
 
 Route::get('deleted-users/{type}', 'UserController@deletedUserList')->name('deleted.users');
 Route::get('retrive-users/{id}', 'UserController@retriveUser')->name('retrive.users');
+Route::get('permanent-delete/{id}', 'UserController@forcedelete')->name('permanent_delete.users');
 
 
 
@@ -55,6 +56,11 @@ Route::match(['get','post'],'contact-us/index', 'ContactUsController@index')->na
 Route::match(['get','post'],'contact-us/delete/{id?}', 'ContactUsController@delete')->name('c_us.delete');
 
 Route::get('video_call_test','TestController@video_call');
+
+Route::match(['get','post'],'faq/index', 'FAQController@index')->name('faq');
+Route::match(['get','post'],'faq/create', 'FAQController@create')->name('faq.create');
+Route::match(['get','post'],'faq/edit/{id}', 'FAQController@edit')->name('faq.edit');
+Route::match(['get','post'],'faq/delete/{id?}', 'FAQController@delete')->name('faq.delete');
 
 });
 //  *************for admin *************//
