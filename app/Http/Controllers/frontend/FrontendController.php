@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Cms;
 use App\Models\ContactUs;
+use App\Models\HomePageBanner;
 use App\Mail\ThankYou;
 use App\Mail\AfterContactUsMailForAdmin;
 use Illuminate\Support\Facades\Mail;
@@ -16,7 +17,9 @@ class FrontendController extends Controller
 {
     function index()
     {
-    	return view('frontend.index');
+        $banner = 1;
+        $home_banners = HomePageBanner::all();
+    	return view('frontend.index', compact('banner','home_banners'));
     }
 
 

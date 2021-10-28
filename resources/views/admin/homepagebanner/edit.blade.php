@@ -3,15 +3,15 @@
 @section('title', 'admin-dashboard')
 
 @section('body')
-@section('header', 'Edit Page')
+@section('header', 'Edit Home page Banner')
 @section('badge')
-    <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner') }}">CMS</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner.edit', $page->id) }}">Edit page</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner') }}">Home page Banner</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner.edit', $page->id) }}">Edit Home page Banner</a></li>
 @endsection
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Page edit</h3>
+        <h3 class="card-title">Home page Banner edit</h3>
     </div>
     <div class="card-body">
         <form role="form" action="{{ route('admin.home_page_banner.edit', $page->id) }}" method="POST"
@@ -34,8 +34,8 @@
                             class="text-danger">*</span></label>
 
                     <div class="col-md-10">
-                        <input class="form-control @error('image') is-invalid @enderror" type="text" name="image"
-                            id="image" placeholder="Please enter image" value="{{ $page->image }}">
+                        <input class="form-control @error('image') is-invalid @enderror" type="file" name="image"
+                            id="image">
                         @error('image')
                             <span class="error invalid-feedback" id="error_description">{{ $message }}</span>
                         @enderror

@@ -11,13 +11,18 @@
         <header class=" for-w-100">
             <div class="container">
                 @include('frontend.beforeloginlayout.common_header')
-                
+
                 @include('frontend.beforeloginlayout.common_navigation')
             </div>
         </header>
         <!-- Header end -->
         <!-- Banner start -->
-            @include('frontend.beforeloginlayout.common_banner')
+            {{-- @include('frontend.beforeloginlayout.common_banner') --}}
+            @if (isset($banner))
+                @yield('banner')
+            @else
+                @include('frontend.beforeloginlayout.common_banner')
+            @endif
         <!-- Banner End-->
 
         <!-- Content start -->

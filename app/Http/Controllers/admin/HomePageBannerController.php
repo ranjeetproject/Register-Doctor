@@ -36,7 +36,7 @@ class HomePageBannerController extends Controller
             $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
             $destinationPath    = public_path().'/uploads/banner';
             $file->move($destinationPath,$fileName);
-            $news->image   = $fileName;
+            $page->image   = $fileName;
 
         }
     	$page->save();
@@ -59,7 +59,7 @@ class HomePageBannerController extends Controller
             $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
             $destinationPath    = public_path().'/uploads/banner';
             $file->move($destinationPath,$fileName);
-            $news->image   = $fileName;
+            $page->image   = $fileName;
 
         }
         $page->content = $request->content;

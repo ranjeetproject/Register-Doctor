@@ -3,9 +3,9 @@
 @section('title', 'admin-dashboard')
 
 @section('body')
-          @section('header', 'Cms Home Page Banner')
+          @section('header', 'Home Page Banner')
           @section('badge')
-           <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner') }}">Cms Home Page Banner</a></li>
+           <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner') }}">Home Page Banner</a></li>
           @endsection
 
     <!-- /.col -->
@@ -43,7 +43,7 @@
                   <a href="" class="btn btn-default btn-sm"><i class="fas fa-edit"></i></a> --}}
                   <a href="" data-toggle="tooltip" title="Refresh" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></a>
                 </div>
-                  {{-- <a href="{{ route('admin.cms.create') }}" data-toggle="tooltip" title="Add new user" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> New</a> --}}
+                  <a href="{{ route('admin.home_page_banner.create') }}" data-toggle="tooltip" title="Add new home page banner" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> New</a>
                 <!-- /.btn-group -->
 
 
@@ -76,7 +76,7 @@
                         <td>
                             @if ($page->image != '')
 
-                                <img src="{{ asset('public/uploads/banner/'.$page->image) }}" alt="">
+                                <img src="{{ asset('public/uploads/banner/'.$page->image) }}" width="200px" height="200px" alt="">
                             @endif
                         </td>
                         <td>{!! $page->content !!}</td>

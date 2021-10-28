@@ -28,7 +28,7 @@ class AddPrescriptionsIssuedToPatentCaseTable extends Migration
     public function down()
     {
         Schema::table('patient_cases', function (Blueprint $table) {
-            $table->dropColumn(['prescriptions_issued']);
+            $table->dropColumn(['prescriptions_issued','case_closed','closed_at']);
         });
     }
 }

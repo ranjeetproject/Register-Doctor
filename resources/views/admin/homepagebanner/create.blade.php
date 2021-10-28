@@ -4,16 +4,16 @@
 
 @section('body')
 
-@section('header', 'Add Page')
+@section('header', 'Add Home page Banner')
 @section('badge')
-    <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner') }}">cms</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner.create') }}">Add cms</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner') }}">Home page Banner</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.home_page_banner.create') }}">Add Home page Banner</a></li>
 @endsection
 
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Page add</h3>
+        <h3 class="card-title">Home page Banner add</h3>
     </div>
     <div class="card-body">
         <form role="form" action="{{ route('admin.home_page_banner.create') }}" method="POST"
