@@ -10,32 +10,87 @@
                <div class="opction-one">
                   <div class="opction-one-top-image">
                      <img src="{{ asset('public/images/frontend/images/opction-one-top-image3.png') }}" alt="">
-
                   </div>
                   <div class="opction-one-bottom">
-                     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-                        <div class="carousel-inner">
-                           <div class="carousel-item active">
-                              <div class="opction-one-bottom-left">
-                                    <h4>Option 1</h4>
-                                 <img src="{{ asset('public/images/frontend/images/doc-pic.jpg') }}" class="d-block" alt="...">
-                              </div>
-                              <div class="opction-one-bottom-right">
-                                 <ul>
-                                    <li>You Choose Your Doctor</li>
-                                    <li>Check out Qualifications, Ratings</li>
-                                    <li>Filter by fees</li>
-                                    <li>Specialists & GPs available</li>
-                                    <li>Choose Live Video,<br> Live Chat
-                                       or Typed Q&A</li>
-                                 </ul>
-                                 <div class="Book-Appointment">
-                                    <span>BOOK APPOINTMENT</span><a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
-                                 </div>
-                              </div>
-                           </div>
+                    <div class="opction-one-bottom-left">
+                        <h4>Option 1</h4>
+                        <div id="opction1carousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <!-- <ol class="carousel-indicators">
+                                <li data-target="#opction1carousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#opction1carousel" data-slide-to="1"></li>
+                                <li data-target="#opction1carousel" data-slide-to="2"></li>
+                            </ol>  -->
+                            <!-- End of Indicators -->
+                            <!-- Carousel Content -->
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img src="{{ asset('public/images/frontend/images/doc-pic.jpg') }}" class="d-block" alt="...">
+                                    <div class="doctor-ratings">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <span class="reviews-count">
+                                        (98 Reviews)
+                                        </span>
+                                    </div>
+                                </div> <!-- End of Carousel Item -->
+
+                                <div class="carousel-item">
+                                    <img src="{{ asset('public/images/frontend/images/doc-pic.jpg') }}" class="d-block" alt="...">
+                                    <div class="doctor-ratings">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <span class="reviews-count">
+                                            (120 Reviews)
+                                        </span>
+                                    </div>
+                                </div> <!-- End of Carousel Item -->
+
+                                <div class="carousel-item">
+                                    <img src="{{ asset('public/images/frontend/images/doc-pic.jpg') }}" class="d-block" alt="...">
+                                    <div class="doctor-ratings">
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <i class="fas fa-star" aria-hidden="true"></i>
+                                        <span class="reviews-count">
+                                        (98 Reviews)
+                                        </span>
+                                    </div>
+                                </div> <!-- End of Carousel Item -->
+                            </div> <!-- End of Carousel Content -->
+                            <div class="doctor-slide-buttons">
+                                <a href="#opction1carousel" class="carousel-control-prev" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon fas fa-caret-square-left" aria-hidden="true"></span>
+                                    <span class="sr-only"></span>
+                                </a>
+                                <a href="#opction1carousel" class="carousel-control-next doctor-option-slide" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon fas fa-caret-square-right" aria-hidden="true"></span>
+                                    <span class="sr-only"></span>
+                                </a>
+                            </div>
+                        </div> <!-- End of Carousel -->
+                    </div>
+                    <div class="opction-one-bottom-right">
+                        <ul>
+                        <li>You Choose Your Doctor</li>
+                        <li>Check out Qualifications, Ratings</li>
+                        <li>Filter by fees</li>
+                        <li>Specialists & GPs available</li>
+                        <li>Choose Live Video,<br> Live Chat
+                            or Typed Q&A</li>
+                        </ul>
+                        <div class="Book-Appointment">
+                        <span>BOOK APPOINTMENT</span><a href="{{ route('patient.my-favorite-doctors').'?dr_speciality=all' }}" rel="noopener noreferrer"><i class="fal fa-share"></i></a>
                         </div>
-                     </div>
+                    </div>
                   </div>
                </div>
             </div>
