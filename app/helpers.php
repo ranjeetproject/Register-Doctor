@@ -122,14 +122,27 @@ function getChild()
 
 }
 
+function reviewCalc($doctor_id)
+{
+    $user = User::withCount('doctorReview')->find($doctor_id);
+    $get_review = DoctorReview::where('doctor_id',$doctor_id)->sum('rating');
+    $review = 0;
+    if($user->doctor_review_count > 0){
+        $review = round(($get_review/$user->doctor_review_count));
+    }
+    return [$review,$user->doctor_review_count];
+}
+
 function getReview($doctor_id)
 {
-  $user = User::withCount('doctorReview')->find($doctor_id);
-  $get_review = DoctorReview::where('doctor_id',$doctor_id)->sum('rating');
-  $review = 0;
-  if($user->doctor_review_count > 0){
-  $review = round(($get_review/$user->doctor_review_count));
-  }
+//   $user = User::withCount('doctorReview')->find($doctor_id);
+//   $get_review = DoctorReview::where('doctor_id',$doctor_id)->sum('rating');
+//   $review = 0;
+//   if($user->doctor_review_count > 0){
+//   $review = round(($get_review/$user->doctor_review_count));
+//   }
+  $review_array = reviewCalc($doctor_id);
+  $review = $review_array[0];
 
   if ($review==5) {
     return '<i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star reting"></i><i class="fas fa-star reting"></i>';

@@ -224,6 +224,31 @@ class UserController extends Controller
         User::where('id', $id)->forceDelete();
         UserProfile::where('user_id', $id)->forceDelete();
         Session::flash('Success-toastr', 'Successfully Deleted.');
-        return redirect()->back();;
+        return redirect()->back();
+    }
+
+    public function setAsDoctorSlide($id)
+    {
+        $five_count = User::where('slide_status', 1)->count();
+        if($five_count >= 5){
+            Session::flash('Error-toastr', 'You Cannot choose more than five doctor.');
+            return redirect()->back();
+        }
+        $user = User::find($id);
+        $user->slide_status = 1;
+        $user->save();
+        return redirect()->back()->with('Success-toastr', 'Successfully selected for slide.');
+        // Session::flash('Error-toastr', 'Successfully Deleted.');
+        return redirect()->back();
+    }
+
+    public function removeAsDoctorSlide($id)
+    {
+        $user = User::find($id);
+        $user->slide_status = 0;
+        $user->save();
+        return redirect()->back()->with('Success-toastr', 'Successfully unselected for slide.');
+        // Session::flash('Error-toastr', 'Successfully Deleted.');
+        return redirect()->back();
     }
 }

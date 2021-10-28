@@ -31,6 +31,8 @@ Route::get('verify-user/{user}', 'UserController@verifyUser')->name('user.verify
 Route::get('deleted-users/{type}', 'UserController@deletedUserList')->name('deleted.users');
 Route::get('retrive-users/{id}', 'UserController@retriveUser')->name('retrive.users');
 Route::get('permanent-delete/{id}', 'UserController@forcedelete')->name('permanent_delete.users');
+Route::get('set-as-doctor-slide/{id}', 'UserController@setAsDoctorSlide')->name('user.set_slide');
+Route::get('remove-from-doctor-slide/{id}', 'UserController@removeAsDoctorSlide')->name('user.remove_slide');
 
 
 

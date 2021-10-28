@@ -9,7 +9,7 @@
            <li class="breadcrumb-item"><a href="{{ route('admin.users', $user->role) }}">Users</a></li>
            <li class="breadcrumb-item"><a href="{{ route('admin.user.view', $user->id) }}">User view</a></li>
           @endsection
-   
+
     <div class="row">
           <div class="col-md-12">
 
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-     
+
       <div class="col-sm-4">
         <div class="description-block">
          <span class="btn btn-group">
@@ -52,6 +52,20 @@
             <a onclick="return confirm('Are you sure want to delete?');" href="{{ route('admin.user.delete', $user->id) }}" class="btn btn-sm btn-danger mt-2">
               <i class="fas fa-trash"></i>  Delete
             </a>
+            @if ($user->role == 2)
+            @if ($user->slide_status == 1)
+            <a onclick="return confirm('Are you sure want to remove for slide?');" href="{{ route('admin.user.remove_slide', $user->id) }}" class="btn btn-sm btn-info mt-2">
+                <i class="fas fa-edit"></i> Remove For Slide
+              </a>
+              @else
+              <a onclick="return confirm('Are you sure want to add for slide?');" href="{{ route('admin.user.set_slide', $user->id) }}" class="btn btn-sm btn-info mt-2">
+                <i class="fas fa-plus"></i>  Add For Slide
+                {{-- <i class="fas fa-plus"></i> --}}
+              </a>
+            @endif
+
+
+            @endif
           </span>
         </div>
       </div>
@@ -63,13 +77,13 @@
 
     <div class="card-footer p-0">
       <ul class="nav flex-column">
-       
+
         <li class="nav-item">
           <a href="mailto:{{$user->email}}" class="nav-link">
             <strong><i class="fas fa-envelope mr-1"></i> Email : {{ $user->email}}</strong>
           </a>
         </li>
-        
+
         <li class="nav-item">
           <a href="tel:{{ $user->profile->mobile}}" class="nav-link">
             <strong><i class="fas fa-mobile mr-1"></i> Telephone : {{ $user->profile->mobile}}</strong>
@@ -94,9 +108,9 @@
           </a>
         </li>
 
-         
+
       </ul>
-     
+
     </div>
   </div>
 </div>
@@ -115,7 +129,7 @@
         <label>Contact number: {{ $user->profile->telephone1}}</label>
       </div>
       <div class="col">
-        <label>GMC licence: </label> <br><img src="{{ asset('public/uploads/users/dr_gmc_licence/'.$user->profile->dr_gmc_licence)}}" width="100px" height="100px"> 
+        <label>GMC licence: </label> <br><img src="{{ asset('public/uploads/users/dr_gmc_licence/'.$user->profile->dr_gmc_licence)}}" width="100px" height="100px">
       </div>
     </div>
 
