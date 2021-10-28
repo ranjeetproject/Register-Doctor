@@ -48,7 +48,7 @@ class CmsController extends Controller
         return view('admin.cms.edit', compact('page'));
     }
 
-    public function delete($nid='', Request $request)
+    public function delete(Request $request)
     {
       if ($request->isMethod('post')) {
             foreach ($request->page_id as $id) {
