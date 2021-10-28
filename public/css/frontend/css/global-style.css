@@ -674,4 +674,51 @@ tr.only-remv:after{
     background: #e92b02;
     color: #fff !important;
 }
-
+/* FAQ STYLE */
+.faq-accordian .card {
+    margin-bottom: 20px;
+    border: 0;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+.faq-accordian .card .card-header {
+    border: 0;
+    padding: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.faq-accordian .card .card-header .btn-header-link {
+    display: block;
+    text-align: left;
+    background: #e3e3e3;
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+    padding: 20px 20px 20px 45px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.faq-accordian .card .card-header .btn-header-link:after {
+    content: "\f068";
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    position: absolute;
+    left: 15px;
+    left: 15px;
+    top: 20px;
+}
+.faq-accordian .card .card-header .btn-header-link.collapsed {
+    background: rgb(255, 255, 255);
+    color: #333;
+}
+.faq-accordian .card .card-header .btn-header-link.collapsed:after {
+    content: "\f067";
+}
+.faq-accordian .card .collapse {
+    border: 0;
+}
+.faq-accordian .card .card-body{
+    color: #777;
+    font-size: 16px;
+}
