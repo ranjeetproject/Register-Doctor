@@ -1,5 +1,7 @@
 <!-- jQuery -->
 <script src="{{ asset('public/plugins/jquery/jquery.min.js')}}" ></script>
+<!-- bootstrap.js -->
+<script src="{{ asset('public/js/frontend/js/bootstrap.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('public/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 
