@@ -16,19 +16,19 @@
                     @forelse ($newses as $news)
 
                     <div class="news-listing for-w-100">
-                        <div class="news-listing-top for-w-100">
+                        <div class="news-listing-top">
                             <h2>{{ $news->heading }}</h2>
                             <p>{{ date('M-d-Y H:i A',strtotime($news->created_at)) }} |<span>{{ $news->posted_by }}</span></p>
                         </div>
-                        <div class="news-listing-bottom for-w-100">
+                        <div class="news-listing-bottom">
 
                             @if(!empty($news->image))
-                            <div class="news-img for-w-100">
+                            <div class="news-img">
                                 <img src="{{asset('public/uploads/news/'.$news->image)}}" alt="">
                             </div>
                             @endif
 
-                            <div class="news-cont for-w-100">
+                            <div class="news-cont">
                                 <p>{!! $news->content !!}</p>
                             </div>
                         </div>
