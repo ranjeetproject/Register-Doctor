@@ -45,6 +45,11 @@ Route::match(['get','post'],'cms/create', 'CmsController@create')->name('cms.cre
 Route::match(['get','post'],'cms/edit/{id}', 'CmsController@edit')->name('cms.edit');
 Route::match(['get','post'],'cms/delete/{id?}', 'CmsController@delete')->name('cms.delete');
 
+Route::match(['get','post'],'home-page-banner/index', 'HomePageBannerController@index')->name('home_page_banner');
+Route::match(['get','post'],'home-page-banner/create', 'HomePageBannerController@create')->name('home_page_banner.create');
+Route::match(['get','post'],'home-page-banner/edit/{id}', 'HomePageBannerController@edit')->name('home_page_banner.edit');
+Route::match(['get','post'],'home-page-banner/delete/{id?}', 'HomePageBannerController@delete')->name('home_page_banner.delete');
+
 Route::match(['get','post'],'handy-document/index', 'HandyDocumentController@index')->name('h_doc');
 Route::match(['get','post'],'handy-document/create', 'HandyDocumentController@create')->name('h_doc.create');
 Route::match(['get','post'],'handy-document/edit/{id}', 'HandyDocumentController@edit')->name('h_doc.edit');
