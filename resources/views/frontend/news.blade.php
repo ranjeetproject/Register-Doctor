@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-md-8">
 
                     @forelse ($newses as $news)
 
@@ -81,7 +81,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-4">
+                <div class="col-md-4">
                     <div class="resent-post for-w-100">
                         <h3>Recent Posts</h3>
                         <form>

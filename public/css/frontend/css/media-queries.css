@@ -743,6 +743,16 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     .faq-accordian .card .card-body{
         font-size: 14px;
     }
+    .news-page .news-listing .news-listing-bottom{
+        display: block;
+    }
+    .news-page .news-listing .news-listing-bottom .news-img {
+        width: 100%;
+        height: 180px;
+    }
+    .news-page .news-listing .news-listing-bottom .news-cont{
+        width: 100%;
+    }
 }
 @media only screen and (max-width : 575px) {
     .home-banner-left-cont {
