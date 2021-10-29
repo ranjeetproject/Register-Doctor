@@ -41,6 +41,7 @@ class NewsController extends Controller
         }
 
 
+
     	$news->content = $request->content;
     	$news->save();
     	Session::flash('Success-toastr', 'Successfully added.');
@@ -80,7 +81,7 @@ class NewsController extends Controller
         return view('admin.news.edit', compact('news'));
     }
 
-    public function delete(Request $request,$nid = '')
+    public function delete(Request $request, $nid = '')
     {
       if ($request->isMethod('post')) {
             foreach ($request->news_id as $id) {
@@ -95,6 +96,27 @@ class NewsController extends Controller
       }
        Session::flash('Success-toastr', 'Successfully deleted.');
        return redirect()->route('admin.news');
+    }
+
+    public function slideSelectRemove($id, $status)
+    {
+        if($status == 1){
+            $five_count = News::where('slide_status', 1)->count();
+            if($five_count >= 5){
+                Session::flash('Error-toastr', 'You Cannot choose more than five banner.');
+                return redirect()->back();
+            }
+            $message = 'Successfully selected for slide.';
+        } else {
+            $message = 'Successfully removed from slide.';
+        }
+
+        $user = News::find($id);
+        $user->slide_status = $status;
+        $user->save();
+        return redirect()->back()->with('Success-toastr', $message);
+        // Session::flash('Error-toastr', 'Successfully Deleted.');
+        return redirect()->back();
     }
 
 }

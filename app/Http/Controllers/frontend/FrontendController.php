@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Cms;
+use App\Models\FAQ;
 use App\User;
 use App\Models\ContactUs;
 use App\Models\HomePageBanner;
@@ -37,6 +38,7 @@ class FrontendController extends Controller
 
     public function getNews(Request $request)
     {
+        $banner = 1;
         $newses = News::select('*');
         if (isset($request->category) && !empty($request->category)) {
                 $newses = $newses->where('news_type',$request->category);
@@ -51,9 +53,10 @@ class FrontendController extends Controller
         $newses = $newses->orderBy('created_at','DESC')->paginate(2);
         $latest_news = News::select('id','heading','created_at','posted_by')->orderBy('created_at','DESC')->limit(5)->get();
         $news_category = News::select('news_type','created_at')->where('news_type','!=',null)->get();
+        $news_banners = News::select('image')->where('slide_status',1)->get();
         // return $news_category;
         // $news = $news->appends(request()->query());
-        return view('frontend.news', compact('newses','latest_news','news_category'));
+        return view('frontend.news', compact('newses','latest_news','news_category','banner','news_banners'));
     }
 
     public function detailNews($heading)
@@ -90,8 +93,8 @@ class FrontendController extends Controller
 
     public function getFaq()
     {
-        $get_faq = Cms::where('page_name','FAQ')->first();
-        return view('frontend.faq', compact('get_faq'));
+        $get_faqs = FAQ::all();
+        return view('frontend.faq', compact('get_faqs'));
 
     }
 
