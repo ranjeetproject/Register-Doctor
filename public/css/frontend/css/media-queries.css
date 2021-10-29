@@ -753,6 +753,9 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     .news-page .news-listing .news-listing-bottom .news-cont{
         width: 100%;
     }
+    section.news-banner-bx .news-banner-img{
+        height: 200px;
+    }
 }
 @media only screen and (max-width : 575px) {
     .home-banner-left-cont {

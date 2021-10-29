@@ -1,7 +1,7 @@
 @extends('frontend.beforeloginlayout.app')
 
 @section('banner')
-    <section class="home-slider-section Banner for-w-100">
+    <section class="home-slider-section Banner news-banner-bx for-w-100">
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -16,23 +16,8 @@
             <div class="carousel-inner" role="listbox">
                 @forelse ($news_banners as $news_banner)
                     <div class="carousel-item @if ($loop->iteration == 1) active @endif">
-                        <div class="container">
-                            <div class="row">
-                                {{-- <div class="col-sm-6">
-                                    <div class="home-banner-left-cont">
-                                        <a href="{{ route('patient.my-favorite-doctors') . '?dr_speciality=all' }}"
-                                            class="banner-left">
-
-                                            {!! $home_banner->content !!}
-                                        </a>
-                                    </div>
-                                </div> --}}
-                                <div class="col-sm-12">
-                                    <div class="bann-img">
-                                        <img src="{{ asset('public/uploads/news/' . $news_banner->image) }}" alt="">
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="news-banner-img">
+                            <img src="{{ asset('public/uploads/news/' . $news_banner->image) }}" alt="">
                         </div>
                     </div>
                 @empty
