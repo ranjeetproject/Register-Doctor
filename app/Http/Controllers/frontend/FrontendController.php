@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Cms;
+use App\User;
 use App\Models\ContactUs;
 use App\Models\HomePageBanner;
 use App\Mail\ThankYou;
@@ -19,7 +20,11 @@ class FrontendController extends Controller
     {
         $banner = 1;
         $home_banners = HomePageBanner::all();
-    	return view('frontend.index', compact('banner','home_banners'));
+        $doctor_slides = User::select('id')->with(['profile'=>function($query){
+                $query->select('profile_photo');
+        }])->where('slide_status',1)->get();
+
+    	return view('frontend.index', compact('banner','home_banners','doctor_slides'));
     }
 
 

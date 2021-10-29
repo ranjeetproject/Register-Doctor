@@ -49,16 +49,16 @@
             <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-sm btn-info mt-2">
               <i class="fas fa-edit"></i>  Edit
             </a>
-            <a onclick="return confirm('Are you sure want to delete?');" href="{{ route('admin.user.delete', $user->id) }}" class="btn btn-sm btn-danger mt-2">
+            <a onclick="return confirm('Are you sure want to delete?');" href="{{ route('admin.user.delete', $user->id) }}" class="btn btn-sm btn-danger mt-2 ml-1">
               <i class="fas fa-trash"></i>  Delete
             </a>
             @if ($user->role == 2)
             @if ($user->slide_status == 1)
-            <a onclick="return confirm('Are you sure want to remove for slide?');" href="{{ route('admin.user.remove_slide', $user->id) }}" class="btn btn-sm btn-info mt-2">
-                <i class="fas fa-edit"></i> Remove For Slide
+            <a onclick="return confirm('Are you sure remove this doctor form slide?');" href="{{ route('admin.user.remove_slide', $user->id) }}" class="btn btn-sm btn-warning mt-2 ml-1">
+                <i class="fas fa-times"></i> Remove For Slide
               </a>
               @else
-              <a onclick="return confirm('Are you sure want to add for slide?');" href="{{ route('admin.user.set_slide', $user->id) }}" class="btn btn-sm btn-info mt-2">
+              <a onclick="return confirm('Are you sure add this doctor for slide?');" href="{{ route('admin.user.set_slide', $user->id) }}" class="btn btn-sm btn-success mt-2 ml-1">
                 <i class="fas fa-plus"></i>  Add For Slide
                 {{-- <i class="fas fa-plus"></i> --}}
               </a>

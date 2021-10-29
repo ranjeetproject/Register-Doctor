@@ -80,7 +80,7 @@ class NewsController extends Controller
         return view('admin.news.edit', compact('news'));
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request,$nid = '')
     {
       if ($request->isMethod('post')) {
             foreach ($request->news_id as $id) {
