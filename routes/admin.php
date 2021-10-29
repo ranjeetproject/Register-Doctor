@@ -40,6 +40,7 @@ Route::match(['get','post'],'news/index', 'NewsController@index')->name('news');
 Route::match(['get','post'],'news/create', 'NewsController@create')->name('news.create');
 Route::match(['get','post'],'news/edit/{id}', 'NewsController@edit')->name('news.edit');
 Route::match(['get','post'],'news/delete/{id?}', 'NewsController@delete')->name('news.delete');
+Route::get('news/select/{id}/{status}', 'NewsController@slideSelectRemove')->name('news.slideSelectRemove');
 
 
 Route::match(['get','post'],'cms/index', 'CmsController@index')->name('cms');
