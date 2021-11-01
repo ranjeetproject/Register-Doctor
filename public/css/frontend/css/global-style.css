@@ -850,3 +850,42 @@ section.news-banner-bx .news-banner-img img{
     padding: 15px;
     border-radius: 8px;
 }
+.top-doctor-details-info{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+.top-doctor-details-info .doctor-info-right{
+    width: calc(100% - 240px);
+    padding-left: 30px;
+}
+.top-doctor-details-info .doctor-info-right p{
+    color: #555555;
+    font-size: 17px;
+    margin-top: 7px;
+}
+.top-doctor-details-info .doctor-info-right h3{
+    color: #0047a8;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+.top-doctor-details-info .doctor-info-right h5{
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+.top-doctor-details-info .doctor-info-right p.tdd-text-warning{
+    color: #0047a8;
+    font-size: 22px;
+}
+.top-doctor-details-info .doctor-img-left{
+    height: 290px;
+    width: 240px;
+}
+.top-doctor-details-info .doctor-img-left img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: bottom;
+}

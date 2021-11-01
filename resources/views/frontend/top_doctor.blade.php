@@ -4,7 +4,7 @@
 
 <section class="for-w-100 main-content innerpage  top-doctor-page">
     <div class="container">
-        <h1 class="inner-page-title">Top Doctor</h1>
+        <h1 class="inner-page-title">Top Doctors</h1>
         <ul class="top-doctor-warning-info">
             <li>We asked doctors which specialist they would recommend to friends or family</li>
             <li>The list is not limited to great internet doctors - included also are those with good face-to-face & surgical skills</li>
@@ -112,8 +112,5 @@
         </div>
     </div>
 </section>
-
-
-
 
 @endsection

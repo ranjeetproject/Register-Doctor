@@ -777,7 +777,26 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     .top-doctor-warning-info li{
         font-size: 16px;
     }
-      
+    .top-doctor-details-info {
+        display: block;
+        margin-top: 30px;
+    }
+    .top-doctor-details-info .doctor-info-right {
+        width: 100%;
+        padding-left: 0;
+        text-align: center;
+    }
+    .top-doctor-details-info .doctor-img-left{
+        margin: 0 auto 20px auto;
+        width: 200px;
+        height: 240px;
+    }
+    .top-doctor-details-info .doctor-info-right h3{
+        font-size: 18px;
+    }
+    .top-doctor-details-info .doctor-info-right p.tdd-text-warning{
+        font-size: 17px;
+    }
 }
 @media only screen and (max-width : 575px) {
     .home-banner-left-cont {
