@@ -11,16 +11,10 @@ Route::get('/terms-condition/{type?}', 'frontend\FrontendController@getTermsCond
 Route::get('/privacy-policy', 'frontend\FrontendController@getPrivacyPolicy')->name('privacyPolicy');
 Route::get('/latest-on-coronavirus', 'frontend\FrontendController@getLatestOnCoronavirus')->name('latestOnCoronavirus');
 Route::get('/living-advice', 'frontend\FrontendController@getLivingAdvice')->name('livingAdvice');
+Route::get('/nearest-doctor', 'frontend\FrontendController@nearestDoctor')->name('nearestDoctor');
+Route::get('/top-doctor', 'frontend\FrontendController@topDoctor')->name('topDoctor');
 //Route::get('/home', 'frontend\FrontendController@index');
 Route::any('search/{model}/{type?}', 'SearchController')->name('search');
-
-
-
-
-
-
-
-
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');

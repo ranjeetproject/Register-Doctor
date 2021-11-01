@@ -123,4 +123,14 @@ class FrontendController extends Controller
         $get_living_advice = Cms::where('page_name','LIVING ADVICE')->first();
         return view('frontend.living_advice', compact('get_living_advice'));
     }
+
+    public function nearestDoctor()
+    {
+        return view('frontend.nearest_doctor');
+    }
+
+    public function topDoctor()
+    {
+        return view('frontend.top_doctor');
+    }
 }
