@@ -15,7 +15,18 @@
 $("button.navbar-toggler").click(function(){
   $("#navbarSupportedContent").toggleClass("show");
 });
-
+$(function () {
+    $('.top-doctor-warning-info li [data-toggle="tooltip"]').tooltip({
+        tooltipClass: "infotooltip",
+        position: {
+          my: 'center bottom-10',
+          at: 'center top'
+        },
+        create: function(ev, ui) {
+          $(this).data("ui-tooltip").liveRegion.remove();
+       }
+    });
+});
 </script>
 @include('common.toastr')
 @include('common.sweetalert')
