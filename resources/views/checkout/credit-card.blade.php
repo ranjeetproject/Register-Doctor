@@ -142,7 +142,7 @@ form#payment-form {
 
         const stripe = Stripe('{{ $stripe_key }}', { locale: 'en' }); // Create a Stripe client.
         const elements = stripe.elements(); // Create an instance of Elements.
-        const cardElement = elements.create('card', { style: style }); // Create an instance of the card Element.
+        const cardElement = elements.create('card', { hidePostalCode: true, style: style }); // Create an instance of the card Element.
         const cardButton = document.getElementById('card-button');
         const clientSecret = cardButton.dataset.secret;
 

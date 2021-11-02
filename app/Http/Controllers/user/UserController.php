@@ -354,8 +354,8 @@ class UserController extends Controller
     public function doctorProfile(Request $request, $id) {
 
         $form_name = 'profile';
-        $user_id = Crypt::decrypt($id);
-        // $user_id = $id;
+        // $user_id = Crypt::decrypt($id);
+        $user_id = $id;
 
          if($request->isMethod('post')){
              $form_name = $request->form_name;
@@ -363,19 +363,19 @@ class UserController extends Controller
              // dd($request->all());
           $data = $request->validate([
             //    $validator = Validator::make($request->all(), [
-       "forename"=>"sometimes|nullable|required|min:3|max:100",
-       "surname"=>"sometimes|nullable|required|min:3|max:100",
-       "telephone1"=>"sometimes|nullable|required|digits:11",
-       "profile_photo"=>"sometimes|nullable|image|mimes:jpeg,png,jpg",//|max:2048
-       "address"=>"sometimes|nullable|required",
-       "dr_name_of_medical_licencer"=>"sometimes|nullable|required",
-       "dr_medical_license_no"=>"sometimes|nullable|required",
-       "dr_speciality"=>"sometimes|nullable|required",
-       "dr_see"=>"sometimes|nullable|required",
-       // "gender"=>"required",
-       // "dob"=>"date|before_or_equal:".now()->subYears(13)->format('Y-m-d'),
+            "forename"=>"sometimes|nullable|required|min:3|max:100",
+            "surname"=>"sometimes|nullable|required|min:3|max:100",
+            "telephone1"=>"sometimes|nullable|required|digits:11",
+            "profile_photo"=>"sometimes|nullable|image|mimes:jpeg,png,jpg",//|max:2048
+            "address"=>"sometimes|nullable|required",
+            "dr_name_of_medical_licencer"=>"sometimes|nullable|required",
+            "dr_medical_license_no"=>"sometimes|nullable|required",
+            "dr_speciality"=>"sometimes|nullable|required",
+            "dr_see"=>"sometimes|nullable|required",
+            // "gender"=>"required",
+            // "dob"=>"date|before_or_equal:".now()->subYears(13)->format('Y-m-d'),
 
-       ],['required'=>'This field is required']);
+            ],['required'=>'This field is required']);
 
             //  if ($validator->fails()) {
             //    Session::flash('Error-toastr','Please fill in all the fields before proceeding');
@@ -446,6 +446,7 @@ class UserController extends Controller
         if(!empty($request->account_name) ) $profile->account_name = $request->account_name;
         if(!empty($request->bank_name) ) $profile->bank_name = $request->bank_name;
         if(!empty($request->iban_or_swift_code) ) $profile->iban_or_swift_code = $request->iban_or_swift_code;
+        if(!empty($request->pincode) ) $profile->pincode = $request->pincode;
 
 
        if ($request->hasFile('profile_photo')) {
