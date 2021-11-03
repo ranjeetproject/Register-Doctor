@@ -589,7 +589,7 @@ font-size: 18px;
     height: 8px;
     border-radius:50%;
     top: 10px;
-    
+
 }
 .pick-a-prescriber ul li:nth-child(even)::after{
     background-color: #ff4d0f;
@@ -657,7 +657,7 @@ tr.only-remv:after{
 }
 .add-edit-prs .modal-content .input-effect .form-group{
         position: relative;
-} 
+}
 .add-edt-table-details tr td a {
     width: 40px;
     height: 40px;
@@ -838,7 +838,7 @@ section.news-banner-bx .news-banner-img img{
     color: #909497;
     white-space: nowrap;
 }
-.td-table-bx .table td, 
+.td-table-bx .table td,
 .td-table-bx .table th{
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -888,4 +888,9 @@ section.news-banner-bx .news-banner-img img{
     width: 100%;
     object-fit: cover;
     object-position: bottom;
+}
+
+.view-moreilink {
+    font-weight: 500;
+    color: #00a3fe !important;
 }

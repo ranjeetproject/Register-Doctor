@@ -193,7 +193,7 @@
                                         <label>The following details will not be available to patients :</label>
 
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <div class="form-group required">
                                             <input
                                                 class="form-control effect-19 {{ !empty($user->profile->telephone1) ? 'has-content' : '' }}"
@@ -205,7 +205,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <input
                                                 class="form-control effect-19 {{ !empty($user->profile->telephone2) ? 'has-content' : '' }}"
@@ -216,11 +216,22 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div class="form-group required">
+                                            <input
+                                                class="form-control effect-19 {{ !empty($user->profile->location) ? 'has-content' : '' }}"
+                                                name="location" value="{{ $user->profile->location }}" type="text" required>
+                                            <label>Location</label>
+                                            @error('location')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group required">
                                             <input
                                                 class="form-control effect-19 {{ !empty($user->profile->pincode) ? 'has-content' : '' }}"
-                                                name="pincode" value="{{ $user->profile->pincode }}" type="tel">
+                                                name="pincode" value="{{ $user->profile->pincode }}" type="text" required>
                                             <label>Zip</label>
                                             @error('pincode')
                                                 <span class="text-danger">{{ $message }}</span>

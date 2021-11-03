@@ -3,18 +3,18 @@
 @section('title', 'admin-dashboard')
 
 @section('body')
-@section('header', 'Edit News')
+@section('header', 'Edit Living advice')
 @section('badge')
-    <li class="breadcrumb-item"><a href="{{ route('admin.news') }}">News</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.news.edit', $news->id) }}">Edit news</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.living_advice') }}">Living advice</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.living_advice.edit', $news->id) }}">Edit Living advice</a></li>
 @endsection
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">News edit</h3>
+        <h3 class="card-title">Living advice edit</h3>
     </div>
     <div class="card-body">
-        <form role="form" action="{{ route('admin.news.edit', $news->id) }}" method="POST"
+        <form role="form" action="{{ route('admin.living_advice.edit', $news->id) }}" method="POST"
             enctype="multipart/form-data" id="cmsForm">
             {{ csrf_field() }}
 
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="name">News Type </label>
+                    <label class="col-md-2 form-control-label" for="name">Living advice Type </label>
 
                     <div class="col-md-10">
                         <input class="form-control @error('news_type') is-invalid @enderror" type="text"
@@ -68,7 +68,7 @@
 
                     <label class="col-md-2 form-control-label" for="name">Image </label>
                     @if (!empty($news->image))
-                        <img width="100px" height="100px" src="{{ asset('public/uploads/news/' . $news->image) }}">
+                        <img width="100px" height="100px" src="{{ asset('public/uploads/living_advice/' . $news->image) }}">
                         <br>
                     @endif
 
@@ -117,10 +117,10 @@
                     @if (!empty($news->image))
                         @if ($news->slide_status)
 
-                            <a href="{{ route('admin.news.slideSelectRemove', [$news->id, 0]) }}"
+                            <a href="{{ route('admin.living_advice.slideSelectRemove', [$news->id, 0]) }}"
                                 class="btn btn-outline-warning"><i class="fas fa-times"></i> Remove From Slide</a>
                         @else
-                            <a href="{{ route('admin.news.slideSelectRemove', [$news->id, 1]) }}"
+                            <a href="{{ route('admin.living_advice.slideSelectRemove', [$news->id, 1]) }}"
                                 class="btn btn-outline-success"><i class="fas fa-plus"></i> Add To Slide</a>
 
                         @endif

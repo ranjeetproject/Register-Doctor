@@ -100,6 +100,24 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('admin.coronavirus')}}" class="nav-link {{ Request::is('admin/coronavirus*') ? 'active' : '' }}">
+              <i class="nav-icon fa fa-newspaper" aria-hidden="true"></i>
+              <p>
+                Coronavirus
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.living_advice')}}" class="nav-link {{ Request::is('admin/living-advice*') ? 'active' : '' }}">
+              <i class="nav-icon fa fa-newspaper" aria-hidden="true"></i>
+              <p>
+                Living Advice
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{route('admin.cms')}}" class="nav-link {{ Request::is('admin/cms*') ? 'active' : '' }}">
             <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
               <p>

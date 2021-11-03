@@ -70,5 +70,17 @@ Route::match(['get','post'],'faq/create', 'FAQController@create')->name('faq.cre
 Route::match(['get','post'],'faq/edit/{id}', 'FAQController@edit')->name('faq.edit');
 Route::match(['get','post'],'faq/delete/{id?}', 'FAQController@delete')->name('faq.delete');
 
+Route::match(['get','post'],'coronavirus/index', 'CoronavirusController@index')->name('coronavirus');
+Route::match(['get','post'],'coronavirus/create', 'CoronavirusController@create')->name('coronavirus.create');
+Route::match(['get','post'],'coronavirus/edit/{id}', 'CoronavirusController@edit')->name('coronavirus.edit');
+Route::match(['get','post'],'coronavirus/delete/{id?}', 'CoronavirusController@delete')->name('coronavirus.delete');
+Route::get('coronavirus/select/{id}/{status}', 'CoronavirusController@slideSelectRemove')->name('coronavirus.slideSelectRemove');
+
+Route::match(['get','post'],'living-advice/index', 'LivingAdviceController@index')->name('living_advice');
+Route::match(['get','post'],'living-advice/create', 'LivingAdviceController@create')->name('living_advice.create');
+Route::match(['get','post'],'living-advice/edit/{id}', 'LivingAdviceController@edit')->name('living_advice.edit');
+Route::match(['get','post'],'living-advice/delete/{id?}', 'LivingAdviceController@delete')->name('living_advice.delete');
+Route::get('living-advice/select/{id}/{status}', 'LivingAdviceController@slideSelectRemove')->name('living_advice.slideSelectRemove');
+
 });
 //  *************for admin *************//

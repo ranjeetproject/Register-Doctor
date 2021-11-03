@@ -3,18 +3,18 @@
 @section('title', 'admin-dashboard')
 
 @section('body')
-@section('header', 'Edit News')
+@section('header', 'Edit Latest on Coronavirus')
 @section('badge')
-    <li class="breadcrumb-item"><a href="{{ route('admin.news') }}">News</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.news.edit', $news->id) }}">Edit news</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.coronavirus') }}">Latest on Coronavirus</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.coronavirus.edit', $news->id) }}">Edit Latest on Coronavirus</a></li>
 @endsection
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">News edit</h3>
+        <h3 class="card-title">Latest on Coronavirus edit</h3>
     </div>
     <div class="card-body">
-        <form role="form" action="{{ route('admin.news.edit', $news->id) }}" method="POST"
+        <form role="form" action="{{ route('admin.coronavirus.edit', $news->id) }}" method="POST"
             enctype="multipart/form-data" id="cmsForm">
             {{ csrf_field() }}
 
@@ -26,7 +26,7 @@
 
                     <div class="col-md-10">
                         <input class="form-control @error('heading') is-invalid @enderror" type="text" name="heading"
-                            id="heading" placeholder="Please enter news heading" value="{{ $news->heading }}">
+                            id="heading" placeholder="Please enter coronavirus news heading" value="{{ $news->heading }}">
                         @error('heading')
                             <span class="error invalid-feedback" id="error_description">{{ $message }}</span>
                         @enderror
@@ -35,11 +35,11 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="name">News Type </label>
+                    <label class="col-md-2 form-control-label" for="name">Coronavirus Type </label>
 
                     <div class="col-md-10">
                         <input class="form-control @error('news_type') is-invalid @enderror" type="text"
-                            name="news_type" id="news_type" placeholder="Please enter news news type"
+                            name="news_type" id="news_type" placeholder="Please enter coronavirus type"
                             value="{{ $news->news_type }}">
                         @error('news_type')
                             <span class="error invalid-feedback" id="error_description">{{ $message }}</span>
@@ -68,7 +68,7 @@
 
                     <label class="col-md-2 form-control-label" for="name">Image </label>
                     @if (!empty($news->image))
-                        <img width="100px" height="100px" src="{{ asset('public/uploads/news/' . $news->image) }}">
+                        <img width="100px" height="100px" src="{{ asset('public/uploads/corona/' . $news->image) }}">
                         <br>
                     @endif
 
@@ -117,10 +117,10 @@
                     @if (!empty($news->image))
                         @if ($news->slide_status)
 
-                            <a href="{{ route('admin.news.slideSelectRemove', [$news->id, 0]) }}"
+                            <a href="{{ route('admin.coronavirus.slideSelectRemove', [$news->id, 0]) }}"
                                 class="btn btn-outline-warning"><i class="fas fa-times"></i> Remove From Slide</a>
                         @else
-                            <a href="{{ route('admin.news.slideSelectRemove', [$news->id, 1]) }}"
+                            <a href="{{ route('admin.coronavirus.slideSelectRemove', [$news->id, 1]) }}"
                                 class="btn btn-outline-success"><i class="fas fa-plus"></i> Add To Slide</a>
 
                         @endif

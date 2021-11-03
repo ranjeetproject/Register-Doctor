@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h1 class="inner-page-title">
-                        News Details
+                        Latest on Coronavirus Details
                     </h1>
                 </div>
             </div>
@@ -23,7 +23,7 @@
 
                             @if (!empty($news->image))
                                 <div class="news-img for-w-100">
-                                    <img src="{{ asset('public/uploads/news/' . $news->image) }}" alt="">
+                                    <img src="{{ asset('public/uploads/corona/' . $news->image) }}" alt="">
                                 </div>
                             @endif
 
@@ -45,7 +45,7 @@
                 <div class="col-md-4">
                     <div class="resent-post for-w-100">
                         <h3>Recent Posts</h3>
-                        <form method="get" action="{{ route('news') }}">
+                        <form method="get" action="{{ route('latestOnCoronavirus') }}">
                             <select
                                 style="margin-bottom: 16px;border-radius: 12px;border: 2px solid #F2F2F3;min-height: 49px; box-shadow: 0px 0px 8px  #f2f2f2; padding: 12px; width: 100%;"
                                 name="category" class="form-select" aria-label="Default select example">
@@ -67,7 +67,7 @@
                                 @forelse ($latest_news as $news)
                                     <li><i class="fal fa-angle-right"></i>
                                         <span class="min-cont"><a
-                                                href="{{ route('detail_news', $news->slug) }}">{{ $news->heading }}</a><span>{{ date('M-d-Y H:i A', strtotime($news->created_at)) }}
+                                                href="{{ route('latestOnCoronavirusDetails', $news->slug) }}">{{ $news->heading }}</a><span>{{ date('M-d-Y H:i A', strtotime($news->created_at)) }}
                                                 |<span>{{ $news->posted_by }}</span> </span>
                                     </li>
                                 @empty

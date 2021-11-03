@@ -3,14 +3,16 @@
 Route::get('/', 'frontend\FrontendController@index')->name('home');
 Route::get('/about-us', 'frontend\FrontendController@getaboutUs')->name('aboutUs');
 Route::get('/news', 'frontend\FrontendController@getNews')->name('news');
-Route::get('/news/{heading}', 'frontend\FrontendController@detailNews')->name('detail_news');
+Route::get('/news/{slug}', 'frontend\FrontendController@detailNews')->name('detail_news');
 Route::get('/faq', 'frontend\FrontendController@getFaq')->name('userFaq');
 Route::get('/contact-us', 'frontend\FrontendController@contactUs')->name('contactUs');
 Route::post('/contact-us', 'frontend\FrontendController@contactUsPost');
 Route::get('/terms-condition/{type?}', 'frontend\FrontendController@getTermsCondition')->name('termsCondition');
 Route::get('/privacy-policy', 'frontend\FrontendController@getPrivacyPolicy')->name('privacyPolicy');
 Route::get('/latest-on-coronavirus', 'frontend\FrontendController@getLatestOnCoronavirus')->name('latestOnCoronavirus');
+Route::get('/latest-on-coronavirus/{slug}', 'frontend\FrontendController@detailCoronavirus')->name('latestOnCoronavirusDetails');
 Route::get('/living-advice', 'frontend\FrontendController@getLivingAdvice')->name('livingAdvice');
+Route::get('/living-advice/{slug}', 'frontend\FrontendController@detailLivingAdvice')->name('livingAdviceDetails');
 Route::get('/nearest-doctor', 'frontend\FrontendController@nearestDoctor')->name('nearestDoctor');
 Route::get('/top-doctor', 'frontend\FrontendController@topDoctor')->name('topDoctor');
 //Route::get('/home', 'frontend\FrontendController@index');

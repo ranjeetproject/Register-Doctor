@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\News;
+use App\Models\LivingAdvice;
 use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class NewsController extends Controller
+class LivingAdviceController extends Controller
 {
     public function index(Request $request)
     {
-    	$news = News::latest()->get();
-    	return view('admin.news.index', compact('news'));
+    	$news = LivingAdvice::latest()->get();
+    	return view('admin.living_advice.index', compact('news'));
     }
 
     public function create(Request $request)
@@ -24,7 +24,7 @@ class NewsController extends Controller
               "heading"=>"required",
               "content"=>"required",
             ]);
-    	$news = new News;
+    	$news = new LivingAdvice;
     	$news->heading = $request->heading;
     	$news->slug = Str::slug($request->heading);
         $news->news_type = $request->news_type;
@@ -36,7 +36,7 @@ class NewsController extends Controller
             $image_file_name    = md5($rand_val);
             $file               = $request->file('image');
             $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
-            $destinationPath    = public_path().'/uploads/news';
+            $destinationPath    = public_path().'/uploads/living_advice';
             $file->move($destinationPath,$fileName);
             $news->image   = $fileName;
 
@@ -50,12 +50,12 @@ class NewsController extends Controller
     	$news->save();
     	Session::flash('Success-toastr', 'Successfully added.');
     	}
-    	return view('admin.news.create');
+    	return view('admin.living_advice.create');
     }
 
     public function edit(Request $request,$id)
     {
-        $news = News::find($id);
+        $news = LivingAdvice::find($id);
         if ($request->isMethod('post')) {
             $validator = $request->validate(
            [
@@ -77,7 +77,7 @@ class NewsController extends Controller
             $image_file_name    = md5($rand_val);
             $file               = $request->file('image');
             $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
-            $destinationPath    = public_path().'/uploads/news';
+            $destinationPath    = public_path().'/uploads/living_advice';
             $file->move($destinationPath,$fileName);
             $news->image   = $fileName;
 
@@ -85,30 +85,30 @@ class NewsController extends Controller
         $news->save();
         Session::flash('Success-toastr', 'Successfully Updated.');
         }
-        return view('admin.news.edit', compact('news'));
+        return view('admin.living_advice.edit', compact('news'));
     }
 
     public function delete(Request $request, $nid = '')
     {
       if ($request->isMethod('post')) {
             foreach ($request->news_id as $id) {
-                $news = News::find($id);
+                $news = LivingAdvice::find($id);
                 // $news->profile->delete();
                 $news->delete();
             }
       } elseif ($request->isMethod('get')) {
-                $news = News::find($nid);
+                $news = LivingAdvice::find($nid);
                 // $news->profile->delete();
                 $news->delete();
       }
        Session::flash('Success-toastr', 'Successfully deleted.');
-       return redirect()->route('admin.news');
+       return redirect()->route('admin.living_advice');
     }
 
     public function slideSelectRemove($id, $status)
     {
         if($status == 1){
-            $five_count = News::where('slide_status', 1)->count();
+            $five_count = LivingAdvice::where('slide_status', 1)->count();
             if($five_count >= 5){
                 Session::flash('Error-toastr', 'You Cannot choose more than five banner.');
                 return redirect()->back();
@@ -118,7 +118,7 @@ class NewsController extends Controller
             $message = 'Successfully removed from slide.';
         }
 
-        $user = News::find($id);
+        $user = LivingAdvice::find($id);
         $user->slide_status = $status;
         $user->save();
         return redirect()->back()->with('Success-toastr', $message);

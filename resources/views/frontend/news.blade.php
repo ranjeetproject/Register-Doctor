@@ -140,12 +140,14 @@
                             @endif
 
                             <div class="news-cont">
-                                <p>{!! $news->content !!}</p>
+                                <p>{{ $news->sort_content }}
+                                    <a href="{{ route('detail_news',$news->slug) }}" class="view-moreilink">View more</a>
+                                </p>
                             </div>
                         </div>
                     </div>
                    @empty
-                      No data found.
+                      No News found.
                     @endforelse
 
                     {{-- <div class="news-listing for-w-100">
@@ -211,7 +213,7 @@
                             <ul>
                                  @forelse ($latest_news as $news)
                                 <li><i class="fal fa-angle-right"></i>
-                                    <span class="min-cont"><a href="{{ route('detail_news',$news->heading) }}">{{ $news->heading }}</a><span>{{ date('M-d-Y H:i A',strtotime($news->created_at)) }} |<span>{{ $news->posted_by }}</span> </span>
+                                    <span class="min-cont"><a href="{{ route('detail_news',$news->slug) }}">{{ $news->heading }}</a><span>{{ date('M-d-Y H:i A',strtotime($news->created_at)) }} |<span>{{ $news->posted_by }}</span> </span>
                                 </li>
                                  @empty
                      <li><i class="fal fa-angle-right"></i>

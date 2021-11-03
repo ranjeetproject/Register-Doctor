@@ -447,6 +447,7 @@ class UserController extends Controller
         if(!empty($request->bank_name) ) $profile->bank_name = $request->bank_name;
         if(!empty($request->iban_or_swift_code) ) $profile->iban_or_swift_code = $request->iban_or_swift_code;
         if(!empty($request->pincode) ) $profile->pincode = $request->pincode;
+        if(!empty($request->location) ) $profile->location = $request->location;
 
 
        if ($request->hasFile('profile_photo')) {
