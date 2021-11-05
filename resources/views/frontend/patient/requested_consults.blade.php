@@ -176,7 +176,8 @@
                                             @if($case->accept_status == 1)
                                             {{-- @dump('hi',$case->status) --}}
                                             @if($case->status < 3)
-                                                    @if($time_slot->getSlot)
+                                            @dump($time_slot)
+                                                    {{-- @if($time_slot->getSlot)
                                                         @php
                                                             $end_time = $time_slot->getSlot->end_time;
                                                         @endphp
@@ -185,7 +186,7 @@
 
 
                                                         @endif
-                                                    @endif
+                                                    @endif --}}
                                                 @endif
 
                                               @endif
