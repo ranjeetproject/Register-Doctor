@@ -59,7 +59,7 @@
                                                     <td style="text-align: center;">
                                                         {{-- @if ($case->getSlot) --}}
                                                         @forelse($case->getBookingSlot as $time_slot)
-                                                            {{-- @dump($time_slot, $time_slot->getSlot, $time_slot->getSlot->start_time) --}}
+                                                            @dump($time_slot, $time_slot->getSlot, $time_slot->getSlot->start_time)
 
                                                             @if ($time_slot->getSlot)
                                                                 {{-- @dump($time_slot->getSlot->start_time) --}}
@@ -78,7 +78,10 @@
 
                                                             @endif
                                                         @empty
+                                                        @php
 
+                                                            $time_slot = '';
+                                                        @endphp
                                                         @endforelse
                                                         {{-- @endif --}}
                                                     </td>
@@ -182,6 +185,7 @@
                                                         @endif
                                                         @if ($case->questions_type == 2 || $case->questions_type == 1)
                                                             @if ($case->status < 3)
+                                                            @if ($time_slot)
                                                                 @if ($time_slot->getSlot)
                                                                     @php
                                                                         $start_time = $time_slot->getSlot->start_time;
@@ -194,13 +198,14 @@
                                                                     @endif
 
                                                                 @endif
+                                                                @endif
                                                             @endif
                                                         @endif
                                                         @if ($case->accept_status == 1)
                                                             {{-- @dump('hi',$case->status) --}}
                                                             @if ($case->status < 3)
                                                                 {{-- @dump($time_slot) --}}
-                                                                @empty (!$time_slot)
+                                                                @if ($time_slot)
                                                                     @if ($time_slot->getSlot)
                                                                         @php
                                                                             $end_time = $time_slot->getSlot->end_time;
