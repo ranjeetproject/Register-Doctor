@@ -59,7 +59,7 @@
                                                     <td style="text-align: center;">
                                                         {{-- @if ($case->getSlot) --}}
                                                         @forelse($case->getBookingSlot as $time_slot)
-                                                            @dump($time_slot, $time_slot->getSlot, $time_slot->getSlot->start_time)
+                                                            @dump($time_slot)
 
                                                             @if ($time_slot->getSlot)
                                                                 {{-- @dump($time_slot->getSlot->start_time) --}}
