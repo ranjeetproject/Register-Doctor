@@ -54,7 +54,7 @@
                                          @forelse ($cases as $case)
                                          {{-- @dump($case) --}}
                                         <tr>
-                                            <td>{{($case->booking_date) ? date('d-m-Y', strtotime($case->booking_date)) : ''}}</td>
+                                            <td>{{($case->booking_date) ? date('m-d-Y', strtotime($case->booking_date)) : ''}}</td>
                                             <td style="text-align: center;">
                                               {{-- @if($case->getSlot) --}}
                                               @forelse($case->getBookingSlot as $time_slot)
@@ -65,7 +65,7 @@
                                                     @if ($time_zone ==2)
                                                         {{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone, $case->booking_date, $time_slot->getSlot->start_time))) }} <br>to<br> {{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone, $case->booking_date, $time_slot->getSlot->end_time))) }} <br>
                                                     @else
-                                                        {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br>
+                                                    {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>to<br> {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }} <br>
                                                     @endif
 
 
@@ -75,8 +75,8 @@
                                               @endforelse
                                               {{-- @endif --}}
                                             </td>
-                                            <td><a href="{{ route('patient.view-doctor-profile',Crypt::encryptString($case->doctor->id)) }}" >{{$case->doctor->name}}</a></td>
-                                            <td><a href="{{ route('patient.view-case',$case->case_id) }}">{{$case->case_id}}</a></td>
+                                            <td>{{$case->doctor->name}}</td>
+                                            <td>{{$case->case_id}}</td>
                                             <td>
                                                 @if($case->questions_type == 2)
                                                     @if($case->accept_status == 1)
@@ -141,8 +141,8 @@
                                             </td>
                                             <td>
                                               @if($case->accept_status == 1)
-                                              <font style="font-size: 16px;">Confirmed</font> <br>
-                                                <strong style="font-size: 18px;">{{date('d F Y', strtotime($case->booking_date))}}
+                                              <font style="font-size: 18px;">Confirmed</font> <br>
+                                                <strong style="font-size: 20px;">{{date('d F Y', strtotime($case->booking_date))}}
 
 
                                               @else
@@ -181,7 +181,7 @@
                                                             $end_time = $time_slot->getSlot->end_time;
                                                         @endphp
                                                         @if (getDiffOfTwoDateInMinute($case->booking_date.' '.$end_time) < 0)
-                                                            <button type="button" onclick="doctorRating('{{ $case->case_id }}')" class="btn btn-sm btn-primary">Rating review</button>
+                                                            <button type="button" onclick="doctorRating('{{ $case->case_id }}')" class="btn btn-sm btn-primary"> Rating review</button>
 
 
                                                         @endif

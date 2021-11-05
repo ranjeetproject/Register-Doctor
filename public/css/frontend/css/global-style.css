@@ -135,7 +135,6 @@ nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand:after {
     position: absolute;
     z-index: -1;
     border-radius: 9px;
-    display: none;
 }
 nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand img {
     width: 260px;
@@ -893,4 +892,35 @@ section.news-banner-bx .news-banner-img img{
 .view-moreilink {
     font-weight: 500;
     color: #00a3fe !important;
+}
+.info-si-icon{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.patient-flex-bx-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.patient-cp-link{
+  color: #202020;
+  font-size: 18px;
+}
+.patient-book-lc{
+    padding: 4px;
+    text-align: center;
+    height: 48px;
+    border-radius: 12px;
+    border: 0;
+    margin-top: 10px;
+    background: #ff4d0f;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.patient-book-lc:hover{
+    background: #ff4d0f;
+    color: #fff;
 }

@@ -5,9 +5,9 @@
 
     <li><a href="{{ route('doctor.profile')}}"><img src="{{ asset('public/images/frontend/images/icon2.png') }}" alt="">Manage Profile </a></li>
 
-    <li><a href="{{ route('doctor.handy-document')}}"><img src="{{ asset('public/images/frontend/images/icon13.png') }}" alt="">Handy Documents</a></li>
+    <li><a href="{{ route('doctor.handy-document')}}"><img src="{{ asset('public/images/frontend/images/icon12.png') }}" alt="">Handy Documents</a></li>
 
-    <li><a href="{{ route('doctor.get-thumbs-up')}}"><img src="{{ asset('public/images/frontend/images/icon12.png') }}" alt="">How to Get Thumbs Up</a></li>
+    <li><a href="{{ route('doctor.get-thumbs-up')}}"><img src="{{ asset('public/images/frontend/images/icon13.png') }}" alt="">How to Get Thumbs Up</a></li>
 
     <li><a href="{{ route('doctor.appointment')}}"><img src="{{ asset('public/images/frontend/images/icon11.png') }}" alt="">Appointments </a></li>
 

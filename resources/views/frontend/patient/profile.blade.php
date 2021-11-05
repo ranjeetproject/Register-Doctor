@@ -27,15 +27,18 @@
                     <div class="tab-pane fade show active input-effect" id="Patient-Profile">
                         <form class="for-w-100" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="for-profile-image mb-3">
-                                <input type="file" name="profile_photo" id="imgInp">
+                            <div class="patient-flex-bx-top">
+                                <div class="for-profile-image">
+                                    <input type="file" name="profile_photo" id="imgInp">
 
-                                <img id="blah" src="{{ $user->profile->profile_photo }}" alt="your image">
+                                    <img id="blah" src="{{ $user->profile->profile_photo }}" alt="your image">
 
-                                <br>
+                                    <br>
 
-                                <span>Update Profile Image</span>
+                                    <span>Update Profile Image</span>
 
+                                </div>
+                                <span class="patient-cp-link">Change password to <a href="{{ route('patient.change-password') }}">Click here</a></span>
                             </div>
                             <div class="row main-form-fild">
                                 {{-- <div class="col-sm-12">
@@ -49,26 +52,26 @@
                                     </div>
                                 </div> --}}
                                 <div class="col-sm-6">
-                                    <div class="form-group required">
-                                        <input type="text" name="forename" class="form-control effect-19 {{!empty($user->forename) ? 'has-content':''}}" value="{{$user->forename}}">
-                                        <label>Forename</label>
+                                    <div class="form-group required has-float-label">
+                                        <input type="text" name="forename" class="form-control {{!empty($user->forename) ? 'has-content':''}}" value="{{$user->forename}}" id="pforename" placeholder="Forename">
+                                        <label for="pforename">Forename</label>
                                     @error('forename')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group required">
-                                        <input type="text" name="surname" class="form-control effect-19 {{!empty($user->surname) ? 'has-content':''}}"  value="{{$user->surname}}">
-                                        <label>Surname</label>
+                                    <div class="form-group required has-float-label">
+                                        <input type="text" name="surname" class="form-control {{!empty($user->surname) ? 'has-content':''}}"  value="{{$user->surname}}" id="psurname" placeholder="Surname">
+                                        <label for="psurname">Surname</label>
                                     @error('surname')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group required">
-                                        <select name="gender" class="form-control effect-19 {{!empty($user->profile->gender) ? 'has-content':''}}" >
+                                    <div class="form-group required has-float-label">
+                                        <select name="gender" class="form-control {{!empty($user->profile->gender) ? 'has-content':''}}" >
                                             <option value="">Select</option>
                                             <option value="male" {{($user->profile->gender == 'male') ? 'Selected':''}}>Male</option>
                                             <option value="female" {{($user->profile->gender == 'female') ? 'Selected':''}} >Female</option>
@@ -89,36 +92,36 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group required">
-                                        <input type="text" class="form-control effect-19 {{!empty($user->profile->address) ? 'has-content':''}}" name="address" value="{{$user->profile->address}}">
-                                        <label>Address</label>
+                                    <div class="form-group required has-float-label">
+                                        <input type="text" class="form-control {{!empty($user->profile->address) ? 'has-content':''}}" name="address" value="{{$user->profile->address}}" id="paddress" placeholder="Address">
+                                        <label for="paddress">Address</label>
                                     @error('address')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group required">
-                                        <input type="email" name="email" class="form-control effect-19 {{!empty($user->email) ? 'has-content':''}}"  value="{{$user->email}}" readonly>
-                                    <label>Email</label>
+                                    <div class="form-group required has-float-label">
+                                        <input type="email" name="email" class="form-control {{!empty($user->email) ? 'has-content':''}}"  value="{{$user->email}}" id="Pemail" placeholder="Email" readonly>
+                                    <label for="Pemail">Email</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 mb-1">
                                     <label>Address for delivery of drugs if different to above</label>
                                 </div>
                                 <div class="col-sm-6 ">
-                                    <div class="form-group required">
-                                        <input type="tel" name="telephone1" class="form-control effect-19 {{!empty($user->profile->telephone1) ? 'has-content':''}}" value="{{$user->profile->telephone1}}">
-                                        <label>Telephone 1</label>
+                                    <div class="form-group required has-float-label">
+                                        <input type="tel" name="telephone1" class="form-control {{!empty($user->profile->telephone1) ? 'has-content':''}}" value="{{$user->profile->telephone1}}" id="Ptelephone1" placeholder="Telephone 1">
+                                        <label for="Ptelephone1">Telephone 1</label>
                                         @error('telephone1')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="tel" name="telephone2" class="form-control effect-19 {{!empty($user->profile->telephone2) ? 'has-content':''}}" value="{{$user->profile->telephone2}}">
-                                        <label>Telephone 2</label>
+                                    <div class="form-group has-float-label">
+                                        <input type="tel" name="telephone2" class="form-control {{!empty($user->profile->telephone2) ? 'has-content':''}}" value="{{$user->profile->telephone2}}" id="Ptelephone2" placeholder="Telephone 2">
+                                        <label for="Ptelephone2">Telephone 2</label>
                                         @error('telephone2')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -128,36 +131,36 @@
                                     <label><strong>GP or Family Doctor</strong> GP address mandatory if you want a prescription via this website and have a UK GP</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" name="gp_name" class="form-control effect-19 {{!empty($user->profile->gp_name) ? 'has-content':''}}" value="{{$user->profile->gp_name}}">
-                                        <label>Name</label>
+                                    <div class="form-group has-float-label">
+                                        <input type="text" name="gp_name" class="form-control {{!empty($user->profile->gp_name) ? 'has-content':''}}" value="{{$user->profile->gp_name}}" id="pName" placeholder="Name">
+                                        <label for="pName">Name</label>
                                         @error('gp_name')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" name="gp_address" class="form-control effect-19 {{!empty($user->profile->gp_address) ? 'has-content':''}}" value="{{$user->profile->gp_address}}">
-                                        <label>Address</label>
+                                    <div class="form-group has-float-label">
+                                        <input type="text" name="gp_address" class="form-control {{!empty($user->profile->gp_address) ? 'has-content':''}}" value="{{$user->profile->gp_address}}" id="pgpAddress" placeholder="Address">
+                                        <label for="pgpAddress">Address</label>
                                         @error('gp_address')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="tel" name="gp_telephone" value="{{$user->profile->gp_telephone}}" class="form-control effect-19 {{!empty($user->profile->gp_telephone) ? 'has-content':''}}">
-                                        <label>Telephone</label>
+                                    <div class="form-group has-float-label">
+                                        <input type="tel" name="gp_telephone" value="{{$user->profile->gp_telephone}}" class="form-control {{!empty($user->profile->gp_telephone) ? 'has-content':''}}" id="pgpTelephone" placeholder="Telephone">
+                                        <label for="pgpTelephone">Telephone</label>
                                         @error('gp_telephone')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" name="gp_email" value="{{$user->profile->gp_email}}" class="form-control effect-19 {{!empty($user->profile->gp_email) ? 'has-content':''}}" >
-                                        <label>Email</label>
+                                    <div class="form-group has-float-label">
+                                        <input type="text" name="gp_email" value="{{$user->profile->gp_email}}" class="form-control {{!empty($user->profile->gp_email) ? 'has-content':''}}" id="pgpemail" placeholder="Email">
+                                        <label for="pgpemail">Email</label>
                                         @error('gp_email')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -167,35 +170,36 @@
                                     <label>Next of Kin (recommended)</label>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" name="n_of_kin_name" value="{{$user->profile->n_of_kin_name}}" class="form-control effect-19 {{!empty($user->profile->n_of_kin_name) ? 'has-content':''}}" >
-                                        <label>Name</label>
+                                    <div class="form-group has-float-label">
+                                        <input type="text" name="n_of_kin_name" value="{{$user->profile->n_of_kin_name}}" class="form-control {{!empty($user->profile->n_of_kin_name) ? 'has-content':''}}" id="pNamekin" placeholder="Name">
+                                        <label for="pNamekin">Name</label>
                                         @error('n_of_kin_name')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text"  name="n_of_kin_address" value="{{$user->profile->n_of_kin_address}}"  class="form-control effect-19 {{!empty($user->profile->n_of_kin_address) ? 'has-content':''}}" >
-                                        <label>Address</label>
+                                    <div class="form-group has-float-label">
+                                        <input type="text"  name="n_of_kin_address" value="{{$user->profile->n_of_kin_address}}"  class="form-control {{!empty($user->profile->n_of_kin_address) ? 'has-content':''}}" id="pAddresskin" placeholder="Address">
+                                        <label for="pAddresskin">Address</label>
                                         @error('n_of_kin_address')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" name="n_of_kin_relationship" value="{{$user->profile->n_of_kin_relationship}}" class="form-control effect-19 {{!empty($user->profile->n_of_kin_relationship) ? 'has-content':''}}" value="{{$user->profile->n_of_kin_relationship}}">
-                                        <label>Relationship</label>
+                                    <div class="form-group has-float-label">
+                                        <input type="text" name="n_of_kin_relationship" value="{{$user->profile->n_of_kin_relationship}}" class="form-control {{!empty($user->profile->n_of_kin_relationship) ? 'has-content':''}}" value="{{$user->profile->n_of_kin_relationship}}" id="pRelationship" placeholder="Relationship">
+                                        <label for="pRelationship">Relationship</label>
                                         @error('n_of_kin_relationship')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" name="n_of_kin_phone" value="{{$user->profile->n_of_kin_phone}}"  class="form-control effect-19" placeholder="Phone No.">
+                                    <div class="form-group has-float-label">
+                                        <input type="text" name="n_of_kin_phone" value="{{$user->profile->n_of_kin_phone}}"  class="form-control" id="pPhoneNo" placeholder="Phone No.">
+                                        <label for="pPhoneNo">Phone No.</label>
                                         @error('n_of_kin_phone')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
