@@ -174,7 +174,7 @@
                 <a href="{{route('patient.requested-consults')}}">
                 <div class="pd-btm-details">
                     <div class="pd-btm-details-cont">
-                        <p>Consults Quick Questions</p>
+                        <p>YOUR REQUESTED <br> CONSULTS + QUICK QUESTIONS</p>
                         <img src="{{ asset('public/images/frontend/images/pd-icon3.png') }}" alt="">
 
                     </div>
@@ -195,7 +195,7 @@
                 <a href="{{route('patient.prescriptions')}}">
                 <div class="pd-btm-details">
                     <div class="pd-btm-details-cont">
-                        <p>Your Prescriptions</p>
+                        <p>YOUR REQUESTED <br> PRESCRIPTIONS</p>
                         <img src="{{ asset('public/images/frontend/images/pd-icon2.png') }}" alt="">
 
                     </div>

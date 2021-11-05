@@ -10,11 +10,16 @@
                         Patient Profile
                     </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link btn" href="{{ route('patient.payment-detail') }}">Payment Details</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link btn" id="chng_time_zone">Change Timezone</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('patient.medical-record')}}" class="nav-link btn">Medical Record</a>
+                        {{-- <a href="{{route('patient.medical-record')}}" class="btn smr-btn mr"></a> --}}
 
                     </li>
                 </ul>
@@ -22,7 +27,7 @@
                     <div class="tab-pane fade show active input-effect" id="Patient-Profile">
                         <form class="for-w-100" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="for-profile-image">
+                            <div class="for-profile-image mb-3">
                                 <input type="file" name="profile_photo" id="imgInp">
 
                                 <img id="blah" src="{{ $user->profile->profile_photo }}" alt="your image">
@@ -76,7 +81,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group required">
-                                        <input onfocus="(this.type='date')" class="form-control effect-19 {{!empty($user->profile->dob) ? 'has-content':''}}" name="dob" value="{{$user->profile->dob}}">
+                                        <input type="date" class="form-control effect-19 {{!empty($user->profile->dob) ? 'has-content':''}}" name="dob" value="{{ date("Y-m-d", strtotime($user->profile->dob)) }}">
                                         <label>Date of Birth</label>
                                     @error('dob')
                                     <span class="text-danger">{{ $message }}</span>
@@ -98,7 +103,7 @@
                                     <label>Email</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mb-1">
                                     <label>Address for delivery of drugs if different to above</label>
                                 </div>
                                 <div class="col-sm-6 ">
@@ -120,7 +125,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <label><strong>GP or Family Doctor</strong><img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> GP address mandatory if you want a prescription via this website and have a UK GP</label>
+                                    <label><strong>GP or Family Doctor</strong> GP address mandatory if you want a prescription via this website and have a UK GP</label>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -158,7 +163,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mb-1">
                                     <label>Next of Kin (recommended)</label>
                                 </div>
                                 <div class="col-sm-6">
@@ -197,12 +202,12 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 Mandator">
-                                    <label>Change password to <a href="{{route('patient.change-password')}}">Click here</a>  <span><sup>*</sup>Mandatory</span> </label>
+                                    <label>  <span><sup>*</sup>Mandatory</span> </label>
                                 </div>
                                 <div class="col-sm-12 Submit-Medical-Record">
                                     <button type="submit" class="btn blue-button smr-btn">Submit</button>
                                     {{-- <button type="submit" class="btn smr-btn mr">Medical Record</button> --}}
-                                    <a href="{{route('patient.medical-record')}}" class="btn smr-btn mr">Medical Record</a>
+                                    {{-- <a href="{{route('patient.medical-record')}}" class="btn smr-btn mr">Medical Record</a> --}}
                                 </div>
                             </div>
                         </form>

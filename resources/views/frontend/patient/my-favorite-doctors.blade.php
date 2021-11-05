@@ -190,7 +190,8 @@
                                                             {{ $doctor->profile->dr_qa_fee }} per 15 mins</p>
                                                         <button type="button"
                                                             onclick="bookLiveChats('{{ $doctor->id }}')"
-                                                            class="btn btn-block Request">Request Q&A <br> <small>Turnaround
+                                                            class="btn btn-block Request">Request Typed Q&A <br>
+                                                            <small>Turnaround
                                                                 Time 5 hrs 2 days</small></button>
                                                     </div>
                                                 </div>
@@ -220,7 +221,8 @@
                                                     <div class="col-sm-12">
                                                         <div class="reting-and-other-info">
                                                             <div class="rating-list">
-                                                                <span onclick="doctorRating('{{ $doctor->doctor->id }}')">
+                                                                <span
+                                                                    onclick="doctorRating('{{ $doctor->doctor->id }}')">
                                                                     {!! getReview($doctor->doctor->id) !!}
                                                                 </span>
 
@@ -263,14 +265,14 @@
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins
                                                         </p>
-                                                        <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->doctor->id)) }}"
+                                                        <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->doctor->id), 'questions_type'=> 'live-chat']) }}"
                                                             class="btn btn-block Book-Live">Book Live Chat</a>
                                                     </div>
                                                     <div class="col-md">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->doctor->profile->dr_live_video_fee }} per 15 mins
                                                         </p>
-                                                        <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->doctor->id)) }}"
+                                                        <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->doctor->id), 'questions_type'=> 'live-video']) }}"
                                                             class="btn btn-block Book-Live">Book Live Video</a>
                                                     </div>
                                                     <div class="col-md-5">
@@ -278,7 +280,7 @@
                                                             {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins</p>
                                                         <button type="button"
                                                             onclick="bookLiveChats('{{ $doctor->doctor->id }}')"
-                                                            class="btn btn-block Request">Request Q&A <br> <small>Turnaround
+                                                            class="btn btn-block Request">Request Typed Q&A <br> <small>Turnaround
                                                                 Time 5 hrs 2 days</small></button>
                                                     </div>
                                                 </div>
