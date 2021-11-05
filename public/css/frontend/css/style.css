@@ -7048,3 +7048,8 @@ button.btn.sider-bar-toggle {
 .news-page.news-details-page .news-listing .news-listing-bottom .news-cont {
   width: 100%;
 }
+.info-si-icon{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}

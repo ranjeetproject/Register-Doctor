@@ -135,7 +135,6 @@ nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand:after {
     position: absolute;
     z-index: -1;
     border-radius: 9px;
-    display: none;
 }
 nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand img {
     width: 260px;
