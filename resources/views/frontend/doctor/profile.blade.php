@@ -16,6 +16,14 @@
                         Manage Profile
                         </a>
                     </li>
+                    <li style="font-size: 14px;">
+                        {{-- <a data-toggle="tab" href="#Payment-Details"> --}}
+                            Change password to <a href="{{route('doctor.change-password')}}" style="padding: 0px; font-size: 14px; display:inline;">Click here</a>
+                        {{-- </a> --}}
+                        {{-- <div class="col-sm-12 Mandator">
+                            <label>Change password to <a href="{{route('doctor.change-password')}}">Click here</a>  </label>
+                        </div> --}}
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link {{($form_name == 'account') ? 'active':''}}"   data-toggle="tab" href="#Payment-Details">
                             Payment Details
@@ -210,7 +218,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Quick question</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Fee : <input class="form-control " type="text"  name="dr_standard_fee" value="{{$user->profile->dr_standard_fee}}">  First Doctor to Take Case
+                                                <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Fee : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{$user->profile->dr_standard_fee}}">  First Doctor to Take Case
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
@@ -225,7 +233,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Video</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" class="" disabled>  Set your own fee : <input class="form-control " type="text" name="dr_live_video_fee"  value="{{$user->profile->dr_live_video_fee}}">  Set availability in Your Calendar above
+                                                <input type="checkbox" class="" disabled>  Set your own fee : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text" name="dr_live_video_fee"  value="{{$user->profile->dr_live_video_fee}}">  Set availability in Your Calendar above
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
@@ -239,7 +247,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Chat</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" name="" class="" disabled>  Set your own fee : <input class="form-control " type="text"  name="dr_live_chat_fee" value="{{$user->profile->dr_live_chat_fee}}">  Set availability in Your Calendar above
+                                                <input type="checkbox" name="" class="" disabled>  Set your own fee : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_live_chat_fee" value="{{$user->profile->dr_live_chat_fee}}">  Set availability in Your Calendar above
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
@@ -253,7 +261,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Booked Q&A</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" class="" disabled>  <span>Set your own fee :</span> <input class="form-control " name="dr_qa_fee" type="text" value="{{$user->profile->dr_qa_fee}}" > Set your max turnaround time
+                                                <input type="checkbox" class="" disabled>  <span>Set your own fee :&nbsp;&nbsp;<i class="fas fa-pound-sign"></i></span> <input class="form-control " name="dr_qa_fee" type="text" value="{{$user->profile->dr_qa_fee}}" > Set your max turnaround time
                                                 for response in Hours or Days
 
                                                 @php
@@ -307,7 +315,12 @@
                                         <label>Your Current Star Ratings from Patients No. Cumulative Median rating</label><br>
                                         <div class="ratings">
                                             <div class="empty-stars"></div>
-                                            <div class="full-stars" style="width:88%"></div>
+                                            @php
+                                               $review_array = reviewCalc(Auth::user()->id);
+                                                $rating = $review_array[0];
+                                                $rating_percent = ($rating/5)*100;
+                                            @endphp
+                                            <div class="full-stars" style="width:{{ $rating_percent }}%"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -335,9 +348,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12 Mandator">
+                                {{-- <div class="col-sm-12 Mandator">
                                     <label>Change password to <a href="{{route('doctor.change-password')}}">Click here</a>  </label>
-                                </div>
+                                </div> --}}
 
                                  <div class="col-sm-12">
                                     <p><sup>*</sup>Mandatory in case you need to be contacted eg by Pharmacist, Admin</p>

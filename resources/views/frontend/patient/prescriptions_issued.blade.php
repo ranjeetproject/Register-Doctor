@@ -10,7 +10,7 @@
 
                         <ol class="breadcrumb Pharmacist-doc-com">
 
-                            <li class="breadcrumb-item active">Prescriptions Dispensed</li>
+                            <li class="breadcrumb-item active">Prescriptions Issued</li>
 
                         </ol>
 
@@ -33,7 +33,7 @@
                                     <div class="row">
 
                                         <div class="col-sm-6">
-                                            
+
 
                                             <div class="form-group">
 
@@ -59,7 +59,7 @@
                                             <p id="date"><strong>Date: </strong></p>
                                             <p id="issued"><strong>Issued: </strong></p>
 
-                                            
+
                                         </div>
 
                                     </div>
@@ -76,13 +76,13 @@
 
 
 
-                                        <table class="table Live-Chat add-edt-table-details" id="add-tr"> 
+                                        <table class="table Live-Chat add-edt-table-details" id="add-tr">
 
                                           <thead>
 
                                               <tr>
 
-                                              
+
 
                                                   <td>Drug </td>
 
@@ -95,14 +95,14 @@
                                                   <td>Duration</td>
 
                                                   <td>Comments</td>
-                                                  
+
                                               </tr>
 
                                             </thead>
 
                                             <tbody>
 
-                                               
+
                                             </tbody>
 
                                         </table>
@@ -112,9 +112,9 @@
                                 </div>
 
                                 <div class="col-sm-12">
-                                
+
                                     <a id="msg_doc" href="#" target="_blank" class="btn blue-button">Message Doctor</a>
-                                    <a id="sub_prisc" href="#" target="_blank" class="btn blue-button">Submit Priscription</a>
+                                    <a id="sub_prisc" href="#" target="_blank" class="btn blue-button">Prescription Sent</a>
 
                                 </div>
 
@@ -122,7 +122,7 @@
 
                         </form>
 
-                        
+
 
                     </div>
 
@@ -133,7 +133,7 @@
 
 
     <!-- modal -->
-    
+
 <div class="modal fade add-edit-prs" id="finalprisc" >
 
 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -154,7 +154,7 @@
 
                     <div class="form-group text-center">
                         <button type="button" id="final_prisc" class="add-submit btn blue-button Prescription-submit ">Submit</button>
-                        
+
                     </div>
                 </div>
             </form>
@@ -167,9 +167,9 @@
 
 </div>
 
-      
 
-    
+
+
 @endsection
 @section('scripts')
 <script>
@@ -217,10 +217,10 @@ $('#case_no').on('change', function(){
             var d_name = $('#doc_name').html();
             $('#doc_name').html(d_name + res.case_details[0].doctor.name);
             $('#msg_doc').attr('href',"{{url('patient/chats')}}/"+res.case_details[0].case_id);
-            
+
             //console.log(d_name);
            //$('#p_name').val(res.case_details[0].doctor.name);sub_prisc
-           
+
             var prescription =res.prescription[0].prescription;
             //prescription[i]['prescription_no']
             if(prescription.length > 0){
@@ -232,33 +232,33 @@ $('#case_no').on('change', function(){
                         presc_no = prescription[i]['prescription_no'];
                         date_time = prescription[i]['updated_at'];
                     }
-                    
+
                     $('#add-tr tbody').append('<tr class="only-remv"><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td></tr>');
                 }
                 $('#sub_prisc').attr('href',"{{url('patient/pharmacies')}}/?c_id="+res.case_details[0].case_id+"&s_id="+presc_no);
                 var d_name = $('#presc_no').html();
                 $('#presc_no').html(d_name + presc_no);
-                date_time =  date_time.split(" ");   
+                date_time =  date_time.split(" ");
                 var my_date  = date_time[0];
                 var my_time  = date_time[1];
                 var date = $('#date').html();
                 $('#date').html(date + my_date);
                 var issued = $('#issued').html();
                 $('#issued').html(date + my_time);//msg_doc
-                
+
             }
         }
     })
-    
+
 });
 
 
 </script>
-   
+
 @endsection
 @section('scripts')
     <script>
-        
+
 
     </script>
 @endsection

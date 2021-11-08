@@ -212,7 +212,7 @@
                                                                         @endphp
                                                                         @if (getDiffOfTwoDateInMinute($case->booking_date . ' ' . $end_time) < 0)
                                                                             <button type="button"
-                                                                                onclick="doctorRating('{{ $case->case_id }}')"
+                                                                                onclick="doctorRating('{{ $case->case_id }}','{{ $case->doctor->id }}')"
                                                                                 class="btn btn-sm btn-primary">Rating
                                                                                 review</button>
 
@@ -266,7 +266,7 @@
                 <form class="modal-body" method="POST" action="{{ route('patient.doctor-review') }}">
 
                     @csrf
-                    {{-- <input type="hidden" name="review_doctor_id" id="review_doctor_id" value=""> --}}
+                    <input type="hidden" name="review_doctor_id" id="review_doctor_id" value="">
                     <input type="hidden" name="case_id" id="case_id" value="">
                     <div class="row">
                         <div class="col-sm-12 mb-2">
@@ -342,7 +342,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-2">
-                            <p>To bookmark this doctor in case you want to consult them again click here</p>
+                            <p id="addRemoveFavourite" style="cursor: pointer;">To bookmark this doctor in case you want to consult them again click here</p>
                         </div>
                         <div class="col-sm-12 ask-submit">
                             <button type="submit" class="btn orange-button">Submit</button>
@@ -355,11 +355,41 @@
 @endsection
 @section('scripts')
     <script>
-        function doctorRating(case_id) {
+        function doctorRating(case_id,doctor_id) {
             $('#doct-review').modal('show');
-            // $('#review_doctor_id').val(doctor_id);
+            $('#review_doctor_id').val(doctor_id);
             $('#case_id').val(case_id);
 
+        }
+        $( document ).ready(function() {
+            $('#addRemoveFavourite').click(function(){
+                var doctorId = $('#review_doctor_id').val();
+                addToFavorite(doctorId);
+            });
+            console.log( "ready!" );
+        });
+
+        function addToFavorite(doctorId) {
+            // var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('patient.add-to-favorite') }}",
+                type: 'get',
+                dataType: "json",
+                // data:{state:state,type:type,_token:token}
+                data: {
+                    doctor_id: doctorId
+                }
+            }).done(function(response) {
+                if (typeof response != "undefined" && response.success) {
+                    // if (response.data == '1') {
+                    //     $('#doctor_' + doctorId).addClass('marks');
+                    // } else if (response.data == '2') {
+                    //     $('#doctor_' + doctorId).removeClass('marks');
+                    // }
+
+                    toastr.success(response.message);
+                }
+            });
         }
     </script>
 @endsection

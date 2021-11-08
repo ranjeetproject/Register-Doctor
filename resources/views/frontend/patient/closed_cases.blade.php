@@ -33,8 +33,8 @@
                                                 <td>Dr. {{ $closed_case->doctor->name }}</td>
 
                                                 <td>
-                                                    <button href="#" target="_blank" class="btn blue-button">View
-                                                        Details</button>
+                                                    <a href="{{ route('patient.view-case',$closed_case->case_id) }}" target="_blank" class="btn blue-button" style="padding: 8px 18px;">View
+                                                        Details</a>
                                                 </td>
                                             </tr>
                                             @empty
