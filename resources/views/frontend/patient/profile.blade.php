@@ -38,7 +38,7 @@
                                     <span>Update Profile Image</span>
 
                                 </div>
-                                <span class="patient-cp-link">Change password to <a href="{{ route('patient.change-password') }}">Click here</a></span>
+                                <span class="patient-cp-link">To Change password <a href="{{ route('patient.change-password') }}">Click here</a></span>
                             </div>
                             <div class="row main-form-fild">
                                 {{-- <div class="col-sm-12">
@@ -108,6 +108,15 @@
                                 </div>
                                 <div class="col-sm-12 mb-1">
                                     <label>Address for delivery of drugs if different to above</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group required has-float-label">
+                                        <input type="text" class="form-control {{!empty($user->profile->address) ? 'has-content':''}}" name="address" value="{{$user->profile->address}}" id="paddress" placeholder="Address">
+                                        <label for="paddress">Address</label>
+                                    @error('address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 ">
                                     <div class="form-group required has-float-label">

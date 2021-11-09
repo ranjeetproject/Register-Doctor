@@ -15,7 +15,7 @@
                             <img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png') }}" alt="">
                             <img src="{{ asset('public/images/frontend/images/Booked-Question.png') }}" alt="">
                             <img src="{{ asset('public/images/frontend/images/Prescriptions.png') }}" alt="">
-                            <h4>Booking Requests <br><span>Patient Chose You Accept or Decline</span></h4>
+                            <h4>Booking Requests <br><span>Patient Chose You - Accept or Decline</span></h4>
                         </div>
                     </a>
 
@@ -44,7 +44,7 @@
                         </div>
                     </a> --}}
                     <a href="{{route('doctor.cases',['quick-questions','accepted'])}}" class="card new-crd col-sm-6">
-                        <h3 style="top: 10;
+                        <h3 style="top: 20;
                         position: absolute;
                     ">DON'T FORGET!</h3>
                         <div class="card-cont">
@@ -59,7 +59,7 @@
                     </a>
                     <div class="col-sm-6 Queries">
                 <a href="#">
-                    <h2>Messages<br><small><strong> from Patients, Parmacists, Admin</strong></small></h2>
+                    <h2><span style="font-size: 22px;">Messages</span><br><small><strong> from Patients, Parmacists, Admin</strong></small></h2>
                     <img src="{{ asset('public/images/frontend/images/Hello-icon.png') }}" alt="">
                 </a>
             </div>

@@ -213,12 +213,12 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/Communication-icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Communication Options</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mb-2">
                                     <div class="form-group">
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Quick question</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Fee : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{$user->profile->dr_standard_fee}}">  First Doctor to Take Case
+                                                <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{$user->profile->dr_standard_fee}}">  First Doctor to Take Case
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
@@ -228,12 +228,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mb-2">
                                     <div class="form-group">
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Video</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" class="" disabled>  Set your own fee : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text" name="dr_live_video_fee"  value="{{$user->profile->dr_live_video_fee}}">  Set availability in Your Calendar above
+                                                <input type="checkbox" class="" disabled>  Set your own Rate : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text" name="dr_live_video_fee"  value="{{$user->profile->dr_live_video_fee}}">  Set availability in Your Calendar above
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
@@ -242,12 +242,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mb-2">
                                     <div class="form-group">
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Chat</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" name="" class="" disabled>  Set your own fee : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_live_chat_fee" value="{{$user->profile->dr_live_chat_fee}}">  Set availability in Your Calendar above
+                                                <input type="checkbox" name="" class="" disabled>  Set your own Rate : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_live_chat_fee" value="{{$user->profile->dr_live_chat_fee}}">  Set availability in Your Calendar above
                                             </div>
                                         </div>
                                         <div class="Notifications-on-of">
@@ -256,12 +256,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mb-2">
                                     <div class="form-group">
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Booked Q&A</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" class="" disabled>  <span>Set your own fee :&nbsp;&nbsp;<i class="fas fa-pound-sign"></i></span> <input class="form-control " name="dr_qa_fee" type="text" value="{{$user->profile->dr_qa_fee}}" > Set your max turnaround time
+                                                <input type="checkbox" class="" disabled>  <span style="white-space: nowrap;">Set your own Rate :&nbsp;&nbsp;<i class="fas fa-pound-sign"></i></span> <input class="form-control " name="dr_qa_fee" type="text" value="{{$user->profile->dr_qa_fee}}" > Set your max turnaround time
                                                 for response in Hours or Days
 
                                                 @php
