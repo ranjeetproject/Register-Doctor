@@ -45,9 +45,9 @@
                                     @if ($doctor->profile->dr_live_video_fee_notification == 1)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="questions_type"
-                                                onclick="$('#book_slot').show();" id="exampleRadios1" value="2">
+                                                onclick="$('#book_slot').show();" id="exampleRadios1" value="2" {{ (request()->questions_type == 'live-video') ? 'checked':'' }}>
                                             <label class="form-check-label" for="exampleRadios1">
-                                                Live Video: Price : {{ $doctor->profile->dr_live_video_fee }} per 15 mins
+                                                Live Video: Price : <i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_video_fee }} per 15 mins
                                                 Check availability in Calendar below
                                             </label>
                                         </div>
@@ -55,9 +55,9 @@
                                     @if ($doctor->profile->dr_live_chat_fee_notification == 1)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="questions_type"
-                                                onclick="$('#book_slot').show();" id="exampleRadios2" value="1">
+                                                onclick="$('#book_slot').show();" id="exampleRadios2" value="1" {{ (request()->questions_type == 'live-chat') ? 'checked':'' }}>
                                             <label class="form-check-label" for="exampleRadios2">
-                                                Live Chat : Price : {{ $doctor->profile->dr_live_chat_fee }} per 15 mins
+                                                Live Chat : Price : <i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_chat_fee }} per 15 mins
                                                 Check availability in Calendar below
                                             </label>
                                         </div>
@@ -67,7 +67,7 @@
                                             onclick="$('#book_slot').hide(); $('#case_details').show();" id="exampleRadios2"
                                             value="4">
                                         <label class="form-check-label" for="exampleRadios2">
-                                            Typed Q & A: Price: {{ $doctor->profile->dr_qa_fee }} per 15 mins This doctor's
+                                            Typed Q & A: Price: <i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_qa_fee }} per 15 mins This doctor's
                                             turnaround time : 8 days
                                         </label>
                                     </div>
@@ -190,12 +190,13 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Day</th>
+                                                            <th></th>
                                                             <th>From</th>
                                                             <th>Till</th>
                                                             <th style="text-align: center;">Select <img
                                                                     src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="tooltip"
                                                                     data-placement="top" title=""
-                                                                    data-original-title="One line Definition"></th>
+                                                                    data-original-title='"Live consultations are booked for a minimum of 15 minute time slots e.g. 30 mins, 45 mins etc. You may cancel up to 48 hours before an appointment (subject to 3% admin fee) or rebook with the same doctor (no extra fee). Cancellations less than 48 hours are not reimbursable. If a doctor does not atttend you may either rebook or be fully reimbursed. You can rate the doctor." The 3% is under admin control.'></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="time_slot">
@@ -208,6 +209,7 @@
                                                                         $query->whereIn('time_slot_id', $getBookedSlot);
                                                                     })
                                                                     ->get();
+                                                                    $h = 13;
                                                             @endphp
                                                             @foreach ($time_slots as $slot)
 
@@ -215,10 +217,22 @@
                                                                     <td>{!! date('l', strtotime($current_day->date)) . '  ' . date('F d Y', strtotime($current_day->date)) !!}
                                                                     </td>
                                                                     @if ($time_zone !=1)
+                                                                    <td>
+                                                                        @if (date('i', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))) == 00)
+                                                                            {{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))) }}
+                                                                        @endif
+
+                                                                    </td>
 
                                                                     <td>{{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))) }} </td>
                                                                         <td>{{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->end_time))) }}</td>
                                                                     @else
+                                                                    <td>
+                                                                        @if (date('i', strtotime($slot->start_time)) == 00)
+
+                                                                            {{ date('h:i a', strtotime($slot->start_time)) }}
+                                                                        @endif
+                                                                    </td>
                                                                     <td>{{ date('h:i a', strtotime($slot->start_time)) }}
                                                                     </td>
                                                                     <td>{{ date('h:i a', strtotime($slot->end_time)) }}

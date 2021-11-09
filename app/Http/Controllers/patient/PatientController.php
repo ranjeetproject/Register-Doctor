@@ -769,6 +769,8 @@ class PatientController extends Controller
         $time_slot = '';
 
         $time_zone = Auth::user()->profile->time_zone;
+        // $h = '26';
+        $hdlst = '26';
 
          foreach($available_days as $current_day){
             foreach($current_day->getSlot()->whereNotIn('id',$getBookedSlot)->get() as $slot){
@@ -776,11 +778,26 @@ class PatientController extends Controller
               $time_slot.= '<tr>
               <td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td>';
               if ($time_zone ==1) {
+                  if(date('H', strtotime($slot->start_time)) == $hdlst){
+                    $time_slot.= '<td></td>';
+                  } else {
+
+                    $time_slot.= '<td>'.date('H:i a', strtotime($slot->start_time)).'</td>';
+                  }
+                  $hdlst = date('H', strtotime($slot->start_time));
                 $time_slot.= '<td>'.date('H:i a', strtotime($slot->start_time)).'</td>
                 <td>'.date('H:i a', strtotime($slot->end_time)).'</td>';
                 }
 
                 else {
+                    if(date('H', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))) == $hdlst){
+                        $time_slot.= '<td></td>';
+                    } else {
+                        //   return date('i', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time)));
+
+                        $time_slot.= '<td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td>';
+                      }
+                      $hdlst = date('H', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time)));
                     $time_slot.= '<td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td>
                     <td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->end_time))).'</td>';
                 }

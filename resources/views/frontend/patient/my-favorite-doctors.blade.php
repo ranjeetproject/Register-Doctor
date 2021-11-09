@@ -174,16 +174,19 @@
                                                     <div class="col-md">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->profile->dr_live_chat_fee }} per 15 mins</p>
-                                                        <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
-                                                            class="btn btn-block Book-Live">Book Live Chat</a>
+                                                        {{-- <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
+                                                            class="btn btn-block Book-Live">Book Live Chat</a> --}}
+                                                        <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->id), 'questions_type'=> 'live-chat']) }}"
+                                                            class="btn btn-block patient-book-lc">Book Live Chat</a>
                                                     </div>
                                                     <div class="col-md">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->profile->dr_live_video_fee }} per 15 mins</p>
 
-                                                        <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
-                                                            class="btn btn-block Book-Live">Book Live Video</a>
-                                                        {{-- <button type="submit" class="btn btn-block Book-Live">Book Live Video</button> --}}
+                                                        {{-- <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
+                                                            class="btn btn-block Book-Live">Book Live Video</a> --}}
+                                                        <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->id), 'questions_type'=> 'live-video']) }}"
+                                                            class="btn btn-block patient-book-lc">Book Live Video</a>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <p><i class="fas fa-pound-sign"></i>
