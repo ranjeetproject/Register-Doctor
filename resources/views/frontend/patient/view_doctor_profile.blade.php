@@ -185,7 +185,6 @@
                                         <div class="col-sm-12">
                                             <div class="table-responsive">
 
-
                                                 <table border="0" style=" box-shadow: 0px 0px 32px #ccc;">
                                                     <thead>
                                                         <tr>
@@ -200,7 +199,84 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="time_slot">
-
+                                                        <!-- Static table collapse start -->
+                                                        <tr class="ts-collapse-icon" data-toggle="collapse" data-target="#time_slot_row_1">
+                                                            <td>Monday November 29 2021</td>
+                                                            <td>02:00 am</td>
+                                                            <td>02:00 am</td>
+                                                            <td>02:15 am</td>
+                                                            <td style="text-align: center;">
+                                                                <input type="checkbox" name="time_slot[]" value="105" onclick="caseDetails()">
+                                                            </td>
+                                                        </tr>
+                                                        <tbody id="time_slot_row_1" class="collapse">
+                                                            <tr>
+                                                                <td>Monday November 29 2021</td>
+                                                                <td></td>
+                                                                <td>02:15 am</td>
+                                                                <td>02:30 am</td>
+                                                                <td style="text-align: center;">
+                                                                    <input type="checkbox" name="time_slot[]" value="106" onclick="caseDetails()">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Monday November 29 2021</td>
+                                                                <td></td>
+                                                                <td>02:30 am</td>
+                                                                <td>02:45 am</td>
+                                                                <td style="text-align: center;">
+                                                                    <input type="checkbox" name="time_slot[]" value="107" onclick="caseDetails()">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Monday November 29 2021</td>
+                                                                <td></td>
+                                                                <td>02:45 am</td>
+                                                                <td>03:00 am</td>
+                                                                <td style="text-align: center;">
+                                                                    <input type="checkbox" name="time_slot[]" value="108" onclick="caseDetails()">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tr class="ts-collapse-icon" data-toggle="collapse" data-target="#time_slot_row_2">
+                                                            <td>Monday November 29 2021</td>
+                                                            <td>02:00 am</td>
+                                                            <td>02:00 am</td>
+                                                            <td>02:15 am</td>
+                                                            <td style="text-align: center;">
+                                                                <input type="checkbox" name="time_slot[]" value="105" onclick="caseDetails()">
+                                                            </td>
+                                                        </tr>
+                                                        <tbody id="time_slot_row_2" class="collapse">
+                                                            <tr>
+                                                                <td>Monday November 29 2021</td>
+                                                                <td></td>
+                                                                <td>02:15 am</td>
+                                                                <td>02:30 am</td>
+                                                                <td style="text-align: center;">
+                                                                    <input type="checkbox" name="time_slot[]" value="106" onclick="caseDetails()">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Monday November 29 2021</td>
+                                                                <td></td>
+                                                                <td>02:30 am</td>
+                                                                <td>02:45 am</td>
+                                                                <td style="text-align: center;">
+                                                                    <input type="checkbox" name="time_slot[]" value="107" onclick="caseDetails()">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Monday November 29 2021</td>
+                                                                <td></td>
+                                                                <td>02:45 am</td>
+                                                                <td>03:00 am</td>
+                                                                <td style="text-align: center;">
+                                                                    <input type="checkbox" name="time_slot[]" value="108" onclick="caseDetails()">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <!-- Static table collapse end -->
                                                         @foreach ($get_current_day as $current_day)
                                                             @php
                                                                 $time_slots = $current_day

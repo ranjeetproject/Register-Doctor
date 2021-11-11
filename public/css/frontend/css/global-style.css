@@ -924,3 +924,31 @@ section.news-banner-bx .news-banner-img img{
     background: #ff4d0f;
     color: #fff;
 }
+.ts-collapse-icon{
+    position: relative;
+}
+.ts-collapse-icon:after,
+.ts-collapse-icon[aria-expanded="true"]:after{
+    width: 16px;
+    height: 16px;
+    color: #0d57a2;
+    font-family: "Font Awesome 5 Pro";
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-size: 16px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.ts-collapse-icon:after{
+    content:"\f067";
+}
+.ts-collapse-icon[aria-expanded="true"]:after{
+    content:"\f068";
+}
