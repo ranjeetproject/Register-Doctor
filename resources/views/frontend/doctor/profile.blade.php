@@ -18,7 +18,7 @@
                     </li>
                     <li style="font-size: 14px;">
                         {{-- <a data-toggle="tab" href="#Payment-Details"> --}}
-                            Change password to <a href="{{route('doctor.change-password')}}" style="padding: 0px; font-size: 14px; display:inline;">Click here</a>
+                            To Change password <a href="{{route('doctor.change-password')}}" style="padding: 0px; font-size: 14px; display:inline;">Click here</a>
                         {{-- </a> --}}
                         {{-- <div class="col-sm-12 Mandator">
                             <label>Change password to <a href="{{route('doctor.change-password')}}">Click here</a>  </label>

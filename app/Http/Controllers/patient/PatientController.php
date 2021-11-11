@@ -771,41 +771,92 @@ class PatientController extends Controller
         $time_zone = Auth::user()->profile->time_zone;
         // $h = '26';
         $hdlst = '26';
+        $count_h_s = 0;
 
          foreach($available_days as $current_day){
-            foreach($current_day->getSlot()->whereNotIn('id',$getBookedSlot)->get() as $slot){
+            foreach($current_day->getSlot()->whereNotIn('id',$getBookedSlot)->orderby('start_time')->get() as $slot){
 
-              $time_slot.= '<tr>
-              <td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td>';
-              if ($time_zone ==1) {
-                  if(date('H', strtotime($slot->start_time)) == $hdlst){
-                    $time_slot.= '<td></td>';
-                  } else {
-
-                    $time_slot.= '<td>'.date('H:i a', strtotime($slot->start_time)).'</td>';
-                  }
-                  $hdlst = date('H', strtotime($slot->start_time));
-                $time_slot.= '<td>'.date('H:i a', strtotime($slot->start_time)).'</td>
-                <td>'.date('H:i a', strtotime($slot->end_time)).'</td>';
+            //   $time_slot.= '<tr>
+            //   <td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td>';
+                if ($time_zone ==1) {
+                    if(date('H', strtotime($slot->start_time)) == $hdlst){
+                        // $time_slot.= '<td></td>';
+                        $time_slot.= '<tr>
+                        <td></td>
+                        <td></td>
+                        <td>'.date('H:i a', strtotime($slot->start_time)).'</td>
+                        <td>'.date('H:i a', strtotime($slot->end_time)).'</td>
+                        <td style="text-align: center;">
+                            <input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()">
+                        </td>
+                        </tr>';
+                    } else {
+                            $count_h_s++;
+                            if($count_h_s>1) {
+                                $time_slot.= '</tbody></table></td></tr>';
+                            }
+                            // $time_slot.= '<td>'.date('H:i a', strtotime($slot->start_time)).'</td>';
+                            $time_slot.= '<tr class="ts-collapse-icon" data-toggle="collapse" data-target="#time_slot_row_'.$count_h_s.'">
+                                                                    <td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td>
+                                                                    <td>'.date('H:i a', strtotime($slot->start_time)).'</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td style="text-align: center;">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr id="time_slot_row_'.$count_h_s.'" class="collapse">
+                                                                    <td colspan="5" class="time-slot-td">
+                                                                    <table>
+                                                                    <tbody >
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td>'.date('H:i a', strtotime($slot->start_time)).'</td>
+                                                                        <td>'.date('H:i a', strtotime($slot->end_time)).'</td>
+                                                                        <td style="text-align: center;">
+                                                                            <input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()">
+                                                                        </td>
+                                                                    </tr>';
+                    }
+                    $hdlst = date('H', strtotime($slot->start_time));
+                    // $time_slot.= '<td>'.date('H:i a', strtotime($slot->start_time)).'</td>
+                    // <td>'.date('H:i a', strtotime($slot->end_time)).'</td>';
                 }
 
                 else {
                     if(date('H', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))) == $hdlst){
-                        $time_slot.= '<td></td>';
+                        // $time_slot.= '<td></td>';
+                        $time_slot.= '<tr><td></td><td></td><td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td><td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->end_time))).'</td><td style="text-align: center;"><input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()"></td></tr>';
                     } else {
                         //   return date('i', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time)));
 
-                        $time_slot.= '<td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td>';
-                      }
-                      $hdlst = date('H', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time)));
-                    $time_slot.= '<td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td>
-                    <td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->end_time))).'</td>';
+                        // $time_slot.= '<td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td>';
+                        $count_h_s++;
+                        if($count_h_s>1) {
+                            $time_slot.= '</tbody></table></td></tr>';
+
+                        }
+                        // $time_slot.= '<td>'.date('H:i a', strtotime($slot->start_time)).'</td>';
+                        $time_slot.= '<tr class="ts-collapse-icon" data-toggle="collapse" data-target="#time_slot_row_'.$count_h_s.'"><td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td> <td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td><td></td><td></td><td style="text-align: center;"></td></tr>';
+
+                        $time_slot.= '<tr id="time_slot_row_'.$count_h_s.'" class="collapse">
+                        <td colspan="5" class="time-slot-td">
+                        <table>
+                        <tbody ><tr><td></td><td></td>
+                        <td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td>
+                        <td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->end_time))).'</td>
+                        <td style="text-align: center;"><input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()"></td></tr>';
+                    }
+                    $hdlst = date('H', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time)));
+                    // $time_slot.= '<td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))).'</td>
+                    // <td>'.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->end_time))).'</td>';
                 }
-              $time_slot.= '<td style="text-align: center;"><input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()"></td>
-              </tr>';
+                //   $time_slot.= '<td style="text-align: center;"><input type="checkbox" name="time_slot[]" value="'.$slot->id.'" onclick="caseDetails()"></td>
+                //   </tr>';
             }
 
          }
+         $time_slot.= '</tbody></table></td></tr>';
 
          if(isset( $available_days)){
             // foreach($available_days as $current_day1){

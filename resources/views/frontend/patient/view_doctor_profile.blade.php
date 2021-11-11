@@ -29,7 +29,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <p><span>Name : </span>{{ $doctor->forename . ' ' . $doctor->surname }}</p>
-                                        <p><span>Speciality or Interest : </span> {{ $doctor->profile->dr_speciality }}</p>
+                                        <p><span>Speciality or Interest : </span> {{ $doctor->profile->dr_speciality }}
+                                        </p>
                                         <p><span>About : </span> {{ $doctor->profile->about }}</p>
                                         <p><span>Experience : </span> {{ $doctor->profile->dr_experience }}</p>
                                         <p><span>Qualifications : </span> DM - Neurology, MD - General Medicine, MBBS</p>
@@ -45,9 +46,11 @@
                                     @if ($doctor->profile->dr_live_video_fee_notification == 1)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="questions_type"
-                                                onclick="$('#book_slot').show();" id="exampleRadios1" value="2" {{ (request()->questions_type == 'live-video') ? 'checked':'' }}>
+                                                onclick="$('#book_slot').show();" id="exampleRadios1" value="2"
+                                                {{ request()->questions_type == 'live-video' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="exampleRadios1">
-                                                Live Video: Price : <i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_video_fee }} per 15 mins
+                                                Live Video: Price : <i class="fas fa-pound-sign"></i>
+                                                {{ $doctor->profile->dr_live_video_fee }} per 15 mins
                                                 Check availability in Calendar below
                                             </label>
                                         </div>
@@ -55,9 +58,11 @@
                                     @if ($doctor->profile->dr_live_chat_fee_notification == 1)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="questions_type"
-                                                onclick="$('#book_slot').show();" id="exampleRadios2" value="1" {{ (request()->questions_type == 'live-chat') ? 'checked':'' }}>
+                                                onclick="$('#book_slot').show();" id="exampleRadios2" value="1"
+                                                {{ request()->questions_type == 'live-chat' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="exampleRadios2">
-                                                Live Chat : Price : <i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_live_chat_fee }} per 15 mins
+                                                Live Chat : Price : <i class="fas fa-pound-sign"></i>
+                                                {{ $doctor->profile->dr_live_chat_fee }} per 15 mins
                                                 Check availability in Calendar below
                                             </label>
                                         </div>
@@ -67,7 +72,8 @@
                                             onclick="$('#book_slot').hide(); $('#case_details').show();" id="exampleRadios2"
                                             value="4">
                                         <label class="form-check-label" for="exampleRadios2">
-                                            Typed Q & A: Price: <i class="fas fa-pound-sign"></i> {{ $doctor->profile->dr_qa_fee }} per 15 mins This doctor's
+                                            Typed Q & A: Price: <i class="fas fa-pound-sign"></i>
+                                            {{ $doctor->profile->dr_qa_fee }} per 15 mins This doctor's
                                             turnaround time : 8 days
                                         </label>
                                     </div>
@@ -90,7 +96,7 @@
                                             @php
                                                 $thumbsUpCount = getThumbsUp($doctor->id);
                                             @endphp
-                                            @for ($i=0; $i<$thumbsUpCount; $i++)
+                                            @for ($i = 0; $i < $thumbsUpCount; $i++)
 
                                                 <i class="far fa-thumbs-up reting"></i>
                                             @endfor
@@ -110,7 +116,8 @@
 
                                 <div class="col-sm-12">
                                     <div class="blank-card">
-                                        <h4>Check Doctor's Availability <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt=""
+                                        <h4>Check Doctor's Availability <img
+                                                src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt=""
                                                 data-toggle="tooltip" data-placement="top" title=""
                                                 data-original-title="One line Definition"></h4>
                                     </div>
@@ -139,11 +146,12 @@
                                                 <span class="show_time">
                                                     @foreach ($get_current_day as $current_day)
                                                         @if ($time_zone != 1)
-                                                        {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->from_time))) }} -
-                                                        {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->to_time))) }}
+                                                            {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $current_day->from_time))) }}
+                                                            -
+                                                            {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $current_day->to_time))) }}
                                                         @else
-                                                        {{ date('H:i a', strtotime($current_day->from_time)) }} -
-                                                        {{ date('H:i a', strtotime($current_day->to_time)) }}
+                                                            {{ date('H:i a', strtotime($current_day->from_time)) }} -
+                                                            {{ date('H:i a', strtotime($current_day->to_time)) }}
                                                         @endif
                                                     @endforeach
                                                 </span>
@@ -193,90 +201,18 @@
                                                             <th>From</th>
                                                             <th>Till</th>
                                                             <th style="text-align: center;">Select <img
-                                                                    src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="" data-toggle="tooltip"
-                                                                    data-placement="top" title=""
-                                                                    data-original-title='"Live consultations are booked for a minimum of 15 minute time slots e.g. 30 mins, 45 mins etc. You may cancel up to 48 hours before an appointment (subject to 3% admin fee) or rebook with the same doctor (no extra fee). Cancellations less than 48 hours are not reimbursable. If a doctor does not atttend you may either rebook or be fully reimbursed. You can rate the doctor." The 3% is under admin control.'></th>
+                                                                    src="{{ asset('public/images/frontend/images/ex-icon.png') }}"
+                                                                    alt="" data-toggle="tooltip" data-placement="top"
+                                                                    title=""
+                                                                    data-original-title='"Live consultations are booked for a minimum of 15 minute time slots e.g. 30 mins, 45 mins etc. You may cancel up to 48 hours before an appointment (subject to 3% admin fee) or rebook with the same doctor (no extra fee). Cancellations less than 48 hours are not reimbursable. If a doctor does not atttend you may either rebook or be fully reimbursed. You can rate the doctor." The 3% is under admin control.'>
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="time_slot">
-                                                        <!-- Static table collapse start -->
-                                                        <tr class="ts-collapse-icon" data-toggle="collapse" data-target="#time_slot_row_1">
-                                                            <td>Monday November 29 2021</td>
-                                                            <td>02:00 am</td>
-                                                            <td>02:00 am</td>
-                                                            <td>02:15 am</td>
-                                                            <td style="text-align: center;">
-                                                                <input type="checkbox" name="time_slot[]" value="105" onclick="caseDetails()">
-                                                            </td>
-                                                        </tr>
-                                                        <tbody id="time_slot_row_1" class="collapse">
-                                                            <tr>
-                                                                <td>Monday November 29 2021</td>
-                                                                <td></td>
-                                                                <td>02:15 am</td>
-                                                                <td>02:30 am</td>
-                                                                <td style="text-align: center;">
-                                                                    <input type="checkbox" name="time_slot[]" value="106" onclick="caseDetails()">
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Monday November 29 2021</td>
-                                                                <td></td>
-                                                                <td>02:30 am</td>
-                                                                <td>02:45 am</td>
-                                                                <td style="text-align: center;">
-                                                                    <input type="checkbox" name="time_slot[]" value="107" onclick="caseDetails()">
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Monday November 29 2021</td>
-                                                                <td></td>
-                                                                <td>02:45 am</td>
-                                                                <td>03:00 am</td>
-                                                                <td style="text-align: center;">
-                                                                    <input type="checkbox" name="time_slot[]" value="108" onclick="caseDetails()">
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                        <tr class="ts-collapse-icon" data-toggle="collapse" data-target="#time_slot_row_2">
-                                                            <td>Monday November 29 2021</td>
-                                                            <td>02:00 am</td>
-                                                            <td>02:00 am</td>
-                                                            <td>02:15 am</td>
-                                                            <td style="text-align: center;">
-                                                                <input type="checkbox" name="time_slot[]" value="105" onclick="caseDetails()">
-                                                            </td>
-                                                        </tr>
-                                                        <tbody id="time_slot_row_2" class="collapse">
-                                                            <tr>
-                                                                <td>Monday November 29 2021</td>
-                                                                <td></td>
-                                                                <td>02:15 am</td>
-                                                                <td>02:30 am</td>
-                                                                <td style="text-align: center;">
-                                                                    <input type="checkbox" name="time_slot[]" value="106" onclick="caseDetails()">
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Monday November 29 2021</td>
-                                                                <td></td>
-                                                                <td>02:30 am</td>
-                                                                <td>02:45 am</td>
-                                                                <td style="text-align: center;">
-                                                                    <input type="checkbox" name="time_slot[]" value="107" onclick="caseDetails()">
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Monday November 29 2021</td>
-                                                                <td></td>
-                                                                <td>02:45 am</td>
-                                                                <td>03:00 am</td>
-                                                                <td style="text-align: center;">
-                                                                    <input type="checkbox" name="time_slot[]" value="108" onclick="caseDetails()">
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                        <!-- Static table collapse end -->
+                                                        @php
+                                                            $count_h_s = 0;
+                                                            $hdlst = '26';
+                                                        @endphp
                                                         @foreach ($get_current_day as $current_day)
                                                             @php
                                                                 $time_slots = $current_day
@@ -285,41 +221,135 @@
                                                                         $query->whereIn('time_slot_id', $getBookedSlot);
                                                                     })
                                                                     ->get();
-                                                                    $h = 13;
+                                                                $h = 13;
                                                             @endphp
                                                             @foreach ($time_slots as $slot)
+                                                                @if ($time_zone == 1)
+                                                                    @if (date('H', strtotime($slot->start_time)) == $hdlst)
 
-                                                                <tr>
-                                                                    <td>{!! date('l', strtotime($current_day->date)) . '  ' . date('F d Y', strtotime($current_day->date)) !!}
-                                                                    </td>
-                                                                    @if ($time_zone !=1)
-                                                                    <td>
-                                                                        @if (date('i', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))) == 00)
-                                                                            {{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))) }}
-                                                                        @endif
-
-                                                                    </td>
-
-                                                                    <td>{{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time))) }} </td>
-                                                                        <td>{{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->end_time))) }}</td>
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td>{{ date('H:i a', strtotime($slot->start_time)) }}
+                                                                            </td>
+                                                                            <td>{{ date('H:i a', strtotime($slot->end_time)) }}
+                                                                            </td>
+                                                                            <td style="text-align: center;">
+                                                                                <input type="checkbox" name="time_slot[]"
+                                                                                    value="'.$slot->id.'"
+                                                                                    onclick="caseDetails()">
+                                                                            </td>
+                                                                        </tr>
                                                                     @else
-                                                                    <td>
-                                                                        @if (date('i', strtotime($slot->start_time)) == 00)
+                                                                        @php
+                                                                            $count_h_s++;
+                                                                        @endphp
 
-                                                                            {{ date('h:i a', strtotime($slot->start_time)) }}
+                                                                        @if ($count_h_s > 1)
+                                                                                </tbody>
+                                                                            </table>
+                                                                            </td>
+                                                                            </tr>
                                                                         @endif
-                                                                    </td>
-                                                                    <td>{{ date('h:i a', strtotime($slot->start_time)) }}
-                                                                    </td>
-                                                                    <td>{{ date('h:i a', strtotime($slot->end_time)) }}
-                                                                    </td>
+                                                                        <tr class="ts-collapse-icon" data-toggle="collapse"
+                                                                            data-target="#time_slot_row_{{ $count_h_s }}">
+                                                                            <td>{{ date('l', strtotime($current_day->date)) . '  ' . date('F d Y', strtotime($current_day->date)) }}
+                                                                            </td>
+                                                                            <td>{{ date('H:i a', strtotime($slot->start_time)) }}</td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td style="text-align: center;">
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr id="time_slot_row_{{ $count_h_s }}" class="collapse">
+                                                                            <td colspan="5" class="time-slot-td">
+                                                                                <table>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td></td>
+                                                                                            <td></td>
+                                                                                            <td>{{ date('H:i a', strtotime($slot->start_time)) }}
+                                                                                            </td>
+                                                                                            <td>{{ date('H:i a', strtotime($slot->end_time)) }}
+                                                                                            </td>
+                                                                                            <td style="text-align: center;">
+                                                                                                <input type="checkbox" name="time_slot[]"
+                                                                                                    value="{{ $slot->id }}"
+                                                                                                    onclick="caseDetails()">
+                                                                                            </td>
+                                                                                        </tr>
                                                                     @endif
-                                                                    <td style="text-align: center;"><input type="checkbox"
-                                                                            name="time_slot[]" onclick="caseDetails()"
-                                                                            value="Bike"></td>
-                                                                </tr>
-                                                            @endforeach
+                                                                    @php
+                                                                        $hdlst = date('H', strtotime($slot->start_time));
+                                                                    @endphp
+                                                            @else
+
+                                                                @if(date('H',
+                                                                strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time)))
+                                                                == $hdlst)
+
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $current_day->date, $slot->start_time))) }}
+                                                                        </td>
+                                                                        <td>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $current_day->date, $slot->end_time))) }}
+                                                                        </td>
+                                                                        <td style="text-align: center;"><input type="checkbox"
+                                                                                name="time_slot[]" value="{{ $slot->id }}"
+                                                                                onclick="caseDetails()"></td>
+                                                                    </tr>
+                                                                @else
+                                                                    @php
+
+                                                                        $count_h_s++;
+                                                                    @endphp
+
+                                                                    @if ($count_h_s > 1)
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    @endif
+                                                                    <tr class="ts-collapse-icon" data-toggle="collapse"
+                                                                        data-target="#time_slot_row_{{ $count_h_s }}">
+                                                                        <td>{{ date('l', strtotime($current_day->date)) . '  ' . date('F d Y', strtotime($current_day->date)) }}
+                                                                        </td>
+                                                                        <td>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $current_day->date, $slot->start_time))) }}
+                                                                        </td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td style="text-align: center;"></td>
+                                                                    </tr>
+
+                                                                    <tr id="time_slot_row_{{ $count_h_s }}" class="collapse">
+                                                                        <td colspan="5" class="time-slot-td">
+                                                                            <table>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $current_day->date, $slot->start_time))) }}
+                                                                                        </td>
+                                                                                        <td>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $current_day->date, $slot->end_time))) }}
+                                                                                        </td>
+                                                                                        <td style="text-align: center;"><input type="checkbox"
+                                                                                                name="time_slot[]" value="{{ $slot->id }}"
+                                                                                                onclick="caseDetails()"></td>
+                                                                                    </tr>
+                                                                @endif
+                                                                @php
+                                                                    $hdlst = date('H', strtotime(timezoneAdjustmentFetch($time_zone, $current_day->date, $slot->start_time)));
+                                                                @endphp
+
+
+                                                            @endif
+
                                                         @endforeach
+                                                    @endforeach
+
+                                                    </tbody></table></td></tr>
 
                                                     </tbody>
                                                 </table>
@@ -339,7 +369,8 @@
 
                                     @csrf
 
-                                    <input type="hidden" name="booking_date" id="booking_date" value="{{ date('Y-m-d') }}">
+                                    <input type="hidden" name="booking_date" id="booking_date"
+                                        value="{{ date('Y-m-d') }}">
                                     <input type="hidden" name="doctor_id"
                                         value=" {{ Crypt::decryptString(Request::segment(3)) }}">
 
@@ -352,9 +383,10 @@
                                         <label for="exampleFormControlFile1">Upload Attachments <i
                                                 class="fal fa-paperclip"></i></label>
                                         <input type="file" name="case_file[]" class="form-control-file"
-                                            id="exampleFormControlFile1" style="opacity: 0; margin-top: -35px;"
-                                            multiple accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right" title=""
-                                            data-original-title="One line definition" src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="">
+                                            id="exampleFormControlFile1" style="opacity: 0; margin-top: -35px;" multiple
+                                            accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right"
+                                            title="" data-original-title="One line definition"
+                                            src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="">
                                     </div>
                                     <div class="form-group">
                                         <div class="file-count">
@@ -441,16 +473,20 @@
                                 available_time += value.from_time + '-' + value.to_time;
                                 available_time += '<br>';
                             });
+                            console.log('====================================');
+                            console.log(response.time_slot);
+                            console.log('====================================');
                             $('.show_time').html(available_time);
-                            $('#time_slot').html(response.time_slot);
+                            $('tbody#time_slot').html(response.time_slot);
+                            // $('#time_slot').html('<tr><td>hi</td></tr><tbody><tr><td>hi</td></tr><tr><td>hi</td></tr></tbody><tbody><tr><td>hi</td></tr><tr><td>hi</td></tr></tbody>');
 
 
                         }
                     });
-                 }
+                }
             });
 
-            $('input#exampleFormControlFile1').change(function(){
+            $('input#exampleFormControlFile1').change(function() {
                 var files = $(this)[0].files;
                 $('#count_up_attach').html(files.length);
                 // if(files.length > 10){

@@ -59,7 +59,7 @@
                     </a>
                     <div class="col-sm-6 Queries">
                 <a href="#">
-                    <h2><span style="font-size: 22px;">Messages</span><br><small><strong> from Patients, Parmacists, Admin</strong></small></h2>
+                    <h2><span style="font-size: 22px;">Messages</span><br><small><strong> from Patients, Pharmacists, Admin</strong></small></h2>
                     <img src="{{ asset('public/images/frontend/images/Hello-icon.png') }}" alt="">
                 </a>
             </div>
