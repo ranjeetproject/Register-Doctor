@@ -952,3 +952,26 @@ section.news-banner-bx .news-banner-img img{
 .ts-collapse-icon[aria-expanded="true"]:after{
     content:"\f068";
 }
+#time_slot tr td:nth-child(1),
+.Available-table-details table tr th:nth-child(1){
+    width: 30%;
+}
+#time_slot tr td:nth-child(2),
+.Available-table-details table tr th:nth-child(2){
+    width: 20%;
+}
+#time_slot tr td:nth-child(3),
+.Available-table-details table tr th:nth-child(3){
+    width: 20%;
+}
+#time_slot tr td:nth-child(4),
+.Available-table-details table tr th:nth-child(4){
+    width: 20%;
+}
+#time_slot tr td:nth-child(5),
+.Available-table-details table tr th:nth-child(5){
+    width: 10%;
+}
+#time_slot tr td.time-slot-td{
+    padding: 0;
+}
