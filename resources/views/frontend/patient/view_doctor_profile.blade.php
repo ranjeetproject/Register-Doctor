@@ -188,7 +188,7 @@
                                     </div>
                                     <div class="row Available-table-details">
                                         <div class="col-sm-12">
-                                            <h4 class="Available-Time">Available Timesolots</h4>
+                                            <h4 class="Available-Time">Available Timeslots</h4>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="table-responsive">
@@ -253,7 +253,11 @@
                                                                         @endif
                                                                         <tr class="ts-collapse-icon" data-toggle="collapse"
                                                                             data-target="#time_slot_row_{{ $count_h_s }}">
-                                                                            <td>{{ date('l', strtotime($current_day->date)) . '  ' . date('F d Y', strtotime($current_day->date)) }}
+                                                                            <td>
+                                                                                @if ($count_h_s == 1)
+
+                                                                                {{ date('l', strtotime($current_day->date)) . '  ' . date('F d Y', strtotime($current_day->date)) }}
+                                                                                @endif
                                                                             </td>
                                                                             <td>{{ date('H:i a', strtotime($slot->start_time)) }}</td>
                                                                             <td></td>
@@ -314,7 +318,11 @@
                                                                     @endif
                                                                     <tr class="ts-collapse-icon" data-toggle="collapse"
                                                                         data-target="#time_slot_row_{{ $count_h_s }}">
-                                                                        <td>{{ date('l', strtotime($current_day->date)) . '  ' . date('F d Y', strtotime($current_day->date)) }}
+                                                                        <td>
+                                                                            @if ($count_h_s == 1)
+
+                                                                            {{ date('l', strtotime($current_day->date)) . '  ' . date('F d Y', strtotime($current_day->date)) }}
+                                                                            @endif
                                                                         </td>
                                                                         <td>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $current_day->date, $slot->start_time))) }}
                                                                         </td>

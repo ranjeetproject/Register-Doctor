@@ -9,7 +9,9 @@
                         <ol class="breadcrumb Pharmacist-doc-com">
                             <li class="breadcrumb-item active">How do you want your Prescription sent ? <img
                                     src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt=""
-                                    data-toggle="tooltip" data-placement="top" title="Info icon to read: You can have your prescription posted to you or sent electronically after choosing a Pharmacy."></li>
+                                    data-toggle="tooltip" data-placement="top"
+                                    title="Info icon to read: You can have your prescription posted to you or sent electronically after choosing a Pharmacy.">
+                            </li>
                         </ol>
                     </nav>
                     <div class="row">
@@ -37,9 +39,12 @@
                                                 class="max-w-22"></li>
                                         <li>In the event of the Pharmacist having a query you may message the doctor from
                                             your lefthand navigation
-                                            menu (<a href="{{ route('patient.chats',request()->c_id) }}"> Prescriptions Issued</a>) e.g. give the Pharmacist's telephone number so they can talk direct</li>
+                                            menu (<a href="{{ route('patient.chats', request()->c_id) }}"> Prescriptions
+                                                Issued</a>) e.g. give the Pharmacist's telephone number so they can talk
+                                            direct</li>
                                     </ul>
-                                    <p class="pmarg-top"><a href="{{ route('patient.profile') }}" target="_blank">Click</a> to check your delivery address is correct</p>
+                                    <p class="pmarg-top"><a href="{{ route('patient.profile') }}"
+                                            target="_blank">Click</a> to check your delivery address is correct</p>
                                     <form action="" method="post" class="Pharmacy-loc">
                                         @csrf
 
@@ -67,31 +72,41 @@
                                             (otherwise use postal option above)
                                             <ul class="sub-cont">
                                                 <li>
-                                                    After selecting a Pharmacy contact them (details below) e.g. is the drug in stock, do they deliver?
+                                                    After selecting a Pharmacy contact them (details below) e.g. is the drug
+                                                    in stock, do they deliver?
                                                 </li>
                                                 <li> Give the Pharmacy your Prescription Number(s) below quoting
                                                     Registered-Doctor.com (located in your Lefthand Navigation Menu under
                                                     Prescriptions Issued).</li>
-                                                <li> Each drug has a prescription number so for 3 drugs provide 3
-                                                    prescription numbers</li>
+                                                {{-- <li> Each drug has a prescription number so for 3 drugs provide 3
+                                                    prescription numbers</li> --}}
                                                 <li> You can also send the Pharmacist your Prescription Number via this
                                                     website</li>
                                             </ul>
                                         </li>
-                                        <li><a href="{{ route('patient.chats', request()->c_id) }}" target="_blank"> You can message the doctor from your Lefthand Navigation Menu under
-                                            Prescriptions Issued</a></li>
+                                        <li>In the event of the Pharmacist having a query you may message the doctor from
+                                            your lefthand navigation menu (<a
+                                                href="{{ route('patient.chats', request()->c_id) }}"
+                                                target="_blank">Prescriptions Issued</a>) e.g. give the pharmacist's
+                                            telephone number so they can talk direct</li>
+                                        {{-- <li><a href="{{ route('patient.chats', request()->c_id) }}" target="_blank"> You can message the doctor from your Lefthand Navigation Menu under
+                                            Prescriptions Issued</a></li> --}}
                                         <li>The Pharmacist bills you direct for the cost of the drug or any delivery costs
+                                            <img src="http://localhost:82/branium/registered-doctor/public/images/frontend/images/ex-icon.png"
+                                                alt="" data-toggle="tooltip" data-placement="top" title=""
+                                                class="max-w-22" data-original-title="One line Definition">
                                         </li>
                                     </ul>
                                     <p class="pmarg-top"><strong>FOR URGENT REQUESTS CONTACT PHARMACY FIRST TO ENSURE
                                             DRUG IS IN STOCK </strong></p>
-                                    <p><a href="{{ route('patient.profile') }}" target="_blank">Click</a> to check your delivery address is correct</p>
+                                    <p><a href="{{ route('patient.profile') }}" target="_blank">Click</a> to check your
+                                        delivery address is correct</p>
                                     <div class="row justify-content-end">
                                         <!-- <div class="col-sm-6">
-                                                <form action="" method="post" class="Pharmacy-loc">
-                                                    <input type="text" class="form-control" placeholder="Search for Special Pharmacy – Location">
-                                                </form>
-                                            </div> -->
+                                                    <form action="" method="post" class="Pharmacy-loc">
+                                                        <input type="text" class="form-control" placeholder="Search for Special Pharmacy – Location">
+                                                    </form>
+                                                </div> -->
                                     </div>
 
                                     @foreach ($data['pharmacies'] as $pharmaci)
@@ -102,7 +117,8 @@
                                                     alt=""> H Pharmacy
                                             </div>
                                             <div class="card-body">
-                                                <p><span>Pharmacy Name : </span> {{ $pharmaci->profile->pharmacy_name }}</p>
+                                                <p><span>Pharmacy Name : </span> {{ $pharmaci->profile->pharmacy_name }}
+                                                </p>
                                                 <p><span>Location : </span> {{ $pharmaci->profile->location }}</p>
                                                 <p><span>Address : </span> {{ $pharmaci->profile->address }}</p>
                                                 <p><span>Contact : </span> {{ $pharmaci->profile->telephone1 }}</p>
@@ -209,7 +225,8 @@
                                                                 class="pharma_sub btn blue-button">send prescription No.
                                                                 electronically</a> <img
                                                                 src="{{ asset('public/images/frontend/images/ex-icon.png') }}"
-                                                                alt="" data-toggle="modal" data-target="#Pharmacy-popup" title='Info icon to state "To use this Pharmacy give them your prescription number and they will find your prescription on this website. You can also send the prescription on this website. You can also send the prescription number electronically to them."'>
+                                                                alt="" data-toggle="modal" data-target="#Pharmacy-popup"
+                                                                title='Info icon to state "To use this Pharmacy give them your prescription number and they will find your prescription on this website. You can also send the prescription on this website. You can also send the prescription number electronically to them."'>
                                                         </p>
                                                     @else
                                                         <p style="background: green;color: #fff;padding: 10px;">

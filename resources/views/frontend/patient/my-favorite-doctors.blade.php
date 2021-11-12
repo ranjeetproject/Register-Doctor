@@ -163,7 +163,7 @@
                                                             {{ $doctor->profile->dr_live_chat_fee_notification == 1 ? 'Live Chat,' : '' }}
                                                             {{ $doctor->profile->dr_live_video_fee_notification == 1 ? ' Live Video,' : '' }}{{ $doctor->profile->dr_qa_fee_notification == 1 ? ' Typed Q&A,' : '' }}
                                                         </p>
-                                                        <p>Sees : {{ ucfirst($doctor->profile->dr_see) }}</p>
+                                                        <p>Sees Adults or Kids : {{ ucfirst($doctor->profile->dr_see) }}</p>
                                                         <p>Prescriber online :
                                                             {{ !empty($doctor->admin_verified_at) ? 'Yes' : 'No' }} </p>
 
@@ -256,7 +256,7 @@
                                                             {{ $doctor->doctor->profile->dr_live_chat_fee_notification == 1 ? 'Live Chat,' : '' }}
                                                             {{ $doctor->doctor->profile->dr_live_video_fee_notification == 1 ? ' Live Video,' : '' }}{{ $doctor->doctor->profile->dr_qa_fee_notification == 1 ? ' Typed Q&A,' : '' }}
                                                         </p>
-                                                        <p>Sees : {{ ucfirst($doctor->doctor->profile->dr_see) }}</p>
+                                                        <p>Sees Adults or Kids : {{ ucfirst($doctor->doctor->profile->dr_see) }}</p>
                                                         <p>Prescriber online :
                                                             {{ !empty($doctor->admin_verified_at) ? 'Yes' : 'No' }} </p>
 
