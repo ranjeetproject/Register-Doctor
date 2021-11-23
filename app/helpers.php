@@ -212,55 +212,76 @@ function findOutBSTStartEndDate($year){
     return [$start_date, $end_date];
 }
 
-function timezoneAdjustmentFetch($timezone, $date, $time) {
-    $year = date('Y', strtotime($date));
-    $dateTime = $date.' '.$time;
-    // dd($dateTime);
-    $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));
-    $end_date = date('Y-m-d 01:00:00', strtotime('last sunday of October ' . $year));
-    // dd($dateTime, $start_date, strtotime($dateTime) - strtotime($start_date));
-    // $date1=date_create("2013-03-15");
-    // $date2=date_create("2013-12-12");
-    // $diff=date_diff($date1,$date2);
-    // echo $diff->format("%R%a");&& $date > $end_date)
-    if((strtotime($start_date) <= strtotime($dateTime) )&& ( strtotime($dateTime)<  strtotime($end_date)) ) {
-        $timestamp = strtotime($time) + 60*60;
+function d_timezone()
+{
+  	// Initialize cURL.
+    $ch = curl_init();
 
-        return date('H:i', $timestamp);
-    } else {
-        return $time;
-    }
-    // switch ($timezone) {
-    //     case "GMT":
-    //         return $dateTime;
-    //       break;
-    //     case "BST":
-    //         return Carbon::parse($dateTime)->addHour();
-    //       break;
-    //     default:
-    //     return $dateTime;
+	// Set the URL that you want to GET by using the CURLOPT_URL option.
+	curl_setopt($ch, CURLOPT_URL, 'https://ipgeolocation.abstractapi.com/v1/?api_key=90ecf805e4b5424bae7a7eff374a9307');
+
+	// Set CURLOPT_RETURNTRANSFER so that the content is returned as a variable.
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+	// Set CURLOPT_FOLLOWLOCATION to true to follow redirects.
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+	// Execute the request.
+	$data = curl_exec($ch);
+
+	// Close the cURL handle.
+	curl_close($ch);
+
+	// Print the data out onto the page.
+	// echo $data;
+	$data_obj = json_decode($data);
+    // dd($data_obj);
+    return $data_obj->timezone->name;
+}
+
+function timezoneAdjustmentFetch($timezone, $date, $time) {
+    // https://ipgeolocation.abstractapi.com/v1/?api_key=403446a0b17545e696d6159ac5d2d48c&ip_address=198.16.66.124
+    // https://timezone.abstractapi.com/v1/convert_time?api_key=3395c724236f484bb6eaf53d49d8b3cf&base_location=Oxford, United Kingdom&base_datetime=2020-05-18 07:00:00&target_location=west_bengal, in
+    // $year = date('Y', strtotime($date));
+    // $dateTime = $date.' '.$time;
+    // // dd($dateTime);
+    // $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));
+    // $end_date = date('Y-m-d 01:00:00', strtotime('last sunday of October ' . $year));
+
+    // if((strtotime($start_date) <= strtotime($dateTime) )&& ( strtotime($dateTime)<  strtotime($end_date)) ) {
+    //     $timestamp = strtotime($time) + 60*60;
+
+    //     return date('H:i', $timestamp);
+    // } else {
+    //     return $time;
     // }
+    $datetime = $date.' '.$time;
+    $tz_from = 'UTC';
+    $tz_to = $timezone;
+    $format = 'Y-m-d H:i:s';
+    // echo $datetime . "\n";
+    $dt = new DateTime($datetime, new \DateTimeZone($tz_from));
+    $dt->setTimeZone(new \DateTimeZone($tz_to));
+    return $dt->format($format);
+
 }
 
 function timezoneAdjustmentStore($timezone, $dateTime) {
-    $year = date('Y', strtotime($dateTime));
-    $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));
-    $end_date = date('Y-m-d 02:00:00', strtotime('last sunday of October ' . $year));
-    if($start_date <= $dateTime && $dateTime > $end_date) {
-        return Carbon::parse($dateTime)->subHour();
-    } else {
-        return $dateTime;
-    }
-    // switch ($timezone) {
-    //     case "GMT":
-    //         return $dateTime;
-    //       break;
-    //     case "BST":
-    //         return Carbon::parse($dateTime)->subHour();
-    //       break;
-    //     default:
+    // $year = date('Y', strtotime($dateTime));
+    // $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));
+    // $end_date = date('Y-m-d 02:00:00', strtotime('last sunday of October ' . $year));
+    // if($start_date <= $dateTime && $dateTime > $end_date) {
+    //     return Carbon::parse($dateTime)->subHour();
+    // } else {
     //     return $dateTime;
     // }
+    $tz_from = $timezone;
+    $tz_to = 'UTC';
+    $format = 'Y-m-d H:i:s';
+    // echo $datetime . "\n";
+    $dt = new DateTime($datetime, new \DateTimeZone($tz_from));
+    $dt->setTimeZone(new \DateTimeZone($tz_to));
+    return $dt->format($format);
 }
 
 ?>

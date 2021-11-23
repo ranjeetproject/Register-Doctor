@@ -16,7 +16,8 @@
                     </nav>
 
                     @php
-                        $time_zone = Auth::user()->profile->time_zone;
+                        // $time_zone = Auth::user()->profile->time_zone;
+                        $time_zone = d_timezone();
                     @endphp
                     <form action="{{ route('patient.create-case') }}" method="post" enctype="multipart/form-data">
                         <div class="row">
@@ -145,14 +146,14 @@
                                             <h3>Doctor Availability :<br>
                                                 <span class="show_time">
                                                     @foreach ($get_current_day as $current_day)
-                                                        @if ($time_zone != 1)
+                                                        {{-- @if ($time_zone != 1) --}}
                                                             {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $current_day->from_time))) }}
                                                             -
                                                             {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $current_day->to_time))) }}
-                                                        @else
+                                                        {{-- @else
                                                             {{ date('H:i a', strtotime($current_day->from_time)) }} -
                                                             {{ date('H:i a', strtotime($current_day->to_time)) }}
-                                                        @endif
+                                                        @endif --}}
                                                     @endforeach
                                                 </span>
                                             </h3>
@@ -224,7 +225,7 @@
                                                                 $h = 13;
                                                             @endphp
                                                             @foreach ($time_slots as $slot)
-                                                                @if ($time_zone == 1)
+                                                                {{-- @if ($time_zone == 1)
                                                                     @if (date('H', strtotime($slot->start_time)) == $hdlst)
 
                                                                         <tr>
@@ -286,7 +287,7 @@
                                                                     @php
                                                                         $hdlst = date('H', strtotime($slot->start_time));
                                                                     @endphp
-                                                            @else
+                                                            @else --}}
 
                                                                 @if(date('H',
                                                                 strtotime(timezoneAdjustmentFetch($time_zone,$current_day->date,$slot->start_time)))
@@ -352,7 +353,7 @@
                                                                 @endphp
 
 
-                                                            @endif
+                                                            {{-- @endif --}}
 
                                                         @endforeach
                                                     @endforeach
@@ -411,18 +412,10 @@
                                 <button type="submit" class="btn blue-button">Book Now</button>
                             </div>
 
-
-
-
-
                         </div>
                     </form>
                 </div>
             </div>
-
-
-
-
         </div>
     </div>
     </div>

@@ -33,8 +33,9 @@
                                     <div class="row">
 
                                         <div class="col-sm-6">
-                                            
 
+
+                                            {{-- @dump($priscriptions) --}}
                                             <div class="form-group">
 
                                                 <label >Prescription No.</label>
@@ -42,7 +43,6 @@
                                                 <select name="case_no" id="case_no"  class="form-control select_search">
 
                                                     <option value="">Select Prescription No.</option>
-
                                                    @foreach($priscriptions as $prisc)
                                                    <option value="{{$prisc->case_id}}">{{$prisc->priscription_id}}</option>
                                                    @endforeach
@@ -59,7 +59,7 @@
                                             <p id="date"><strong>Date: </strong></p>
                                             <p id="issued"><strong>Issued: </strong></p>
 
-                                            
+
                                         </div>
 
                                     </div>
@@ -76,13 +76,13 @@
 
 
 
-                                        <table class="table Live-Chat add-edt-table-details" id="add-tr"> 
+                                        <table class="table Live-Chat add-edt-table-details" id="add-tr">
 
                                           <thead>
 
                                               <tr>
 
-                                              
+
 
                                                   <td>Drug </td>
 
@@ -95,14 +95,14 @@
                                                   <td>Duration</td>
 
                                                   <td>Comments</td>
-                                                  
+
                                               </tr>
 
                                             </thead>
 
                                             <tbody>
 
-                                               
+
                                             </tbody>
 
                                         </table>
@@ -112,7 +112,7 @@
                                 </div>
 
                                 <div class="col-sm-12" style="display:none;">
-                                
+
                                     <a id="msg_doc" href="#" target="_blank" class="btn blue-button">Message Doctor</a>
                                     <a id="sub_prisc" href="#" target="_blank" class="btn blue-button">Submit Priscription</a>
 
@@ -122,7 +122,7 @@
 
                         </form>
 
-                        
+
 
                     </div>
 
@@ -133,7 +133,7 @@
 
 
     <!-- modal -->
-    
+
 <div class="modal fade add-edit-prs" id="finalprisc" >
 
 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -154,7 +154,7 @@
 
                     <div class="form-group text-center">
                         <button type="button" id="final_prisc" class="add-submit btn blue-button Prescription-submit ">Submit</button>
-                        
+
                     </div>
                 </div>
             </form>
@@ -167,9 +167,9 @@
 
 </div>
 
-      
 
-    
+
+
 @endsection
 @section('scripts')
 <script>
@@ -221,7 +221,7 @@ $('#case_no').on('change', function(){
             var prescription =res.prescription[0].prescription;
             //prescription[i]['prescription_no']
             if(prescription.length > 0){
-                
+
                 $('#msg_doc').attr('href',"{{url('patient/chats')}}/"+res.case_details[0].case_id);
                 $('#doc_name').html( '<strong>Paitent Name: </strong>'+res.case_details[0].doctor.name);
                 var presc_no =0;
@@ -232,37 +232,37 @@ $('#case_no').on('change', function(){
                         presc_no = prescription[i]['prescription_no'];
                         date_time = prescription[i]['updated_at'];
                     }
-                    
+
                     $('#add-tr tbody').html('<tr class="only-remv"><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td></tr>');
                 }
                 $('#sub_prisc').attr('href',"{{url('patient/pharmacies')}}/?c_id="+res.case_details[0].case_id+"&s_id="+presc_no);
                 //var d_name = $('#presc_no').html();
                 $('#presc_no').html( '<strong>Prescription No.: </strong>'+presc_no);
-                date_time =  date_time.split(" ");   
+                date_time =  date_time.split(" ");
                 var my_date  = date_time[0];
                 var my_time  = date_time[1];
                // var date = $('#date').html();
                 $('#date').html('<strong>Date: </strong>'+my_date);
                 //var issued = $('#issued').html();
                 $('#issued').html('<strong>Issued: </strong>'+my_time);//msg_doc
-                
+
             }else{
                 //
             }
         }
     })
-    
+
 });
 $(document).ready(function() {
     $('.select_search').select2();
 });
 
 </script>
-   
+
 @endsection
 @section('scripts')
     <script>
-        
+
 
     </script>
 @endsection

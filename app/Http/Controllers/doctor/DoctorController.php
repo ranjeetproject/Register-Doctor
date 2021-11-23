@@ -393,16 +393,18 @@ class DoctorController extends Controller
                 }
 
                 DB::beginTransaction();
+                $time_zone = d_timezone();
+
                 $available_day = new DoctorAvailableDays;
                 $available_day->user_id = $user->id;
                 $available_day->date = $date;
-                $available_day->from_time = $request->from_time;
-                $available_day->to_time = $request->to_time;
+                $available_day->from_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time)));
+                $available_day->to_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time)));
                 $available_day->save();
 
                 $number_of_slot = $total_minutes/15;
-                $from_time = Carbon::parse($request->from_time);
-                $to_time =Carbon::parse($request->from_time)->addMinutes(15);
+                $from_time = Carbon::parse($request->from_time,$time_zone)->setTimezone('UTC');
+                $to_time =Carbon::parse($request->from_time,$time_zone)->setTimezone('UTC')->addMinutes(15);
 
 
 
@@ -452,27 +454,39 @@ class DoctorController extends Controller
     public function editAvailableDay(Request $request)
     {
         $user = Auth::guard('siteDoctor')->user();
+        $time_zone = d_timezone();
         if(!empty($request->available_day_id)){
+            //for single edit
             $id = $request->available_day_id;
-            $available_day = DoctorAvailableDays::find($id);
+            $available = DoctorAvailableDays::find($id);
+            // dd($available_day);
+            $available_da['from_time'] = date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->from_time)));
+            $available_da['to_time'] = date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->to_time)));
+            $available_da['date'] = $available->date;
+            $available_da['id'] = $available->id;
+            $available_da['user_id'] = $available->user_id;
+            // $available_d[] = $available_da;
+            $available_day = $available_da;
         }elseif (!empty($request->date)) {
             $date = str_replace('/','-',$request->date);
             $date = date('Y-m-d',strtotime($date));
             $available_day = DoctorAvailableDays::where('date',$date)->get();
             // dd($available_day );
-            $time_zone = $user->profile->time_zone;
+            // $time_zone = $user->profile->time_zone;
+
+
             foreach($available_day as $available) {
-                if($time_zone == 2) {
+                // if($time_zone == 2) {
 
-                    $available_da['from_time'] = timezoneAdjustmentFetch($time_zone, $available->date, $available->from_time);
-                    $available_da['to_time'] = timezoneAdjustmentFetch($time_zone, $available->date, $available->to_time);
+                    $available_da['from_time'] = date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->from_time)));
+                    $available_da['to_time'] = date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->to_time)));
                     $available_da['date'] = $available->date;
-                } else {
+                // } else {
 
-                    $available_da['from_time'] = $available->from_time;
-                    $available_da['to_time'] = $available->to_time;
-                    $available_da['date'] = $available->date;
-                }
+                //     $available_da['from_time'] = $available->from_time;
+                //     $available_da['to_time'] = $available->to_time;
+                //     $available_da['date'] = $available->date;
+                // }
                 $available_d[] = $available_da;
             }
             $available_day = $available_d;
@@ -514,13 +528,13 @@ class DoctorController extends Controller
             // $available_day = new DoctorAvailableDays;
             $available_day->user_id = $user->id;
             $available_day->date = $date;
-            $available_day->from_time = $request->from_time;
-            $available_day->to_time = $request->to_time;
+            $available_day->from_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time)));
+            $available_day->to_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time)));
             $available_day->save();
 
             $number_of_slot = $total_minutes/15;
-            $from_time = Carbon::parse($request->from_time);
-            $to_time =Carbon::parse($request->from_time)->addMinutes(15);
+            $from_time = Carbon::parse($request->from_time,$time_zone)->setTimezone('UTC');
+            $to_time =Carbon::parse($request->from_time,$time_zone)->setTimezone('UTC')->addMinutes(15);
 
 
 
@@ -574,96 +588,99 @@ class DoctorController extends Controller
 
     function addWeeklyDay(Request $request)
     {
-      try{
-      $user = Auth::guard('siteDoctor')->user();
-      $weekly_day = new WeeklyAvailableDays;
-      $weekly_day->user_id = $user->id;
-      $weekly_day->day = $request->day;
+        try{
+            $time_zone = d_timezone();
+            $user = Auth::guard('siteDoctor')->user();
+            $weekly_day = new WeeklyAvailableDays;
+            $weekly_day->user_id = $user->id;
+            $weekly_day->day = $request->day;
 
-  switch ($request->day) {
-    case "monday":
-        $weekly_day->num_val_for_day = 1;
-      break;
-    case "tuesday":
-        $weekly_day->num_val_for_day = 2;
-      break;
-    case "wednesday":
-      $weekly_day->num_val_for_day = 3;
-      break;
+            switch ($request->day) {
+                case "monday":
+                    $weekly_day->num_val_for_day = 1;
+                break;
+                case "tuesday":
+                    $weekly_day->num_val_for_day = 2;
+                break;
+                case "wednesday":
+                $weekly_day->num_val_for_day = 3;
+                break;
 
-        case "thursday":
-      $weekly_day->num_val_for_day = 4;
-      break;
-        case "friday":
-      $weekly_day->num_val_for_day = 5;
-      break;
-        case "saturday":
-      $weekly_day->num_val_for_day = 6;
-      break;
-      case "sunday":
-      $weekly_day->num_val_for_day = 7;
-      break;
+                    case "thursday":
+                $weekly_day->num_val_for_day = 4;
+                break;
+                    case "friday":
+                $weekly_day->num_val_for_day = 5;
+                break;
+                    case "saturday":
+                $weekly_day->num_val_for_day = 6;
+                break;
+                case "sunday":
+                $weekly_day->num_val_for_day = 7;
+                break;
 
-  default:
-    $weekly_day->num_val_for_day = 0;
-}
-  DB::beginTransaction();
-      $weekly_day->day = $request->day;
-      $weekly_day->from_time = $request->from_time;
-      $weekly_day->to_time = $request->to_time;
-      $weekly_day->save();
-$startDate = date('Y-m-d');
-$endDate = date('Y').'-12-31';
-      $endDate = strtotime($endDate);
-for($i = strtotime(ucfirst($request->day), strtotime($startDate)); $i <= $endDate; $i = strtotime('+1 week', $i)){
-        $date = date('Y-m-d', $i);
+            default:
+                $weekly_day->num_val_for_day = 0;
+            }
+            DB::beginTransaction();
 
-         $from_date_time =  $date.' '.$request->from_time;
-         $to_date_time =  $date.' '.$request->to_time;
+            $weekly_day->day = $request->day;
+            $weekly_day->from_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, date('Y-m-d').' '.$request->from_time)));
+            $weekly_day->to_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, date('Y-m-d').' '.$request->to_time)));
+            $weekly_day->save();
+            $startDate = date('Y-m-d');
+            $endDate = date('Y').'-12-31';
+            $endDate = strtotime($endDate);
 
-         $from_date_time = Carbon::parse($from_date_time);
+            for($i = strtotime(ucfirst($request->day), strtotime($startDate)); $i <= $endDate; $i = strtotime('+1 week', $i)){
+                $date = date('Y-m-d', $i);
 
-         $total_minutes = $from_date_time->diffInMinutes($to_date_time);
+                $from_date_time =  $date.' '.$request->from_time;
+                $to_date_time =  $date.' '.$request->to_time;
 
+                $from_date_time = Carbon::parse($from_date_time);
 
-        $available_day = new DoctorAvailableDays;
-        $available_day->user_id = $user->id;
-        $available_day->date = $date;
-        $available_day->from_time = $request->from_time;
-        $available_day->to_time = $request->to_time;
-        $available_day->save();
-
-        $number_of_slot = $total_minutes/15;
-        $from_time = Carbon::parse($request->from_time);
-        $to_time =Carbon::parse($request->from_time)->addMinutes(15);
+                $total_minutes = $from_date_time->diffInMinutes($to_date_time);
 
 
+                $available_day = new DoctorAvailableDays;
+                $available_day->user_id = $user->id;
+                $available_day->date = $date;
+                $available_day->from_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time)));
+                $available_day->to_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time)));
+                $available_day->save();
 
-       for ($j = 1; $j <= $number_of_slot; $j++) {
-        $time_slot = new TimeSlot;
-        $time_slot->user_id = $user->id;
-        $time_slot->available_day_id = $available_day->id;
-        $time_slot->start_time = $from_time->format('H:i');
-        $time_slot->end_time = $to_time->format('H:i');
-        $from_time = $from_time->addMinutes(15);
-        $to_time = $to_time->addMinutes(15);
-        $time_slot->save();
-        // echo '<pre>';
-        //    print_r($time_slot);
-       }
-        // exit;
+                $number_of_slot = $total_minutes/15;
+                $from_time = Carbon::parse($request->from_time,$time_zone)->setTimezone('UTC');
+                $to_time =Carbon::parse($request->from_time,$time_zone)->setTimezone('UTC')->addMinutes(15);
 
-}
-      DB::commit();
 
-      } catch (\Exception $e) {
+
+                for ($j = 1; $j <= $number_of_slot; $j++) {
+                    $time_slot = new TimeSlot;
+                    $time_slot->user_id = $user->id;
+                    $time_slot->available_day_id = $available_day->id;
+                    $time_slot->start_time = $from_time->format('H:i');
+                    $time_slot->end_time = $to_time->format('H:i');
+                    $from_time = $from_time->addMinutes(15);
+                    $to_time = $to_time->addMinutes(15);
+                    $time_slot->save();
+                    // echo '<pre>';
+                    //    print_r($time_slot);
+                }
+                    // exit;
+
+            }
+            DB::commit();
+
+        } catch (\Exception $e) {
             Session::flash('Error-toastr', $e->getMessage());
             DB::rollback();
             return redirect()->back();
         }
  // exit;
-      Session::flash('Success-toastr','Successfully added');
-      return redirect()->back();
+        Session::flash('Success-toastr','Successfully added');
+        return redirect()->back();
     }
  public function deleteWeeklyDay($id)
     {
@@ -730,44 +747,52 @@ $get_day = $get_day->delete();
      public function editWeeklyDay(Request $request)
     {
       $id = $request->weekly_day_id;
+      $time_zone = d_timezone();
       $weekly_day = WeeklyAvailableDays::find($id);
+      $weekly_da['from_time'] = date('H:i:s',strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $weekly_day->from_time)));
+      $weekly_da['to_time'] = date('H:i:s',strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $weekly_day->to_time)));
+      $weekly_da['id'] = $weekly_day->id;
+      $weekly_da['user_id'] = $weekly_day->user_id;
+      $weekly_da['day'] = $weekly_day->day;
+
+      $weekly_day = $weekly_da;
       if ($request->isMethod('post')) {
          //  $data = $request->validate([
          //     "day"=>"required",
          //     "from_time"=>"required",
          //     "to_time"=>"required",
          // ]);
-switch ($request->day) {
-  case "monday":
-      $weekly_day->num_val_for_day = 1;
-    break;
-  case "tuesday":
-      $weekly_day->num_val_for_day = 2;
-    break;
-  case "wednesday":
-    $weekly_day->num_val_for_day = 3;
-    break;
+            switch ($request->day) {
+                case "monday":
+                    $weekly_day->num_val_for_day = 1;
+                    break;
+                case "tuesday":
+                    $weekly_day->num_val_for_day = 2;
+                    break;
+                case "wednesday":
+                    $weekly_day->num_val_for_day = 3;
+                    break;
 
-      case "thursday":
-    $weekly_day->num_val_for_day = 4;
-    break;
-      case "friday":
-    $weekly_day->num_val_for_day = 5;
-    break;
-      case "saturday":
-    $weekly_day->num_val_for_day = 6;
-    break;
-    case "sunday":
-    $weekly_day->num_val_for_day = 7;
-    break;
+                    case "thursday":
+                    $weekly_day->num_val_for_day = 4;
+                    break;
+                    case "friday":
+                    $weekly_day->num_val_for_day = 5;
+                    break;
+                    case "saturday":
+                    $weekly_day->num_val_for_day = 6;
+                    break;
+                    case "sunday":
+                    $weekly_day->num_val_for_day = 7;
+                    break;
 
-  default:
-    $weekly_day->num_val_for_day = 0;
-}
+                default:
+                    $weekly_day->num_val_for_day = 0;
+            }
 
         $weekly_day->day = $request->day;
-        $weekly_day->from_time = $request->from_time;
-        $weekly_day->to_time = $request->to_time;
+        $weekly_day->from_time = date('H:i:s',strtotime(timezoneAdjustmentStore($time_zone, date('Y-m-d').' '.$request->from_time)));
+        $weekly_day->to_time = date('H:i:s',strtotime(timezoneAdjustmentStore($time_zone, date('Y-m-d').' '.$request->to_time)));
         $weekly_day->save();
          Session::flash('Success-toastr','Successfully updated');
          return redirect()->back();

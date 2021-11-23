@@ -3,6 +3,8 @@
 @section('content')
     @php
     $time_zone = Auth::user()->profile->time_zone;
+    $time_zone = d_timezone();
+    // dd($time_zone,$time_zone->timezone->name);
     @endphp
     <div class="col Post-prescription-right Incoming-Prescription-Requests-page">
         <div class="row">
@@ -62,18 +64,17 @@
                                                             {{-- @dump($time_slot) --}}
 
                                                             @if ($time_slot->getSlot)
-                                                                {{-- @dump($time_slot->getSlot->start_time) --}}
-                                                                @if ($time_zone == 2)
+                                                                {{-- @if ($time_zone == 2) --}}
                                                                     {{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone, $case->booking_date, $time_slot->getSlot->start_time))) }}
                                                                     <br>to<br>
                                                                     {{ date('h:i a', strtotime(timezoneAdjustmentFetch($time_zone, $case->booking_date, $time_slot->getSlot->end_time))) }}
                                                                     <br>
-                                                                @else
+                                                                {{-- @else
                                                                     {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }}
                                                                     <br>to<br>
                                                                     {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }}
                                                                     <br>
-                                                                @endif
+                                                                @endif --}}
 
 
                                                             @endif

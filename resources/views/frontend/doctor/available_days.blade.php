@@ -24,7 +24,8 @@
                     </li>
                 </ul> --}}
                 @php
-                    $time_zone = Auth::user()->profile->time_zone;
+                    // $time_zone = Auth::user()->profile->time_zone;
+                    $time_zone = d_timezone();
                 @endphp
                 <div class="tab-content Calendar-Regular-tab-con" id="myTabContent">
                     <div class="tab-pane fade show active" id="Regular-Weekly-Timetable">
@@ -35,13 +36,13 @@
                                     <h3>Your Availability :<br>
                                         <span class="show_time">
                                             @foreach ($get_current_day as $current_day)
-                                                @if ($time_zone != 1)
+                                                {{-- @if ($time_zone != 1) --}}
                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->from_time))) }} -
                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->to_time))) }}
-                                                @else
+                                                {{-- @else
                                                 {{ date('H:i a', strtotime($current_day->from_time)) }} -
                                                 {{ date('H:i a', strtotime($current_day->to_time)) }}
-                                                @endif
+                                                @endif --}}
 
                                             @endforeach
                                         </span>
@@ -94,15 +95,15 @@
                                                             aria-controls="collapseOne">
                                                             {{ ucfirst($day->day) }} -
                                                             {{-- @dump($day->day) --}}
-                                                            @if ($time_zone !=1)
+                                                            {{-- @if ($time_zone !=1) --}}
 
                                                             <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$day->day,$day->from_time))) }} -
                                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$day->day,$day->to_time))) }}</span>
-                                                            @else
+                                                            {{-- @else
                                                             <span>{{ date('H:i a', strtotime($day->from_time)) }} -
                                                                 {{ date('H:i a', strtotime($day->to_time)) }}</span>
 
-                                                            @endif
+                                                            @endif --}}
 
                                                         </button>
                                                         <span class="accetion"><a href="#"
@@ -194,16 +195,16 @@
                                                             aria-expanded="false" aria-controls="acone">
                                                             {{ ucfirst(date('l', strtotime($available_day->date))) }} -
                                                             {{ date('F d Y', strtotime($available_day->date)) }}
-                                                            @if($time_zone ==2)
+                                                            {{-- @if($time_zone ==2) --}}
 
                                                             <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$available_day->date,$available_day->from_time))) }}
                                                                 -
                                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$available_day->date,$available_day->to_time))) }}</span>
-                                                            @else
+                                                            {{-- @else
                                                             <span>{{ date('H:i a', strtotime($available_day->from_time)) }}
                                                                 -
                                                                 {{ date('H:i a', strtotime($available_day->to_time)) }}</span>
-                                                            @endif
+                                                            @endif --}}
                                                         </button>
                                                         <span class="accetion"><a href="#"
                                                                 onclick="editAvailableDay('{{ $available_day->id }}');"><i
@@ -632,7 +633,7 @@
                 // "2020-05-12": {}
             },
             onDayClick: function(events) {
-                alert('Day was clicked');
+                // alert('Day was clicked');
                 console.log('====================================');
                 console.log(events,$(this).data('day'));
                 var day = $(this).data('day');

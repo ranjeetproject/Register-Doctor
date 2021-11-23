@@ -11,7 +11,8 @@
                         </ol>
                       </nav>
                       @php
-                      $time_zone = Auth::user()->profile->time_zone;
+                    //   $time_zone = Auth::user()->profile->time_zone;
+                      $time_zone = d_timezone();
                   @endphp
                     <div class="for-w-100 Prescriptions-Dispensed-right-table">
                         <div class="row">
@@ -55,20 +56,20 @@
                                             <td>
                                               @forelse($case->getBookingSlot as $time_slot)
                                                 @if($time_slot->getSlot)
-                                                @if ($time_zone == 2)
+                                                {{-- @if ($time_zone == 2) --}}
                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$case->booking_date,$time_slot->getSlot->start_time))) }} -
 
-                                                @else
+                                                {{-- @else
                                                 {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} --
-                                                @endif
+                                                @endif --}}
                                                 @endif
                                                 @if($time_slot->getSlot)
-                                                @if ($time_zone == 2)
+                                                {{-- @if ($time_zone == 2) --}}
                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$case->booking_date,$time_slot->getSlot->end_time))) }}
 
-                                                @else
+                                                {{-- @else
                                                 {{ date('h:i a', strtotime($time_slot->getSlot->end_time)) }}
-                                                @endif
+                                                @endif --}}
 
 
                                                 @endif

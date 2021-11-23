@@ -39,7 +39,7 @@
                                                 class="max-w-22"></li>
                                         <li>In the event of the Pharmacist having a query you may message the doctor from
                                             your lefthand navigation
-                                            menu (<a href="{{ route('patient.chats', request()->c_id) }}"> Prescriptions
+                                            menu (<a href="{{ (request()->c_id) ? route('patient.chats', request()->c_id) : "#" }}"> Prescriptions
                                                 Issued</a>) e.g. give the Pharmacist's telephone number so they can talk
                                             direct</li>
                                     </ul>
@@ -86,7 +86,7 @@
                                         </li>
                                         <li>In the event of the Pharmacist having a query you may message the doctor from
                                             your lefthand navigation menu (<a
-                                                href="{{ route('patient.chats', request()->c_id) }}"
+                                                href="{{ (request()->c_id) ? route('patient.chats', request()->c_id): "#"  }}"
                                                 target="_blank">Prescriptions Issued</a>) e.g. give the pharmacist's
                                             telephone number so they can talk direct</li>
                                         {{-- <li><a href="{{ route('patient.chats', request()->c_id) }}" target="_blank"> You can message the doctor from your Lefthand Navigation Menu under
