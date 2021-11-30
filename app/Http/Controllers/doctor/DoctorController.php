@@ -356,7 +356,7 @@ class DoctorController extends Controller
       // exit;
       $timezone = d_timezone();
         $pct = PrescriptionComment::where('case_id',$cid)->get();
-        if(empty($pct)){
+        if(!count($pct)){
 
             $pcv = [];
         }
