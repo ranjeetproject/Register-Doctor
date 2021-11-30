@@ -37,13 +37,14 @@
                                               <td> View <br>Case</td>
                                               <td>View Medical <br>Record</td>
                                               <td> Prescription No.</td>
-                                              <td style="min-width: 250px;"> Action</td>
+                                              <td style="min-width: 150px;"> Action</td>
+                                              <td> Comments/Corrections <br>if any</td>
 
                                           </tr>
                                       </thead>
                                       <tbody>
                                       @foreach($cases as $case)
-
+                                      {{-- @dd($case->getPrescriptionComents, $case->getPrescriptionComents[0]->coments) --}}
                                         <tr >
                                             <td>{{date('d-m-Y', strtotime($case->updated_at)) }}</td>
 
@@ -57,6 +58,24 @@
                                                 <!-- <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button>
                                                 <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Print<br>Prescription</span></button><br> -->
                                                 <a href="{{url('doctor/viewPrescription')}}/{{$case->case_id}}"  target="_blank" class="btn blue-button btn-block Print-GP-Note"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""> Prescription</a>
+                                             </td>
+                                             <td>
+
+
+                                                 @if (!empty($case->getPrescriptionComents) && !empty($case->getPrescriptionComents[0]->comments))
+                                                    <p>{{ $case->getPrescriptionComents[0]->comments }} <a class="btn btn-sm btn-link" onclick="openModal('{{ $case->case_id }}')">
+                                                        View more
+                                                    </a></p>
+                                                 @else
+                                                 <p>No comment or correction found</p>
+                                                 @endif
+
+                                                <form method="POST" action="{{ route('doctor.prescription_comment') }}" class="text-center">
+                                                    @csrf
+                                                    <input type="hidden" name="case_id" value="{{$case->case_id}}">
+                                                    <textarea name="comments" id="" cols="30" rows="1" class="form-control" required></textarea>
+                                                    <button type="submit" class="btn btn-sm btn-primary mt-1">save</button>
+                                                </form>
                                              </td>
 
                                         </tr>
@@ -93,9 +112,67 @@
             </div>
         </div>
     </div>
+
+    <div class="modal modal-big" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Comments or Corrections</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" id="modal_body">
+              Modal body..
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
 @endsection
 @section('scripts')
     <script>
+         function openModal(case_id) {
 
+            // edit-weekly-day
+            $.ajax({
+                url: "{{ route('doctor.prescription_comment_list') }}",
+                type: 'get',
+                dataType: "json",
+                // data:{state:state,type:type,_token:token}
+                data: {
+                    case_id: case_id
+                }
+            }).done(function(response) {
+                console.log(response);
+                // if (typeof response != "undefined") {
+                    var str = '';
+                    response.forEach(function (item, index) {
+                    console.log(item, index);
+                    str += '<div class="row"><div class="col-10">'+ item.comments +'</div><div class="col-2">'+item.created_at+'</div></div>';
+                    });
+                    for (var obj  in response) {
+                        console.log('====================================');
+                        console.log(obj);
+                        console.log('====================================');
+
+                        // // skip loop if the property is from prototype
+                        // if (!obj.hasOwnProperty(prop)) continue;
+
+                        // // your code
+                        // alert(prop + " = " + obj[prop]);
+                    }
+                    $("#modal_body").html(str);
+                    $('#myModal').modal('show');
+                // }
+            });
+        }
     </script>
 @endsection

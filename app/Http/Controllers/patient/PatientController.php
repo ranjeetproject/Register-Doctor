@@ -20,6 +20,7 @@ use App\Models\HandyDocument;
 use App\Models\Payment;
 use App\Models\SummaryDiagnosis;
 use App\Models\pharma_req_prescription;
+use App\Models\PrescriptionComment;
 use App\User;
 use App\UserDoctor;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -509,7 +510,20 @@ class PatientController extends Controller
         $case = PatientCase::where( 'case_id', $request->case_id)->with('doctor')->get();
         $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
 
-        $return = array('case_details'=>$case, 'prescription'=>$prescription);
+        $timezone = d_timezone();
+        $pct = PrescriptionComment::where('case_id',$request->case_id)->get();
+        // dd($pct,  empty($pct));
+        if(!count($pct)){
+            $pcv = [];
+        }
+        foreach($pct as $pcs){
+            $pcl['comments'] = $pcs->comments;
+            $pcl['created_at'] = timezoneAdjustmentFetchTwo($timezone,$pcs->created_at);
+            $pcv[] = $pcl;
+        }
+
+
+        $return = array('case_details'=>$case, 'prescription'=>$prescription,'comments'=>$pcv);
         return response()->json( $return);
 
     }

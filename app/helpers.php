@@ -266,6 +266,33 @@ function timezoneAdjustmentFetch($timezone, $date, $time) {
 
 }
 
+function timezoneAdjustmentFetchTwo($timezone, $datetime) {
+    // https://ipgeolocation.abstractapi.com/v1/?api_key=403446a0b17545e696d6159ac5d2d48c&ip_address=198.16.66.124
+    // https://timezone.abstractapi.com/v1/convert_time?api_key=3395c724236f484bb6eaf53d49d8b3cf&base_location=Oxford, United Kingdom&base_datetime=2020-05-18 07:00:00&target_location=west_bengal, in
+    // $year = date('Y', strtotime($date));
+    // $dateTime = $date.' '.$time;
+    // // dd($dateTime);
+    // $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));
+    // $end_date = date('Y-m-d 01:00:00', strtotime('last sunday of October ' . $year));
+
+    // if((strtotime($start_date) <= strtotime($dateTime) )&& ( strtotime($dateTime)<  strtotime($end_date)) ) {
+    //     $timestamp = strtotime($time) + 60*60;
+
+    //     return date('H:i', $timestamp);
+    // } else {
+    //     return $time;
+    // }
+    // $datetime = $date.' '.$time;
+    $tz_from = 'UTC';
+    $tz_to = $timezone;
+    $format = 'Y-m-d H:i:s';
+    // echo $datetime . "\n";
+    $dt = new DateTime($datetime, new \DateTimeZone($tz_from));
+    $dt->setTimeZone(new \DateTimeZone($tz_to));
+    return $dt->format($format);
+
+}
+
 function timezoneAdjustmentStore($timezone, $dateTime) {
     // $year = date('Y', strtotime($dateTime));
     // $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));

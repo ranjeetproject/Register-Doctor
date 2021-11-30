@@ -20,6 +20,7 @@ use App\Models\HandyDocument;
 use App\Models\ThumbsUp;
 use App\Models\Payment;
 use App\Models\BookTimeSlot;
+use App\Models\PrescriptionComment;
 use App\UserDoctor;
 use App\helpers;
 use App\Mail\FinalizePrescription;
@@ -333,7 +334,9 @@ class DoctorController extends Controller
 
      public function prescriptionIssues(Request $request)
     {
-      $cases = PatientCase::where('accept_status',1)->where('prescriptions_issued', '=', 'yes')->with('user')->with('prescription')->get();
+      $cases = PatientCase::where('accept_status',1)->where('prescriptions_issued', '=', 'yes')->with(['user','prescription','getPrescriptionComents' => function($c){
+        $c->latest()->first();
+    } ])->get();
 
       return view('frontend.doctor.prescription_issues',compact('cases'));
     }
@@ -341,7 +344,7 @@ class DoctorController extends Controller
     {
 
       //$cases = PatientCase::where('accept_status',1)->where('prescriptions_issued', '=', 'yes')->with('user')->with('prescription')->get();
-      $case = PatientCase::where( 'case_id', $cid)->with('user')->first();
+      $case = PatientCase::where( 'case_id', $cid)->with(['user'])->first();
       $paitent_req = Prescription_req_doctor::where( 'case_id', $cid)->first();
       $req_status = 'inactive';
       if($paitent_req !=''){
@@ -351,7 +354,20 @@ class DoctorController extends Controller
       $prescription = Prescription::where( 'case_no', $cid)->get();
       // print_r($prescription);
       // exit;
-      $return = array('case_details'=>$case, 'prescription'=>$prescription, 'req_status'=> $req_status);
+      $timezone = d_timezone();
+        $pct = PrescriptionComment::where('case_id',$cid)->get();
+        if(empty($pct)){
+
+            $pcv = [];
+        }
+        foreach($pct as $pcs){
+            $pcl['comments'] = $pcs->comments;
+            $pcl['created_at'] = timezoneAdjustmentFetchTwo($timezone,$pcs->created_at);
+            $pcv[] = $pcl;
+        }
+
+        // return $pcv;
+      $return = array('case_details'=>$case, 'prescription'=>$prescription, 'req_status'=> $req_status, 'comments' => $pcv);
       //return response()->json( $return);
       return view('frontend.doctor.view_prescription',compact('return'));
     }
@@ -1019,5 +1035,25 @@ $get_day = $get_day->delete();
         }
         return response()->json( $return);
 
+    }
+
+    public function prescriptionComment(Request $request) {
+        $p_ct = new PrescriptionComment;
+        $p_ct->case_id = $request->case_id;
+        $p_ct->comments = $request->comments;
+        $p_ct->save();
+        return redirect()->back();
+    }
+
+    public function prescriptionCommentlist(Request $request) {
+        $timezone = d_timezone();
+        $pct = PrescriptionComment::where('case_id',$request->case_id)->get();
+        foreach($pct as $pcs){
+            $pcl['comments'] = $pcs->comments;
+            $pcl['created_at'] = timezoneAdjustmentFetchTwo($timezone,$pcs->created_at);
+            $pcv[] = $pcl;
+        }
+
+        return $pcv;
     }
 }

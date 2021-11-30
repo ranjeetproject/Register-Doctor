@@ -35,6 +35,10 @@ class PatientCase extends Model
         return $this->hasMany('App\Models\BookTimeSlot','patient_case_id','id');
     }
 
+    public function getPrescriptionComents()
+    {
+        return $this->hasMany('App\Models\PrescriptionComment','case_id','case_id');
+    }
 
     function getAccepedDoctor()
     {
