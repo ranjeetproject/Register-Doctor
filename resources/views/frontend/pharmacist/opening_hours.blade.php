@@ -4,14 +4,14 @@
     <div class="col Post-prescription-right Patient-Profile-page">
         <div class="row">
             <div class="col-sm-12">
-                
+
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active input-effect" id="Patient-Profile">
                         <form class="for-w-100" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row Manage-Account-title">
                                 <div class="col-sm-12">
-                                    <h2>Opening Hours</h2>
+                                    <h2>Opening Hours - UK local time</h2>
                                 </div>
                             </div>
                             <div class="row main-form-fild">
@@ -20,7 +20,7 @@
                                     <label>MON </label>
                                     <div class="row">
                                         <div class="col">
-                                            
+
                                             <input id="From-date" name="monday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->monday_opening_time  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
@@ -37,7 +37,7 @@
                                     <label>TUE </label>
                                     <div class="row">
                                         <div class="col">
-                                            
+
                                             <input id="From-date" name="tuesday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->tuesday_opening_time  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
@@ -51,7 +51,7 @@
                                     <label>WED </label>
                                     <div class="row">
                                         <div class="col">
-                                            
+
                                             <input id="From-date" name="wednesday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->wednesday_opening_time ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
@@ -65,7 +65,7 @@
                                     <label>THU </label>
                                     <div class="row">
                                         <div class="col">
-                                            
+
                                             <input id="From-date" name="thursday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->thursday_opening_time  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
@@ -79,7 +79,7 @@
                                     <label>FRI </label>
                                     <div class="row">
                                         <div class="col">
-                                            
+
                                             <input id="From-date" name="friday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->friday_opening_time  ?? '09:00' }}" />
                                         </div>
                                         <div class="col">
@@ -93,7 +93,7 @@
                                     <label>SAT </label>
                                     <div class="row">
                                         <div class="col">
-                                            
+
                                             <input id="From-date" name="saturday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->saturday_opening_time  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
@@ -108,7 +108,7 @@
                                     <label>SUN </label>
                                     <div class="row">
                                         <div class="col">
-                                            
+
                                             <input id="From-date" name="sunday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->sunday_opening_time  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
@@ -120,7 +120,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Notes </label>
+                                    <label>Notes e.g. Closed Bank Holodays, Open 365 days</label>
                                     <div class="row">
                                         <div class="col">
                                             <textarea name="notes" class="form-control">{{ $user->openingTime->notes  ?? '' }}</textarea>
@@ -136,16 +136,16 @@
                             </div>
                         </form>
                     </div>
-                        
+
                     <div class="tab-pane fade " id="Payment-Details">
-                    
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
- 
+
 @endsection
 @section('scripts')
     {{-- <script>
@@ -171,7 +171,7 @@
 
          $(window).on('load', function(){
     $(".tab-content #Patient-Profile input, .tab-content #Patient-Profile textarea").val("");
-    
+
     $(".input-effect input, .input-effect textarea").focusout(function(){
     if($(this).val() != ""){
     $(this).addClass("has-content");

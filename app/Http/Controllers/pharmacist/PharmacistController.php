@@ -211,6 +211,7 @@ class PharmacistController extends Controller
     function openingHours(Request $request)
     {
        $user = Auth::guard('sitePharmacist')->user();
+       $time_zone = d_timezone();
 
       if ($request->isMethod('post')) {
 
@@ -270,7 +271,7 @@ class PharmacistController extends Controller
 
       }
 
-      return view('frontend.pharmacist.opening_hours',compact('user'));
+      return view('frontend.pharmacist.opening_hours',compact('user','time_zone'));
     }
 
     public function handyDocument(Request $request)
@@ -319,6 +320,12 @@ class PharmacistController extends Controller
         $return = array('case_details'=>$case, 'prescription'=>$prescription);
         return response()->json( $return);
 
+    }
+
+    public function chats(Request $request, $id)
+    {
+      $case = PatientCase::where('case_id',$id)->first();
+      return view('frontend.pharmacist.chats', compact('case'));
     }
 
 }

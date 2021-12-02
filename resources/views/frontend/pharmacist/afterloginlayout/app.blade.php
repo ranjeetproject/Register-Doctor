@@ -30,7 +30,7 @@
         <!-- Footer start -->
         @include('frontend.pharmacist.afterloginlayout.common_footer')
         @include('frontend.pharmacist.afterloginlayout.common_js')
-        @include('common.timezone_setup')
+        {{-- @include('common.timezone_setup') --}}
         <!-- Footer end -->
         @yield('scripts')
         <script>
