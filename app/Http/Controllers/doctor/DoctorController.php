@@ -1056,4 +1056,30 @@ $get_day = $get_day->delete();
 
         return $pcv;
     }
+
+    public function sickNote(Request $request,$id)
+    {
+        $case = '';
+    //   $case = PatientCase::where('case_id',$id)->first();
+
+    //   if($request->isMethod('post')){
+
+
+    //     $summary_diagnosis = SummaryDiagnosis::where('patient_case_id',$case->id)->first();
+    //     if(empty($summary_diagnosis)){
+    //     $summary_diagnosis = new SummaryDiagnosis;
+    //         PatientCase::where('case_id',$id)->update(['case_closed' => 'yes','closed_at' => date('Y-m-d')]);
+    //     }
+
+
+    //     $summary_diagnosis->user_id = $case->user_id;
+    //     $summary_diagnosis->patient_case_id = $case->id;
+    //     $summary_diagnosis->summary_diagnose = $request->summary_diagnose;
+    //     $summary_diagnosis->future_reference = $request->future_reference;
+    //     $summary_diagnosis->save();
+    //     Session::flash('Success-toastr','Successfully added');
+    //   }
+
+      return view('frontend.doctor.sick_note', compact('case'));
+    }
 }

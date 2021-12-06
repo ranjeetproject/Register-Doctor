@@ -43,5 +43,5 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::get('/print-case-summery/{id}', 'DoctorController@printCaseSummery')->name('print-case-summery');
     Route::post('/prescription_comment', 'DoctorController@prescriptionComment')->name('prescription_comment');
     Route::get('/prescription_comments', 'DoctorController@prescriptionCommentlist')->name('prescription_comment_list');
-
+    Route::match(['get','post'],'sick-note/{id}', 'DoctorController@sickNote')->name('sick-note');
 });

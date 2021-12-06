@@ -4,7 +4,7 @@
     <div class="col Choose-Your-Doctor-right innerpage  case-page">
         <div class="row">
             <div class="col-sm-12">
-               
+
 
 
                <div class="container">
@@ -12,7 +12,7 @@
             <div class="col Case-Conclusion-live-Video-and-live-Chat-right">
 
                     <span class="cash-id">Case ID : {{$case->case_id}}</span> <button class="btn cash-consol-btn">Case Conclusion</button>
-                    
+
                 </div>
                 <div class="col-sm-12">
                     <div class="view-case-details">
@@ -27,7 +27,7 @@
 
                     <form method="post">
                         @csrf
-                        
+
                     <div class="row">
 
                             <div class="col-sm-12">
@@ -46,7 +46,7 @@
 
                         </div>
 
-                        
+
 
                         <div class="row">
 
@@ -89,7 +89,7 @@
                         </form>
 
 
-                    
+
                 </div>
             </div>
             {{-- <div class="row Doctor Replies">
@@ -114,7 +114,7 @@
                     <p>Entry dated : 28.08.2020</p>
                 </div>
             </div> --}}
-            
+
         </div>
 
 
@@ -125,6 +125,6 @@
 @endsection
 @section('scripts')
     <script>
-       
+
     </script>
 @endsection
