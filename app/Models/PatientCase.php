@@ -54,4 +54,9 @@ class PatientCase extends Model
     {
         return $this->hasOne('App\Models\DoctorReview','case_id','case_id')->withDefault();
     }
+
+    public function sickNote()
+    {
+        return $this->hasOne('App\Models\SickNote','case_id','case_id')->withDefault();
+    }
 }

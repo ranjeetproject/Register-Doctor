@@ -55,6 +55,7 @@
                                         <tbody>
                                             @forelse ($cases as $case)
                                                 {{-- @dump($case) --}}
+
                                                 <tr>
                                                     <td>{{ $case->booking_date ? date('d-m-Y', strtotime($case->booking_date)) : '' }}
                                                     </td>
@@ -224,7 +225,11 @@
                                                             @endif
 
                                                         @endif
+                                                        @if (!empty($case->sickNote->user_id))
 
+                                                            <a href="{{ route('patient.sick-note', $case->case_id) }}"
+                                                                class="btn btn-sm btn-primary mt-1"> Sick Note</a>
+                                                        @endif
 
                                                     </td>
 

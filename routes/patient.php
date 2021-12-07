@@ -51,6 +51,7 @@
     Route::get('/cancel-booking/{id}', 'PatientController@cancelBooking')->name('cancel-booking');
     Route::get('/payment-detail', 'PatientController@paymentDetail')->name('payment-detail');
     Route::get('/print-case-summery/{id}', 'PatientController@printCaseSummery')->name('print-case-summery');
+    Route::get('/sick-note/{id}', 'PatientController@sickNote')->name('sick-note');
 
 });
 

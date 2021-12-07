@@ -19,6 +19,7 @@ use App\Models\WeeklyAvailableDays;
 use App\Models\HandyDocument;
 use App\Models\Payment;
 use App\Models\SummaryDiagnosis;
+use App\Models\SickNote;
 use App\Models\pharma_req_prescription;
 use App\Models\PrescriptionComment;
 use App\User;
@@ -467,7 +468,7 @@ class PatientController extends Controller
 
     public function requestedConsults(Request $request)
     {
-      $cases = PatientCase::where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
+      $cases = PatientCase::with('sickNote')->where('user_id',Auth::guard('sitePatient')->user()->id)->latest()->paginate(10);
         return view('frontend.patient.requested_consults', compact('cases'));
 
     }
@@ -1101,5 +1102,13 @@ class PatientController extends Controller
         $summary = SummaryDiagnosis::where('patient_case_id',$id)->first();
         $case_detail = PatientCase::where('case_id',$id)->first();
         return view('frontend.patient.print_case_summery',compact('summary','case_detail'));
+    }
+
+    public function sickNote($id)
+    {
+        $case = PatientCase::where('case_id',$id)->first();
+        $sicknote = SickNote::where('case_id',$id)->first();
+        return view('frontend.patient.sick_note',compact('case','sicknote'));
+
     }
 }

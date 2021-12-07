@@ -13,9 +13,10 @@ class CreateSickNoteTable extends Migration
      */
     public function up()
     {
-        Schema::create('sick_note', function (Blueprint $table) {
+        Schema::create('sick_notes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('case_id');
+            $table->string('user_id');
             $table->text('medical_condition')->nullable();
             $table->text('remarks')->nullable();
             $table->string('advice')->nullable();
@@ -30,6 +31,6 @@ class CreateSickNoteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sick_note');
+        Schema::dropIfExists('sick_notes');
     }
 }

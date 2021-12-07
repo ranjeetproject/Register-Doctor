@@ -56,6 +56,9 @@
                                             <td>
                                               @forelse($case->getBookingSlot as $time_slot)
                                                 @if($time_slot->getSlot)
+                                                @php
+                                                    $start_time = $time_slot->getSlot->start_time;
+                                                @endphp
                                                 {{-- @if ($time_zone == 2) --}}
                                                 {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$case->booking_date,$time_slot->getSlot->start_time))) }} -
 
@@ -134,7 +137,9 @@
                                             <td><a href="{{route('doctor.view-medical-recorde',$case->case_id)}}"><i class="fal fa-eye"></i></a></td>
 
                                             <td class="masg-dep-tol">
-
+                                                @if (getDiffOfTwoDateInMinute($case->booking_date . ' ' . $start_time) < 0)
+                                                <a href="{{ route('doctor.sick-note',$case->case_id) }}" class="btn btn-sm btn-primary">Sick note</a>
+                                                @endif
                                              </td>
 
                                         </tr>

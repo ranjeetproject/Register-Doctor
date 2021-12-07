@@ -9,6 +9,7 @@ use App\Models\DrugsDetails;
 use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
+use App\Models\SickNote;
 use App\Models\Prescription_req_doctor;
 use App\Prescription;
 use App\Models\SummaryDiagnosis;
@@ -23,6 +24,7 @@ use App\Models\BookTimeSlot;
 use App\Models\PrescriptionComment;
 use App\UserDoctor;
 use App\helpers;
+use App\User;
 use App\Mail\FinalizePrescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -251,7 +253,25 @@ class DoctorController extends Controller
 
     public function sendPatientMessage(Request $request)
     {
-        return view('frontend.doctor.send_patient_message');
+        $key_v = $request->key_v;
+        $search = $request->search;
+        $users = [];
+        switch($key_v) {
+            case 1:
+                $users = User::where('name',$search)->where('role',1)->get();
+            break;
+
+            case 2:
+                $users = User::where('registration_number',$search)->where('role',1)->get();
+            break;
+
+            case 3:
+                $users = User::join('prescription','prescription.p_id','=','users.id')
+                ->where('prescription.prescription_no',$search)->where('users.role',1)->get();
+            break;
+        }
+
+        return view('frontend.doctor.send_patient_message',compact('users'));
     }
 
     public function createPrescription(Request $request)
@@ -1060,26 +1080,27 @@ $get_day = $get_day->delete();
     public function sickNote(Request $request,$id)
     {
         $case = '';
-    //   $case = PatientCase::where('case_id',$id)->first();
+        $case = PatientCase::where('case_id',$id)->first();
 
-    //   if($request->isMethod('post')){
-
-
-    //     $summary_diagnosis = SummaryDiagnosis::where('patient_case_id',$case->id)->first();
-    //     if(empty($summary_diagnosis)){
-    //     $summary_diagnosis = new SummaryDiagnosis;
-    //         PatientCase::where('case_id',$id)->update(['case_closed' => 'yes','closed_at' => date('Y-m-d')]);
-    //     }
+        if($request->isMethod('post')){
 
 
-    //     $summary_diagnosis->user_id = $case->user_id;
-    //     $summary_diagnosis->patient_case_id = $case->id;
-    //     $summary_diagnosis->summary_diagnose = $request->summary_diagnose;
-    //     $summary_diagnosis->future_reference = $request->future_reference;
-    //     $summary_diagnosis->save();
-    //     Session::flash('Success-toastr','Successfully added');
-    //   }
+            $sicknotes = SickNote::where('case_id',$id)->first();
+            if(empty($sicknotes)){
+            $sicknotes = new SickNote;
+                // PatientCase::where('case_id',$id)->update(['case_closed' => 'yes','closed_at' => date('Y-m-d')]);
+            }
 
-      return view('frontend.doctor.sick_note', compact('case'));
+
+            $sicknotes->user_id = $case->user_id;
+            $sicknotes->case_id = $case->case_id;
+            $sicknotes->medical_condition = $request->medical_condition;
+            $sicknotes->remarks = $request->remarks;
+            $sicknotes->save();
+            Session::flash('Success-toastr','Successfully added');
+        }
+        $sicknote = SickNote::where('case_id',$id)->first();
+
+        return view('frontend.doctor.sick_note', compact('case','sicknote'));
     }
 }

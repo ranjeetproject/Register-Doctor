@@ -1,4 +1,4 @@
-@extends('frontend.doctor.afterloginlayout.app')
+@extends('frontend.patient.afterloginlayout.app')
 
 @section('content')
     <section class="col sick-note-wrap">
@@ -6,8 +6,7 @@
             <h2>STATEMENT OF LICENSED MEDICAL DOCTOR</h2>
             <p>Fitness for Work Statement - Certificate Number</p>
         </div>
-        <form action="{{ route('doctor.sick-note',$case->case_id) }}" method="post">
-            @csrf
+
         <div class="form-group">
             {{-- <input type="text" class="form-control" placeholder="To Mr. Jhone Doe"> --}}
             To, {{ $case->user->name }}
@@ -26,20 +25,19 @@
         <div class="form-group">
         <textarea rows="5"  name="remarks" class="form-control" placeholder="Doctors’ remarks where applicable e.g. functional effects of condition">{{ $sicknote ? $sicknote->remarks : '' }}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        {{-- <table class="table sick-note-info-details">
+
+        <table class="table sick-note-info-details">
             <tbody>
                 <tr>
-                    <td>Doctor John Smith</td>
-                    <td>Date:</td>
+                    <td>Doctor {{ $case->doctor->name }}</td>
+                    <td>Date: {{ $sicknote ? date('d-m-Y', strtotime($sicknote->created_at)):'' }}</td>
                 </tr>
                 <tr>
-                    <td>Medical licence no.</td>
+                    <td>Medical licence no. {{ $case->doctor->profile->dr_medical_license_no }}</td>
                     <td>Medical Licenser:  GMC</td>
                 </tr>
                 <tr>
-                    <td>Registered-Doctor.com I.D. Number</td>
+                    <td>Registered-Doctor.com </td><td>I.D. Number</td>
                 </tr>
             </tbody>
         </table>
@@ -50,7 +48,7 @@
         <div class="sick-note-footer-info">
             <p><a href="#">www.Registered-Doctor.com</a><p>
             <p>1 Germaine Street, London WC1V</p>
-        </div> --}}
+        </div>
         <!-- <div class="row">
             <div class="col Case-Conclusion-live-Video-and-live-Chat-right">
                 <span class="cash-id">chandan Case ID : 12346</span> <button class="btn cash-consol-btn">Case Conclusion</button>
