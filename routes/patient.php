@@ -52,6 +52,8 @@
     Route::get('/payment-detail', 'PatientController@paymentDetail')->name('payment-detail');
     Route::get('/print-case-summery/{id}', 'PatientController@printCaseSummery')->name('print-case-summery');
     Route::get('/sick-note/{id}', 'PatientController@sickNote')->name('sick-note');
+    Route::get('video-cal-pres/{id}','PatientController@videoCallDocPres')->name('video-call-pres');
+
 
 });
 

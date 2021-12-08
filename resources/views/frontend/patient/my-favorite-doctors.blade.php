@@ -4,7 +4,14 @@
     <div class="col Post-prescription-right innerpage  Choose-Your-Doctor-page">
         <div class="row">
             <div class="col-sm-12">
-
+                @php
+                    $age = \Carbon\Carbon::parse(auth()->user()->profile->dob)->diff(\Carbon\Carbon::now());
+                    $sd = $age->format('%y years, %m months and %d days');
+                    $d_years = $age->format('%y');
+                    $d_months = $age->format('%m');
+                    $d_days = $age->format('%d');
+                    // dump($age, $sd, $d_years,$d_months,$d_days);
+                @endphp
 
                 <div class="col Choose-Your-Doctor-right">
 
@@ -171,7 +178,8 @@
 
                                                 </div>
                                                 <div class="row books-btn">
-                                                    <div class="col-md">
+                                                    @if(18 < $d_years || $d_years < 11)
+                                                    <div class="col-md-4">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->profile->dr_live_chat_fee }} per 15 mins</p>
                                                         {{-- <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
@@ -179,7 +187,8 @@
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->id), 'questions_type'=> 'live-chat']) }}"
                                                             class="btn btn-block patient-book-lc">Book Live Chat</a>
                                                     </div>
-                                                    <div class="col-md">
+                                                    @endif
+                                                    <div class="col-md-4">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->profile->dr_live_video_fee }} per 15 mins</p>
 
@@ -188,7 +197,8 @@
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->id), 'questions_type'=> 'live-video']) }}"
                                                             class="btn btn-block patient-book-lc">Book Live Video</a>
                                                     </div>
-                                                    <div class="col-md-5">
+                                                    @if(18 < $d_years || $d_years < 11)
+                                                    <div class="col-md-4">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->profile->dr_qa_fee }} per 15 mins</p>
                                                         <button type="button"
@@ -197,6 +207,7 @@
                                                             <small>Turnaround
                                                                 Time 5 hrs 2 days</small></button>
                                                     </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -264,6 +275,7 @@
 
                                                 </div>
                                                 <div class="row books-btn">
+                                                    @if(18 < $d_years || $d_years <11)
                                                     <div class="col-md">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins
@@ -273,6 +285,7 @@
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->doctor->id), 'questions_type'=> 'live-chat']) }}"
                                                             class="btn btn-block patient-book-lc">Book Live Chat</a>
                                                     </div>
+                                                    @endif
                                                     <div class="col-md">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->doctor->profile->dr_live_video_fee }} per 15 mins
@@ -282,6 +295,8 @@
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->doctor->id), 'questions_type'=> 'live-video']) }}"
                                                             class="btn btn-block patient-book-lc">Book Live Video</a>
                                                     </div>
+
+                                                    @if(18 < $d_years || $d_years < 11)
                                                     <div class="col-md-5">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins</p>
@@ -290,6 +305,7 @@
                                                             class="btn btn-block Request">Request Typed Q&A <br> <small>Turnaround
                                                                 Time 5 hrs 2 days</small></button>
                                                     </div>
+                                                    @endif
                                                 </div>
                                             </div>
 

@@ -288,6 +288,7 @@ class DoctorController extends Controller
     {
         //print_r($request->case_id);
         $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
+        // dd($case);
         $paitent_req = Prescription_req_doctor::where( 'case_id', $request->case_id)->first();
         $req_status = 'inactive';
         if($paitent_req !=''){
@@ -1102,5 +1103,11 @@ $get_day = $get_day->delete();
         $sicknote = SickNote::where('case_id',$id)->first();
 
         return view('frontend.doctor.sick_note', compact('case','sicknote'));
+    }
+
+    public function inviteVideo($case_id,$user_id)
+    {
+        Mail::to("koustav.mondal@brainiuminfotech.com")->send(new FinalizePrescription($request->case_id));
+        // return
     }
 }

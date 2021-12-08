@@ -97,7 +97,7 @@
                                     <div class="row">
 
                                         <div class="col-sm-6">
-                                            
+
 
                                             <div class="form-group">
 
@@ -157,6 +157,7 @@
 
                                             <p>For this prescription [you must use webcam and check ID OR you must use webcam but do not need to check ID OR you do not need to use webcam or check ID]</p>
 
+                                            <p id="verify_id_all"><a target="_blank" id="verify_id" href="#">Click</a> to verify Id</p>
                                             <p><a target="_blank" id="medical_record" href="#">Click</a> to see patient medical record including allergies and for UK patients their GP details</p>
 
                                             <p><a target="_blank" id="msg_patient" href="#">Click</a> to contact patient before issuing prescription</p>
@@ -182,7 +183,7 @@
                                             <a data-toggle="modal" data-target="#add-pop"><i class="fas fa-plus"></i></a>
                                         </div>
 
-                                        <table class="table Live-Chat add-edt-table-details" id="add-tr"> 
+                                        <table class="table Live-Chat add-edt-table-details" id="add-tr">
 
                                           <thead>
 
@@ -225,8 +226,8 @@
                                                     <td>
                                                         <strong>See GP</strong> for weekly weight check <br>Reduce prednisolone by 10mg a day</td>
                                                     <td>
-                                                        <a data-toggle="modal" data-target="#edit-pop"><i class="fas fa-pencil-alt"></i></a> 
-                                                        <a class="delt"><i class="far fa-trash-alt"></i></a> 
+                                                        <a data-toggle="modal" data-target="#edit-pop"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a class="delt"><i class="far fa-trash-alt"></i></a>
                                                     </td>
                                                 </tr> -->
 
@@ -309,9 +310,9 @@
                                     </div>
                                     <div data-toggle="modal" data-target="#finalprisc" id="edit_prisc" class="btn blue-button Prescription-submit ">Edit Priscription</div>
                                     <a id="msg_doc" href="#" target="_blank" class="btn blue-button">Message Patient</a>
-                                   
+
                                     <div class="row" id="print">
-                                        
+
                                     </div>
 
                                 </div>
@@ -320,7 +321,7 @@
 
                         </form>
 
-                        
+
 
                     </div>
 
@@ -337,7 +338,7 @@
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-pop">
         Edit
        </button> --}}
-      
+
     <div class="modal fade Prescribed-Modal" id="Prescribed-Modal" >
 
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -357,7 +358,7 @@
                     The prescription is now available to the patient who will decide whether to have the Prescription posted to them or sent electronically to a Pharmacist of their choice. CHECK YOUR MESSAGES AS YOU WILL BE REQUIRED TO DOWNLOAD AND POST THE SIGNED PRESCRIPTION TO EITHER THE PATIENT OR A PHARMACIST. Pharmacists may seek clarification on prescriptions before dispensing them. They may also ring you. If going abroad please ensure you are contactable or make appropriate cover. <b>Issued Prescriptions show in your Menu in the Iefthand navigation.</b>
 
                 </p>
-                
+
             </div>
 
           </div>
@@ -416,34 +417,34 @@
                     </h1>
                     <form class="row" action="">
                         <div class="col-sm-12 input-effect">
-                            
+
                             <div class="form-group">
-                                
+
                                 <input name="drug" id="drug" type="text" class="form-control effect-19" >
                                 <label>Drug</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <input name="dose" id="dose" type="text" class="form-control effect-19" >
                                 <label>Dose</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <input name="route" id="route" type="text" class="form-control effect-19">
                                 <label>Route</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <input name="frequency" id="frequency" type="text" class="form-control effect-19">
                                 <label>Frequency</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <input name="duration" id="duration" type="text" class="form-control effect-19">
                                 <label>Duration</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <textarea name="comments" id="comments" class="form-control effect-19" rows="4"></textarea>
                                 <label>Comments</label>
                             </div>
@@ -481,36 +482,36 @@
                     </h1>
                     <form class="row">
                         <div class="col-sm-12 input-effect">
-                            
+
                             <div class="form-group">
-                                
+
                                 <input type="text" class="form-control effect-19 has-content" value="Flucloxacillin " >
                                 <label>Drug</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <input type="text" class="form-control effect-19 has-content" value="500 milligrams">
                                 <label>Dose</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <input type="text" class="form-control effect-19 has-content" value="4x per day ">
                                 <label>Frequency</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <input type="text" class="form-control effect-19 has-content" value="Oral tablets">
                                 <label>Route</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <input type="text" class="form-control effect-19 has-content" value="One Week">
                                 <label>Duration</label>
                             </div>
                             <div class="form-group">
-                                
+
                                 <textarea name="" id="" type="text" placeholder="See GP for weekly weight check reduce prednisolone by 10mg a day" class="form-control effect-19 has-content"  rows="4">
-                                    
+
                                 </textarea>
                                 <label>Comments</label>
                             </div>
@@ -530,6 +531,7 @@
 @section('scripts')
 <script>
 $('#Prescribed-Modal').modal('show');
+$('#verify_id_all').hide();
 
     //      $(".add-and-edit").click(function(){
 
@@ -571,13 +573,22 @@ $('#case_no').on('change', function(){
         success:function(res){
             console.log(res.case_details[0]);
             $('#p_name').val(res.case_details[0].user.name);
-            $('#upn').val(res.case_details[0].user.registration_number); 
+            $('#upn').val(res.case_details[0].user.registration_number);
             $('#p_id').val(res.case_details[0].user.id);
             $('#d_id').val(res.case_details[0].doctor_id);
             $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
             $('#medical_record').attr('href',"{{url('doctor/view-medical-recorde')}}/"+res.case_details[0].case_id);
             $('#msg_patient').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
             $('#summary').attr('href',"{{url('doctor/summary-diagnosis')}}/"+res.case_details[0].case_id);
+            if(!res.case_details[0].user.id_verify){
+                $('#verify_id_all').show();
+                $('#verify_id').attr('href',"{{url('doctor/invite-video')}}/"+res.case_details[0].case_id);
+
+
+            } else {
+                $('#verify_id_all').hide();
+            }
+
             msg_patient
             var prescription =res.prescription[0].prescription;
             var status = '';
@@ -586,15 +597,15 @@ $('#case_no').on('change', function(){
                 console.log('ko');
                 for(i=0; i < prescription.length; i++){
                     console.log(prescription[i]);
-                    
+
                     status = prescription[i]['status'];
                     if(status == 'no'){
                         data_table +=  '<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a href="javascript:void(0)" class="delt" pris_id="'+prescription[i]['id']+'" onclick="delet_prisc(this);"><i class="far fa-trash-alt"></i></a></td></tr>';
-                        
+
                     }
                     if(status == 'y'){
                         data_table +='<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td></td></tr>';
-                        
+
                     }
                 }
                 $('#add-tr tbody').html(data_table);
@@ -621,11 +632,11 @@ $('#case_no').on('change', function(){
                 $('#befour_sub').css('display','block');
                 $('#after_sub').css('display','none');
                 $('#add-tr tbody').html('');
-                
+
             }
         }
     })
-    
+
 });
 $('#add_pris').on('click', function(){
     console.log('asd');
@@ -673,20 +684,20 @@ $('#add_pris').on('click', function(){
                     var status = prescription[i]['status']
                     if(status == 'no'){
                         data_table +=  '<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a href="javascript:void(0)" class="delt" pris_id="'+prescription[i]['id']+'" onclick="delet_prisc(this);"><i class="far fa-trash-alt"></i></a></td></tr>';
-                        
+
                     }
                     if(status == 'y'){
                         data_table +='<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td></td></tr>';
-                        
+
                     }
                 }
                 $('#add-tr tbody').html(data_table);
                 $('#add-pop').modal('hide');
-                
+
             }
         }
     });
-    
+
 });
 $('#final_prisc').on('click', function(){
     var case_id = $('#case_no').val();
@@ -716,13 +727,13 @@ $('#final_prisc').on('click', function(){
                         status = prescription[i]['status'];
                         if(status == 'no'){
                         data_table +=  '<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td><a href="javascript:void(0)" class="delt" pris_id="'+prescription[i]['id']+'" onclick="delet_prisc(this);"><i class="far fa-trash-alt"></i></a></td></tr>';
-                        
+
                         }
                         if(status == 'y'){
                             data_table +='<tr class="only-remv"><td>'+prescription[i]['prescription_no']+'</td><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td><td></td></tr>';
-                            
+
                         }
-               
+
                         $('#final_sucess').css('display', 'block');
                         $('#final_error').css('display', 'none');
                         $('#finalprisc').modal('hide')
@@ -739,7 +750,7 @@ $('#final_prisc').on('click', function(){
                     }
                 }
             }
-        }); 
+        });
     }else{
         $('#final_error').css('display', 'block');
         $('#final_sucess').css('display', 'none');
@@ -748,7 +759,7 @@ $('#final_prisc').on('click', function(){
 });
 
 function delet_prisc(obj){
-     
+
    // alert('asdas');
     var _token = $("input[name=_token]").val();
     //var $this = $(obj).closest('tr').hide();;
@@ -764,14 +775,14 @@ function delet_prisc(obj){
                     _token : _token
                 },
                 success:function(res){
-                    
+
                     if(res.success == 'yes'){
                         //console.log($this);
                         $(obj).closest('tr').remove();//remove();
 
                     }
                 }
-            }); 
+            });
         }
     }
 }

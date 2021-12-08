@@ -5,7 +5,14 @@
         <div class="row">
             <div class="col-sm-12">
 
-
+                @php
+                    $age = \Carbon\Carbon::parse(auth()->user()->profile->dob)->diff(\Carbon\Carbon::now());
+                    $sd = $age->format('%y years, %m months and %d days');
+                    $d_years = $age->format('%y');
+                    $d_months = $age->format('%m');
+                    $d_days = $age->format('%d');
+                    // dump($age, $sd, $d_years,$d_months,$d_days);
+                @endphp
 
 
                 <div class="col Choose-Your-Doctor-right">
@@ -57,6 +64,7 @@
                                         </div>
                                     @endif
                                     @if ($doctor->profile->dr_live_chat_fee_notification == 1)
+                                    @if(18 < $d_years || $d_years < 11)
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="questions_type"
                                                 onclick="$('#book_slot').show();" id="exampleRadios2" value="1"
@@ -67,7 +75,9 @@
                                                 Check availability in Calendar below
                                             </label>
                                         </div>
+                                        @endif
                                     @endif
+                                    @if(18 < $d_years || $d_years < 11)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="questions_type"
                                             onclick="$('#book_slot').hide(); $('#case_details').show();" id="exampleRadios2"
@@ -78,6 +88,7 @@
                                             turnaround time : 8 days
                                         </label>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-sm-12">

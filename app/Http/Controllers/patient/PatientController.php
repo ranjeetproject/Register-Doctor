@@ -48,9 +48,6 @@ class PatientController extends Controller
         $this->middleware(['auth','isPatient']);
     }
 
-
-
-
     public function dashboard() {
         return view('frontend.patient.dashboard');
     }

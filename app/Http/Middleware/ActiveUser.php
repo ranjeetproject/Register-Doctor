@@ -17,7 +17,6 @@ class ActiveUser
      */
     public function handle($request, Closure $next)
     {
-    
         if (Auth::check() && Auth::user()->notBlock()) {
           return $next($request);
         }else{
@@ -35,7 +34,7 @@ class ActiveUser
                 case '3':
                     Auth::guard("sitePharmacist")->logout();
                     return redirect()->route('login')->with('Info-sweet','Your profile has been blocked by admin');
-                    break;          
+                    break;
                 default:
                     Auth::guard("sitePatient")->logout();
                     return redirect()->route('login')->with('Info-sweet','Your profile has been blocked by admin');

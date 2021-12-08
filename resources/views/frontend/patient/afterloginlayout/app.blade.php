@@ -29,7 +29,7 @@
         </section>
         <!-- Footer start -->
             @include('frontend.patient.afterloginlayout.common_footer')
-            @include('common.timezone_setup')
+            {{-- @include('common.timezone_setup') --}}
             @include('frontend.patient.afterloginlayout.common_js')
         <!-- Footer end -->
         @yield('scripts')

@@ -13,10 +13,10 @@
                     {{-- <li class="nav-item">
                         <a class="nav-link btn" href="{{ route('patient.payment-detail') }}">Payment Details</a>
                     </li> --}}
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link btn" id="chng_time_zone">Change Timezone</a>
 
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a href="{{route('patient.medical-record')}}" class="nav-link btn">Medical Record</a>
                         {{-- <a href="{{route('patient.medical-record')}}" class="btn smr-btn mr"></a> --}}

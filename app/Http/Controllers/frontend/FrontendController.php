@@ -28,6 +28,7 @@ class FrontendController extends Controller
         $doctor_slides = User::select('id')->with(['profile'=>function($query){
                 $query->select('profile_photo');
         }])->where('slide_status',1)->get();
+        // dd(auth()->guard('sitePatient')->user());
 
     	return view('frontend.index', compact('banner','home_banners','doctor_slides'));
     }
