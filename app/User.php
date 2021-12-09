@@ -11,19 +11,19 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable,SoftDeletes;
-  
+
     protected $guard = 'siteAdmin';
 
     protected $fillable = [
         'name', 'email', 'password',
     ];
 
-    
+
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-   
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -51,31 +51,31 @@ class User extends Authenticatable
     // public function userRoles()
     // {
     //     return $this->hasMany('App\Models\UserRole');
-        
+
     // }
 
       public function userFavDoc()
     {
         return $this->hasMany('App\Models\FavouriteDoctor');
-        
+
     }
 
      public function openingTime()
     {
         return $this->hasOne('App\Models\PharmacyOpeningTime','user_id','id')->withDefault();
-        
+
     }
 
     public function deliveryOption()
     {
         return $this->hasOne('App\Models\DeliveryOptions','user_id','id')->withDefault();
-        
+
     }
-    
+
 
     public function profile()
     {
-        
+
         return $this->hasOne('App\Models\UserProfile')->withDefault();
     }
 
@@ -87,20 +87,25 @@ class User extends Authenticatable
     public function childs()
     {
         return $this->hasMany('App\Models\ChildsAccountsHolder','user_id','id');
-        
+
     }
 
-    
+    public function parents()
+    {
+        return $this->hasMany('App\Models\ChildsAccountsHolder','child_id','id');
+    }
+
+
     public function weeklyAvailableDays()
     {
         return $this->hasMany('App\Models\WeeklyAvailableDays');
-        
+
     }
 
      public function availableDays()
     {
         return $this->hasMany('App\Models\DoctorAvailableDays');
-        
+
     }
 
 

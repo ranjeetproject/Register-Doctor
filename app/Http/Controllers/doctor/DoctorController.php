@@ -26,6 +26,7 @@ use App\UserDoctor;
 use App\helpers;
 use App\User;
 use App\Mail\FinalizePrescription;
+use App\Mail\InviteVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -1107,7 +1108,38 @@ $get_day = $get_day->delete();
 
     public function inviteVideo($case_id,$user_id)
     {
-        Mail::to("koustav.mondal@brainiuminfotech.com")->send(new FinalizePrescription($request->case_id));
-        // return
+        // send mail to parent or user
+        $user = User::find($user_id);
+        // dump($user);
+        if($user->role == 4) {
+            $parents = $user->parents;
+            // dd($parents);
+            foreach($parents as $parent) {
+                $user =  User::find($parent->user_id);
+                Mail::to($user->email)->send(new InviteVideo($case_id, $user, $user_id));
+            }
+        } else{
+
+            Mail::to($user->email)->send(new InviteVideo($case_id, $user, $user_id));
+        }
+
+        //send mail to doctor
+        $doctor = Auth::user();
+        Mail::to($doctor->email)->send(new InviteVideo($case_id, $doctor, $user_id));
+        Session::flash('Success-toastr','Invitation sent successfully');
+        return redirect()->route('doctor.video-call-pres', [$case_id, $user_id]);
+        // return view('frontend.doctor.invite_video_link', compact('case_id'));
+    }
+
+    public function videoCallDocPres($case_id,$user_id)
+    {
+        return view('common.video_call_pres',compact('case_id','user_id'));
+    }
+
+    public function verifyId($user_id)
+    {
+        User::where('id',$user_id)->update(['id_verify' => date('Y-m-d H:i:s')]);
+        Session::flash('Success-toastr','Verified successfully');
+        return redirect()->route('doctor.dashboard');
     }
 }

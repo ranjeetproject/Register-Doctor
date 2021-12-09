@@ -78,7 +78,7 @@
 
 <br>
 <center>
-  <a class="btn btn-primary"  href="{{ route('doctor.video-call-pres', 'invite'.$case_id) }}">Video Verify</a>
+  <a class="btn btn-primary"  href="{{ route('doctor.video-call-pres', [$case_id, $patient_id]) }}">Video Verify</a>
 </center>
 @else
 <p>Dear Patient</p>

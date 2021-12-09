@@ -1108,4 +1108,9 @@ class PatientController extends Controller
         return view('frontend.patient.sick_note',compact('case','sicknote'));
 
     }
+
+    public function videoCallDocPres($case_id)
+    {
+        return view('common.video_call_pres',compact('case_id'));
+    }
 }

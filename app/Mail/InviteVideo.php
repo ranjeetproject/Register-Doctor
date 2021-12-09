@@ -13,10 +13,14 @@ class InviteVideo extends Mailable
     use Queueable, SerializesModels;
 
     public $case_id;
+    public $user;
+    public $patient_id;
 
-    public function __construct($case_id)
+    public function __construct($case_id, $user, $user_id)
     {
        $this->case_id = $case_id;
+       $this->patient_id = $user_id;
+       $this->user = $user;
     }
 
 

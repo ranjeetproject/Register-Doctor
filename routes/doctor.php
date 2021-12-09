@@ -44,7 +44,8 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::post('/prescription_comment', 'DoctorController@prescriptionComment')->name('prescription_comment');
     Route::get('/prescription_comments', 'DoctorController@prescriptionCommentlist')->name('prescription_comment_list');
     Route::get('/invite-video/{case_id}/{user_id}', 'DoctorController@inviteVideo')->name('invite-video');
-    Route::get('video-cal-pres/{id}','DoctorController@videoCallDocPres')->name('video-call-pres');
+    Route::get('video-cal-pres/{case_id}/{user_id}','DoctorController@videoCallDocPres')->name('video-call-pres');
+    Route::get('verify-id/{user_id}','DoctorController@verifyId')->name('verify-id');
 
     Route::match(['get','post'],'sick-note/{id}', 'DoctorController@sickNote')->name('sick-note');
 });

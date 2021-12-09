@@ -10,7 +10,7 @@
 
                         <ol class="breadcrumb Pharmacist-doc-com">
 
-                            <li class="breadcrumb-item active">Prescription Page</li>
+                            <li class="breadcrumb-item active">Invitetion send </li>
 
                         </ol>
 
