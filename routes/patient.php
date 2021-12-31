@@ -53,6 +53,10 @@
     Route::get('/print-case-summery/{id}', 'PatientController@printCaseSummery')->name('print-case-summery');
     Route::get('/sick-note/{id}', 'PatientController@sickNote')->name('sick-note');
     Route::get('video-cal-pres/{id}','PatientController@videoCallDocPres')->name('video-call-pres');
+//person to person chat
+    Route::get('direct-chat', 'PatientController@directChat')->name('direct_chat');
+    Route::post('direct-chat', 'PatientController@directChat_post')->name('direct_chat_post');
+    Route::match(['get','post'],'direct-chats/{id}', 'PatientController@directChats')->name('direct_chats');
 
 
 });

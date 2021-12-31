@@ -22,6 +22,7 @@ use App\Models\SummaryDiagnosis;
 use App\Models\SickNote;
 use App\Models\pharma_req_prescription;
 use App\Models\PrescriptionComment;
+use App\Models\PersonTOPersonChat;
 use App\User;
 use App\UserDoctor;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -904,30 +905,30 @@ class PatientController extends Controller
  function symptomsChecker(Request $request,$case_id)
     {
         $user = Auth::guard('sitePatient')->user();
-
+        $last_symptroms = SymptromsDetails::where('user_id',$user->id)->latest()->first();
 
         if($request->isMethod('post')){
             // return $request->all();
             $case = PatientCase::where('case_id',$case_id)->first();
 
             if(isset($request->symptom) && !empty($request->symptom)){
-            foreach ($request->symptom as $value) {
-            $symptoms = new PastSymptoms;
-            $symptoms->user_id = $user->id;
-            $symptoms->patient_case_id = $case->id;
-            $symptoms->symptom = $value;
-            $symptoms->type = 1;
-            $symptoms->save();
+                foreach ($request->symptom as $value) {
+                    $symptoms = new PastSymptoms;
+                    $symptoms->user_id = $user->id;
+                    $symptoms->patient_case_id = $case->id;
+                    $symptoms->symptom = $value;
+                    $symptoms->type = 1;
+                    $symptoms->save();
+                }
+                foreach ($request->symptom2 as $value) {
+                    $symptoms = new PastSymptoms;
+                    $symptoms->user_id = $user->id;
+                    $symptoms->patient_case_id = $case->id;
+                    $symptoms->symptom = $value;
+                    $symptoms->type = 2;
+                    $symptoms->save();
+                }
             }
-            foreach ($request->symptom2 as $value) {
-            $symptoms = new PastSymptoms;
-            $symptoms->user_id = $user->id;
-            $symptoms->patient_case_id = $case->id;
-            $symptoms->symptom = $value;
-            $symptoms->type = 2;
-            $symptoms->save();
-            }
-         }
 
 
 
@@ -979,7 +980,7 @@ class PatientController extends Controller
 
         }
 
-         return view('frontend.patient.symptoms-checker');
+         return view('frontend.patient.symptoms-checker',compact('last_symptroms'));
     }
 
 
@@ -1112,5 +1113,71 @@ class PatientController extends Controller
     public function videoCallDocPres($case_id)
     {
         return view('common.video_call_pres',compact('case_id'));
+    }
+
+    public function directChats(Request $request, $id)
+    {
+        $sender_id = Auth::user()->id;
+        $user_detail = User::findOrFail($id);
+
+
+      if($user_detail->roll == 1){
+        $chat_details = PersonTOPersonChat::where('p_id',$sender_id)->where('ph_id',$id)->first();
+        // User::findOrFail($id)
+      } elseif ($user_detail->roll == 2) {
+        $chat_details = PersonTOPersonChat::where('p_id',$sender_id)->where('d_id',$id)->first();
+      }
+
+      if($chat_details) {
+        $peerPeerId = $chat_details->id;
+      } else {
+        $chat = new PersonTOPersonChat;
+        $chat->p_id = $sender_id;
+        if ($user_detail->roll == 2) {
+            # code...
+            $chat->d_id = $id;
+        } else {
+
+            $chat->ph_id = $id;
+        }
+        $chat->save();
+        $peerPeerId = $chat->id;
+      }
+
+      $chat_id = getDirectChatId($peerPeerId);
+
+      return view('frontend.patient.direct_chats', compact('user','chat_id'));
+    }
+
+    public function directChat(Request $request)
+    {
+      return view('frontend.patient.direct_chat');
+    }
+
+    public function directChat_post(Request $request)
+    {
+        $key_per = $request->param;
+        $val_sur = $request->search;
+        $p_user = '';
+        $d_user = '';
+
+        if($request->param == 1){
+            $users = User::where('name',$request->search)->where('role',1)->get();
+        } elseif ($request->param == 2) {
+            $users = User::where('registration_number',$request->search)->where('role',1)->get();
+        } elseif ($request->param == 3) {
+            $users = User::where('registration_number',$request->search)->where('role',2)->get();
+        }elseif ($request->param == 4) {
+            $users = User::where('registration_number',$request->search)->where('role',2)->get();
+        }else{
+            $presn = Prescription::where('prescription_no',$request->search)->first();
+            if ($presn) {
+                $p_user = User::find($presn->p_id);
+                $d_user = User::find($presn->doc_id);
+                # code...
+            }
+            $users = [];
+        }
+      return view('frontend.patient.direct_chat',compact('users','p_user','d_user','key_per','val_sur'));
     }
 }

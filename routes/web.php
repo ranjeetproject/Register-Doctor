@@ -22,6 +22,23 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+
+Route::get('test', function () {
+    $childs = App\User::with('parents')
+    // ->wherehas('profile',function ( $query) {
+    //     $query->where(DB::raw('FLOOR(DATEDIFF(DATE_ADD(DATE(NOW()),INTERVAL 30 DAY),dob) / 365.25) - (FLOOR(DATEDIFF(DATE(NOW()),dob) / 365.25))'),1)
+    //     ->where(DB::raw('FLOOR(DATEDIFF(DATE_ADD(DATE(NOW()),INTERVAL 30 DAY),dob) / 365.25)'),18);
+    // })
+    ->where('role',4)
+    ->get();
+
+    foreach($childs as $child) {
+        // dd($child->parents);
+        App\User::find($child->parents->user_id);
+
+    }
+});
+
 // Route::namespace('user')->group(function(){
 // 	Route::get('registration', 'UserController@registration')->name('registration');
 //     Route::post('create-user', 'UserController@createUser')->name('create-user');
@@ -36,6 +53,7 @@ Route::namespace('user')->group(function(){
 	Route::match(['get','post'],'registration-step2/{id}', 'UserController@registrationStep2')->name('registration-step2');
 	Route::post('create-user', 'UserController@createUser')->name('create-user');
 	Route::get('email-verification/{id}', 'UserController@emailVerification')->name('email-verification');
+	Route::match(['get','post'], 'child-to-adult/{id}', 'UserController@childToAdult')->name('child-to-adult');
 	Route::get('accept-term-and-conditions/{id}', 'UserController@acceptTermsAndConditions')->name('accept-term-and-conditions');
 	Route::match(['get','post'],'profile/{id}', 'UserController@doctorProfile')->name('doc-verify-profile');
     // Route::match(['get','post'],'/profile', 'DoctorController@profile')->name('profile');

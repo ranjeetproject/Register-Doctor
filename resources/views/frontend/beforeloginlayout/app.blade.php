@@ -31,6 +31,7 @@
 
         <!-- Footer start -->
             @include('frontend.beforeloginlayout.common_footer')
+            @include('cookieConsent::index')
         <!-- Footer end -->
 
          <!-- common js start -->

@@ -1,6 +1,9 @@
-@extends('frontend.doctor.afterloginlayout.app')
+@extends('frontend.pharmacist.afterloginlayout.app')
 
 @section('content')
+@php
+
+@endphp
     <div class="col Choose-Your-Doctor-right innerpage  Message-Doctor-to-Patient-via-Left-Hand-Navigation-page">
         <div class="row">
             <div class="col-sm-12">
@@ -39,12 +42,12 @@
                                 <div class="contacts-bottom">
                                     <a href="#" class="contacts-bottom-details">
                                         <div class="profile-img active">
-                                            <img src="{{ $case->user->profile->profile_photo }}" alt="">
+                                            <img src="{{ $user->profile->profile_photo }}" alt="">
                                         </div>
                                         <div class="profile-colnt">
                                             <div class="profile-colnt-det">
-                                                <h3>{{ $case->user->name }} <small></small></h3>
-                                                <p>Case Id. {{ $case->case_id }} </p>
+                                                <h3>{{ $user->name }} <small></small></h3>
+                                                {{-- <p>Case Id. {{ $case->case_id }} </p> --}}
                                             </div>
 
                                         </div>
@@ -60,13 +63,13 @@
 
                                 <div class="chat-body-you">
                                     <div class="chat-body-left">
-                                        <img src="{{ $case->user->profile->profile_photo }}" alt="">
+                                        <img src="{{ $user->profile->profile_photo }}" alt="">
                                     </div>
                                     <div class="chat-body-right">
-                                        <h3>{{ $case->user->name }}
-                                            <small>{{ date('d-m-Y h:i:s', strtotime($case->created_at)) }}</small>
+                                        <h3>{{ $user->name }}
+                                            {{-- <small>{{ date('d-m-Y h:i:s', strtotime($case->created_at)) }}</small> --}}
                                         </h3>
-                                        <p>{{ $case->health_problem }}</p>
+                                        {{-- <p>{{ $case->health_problem }}</p> --}}
 
                                     </div>
                                 </div>
@@ -103,8 +106,8 @@
                             <form method="post" id="upload_form" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="rec_user_id" id="rec_user_id"
-                                    value="{{ $case->user_id ?? '' }}" data-doctor-count="">
-                                <input type="hidden" name="case_id" id="case_id" value="p{{ $case->case_id }}">
+                                    value="{{ chat_id ?? '' }}" data-doctor-count="">
+                                <input type="hidden" name="case_id" id="case_id" value="{{ chat_id }}">
 
                                 <input type="text" name="message" id="message" placeholder="Type a new message..."
                                     class="chat-input" required>
@@ -124,7 +127,11 @@
     </div>
     </div>
 @endsection
-@push('scripts')
+@section('scripts')
+<script src="{{ asset('public/plugins/moment/moment.min.js') }}"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     {{-- <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script> --}}
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
@@ -164,7 +171,7 @@
         var userId = '{{ Request::segment(2) }}';
 
 
-        db.collection("chats").where("case_id", "==", 'p{{ $case->case_id }}').get().then((querySnapshot) => {
+        db.collection("chats").where("case_id", "==", '{{ chat_id }}').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var details = doc.data();
                 chatDetails.push(details);
@@ -176,7 +183,7 @@
 
         setTimeout(() => {
             var onSnapshotchatDetails = []
-            db.collection("chats").where("case_id", "==", 'p{{ $case->case_id }}').onSnapshot(function(
+            db.collection("chats").where("case_id", "==", '{{ chat_id }}').onSnapshot(function(
                 querySnapshot) {
                 querySnapshot.forEach((doc) => {
                     var details = doc.data();
@@ -210,13 +217,15 @@
 
                 chatDetails = chatDetails.filter((v, i, a) => a.findIndex(t => (t.created_at === v.created_at)) ===
                     i);
+                    console.log('chatDetailsf');
+                console.log(chatDetails);
                 chatDetails = _.sortBy(chatDetails, 'created_at');
 
                 $.each(chatDetails, function(key, value) {
                     var time = moment(value.created_at).format("DD-MM-YYYY h:mm:ss");
                     if (value.sender_id != '{{ Auth::guard('sitePharmacist')->user()->id }}') {
                         chatData +=
-                            '<div class="chat-body-you"><div class="chat-body-left"><img src="{{ $case->user->profile->profile_photo }}" alt=""></div><div class="chat-body-right"><h3>{{ $case->user->name }}  <small>' +
+                            '<div class="chat-body-you"><div class="chat-body-left"><img src="{{ $user->profile->profile_photo }}" alt=""></div><div class="chat-body-right"><h3>{{ $user->name }}  <small>' +
                             time + '</small></h3><p>' + value.message + '</p></div></div>';
 
                     } else {
@@ -246,25 +255,9 @@
 
 
         $('#upload_form').on('submit', function(event) {
-            // alert('ffffffff');
+            alert('ffffffff');
             event.preventDefault();
-            if ($('#rec_user_id').data('doctor-count') < 10) {
-                // $.ajax({
-                //     url: "{{ route('doctor.doctor-reply-case') }}",
-                //     method: "get",
-                //     data: {
-                //         case_id: 'p{{ $case->case_id }}'
-                //     },
-                //     dataType: 'JSON',
-                //     success: function(data) {
-                //         if (typeof response != "undefined" && response.success) {
-                //             console.log(response.message);
-                //         }
-                //     }
-
-
-                // });
-
+            // if ($('#rec_user_id').data('doctor-count') < 10) {
 
                 if ($('#image').val()) {
 
@@ -320,15 +313,15 @@
                         });
                     document.getElementById('message').value = '';
                 }
-            } else {
-                Swal.fire(
-                    'Warning!',
-                    'You can not enter more than ten message!',
-                    'warning'
-                );
-            }
+            // } else {
+            //     Swal.fire(
+            //         'Warning!',
+            //         'You can not enter more than ten message!',
+            //         'warning'
+            //     );
+            // }
         });
 
         // });
     </script>
-@endpush
+@endsection

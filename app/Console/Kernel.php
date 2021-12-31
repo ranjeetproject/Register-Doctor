@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ChildMailSentCron::class,
+        Commands\ChildToAdultCron::class,
     ];
 
     /**
@@ -24,8 +25,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('child_mail_sent:cron')
+            // ->dailyAt('13:00');
+            ->everyMinute();
+        $schedule->command('child_to_adult:cron')
+        ->dailyAt('23:00');
+        // ->everyMinute();
     }
 
     /**

@@ -12,6 +12,7 @@ use App\Models\Role;
 use App\Models\UserProfile;
 use App\Models\UserRole;
 use App\Models\Cms;
+use App\Models\ChildToAdult;
 use App\Notifications\UserNotification;
 use App\User;
 use Auth;
@@ -482,6 +483,43 @@ class UserController extends Controller
          return view('frontend.profile', compact('user','form_name'));
 
      }
+
+    function childToAdult($id, Request $request){
+        // $user_id = Crypt::decrypt($id);
+        // $user = User::find($user_id);
+        if($request->isMethod('post')){
+
+            $validator = $request->validate(
+                [
+
+                "email"=>"required|email|unique:users,email",
+                "password"=>"required|min:6",
+                "confirm_password"=>"required|same:password",
+                // "terms_conditions"=>"required",
+                //    "privacy_policy"=>"required",
+                ],[
+                    'email.unique' => 'This email ID is already taken. Please use a different email ID',
+                    'terms_conditions.required'=>'Please read and tick to accept','privacy_policy.required'=>'Please read and tick to accept'
+                ]
+            );
+            $user_id = Crypt::decrypt($request->user_id);
+            $child = new ChildToAdult;
+            $child->user_id = $user_id;
+            $child->email = $request->email;
+            $child->password = Hash::make($request->password);
+            $child->save();
+            return redirect()->route('login')->with('Success-toastr','Successfully added.');
+        }
+        // $user->terms_conditions = date('Y-m-d H:i:s');
+        //   $user->privacy_policy = date('Y-m-d H:i:s');
+        // if ($user->save()) {
+        //   Mail::to($user->email)->send(new CompleteRegistration($user->id));
+        //   return redirect()->route('login')->with('Success-toastr','Successfully accepted.');
+        // } else {
+        //   return redirect()->route('login')->with('Error-toastr','Something went wrong.');
+        // }
+        return view('frontend.child-to-adult',compact('id'));
+    }
 
      function logout()
      {

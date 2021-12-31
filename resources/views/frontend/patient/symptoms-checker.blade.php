@@ -4,7 +4,27 @@
     <div class="col Post-prescription-right  innerpage  Symptoms-page">
         <div class="row">
             <div class="col-sm-12">
-               
+                @php
+                    $age = \Carbon\Carbon::parse(auth()->user()->profile->dob)->diff(\Carbon\Carbon::now());
+                    $sd = $age->format('%y years, %m months and %d days');
+                    $d_years = $age->format('%y');
+                    $d_months = $age->format('%m');
+                    $d_days = $age->format('%d');
+
+                    if(is_null($last_symptroms)) {
+                        $diff_in_months = 6;
+                    } else {
+                        $last_date = $last_symptroms->created_at;
+
+                        $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $last_date);
+                        $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', \Carbon\Carbon::now());
+                        $diff_in_months = $to->diffInMonths($from);
+                    }
+
+                    dump( $diff_in_months);
+                    // dump($age, $sd, $d_years,$d_months,$d_days);
+                @endphp
+
                 <div class="col Symptoms-right">
                     <h2 class="for-title">Please complete the questions below (or on behalf of your child)</h2>
                      <div class="for-w-100 Incoming-Prescription-Requests-right-table">
@@ -55,7 +75,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                      
+
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -129,7 +149,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                      
+
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -167,17 +187,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="lable-title">Weight</label>
-                                        <input class="form-control" name="weight">
+                                        <input class="form-control" name="weight" {{ (($d_years < 18) && ($diff_in_months >=6 ) ) ? "required":'' }}>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="lable-title">Height</label>
-                                        <input class="form-control" name="height" >
+                                        <input class="form-control" name="height" {{ (($d_years < 18) && ($diff_in_months >=6 )) ? "required":'' }}>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -232,36 +252,36 @@
                                 </div>
                             </div>
                          </form>
-                       
+
                     </div>
                 </div>
             </div>
             </div>
         </div>
     </div>
-   
+
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function(){ 
-            var count = $("#form-inline").children().length;  
-            var count = $("#List-any-drug-list").children().length;                             
+        $(document).ready(function(){
+            var count = $("#form-inline").children().length;
+            var count = $("#List-any-drug-list").children().length;
             $("#drugs-taken .add-drugs-drugs").click(function(){
                 count++;
                 $("#drugs-taken").append('<div class="form-inline"><div class="remove-drugs-drugs"><i class="fal fa-minus"></i></div><label class="my-1 mr-2" >Drug name</label><input type="text" name="drug_name[]" id="NEW'+count+'" class="form-control my-1 mr-sm-2"  placeholder="e g flucloxacillin"><label class="my-1 mr-2" >Dose </label><input type="text" class="form-control my-1 mr-sm-2" name="dose[]" placeholder="eg 500 milligrams"><label class="my-1 mr-2" >Frequency</label><input type="text" class="form-control my-1 mr-sm-2" name="frequency[]" placeholder="frequency 4x a day"><div class="form-group"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="currently_taking[]" value="1"><label class="form-check-label lable-title">Tick if currently on drug</label></div></div></div></div>');
-                
-            }); 
+
+            });
             $("#List-any-drug .add-List-any-drug").click(function(){
                 count++;
                 $("#List-any-drug").append('<div class="row" id="List-any-drug-list"><div class="remove-List-any-drug"><i class="fal fa-minus"></i></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">List any drug allergies<span>(Drug name)</span> </label><input class="form-control" name="drug_name2[]"></div></div><div class="col-sm-6"><div class="form-group"><label class="lable-title">What happened ? <span> (eg - rash)</span> </label><input class="form-control" id="inputState" name="what_happened[]"></div></div></div>');
-                
-            }); 
+
+            });
         });
         $(document).on('click', ".form-inline .remove-drugs-drugs", function() {
-            $(this).parent().remove();     
+            $(this).parent().remove();
         });
         $(document).on('click', "#List-any-drug-list .remove-List-any-drug", function() {
-            $(this).parent().remove();     
+            $(this).parent().remove();
         });
 
     </script>

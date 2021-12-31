@@ -7,6 +7,7 @@ use App\Models\DeliveryOptions;
 use App\Models\PharmacyOpeningTime;
 use App\Models\UserProfile;
 use App\Models\HandyDocument;
+use App\Models\PersonTOPersonChat;
 use Auth, Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Prescription_req_doctor;
 use App\Prescription;
+use App\user;
 use App\Models\pharma_req_prescription;
 use App\Models\PatientCase;
 // use Session;
@@ -324,8 +326,68 @@ class PharmacistController extends Controller
 
     public function chats(Request $request, $id)
     {
-      $case = PatientCase::where('case_id',$id)->first();
-      return view('frontend.pharmacist.chats', compact('case'));
+        $sender_id = Auth::user()->id;
+      $user_detail = User::findOrFail($id);
+
+
+      if($user_detail->roll == 1){
+        $chat_details = PersonTOPersonChat::where('ph_id',$sender_id)->where('p_id',$id)->first();
+        // User::findOrFail($id)
+      } elseif ($user_detail->roll == 2) {
+        $chat_details = PersonTOPersonChat::where('ph_id',$sender_id)->where('d_id',$id)->first();
+      }
+
+      if($chat_details) {
+        $peerPeerId = $chat_details->id;
+      } else {
+        $chat = new PersonTOPersonChat;
+        $chat->ph_id = $sender_id;
+        if ($user_detail->roll == 2) {
+            # code...
+            $chat->d_id = $id;
+        } else {
+
+            $chat->p_id = $id;
+        }
+        $chat->save();
+        $peerPeerId = $chat->id;
+      }
+
+      $chat_id = getDirectChatId($peerPeerId);
+
+      return view('frontend.pharmacist.chats', compact('user','chat_id'));
+    }
+
+    public function chat(Request $request)
+    {
+      return view('frontend.pharmacist.chat');
+    }
+
+    public function chat_post(Request $request)
+    {
+        $key_per = $request->param;
+        $val_sur = $request->search;
+        $p_user = '';
+        $d_user = '';
+
+        if($request->param == 1){
+            $users = User::where('name',$request->search)->where('role',1)->get();
+        } elseif ($request->param == 2) {
+            $users = User::where('registration_number',$request->search)->where('role',1)->get();
+        } elseif ($request->param == 3) {
+            $users = User::where('registration_number',$request->search)->where('role',2)->get();
+        }elseif ($request->param == 4) {
+            $users = User::where('registration_number',$request->search)->where('role',2)->get();
+        }else{
+            $presn = Prescription::where('prescription_no',$request->search)->first();
+            if ($presn) {
+                $p_user = User::find($presn->p_id);
+                $d_user = User::find($presn->doc_id);
+                # code...
+            }
+            $users = [];
+        }
+      return view('frontend.pharmacist.chat',compact('users','p_user','d_user','key_per','val_sur'));
     }
 
 }

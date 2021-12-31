@@ -311,4 +311,10 @@ function timezoneAdjustmentStore($timezone, $dateTime) {
     return $dt->format($format);
 }
 
+//direct chat unique id
+function getDirectChatId($id)
+{
+    return 'DC'.str_pad($id,12,"0",STR_PAD_LEFT);
+}
+
 ?>
