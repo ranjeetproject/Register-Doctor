@@ -37,8 +37,9 @@
                                         <span class="show_time">
                                             @foreach ($get_current_day as $current_day)
                                                 {{-- @if ($time_zone != 1) --}}
-                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->from_time))) }} -
-                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,date('Y-m-d'),$current_day->to_time))) }}
+                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $current_day->from_time))) }}
+                                                -
+                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $current_day->to_time))) }}
                                                 {{-- @else
                                                 {{ date('H:i a', strtotime($current_day->from_time)) }} -
                                                 {{ date('H:i a', strtotime($current_day->to_time)) }}
@@ -95,10 +96,11 @@
                                                             aria-controls="collapseOne">
                                                             {{ ucfirst($day->day) }} -
                                                             {{-- @dump($day->day) --}}
-                                                            {{-- @if ($time_zone !=1) --}}
+                                                            {{-- @if ($time_zone != 1) --}}
 
-                                                            <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$day->day,$day->from_time))) }} -
-                                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$day->day,$day->to_time))) }}</span>
+                                                            <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $day->day, $day->from_time))) }}
+                                                                -
+                                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $day->day, $day->to_time))) }}</span>
                                                             {{-- @else
                                                             <span>{{ date('H:i a', strtotime($day->from_time)) }} -
                                                                 {{ date('H:i a', strtotime($day->to_time)) }}</span>
@@ -106,14 +108,19 @@
                                                             @endif --}}
 
                                                         </button>
-                                                        <span class="accetion"><a href="#"
-                                                                onclick="editWeeklyDay('{{ $day->id }}')"><i
-                                                                    class="fas fa-pencil-alt"></i></a> | <a
-                                                                href="{{ route('doctor.delete-weekly-day', $day->id) }}"
+                                                        <span class="accetion">
+                                                            <a href="#" onclick="editWeeklyDay('{{ $day->id }}')"><i
+                                                                    class="fas fa-pencil-alt"></i>
+                                                            </a> |
+                                                            <a href="{{ route('doctor.delete-weekly-day', $day->id) }}"
                                                                 onclick="return confirm('Are you sure ?');"><i
-                                                                    class="far fa-trash-alt"></i></a></span>
+                                                                    class="far fa-trash-alt"></i>
+                                                            </a>
+
+                                                        </span>
                                                     </h2>
                                                 </div>
+
 
                                                 {{-- <div id="collapseOnee" class="collapse" aria-labelledby="headingOne"
                                                     data-parent="#accordionExample">
@@ -172,7 +179,8 @@
                                             </div>
                                             <div class="form-group mb-2 mr-1">
                                                 <input type="text" name="to_date" onfocus="(this.type='date')"
-                                                    onblur="(this.type='text')" class="form-control" placeholder="To Date">
+                                                    onblur="(this.type='text')" class="form-control"
+                                                    placeholder="To Date">
                                             </div>
                                             <button type="submit" class="btn btn-primary btn-block mb-2">Search</button>
                                         </form>
@@ -195,11 +203,11 @@
                                                             aria-expanded="false" aria-controls="acone">
                                                             {{ ucfirst(date('l', strtotime($available_day->date))) }} -
                                                             {{ date('F d Y', strtotime($available_day->date)) }}
-                                                            {{-- @if($time_zone ==2) --}}
+                                                            {{-- @if ($time_zone == 2) --}}
 
-                                                            <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$available_day->date,$available_day->from_time))) }}
+                                                            <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $available_day->date, $available_day->from_time))) }}
                                                                 -
-                                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone,$available_day->date,$available_day->to_time))) }}</span>
+                                                                {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $available_day->date, $available_day->to_time))) }}</span>
                                                             {{-- @else
                                                             <span>{{ date('H:i a', strtotime($available_day->from_time)) }}
                                                                 -
@@ -208,10 +216,11 @@
                                                         </button>
                                                         <span class="accetion"><a href="#"
                                                                 onclick="editAvailableDay('{{ $available_day->id }}');"><i
-                                                                    class="fas fa-pencil-alt"></i></a> | <a
-                                                                href="{{ route('doctor.delete-available-day', $available_day->id) }}"
-                                                                onclick="return confirm('Are you sure ?');"><i
+                                                                    class="fas fa-pencil-alt"></i></a> | <a href="#"
+                                                                onclick="deleteAvaildayCheck('{{ $available_day->id }}');"><i
                                                                     class="far fa-trash-alt"></i></a></span>
+                                                        {{-- return confirm('Are you sure ?'); --}}
+                                                        {{-- {{ route('doctor.delete-available-day', $available_day->id) }} --}}
                                                     </h2>
                                                 </div>
 
@@ -259,21 +268,21 @@
 
                                 </div>
                                 <!-- <div class="col-sm-6 tile-pick">
-                                                        <div class="form-group Timeslot">
-                                                            <label>Add Regular Timeslot in your Diary</label>
-                                                            <input  class="form-control" type="text" placeholder="Sunday">
-                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-6 tile-pick">
-                                                        <div class="form-group">
-                                                             <label>From</label>
-                                                             <input id="From-date" class="form-control" type="time" value="09:00">
-                                                          </div>
-                                                          <div class="form-group">
-                                                            <label>Till</label>
-                                                            <input id="Till-date" class="form-control" type="time" value="09:15">
-                                                          </div>
-                                                    </div> -->
+                                                                        <div class="form-group Timeslot">
+                                                                            <label>Add Regular Timeslot in your Diary</label>
+                                                                            <input  class="form-control" type="text" placeholder="Sunday">
+                                                                         </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6 tile-pick">
+                                                                        <div class="form-group">
+                                                                             <label>From</label>
+                                                                             <input id="From-date" class="form-control" type="time" value="09:00">
+                                                                          </div>
+                                                                          <div class="form-group">
+                                                                            <label>Till</label>
+                                                                            <input id="Till-date" class="form-control" type="time" value="09:15">
+                                                                          </div>
+                                                                    </div> -->
                                 {{-- <div class="submit-btn col-sm-12">
                                                     <button type="submit" class="btn blue-button">Submit</button>
                                                 </div> --}}
@@ -437,7 +446,8 @@
 
                     <div class="form-group">
                         <label>Date</label>
-                        <input type="text" onfocus="(this.type='date')" name="date" id="date" class="form-control" required>
+                        <input type="text" onfocus="(this.type='date')" name="date" id="date" class="form-control"
+                            required>
                     </div>
 
                     <div class="form-group">
@@ -593,89 +603,89 @@
 
 @endsection
 @section('scripts')
-<script type="text/javascript">
-    $(function() {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    $('#myModal').modal('show')
+    <script type="text/javascript">
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        $('#myModal').modal('show')
 
-    $(document).ready(function() {
+        $(document).ready(function() {
 
 
-        $(".responsive-calendar").responsiveCalendar({
-            time: '{{ date('Y-m') }}',
-            // time: '2021-04',
-            events: {
+            $(".responsive-calendar").responsiveCalendar({
+                time: '{{ date('Y-m') }}',
+                // time: '2021-04',
+                events: {
 
-                @foreach ($available_days as $available_day)
-                    "{{ $available_day->date }}":{},
-                @endforeach
-                // "2020-03-02":{
-                //     "class": "day wed past active book",
-                // },
-                // "2020-03-04":{},
-                // "2020-03-06":{},
-                // "2020-03-09":{},
-                // "2020-03-10":{},
-                // "2020-03-12":{},
-                // "2020-03-14":{},
-                // "2020-03-15":{},
-                // "2020-03-18":{},
-                // "2020-03-20":{},
-                // "2020-03-24":{},
-                // "2020-03-26":{},
-                // "2020-03-28":{},
-                // "2020-03-29":{},
-                // "2020-03-30":{},
-                // "2020-05-30": {},
-                // "2020-04-26": {},
+                    @foreach ($available_days as $available_day)
+                        "{{ $available_day->date }}":{},
+                    @endforeach
+                    // "2020-03-02":{
+                    //     "class": "day wed past active book",
+                    // },
+                    // "2020-03-04":{},
+                    // "2020-03-06":{},
+                    // "2020-03-09":{},
+                    // "2020-03-10":{},
+                    // "2020-03-12":{},
+                    // "2020-03-14":{},
+                    // "2020-03-15":{},
+                    // "2020-03-18":{},
+                    // "2020-03-20":{},
+                    // "2020-03-24":{},
+                    // "2020-03-26":{},
+                    // "2020-03-28":{},
+                    // "2020-03-29":{},
+                    // "2020-03-30":{},
+                    // "2020-05-30": {},
+                    // "2020-04-26": {},
 
-                // "2020-05-12": {}
-            },
-            onDayClick: function(events) {
-                // alert('Day was clicked');
-                console.log('====================================');
-                console.log(events,$(this).data('day'));
-                var day = $(this).data('day');
-            var year = $(this).data('year');
-            var month = $(this).data('month');
-            day = (day <= 9) ? '0' + day : day;
-            month = (month <= 9) ? '0' + month : month;
-            var date = day + '/' + month + '/' + year;
-            // $('#myModal2').modal('show');
-            // $('#date').val(date);
-            var fromDate = new Date(year + '-' + month + '-' + day);
-            var formatedDate = new Date(fromDate).toDateString();
-            //alert(formatedDate);
+                    // "2020-05-12": {}
+                },
+                onDayClick: function(events) {
+                    // alert('Day was clicked');
+                    console.log('====================================');
+                    console.log(events, $(this).data('day'));
+                    var day = $(this).data('day');
+                    var year = $(this).data('year');
+                    var month = $(this).data('month');
+                    day = (day <= 9) ? '0' + day : day;
+                    month = (month <= 9) ? '0' + month : month;
+                    var date = day + '/' + month + '/' + year;
+                    // $('#myModal2').modal('show');
+                    // $('#date').val(date);
+                    var fromDate = new Date(year + '-' + month + '-' + day);
+                    var formatedDate = new Date(fromDate).toDateString();
+                    //alert(formatedDate);
 
-            $.ajax({
-                url: "{{ route('doctor.edit-available-day') }}",
-                type: 'get',
-                dataType: "json",
-                // data:{state:state,type:type,_token:token}
-                data: {
-                    date: date
-                }
-            }).done(function(response) {
-                if (typeof response != "undefined" && response.success) {
-                    $('.show_date').html(formatedDate);
-                    var available_time = '';
-                    $.each(response.data, function(index, value) {
-                        console.log(value.date);
-                        available_time += value.from_time + '-' + value.to_time;
-                        available_time += '<br>';
+                    $.ajax({
+                        url: "{{ route('doctor.edit-available-day') }}",
+                        type: 'get',
+                        dataType: "json",
+                        // data:{state:state,type:type,_token:token}
+                        data: {
+                            date: date
+                        }
+                    }).done(function(response) {
+                        if (typeof response != "undefined" && response.success) {
+                            $('.show_date').html(formatedDate);
+                            var available_time = '';
+                            $.each(response.data, function(index, value) {
+                                console.log(value.date);
+                                available_time += value.from_time + '-' + value.to_time;
+                                available_time += '<br>';
+                            });
+                            $('.show_time').html(available_time);
+
+
+                        }
                     });
-                    $('.show_time').html(available_time);
-
-
+                    console.log('====================================');
                 }
             });
-                console.log('====================================');
-            }
-        });
 
-    });
-    // $(window).on('load', function() {
+        });
+        // $(window).on('load', function() {
 
         // alert('fjjdf');
 
@@ -685,107 +695,211 @@
         // window.location.reload(true)
         // setTimeout(function(){
         // $(".day a").click(function() {
-            // alert('fjjdf');
-            // var day = $(this).data('day');
-            // var year = $(this).data('year');
-            // var month = $(this).data('month');
-            // day = (day <= 9) ? '0' + day : day;
-            // month = (month <= 9) ? '0' + month : month;
-            // var date = day + '/' + month + '/' + year;
-            // // $('#myModal2').modal('show');
-            // // $('#date').val(date);
-            // var fromDate = new Date(year + '-' + month + '-' + day);
-            // var formatedDate = new Date(fromDate).toDateString();
-            // //alert(formatedDate);
+        // alert('fjjdf');
+        // var day = $(this).data('day');
+        // var year = $(this).data('year');
+        // var month = $(this).data('month');
+        // day = (day <= 9) ? '0' + day : day;
+        // month = (month <= 9) ? '0' + month : month;
+        // var date = day + '/' + month + '/' + year;
+        // // $('#myModal2').modal('show');
+        // // $('#date').val(date);
+        // var fromDate = new Date(year + '-' + month + '-' + day);
+        // var formatedDate = new Date(fromDate).toDateString();
+        // //alert(formatedDate);
 
-            // $.ajax({
-            //     url: "{{ route('doctor.edit-available-day') }}",
-            //     type: 'get',
-            //     dataType: "json",
-            //     // data:{state:state,type:type,_token:token}
-            //     data: {
-            //         date: date
-            //     }
-            // }).done(function(response) {
-            //     if (typeof response != "undefined" && response.success) {
-            //         $('.show_date').html(formatedDate);
-            //         var available_time = '';
-            //         $.each(response.data, function(index, value) {
-            //             console.log(value.date);
-            //             available_time += value.from_time + '-' + value.to_time;
-            //             available_time += '<br>';
-            //         });
-            //         $('.show_time').html(available_time);
-
-
-            //     }
-            // });
-    //     });
-    // }, 2000);
-
-    // });
-
-    function editAvailableDay(available_day_id) {
+        // $.ajax({
+        //     url: "{{ route('doctor.edit-available-day') }}",
+        //     type: 'get',
+        //     dataType: "json",
+        //     // data:{state:state,type:type,_token:token}
+        //     data: {
+        //         date: date
+        //     }
+        // }).done(function(response) {
+        //     if (typeof response != "undefined" && response.success) {
+        //         $('.show_date').html(formatedDate);
+        //         var available_time = '';
+        //         $.each(response.data, function(index, value) {
+        //             console.log(value.date);
+        //             available_time += value.from_time + '-' + value.to_time;
+        //             available_time += '<br>';
+        //         });
+        //         $('.show_time').html(available_time);
 
 
-        $.ajax({
-            url: "{{ route('doctor.edit-available-day') }}",
-            type: 'get',
-            dataType: "json",
-            // data:{state:state,type:type,_token:token}
-            data: {
-                available_day_id: available_day_id
-            }
-        }).done(function(response) {
-            if (typeof response != "undefined" && response.success) {
-                $('#myModal3').modal('show');
-                $('#available_day_id').val(response.data.id);
-                $('#edit_date').val(response.data.date);
-                $('#edit_from_time').val(response.data.from_time);
-                $('#edit_to_time').val(response.data.to_time);
-                // if(response.data == '1'){
-                //  $('#doctor_'+doctorId).addClass('marks');
-                // }else if(response.data == '2'){
-                //  $('#doctor_'+doctorId).removeClass('marks');
-                // }
+        //     }
+        // });
+        //     });
+        // }, 2000);
 
-                // toastr.success(response.message);
-            }
-        });
-    }
+        // });
+        function deleteAvaildayCheck(available_date_id) {
+//             const swalWithBootstrapButtons = Swal.mixin({
+//   customClass: {
+//     confirmButton: 'btn btn-success',
+//     cancelButton: 'btn btn-danger'
+//   },
+//   buttonsStyling: false
+// })
 
-    function addweeklyday() {
-        $('#myModal4').modal('show');
-    }
+// swalWithBootstrapButtons.fire({
+//   title: 'Are you sure?',
+//   text: "You won't be able to revert this!",
+//   icon: 'warning',
+//   showCancelButton: true,
+//   confirmButtonText: 'Yes, delete it!',
+//   cancelButtonText: 'No, cancel!',
+//   reverseButtons: true
+// }).then((result) => {
+//   if (result.isConfirmed) {
+//     swalWithBootstrapButtons.fire(
+//       'Deleted!',
+//       'Your file has been deleted.',
+//       'success'
+//     )
+//   } else if (
+//     /* Read more about handling dismissals below */
+//     result.dismiss === Swal.DismissReason.cancel
+//   ) {
+//     swalWithBootstrapButtons.fire(
+//       'Cancelled',
+//       'Your imaginary file is safe :)',
+//       'error'
+//     )
+//   }
+// })
 
-    function editWeeklyDay(weekly_day_id) {
+$.ajax({
+                url: "{{ route('doctor.available-date-check') }}",
+                type: 'get',
+                dataType: "json",
+                // data:{state:state,type:type,_token:token}
+                data: {
+                    available_date_id: available_date_id
+                }
+            }).done(function(response) {
+                if (typeof response != "undefined" && response.success) {
+                    // $('#myModal3').modal('show');
+                    // $('#available_day_id').val(response.data.id);
+                    // $('#edit_date').val(response.data.date);
+                    // $('#edit_from_time').val(response.data.from_time);
+                    // $('#edit_to_time').val(response.data.to_time);
+                    // // if(response.data == '1'){
+                    // //  $('#doctor_'+doctorId).addClass('marks');
+                    // // }else if(response.data == '2'){
+                    // //  $('#doctor_'+doctorId).removeClass('marks');
+                    // // }
+
+                    // // toastr.success(response.message);
+                    console.log('====================================');
+                    console.log('response');
+                    console.log('====================================');
+                    if(response.data.approve_case){
+                        if (confirm("You have some confirmed booking, wish to cancel them ?")) {
+                    //         $.ajax({
+                    //             url: 'edit_user_details.php',
+                    //             type: 'post',
+                    //             data: {'id' : id},
+                    //             success: function(response) {
+                    //             //$('#edit_user_result').html(response);
+                    //                 $('#sent_password_result'+id).html(response);
+                    //                 setTimeout(function() {
+                    //                     $('input[type=submit]').attr('disabled', false);
+                    //                     window.location.href = "users.php";
+                    //                 }, 5000 );
+                    //             }
+                    //         });
+                        }
+
+                    } else if (response.data.pending_case) {
+                        if (confirm("You have some appointment booking request, wish to cancel them ?")) {
+                        }
+
+                    } else {
+                        if (confirm("Are you sure ?")) {
+                        }
+                    }
+                }
+            });
+
+// if (confirm("OK to submit?")) {
+//         $.ajax({
+//             url: 'edit_user_details.php',
+//             type: 'post',
+//             data: {'id' : id},
+//             success: function(response) {
+//             //$('#edit_user_result').html(response);
+//                 $('#sent_password_result'+id).html(response);
+//                 setTimeout(function() {
+//                     $('input[type=submit]').attr('disabled', false);
+//                     window.location.href = "users.php";
+//                 }, 5000 );
+//             }
+//         });
+//     }
+        }
+
+        function editAvailableDay(available_day_id) {
 
 
-        $.ajax({
-            url: "{{ route('doctor.edit-weekly-day') }}",
-            type: 'get',
-            dataType: "json",
-            // data:{state:state,type:type,_token:token}
-            data: {
-                weekly_day_id: weekly_day_id
-            }
-        }).done(function(response) {
-            if (typeof response != "undefined" && response.success) {
-                $('#myModal5').modal('show');
-                $('#weekly_day_id').val(response.data.id);
-                $('#weekly_day').val(response.data.day);
-                $('#weekly_from_time').val(response.data.from_time);
-                $('#weekly_to_time').val(response.data.to_time);
-                // if(response.data == '1'){
-                //  $('#doctor_'+doctorId).addClass('marks');
-                // }else if(response.data == '2'){
-                //  $('#doctor_'+doctorId).removeClass('marks');
-                // }
+            $.ajax({
+                url: "{{ route('doctor.edit-available-day') }}",
+                type: 'get',
+                dataType: "json",
+                // data:{state:state,type:type,_token:token}
+                data: {
+                    available_day_id: available_day_id
+                }
+            }).done(function(response) {
+                if (typeof response != "undefined" && response.success) {
+                    $('#myModal3').modal('show');
+                    $('#available_day_id').val(response.data.id);
+                    $('#edit_date').val(response.data.date);
+                    $('#edit_from_time').val(response.data.from_time);
+                    $('#edit_to_time').val(response.data.to_time);
+                    // if(response.data == '1'){
+                    //  $('#doctor_'+doctorId).addClass('marks');
+                    // }else if(response.data == '2'){
+                    //  $('#doctor_'+doctorId).removeClass('marks');
+                    // }
 
-                // toastr.success(response.message);
-            }
-        });
-    }
+                    // toastr.success(response.message);
+                }
+            });
+        }
 
-</script>
+        function addweeklyday() {
+            $('#myModal4').modal('show');
+        }
+
+        function editWeeklyDay(weekly_day_id) {
+
+
+            $.ajax({
+                url: "{{ route('doctor.edit-weekly-day') }}",
+                type: 'get',
+                dataType: "json",
+                // data:{state:state,type:type,_token:token}
+                data: {
+                    weekly_day_id: weekly_day_id
+                }
+            }).done(function(response) {
+                if (typeof response != "undefined" && response.success) {
+                    $('#myModal5').modal('show');
+                    $('#weekly_day_id').val(response.data.id);
+                    $('#weekly_day').val(response.data.day);
+                    $('#weekly_from_time').val(response.data.from_time);
+                    $('#weekly_to_time').val(response.data.to_time);
+                    // if(response.data == '1'){
+                    //  $('#doctor_'+doctorId).addClass('marks');
+                    // }else if(response.data == '2'){
+                    //  $('#doctor_'+doctorId).removeClass('marks');
+                    // }
+
+                    // toastr.success(response.message);
+                }
+            });
+        }
+    </script>
 @endsection

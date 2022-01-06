@@ -1121,7 +1121,7 @@ class PatientController extends Controller
         $user_detail = User::findOrFail($id);
 
 
-      if($user_detail->roll == 1){
+      if($user_detail->roll == 3){
         $chat_details = PersonTOPersonChat::where('p_id',$sender_id)->where('ph_id',$id)->first();
         // User::findOrFail($id)
       } elseif ($user_detail->roll == 2) {
@@ -1162,9 +1162,9 @@ class PatientController extends Controller
         $d_user = '';
 
         if($request->param == 1){
-            $users = User::where('name',$request->search)->where('role',1)->get();
+            $users = User::where('name',$request->search)->where('role',3)->get();
         } elseif ($request->param == 2) {
-            $users = User::where('registration_number',$request->search)->where('role',1)->get();
+            $users = User::where('registration_number',$request->search)->where('role',3)->get();
         } elseif ($request->param == 3) {
             $users = User::where('registration_number',$request->search)->where('role',2)->get();
         }elseif ($request->param == 4) {

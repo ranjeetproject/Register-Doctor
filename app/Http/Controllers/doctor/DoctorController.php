@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\Eloquent\Builder;
 use Session;
 
 
@@ -616,10 +617,47 @@ class DoctorController extends Controller
         }
     }
 
+    public function availableDateCheck(Request $request)
+    {
+        $user = Auth::guard('siteDoctor')->user();
+        $time_zone = d_timezone();
+        if(!empty($request->available_date_id)){
+            //for single edit
+            $id = $request->available_date_id;
+            $available = DoctorAvailableDays::withCount('getBookedSlot')->whereHas('getBookedSlot.getCase', function($query){
+                $query->where('patient_cases.status',1);
+            })->find($id);
+
+            $available_pending = DoctorAvailableDays::withCount('getBookedSlot')->whereHas('getBookedSlot.getCase', function($query){
+                $query->where('patient_cases.status',2);
+            })->find($id);
+            // dd($available, $available_pending);
+        }
+
+        if(isset( $id)) {
+            return response()->json(['success' =>true, 'message'=>'success','data'=>['approve_case'=>$available,'pending_case'=>$available_pending]], 200);
+        } else{
+            return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_day], 200);
+        }
+    }
+
     public function deleteAvailableDay($id)
     {
       $available_day = DoctorAvailableDays::find($id);
-      $available_day->delete();
+      $availableDays = DoctorAvailableDays::whereHas('getBookedSlot', function ($query) {
+            return $query->where('book_time_slots.status',1);
+        })->find($id);
+
+      if($availableDays)
+      {
+        // dd('not');
+      }else {
+        // DoctorAvailableDays::select('asd')->find($id);
+        //   return view('welcome');
+        // dd('in');
+
+          $available_day->delete();
+      }
       Session::flash('Success-toastr','Successfully deleted');
       return redirect()->back();
     }
@@ -667,7 +705,7 @@ class DoctorController extends Controller
             $weekly_day->to_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, date('Y-m-d').' '.$request->to_time)));
             $weekly_day->save();
             $startDate = date('Y-m-d');
-            $endDate = date('Y').'-12-31';
+            $endDate = (date('Y')+5).'-12-31';
             $endDate = strtotime($endDate);
 
             for($i = strtotime(ucfirst($request->day), strtotime($startDate)); $i <= $endDate; $i = strtotime('+1 week', $i)){
@@ -728,7 +766,7 @@ class DoctorController extends Controller
       // return $available_day;
 
       $startDate = date('Y-m-d');
-      $endDate = date('Y').'-12-31';
+      $endDate = (date('Y')+5).'-12-31';
       $endDate = strtotime($endDate);
 for($i = strtotime(ucfirst($available_day->day), strtotime($startDate)); $i <= $endDate; $i = strtotime('+1 week', $i)){
          $date = date('Y-m-d', $i);

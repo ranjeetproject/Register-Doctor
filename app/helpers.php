@@ -293,7 +293,7 @@ function timezoneAdjustmentFetchTwo($timezone, $datetime) {
 
 }
 
-function timezoneAdjustmentStore($timezone, $dateTime) {
+function timezoneAdjustmentStore($timezone, $datetime) {
     // $year = date('Y', strtotime($dateTime));
     // $start_date = date('Y-m-d 01:00:00', strtotime('last sunday of March ' . $year));
     // $end_date = date('Y-m-d 02:00:00', strtotime('last sunday of October ' . $year));

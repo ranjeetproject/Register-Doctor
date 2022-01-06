@@ -22,6 +22,8 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::match(['get','post'],'/available-days', 'DoctorController@availableDays')->name('available-days');
     Route::get('delete-available-day/{id}', 'DoctorController@deleteAvailableDay')->name('delete-available-day');
     Route::match(['get','post'],'edit-available-day', 'DoctorController@editAvailableDay')->name('edit-available-day');
+    Route::match(['get'],'available-day-check', 'DoctorController@availableDayCheck')->name('available-day-check');
+    Route::match(['get'],'available-date-check', 'DoctorController@availableDateCheck')->name('available-date-check');
     Route::match(['get','post'],'add-weekly-day', 'DoctorController@addWeeklyDay')->name('add-weekly-day');
     Route::get('delete-weekly-day/{id}', 'DoctorController@deleteWeeklyDay')->name('delete-weekly-day');
     Route::match(['get','post'],'edit-weekly-day', 'DoctorController@editWeeklyDay')->name('edit-weekly-day');
