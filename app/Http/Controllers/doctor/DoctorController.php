@@ -27,6 +27,7 @@ use App\helpers;
 use App\User;
 use App\Mail\FinalizePrescription;
 use App\Mail\InviteVideo;
+use App\Mail\AvailDayChangeNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -625,17 +626,17 @@ class DoctorController extends Controller
             //for single edit
             $id = $request->available_date_id;
             $available = DoctorAvailableDays::withCount('getBookedSlot')->whereHas('getBookedSlot.getCase', function($query){
-                $query->where('patient_cases.status',1);
+                $query->where('patient_cases.accept_status',1);
             })->find($id);
 
             $available_pending = DoctorAvailableDays::withCount('getBookedSlot')->whereHas('getBookedSlot.getCase', function($query){
-                $query->where('patient_cases.status',2);
+                $query->whereNull('patient_cases.accept_status');
             })->find($id);
             // dd($available, $available_pending);
         }
 
         if(isset( $id)) {
-            return response()->json(['success' =>true, 'message'=>'success','data'=>['approve_case'=>$available,'pending_case'=>$available_pending]], 200);
+            return response()->json(['success' =>true, 'message'=>'success','data'=>['approve_case'=>$available,'pending_case'=>$available_pending,'available_date_id'=>$id]], 200);
         } else{
             return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_day], 200);
         }
@@ -644,20 +645,31 @@ class DoctorController extends Controller
     public function deleteAvailableDay($id)
     {
       $available_day = DoctorAvailableDays::find($id);
-      $availableDays = DoctorAvailableDays::whereHas('getBookedSlot', function ($query) {
-            return $query->where('book_time_slots.status',1);
+      $available = DoctorAvailableDays::with('getBookedSlot.getCase.user')->withCount('getBookedSlot')->whereHas('getBookedSlot.getCase', function($query){
+            $query->where('patient_cases.accept_status',1);
         })->find($id);
 
-      if($availableDays)
+        $available_pending = DoctorAvailableDays::with('getBookedSlot.getCase.user')->withCount('getBookedSlot')->whereHas('getBookedSlot.getCase', function($query){
+            $query->whereNull('patient_cases.accept_status');
+        })->find($id);
+// dd($available,$available_pending);
+      if($available)
       {
+          foreach($available->getBookedSlot as $bookedSlot) {
+            Mail::to($bookedSlot->getCase->user->email)->send(new AvailDayChangeNotification($bookedSlot->getCase->user->name, 'Please do appointment on any other available date, and you also get refund.'));
+          }
+        }
+        if($available_pending){
+          foreach($available->getBookedSlot as $bookedSlot) {
+            Mail::to($bookedSlot->getCase->user->email)->send(new AvailDayChangeNotification($bookedSlot->getCase->user->name, 'Please request for booking appointment for any other date.'));
+          }
         // dd('not');
-      }else {
-        // DoctorAvailableDays::select('asd')->find($id);
-        //   return view('welcome');
-        // dd('in');
+
+
+      }
 
           $available_day->delete();
-      }
+
       Session::flash('Success-toastr','Successfully deleted');
       return redirect()->back();
     }

@@ -797,23 +797,21 @@ $.ajax({
                     console.log('====================================');
                     if(response.data.approve_case){
                         if (confirm("You have some confirmed booking, wish to cancel them ?")) {
-                    //         $.ajax({
-                    //             url: 'edit_user_details.php',
-                    //             type: 'post',
-                    //             data: {'id' : id},
-                    //             success: function(response) {
-                    //             //$('#edit_user_result').html(response);
-                    //                 $('#sent_password_result'+id).html(response);
-                    //                 setTimeout(function() {
-                    //                     $('input[type=submit]').attr('disabled', false);
-                    //                     window.location.href = "users.php";
-                    //                 }, 5000 );
-                    //             }
-                    //         });
+                            // $.ajax({
+                            //     url: '{{ url('doctor.delete-available-day') }}'+'/'response.data.available_date_id+,
+                            //     type: 'get',
+                            //     dataType: "json",
+                            //     success: function(response) {
+                            //     //$('#edit_user_result').html(response);
+                            //        alert('hi');
+                            //     }
+                            // });
+                            location.href = "{{ url('doctor/delete-available-day') }}"+"/"+response.data.available_date_id;
                         }
 
                     } else if (response.data.pending_case) {
                         if (confirm("You have some appointment booking request, wish to cancel them ?")) {
+                            location.href = "{{ url('doctor/delete-available-day') }}"+"/"+response.data.available_date_id;
                         }
 
                     } else {
