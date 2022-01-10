@@ -644,6 +644,7 @@ class DoctorController extends Controller
 
     public function deleteAvailableDay($id)
     {
+        $user_id = Auth::user()->id;
       $available_day = DoctorAvailableDays::find($id);
       $available = DoctorAvailableDays::with('getBookedSlot.getCase.user')->withCount('getBookedSlot')->whereHas('getBookedSlot.getCase', function($query){
             $query->where('patient_cases.accept_status',1);
@@ -656,11 +657,19 @@ class DoctorController extends Controller
       if($available)
       {
           foreach($available->getBookedSlot as $bookedSlot) {
+            $case = $bookedSlot->getCase;
+            $case->cancel_by = $user_id;
+            $case->cancel_date = date('Y-m-d H:i:s');
+            $case->save();
             Mail::to($bookedSlot->getCase->user->email)->send(new AvailDayChangeNotification($bookedSlot->getCase->user->name, 'Please do appointment on any other available date, and you also get refund.'));
           }
         }
         if($available_pending){
           foreach($available->getBookedSlot as $bookedSlot) {
+            $case = $bookedSlot->getCase;
+            $case->cancel_by = $user_id;
+            $case->cancel_date = date('Y-m-d H:i:s');
+            $case->save();
             Mail::to($bookedSlot->getCase->user->email)->send(new AvailDayChangeNotification($bookedSlot->getCase->user->name, 'Please request for booking appointment for any other date.'));
           }
         // dd('not');
