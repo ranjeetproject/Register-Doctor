@@ -137,7 +137,7 @@
                                             <td><a href="{{route('doctor.view-medical-recorde',$case->case_id)}}"><i class="fal fa-eye"></i></a></td>
 
                                             <td class="masg-dep-tol">
-                                                @if($start_time)
+                                                @if(!empty($start_time))
                                                 @if (getDiffOfTwoDateInMinute($case->booking_date . ' ' . $start_time) < 0)
                                                 <a href="{{ route('doctor.sick-note',$case->case_id) }}" class="btn btn-sm btn-primary">Sick note</a>
                                                 @endif
