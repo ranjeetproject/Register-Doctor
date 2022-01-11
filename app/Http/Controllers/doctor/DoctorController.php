@@ -433,6 +433,22 @@ class DoctorController extends Controller
                     return redirect()->back();
                 }
 
+                $doctor_availity_time_check = DoctorAvailableDays::where('user_id',$user->id)->where('date',$date)
+                    ->where(function($query) use($time_zone, $date , $request) {
+                        $query->where(function($query) use($time_zone, $date , $request) {
+                            $query->where('from_time','<=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))))
+                                ->where('to_time','>',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))));
+                        })
+                        ->orWhere(function($query) use($time_zone, $date , $request) {
+                            $query->where('from_time','<',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))))
+                                ->where('to_time','>=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))));
+                        });
+                    })->count();
+                if($doctor_availity_time_check) {
+                    Session::flash('Error-toastr','Your given time is overlaped with previus set time');
+                    return redirect()->back();
+                }
+
                 DB::beginTransaction();
 
 
