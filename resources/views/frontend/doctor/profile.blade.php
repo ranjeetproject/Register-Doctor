@@ -53,8 +53,8 @@
                                 </div>
                                 <div class="col-sm-10 profile-info">
                                     <h2>Manage your Diary in the Calendar Below.</h2>
-                                    <a class="btn btn-primary" href="{{route('doctor.available-days')}}">Regular Timetable</a>
-                                    <a class="btn add-btn" id="chng_time_zone">Change Timezone</a>
+                                    <a class="btn btn-primary" href="{{route('doctor.available-days')}}">Calender</a>
+                                    {{-- <a class="btn add-btn" id="chng_time_zone">Change Timezone</a> --}}
                                     {{-- <a href="{{route('doctor.available-days')}}" class="btn add-btn" >Ad Hoc Timeslots</a> --}}
                                 </div>
                             </div>
@@ -162,6 +162,9 @@
 
                                 </div>
 
+                                <div class="col-sm-12">
+                                    <p><sup>*</sup>Mandatory in case you need to be contacted eg by Pharmacist, Admin</p>
+                                </div>
 
                                <div class="col-sm-12">
                                     <div class="form-group Communication">
@@ -226,8 +229,8 @@
                                             <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_standard_fee_notification == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
+                                    <hr>
                                 </div>
-
                                 <div class="col-sm-12 mb-2">
                                     <div class="form-group">
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Video</label>
@@ -241,6 +244,7 @@
                                             <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_live_video_fee_notification == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
+                                    <hr>
                                 </div>
                                 <div class="col-sm-12 mb-2">
                                     <div class="form-group">
@@ -255,6 +259,7 @@
                                             <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_live_chat_fee_notification == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
+                                    <hr>
                                 </div>
                                 <div class="col-sm-12 mb-2">
                                     <div class="form-group">
@@ -287,13 +292,15 @@
                                             <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off"><span class="{{($user->profile->dr_qa_fee_notification == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
+                                    <hr>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Tick to offer prescription online (only UK Doctors)</label>
                                         <div class="row all-question-list">
                                             <div class="col aql-comm">
-                                                <input type="checkbox" class="" disabled>  Upload Signature <input class="form-control " type="text"  name="dr_signature" value="{{$user->profile->dr_signature}}">
+                                                <input type="checkbox" class="" >
+                                                {{-- Upload Signature <input class="form-control " type="text"  name="dr_signature" value="{{$user->profile->dr_signature}}"> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -329,7 +336,7 @@
                                         <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Comments</label>
                                         <div class="Notifications-on-of">
                                             <input type="checkbox" name="dr_ratings_comments" class="form-check-input" value="0" {{($user->profile->dr_ratings_comments == 0) ? 'checked':''}}>
-                                            Turn Ratings & Comments <div class="on-and-off"><span class="{{($user->profile->dr_ratings_comments == 0) ? 'of':'on'}}"></span></div>
+                                            Show Ratings & Comments <div class="on-and-off"><span class="{{($user->profile->dr_ratings_comments == 0) ? 'of':'on'}}"></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -352,9 +359,9 @@
                                     <label>Change password to <a href="{{route('doctor.change-password')}}">Click here</a>  </label>
                                 </div> --}}
 
-                                 <div class="col-sm-12">
+                                 {{-- <div class="col-sm-12">
                                     <p><sup>*</sup>Mandatory in case you need to be contacted eg by Pharmacist, Admin</p>
-                                </div>
+                                </div> --}}
 
 
                                 <div class="col-sm-12 for-msg">

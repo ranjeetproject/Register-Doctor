@@ -32,6 +32,7 @@ Route::get('deleted-users/{type}', 'UserController@deletedUserList')->name('dele
 Route::get('retrive-users/{id}', 'UserController@retriveUser')->name('retrive.users');
 Route::get('permanent-delete/{id}', 'UserController@forcedelete')->name('permanent_delete.users');
 Route::get('set-as-doctor-slide/{id}', 'UserController@setAsDoctorSlide')->name('user.set_slide');
+Route::get('set-as-standard-amount', 'AdminController@setAsStandardAmount')->name('user.set_as_standard_amount');
 Route::get('remove-from-doctor-slide/{id}', 'UserController@removeAsDoctorSlide')->name('user.remove_slide');
 
 

@@ -235,7 +235,7 @@ function d_timezone()
 	// Print the data out onto the page.
 	// echo $data;
 	$data_obj = json_decode($data);
-    // dd($data_obj);
+    // dump($data_obj,$data_obj->timezone->name);
     return $data_obj->timezone->name;
 }
 

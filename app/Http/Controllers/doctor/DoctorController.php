@@ -405,7 +405,8 @@ class DoctorController extends Controller
      public function availableDays(Request $request)
     {
         $user = Auth::guard('siteDoctor')->user();
-
+        $time_zone = d_timezone();
+        // dd('hi');
         if ($request->isMethod('post')) {
             try{
                 $data = $request->validate([
@@ -433,7 +434,7 @@ class DoctorController extends Controller
                 }
 
                 DB::beginTransaction();
-                $time_zone = d_timezone();
+
 
                 $available_day = new DoctorAvailableDays;
                 $available_day->user_id = $user->id;
@@ -488,7 +489,7 @@ class DoctorController extends Controller
         $available_days = DoctorAvailableDays::where('user_id',$user->id)->orderBy('date')->get();
         $get_current_day = DoctorAvailableDays::where('user_id',$user->id)->where('date',date('Y-m-d'))->get();
         $weekly_available_days = WeeklyAvailableDays::where('user_id',$user->id)->orderBy('num_val_for_day')->get();
-        return view('frontend.doctor.available_days', compact('available_days','weekly_available_days','get_current_day','available_days_for_month'));
+        return view('frontend.doctor.available_days', compact('available_days','weekly_available_days','get_current_day','available_days_for_month','time_zone'));
     }
 
     public function editAvailableDay(Request $request)

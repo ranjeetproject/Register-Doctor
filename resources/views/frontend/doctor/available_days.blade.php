@@ -25,7 +25,7 @@
                 </ul> --}}
                 @php
                     // $time_zone = Auth::user()->profile->time_zone;
-                    $time_zone = d_timezone();
+                    // $time_zone = d_timezone();
                 @endphp
                 <div class="tab-content Calendar-Regular-tab-con" id="myTabContent">
                     <div class="tab-pane fade show active" id="Regular-Weekly-Timetable">
@@ -451,7 +451,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Form Time</label>
+                        <label>From Time</label>
 
                         <input type="text" name="from_time" id="from_time" class="form-control jsdatetimepicker"
                             autocomplete="off" required>
@@ -486,17 +486,20 @@
                     <input type="hidden" name="available_day_id" id="available_day_id">
 
                     <div class="form-group">
+                        <label>Date</label>
                         <input type="text" onfocus="(this.type='date')" name="date" id="edit_date" class="form-control"
                             required>
                     </div>
 
                     <div class="form-group">
+                        <label>From Time</label>
                         <input type="text" name="from_time" id="edit_from_time" class="form-control jsdatetimepicker"
                             autocomplete="off" required>
                     </div>
 
 
                     <div class="form-group">
+                        <label>To Time</label>
                         <input type="text" name="to_time" id="edit_to_time" class="form-control jsdatetimepicker"
                             autocomplete="off" required>
                     </div>

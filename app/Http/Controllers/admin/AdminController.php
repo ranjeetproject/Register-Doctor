@@ -132,6 +132,15 @@ class AdminController extends Controller
             return redirect()->back();
     }
 
+    public function setAsStandardAmount(Request $request)
+    {
+        $standard_amount = SiteSetting::firstOrNew(['key'=>'standard_amount']);
+        $standard_amount->key = 'standard_amount';
+        $standard_amount->value = $request->standard_amount;
+        $standard_amount->save();
+        return view('admin.standard_amount',compact('standard_amount'));
+    }
+
     function settings(Request $request)
     {
       if ($request->isMethod('post')) {
