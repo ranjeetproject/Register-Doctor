@@ -37,6 +37,7 @@ class PharmacistController extends Controller
 
 
     public function dashboard() {
+        d_timezone('asd');
         return view('frontend.pharmacist.dashboard');
     }
 

@@ -41,7 +41,7 @@
     Route::match(['get','post'],'/chats/{id}', 'PatientController@chats')->name('chats');
     Route::match(['get','post'],'/doctor-available-day', 'PatientController@doctorAvailableDay')->name('doctor-available-day');
     Route::match(['get','post'],'/symptoms-checker/{case_id}', 'PatientController@symptomsChecker')->name('symptoms-checker');
-    Route::get('/show-prescriptions-rules', 'PatientController@showPrescriptionsRules')->name('show-prescriptions-rules');
+    // Route::get('/show-prescriptions-rules', 'PatientController@showPrescriptionsRules')->name('show-prescriptions-rules');
 
     Route::match(['get','post'],'view-case/{id}', 'PatientController@viewCase')->name('view-case');
     Route::post('doctor-review', 'PatientController@doctorReview')->name('doctor-review');

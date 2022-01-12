@@ -125,7 +125,7 @@
         <div class="row">
             <div class="col-sm-12 tex-center">
                 {{-- <a href="#" class="btn blue-button">Child FAQS</a> --}}
-                <a href="{{ route('patient.show-prescriptions-rules') }}" class="btn blue-button">Click to Start </a>
+                <a href="{{ route('patient.view-childs') }}" class="btn blue-button">Click to Start </a>
             </div>
         </div>
     </div>

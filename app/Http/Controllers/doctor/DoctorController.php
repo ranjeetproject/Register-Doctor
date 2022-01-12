@@ -56,7 +56,7 @@ class DoctorController extends Controller
 
     public function dashboard() {
         //dd(findOutBSTStartEndDate('2021'));
-
+        d_timezone('asd');
       if(empty(Auth::guard('siteDoctor')->user()->profile->dr_name_of_medical_licencer)){
         return redirect()->route('doctor.profile');
       }

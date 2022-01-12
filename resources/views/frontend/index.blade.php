@@ -298,7 +298,7 @@
                         <div class="Prescriptions-top">
                             <h3>Prescriptions<br><small>In 3 Easy Steps</small></h3>
                             <img src="{{ asset('public/images/frontend/images/m-pr-pic1.jpg') }}" alt="">
-                            <a href="{{ route('patient.show-prescriptions-rules') }}" class="btn blue-button">Find Out
+                            <a href="{{ route('show-prescriptions-rules') }}" class="btn blue-button">Find Out
                                 More
                             </a>
 

@@ -50,6 +50,7 @@ class PatientController extends Controller
     }
 
     public function dashboard() {
+        d_timezone('asd');
         return view('frontend.patient.dashboard');
     }
 

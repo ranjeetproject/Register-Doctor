@@ -6,6 +6,7 @@ use App\Models\FavouriteDoctor;
 use App\Models\SiteSetting;
 use App\Models\TimeSlot;
 use App\Models\ThumbsUp;
+use App\Models\UserTimezone;
 use App\User;
 
  function dateDifferent($date1, $date2)
@@ -212,8 +213,10 @@ function findOutBSTStartEndDate($year){
     return [$start_date, $end_date];
 }
 
-function d_timezone()
+function d_timezone($parm='')
 {
+
+    if($parm) {
   	// Initialize cURL.
     $ch = curl_init();
 
@@ -235,8 +238,20 @@ function d_timezone()
 	// Print the data out onto the page.
 	// echo $data;
 	$data_obj = json_decode($data);
-    // dump($data_obj,$data_obj->timezone->name);
-    return $data_obj->timezone->name;
+    // dd($data_obj);
+    // dd($data_obj,$data_obj->timezone);
+    $user = UserTimezone::firstOrNew(array('user_id' => auth()->user()->id));
+    if (!empty($data_obj)) {
+        # code...
+        $user->time_zone = $data_obj->timezone->name;
+        $user->date = date('Y-m-d');
+    }
+    $user->save();
+    // return $data_obj->timezone->name;
+    } else {
+        $data = UserTimezone::where('user_id',auth()->user()->id)->first();
+        return $data->time_zone;
+    }
 }
 
 function timezoneAdjustmentFetch($timezone, $date, $time) {

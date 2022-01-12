@@ -239,4 +239,9 @@ class FrontendController extends Controller
     {
        return view('frontend.child-pathway');
     }
+
+    public function showPrescriptionsRules(Request $request)
+    {
+      return view('frontend.patient.show-prescriptions-rules');
+    }
 }

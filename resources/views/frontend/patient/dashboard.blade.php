@@ -118,14 +118,15 @@
                     <div class="Prescriptions-top">
                         <h3>Prescriptions<br><small>In 3 Easy Steps</small></h3>
                         <img src="{{ asset('public/images/frontend/images/m-pr-pic1.jpg') }}" alt="">
-                        <a class="btn blue-button" href="{{route('patient.show-prescriptions-rules')}}">Find Out More</a>
+                        <a class="btn blue-button" href="{{route('show-prescriptions-rules')}}">Find Out More</a>
                         {{-- <button type="submit" class="btn blue-button">Find Out More</button> --}}
                     </div>
                       @if(Auth::guard('sitePatient')->user()->role == 1)
                     <div class="Prescriptions-bottom">
                         <h4>Children</h4>
                         <img src="{{ asset('public/images/frontend/images/m-pr-pic2.png') }}" alt="">
-                        <a href="{{route('patient.view-childs')}}" class="btn blue-button">Find Out More</a>
+                        <a href="{{route('child-pathway')}}" class="btn blue-button">Find Out More</a>
+                        {{-- <a href="{{route('patient.view-childs')}}" class="btn blue-button">Find Out More</a> --}}
                     </div>
                     @endif
 
