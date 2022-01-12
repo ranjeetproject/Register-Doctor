@@ -15,6 +15,7 @@ Route::get('/living-advice', 'frontend\FrontendController@getLivingAdvice')->nam
 Route::get('/living-advice/{slug}', 'frontend\FrontendController@detailLivingAdvice')->name('livingAdviceDetails');
 Route::get('/nearest-doctor', 'frontend\FrontendController@nearestDoctor')->name('nearestDoctor');
 Route::get('/top-doctor', 'frontend\FrontendController@topDoctor')->name('topDoctor');
+Route::get('/child-pathway', 'frontend\FrontendController@childPathway')->name('child-pathway');
 //Route::get('/home', 'frontend\FrontendController@index');
 Route::any('search/{model}/{type?}', 'SearchController')->name('search');
 

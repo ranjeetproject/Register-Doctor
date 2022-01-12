@@ -436,12 +436,14 @@ class DoctorController extends Controller
                 $doctor_availity_time_check = DoctorAvailableDays::where('user_id',$user->id)->where('date',$date)
                     ->where(function($query) use($time_zone, $date , $request) {
                         $query->where(function($query) use($time_zone, $date , $request) {
-                            $query->where('from_time','<=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))))
-                                ->where('to_time','>',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))));
-                        })
-                        ->orWhere(function($query) use($time_zone, $date , $request) {
-                            $query->where('from_time','<',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))))
-                                ->where('to_time','>=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))));
+                            $query->whereTime('from_time','<=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))))
+                                ->whereTime('to_time','>',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))));
+                        })->orWhere(function($query) use($time_zone, $date , $request) {
+                            $query->whereTime('from_time','<',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))))
+                                ->whereTime('to_time','>=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))));
+                        })->orWhere(function($query) use($time_zone, $date , $request) {
+                            $query->whereTime('from_time','>',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))))
+                                ->whereTime('to_time','<',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))));
                         });
                     })->count();
                 if($doctor_availity_time_check) {

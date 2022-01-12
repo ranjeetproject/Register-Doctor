@@ -299,12 +299,17 @@
                             <h3>Prescriptions<br><small>In 3 Easy Steps</small></h3>
                             <img src="{{ asset('public/images/frontend/images/m-pr-pic1.jpg') }}" alt="">
                             <a href="{{ route('patient.show-prescriptions-rules') }}" class="btn blue-button">Find Out
-                                More</a>
+                                More
+                            </a>
+
                         </div>
                         <div class="Prescriptions-bottom">
                             <h4>Children</h4>
                             <img src="{{ asset('public/images/frontend/images/m-pr-pic2.png') }}" alt="">
-                            <a href="{{ route('patient.view-childs') }}" class="btn blue-button">Find Out More</a>
+                            {{-- <a href="{{ route('patient.view-childs') }}" class="btn blue-button">Find Out More</a> --}}
+                            <a href="{{ route('child-pathway') }}" class="btn blue-button">Find Out
+                                More
+                            </a>
                         </div>
                     </div>
                 </div>

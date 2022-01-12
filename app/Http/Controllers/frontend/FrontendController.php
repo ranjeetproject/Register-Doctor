@@ -234,4 +234,9 @@ class FrontendController extends Controller
         // dump($specialities,$doctors);
         return view('frontend.top_doctor', compact('specialities','locations','doctors'));
     }
+
+    public function childPathway()
+    {
+       return view('frontend.child-pathway');
+    }
 }
