@@ -22,4 +22,9 @@ class DoctorAvailableDays extends Model
         return $this->hasManyThrough('App\Models\BookTimeSlot', 'App\Models\TimeSlot','available_day_id','time_slot_id','id','id');
     }
 
+    public function getFromDateTimeAttribute()
+    {
+        return "{$this->date} {$this->from_time}";
+    }
+
 }

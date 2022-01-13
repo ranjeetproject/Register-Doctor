@@ -436,16 +436,18 @@ class DoctorController extends Controller
                 $doctor_availity_time_check = DoctorAvailableDays::where('user_id',$user->id)->where('date',$date)
                     ->where(function($query) use($time_zone, $date , $request) {
                         $query->where(function($query) use($time_zone, $date , $request) {
-                            $query->whereTime('from_time','<=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))))
-                                ->whereTime('to_time','>',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))));
+                            $query->where('from_time','<=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))))
+                                ->where('to_time','>',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))));
                         })->orWhere(function($query) use($time_zone, $date , $request) {
-                            $query->whereTime('from_time','<',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))))
-                                ->whereTime('to_time','>=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))));
+                            $query->where('from_time','<',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))))
+                                ->where('to_time','>=',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))));
                         })->orWhere(function($query) use($time_zone, $date , $request) {
-                            $query->whereTime('from_time','>',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))))
-                                ->whereTime('to_time','<',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))));
+                            $query->where('from_time','>',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))))
+                                ->where('to_time','<',date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time))));
                         });
                     })->count();
+                    // dd(DoctorAvailableDays::where('from_date_time',timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time))->get());
+                    // dd($doctor_availity_time_check);
                 if($doctor_availity_time_check) {
                     Session::flash('Error-toastr','Your given time is overlaped with previus set time');
                     return redirect()->back();
@@ -705,6 +707,11 @@ class DoctorController extends Controller
     function addWeeklyDay(Request $request)
     {
         try{
+            $data = $request->validate([
+                // "date"=>"required|after_or_equal:today",
+                "from_time"=>"required|date_format:H:i",
+                "to_time"=>"required|date_format:H:i|after:from_time",
+            ]);
             $time_zone = d_timezone();
             $user = Auth::guard('siteDoctor')->user();
             $weekly_day = new WeeklyAvailableDays;
@@ -873,11 +880,11 @@ $get_day = $get_day->delete();
 
       $weekly_day = $weekly_da;
       if ($request->isMethod('post')) {
-         //  $data = $request->validate([
-         //     "day"=>"required",
-         //     "from_time"=>"required",
-         //     "to_time"=>"required",
-         // ]);
+        $data = $request->validate([
+            // "date"=>"required|after_or_equal:today",
+            "from_time"=>"required|date_format:H:i",
+            "to_time"=>"required|date_format:H:i|after:from_time",
+        ]);
             switch ($request->day) {
                 case "monday":
                     $weekly_day->num_val_for_day = 1;

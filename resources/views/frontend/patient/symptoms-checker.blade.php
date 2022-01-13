@@ -190,13 +190,13 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="lable-title">Weight</label>
+                                        <label class="lable-title">Weight<span> (LB)</span></label>
                                         <input class="form-control" name="weight" {{ (($d_years < 18) && ($diff_in_months >=6 ) ) ? "required":'' }}>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="lable-title">Height</label>
+                                        <label class="lable-title">Height<span> (CM)</span></label>
                                         <input class="form-control" name="height" {{ (($d_years < 18) && ($diff_in_months >=6 )) ? "required":'' }}>
                                     </div>
                                 </div>

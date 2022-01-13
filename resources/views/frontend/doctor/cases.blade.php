@@ -54,6 +54,7 @@
                                       <thead>
                                           <tr>
                                               <td>Patient’s<br> Name  </td>
+                                              <td>Date </td>
                                               <td style="text-align: center; min-width: 100px;">Timing</td>
                                               <td>Case No.</td>
                                               <td>Communication</td>
@@ -80,6 +81,7 @@
                                         <tr >
 
                                             <td>{{$case->user->name}}</td>
+                                            <td>{{$case->booking_date}}</td>
                                             <td style="text-align: center;">
                                                @forelse($case->getBookingSlot as $time_slot)
                                                 @if($time_slot->getSlot)
