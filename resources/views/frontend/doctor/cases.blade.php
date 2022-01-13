@@ -54,8 +54,8 @@
                                       <thead>
                                           <tr>
                                               <td>Patient’s<br> Name  </td>
-                                              <td>Date </td>
-                                              <td style="text-align: center; min-width: 100px;">Timing</td>
+                                              {{-- <td>Date </td> --}}
+                                              <td style="text-align: center; min-width: 100px;">Appintment date & Time</td>
                                               <td>Case No.</td>
                                               <td>Communication</td>
 
@@ -81,8 +81,9 @@
                                         <tr >
 
                                             <td>{{$case->user->name}}</td>
-                                            <td>{{$case->booking_date}}</td>
+                                            {{-- <td></td> --}}
                                             <td style="text-align: center;">
+                                                {{$case->booking_date}}<br>
                                                @forelse($case->getBookingSlot as $time_slot)
                                                 @if($time_slot->getSlot)
                                               {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} <br>
