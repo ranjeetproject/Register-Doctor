@@ -60,7 +60,7 @@ class PatientController extends Controller
       $validator = Validator::make($request->all(), [
       "forename"=>"required|min:3|max:100",
       "surname"=>"required|min:3|max:100",
-      "telephone1"=>"required|digits:10",
+      "telephone1"=>"required|digits:11",
       "gender"=>"required",
       "address"=>"required",
       "dob"=>"date|before_or_equal:".now()->subYears(13)->format('Y-m-d'),
