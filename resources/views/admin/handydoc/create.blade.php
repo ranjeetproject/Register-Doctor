@@ -77,33 +77,27 @@
 
 
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="name">Document <span
-                        class="text-danger">*</span> </label>
+                    <label class="col-md-2 form-control-label" for="name">Document </label>
 
                     <div class="col-md-10">
                         <input class="form-control @error('document') is-invalid @enderror" type="file" name="document"
-                            id="document" accept="application/pdf" required>
+                            id="document" accept="application/pdf">
                         @error('document')
                             <span class="error invalid-feedback" id="error_description">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
 
-
-
-
-                {{-- <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="description">Content<span
-                            class="text-danger">*</span></label>
+                <div class="form-group row">
+                    <label class="col-md-2 form-control-label" for="description">Url</label>
                     <div class="col-md-10">
-                        <textarea class="form-control textarea @error('content') is-invalid @enderror" type="text"
-                            name="content" id="content" placeholder="content"
-                            style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('content') }}</textarea>
-                        @error('content')
+                        <input class="form-control @error('url') is-invalid @enderror" type="text"
+                            name="url" id="url" placeholder="url" >
+                        @error('url')
                             <span class="error invalid-feedback" id="error_description">{{ $message }}</span>
                         @enderror
                     </div>
-                </div> --}}
+                </div>
 
             </div>
             <div class="card-footer">

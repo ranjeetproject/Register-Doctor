@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserProfile extends Model
 {
     use SoftDeletes;
-    
+
     protected $guarded = [];
 
     public function getProfilePhotoAttribute($profile_photo)
@@ -27,5 +27,9 @@ class UserProfile extends Model
         if(!empty($dob)){
         return date('d-m-Y', strtotime($dob));
         }
+    }
+
+    public function speciality(){
+        return $this->belongsTo('App\Models\Specialties','dr_speciality','id');
     }
 }

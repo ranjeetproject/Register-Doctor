@@ -84,7 +84,14 @@
 
                                 <div class="col-sm-12">
                                     <div class="form-group required has-float-label">
-                                        <input class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" type="text"  name="dr_speciality" value="{{$user->profile->dr_speciality}}" id="specialityorinterest" placeholder="Speciality or Interest">
+                                        {{-- <input class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" type="text"  name="dr_speciality" value="{{$user->profile->dr_speciality}}" id="specialityorinterest" placeholder="Speciality or Interest"> --}}
+                                        <select class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" name="dr_speciality">
+                                            <option value="">Select speciality</option>
+                                            @foreach ($speciality as $special)
+
+                                        <option value="{{ $special->id }}" {{ ($user->profile->dr_speciality == $special->id)? "Selected": ""}}>{{ $special->name }}</option>
+                                            @endforeach
+                                        </select>
                                         <label for="specialityorinterest">Speciality or Interest <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" class="info-si-icon" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"></label>
                                     @error('dr_speciality')
                                     <span class="text-danger">{{ $message }}</span>

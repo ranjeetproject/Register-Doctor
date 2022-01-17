@@ -23,7 +23,7 @@ class HandyDocumentController extends Controller
            [
               "topic_name"=>"required",
               "user_type"=>"required",
-              "document"=>"required",
+            //   "document"=>"required",
             ]);
             $h_doc = new HandyDocument;
             $h_doc->topic_name = $request->topic_name;
@@ -40,6 +40,8 @@ class HandyDocumentController extends Controller
                 $file->move($destinationPath,$fileName);
                 $h_doc->file_name   = $fileName;
 
+            } else {
+                $h_doc->website   = $request->url;
             }
 
 
@@ -74,6 +76,9 @@ class HandyDocumentController extends Controller
                 $file->move($destinationPath,$fileName);
                 $h_doc->file_name   = $fileName;
 
+            }
+            if($request->url) {
+                $h_doc->website   = $request->url;
             }
             $h_doc->save();
             Session::flash('Success-toastr', 'Successfully Updated.');

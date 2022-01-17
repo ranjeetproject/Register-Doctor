@@ -302,7 +302,8 @@ class PatientController extends Controller
          // return $doctors_speciality;
         $login_user = Auth::guard('sitePatient')->user();
 
-        $doctors = $login_user->userFavDoc()->where('status',1)->with('doctor')->paginate(1);
+        $doctors = $login_user->userFavDoc()->where('status',1)->with('doctor')->paginate(8);
+        // dd($doctors);
 
         $search_doctors = '';
         if(!empty($request->dr_speciality)) {

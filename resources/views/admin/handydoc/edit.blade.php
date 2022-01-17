@@ -92,21 +92,16 @@
                     </div>
                 </div>
 
-
-                {{-- <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="description">Content<span
-                            class="text-danger">*</span></label>
+                <div class="form-group row">
+                    <label class="col-md-2 form-control-label" for="description">Url</label>
                     <div class="col-md-10">
-                        <textarea class="form-control textarea @error('content') is-invalid @enderror" type="text"
-                            name="content" id="content" placeholder="content"
-                            style="width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $news->content }}</textarea>
-
-                        @error('content')
+                        <input class="form-control @error('url') is-invalid @enderror" type="text"
+                            name="url" id="url" placeholder="url" value="{{ $h_doc->website }}">
+                        @error('url')
                             <span class="error invalid-feedback" id="error_description">{{ $message }}</span>
                         @enderror
                     </div>
-                </div> --}}
-
+                </div>
             </div>
 
             <div class="card-footer">

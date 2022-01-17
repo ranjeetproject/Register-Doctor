@@ -10,6 +10,7 @@ use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
 use App\Models\SickNote;
+use App\Models\Specialties;
 use App\Models\Prescription_req_doctor;
 use App\Prescription;
 use App\Models\SummaryDiagnosis;
@@ -66,6 +67,7 @@ class DoctorController extends Controller
     public function profile(Request $request) {
 
        $form_name = 'profile';
+       $speciality = Specialties::where('status',1)->orderby('name')->get();
 
         if($request->isMethod('post')){
             $form_name = $request->form_name;
@@ -183,7 +185,7 @@ class DoctorController extends Controller
 
         $user = Auth::guard('siteDoctor')->user();
         // return $user->profile->dr_qa_fee_notification;
-        return view('frontend.doctor.profile', compact('user','form_name'));
+        return view('frontend.doctor.profile', compact('user','form_name','speciality'));
 
     }
 

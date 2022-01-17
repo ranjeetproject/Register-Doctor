@@ -83,5 +83,11 @@ Route::match(['get','post'],'living-advice/edit/{id}', 'LivingAdviceController@e
 Route::match(['get','post'],'living-advice/delete/{id?}', 'LivingAdviceController@delete')->name('living_advice.delete');
 Route::get('living-advice/select/{id}/{status}', 'LivingAdviceController@slideSelectRemove')->name('living_advice.slideSelectRemove');
 
+Route::match(['get','post'],'specialties/index', 'SpecialtiesController@index')->name('specialties');
+Route::match(['get','post'],'specialties/create', 'SpecialtiesController@create')->name('specialties.create');
+Route::match(['get','post'],'specialties/edit/{id}', 'SpecialtiesController@edit')->name('specialties.edit');
+Route::match(['get','post'],'specialties/delete/{id?}', 'SpecialtiesController@delete')->name('specialties.delete');
+Route::get('Specialties-advice/select/{id}/{status}', 'SpecialtiesController@slideSelectRemove')->name('specialties.slideSelectRemove');
+
 });
 //  *************for admin *************//
