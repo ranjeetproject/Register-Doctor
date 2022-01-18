@@ -23,6 +23,10 @@
 
                     </li>
                 </ul>
+                <a class="nav-link active btn " href="#">
+                    Delete History
+                </a>
+
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active input-effect" id="Patient-Profile">
                         <form class="for-w-100" method="POST" enctype="multipart/form-data">
