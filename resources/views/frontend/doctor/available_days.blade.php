@@ -175,7 +175,7 @@
                                             <div class="form-group mb-2 mr-1">
                                                 <input type="text" name="from_date" onfocus="(this.type='date')"
                                                     onblur="(this.type='text')" class="form-control"
-                                                    placeholder="Form Date">
+                                                    placeholder="From Date">
                                             </div>
                                             <div class="form-group mb-2 mr-1">
                                                 <input type="text" name="to_date" onfocus="(this.type='date')"
