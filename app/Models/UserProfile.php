@@ -30,6 +30,6 @@ class UserProfile extends Model
     }
 
     public function speciality(){
-        return $this->belongsTo('App\Models\Specialties','dr_speciality','id');
+        return $this->belongsTo('App\Models\Specialties','dr_speciality','id')->withDefault();
     }
 }

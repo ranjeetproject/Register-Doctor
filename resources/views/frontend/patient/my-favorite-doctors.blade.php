@@ -42,11 +42,11 @@
                             <div class="col-sm-7">
                                 <select class="custom-select mr-sm-2" name="dr_speciality" id="inlineFormCustomSelect">
                                     <option value="">Select Speciality </option>
-                                    <option value="all">All</option>
+                                    <option value="all" {{ isset($_GET['dr_speciality']) && $_GET['dr_speciality'] == "all" ? 'selected' : '' }}>All</option>
                                     @foreach ($doctors_speciality as $doctor_speciality)
-                                        <option value="{{ $doctor_speciality['dr_speciality'] }}"
-                                            {{ isset($_GET['dr_speciality']) && $_GET['dr_speciality'] == $doctor_speciality['dr_speciality'] ? 'selected' : '' }}>
-                                            {{ ucfirst($doctor_speciality['dr_speciality']) }}</option>
+                                        <option value="{{ $doctor_speciality['id'] }}"
+                                            {{ isset($_GET['dr_speciality']) && $_GET['dr_speciality'] == $doctor_speciality['id'] ? 'selected' : '' }}>
+                                            {{ ucfirst($doctor_speciality['name']) }}</option>
 
                                     @endforeach
                                 </select>
@@ -161,7 +161,7 @@
                                                         </div>
                                                         <h5 class="card-title">
                                                             {{ ucfirst($doctor->forename . ' ' . $doctor->surname) }}<br><small>
-                                                                {{ ucfirst($doctor->profile->dr_speciality) }}</small>
+                                                                {{ ucfirst($doctor->profile->speciality->name) }}</small>
                                                         </h5>
                                                         <p>{{ $doctor->profile->dr_qualifications }}</p>
                                                         <p>Location : {{ ucfirst($doctor->profile->address) }}</p>
@@ -224,6 +224,7 @@
 
                                 {{-- ******************************* --}}
                                 @forelse ($doctors as $doctor)
+                                {{-- @dump($doctor,$doctor->doctor->profile->speciality) --}}
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="card-body-img">
@@ -257,7 +258,7 @@
                                                         </div>
                                                         <h5 class="card-title">
                                                             {{ ucfirst($doctor->doctor->name) }}<br><small>
-                                                                {{ ucfirst($doctor->doctor->profile->dr_speciality) }}</small>
+                                                                {{ ucfirst($doctor->doctor->profile->speciality->name) }}</small>
                                                         </h5>
                                                         <p>{{ $doctor->doctor->profile->dr_qualifications }}</p>
                                                         <p>Location : {{ ucfirst($doctor->doctor->profile->address) }}

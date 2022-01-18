@@ -819,6 +819,7 @@ $.ajax({
 
                     } else {
                         if (confirm("Are you sure ?")) {
+                            location.href = "{{ url('doctor/delete-available-day') }}"+"/"+response.data.available_date_id;
                         }
                     }
                 }

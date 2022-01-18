@@ -37,7 +37,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <p><span>Name : </span>{{ $doctor->forename . ' ' . $doctor->surname }}</p>
-                                        <p><span>Speciality or Interest : </span> {{ $doctor->profile->dr_speciality }}
+                                        <p><span>Speciality or Interest : </span> {{ $doctor->profile->speciality->name }}
                                         </p>
                                         <p><span>About : </span> {{ $doctor->profile->about }}</p>
                                         <p><span>Experience : </span> {{ $doctor->profile->dr_experience }}</p>

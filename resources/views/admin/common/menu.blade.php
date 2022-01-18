@@ -91,6 +91,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('admin.specialties')}}" class="nav-link {{ Request::is('admin/specialties*') ? 'active' : '' }}">
+              <i class="nav-icon fa fa-list-alt" aria-hidden="true"></i>
+              <p>
+                Manage Speciality
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{route('admin.news')}}" class="nav-link {{ Request::is('admin/news*') ? 'active' : '' }}">
               <i class="nav-icon fa fa-newspaper" aria-hidden="true"></i>
               <p>

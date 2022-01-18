@@ -20,6 +20,7 @@ use App\Models\HandyDocument;
 use App\Models\Payment;
 use App\Models\SummaryDiagnosis;
 use App\Models\SickNote;
+use App\Models\Specialties;
 use App\Models\pharma_req_prescription;
 use App\Models\PrescriptionComment;
 use App\Models\PersonTOPersonChat;
@@ -296,7 +297,7 @@ class PatientController extends Controller
     public function myFavoriteDoctors(Request $request)
     {
         // $doctors = UserDoctor::where('role',2)->paginate(5);
-        $doctors_speciality = UserProfile::select('dr_speciality')->where('dr_speciality','!=',null)->orderBy('dr_speciality')->get()->toArray();
+        $doctors_speciality = Specialties::select('name','id')->orderBy('name')->get()->toArray();
 
          $doctors_speciality = array_map("unserialize", array_unique(array_map("serialize", $doctors_speciality)));
          // return $doctors_speciality;
