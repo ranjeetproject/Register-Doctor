@@ -975,3 +975,7 @@ section.news-banner-bx .news-banner-img img{
 #time_slot tr td.time-slot-td{
     padding: 0;
 }
+.profile-tabs-wrap {
+    display: flex;
+    justify-content: space-between;
+}
