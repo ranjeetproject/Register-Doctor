@@ -380,7 +380,7 @@
           </button>
         <div class="col-sm-12 Prescription-form-fild">
             <h1 class="inner-page-title text-center mb-4">
-                Please check after theat the prescription will visible for patients
+                Please check after submit the prescription will visible for patients
             </h1>
             <form class="row" action="">
                 <div class="col-sm-12 input-effect">
