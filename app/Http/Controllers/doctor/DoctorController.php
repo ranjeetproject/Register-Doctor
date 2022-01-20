@@ -71,7 +71,7 @@ class DoctorController extends Controller
        //fixed profile
        $user = Auth::guard('siteDoctor')->user();
        $profile_c = UserProfile::where('user_id',$user->id)->count();
-       if( $profile_c) {
+       if( !$profile_c) {
         $profile_s =  new UserProfile;
 
         $profile_s->user_id = $user->id;
