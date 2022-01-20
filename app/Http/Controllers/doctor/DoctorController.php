@@ -69,6 +69,7 @@ class DoctorController extends Controller
        $form_name = 'profile';
        $speciality = Specialties::where('status',1)->orderby('name')->get();
        //fixed profile
+       $user = Auth::guard('siteDoctor')->user();
        $profile_c = UserProfile::where('user_id',$user->id)->count();
        if( $profile_c) {
         $profile_s =  new UserProfile;
