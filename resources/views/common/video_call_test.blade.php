@@ -383,15 +383,15 @@ canvas {
         });
         connection.closeSocket();
     }
-    if ({{ $diff_timer }}>0) {
-     window.setTimeout(doIt, {{ $diff_timer }});
-    }
-    var doRef = function() {
-        window.location.reload();
-    }
-    if ({{ $diff_timer_ref }}>0) {
-        window.setTimeout(doRef, {{ $diff_timer_ref }});
-    }
+    // if ({{ $diff_timer }}>0) {
+    //  window.setTimeout(doIt, {{ $diff_timer }});
+    // }
+    // var doRef = function() {
+    //     window.location.reload();
+    // }
+    // if ({{ $diff_timer_ref }}>0) {
+    //     window.setTimeout(doRef, {{ $diff_timer_ref }});
+    // }
 
 $(".btn.btn-success.btn.blue-button.larch.join").click(function(){
     $(".btn.btn-success.btn.blue-button.larch.join").hide();
