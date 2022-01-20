@@ -185,7 +185,7 @@ canvas {
             @php
                 $diff = strtotime(date('H:i:s', strtotime($time_slot->getSlot->end_time)))-strtotime(date('H:i:s'));
                 // $diff_timer = $diff*1000;
-                $diff_timer = 15*1000;
+                $diff_timer = 300*1000;
             @endphp
             <button id="btn-open-or-join-room" class="btn btn-success btn blue-button larch join">Join Room</button>
             {{-- @else
@@ -386,7 +386,7 @@ canvas {
     if ({{ $diff_timer }}>0) {
      window.setTimeout(doIt, {{ $diff_timer }});
     }
-    var doRef = function() = {
+    var doRef = function() {
         window.location.reload();
     }
     if ({{ $diff_timer_ref }}>0) {
