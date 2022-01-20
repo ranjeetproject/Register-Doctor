@@ -386,7 +386,7 @@ canvas {
     if ({{ $diff_timer }}>0) {
      window.setTimeout(doIt, {{ $diff_timer }});
     }
-    var doRef = function() => {
+    var doRef = function() = {
         window.location.reload();
     }
     if ({{ $diff_timer_ref }}>0) {
