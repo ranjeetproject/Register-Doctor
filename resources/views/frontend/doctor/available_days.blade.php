@@ -905,45 +905,45 @@ $.ajax({
             });
         }
 
-        function editWeeklyValidateForm() {
-            // alert('hi');
-            let first = document.getElementById('weekly_from_time').value;
-            let second = document.getElementById('weekly_to_time').value;
-            if (first >= second) {
-                alert("from time can not be grater than till time");
-                event.preventDefault();
-                return false;
-            }
-        }
+        // function editWeeklyValidateForm() {
+        //     // alert('hi');
+        //     let first = document.getElementById('weekly_from_time').value;
+        //     let second = document.getElementById('weekly_to_time').value;
+        //     if (first >= second) {
+        //         alert("from time can not be grater than till time");
+        //         event.preventDefault();
+        //         return false;
+        //     }
+        // }
 
-        function addAvailableDaysValidateForm() {
-            let first = document.getElementById('from_time').value;
-            let second = document.getElementById('to_time').value;
-            if (first >= second) {
-                alert("From time can not be grater than till time");
-                event.preventDefault();
-                return false;
-            }
-        }
+        // function addAvailableDaysValidateForm() {
+        //     let first = document.getElementById('from_time').value;
+        //     let second = document.getElementById('to_time').value;
+        //     if (first >= second) {
+        //         alert("From time can not be grater than till time");
+        //         event.preventDefault();
+        //         return false;
+        //     }
+        // }
 
-        function editAvailableDayvalidateForm() {
-            let first = document.getElementById('edit_from_time').value;
-            let second = document.getElementById('edit_to_time').value;
-            if (first >= second) {
-                alert("from time can not be grater than till time");
-                event.preventDefault();
-                return false;
-            }
-        }
+        // function editAvailableDayvalidateForm() {
+        //     let first = document.getElementById('edit_from_time').value;
+        //     let second = document.getElementById('edit_to_time').value;
+        //     if (first >= second) {
+        //         alert("from time can not be grater than till time");
+        //         event.preventDefault();
+        //         return false;
+        //     }
+        // }
 
-        function addWeeklyvalidateForm() {
-            let first = document.getElementById('weekly_from_time').value;
-            let second = document.getElementById('weekly_to_time').value;
-            if (first >= second) {
-                alert("from time can not be grater than till time");
-                event.preventDefault();
-                return false;
-            }
-        }
+        // function addWeeklyvalidateForm() {
+        //     let first = document.getElementById('weekly_from_time').value;
+        //     let second = document.getElementById('weekly_to_time').value;
+        //     if (first >= second) {
+        //         alert("from time can not be grater than till time");
+        //         event.preventDefault();
+        //         return false;
+        //     }
+        // }
     </script>
 @endsection
