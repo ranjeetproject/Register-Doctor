@@ -440,7 +440,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="fal fa-times-circle"></i>
                 </button>
-                <form method="POST" action="">
+                <form method="POST" action="" onsubmit="addAvailableDaysValidateForm()">
 
                     @csrf
 
@@ -480,7 +480,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="fal fa-times-circle"></i>
                 </button>
-                <form method="POST" action="{{ route('doctor.edit-available-day') }}">
+                <form method="POST" action="{{ route('doctor.edit-available-day') }}" onsubmit="editWeeklyValidateForm()">
 
                     @csrf
                     <input type="hidden" name="available_day_id" id="available_day_id">
@@ -504,7 +504,7 @@
                             autocomplete="off" required>
                     </div>
 
-                    <button class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
 
                 </form>
             </div>
@@ -518,7 +518,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="fal fa-times-circle"></i>
                 </button>
-                <form method="POST" action="{{ route('doctor.add-weekly-day') }}">
+                <form method="POST" action="{{ route('doctor.add-weekly-day') }}" onsubmit="editWeeklyValidateForm()">
 
                     @csrf
                     {{-- <input type="hidden" name="available_day_id" id="available_day_id"> --}}
@@ -564,7 +564,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="fal fa-times-circle"></i>
                 </button>
-                <form method="POST" action="{{ route('doctor.edit-weekly-day') }}">
+                <form method="POST" action="{{ route('doctor.edit-weekly-day') }}" onsubmit="editWeeklyValidateForm()">
 
                     @csrf
                     <input type="hidden" name="weekly_day_id" id="weekly_day_id">
@@ -858,6 +858,7 @@ $.ajax({
                     $('#myModal3').modal('show');
                     $('#available_day_id').val(response.data.id);
                     $('#edit_date').val(response.data.date);
+                    console.log(response.data.from_time);
                     $('#edit_from_time').val(response.data.from_time);
                     $('#edit_to_time').val(response.data.to_time);
                     // if(response.data == '1'){
@@ -902,6 +903,47 @@ $.ajax({
                     // toastr.success(response.message);
                 }
             });
+        }
+
+        function editWeeklyValidateForm() {
+            // alert('hi');
+            let first = document.getElementById('weekly_from_time').value;
+            let second = document.getElementById('weekly_to_time').value;
+            if (first >= second) {
+                alert("from time can not be grater than till time");
+                event.preventDefault();
+                return false;
+            }
+        }
+
+        function addAvailableDaysValidateForm() {
+            let first = document.getElementById('from_time').value;
+            let second = document.getElementById('to_time').value;
+            if (first >= second) {
+                alert("From time can not be grater than till time");
+                event.preventDefault();
+                return false;
+            }
+        }
+
+        function editAvailableDayvalidateForm() {
+            let first = document.getElementById('edit_from_time').value;
+            let second = document.getElementById('edit_to_time').value;
+            if (first >= second) {
+                alert("from time can not be grater than till time");
+                event.preventDefault();
+                return false;
+            }
+        }
+
+        function addWeeklyvalidateForm() {
+            let first = document.getElementById('weekly_from_time').value;
+            let second = document.getElementById('weekly_to_time').value;
+            if (first >= second) {
+                alert("from time can not be grater than till time");
+                event.preventDefault();
+                return false;
+            }
         }
     </script>
 @endsection

@@ -86,7 +86,7 @@
                                     <div class="form-group required has-float-label">
                                         {{-- <input class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" type="text"  name="dr_speciality" value="{{$user->profile->dr_speciality}}" id="specialityorinterest" placeholder="Speciality or Interest"> --}}
                                         <select class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" name="dr_speciality">
-                                            <option value="">Select speciality</option>
+                                            <option value="">Select Speciality or Interest</option>
                                             @foreach ($speciality as $special)
 
                                         <option value="{{ $special->id }}" {{ ($user->profile->dr_speciality == $special->id)? "Selected": ""}}>{{ $special->name }}</option>

@@ -38,10 +38,10 @@
                     </div>
                     <form>
                         <div class="form-group row Speciality-form">
-                            <label class="col col-form-label">Speciality :</label>
+                            <label class="col col-form-label">Speciality or Interest :</label>
                             <div class="col-sm-7">
                                 <select class="custom-select mr-sm-2" name="dr_speciality" id="inlineFormCustomSelect">
-                                    <option value="">Select Speciality </option>
+                                    <option value="">Select Speciality or Interest </option>
                                     <option value="all" {{ isset($_GET['dr_speciality']) && $_GET['dr_speciality'] == "all" ? 'selected' : '' }}>All</option>
                                     @foreach ($doctors_speciality as $doctor_speciality)
                                         <option value="{{ $doctor_speciality['id'] }}"

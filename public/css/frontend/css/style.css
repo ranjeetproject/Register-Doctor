@@ -6915,7 +6915,7 @@ button.btn.sider-bar-toggle {
 }
 .has-float-label label,
 .has-float-label>span,
-.has-float-label .form-control:focus~label, 
+.has-float-label .form-control:focus~label,
 .has-float-label .form-control~label,
 .has-float-label .form-control:-webkit-autofill~label{
   position:absolute;
@@ -6981,7 +6981,7 @@ button.btn.sider-bar-toggle {
 .carousel-indicators .active {
   background-color: #fc490d;
 }
-.home-slider-section .carousel-control-next, 
+.home-slider-section .carousel-control-next,
 .home-slider-section .carousel-control-prev{
   width: 34px;
   height: 34px;
@@ -7030,9 +7030,9 @@ button.btn.sider-bar-toggle {
   font-size: 26px;
   line-height: 22px !important;
 }
-.doctor-slide-buttons a.carousel-control-next:focus, 
-.doctor-slide-buttons a.carousel-control-next:hover, 
-.doctor-slide-buttons a.carousel-control-prev:focus, 
+.doctor-slide-buttons a.carousel-control-next:focus,
+.doctor-slide-buttons a.carousel-control-next:hover,
+.doctor-slide-buttons a.carousel-control-prev:focus,
 .doctor-slide-buttons a.carousel-control-prev:hover{
   color: #fc490d;
 }
@@ -7108,4 +7108,9 @@ button.btn.sider-bar-toggle {
 }
 .sick-note-list li{
   margin-top: 5px;
+}
+
+.sd_btn {
+    color: #ffffff !important;
+    margin-top: 15px;
 }

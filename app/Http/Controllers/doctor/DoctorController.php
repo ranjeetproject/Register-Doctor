@@ -461,8 +461,8 @@ class DoctorController extends Controller
                 $available_day = new DoctorAvailableDays;
                 $available_day->user_id = $user->id;
                 $available_day->date = $date;
-                $available_day->from_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time)));
-                $available_day->to_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time)));
+                $available_day->from_time = date('H:i', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time)));
+                $available_day->to_time = date('H:i', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time)));
                 $available_day->save();
 
                 $number_of_slot = $total_minutes/15;
@@ -504,7 +504,7 @@ class DoctorController extends Controller
 
             $available_days_for_month = $available_days_for_month->where('date','>=',$from_date)->where('date','<=',$to_date);
         }else{
-            $available_days_for_month = $available_days_for_month->whereMonth('date',date('m'));
+            $available_days_for_month = $available_days_for_month->whereMonth('date',date('m'))->whereYear('date',date('Y'));
         }
         $available_days_for_month =  $available_days_for_month->orderBy('date')->get();
 
@@ -519,40 +519,34 @@ class DoctorController extends Controller
         $user = Auth::guard('siteDoctor')->user();
         $time_zone = d_timezone();
         if(!empty($request->available_day_id)){
-            //for single edit
+            // dump('hi1');
+            //for single edit add hoc side
             $id = $request->available_day_id;
             $available = DoctorAvailableDays::find($id);
             // dd($available_day);
-            $available_da['from_time'] = date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->from_time)));
-            $available_da['to_time'] = date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->to_time)));
+            $available_da['from_time'] = date('H:i', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->from_time)));
+            $available_da['to_time'] = date('H:i', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->to_time)));
             $available_da['date'] = $available->date;
             $available_da['id'] = $available->id;
             $available_da['user_id'] = $available->user_id;
-            // $available_d[] = $available_da;
-            $available_day = $available_da;
+            $available_d = $available_da;
+            $available_day = $available;
+            // dd($available_day);
         }elseif (!empty($request->date)) {
+            //callender date click get
+            // dump('hi2');
             $date = str_replace('/','-',$request->date);
             $date = date('Y-m-d',strtotime($date));
             $available_day = DoctorAvailableDays::where('date',$date)->get();
-            // dd($available_day );
-            // $time_zone = $user->profile->time_zone;
-
 
             foreach($available_day as $available) {
-                // if($time_zone == 2) {
+                $available_da['from_time'] = date('H:i A', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->from_time)));
+                $available_da['to_time'] = date('H:i A', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->to_time)));
+                $available_da['date'] = $available->date;
 
-                    $available_da['from_time'] = date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->from_time)));
-                    $available_da['to_time'] = date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, $available->date, $available->to_time)));
-                    $available_da['date'] = $available->date;
-                // } else {
-
-                //     $available_da['from_time'] = $available->from_time;
-                //     $available_da['to_time'] = $available->to_time;
-                //     $available_da['date'] = $available->date;
-                // }
                 $available_d[] = $available_da;
             }
-            $available_day = $available_d;
+            // $available_day = $available_d;
 
         }
 
@@ -566,7 +560,6 @@ class DoctorController extends Controller
 
             $date = str_replace("/", "-", $request->date);
             $date = date('Y-m-d',strtotime($date));
-
 
             $from_date_time =  $date.' '.$request->from_time;
             $to_date_time =  $date.' '.$request->to_time;
@@ -582,7 +575,15 @@ class DoctorController extends Controller
                 return redirect()->back();
             }
 
+            $available_request_count = DoctorAvailableDays::withCount('getBookedSlot')->has('getBookedSlot')->find($id);
+            if($available_request_count) {
+                Session::flash('Error-toastr','This date timeslot range is booked by some patient, so edit is not possible this time range.');
+                return redirect()->back();
+            }
 
+            // dd($available_request_count);
+
+            // dd($available_day->getSlot);
             foreach ($available_day->getSlot as $slot) {
                 $slot->delete();
             }
@@ -591,9 +592,10 @@ class DoctorController extends Controller
             // $available_day = new DoctorAvailableDays;
             $available_day->user_id = $user->id;
             $available_day->date = $date;
-            $available_day->from_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time)));
-            $available_day->to_time = date('H:i:s', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time)));
+            $available_day->from_time = date('H:i', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->from_time)));
+            $available_day->to_time = date('H:i', strtotime(timezoneAdjustmentStore($time_zone, $date.' '.$request->to_time)));
             $available_day->save();
+            // dd($available_day);
 
             $number_of_slot = $total_minutes/15;
             $from_time = Carbon::parse($request->from_time,$time_zone)->setTimezone('UTC');
@@ -634,10 +636,10 @@ class DoctorController extends Controller
             return redirect()->back();
         }
 
-        if(isset( $available_day)) {
-            return response()->json(['success' =>true, 'message'=>'success','data'=>$available_day], 200);
+        if(isset( $available_d)) {
+            return response()->json(['success' =>true, 'message'=>'success','data'=>$available_d], 200);
         } else{
-            return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_day], 200);
+            return response()->json(['success' =>fails, 'message'=>'No data found.','data'=>$available_d], 200);
         }
     }
 

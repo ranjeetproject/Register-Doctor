@@ -95,6 +95,7 @@
               <i class="nav-icon fa fa-list-alt" aria-hidden="true"></i>
               <p>
                 Manage Speciality
+                {{-- Speciality or Interest --}}
               </p>
             </a>
           </li>

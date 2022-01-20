@@ -3,15 +3,15 @@
 @section('title', 'admin-dashboard')
 
 @section('body')
-@section('header', 'Edit Specialty')
+@section('header', 'Edit Speciality or Interest')
 @section('badge')
-    <li class="breadcrumb-item"><a href="{{ route('admin.specialties') }}">Specialty</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.specialties.edit', $specialties->id) }}">Edit Specialty</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.specialties') }}">Speciality or Interest</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.specialties.edit', $specialties->id) }}">Edit Speciality or Interest</a></li>
 @endsection
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Specialty edit</h3>
+        <h3 class="card-title">Speciality or Interest edit</h3>
     </div>
     <div class="card-body">
         <form role="form" action="{{ route('admin.specialties.edit', $specialties->id) }}" method="POST"

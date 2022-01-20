@@ -3,16 +3,16 @@
 @section('title', 'admin-dashboard')
 
 @section('body')
-          @section('header', 'Specialties')
+          @section('header', 'Speciality or Interest')
           @section('badge')
-           <li class="breadcrumb-item"><a href="{{ route('admin.specialties') }}">Specialties</a></li>
+           <li class="breadcrumb-item"><a href="{{ route('admin.specialties') }}">Speciality or Interest</a></li>
           @endsection
 
     <!-- /.col -->
 
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title">Specialties list</h3>
+              <h3 class="card-title">Speciality or Interest list</h3>
 
               <div class="card-tools">
                 <form action="" method="GET">

@@ -80,7 +80,7 @@
 
                             <div class="col-sm-12">
 
-                                <button class="btn blue-button">submit</button>
+                                <button class="btn blue-button sd_btn">submit</button>
 
                             </div>
 
