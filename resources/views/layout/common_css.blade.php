@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="{{ asset('public/plugins/sweetalert2/sweetalert2.min.css')}}">
 
    <link rel="stylesheet" href="{{ asset('public/plugins/summernote/summernote-bs4.css')}}">
+   
    {{-- <link rel="stylesheet" href="{{ asset('public/css/ckeditor.css')}}"> --}}
 
   <!-- Google Font: Source Sans Pro -->
