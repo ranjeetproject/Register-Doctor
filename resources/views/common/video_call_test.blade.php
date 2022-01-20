@@ -180,21 +180,23 @@ canvas {
         @endphp
         @foreach ($case->getBookingSlot as $time_slot)
             {{-- @if (date('H:i:s', strtotime($time_slot->getSlot->start_time)) <= date('H:i:s') and date('H:i:s', strtotime($time_slot->getSlot->end_time)) > date('H:i:s')) --}}
-            @if (date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $time_slot->getSlot->start_time))) <= date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), date('H:i:s')))) and date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $time_slot->getSlot->end_time))) > date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), date('H:i:s')))))
+            {{-- test --}}
+            {{-- @if (date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $time_slot->getSlot->start_time))) <= date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), date('H:i:s')))) and date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $time_slot->getSlot->end_time))) > date('H:i:s', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), date('H:i:s'))))) --}}
             @php
                 $diff = strtotime(date('H:i:s', strtotime($time_slot->getSlot->end_time)))-strtotime(date('H:i:s'));
-                $diff_timer = $diff*1000;
+                // $diff_timer = $diff*1000;
+                $diff_timer = 15*1000;
             @endphp
             <button id="btn-open-or-join-room" class="btn btn-success btn blue-button larch join">Join Room</button>
-            @else
+            {{-- @else
             @php
-            // dd($time_slot->getSlot->start_time);
+
                 $diff = strtotime(date('H:i:s', strtotime($time_slot->getSlot->start_time)))-strtotime(date('H:i:s'));
                 $diff_timer_ref = $diff*1000;
             @endphp
-            {{-- <button class="btn btn-success btn blue-button larch">Calling time {{date('h:i a', strtotime($time_slot->getSlot->start_time)).' -- '.date('h:i a', strtotime($time_slot->getSlot->end_time))}}</button> --}}
+
             <button class="btn btn-success btn blue-button larch">Calling time {{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $time_slot->getSlot->start_time))).' -- '.date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, date('Y-m-d'), $time_slot->getSlot->end_time))) }}</button>
-            @endif
+            @endif --}}
 
         @endforeach
         <div id="remote-video-container" class="remote_video_div"></div>
