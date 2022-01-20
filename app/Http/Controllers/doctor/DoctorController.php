@@ -68,6 +68,15 @@ class DoctorController extends Controller
 
        $form_name = 'profile';
        $speciality = Specialties::where('status',1)->orderby('name')->get();
+       //fixed profile
+       $profile_c = UserProfile::where('user_id',$user->id)->count();
+       if( $profile_c) {
+        $profile_s =  new UserProfile;
+
+        $profile_s->user_id = $user->id;
+        $profile_s->save();
+       }
+
 
         if($request->isMethod('post')){
             $form_name = $request->form_name;
