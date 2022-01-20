@@ -79,7 +79,7 @@ $(document).ready(function(){
   //*********** for datetimepicker ***********///
    $('.datepicker').datetimepicker({
         // format: 'L',
-         format: '{{ getSetting('date_format') ? getSetting('date_format') : 'DD-MM-YYYY' }}',
+        format: '{{ getSetting('date_format') ? getSetting('date_format') : 'DD-MM-YYYY' }}',
         // format: 'DD-MM-YYYY',
     });
 

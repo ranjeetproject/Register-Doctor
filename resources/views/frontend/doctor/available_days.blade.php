@@ -172,10 +172,11 @@
                                     <div class="d-block">
 
                                         <form class="form-inline filter-buy d-flex">
+                                       
                                             <div class="form-group mb-2 mr-1">
-                                                <input type="text" name="from_date" onfocus="(this.type='date')"
-                                                    onblur="(this.type='text')" class="form-control"
-                                                    placeholder="From Date">
+                                                <input type="text" name="from_date"  onfocus="(this.type='date')"
+                                                    onblur="(this.type='text')" class="form-control" 
+                                                   placeholder="From Date">
                                             </div>
                                             <div class="form-group mb-2 mr-1">
                                                 <input type="text" name="to_date" onfocus="(this.type='date')"
@@ -261,7 +262,7 @@
                                         @endforeach
 
 
-
+                                        {{@$available_days_for_month->links()}} 
 
 
                                     </div>
@@ -338,7 +339,7 @@
                                         <form class="form-inline filter-buy d-flex">
                                             <div class="form-group mb-2 mr-1">
                                                 <input type="text" name="from_date" onfocus="(this.type='date')"
-                                                    onblur="(this.type='text')" class="form-control"
+                                                    onblur="(this.type='text')"  class="form-control"
                                                     placeholder="Form Date">
                                             </div>
                                             <div class="form-group mb-2 mr-1">
@@ -611,9 +612,8 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
         $('#myModal').modal('show')
-
+       
         $(document).ready(function() {
-
 
             $(".responsive-calendar").responsiveCalendar({
                 time: '{{ date('Y-m') }}',

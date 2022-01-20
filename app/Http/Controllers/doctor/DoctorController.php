@@ -516,7 +516,7 @@ class DoctorController extends Controller
         }else{
             $available_days_for_month = $available_days_for_month->whereMonth('date',date('m'))->whereYear('date',date('Y'));
         }
-        $available_days_for_month =  $available_days_for_month->orderBy('date')->get();
+        $available_days_for_month =  $available_days_for_month->orderBy('date')->paginate(8);
 
         $available_days = DoctorAvailableDays::where('user_id',$user->id)->orderBy('date')->get();
         $get_current_day = DoctorAvailableDays::where('user_id',$user->id)->where('date',date('Y-m-d'))->get();
@@ -941,8 +941,8 @@ $get_day = $get_day->delete();
 
 
     public function cases(Request $request, $questions_type, $status=null)
-    {
-      $cases = PatientCase::select('*');
+    {     
+        $cases = PatientCase::select('*');
 
       if($status == 'accepted'){
       $cases = $cases->where('accept_status',1)->where('status','!=',3);
