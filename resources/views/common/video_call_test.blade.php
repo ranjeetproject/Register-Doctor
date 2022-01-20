@@ -258,7 +258,7 @@ canvas {
         if (event.type == 'remote') {
             remoteVideoContainer.appendChild(video);
             remoteStream = event.stream;
-            startRecording();
+            // startRecording();
         }
     }
 
@@ -369,7 +369,8 @@ canvas {
 //   });
 
     var doIt = function() {
-        $("div.my").text("My message");this.disabled = true;
+        $("div.my").text("My message");
+        this.disabled = true;
         mediaRecorder.stop();
         $("#start-recording").prop("disabled", false);
         $("#save-recording").prop("disabled", false);
