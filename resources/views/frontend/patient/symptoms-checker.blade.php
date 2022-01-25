@@ -85,7 +85,7 @@
                                 <div class="col-sm-12">
                                     <div class="sc-item-bx bg-light-yl">
                                         <div class="form-group">
-                                            <label class="lable-title">Tick if you had any of these conditions now or in the past</label>
+                                            <label class="lable-title">Tick if you had any of these symptoms now or in the past</label>
                                             <div class="from-g-cont for-check-box">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" name="symptom2[]" type="checkbox" value="chest pain">
@@ -150,15 +150,15 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="lable-title">Please list any conditions not covered above </label>
+                                            <label class="lable-title">Please list any symptoms not covered above </label>
                                             <input class="form-control" name="cond_not_covered2">
                                         </div>
                                     </div>
                                 </div>
-                                            
+
                                 <div class="col-sm-12">
                                     <div class="sc-item-bx bg-light-gray">
-                                        <div class="row">  
+                                        <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label class="lable-title">Please provide more details as required</label>
