@@ -374,7 +374,7 @@ class DoctorController extends Controller
     {
       $cases = PatientCase::where('accept_status',1)->where('prescriptions_issued', '=', 'yes')->with(['user','prescription','getPrescriptionComents' => function($c){
         $c->latest()->first();
-    } ])->get();
+    } ])->paginate(8);
 
       return view('frontend.doctor.prescription_issues',compact('cases'));
     }
@@ -943,7 +943,7 @@ $get_day = $get_day->delete();
 
 
     public function cases(Request $request, $questions_type, $status=null)
-    {     
+    {
         $cases = PatientCase::select('*');
 
       if($status == 'accepted'){
