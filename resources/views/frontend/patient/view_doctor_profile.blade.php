@@ -401,12 +401,13 @@
 
                                     <div class="form-group m-0">
                                         <label for="exampleFormControlFile1">Upload Attachments <i
-                                                class="fal fa-paperclip"></i></label>
+                                                class="fal fa-paperclip"></i></label><p>Max 5 Upload File</p>
                                         <input type="file" name="case_file[]" class="form-control-file"
                                             id="exampleFormControlFile1" style="opacity: 0; margin-top: -35px;" multiple
                                             accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right"
                                             title="" data-original-title="One line definition"
                                             src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="">
+                                            
                                     </div>
                                     <div class="form-group">
                                         <div class="file-count">
