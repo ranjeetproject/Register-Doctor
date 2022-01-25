@@ -177,14 +177,14 @@ class PatientController extends Controller
 
     public function createCase(Request $request)
     {
-
         if($request->isMethod('post')) {
          // $data = $request->validate([
             $validator = Validator::make($request->all(), [
                 "health_problem"=>"required",
                 "questions_type"=>"required",
-                "case_file.*"=>"nullable|max:2000",
+                // "case_file.*"=>"nullable|max:2000",
                 // "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
+                
             ]);
 
             if ($validator->fails()) {
@@ -219,6 +219,10 @@ class PatientController extends Controller
 
             $img_did = [];
             if ($request->hasFile('case_file')){
+              if(count($request->file('case_file'))>5){
+                Session::flash('Error-toastr','File Upload Not Maxium 5');
+                return redirect()->back();
+              }else{
                 foreach($request->file('case_file') as $image)
                 {
                     $rand_val           = date('YMDHIS') . rand(11111, 99999);
@@ -226,12 +230,20 @@ class PatientController extends Controller
                     // $file               = $request->file('image');
                     $file               = $image;
                     $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
-                    $destinationPath    = public_path().'/uploads/cases/';
-                    $file->move($destinationPath,$fileName);
-                    $images['file_name']    = $fileName;
-                    $images['patient_case_id']    = $case->id;
-                    array_push($img_did, $images);
+                    $extension =  pathinfo(storage_path($fileName),PATHINFO_EXTENSION);
+                    if($extension == 'jpg' || $extension == 'pdf'){
+                      $destinationPath    = public_path().'/uploads/cases/';
+                      $file->move($destinationPath,$fileName);
+                      $images['file_name']    = $fileName;
+                      $images['patient_case_id']    = $case->id;
+                      array_push($img_did, $images);
+                    }else{
+                      Session::flash('Error-toastr','File Formate Not Supported');
+                      return redirect()->back();
+                    }
+                  
                 }
+              }
             }
             // print_r($img_did); exit;
 

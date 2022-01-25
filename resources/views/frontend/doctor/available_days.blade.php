@@ -175,12 +175,12 @@
 
                                             <div class="form-group mb-2 mr-1">
                                                 <input type="text" name="from_date"  onfocus="(this.type='date')"
-                                                    onblur="(this.type='text')" class="form-control"
-                                                   placeholder="From Date">
+                                                    onblur="(this.type='date')" class="form-control"
+                                                   placeholder="From Date" data-date-format="DD-MM-YY">
                                             </div>
                                             <div class="form-group mb-2 mr-1">
                                                 <input type="text" name="to_date" onfocus="(this.type='date')"
-                                                    onblur="(this.type='text')" class="form-control"
+                                                    onblur="(this.type='date')" class="form-control"
                                                     placeholder="To Date">
                                             </div>
                                             <button type="submit" class="btn btn-primary btn-block mb-2">Search</button>

@@ -401,17 +401,40 @@
 
                                     <div class="form-group m-0">
                                         <label for="exampleFormControlFile1">Upload Attachments <i
-                                                class="fal fa-paperclip"></i></label>
+                                                class="fal fa-paperclip"></i></label><p>Max 5 Upload File</p>
                                         <input type="file" name="case_file[]" class="form-control-file"
                                             id="exampleFormControlFile1" style="opacity: 0; margin-top: -35px;" multiple
                                             accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right"
                                             title="" data-original-title="One line definition"
                                             src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="">
+                                            
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <div class="file-count">
                                             <span id="count_up_attach">0</span>
                                             <i class="fas fa-file-medical-alt"></i>
+                                        </div>
+                                    </div> -->
+                                    <ul class="nav vdp-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#vdp-pdf" role="tab" aria-selected="true">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span>pdf</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#vdp-image" role="tab" aria-selected="false">
+                                                <i class="fas fa-file-image"></i>
+                                                <span>Image</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade" id="vdp-pdf" role="tabpanel">
+                                            pdf
+                                        </div>
+                                        <div class="tab-pane fade" id="vdp-image" role="tabpanel">
+                                            image
                                         </div>
                                     </div>
                                 </div>
