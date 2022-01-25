@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AcceptedPrescriptionDoc;
 use App\Models\DoctorAvailableDays;
 use App\Models\DrugsDetails;
+use App\Models\DoctorReview;
 use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
@@ -194,8 +195,9 @@ class DoctorController extends Controller
       }
 
         $user = Auth::guard('siteDoctor')->user();
-        // return $user->profile->dr_qa_fee_notification;
-        return view('frontend.doctor.profile', compact('user','form_name','speciality'));
+        $allDoctorReviews = $this->allReviews($user->id);
+        // return $user->profile->dr_qa_fee_notification;          
+        return view('frontend.doctor.profile',compact('user','form_name','speciality','allDoctorReviews'));
 
     }
 
@@ -372,7 +374,7 @@ class DoctorController extends Controller
     {
       $cases = PatientCase::where('accept_status',1)->where('prescriptions_issued', '=', 'yes')->with(['user','prescription','getPrescriptionComents' => function($c){
         $c->latest()->first();
-    } ])->get();
+    } ])->paginate(8);
 
       return view('frontend.doctor.prescription_issues',compact('cases'));
     }
@@ -941,7 +943,7 @@ $get_day = $get_day->delete();
 
 
     public function cases(Request $request, $questions_type, $status=null)
-    {     
+    {
         $cases = PatientCase::select('*');
 
       if($status == 'accepted'){
@@ -1240,5 +1242,10 @@ $get_day = $get_day->delete();
         User::where('id',$user_id)->update(['id_verify' => date('Y-m-d H:i:s')]);
         Session::flash('Success-toastr','Verified successfully');
         return redirect()->route('doctor.dashboard');
+    }
+
+    public function allReviews($id){
+        $doctorReviews =  DoctorReview::where('doctor_id',$id)->get();
+        return $doctorReviews;
     }
 }

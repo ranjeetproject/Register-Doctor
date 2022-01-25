@@ -335,7 +335,24 @@
                                                 $rating_percent = ($rating/5)*100;
                                             @endphp
                                             <div class="full-stars" style="width:{{ $rating_percent }}%"></div>
-                                        </div>
+                                        </div><h3>{{$rating}}/{{5}}</h3>
+                                      
+                                      <h4>Review</h4>&nbsp;
+                                        @foreach($allDoctorReviews as $val)
+                                        
+                                            @php
+                                                $user = getUserDetails($val['user_id'])
+                                            @endphp
+                                            <p class="Prescriptions-dt">
+                                                <b>
+                                                {{$user->name}}
+                                                </b>
+                                            </p>
+                                             <p>
+                                               {{$val['review']}}
+                                            </p>
+                                        @endforeach
+                                         <a href="#" class="btn btn-sm btn-primary">Read more</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

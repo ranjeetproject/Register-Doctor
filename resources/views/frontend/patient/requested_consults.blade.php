@@ -100,10 +100,10 @@
                                                                     target="_blank">
                                                                     Live Video
                                                                     <br><img
-                                                                        src="{{ asset('public/images/frontend/images/Live-Video-Chat.png') }}"
+                                                                        src="{{ asset('public/images/frontend/images/live-video-icon.png') }}"
                                                                         alt="">
-                                                                    <img src="{{ asset('public/images/frontend/images/Prescriptions.png') }}"
-                                                                        alt="">
+                                                                    {{-- <img src="{{ asset('public/images/frontend/images/Prescriptions.png') }}"
+                                                                        alt=""> --}}
                                                                 </a>
                                                             @else
                                                                 Live video
@@ -114,7 +114,7 @@
                                                                     @if ($case->questions_type == 1)
                                                                         Live Chat
                                                                         <br><img
-                                                                            src="{{ asset('public/images/frontend/images/Live-Text-Chat.png') }}"
+                                                                            src="{{ asset('public/images/frontend/images/live-g-chat-icon.png') }}"
                                                                             alt="">
                                                                     @endif
 
