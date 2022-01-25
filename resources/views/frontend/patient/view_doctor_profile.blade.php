@@ -430,10 +430,32 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane fade" id="vdp-pdf" role="tabpanel">
-                                            pdf
+                                            <ul class="vdp-upload-gallery">                                             
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>                                                                 
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>                              
+                                            </ul>
                                         </div>
                                         <div class="tab-pane fade" id="vdp-image" role="tabpanel">
-                                            image
+                                            <ul class="vdp-upload-gallery">                                             
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="{{ asset('public/images/frontend/images/opction-one-top-image.png')}}" alt="">
+                                                    </a>
+                                                </li>                                                                 
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="{{ asset('public/images/frontend/images/opction-one-top-image.png')}}" alt="">
+                                                    </a>
+                                                </li>                              
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
