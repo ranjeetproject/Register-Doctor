@@ -88,7 +88,7 @@
                                                     @if($case->booking_date==date('Y-m-d'))
                                                     <a href="{{route('doctor.video-call',$case->case_id)}}" target="_blank">
                                                         Live Video
-                                                        <br><img src="{{ asset('public/images/frontend/images/Live-Video-Chat.png')}}" alt="">
+                                                        <br><img src="{{ asset('public/images/frontend/images/live-video-icon.png')}}" alt="">
                                                         <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
                                                     </a>
                                                     @elseif($case->booking_date < date('Y-m-d') )
@@ -101,7 +101,7 @@
                                                     <a href="{{route('doctor.chats',$case->case_id)}}">
                                                     @if($case->questions_type == 1)
                                                     Live Chat
-                                                    <br><img src="{{ asset('public/images/frontend/images/Live-Text-Chat.png')}}" alt="">
+                                                    <br><img src="{{ asset('public/images/frontend/images/live-g-chat-icon.png')}}" alt="">
                                                     @endif
 
 

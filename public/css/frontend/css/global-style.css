@@ -979,3 +979,59 @@ section.news-banner-bx .news-banner-img img{
     display: flex;
     justify-content: space-between;
 }
+.file-upload-bx{
+    display: flex;
+    flex-wrap: wrap;
+}
+.vdp-tabs a{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 90px;
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    padding: 8px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+}
+.vdp-tabs a.active, 
+.vdp-tabs a:hover {
+    background-color: #294876;
+    color: #fff;
+}
+.vdp-tabs a.active span, 
+.vdp-tabs a.active i, 
+.vdp-tabs a:hover span, 
+.vdp-tabs a:hover i{
+    color: #fff;
+}
+.vdp-tabs a i{
+    font-size: 34px;
+    color: #294876;
+}
+.vdp-tabs a span {
+    font-size: 15px;
+    color: #333;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 100%;
+}
+.sc-item-bx{
+    padding: 15px 20px 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.bg-light-blue{
+    background-color: #dcedff;
+}
+.bg-light-yl{
+    background-color: rgb(255 152 0 / 20%);
+}
+.bg-light-gray{
+    background-color: rgb(73 84 90 / 18%)
+}
