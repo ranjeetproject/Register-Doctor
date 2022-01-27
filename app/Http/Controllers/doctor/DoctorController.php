@@ -7,6 +7,7 @@ use App\Models\AcceptedPrescriptionDoc;
 use App\Models\DoctorAvailableDays;
 use App\Models\DrugsDetails;
 use App\Models\DoctorReview;
+use App\Models\DoctorSpeciality;
 use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
@@ -69,8 +70,17 @@ class DoctorController extends Controller
 
        $form_name = 'profile';
        $speciality = Specialties::where('status',1)->orderby('name')->get();
+       
        //fixed profile
        $user = Auth::guard('siteDoctor')->user();
+       $dr_specialties =[];
+       $dr_speciality= DoctorSpeciality::select('dr_specialties_id')
+        ->where('user_id',$user->id)
+       ->get()->toArray();
+        foreach($dr_speciality as $key => $val)
+        {
+            $dr_specialties[] = $val['dr_specialties_id'];
+        }
        $profile_c = UserProfile::where('user_id',$user->id)->count();
        if( !$profile_c) {
         $profile_s =  new UserProfile;
@@ -80,7 +90,8 @@ class DoctorController extends Controller
        }
 
 
-        if($request->isMethod('post')){
+    if($request->isMethod('post'))
+    {
             $form_name = $request->form_name;
 
             // dd($request->all());
@@ -128,7 +139,7 @@ class DoctorController extends Controller
 
      $profile->user_id = $user->id;
 
-       if(!empty($request->dr_speciality) ) $profile->dr_speciality = $request->dr_speciality;
+    //    if(!empty($request->dr_speciality) ) $profile->dr_speciality = $request->dr_speciality;
        if(!empty($request->about) ) $profile->about = $request->about;
        if(!empty($request->dr_experience) ) $profile->dr_experience = $request->dr_experience;
        if(!empty($request->dr_qualifications) ) $profile->dr_qualifications = $request->dr_qualifications;
@@ -180,9 +191,54 @@ class DoctorController extends Controller
             $profile->profile_photo = $fileName;
           }
           // print_r($profile); exit;
-
+       
           $profile->save();
-           $user->save();
+          if($user->save()){
+            if(!empty($request->dr_speciality))
+            {
+                $check_dr_speciality = DoctorSpeciality::orderBy('dr_specialties_id', 'DESC')->where('user_id','=',$user->id)->get(['dr_specialties_id'])->toArray();
+                $dr_specialites_id = [];
+                array_map(function($value) use (&$dr_specialites_id){
+                    $dr_specialites_id[] = $value['dr_specialties_id'];
+                }, $check_dr_speciality);
+               
+                if(empty($dr_specialites_id))
+                {
+                    foreach($request->dr_speciality  as $val)
+                    {
+                            DoctorSpeciality::create([
+                                'user_id'=>$user->id,
+                                'dr_specialties_id'=> $val,
+                                ]);
+                    }
+                }
+                if(!empty($dr_specialites_id))
+                {
+                    foreach($request->dr_speciality  as $val)
+                    {
+                        if(!in_array($val,$dr_specialites_id))
+                        {
+                            DoctorSpeciality::create([
+                                'user_id'=>$user->id,
+                                'dr_specialties_id'=> $val,
+                                ]);
+                        }
+                    }
+                    
+                    foreach($dr_specialites_id  as $val)
+                    {
+                        if(!in_array($val,$request->dr_speciality))
+                        {
+                            DoctorSpeciality::where('user_id','=',$user->id)->where('dr_specialties_id','=',$val)->delete();
+                        }
+                    }
+                    
+                
+                 }
+            }
+               
+           }
+
 
           Session::flash('Success-toastr','Profile Successfully updated');
 
@@ -196,8 +252,9 @@ class DoctorController extends Controller
 
         $user = Auth::guard('siteDoctor')->user();
         $allDoctorReviews = $this->allReviews($user->id);
+        
         // return $user->profile->dr_qa_fee_notification;          
-        return view('frontend.doctor.profile',compact('user','form_name','speciality','allDoctorReviews'));
+        return view('frontend.doctor.profile',compact('user','dr_specialties','form_name','speciality','allDoctorReviews'));
 
     }
 
@@ -1245,7 +1302,7 @@ $get_day = $get_day->delete();
     }
 
     public function allReviews($id){
-        $doctorReviews =  DoctorReview::where('doctor_id',$id)->get();
+        $doctorReviews =  DoctorReview::where('doctor_id',$id)->get()->toArray();
         return $doctorReviews;
     }
 }

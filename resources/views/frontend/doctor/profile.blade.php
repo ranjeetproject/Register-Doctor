@@ -85,11 +85,10 @@
                                 <div class="col-sm-12">
                                     <div class="form-group required has-float-label">
                                         {{-- <input class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" type="text"  name="dr_speciality" value="{{$user->profile->dr_speciality}}" id="specialityorinterest" placeholder="Speciality or Interest"> --}}
-                                        <select class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" name="dr_speciality">
+                                        <select class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" name="dr_speciality[]" multiple="multiple" id="multiOpt">
                                             <option value="">Select Speciality or Interest</option>
                                             @foreach ($speciality as $special)
-
-                                        <option value="{{ $special->id }}" {{ ($user->profile->dr_speciality == $special->id)? "Selected": ""}}>{{ $special->name }}</option>
+                                                <option value="{{ $special->id }}" @if(in_array($special->id,$dr_specialties)) {{'Selected'}} @endIf>{{ $special->name }}</option>
                                             @endforeach
                                         </select>
                                         <label for="specialityorinterest">Speciality or Interest <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" class="info-si-icon" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"></label>
@@ -335,7 +334,7 @@
                                                 $rating_percent = ($rating/5)*100;
                                             @endphp
                                             <div class="full-stars" style="width:{{ $rating_percent }}%"></div>
-                                        </div><h3>{{$rating}}/{{5}}</h3>
+                                        </div><h3>{{$rating}} Out Of {{5}}</h3>
                                       
                                       <h4>Review</h4>&nbsp;
                                         @foreach($allDoctorReviews as $val)
@@ -352,7 +351,7 @@
                                                {{$val['review']}}
                                             </p>
                                         @endforeach
-                                         <a href="#" class="btn btn-sm btn-primary">Read more</a>
+                                         <a href="{{}}" class="btn btn-sm btn-primary">Read more</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -526,6 +525,10 @@
             $("#imgInp").change(function() {
                 readURL(this);
             });
+
+            $('#multiOpt').select2({
+                maximumSelectionLength:5
+            });
         });
 
         $('.Notifications-on-of input[type="checkbox"]').click(function() {
@@ -552,7 +555,10 @@
         $('#exampleModal').modal('show');
     });
 
+    
+
 });
+    
 
     </script>
 @endsection

@@ -1,6 +1,6 @@
 <script src="{{ asset('public/js/frontend/js/jquery-1.11.0.js') }}"></script>
  {{-- <script src="{{ asset('public/js/app.js') }}" defer></script> --}}
-
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{{ asset('public/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('public/js/frontend/js/popper.min.js') }}"></script>
