@@ -110,6 +110,8 @@ a.btn.back-button{
 .local_video_div video, .remote_video_div video {
     height: calc(100vh - 157px);
     width: 100%;
+    object-fit: cover;
+    background: #000;
 }
 .col-md-6.text-center {
     float: right;

@@ -83,7 +83,7 @@
 
 
                                 <div class="col-sm-12">
-                                    <div class="form-group required has-float-label">
+                                    <div class="form-group required has-float-label multiOpt-input-field">
                                         {{-- <input class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" type="text"  name="dr_speciality" value="{{$user->profile->dr_speciality}}" id="specialityorinterest" placeholder="Speciality or Interest"> --}}
                                         <select class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" name="dr_speciality[]" multiple="multiple" id="multiOpt">
                                             <option value="">Select Speciality or Interest</option>
@@ -351,7 +351,7 @@
                                                {{$val['review']}}
                                             </p>
                                         @endforeach
-                                         <a href="{{}}" class="btn btn-sm btn-primary">Read more</a>
+                                         <a href="#" class="btn btn-sm btn-primary">Read more</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
