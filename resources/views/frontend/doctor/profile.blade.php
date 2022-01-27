@@ -351,7 +351,7 @@
                                                {{$val['review']}}
                                             </p>
                                         @endforeach
-                                         <a href="{{}}" class="btn btn-sm btn-primary">Read more</a>
+                                         <a href="#" class="btn btn-sm btn-primary">Read more</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
