@@ -89,7 +89,7 @@
                                                     <a href="{{route('doctor.video-call',$case->case_id)}}" target="_blank">
                                                         Live Video
                                                         <br><img src="{{ asset('public/images/frontend/images/live-video-icon.png')}}" alt="">
-                                                        <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt="">
+                                                        {{-- <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt=""> --}}
                                                     </a>
                                                     @elseif($case->booking_date < date('Y-m-d') )
                                                         Your appointment date was {{ $case->booking_date }}
