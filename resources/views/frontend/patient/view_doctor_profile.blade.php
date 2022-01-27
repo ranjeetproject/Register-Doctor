@@ -415,21 +415,33 @@
                                             <i class="fas fa-file-medical-alt"></i>
                                         </div>
                                     </div> -->
-                                    <ul class="nav vdp-tabs" role="tablist">
+                                    <ul class="nav vdp-tabs">
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#vdp-pdf" role="tab" aria-selected="true">
+                                            <a class="nav-link" target="_blank" href="http://localhost:82/registered-doctor/public/uploads/handydoc/61cea95603375961310528744920d839.pdf">
                                             <i class="fas fa-file-pdf"></i>
-                                            <span>pdf</span>
+                                            <span>doctor-list.pdf</span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#vdp-image" role="tab" aria-selected="false">
+                                            <a class="nav-link" target="_blank" href="http://localhost:82/registered-doctor/public/uploads/cases/6173e67e88f1c12ee3b2e4e3f25b2dc2.png">
                                                 <i class="fas fa-file-image"></i>
-                                                <span>Image</span>
+                                                <span>patient-list-img.jpg</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" target="_blank" href="http://localhost:82/registered-doctor/public/uploads/handydoc/61cea95603375961310528744920d839.pdf">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span>doctor-list.pdf</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" target="_blank" href="http://localhost:82/registered-doctor/public/uploads/cases/6173e67e88f1c12ee3b2e4e3f25b2dc2.png">
+                                                <i class="fas fa-file-image"></i>
+                                                <span>patient-list-img.jpg</span>
                                             </a>
                                         </li>
                                     </ul>
-                                    <div class="tab-content">
+                                    <!-- <div class="tab-content">
                                         <div class="tab-pane fade" id="vdp-pdf" role="tabpanel">
                                             <ul class="vdp-upload-gallery">                                             
                                                 <li>
@@ -458,7 +470,7 @@
                                                 </li>                              
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 

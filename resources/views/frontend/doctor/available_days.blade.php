@@ -172,16 +172,21 @@
                                     <div class="d-block">
 
                                         <form class="form-inline filter-buy d-flex">
-
                                             <div class="form-group mb-2 mr-1">
-                                                <input type="text" name="from_date"  onfocus="(this.type='date')"
+                                                <!-- <input type="text" name="from_date"  onfocus="(this.type='date')"
                                                     onblur="(this.type='date')" class="form-control"
-                                                   placeholder="From Date" data-date-format="DD-MM-YY">
+                                                   placeholder="From Date"> -->
+                                                <div class="datePicker-input-field">
+                                                    <input class="form-control" id="FromDatepicker" type="text" name="from_date" placeholder="From Date" readonly/>
+                                                </div>
                                             </div>
                                             <div class="form-group mb-2 mr-1">
-                                                <input type="text" name="to_date" onfocus="(this.type='date')"
+                                                <!-- <input type="text" name="to_date" onfocus="(this.type='date')"
                                                     onblur="(this.type='date')" class="form-control"
-                                                    placeholder="To Date">
+                                                    placeholder="To Date"> -->
+                                                <div class="datePicker-input-field">
+                                                    <input class="form-control" id="ToDatepicker" type="text" name="to_date" placeholder="To Date" readonly/>
+                                                </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary btn-block mb-2">Search</button>
                                         </form>
@@ -945,5 +950,31 @@ $.ajax({
         //         return false;
         //     }
         // }
+
+        $(function () {
+            $("#FromDatepicker").datepicker({
+                showOn: "button",
+                buttonText:'<i class="far fa-calendar-alt"></i>',
+                dateFormat : "ds M yy",
+                onSelect: function(dateText, inst) {
+                    var arrOrd = new Array('0','st','nd','rd','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','st','nd','rd','th','th','th','th','th','th','th','st');
+                    var day = Number(inst.selectedDay);
+                    var suffix = arrOrd[day];       
+                    $(this).val($(this).val().replace(inst.selectedDay+"s",inst.selectedDay+suffix));
+                }
+            });
+
+            $("#ToDatepicker").datepicker({
+                showOn: "button",
+                buttonText:'<i class="far fa-calendar-alt"></i>',
+                dateFormat : "ds M yy",
+                onSelect: function(dateText, inst) {
+                    var arrOrd = new Array('0','st','nd','rd','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','st','nd','rd','th','th','th','th','th','th','th','st');
+                    var day = Number(inst.selectedDay);
+                    var suffix = arrOrd[day];       
+                    $(this).val($(this).val().replace(inst.selectedDay+"s",inst.selectedDay+suffix));
+                }
+            });
+          });
     </script>
 @endsection
