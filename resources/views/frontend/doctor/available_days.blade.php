@@ -208,7 +208,7 @@
                                                             data-target="#acone_{{ $available_day->id }}"
                                                             aria-expanded="false" aria-controls="acone">
                                                             {{ ucfirst(date('l', strtotime($available_day->date))) }} -
-                                                            {{ date('F d Y', strtotime($available_day->date)) }}
+                                                            {{ date('dS M Y', strtotime($available_day->date)) }}
                                                             {{-- @if ($time_zone == 2) --}}
 
                                                             <span>{{ date('H:i a', strtotime(timezoneAdjustmentFetch($time_zone, $available_day->date, $available_day->from_time))) }}

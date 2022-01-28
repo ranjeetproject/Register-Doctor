@@ -48,6 +48,7 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::get('/invite-video/{case_id}/{user_id}', 'DoctorController@inviteVideo')->name('invite-video');
     Route::get('video-cal-pres/{case_id}/{user_id}','DoctorController@videoCallDocPres')->name('video-call-pres');
     Route::get('verify-id/{user_id}','DoctorController@verifyId')->name('verify-id');
+    Route::get('/all-reviews', 'DoctorController@doctorAllReviews')->name('all-dr-review');
 
     Route::match(['get','post'],'sick-note/{id}', 'DoctorController@sickNote')->name('sick-note');
 });

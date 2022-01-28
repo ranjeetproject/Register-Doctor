@@ -337,10 +337,10 @@
                                         </div><h3>{{$rating}} Out Of {{5}}</h3>
                                       
                                       <h4>Review</h4>&nbsp;
-                                        @foreach($allDoctorReviews as $val)
-                                        
+                                       
+                                        @foreach($twoReviews as $val)
                                             @php
-                                                $user = getUserDetails($val['user_id'])
+                                                $user = getUserDetails($val['user_id']);
                                             @endphp
                                             <p class="Prescriptions-dt">
                                                 <b>
@@ -351,7 +351,7 @@
                                                {{$val['review']}}
                                             </p>
                                         @endforeach
-                                         <a href="#" class="btn btn-sm btn-primary">Read more</a>
+                                        <a href="{{ route('doctor.all-dr-review')}}" class="btn btn-sm btn-primary">Read more</a> 
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

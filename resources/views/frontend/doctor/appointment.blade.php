@@ -51,7 +51,7 @@
                                          @foreach ($cases as $case)
 
                                          <tr >
-                                            <td>{{date('m-d-Y', strtotime($case->booking_date))}}</td>
+                                            <td>{{date('dS M Y', strtotime($case->booking_date))}}</td>
 
                                             <td>
                                               @forelse($case->getBookingSlot as $time_slot)
@@ -92,9 +92,9 @@
                                                         {{-- <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt=""> --}}
                                                     </a>
                                                     @elseif($case->booking_date < date('Y-m-d') )
-                                                        Your appointment date was {{ $case->booking_date }}
+                                                        Your appointment date was {{ date('dS M Y', strtotime($case->booking_date)) }}
                                                     @else
-                                                        Your appointment date is {{ $case->booking_date }}
+                                                        Your appointment date is {{ date('dS M Y', strtotime($case->booking_date)) }}
                                                     @endif
                                                 @else
 

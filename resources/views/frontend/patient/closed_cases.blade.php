@@ -28,7 +28,7 @@
                                             @forelse ($closed_cases as $closed_case)
                                             <tr>
                                                 {{-- @dump($closed_case) --}}
-                                                <td>{{ date('d-m-Y', strtotime($closed_case->patientCaseCloseDate->created_at)) }}</td>
+                                                <td>{{ date('dS M Y', strtotime($closed_case->patientCaseCloseDate->created_at)) }}</td>
                                                 <td>{{ $closed_case->case_id }}</td>
                                                 <td>Dr. {{ $closed_case->doctor->name }}</td>
 

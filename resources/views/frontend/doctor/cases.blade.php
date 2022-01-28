@@ -88,7 +88,7 @@
                                                         <td>{{ $case->user->name }}</td>
                                                         {{-- <td></td> --}}
                                                         <td style="text-align: center;">
-                                                            {{ date('m-d-Y', strtotime($case->booking_date)) }}<br>
+                                                            {{ date('dS M Y', strtotime($case->booking_date)) }}<br>
                                                             @forelse($case->getBookingSlot as $time_slot)
                                                                 @if ($time_slot->getSlot)
                                                                     {{-- {{ date('h:i a', strtotime($time_slot->getSlot->start_time)) }} --}}

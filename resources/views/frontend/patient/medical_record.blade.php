@@ -34,7 +34,7 @@
                                     <div class="card-body">
 
                                         @foreach($past_symptoms as $past_symptom)
-                                         <p><label>{{$past_symptom->symptom}} </label>  Entry Dated :  {{ date('d.m.Y', strtotime($past_symptom->created_at))}}</p>
+                                         <p><label>{{$past_symptom->symptom}} </label>  Entry Dated :  {{ date('dS M Y', strtotime($past_symptom->created_at))}}</p>
                                         @endforeach
 
                                     </div>
@@ -48,7 +48,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                        @foreach($past_symptoms2 as $past_symptom)
-                                         <p><label>{{$past_symptom->symptom}} </label>  Entry Dated :  {{ date('d.m.Y', strtotime($past_symptom->created_at))}}</p>
+                                         <p><label>{{$past_symptom->symptom}} </label>  Entry Dated :  {{ date('dS M Y', strtotime($past_symptom->created_at))}}</p>
                                         @endforeach
                                     </div>
                                   </div>
@@ -77,7 +77,7 @@
                                                     <td>{{$case->doctor->name}}</td>
                                                     <td><a href="{{ route('patient.view-case', $case->case_id) }}" class="btn">View Case</a>
                                                         <a href="{{ route('patient.print-case-summery', $case->case_id) }}" class="btn">Print Case Summary</a></td>
-                                                    <td>{{ date('d.m.Y', strtotime($case->created_at))}}</td>
+                                                    <td>{{ date('dS M Y', strtotime($case->created_at))}}</td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -114,7 +114,7 @@
                                                         <td>{{$drug->dose}} </td>
                                                         <td>{{$drug->frequency}}  </td>
                                                         <td>{{($drug->currently_taking == 1)?'Yes':'No'}}</td>
-                                                        <td>{{date('d.m.Y', strtotime($drug->created_at))}} </td>
+                                                        <td>{{date('dS M Y', strtotime($drug->created_at))}} </td>
                                                     </tr>
                                             @endforeach
 
@@ -145,7 +145,7 @@
                                                 <tr>
                                                     <td>{{$drug->drug_name}} </td>
                                                     <td>{{$drug->what_happened}}</td>
-                                                    <td>{{date('d.m.Y', strtotime($drug->created_at))}} </td>
+                                                    <td>{{date('dS M Y', strtotime($drug->created_at))}} </td>
                                                 </tr>
                                        @endforeach
 

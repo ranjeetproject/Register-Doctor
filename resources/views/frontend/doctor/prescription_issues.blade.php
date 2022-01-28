@@ -46,7 +46,7 @@
                                       @foreach($cases as $case)
                                       {{-- @dd($case->getPrescriptionComents, $case->getPrescriptionComents[0]->coments) --}}
                                         <tr >
-                                            <td>{{date('d-m-Y', strtotime($case->updated_at)) }}</td>
+                                            <td>{{date('dS M Y', strtotime($case->updated_at)) }}</td>
 
                                             <td>{{$case->user->name}}</td>
                                             <td>{{$case->case_id}}</td>

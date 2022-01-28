@@ -57,7 +57,7 @@
                                                 {{-- @dump($case) --}}
 
                                                 <tr>
-                                                    <td>{{ $case->booking_date ? date('d-m-Y', strtotime($case->booking_date)) : '' }}
+                                                    <td>{{ $case->booking_date ? date('dS M Y', strtotime($case->booking_date)) : '' }}
                                                     </td>
                                                     <td style="text-align: center;">
                                                         {{-- @if ($case->getSlot) --}}

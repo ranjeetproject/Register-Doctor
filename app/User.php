@@ -114,5 +114,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\DoctorReview','doctor_id','id');
     }
 
+    public function doctorSpeciality()
+    {
+        return $this->hasMany('App\Models\DoctorSpeciality','user_id','id');
+    }
+
 
 }

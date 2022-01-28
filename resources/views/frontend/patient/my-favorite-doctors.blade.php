@@ -160,8 +160,12 @@
                                                                 class="btn blue-button rating-list-profile">View Profile</a>
                                                         </div>
                                                         <h5 class="card-title">
-                                                            {{ ucfirst($doctor->forename . ' ' . $doctor->surname) }}<br><small>
-                                                                {{ ucfirst($doctor->profile->speciality->name) }}</small>
+                                                            {{ ucfirst($doctor->forename . ' ' . $doctor->surname) }}<br>
+                                                            <small>
+                                                                @foreach (@$doctor->doctorSpeciality as  $speciality)
+                                                                    {{ ucfirst($speciality->specialites->name) }}
+                                                                @endforeach
+                                                            </small>
                                                         </h5>
                                                         <p>{{ $doctor->profile->dr_qualifications }}</p>
                                                         <p>Location : {{ ucfirst($doctor->profile->address) }}</p>

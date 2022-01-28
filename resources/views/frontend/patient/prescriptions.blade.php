@@ -58,7 +58,7 @@
 
                                                  @forelse ($cases as $case)
                                                 <tr>
-                                                    <td>{{date('m-d-Y', strtotime($case->booking_date))}}</td>
+                                                    <td>{{date('dS M Y', strtotime($case->booking_date))}}</td>
                                                     <td style="text-align: center;">
                                                       @forelse($case->getBookingSlot as $time_slot)
 

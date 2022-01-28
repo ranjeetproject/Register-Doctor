@@ -47,7 +47,7 @@
                                         <tbody>
                                             @forelse ($close_cases as $close_case)
                                                 <tr>
-                                                    <td>{{ $close_case->closed_at }}</td>
+                                                    <td>{{ date('dS M Y', strtotime($close_case->closed_at)) }}</td>
                                                     <td>{{ $close_case->case_id }}</td>
                                                     <td>{{ $close_case->user->name }}</td>
                                                     <td><a href="{{route('doctor.view-case',$close_case->case_id)}}"><button class="btn blue-button">View details</button></a> </td>

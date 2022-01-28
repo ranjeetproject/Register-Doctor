@@ -251,10 +251,10 @@ class DoctorController extends Controller
       }
 
         $user = Auth::guard('siteDoctor')->user();
-        $allDoctorReviews = $this->allReviews($user->id);
-        
-        // return $user->profile->dr_qa_fee_notification;          
-        return view('frontend.doctor.profile',compact('user','dr_specialties','form_name','speciality','allDoctorReviews'));
+        $allDoctorReview = $this->allReviews($user->id);
+        // return $user->profile->dr_qa_fee_notification; 
+        $twoReviews = array_slice($allDoctorReview,0,2);
+        return view('frontend.doctor.profile',compact('user','dr_specialties','form_name','speciality','allDoctorReview','twoReviews'));
 
     }
 
@@ -1304,5 +1304,11 @@ $get_day = $get_day->delete();
     public function allReviews($id){
         $doctorReviews =  DoctorReview::where('doctor_id',$id)->get()->toArray();
         return $doctorReviews;
+    }
+
+    public function doctorAllReviews(){
+        $user = Auth::guard('siteDoctor')->user();
+        $allDoctorReview = $this->allReviews($user->id);
+        return view('frontend.doctor.dr_all_reviews',compact('allDoctorReview'));
     }
 }

@@ -45,7 +45,7 @@
                                           @forelse($handy_docs as $handy_doc)
                                             <tr>
                                                 <td>{{ $handy_doc->topic_name }}</td>
-                                                <td>{{ date('d M Y', strtotime($handy_doc->created_at)) }}</td>
+                                                <td>{{ date('dS M Y', strtotime($handy_doc->created_at)) }}</td>
                                                 <td class="for-divider">
                                                     @if ($handy_doc->file_name)
                                                     <a href="{{ route('doctor.view-handy-document',['id'=>$handy_doc->id]) }}"><i class="fal fa-eye"></i></a>
