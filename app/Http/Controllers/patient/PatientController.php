@@ -865,7 +865,7 @@ class PatientController extends Controller
                         }
                         $time_slot.= '<tr class="ts-collapse-icon" data-toggle="collapse" data-target="#time_slot_row_'.$count_h_s.'">';
                         if($count_h_s == 1) {
-                            $time_slot.= '<td>'.date('l',strtotime($current_day->date)) .'  '. date('F d Y',strtotime($current_day->date)).'</td>';
+                            $time_slot.= '<td>'.date('l',strtotime($current_day->date)) .'  '. date('dS M Y',strtotime($current_day->date)).'</td>';
 
                         }else {
                             $time_slot.= '<td></td>';
