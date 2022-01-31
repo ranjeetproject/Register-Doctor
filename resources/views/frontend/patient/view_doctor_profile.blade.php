@@ -416,30 +416,7 @@
                                         </div>
                                     </div> -->
                                     <ul class="nav vdp-tabs">
-                                        <li class="nav-item">
-                                            <a class="nav-link" target="_blank" href="http://localhost:82/registered-doctor/public/uploads/handydoc/61cea95603375961310528744920d839.pdf">
-                                            <i class="fas fa-file-pdf"></i>
-                                            <span>doctor-list.pdf</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" target="_blank" href="http://localhost:82/registered-doctor/public/uploads/cases/6173e67e88f1c12ee3b2e4e3f25b2dc2.png">
-                                                <i class="fas fa-file-image"></i>
-                                                <span>patient-list-img.jpg</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" target="_blank" href="http://localhost:82/registered-doctor/public/uploads/handydoc/61cea95603375961310528744920d839.pdf">
-                                            <i class="fas fa-file-pdf"></i>
-                                            <span>doctor-list.pdf</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" target="_blank" href="http://localhost:82/registered-doctor/public/uploads/cases/6173e67e88f1c12ee3b2e4e3f25b2dc2.png">
-                                                <i class="fas fa-file-image"></i>
-                                                <span>patient-list-img.jpg</span>
-                                            </a>
-                                        </li>
+                                        
                                     </ul>
                                     <!-- <div class="tab-content">
                                         <div class="tab-pane fade" id="vdp-pdf" role="tabpanel">
@@ -557,12 +534,37 @@
 
             $('input#exampleFormControlFile1').change(function() {
                 var files = $(this)[0].files;
-                $('#count_up_attach').html(files.length);
+               // $('#count_up_attach').html(files.length);
                 // if(files.length > 10){
                 //     alert("you can select max 10 files.");
                 // }else{
                 //     alert("correct, you have selected less than 10 files");
                 // }
+                
+                for (var i = 0; i < files.length; i++) 
+                {
+                    var file_name = files[i].name;
+                    var ext = file_name.substring(file_name.lastIndexOf('.') + 1).toLowerCase();
+                    if(ext == 'pdf'){
+                        //console.log('this is pdf');
+                        $(`<li class="nav-item">
+                                            <a class="nav-link" target="_blank" href="${URL.createObjectURL(files[i])}">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span>${file_name}</span>
+                                            </a>
+                                        </li>${i}`).appendTo('ul.vdp-tabs')
+                    }else{
+                        //console.log('this is jpg');
+                        $(`<li class="nav-item">
+                                            <a class="nav-link" target="_blank" href="${URL.createObjectURL(files[i])}">
+                                                <i class="fas fa-file-image"></i>
+                                                <span>${file_name}</span>
+                                            </a>
+                                        </li>${i}`).appendTo('ul.vdp-tabs')
+                    }
+                     
+                }
+
             });
 
         });
@@ -579,6 +581,8 @@
         function caseDetails() {
             $('#case_details').show();
         }
+
+       
     </script>
 
 @endpush
