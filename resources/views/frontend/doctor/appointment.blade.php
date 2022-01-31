@@ -37,7 +37,7 @@
 
                                               <td>Date</td>
                                               <td>Time</td>
-                                              <td>Communication</td>
+                                              <td>Appointment</td>
                                               <td>type</td>
                                               <td>Patient’s<br> Name  </td>
                                               <td>Case No.</td>
@@ -48,8 +48,9 @@
                                           </tr>
                                       </thead>
                                       <tbody>
+                                      
                                          @foreach ($cases as $case)
-
+    
                                          <tr >
                                             <td>{{date('dS M Y', strtotime($case->booking_date))}}</td>
 
@@ -87,20 +88,20 @@
                                                 @if($case->questions_type == 2)
                                                     @if($case->booking_date==date('Y-m-d'))
                                                     <a href="{{route('doctor.video-call',$case->case_id)}}" target="_blank">
-                                                        Live Video
+                                                        Start Live Video Calling
                                                         <br><img src="{{ asset('public/images/frontend/images/live-video-icon.png')}}" alt="">
                                                         {{-- <img src="{{ asset('public/images/frontend/images/Prescriptions.png')}}" alt=""> --}}
                                                     </a>
                                                     @elseif($case->booking_date < date('Y-m-d') )
-                                                        Your appointment date was {{ date('dS M Y', strtotime($case->booking_date)) }}
+                                                         {{ date('dS M Y', strtotime($case->booking_date)) }}
                                                     @else
-                                                        Your appointment date is {{ date('dS M Y', strtotime($case->booking_date)) }}
+                                                         {{ date('dS M Y', strtotime($case->booking_date)) }}
                                                     @endif
                                                 @else
 
                                                     <a href="{{route('doctor.chats',$case->case_id)}}">
                                                     @if($case->questions_type == 1)
-                                                    Live Chat
+                                                    Start Live Chat
                                                     <br><img src="{{ asset('public/images/frontend/images/live-g-chat-icon.png')}}" alt="">
                                                     @endif
 
@@ -140,6 +141,8 @@
                                                 @if(!empty($start_time))
                                                 @if (getDiffOfTwoDateInMinute($case->booking_date . ' ' . $start_time) < 0)
                                                 <a href="{{ route('doctor.sick-note',$case->case_id) }}" class="btn btn-sm btn-primary">Sick note</a>
+                                                <a  href="{{ route('doctor.create-prescription',$case->case_id) }}"><img src="{{ asset('public/images/frontend/images/Prescription-icon.png')}}" alt=""/></a>
+
                                                 @endif
                                                 @else
                                                 @endif

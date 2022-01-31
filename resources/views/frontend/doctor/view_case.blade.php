@@ -30,10 +30,13 @@
                     <div class="view-case-details">
                         @foreach($case->casefile as $casefile)
                         @if (strpos($casefile->file_name, '.pdf') !== false)
+                         <a class="nav-link" target="_blank" href="{{asset('public/uploads/cases/'.$casefile->file_name)}}">
                             <p><embed src="{{asset('public/uploads/cases/'.$casefile->file_name)}}" width="500px" height="600px" class="img-thumbnail"/></p>
+                        </a>
                         @else
-
+                         <a class="nav-link" target="_blank" href="{{asset('public/uploads/cases/'.$casefile->file_name)}}">
                             <p><img width="500px" height="300px" class="img-thumbnail" src="{{asset('public/uploads/cases/'.$casefile->file_name)}}"></p>
+                        </a>
                         @endif
                         <br>
                         @endforeach

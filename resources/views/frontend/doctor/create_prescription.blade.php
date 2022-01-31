@@ -157,7 +157,7 @@
 
                                             <p>For this prescription [you must use webcam and check ID OR you must use webcam but do not need to check ID OR you do not need to use webcam or check ID]</p>
 
-                                            <p id="verify_id_all"><a target="_blank" id="verify_id" href="#">Click</a> to verify Id</p>
+                                            <p id="verify_id_all"><a target="_blank" href="#" data-toggle="modal" data-target="#finalprisc1">Click</a> to verify Id</p>
                                             <p><a target="_blank" id="medical_record" href="#">Click</a> to see patient medical record including allergies and for UK patients their GP details</p>
 
                                             <p><a target="_blank" id="msg_patient" href="#">Click</a> to contact patient before issuing prescription</p>
@@ -366,36 +366,69 @@
         </div>
 
     </div>
+    
 
 <div class="modal fade add-edit-prs" id="finalprisc" >
 
-<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
 
-  <div class="modal-content">
-    <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
-            <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
 
-          </button>
-        <div class="col-sm-12 Prescription-form-fild">
-            <h1 class="inner-page-title text-center mb-4">
-                Please check after submit the prescription will visible for patients
-            </h1>
-            <form class="row" action="">
-                <div class="col-sm-12 input-effect">
+                </button>
+                <div class="col-sm-12 Prescription-form-fild">
+                    <h1 class="inner-page-title text-center mb-4">
+                        Please check after submit the prescription will visible for patients
+                    </h1>
+                    <form class="row" action="">
+                        <div class="col-sm-12 input-effect">
 
-                    <div class="form-group text-center">
-                        <button type="button" id="final_prisc" class="add-submit btn blue-button Prescription-submit ">Submit</button>
-                    </div>
+                            <div class="form-group text-center">
+                                <button type="button" id="final_prisc" class="add-submit btn blue-button Prescription-submit ">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
-            </form>
-
+            </div>
         </div>
+
     </div>
-  </div>
 
 </div>
+
+<div class="modal fade add-edit-prs" id="finalprisc1" >
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                    <span aria-hidden="true">&times;</span>
+
+                </button>
+                <div class="col-sm-12 Prescription-form-fild">
+                    <h1 class="inner-page-title text-center mb-4">
+                        Need your appearance in video call you verify your ID
+                    </h1>
+                    <form class="row" action="">
+                        <div class="col-sm-12 input-effect">
+
+                            <div class="form-group text-center">
+                                <a target="_blank" id="verify_id" href="#" class="add-submit btn blue-button Prescription-submit">Click</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </div>
 

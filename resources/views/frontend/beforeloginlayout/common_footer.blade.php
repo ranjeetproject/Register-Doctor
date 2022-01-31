@@ -30,7 +30,7 @@
                     <li><a href="{{ route('termsCondition','pharmacist')}}">Terms & Conditions</a></li>
                     @endif
 
-                    <li><a href="{{ route('privacyPolicy')}}">Private Policy</a></li>
+                    <li><a href="{{ route('privacyPolicy')}}">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="col-sm-3 cont-details">
