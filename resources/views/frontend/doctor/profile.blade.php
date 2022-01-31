@@ -334,24 +334,25 @@
                                                 $rating_percent = ($rating/5)*100;
                                             @endphp
                                             <div class="full-stars" style="width:{{ $rating_percent }}%"></div>
-                                        </div><h3>{{$rating}} Out Of {{5}}</h3>
-                                      
-                                      <h4>Review</h4>&nbsp;
-                                       
-                                        @foreach($twoReviews as $val)
-                                            @php
-                                                $user = getUserDetails($val['user_id']);
-                                            @endphp
-                                            <p class="Prescriptions-dt">
-                                                <b>
-                                                {{$user->name}}
-                                                </b>
-                                            </p>
-                                             <p>
-                                               {{$val['review']}}
-                                            </p>
-                                        @endforeach
-                                        <a href="{{ route('doctor.all-dr-review')}}" class="btn btn-sm btn-primary">Read more</a> 
+                                            <div class="ratings-out-txt">{{$rating}} out of {{5}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <h4>Reviews</h4>
+                                        <ul class="dr-reviews-list">
+                                       @foreach($twoReviews as $val)
+                                           @php
+                                               $user = getUserDetails($val['user_id']);
+                                           @endphp
+                                            <li>
+                                                <h4>{{$user->name}}</h4>
+                                                <p>{{$val['review']}}</p>
+                                            </li>
+                                       @endforeach
+                                        </ul>
+                                       <a href="{{ route('doctor.all-dr-review')}}" class="btn btn-sm dr-btn-readmore">Read More</a> 
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

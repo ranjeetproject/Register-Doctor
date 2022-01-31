@@ -1210,3 +1210,57 @@ section.news-banner-bx .news-banner-img img{
 .multiOpt-input-field .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
     bottom: 0;
 }
+.all-reviews-list li{
+    margin-top: 20px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 10px;
+    padding: 15px;
+}
+.all-reviews-list li:first-child{
+    margin-top: 0;
+}
+.all-reviews-list li h4{
+    font-size: 17px;
+    color: #3c4f60;
+    font-weight: 600;
+}
+.all-reviews-list li p,
+.dr-reviews-list li p{
+    margin-top: 6px;
+    color: #555 !important;
+}
+.ratings-out-txt{
+    font-size: 16px;
+    color: #ff9040;
+    font-weight: 600;
+}
+.dr-reviews-list{
+    margin-top: 15px;
+}
+.dr-reviews-list li{
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.dr-reviews-list li:first-child{
+    padding-top: 0;
+}
+.dr-reviews-list li h4{
+    font-size: 15px;
+    color: #3c4f60 !important;
+    font-weight: 600;
+}
+.dr-btn-readmore{
+    color: #004cac;
+    border-radius: 30px;
+    border-color: #004cac;
+    background-color: #fff;
+    padding: 7px 18px;
+    font-weight: 600;
+}
+.dr-btn-readmore:hover{
+    background-color: #004cac;
+    color: #fff;
+}
