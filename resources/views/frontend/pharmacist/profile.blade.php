@@ -20,106 +20,106 @@
 
                         <div class="row main-form-fild">
                             <div class="col-md-6">
-                                <div class="form-group required">
-                                     <input type="text" name="forename" class="form-control effect-19 {{!empty($user->forename) ? 'has-content':''}}" value="{{$user->forename}}">
+                                <div class="form-group required has-float-label">
+                                     <input type="text" name="forename" class="form-control {{!empty($user->forename) ? 'has-content':''}}" value="{{$user->forename}}" placeholder="Forename">
                                      <label >Forename</label>
                                     @error('forename')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                   </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group required">
-                                     <input type="text" name="surname" class="form-control effect-19 {{!empty($user->surname) ? 'has-content':''}}" value="{{$user->surname}}">
+                                <div class="form-group required has-float-label">
+                                     <input type="text" name="surname" class="form-control {{!empty($user->surname) ? 'has-content':''}}" value="{{$user->surname}}" placeholder="Surname">
                                      <label >Surname</label>
                                     @error('surname')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                   </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group required">
-                                    <input type="text" name="location" class="form-control effect-19 {{!empty($user->profile->location) ? 'has-content':''}}" value="{{$user->profile->location}}">
+                                <div class="form-group required has-float-label">
+                                    <input type="text" name="location" class="form-control {{!empty($user->profile->location) ? 'has-content':''}}" value="{{$user->profile->location}}" placeholder="Location">
                                     <label >Location</label>
                                      @error('location')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                   </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group required">
-                                    <input type="text" name="pharmacy_numbar" class="form-control effect-19 {{!empty($user->registration_number) ? 'has-content':''}}" value="{{$user->registration_number}}" readonly>
+                                <div class="form-group required has-float-label">
+                                    <input type="text" name="pharmacy_numbar" class="form-control {{!empty($user->registration_number) ? 'has-content':''}}" value="{{$user->registration_number}}" placeholder="Registered-Doctor Pharmacy No" readonly>
                                     <label >Registered-Doctor Pharmacy No</label>
                                      @error('pharmacy_numbar')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                   </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group required">
-                                    <input type="text" name="pharmacy_name" class="form-control effect-19 {{!empty($user->profile->pharmacy_name) ? 'has-content':''}}" value="{{$user->profile->pharmacy_name}}">
+                                <div class="form-group required has-float-label">
+                                    <input type="text" name="pharmacy_name" class="form-control {{!empty($user->profile->pharmacy_name) ? 'has-content':''}}" value="{{$user->profile->pharmacy_name}}" placeholder="Pharmacy Name">
                                     <label >Pharmacy Name</label>
                                      @error('pharmacy_name')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                   </div>
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group required">
-                                    <input type="text" name="address" class="form-control effect-19 {{!empty($user->profile->address) ? 'has-content':''}}" value="{{$user->profile->address}}">
+                                <div class="form-group required has-float-label">
+                                    <input type="text" name="address" class="form-control {{!empty($user->profile->address) ? 'has-content':''}}" value="{{$user->profile->address}}" placeholder="Address">
                                     <label >Address</label>
                                      @error('address')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                   </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group required">
-                                    <input type="tel" name="telephone1" class="form-control effect-19 {{!empty($user->profile->telephone1) ? 'has-content':''}}"  value="{{$user->profile->telephone1}}">
+                                <div class="form-group required has-float-label">
+                                    <input type="tel" name="telephone1" class="form-control {{!empty($user->profile->telephone1) ? 'has-content':''}}"  value="{{$user->profile->telephone1}}" placeholder="Telephone Number 1">
                                     <label >Telephone Number 1</label>
                                     @error('telephone1')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                   </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="tel" name="telephone2" class="form-control effect-19 {{!empty($user->profile->telephone2) ? 'has-content':''}}"  value="{{$user->profile->telephone2}}">
+                                <div class="form-group has-float-label">
+                                    <input type="tel" name="telephone2" class="form-control {{!empty($user->profile->telephone2) ? 'has-content':''}}"  value="{{$user->profile->telephone2}}" placeholder="Telephone Number 2">
                                     <label >Telephone Number 2</label>
                                   </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="tel" name="telephone3" class="form-control effect-19 {{!empty($user->profile->telephone3) ? 'has-content':''}}"  value="{{$user->profile->telephone3}}">
+                                <div class="form-group has-float-label">
+                                    <input type="tel" name="telephone3" class="form-control {{!empty($user->profile->telephone3) ? 'has-content':''}}"  value="{{$user->profile->telephone3}}" placeholder="Telephone Number 3">
                                     <label >Telephone Number 3</label>
                                   </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="email" name="email" class="form-control effect-19 {{!empty($user->email) ? 'has-content':''}}" value="{{$user->email}}" readonly>
+                                <div class="form-group has-float-label">
+                                    <input type="email" name="email" class="form-control {{!empty($user->email) ? 'has-content':''}}" value="{{$user->email}}" placeholder="Email" readonly>
                                     <label >Email</label>
                                   </div>
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="url" name="website" class="form-control effect-19 {{!empty($user->profile->website) ? 'has-content':''}}"  value="{{$user->profile->website}}">
+                                <div class="form-group has-float-label">
+                                    <input type="url" name="website" class="form-control {{!empty($user->profile->website) ? 'has-content':''}}"  value="{{$user->profile->website}}" placeholder="Link to Website">
                                     <label >Link to Website</label>
                                   </div>
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea class="form-control effect-19 {{!empty($user->profile->about) ? 'has-content':''}}" name="about" rows="3">{{$user->profile->about}}</textarea>
+                                <div class="form-group has-float-label">
+                                    <textarea class="form-control {{!empty($user->profile->about) ? 'has-content':''}}" name="about" rows="3" placeholder="About">{{$user->profile->about}}</textarea>
                                     <label >About <span>e.g. 24 hours, extended opening hours, can deliver anywhere in Glasgow, within M25 etc.</span></label>
                                   </div>
                             </div>
