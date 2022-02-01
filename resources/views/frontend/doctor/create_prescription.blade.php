@@ -419,7 +419,9 @@
                         <div class="col-sm-12 input-effect">
 
                             <div class="form-group text-center">
-                                <a target="_blank" id="verify_id" href="#" class="add-submit btn blue-button Prescription-submit">Click</a>
+                                <a target="_blank" id="" href="#" class="add-submit btn blue-button Prescription-submit">Click</a>
+
+                                {{-- <a target="_blank" id="verify_id" href="#" class="add-submit btn blue-button Prescription-submit">Click</a> --}}
                             </div>
                         </div>
                     </form>
