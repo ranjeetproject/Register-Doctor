@@ -744,6 +744,9 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     .patient-flex-bx-top{
         display: block;
     }
+    .mfd-item-linfo{
+        width: 100%;
+    }
 }
 @media only screen and (max-width : 767px) {
     section.Banner .bann-img img {

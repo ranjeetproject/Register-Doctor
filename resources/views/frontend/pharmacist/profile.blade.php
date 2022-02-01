@@ -1,7 +1,7 @@
 @extends('frontend.pharmacist.afterloginlayout.app')
 
 @section('content')
-    <div class="col Manage-Profile">
+    <div class="col Manage-Profile pht-profile">
                     <h2 class="page-title">Manage Profile</h2>
                     <form class="for-w-100" method="post" enctype="multipart/form-data">
 
@@ -179,16 +179,20 @@
                                   </div>
 
                             </div> --}}
-
+                            <div class="col-md-12">
+                                <h5 class="pht-title-do">Delivery Options</h5>
+                            </div>
                             <div class="col-md-12 Customer-Pick-up">
-                                <label >Delivery Options</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="customer_pick_up" id="Customer-Pick-up" value="1" {{(isset($user->deliveryOption->customer_pick_up) && $user->deliveryOption->customer_pick_up == 1) ? 'checked':''}}>
-                                    <label class="form-check-label" for="Customer-Pick-up">
-                                        Customer Pick up
-                                    </label>
-                                  </div>
-                                  
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="customer_pick_up" id="Customer-Pick-up" value="1" {{(isset($user->deliveryOption->customer_pick_up) && $user->deliveryOption->customer_pick_up == 1) ? 'checked':''}}>
+                                            <label class="form-check-label" for="Customer-Pick-up">
+                                                Customer Pick up
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-md-4 Customer-Pick-up">
@@ -198,11 +202,9 @@
                                         Local Delivery (car/courier)
                                     </label>
                                   </div>
-                                  
                             </div>
-
                             <div class="col-md-8">
-                                <div class="form-group-deliver-details">
+                                <div class="form-group-deliver-details pdt-deliver-eg-bx">
                                     <label class="">
                                         Details e.g. We deliver anywhere in London, We deliver up to 5 miles from Glasgow
                                     </label>
@@ -212,22 +214,29 @@
                             
 
                             <div class="col-md-12 Customer-Pick-up">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="posts_within_uk" id="Posts-within-UK" value="1" {{(isset($user->deliveryOption->posts_within_uk) && $user->deliveryOption->posts_within_uk == 1) ? 'checked':''}}>
-                                    <label class="form-check-label" for="Posts-within-UK">
-                                        Posts within UK
-                                    </label>
-                                  </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="posts_within_uk" id="Posts-within-UK" value="1" {{(isset($user->deliveryOption->posts_within_uk) && $user->deliveryOption->posts_within_uk == 1) ? 'checked':''}}>
+                                            <label class="form-check-label" for="Posts-within-UK">
+                                                Posts within UK
+                                            </label>
+                                        </div>
+                                    </div> 
+                                </div>
                             </div>
                             <div class="col-md-12 Customer-Pick-up">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="sends_international" id="Sends-International" value="1" {{(isset($user->deliveryOption->sends_international) && $user->deliveryOption->sends_international == 1) ? 'checked':''}}>
-                                    <label class="form-check-label" for="Sends-International">
-                                        Sends International
-                                    </label>
-                                  </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="sends_international" id="Sends-International" value="1" {{(isset($user->deliveryOption->sends_international) && $user->deliveryOption->sends_international == 1) ? 'checked':''}}>
+                                            <label class="form-check-label" for="Sends-International">
+                                                Sends International
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
 
                              <div class="col-md-12 Mandator">
                                     <label>Change password to <a href="{{route('pharmacist.change-password')}}">Click here</a>  </label>

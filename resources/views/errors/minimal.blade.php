@@ -41,7 +41,6 @@
                 padding: 0 15px 0 15px;
                 text-align: center;
             }
-
             .message {
                 font-size: 18px;
                 text-align: center;
@@ -53,10 +52,11 @@
             <div class="code">
                 @yield('code')
             </div>
-
+            @yield('custom')
             <div class="message" style="padding: 10px;">
                 @yield('message')
             </div>
         </div>
+       
     </body>
 </html>

@@ -43,7 +43,7 @@
                                               <td>Case No.</td>
                                               <td> View <br>Case</td>
                                               <td>View Medical <br>Record</td>
-                                              <td style="min-width: 250px;"> Action</td>
+                                              <td style="min-width: 130px;"> Action</td>
 
                                           </tr>
                                       </thead>
@@ -137,11 +137,11 @@
                                             <td><a href="{{route('doctor.view-case',$case->case_id)}}"><i class="fal fa-eye"></i></a></td>
                                             <td><a href="{{route('doctor.view-medical-recorde',$case->case_id)}}"><i class="fal fa-eye"></i></a></td>
 
-                                            <td class="masg-dep-tol">
+                                            <td class="masg-dep-tol apt-btn-group">
                                                 @if(!empty($start_time))
                                                 @if (getDiffOfTwoDateInMinute($case->booking_date . ' ' . $start_time) < 0)
                                                 <a href="{{ route('doctor.sick-note',$case->case_id) }}" class="btn btn-sm btn-primary">Sick note</a>
-                                                <a  href="{{ route('doctor.create-prescription',$case->case_id) }}"><img src="{{ asset('public/images/frontend/images/Prescription-icon.png')}}" alt=""/></a>
+                                                <a  href="{{ route('doctor.create-prescription',$case->case_id) }}"><img src="{{ asset('public/images/frontend/images/Prescription-icon.png')}}" alt="" width="20"/></a>
 
                                                 @endif
                                                 @else

@@ -159,6 +159,7 @@
                                                             <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
                                                                 class="btn blue-button rating-list-profile">View Profile</a>
                                                         </div>
+                                                        <div class="mfd-item-linfo">
                                                         <h5 class="card-title">
                                                             {{ ucfirst($doctor->forename . ' ' . $doctor->surname) }}<br>
                                                             <small>
@@ -177,7 +178,7 @@
                                                         <p>Sees Adults or Kids : {{ ucfirst($doctor->profile->dr_see) }}</p>
                                                         <p>Prescriber online :
                                                             {{ !empty($doctor->admin_verified_at) ? 'Yes' : 'No' }} </p>
-
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -260,6 +261,7 @@
                                                             <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->doctor->id)) }}"
                                                                 class="btn blue-button rating-list-profile">View Profile</a>
                                                         </div>
+                                                        <div class="mfd-item-linfo">
                                                         <h5 class="card-title">
                                                             {{ ucfirst($doctor->doctor->name) }}<br><small>
                                                                 {{ ucfirst($doctor->doctor->profile->speciality->name) }}</small>
@@ -275,7 +277,7 @@
                                                         <p>Sees Adults or Kids : {{ ucfirst($doctor->doctor->profile->dr_see) }}</p>
                                                         <p>Prescriber online :
                                                             {{ !empty($doctor->admin_verified_at) ? 'Yes' : 'No' }} </p>
-
+                                                        </div>
                                                     </div>
 
                                                 </div>
