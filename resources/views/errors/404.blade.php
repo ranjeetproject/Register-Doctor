@@ -50,7 +50,7 @@
             }
             .flex-direction-column{
                 flex-direction: column;
-                
+
             }
             .flex-direction-column h2{
                 color:#141924;
@@ -85,7 +85,7 @@
         <div class="flex-center flex-direction-column position-ref full-height">
             <img src="{{ asset('public/images/frontend/images/logo.jpg') }}" alt="">
             <h2>Oops! your page has expired.</h2>
-            <a href="#" class="btn gh-button"><img src="{{ asset('public/images/frontend/images/home-icon.png') }}" alt=""> Back to home</a>
+            <a href="{{ route('home') }}" class="btn gh-button"><img src="{{ asset('public/images/frontend/images/home-icon.png') }}" alt=""> Back to home</a>
         </div>
     </body>
 </html>
