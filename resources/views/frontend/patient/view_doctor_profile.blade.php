@@ -401,7 +401,7 @@
 
                                     <div class="form-group m-0">
                                         <label for="exampleFormControlFile1">Upload Attachments <i
-                                                class="fal fa-paperclip"></i></label><p>Max 5 Upload File</p>
+                                                class="fal fa-paperclip"></i></label><p>You Can Upload Max 5 File PDF & JPEG</p>
                                         <input type="file" name="case_file[]" class="form-control-file"
                                             id="exampleFormControlFile1" style="opacity: 0; margin-top: -35px;" multiple
                                             accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right"
