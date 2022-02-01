@@ -921,7 +921,7 @@ class PatientController extends Controller
     {
         $user = Auth::guard('sitePatient')->user();
         $last_symptroms = SymptromsDetails::where('user_id',$user->id)->latest()->first();
-
+      
         if($request->isMethod('post')){
             // return $request->all();
             $case = PatientCase::where('case_id',$case_id)->first();
@@ -935,14 +935,16 @@ class PatientController extends Controller
                     $symptoms->type = 1;
                     $symptoms->save();
                 }
-                foreach ($request->symptom2 as $value) {
-                    $symptoms = new PastSymptoms;
-                    $symptoms->user_id = $user->id;
-                    $symptoms->patient_case_id = $case->id;
-                    $symptoms->symptom = $value;
-                    $symptoms->type = 2;
-                    $symptoms->save();
-                }
+              if(isset($request->symptom2) && !empty($request->symptom2)){
+                  foreach ($request->symptom2 as $value) {
+                      $symptoms = new PastSymptoms;
+                      $symptoms->user_id = $user->id;
+                      $symptoms->patient_case_id = $case->id;
+                      $symptoms->symptom = $value;
+                      $symptoms->type = 2;
+                      $symptoms->save();
+                  }
+              }
             }
 
 

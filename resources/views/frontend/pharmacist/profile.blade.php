@@ -3,7 +3,7 @@
 @section('content')
     <div class="col Manage-Profile pht-profile">
                     <h2 class="page-title">Manage Profile</h2>
-                    <form class="for-w-100" method="post" enctype="multipart/form-data">
+                    <form class="for-w-100" method="post" enctype="multipart/form-data" id="pharmacistProfile">
 
                         @csrf
 
@@ -112,7 +112,7 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="url" name="website" class="form-control effect-19 {{!empty($user->profile->website) ? 'has-content':''}}" required  value="{{$user->profile->website}}">
+                                    <input type="url" name="website" class="form-control effect-19 {{!empty($user->profile->website) ? 'has-content':''}}"  value="{{$user->profile->website}}">
                                     <label >Link to Website</label>
                                   </div>
                             </div>
@@ -255,14 +255,7 @@
     <script>
 
 
-         $('#From-date').timepicker({
-            format: 'HH:mm',
-            'showDuration': true,
-        });
-        $('#Till-date').timepicker({
-            format: 'HH:mm',
-            'showDuration': true
-        });
+         
         
 
 
@@ -289,6 +282,79 @@ $('.Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check input')
     $('.Manage-Profile .main-form-fild .form-group.Opening-Hours .form-check input').parent().removeClass("active");
   $(this).parent().addClass("active");
 });
+
+$(function () {
+
+        $('#pharmacistProfile').validate({
+            
+                    rules: {
+                        forename: {
+                            required: true
+                        },
+                        surname: {
+                            required: true
+                        },
+                        location: {
+                            required: true
+                        },
+                        pharmacy_numbar: {
+                            required: true
+                        },
+                        pharmacy_name: {
+                            required: true
+                        },
+                        address: {
+                            required: true
+                        },
+                        telephone1: {
+                            required: true
+                        },
+                    },
+                    messages: {
+                        forename: {
+                            required: "This forename field is required.",
+                        },
+                        surname: {
+                            required: "This surname field is required.",
+                        },
+                        location: {
+                            required: "This location field is required.",
+                        },
+                        pharmacy_numbar: {
+                            required: "This pharmacy numbar field is required.",
+                        },
+                        pharmacy_name: {
+                            required: "This pharmacy name field is required.",
+                        },
+                        address: {
+                            required: "This address field is required.",
+                        },
+                        telephone1: {
+                            required: "This telephone number 1 field is required.",
+                        },
+                    },
+                    errorElement: "span",
+                    errorClass: "form-text text-danger"
+                });
+
+
+                $('#pharmacistProfile').submit(function(){
+                    $('button[type=submit]').attr("disabled", true);
+                    setTimeout(function()
+                    {
+                        $('button[type=submit]').attr("disabled", false);
+                    }, 3000);
+                });
+    })
+
+    $('#From-date').timepicker({
+            format: 'HH:mm',
+            'showDuration': true,
+        });
+        $('#Till-date').timepicker({
+            format: 'HH:mm',
+            'showDuration': true
+        });
 
     </script>
 @endsection
