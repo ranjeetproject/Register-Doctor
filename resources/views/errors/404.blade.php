@@ -13,7 +13,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                background: url('http://localhost:82/registered-doctor/public/images/frontend/images/expired-bg.jpg') no-repeat;
+                background: url('{{ asset('public/images/frontend/images/expired-bg.jpg') }}') no-repeat;
                 background-size: cover;
                 background-position: center;
                 color: #636b6f;
