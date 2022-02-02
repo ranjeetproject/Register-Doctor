@@ -89,5 +89,9 @@ Route::match(['get','post'],'specialties/edit/{id}', 'SpecialtiesController@edit
 Route::match(['get','post'],'specialties/delete/{id?}', 'SpecialtiesController@delete')->name('specialties.delete');
 Route::get('Specialties-advice/select/{id}/{status}', 'SpecialtiesController@slideSelectRemove')->name('specialties.slideSelectRemove');
 
+Route::get('route', 'RouteController@index')->name('route');
+
+
+
 });
 //  *************for admin *************//

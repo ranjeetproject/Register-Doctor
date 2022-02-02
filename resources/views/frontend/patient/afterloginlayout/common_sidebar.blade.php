@@ -15,7 +15,7 @@
 
       <li><a href="{{route('patient.closed-cases')}}"><img src="{{ asset('public/images/frontend/images/icon8.png') }}" alt="">Closed Cases </a></li>
 
-      <li><a href="{{route('patient.prescriptions-issued')}}"><img src="{{ asset('public/images/frontend/images/icon4.png') }}" alt="">Prescriptions Issued</a></li>
+      <li><a href="{{route('patient.prescriptions-issued')}}"><img src="{{ asset('public/images/frontend/images/icon4.png') }}" alt="">Prescriptions Issued <span id="hide">({{($patientNotification)?$patientNotification:0}})</span></a></li>
 
       <li><a href="{{route('patient.pharmacies')}}"><img src="{{ asset('public/images/frontend/images/icon7.png') }}" alt="">Pharmacies</a></li>
 

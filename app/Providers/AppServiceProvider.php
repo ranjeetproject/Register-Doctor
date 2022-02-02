@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\patient\PatientController;
+
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +17,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        view()->composer('frontend.patient.afterloginlayout.common_sidebar',function($view)
+        {
+            $user = Auth::guard('sitePatient')->user();
+            $prescriptionNotification= new PatientController();
+            $data['patientNotification']=$prescriptionNotification->patientPrescriptionNotification($user->id);
+            $view->with($data); 
+        });
     }
 
     /**
@@ -23,6 +33,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
     }
 }

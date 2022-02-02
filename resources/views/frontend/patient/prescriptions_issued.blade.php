@@ -39,7 +39,7 @@
 
                                                 <label>Case No.</label>
 
-                                                <select name="case_no" id="case_no" class="form-control">
+                                                <select name="case_no" id="case_no" class="form-control case_no">
 
                                                     <option value="">Select Case No.</option>
 
@@ -295,6 +295,27 @@
                 }
             })
 
+        });
+        $('.case_no').on('change', function() {
+            var case_id = $(this).val();
+            var _token = $("input[name=_token]").val();
+             var baseUrl = '{{route("patient.prescriptions-issued-update")}}';
+            $.ajax({
+                type: 'POST',
+                url: baseUrl,
+                data: {
+                    case_id: case_id,
+                    _token: _token
+                },
+                success: function (data)
+                {
+                    console.log(data)
+                    var html = `<span>(${data})</span>`;
+                    $("#hide").html(html);
+                }
+               
+                
+            });
         });
     </script>
 

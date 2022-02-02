@@ -350,7 +350,7 @@ class DoctorController extends Controller
 
     public function createPrescription(Request $request)
     {
-      $cases = PatientCase::where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->where('prescriptions_issued', '=', 'no')->get();
+      $cases = PatientCase::orderBy('case_id', 'DESC')->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->where('prescriptions_issued', '=', 'no')->get();
       return view('frontend.doctor.create_prescription',compact('cases'));
     }
     // public function AddPrescription(Request $request)

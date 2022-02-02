@@ -57,6 +57,7 @@
     Route::get('direct-chat', 'PatientController@directChat')->name('direct_chat');
     Route::post('direct-chat', 'PatientController@directChat_post')->name('direct_chat_post');
     Route::match(['get','post'],'direct-chats/{id}', 'PatientController@directChats')->name('direct_chats');
+    Route::match(['get','post'],'prescriptions-issued-update', 'PatientController@updateNotification')->name('prescriptions-issued-update');
 
 
 });

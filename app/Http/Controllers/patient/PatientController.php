@@ -10,6 +10,8 @@ use App\Models\DoctorAvailableDays;
 use App\Models\DoctorReview;
 use App\Models\DrugsDetails;
 use App\Models\DrugsProblem;
+use App\Prescription;
+
 use App\Models\FavouriteDoctor;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
@@ -1196,5 +1198,21 @@ class PatientController extends Controller
             $users = [];
         }
       return view('frontend.patient.direct_chat',compact('users','p_user','d_user','key_per','val_sur'));
+    }
+
+    public function patientPrescriptionNotification($id)
+    {
+      $user = Auth::guard('sitePatient')->user();
+      if($user){
+        $patientPrescription = Prescription::where('p_id',$id)->where('status','=','y')->where('read','=',0)->count();
+        return $patientPrescription;
+      }
+    }
+    public function updateNotification(Request $request)
+    {
+      $patientPrescriptionCount = Prescription::where('status','=','y')->where('read','=',0)->count();
+      $patientPrescription = Prescription::where('case_no',$request->case_id)->update(['read'=>1]);
+      $remainingPatientPrescription = abs($patientPrescriptionCount - $patientPrescription);
+      return response()->json($remainingPatientPrescription); 
     }
 }

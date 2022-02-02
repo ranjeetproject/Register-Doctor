@@ -748,7 +748,7 @@ $('#final_prisc').on('click', function(){
                 _token : _token
             },
             success:function(res){
-                console.log(res.case_details[0]);
+                //console.log(res.case_details[0]);
                 $('#msg_doc').attr('href',"{{url('doctor/chats')}}/"+res.case_details[0].case_id);
                 $('#p_name').val(res.case_details[0].user.name);
                 $('#upn').val(res.case_details[0].user.registration_number);

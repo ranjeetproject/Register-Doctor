@@ -135,6 +135,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('admin.route')}}" class="nav-link {{ Request::is('admin/route*') ? 'active' : '' }}">
+            <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
+              <p>
+                Manage Route 
+              </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="{{route('admin.home_page_banner')}}" class="nav-link {{ Request::is('admin/home-page-banner*') ? 'active' : '' }}">
