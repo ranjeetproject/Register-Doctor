@@ -1306,3 +1306,65 @@ section.news-banner-bx .news-banner-img img{
     padding-left: 12px!important;
     padding-right: 12px!important;
 }
+.login-page form .form-group.login-password-field .form-control{
+    margin-bottom: 0;
+}
+.login-page form .form-group.login-password-field .password-input-group{
+    position: relative;
+}
+.login-page form .form-group.login-password-field .password-input-group button.btn{
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    bottom: 1px;
+    min-width: 50px;
+    font-size: 17px;
+    border-radius: 8px;
+    color: #6b6b6b;
+    border: 0 !important;
+}
+.login-page form .form-group.login-password-field .password-input-group button.btn:focus,
+.login-page form .form-group.login-password-field .password-input-group button.btn:hover{
+    box-shadow: none;
+    color: #294876;
+}
+.pharmacies-item-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pharmacies-item-infoleft{
+    width: calc(100% - 200px);
+    display: flex;
+    align-items: center;
+}
+.pharmacies-item-infoleft span{
+    padding-left: 10px;
+}
+.phar-time-table{
+    padding: 10px;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 35%);
+    border: 0;
+}
+.phar-time-table .table{
+    margin-bottom: 0;
+}
+.phar-time-table .table td, 
+.phar-time-table .table th{
+    font-size: 15px;
+}
+.btn-phar-Availability{
+    border: 2px solid #004cac;
+    background: #fff;
+    color: #004cac;
+    font-size: 15px;
+    border-radius: 30px;
+    padding: 6px 15px;
+    font-weight: 500;
+}
+.btn-phar-Availability:hover,
+.btn-phar-Availability:focus{
+    border-color: #ff4d0f;
+    background: #ff4d0f;
+    color: #fff;
+}

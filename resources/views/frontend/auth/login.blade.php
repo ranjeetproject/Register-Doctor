@@ -31,8 +31,13 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <input type="Password" name="password" class="@error('password') is-invalid @enderror form-control" placeholder="Password">
+                        <div class="form-group login-password-field">
+                            <div class="password-input-group">
+                                <input type="Password" name="password" class="@error('password') is-invalid @enderror form-control" placeholder="Password" id="password">
+                                <button type="button" class="btn" onclick="showPassword()">
+                                    <i class="fas fa-eye-slash" id="eye"></i>
+                                </button>
+                            </div>
                             @error('password')
                                 <span class="invalid-message" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -55,3 +60,20 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+      function showPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+          $("#eye").removeClass('fa fa-eye-slash');
+          $("#eye").addClass('fa fa-eye');
+        } else {
+          x.type = "password";
+          $("#eye").removeClass('fa fa-eye');
+          $("#eye").addClass('fa fa-eye-slash');
+        }
+      }
+    </script>
+@endpush

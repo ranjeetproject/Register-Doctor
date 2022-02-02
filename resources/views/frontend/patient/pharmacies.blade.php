@@ -112,9 +112,98 @@
                                     @foreach ($data['pharmacies'] as $pharmaci)
 
                                         <div class="card pharmacy-details">
-                                            <div class="card-header">
+                                            <div class="card-header pharmacies-item-header">
+                                                <div class="pharmacies-item-infoleft">
                                                 <img src="{{ asset('public/images/frontend/images/pharmacy-icon.png') }}"
-                                                    alt=""> H Pharmacy
+                                                    alt=""> <span> H Pharmacy </span>
+                                                </div>
+                                                <button type="button" class="btn btn-phar-Availability dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Availability</button>
+                                                <div class="dropdown-menu dropdown-menu-right phar-time-table">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    Day
+                                                                </th>
+                                                                <th>
+                                                                    Time
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>
+                                                                    Sunday
+                                                                </th>
+                                                                <td>
+                                                                    {{ $pharmaci->openingTime->sunday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->sunday_opening_time)) : '' }}
+                                                                    -
+                                                                    {{ $pharmaci->openingTime->sunday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->sunday_closing_time)) : '' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>
+                                                                    Monday
+                                                                </th>
+                                                                <td>
+                                                                    {{ $pharmaci->openingTime->monday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->monday_opening_time)) : '' }}
+                                                                    -
+                                                                    {{ $pharmaci->openingTime->monday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->monday_closing_time)) : '' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>
+                                                                    Tuesday
+                                                                </th>
+                                                                <td>
+                                                                    {{ $pharmaci->openingTime->tuesday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->tuesday_opening_time)) : '' }}
+                                                                    -
+                                                                    {{ $pharmaci->openingTime->tuesday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->tuesday_closing_time)) : '' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>
+                                                                    Wednesday
+                                                                </th>
+                                                                <td>
+                                                                    {{ $pharmaci->openingTime->wednesday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->wednesday_opening_time)) : '' }}
+                                                                    -
+                                                                    {{ $pharmaci->openingTime->wednesday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->wednesday_closing_time)) : '' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>
+                                                                    Thursday
+                                                                </th>
+                                                                <td>
+                                                                    {{ $pharmaci->openingTime->thursday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->thursday_opening_time)) : '' }}
+                                                                    -
+                                                                    {{ $pharmaci->openingTime->thursday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->thursday_closing_time)) : '' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>
+                                                                    Friday
+                                                                </th>
+                                                                <td>
+                                                                    {{ $pharmaci->openingTime->friday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->friday_opening_time)) : '' }}
+                                                                    -
+                                                                    {{ $pharmaci->openingTime->friday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->friday_closing_time)) : '' }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>
+                                                                    Saturday
+                                                                </th>
+                                                                <td>
+                                                                    {{ $pharmaci->openingTime->saturday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->saturday_opening_time)) : '' }}
+                                                                    -
+                                                                    {{ $pharmaci->openingTime->saturday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->saturday_closing_time)) : '' }}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                             <div class="card-body">
                                                 <p><span>Pharmacy Name : </span> {{ $pharmaci->profile->pharmacy_name }}
@@ -124,90 +213,6 @@
                                                 <p><span>Contact : </span> {{ $pharmaci->profile->telephone1 }}</p>
                                                 <p><span>Email : </span> {{ $pharmaci->email }}</p>
                                                 <p><span>Opening hours uk : </span></p>
-                                                <table class="table table-bordered" style="max-width: 450px;">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>
-                                                                Day
-                                                            </th>
-                                                            <th>
-                                                                Time
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>
-                                                                Sunday
-                                                            </th>
-                                                            <td>
-                                                                {{ $pharmaci->openingTime->sunday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->sunday_opening_time)) : '' }}
-                                                                -
-                                                                {{ $pharmaci->openingTime->sunday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->sunday_closing_time)) : '' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>
-                                                                Monday
-                                                            </th>
-                                                            <td>
-                                                                {{ $pharmaci->openingTime->monday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->monday_opening_time)) : '' }}
-                                                                -
-                                                                {{ $pharmaci->openingTime->monday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->monday_closing_time)) : '' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>
-                                                                Tuesday
-                                                            </th>
-                                                            <td>
-                                                                {{ $pharmaci->openingTime->tuesday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->tuesday_opening_time)) : '' }}
-                                                                -
-                                                                {{ $pharmaci->openingTime->tuesday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->tuesday_closing_time)) : '' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>
-                                                                Wednesday
-                                                            </th>
-                                                            <td>
-                                                                {{ $pharmaci->openingTime->wednesday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->wednesday_opening_time)) : '' }}
-                                                                -
-                                                                {{ $pharmaci->openingTime->wednesday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->wednesday_closing_time)) : '' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>
-                                                                Thursday
-                                                            </th>
-                                                            <td>
-                                                                {{ $pharmaci->openingTime->thursday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->thursday_opening_time)) : '' }}
-                                                                -
-                                                                {{ $pharmaci->openingTime->thursday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->thursday_closing_time)) : '' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>
-                                                                Friday
-                                                            </th>
-                                                            <td>
-                                                                {{ $pharmaci->openingTime->friday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->friday_opening_time)) : '' }}
-                                                                -
-                                                                {{ $pharmaci->openingTime->friday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->friday_closing_time)) : '' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>
-                                                                Saturday
-                                                            </th>
-                                                            <td>
-                                                                {{ $pharmaci->openingTime->saturday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->saturday_opening_time)) : '' }}
-                                                                -
-                                                                {{ $pharmaci->openingTime->saturday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->saturday_closing_time)) : '' }}
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
                                                 <form action="">
                                                     @csrf
                                                     <p><span>Delivery options : </span>
