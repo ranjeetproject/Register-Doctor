@@ -44,7 +44,15 @@
                                                     <option value="">Select Case No.</option>
 
                                                     @foreach ($cases as $case)
-                                                        <option value="{{ $case->case_id }}">{{ $case->case_id }}</option>
+                                                        <option value="{{ $case->case_id }}">{{ $case->case_id }} {{ $case->doctor->name }} @foreach($case->prescription as $prescription)
+                                                            
+                                                            @if($prescription->prescription_no != '')
+                                                                @if($loop->index == 0)
+                                                                    {{$prescription->updated_at}}
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
+                                                        </option>
                                                     @endforeach
 
                                                 </select>
@@ -57,7 +65,7 @@
                                             <p id="presc_no"><strong>Prescription No.: </strong></p>
                                             <p id="doc_name"><strong>Doctor Name: </strong></p>
                                             <p id="date"><strong>Date: </strong></p>
-                                            <p id="issued"><strong>Issued: </strong></p>
+                                            <p id="issued"><strong>Time: </strong></p>
 
 
                                         </div>
@@ -231,7 +239,7 @@
                     //prescription[i]['prescription_no']
                     var d_name = '<strong>Prescription No.: </strong>';
                     var date = '<strong>Date: </strong>';
-                    var issued = '<strong>Issued: </strong>';
+                    var issued = '<strong>Time: </strong>';
                     if (prescription.length > 0) {
                         var presc_no = 0;
                         var date_time = 0;

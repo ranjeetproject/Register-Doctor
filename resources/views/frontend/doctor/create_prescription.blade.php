@@ -465,7 +465,14 @@
                             </div>
                             <div class="form-group">
 
-                                <input name="route" id="route" type="text" class="form-control effect-19">
+                                <select
+                                        class="form-control effect-19"
+                                        name="route" id="route">
+                                        @foreach ($routes as $route)
+                                            <option value={{$route->route_name}}>{{$route->route_name}}</option>
+                                        @endforeach
+                                        
+                                </select>
                                 <label>Route</label>
                             </div>
                             <div class="form-group">

@@ -8,6 +8,7 @@ use App\Models\DoctorAvailableDays;
 use App\Models\DrugsDetails;
 use App\Models\DoctorReview;
 use App\Models\DoctorSpeciality;
+use App\Models\Route;
 use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
 use App\Models\PatientCase;
@@ -350,8 +351,9 @@ class DoctorController extends Controller
 
     public function createPrescription(Request $request)
     {
-      $cases = PatientCase::orderBy('case_id', 'DESC')->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->where('prescriptions_issued', '=', 'no')->get();
-      return view('frontend.doctor.create_prescription',compact('cases'));
+      $cases  = PatientCase::orderBy('case_id', 'DESC')->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->where('accept_status',1)->where('prescriptions_issued', '=', 'no')->get();
+      $routes = Route::orderBy('id', 'DESC')->get();
+      return view('frontend.doctor.create_prescription',compact('cases','routes'));
     }
     // public function AddPrescription(Request $request)
     // {

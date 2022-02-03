@@ -114,8 +114,8 @@
                                         <div class="card pharmacy-details">
                                             <div class="card-header pharmacies-item-header">
                                                 <div class="pharmacies-item-infoleft">
-                                                <img src="{{ asset('public/images/frontend/images/pharmacy-icon.png') }}"
-                                                    alt=""> <span> H Pharmacy </span>
+                                                <img src="{{$pharmaci->profile->profile_photo}}"
+                                                    alt=""/> <span> {{ $pharmaci->profile->pharmacy_name }} </span>
                                                 </div>
                                                 <button type="button" class="btn btn-phar-Availability dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Availability</button>
                                                 <div class="dropdown-menu dropdown-menu-right phar-time-table">
