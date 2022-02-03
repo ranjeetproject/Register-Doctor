@@ -90,6 +90,12 @@ Route::match(['get','post'],'specialties/delete/{id?}', 'SpecialtiesController@d
 Route::get('Specialties-advice/select/{id}/{status}', 'SpecialtiesController@slideSelectRemove')->name('specialties.slideSelectRemove');
 
 Route::get('route', 'RouteController@index')->name('route');
+Route::get('route/create', 'RouteController@create')->name('create-route');
+Route::post('route/save', 'RouteController@store')->name('save-route');
+Route::get('route/edit/{id}', 'RouteController@edit')->name('route-edit');
+Route::post('route/update/{id}', 'RouteController@update')->name('route-update');
+Route::get('route/delete/{id}', 'RouteController@deleteSpecific')->name('route-delete');
+
 
 
 
