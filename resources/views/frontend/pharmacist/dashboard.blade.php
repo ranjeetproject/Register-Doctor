@@ -22,7 +22,8 @@
                 <a href="#" class="card">
                     <div class="card-cont">
                         <img src="{{ asset('public/images/frontend/images/Waiting-icon.png') }}" alt="">
-                        <h4>Prescriptions<br><span>4 Your Pharmacy</span> Waiting</h4>
+                        {{-- <h4>Prescriptions<br><span>4 Your Pharmacy</span> Waiting</h4> --}}
+                        <h4>You have {{ $new_prescription }} new<br><span>prescription waiting</span> at your pharmecy</h4>
                     </div>
                 </a>
             </div>
@@ -35,6 +36,6 @@
                     </div>
                 </a>
             </div>
-        </div>  
+        </div>
     </div>
 @endsection
