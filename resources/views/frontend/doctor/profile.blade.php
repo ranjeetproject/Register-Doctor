@@ -43,15 +43,17 @@
                     <div class="tab-pane fade {{($form_name == 'profile') ? 'show active':''}} input-effect" id="Manage-Profile" >
                         <form method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="row Doctor-contact main-form-fild">
-                                <div class="col-sm-2 pad-lef-0">
-                                    <div class="for-profile-image">
+                            <div class="profile-header-bx mb-4">
+                                <div class="profile-image-bx">
+                                    <div class="profile-image-upload">
+                                    <img id="blah" src="{{ $user->profile->profile_photo }}">
+                                    </div>
+                                    <div class="profile-image-upload-btn">
                                         <input type="file" name="profile_photo" id="imgInp">
-                                        <img id="blah" src="{{ $user->profile->profile_photo }}">
-                                        <span>Update Profile Image</span>
+                                        <span><i class="fas fa-pencil-alt"></i></span>
                                     </div>
                                 </div>
-                                <div class="col-sm-10 profile-info">
+                                <div class="profile-info">
                                     <h2>Manage your Diary in the Calendar Below.</h2>
                                     <a class="btn btn-primary" href="{{route('doctor.available-days')}}">Calender</a>
                                     {{-- <a class="btn add-btn" id="chng_time_zone">Change Timezone</a> --}}

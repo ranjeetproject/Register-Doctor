@@ -33,8 +33,17 @@
                     <div class="tab-pane fade show active input-effect" id="Patient-Profile">
                         <form class="for-w-100" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="patient-flex-bx-top">
-                                <div class="for-profile-image">
+                            <div class="patient-flex-bx-top mt-3 mb-4">
+                                <div class="profile-image-bx">
+                                    <div class="profile-image-upload">
+                                    <img id="blah" src="{{ $user->profile->profile_photo }}" alt="your image">
+                                    </div>
+                                    <div class="profile-image-upload-btn">
+                                        <input type="file" name="profile_photo" id="imgInp">
+                                        <span><i class="fas fa-pencil-alt"></i></span>
+                                    </div>
+                                </div>
+                                <!-- <div class="for-profile-image">
                                     <input type="file" name="profile_photo" id="imgInp">
 
                                     <img id="blah" src="{{ $user->profile->profile_photo }}" alt="your image">
@@ -43,7 +52,7 @@
 
                                     <span>Update Profile Image</span>
 
-                                </div>
+                                </div> -->
                                 <span class="patient-cp-link">To Change password <a
                                         href="{{ route('patient.change-password') }}">Click here</a></span>
                             </div>

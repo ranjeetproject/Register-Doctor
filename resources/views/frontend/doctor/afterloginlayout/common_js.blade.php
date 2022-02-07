@@ -2,8 +2,9 @@
  {{-- <script src="{{ asset('public/js/app.js') }}" defer></script> --}}
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="{{ asset('public/plugins/moment/moment.min.js') }}"></script>
+<script src="{{ asset('public/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{ asset('public/js/frontend/js/popper.min.js') }}"></script>
+<script src="{{ asset('public/plugins/moment/moment.min.js') }}"></script>
 
 <script src="{{ asset('public/js/frontend/js/bootstrap.min.js') }}"></script>
 <!-- Script for custom script-->
@@ -13,7 +14,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js" integrity="sha512-+UiyfI4KyV1uypmEqz9cOIJNwye+u+S58/hSwKEAeUMViTTqM9/L4lqu8UxJzhmzGpms8PzFJDzEqXL9niHyjA==" crossorigin="anonymous"></script>
 
-<script src="{{ asset('public/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
 
@@ -76,7 +76,6 @@ jQuery('.jsdatetimepicker').datetimepicker({
  //  weekends:['12.07.2020','11.07.2020','03.07.2020','04.07.2020','05.07.2020','06.07.2020'],
  //  format:'d-m-Y H:m a',
 });
-
 </script>
 
 @stack('scripts')

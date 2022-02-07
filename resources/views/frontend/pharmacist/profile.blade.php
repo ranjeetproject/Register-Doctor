@@ -6,12 +6,22 @@
                     <form class="for-w-100" method="post" enctype="multipart/form-data" id="pharmacistProfile">
 
                         @csrf
-
-                        <div class="for-profile-image">
+                        <div class="profile-header-bx mt-3 mb-3">
+                            <div class="profile-image-bx">
+                                <div class="profile-image-upload">
+                                <img id="blah" src="{{ $user->profile->profile_photo }}" alt="your image" />
+                                </div>
+                                <div class="profile-image-upload-btn">
+                                    <input type='file' name="profile_photo" id="imgInp" />
+                                    <span><i class="fas fa-pencil-alt"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="for-profile-image">
                             <input type='file' name="profile_photo" id="imgInp" />
                             <img id="blah" src="{{ $user->profile->profile_photo }}" alt="your image" /><br>
                             <span>Update Profile Image</span>
-                        </div>
+                        </div> -->
 
                         <div class="Notifications-on-of">
                             <input type="checkbox" class="form-check-input" checked>

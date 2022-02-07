@@ -27,15 +27,19 @@
                         <p>{{$case->health_problem}}</p>
                     </div>
                     <h2>Attachments</h2>
-                    <div class="view-case-details">
+                    <div class="view-case-details v-case-view">
                         @foreach($case->casefile as $casefile)
                         @if (strpos($casefile->file_name, '.pdf') !== false)
                          <a class="nav-link" target="_blank" href="{{asset('public/uploads/cases/'.$casefile->file_name)}}">
-                            <p><embed src="{{asset('public/uploads/cases/'.$casefile->file_name)}}" width="500px" height="600px" class="img-thumbnail"/></p>
+                            <!-- <p><embed src="{{asset('public/uploads/cases/'.$casefile->file_name)}}" width="500px" height="600px" class="img-thumbnail"/></p> -->
+                            <i class="fas fa-file-pdf"></i>
+                            <div class="v-case-view-btn"><span>View</span></div>
                         </a>
                         @else
                          <a class="nav-link" target="_blank" href="{{asset('public/uploads/cases/'.$casefile->file_name)}}">
-                            <p><img width="500px" height="300px" class="img-thumbnail" src="{{asset('public/uploads/cases/'.$casefile->file_name)}}"></p>
+                            <!-- <p><img width="500px" height="300px" class="img-thumbnail" src="{{asset('public/uploads/cases/'.$casefile->file_name)}}"></p> -->
+                            <i class="fas fa-file-image"></i>
+                            <div class="v-case-view-btn"><span>View</span></div>
                         </a>
                         @endif
                         <br>

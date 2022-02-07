@@ -30,9 +30,19 @@
                     <div class="view-case-details">
                         @foreach($case->casefile as $casefile)
                             @if (strpos($casefile->file_name, '.pdf') !== false)
-                                <p><embed src="{{asset('public/uploads/cases/'.$casefile->file_name)}}" width="500px" height="600px" class="img-thumbnail"/></p>
+                                <a class="nav-link" target="_blank" href="{{asset('public/uploads/cases/'.$casefile->file_name)}}">
+                                    <!-- <p><embed src="{{asset('public/uploads/cases/'.$casefile->file_name)}}" width="500px" height="600px" class="img-thumbnail"/></p> -->
+                                    <i class="fas fa-file-pdf"></i>
+                                    <div class="v-case-view-btn"><span>View</span></div>
+                                </a>
+                                <!-- <p><embed src="{{asset('public/uploads/cases/'.$casefile->file_name)}}" width="500px" height="600px" class="img-thumbnail"/></p> -->
                             @else
-                                <p><img width="500px" height="300px" class="img-thumbnail" src="{{asset('public/uploads/cases/'.$casefile->file_name)}}"></p>
+                                <a class="nav-link" target="_blank" href="{{asset('public/uploads/cases/'.$casefile->file_name)}}">
+                                    <!-- <p><img width="500px" height="300px" class="img-thumbnail" src="{{asset('public/uploads/cases/'.$casefile->file_name)}}"></p> -->
+                                    <i class="fas fa-file-image"></i>
+                                    <div class="v-case-view-btn"><span>View</span></div>
+                                </a>
+                                <!-- <p><img width="500px" height="300px" class="img-thumbnail" src="{{asset('public/uploads/cases/'.$casefile->file_name)}}"></p> -->
                             @endif
                             <br>
                         @endforeach
