@@ -1251,30 +1251,41 @@
   color: #555;
 }
 
-.Manage-Profile .Notifications-on-of .on-and-off {
+.Manage-Profile .Notifications-on-of .on-and-off,
+.Doctor-Manage-Account-Profile-page .Notifications-on-of .on-and-off {
   width: 44px;
   padding: 2px;
   border-radius: 50px;
-  border: 1px solid #004cac;
+  border: 1px solid transparent;
   display: inline-block;
   margin-bottom: -6px;
   margin-left: 10px;
 }
-
-.Manage-Profile .Notifications-on-of .on-and-off span {
+.Manage-Profile .Notifications-on-of .on-and-off.on,
+.Doctor-Manage-Account-Profile-page .Notifications-on-of .on-and-off.on{
+  border-color:#004cac;
+}
+.Manage-Profile .Notifications-on-of .on-and-off.of,
+.Doctor-Manage-Account-Profile-page .Notifications-on-of .on-and-off.of{
+  border-color:#bfbfbf;
+}
+.Manage-Profile .Notifications-on-of .on-and-off span,
+.Doctor-Manage-Account-Profile-page .Notifications-on-of .on-and-off span {
   width: 16px;
   height: 16px;
   border-radius: 50%;
   position: relative;
 }
 
-.Manage-Profile .Notifications-on-of .on-and-off span.on {
+.Manage-Profile .Notifications-on-of .on-and-off.on span,
+.Doctor-Manage-Account-Profile-page .Notifications-on-of .on-and-off.on span{
   background: #004cac;
   float: left;
 }
 
-.Manage-Profile .Notifications-on-of .on-and-off span.of {
-  background: #ccc;
+.Manage-Profile .Notifications-on-of .on-and-off.of span,
+.Doctor-Manage-Account-Profile-page .Notifications-on-of .on-and-off.of span{
+  background: #bfbfbf;
   float: right;
 }
 
@@ -4900,6 +4911,7 @@ a.btn.blue-button.Finish-Exchange {
   background: -webkit-gradient(linear, right top, left top, from(#0351d2), to(#25b5ff));
   background: linear-gradient(right, #0351d2 0%, #25b5ff 100%);
   color: #fff;
+  border: 0;
 }
 
 .Doctor-Manage-Account-Profile-page .nav.Choose-Your-tab li a img {

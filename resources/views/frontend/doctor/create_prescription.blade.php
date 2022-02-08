@@ -447,47 +447,41 @@
 
                   </button>
                 <div class="col-sm-12 Prescription-form-fild">
-                    <h1 class="inner-page-title text-center mb-4">
+                    <h1 class="inner-page-title text-center mb-2">
                         Add Drug Prescribed
                     </h1>
-                    <form class="row" action="">
-                        <div class="col-sm-12 input-effect">
-
-                            <div class="form-group">
-
-                                <input name="drug" id="drug" type="text" class="form-control effect-19" >
+                    <form class="row Patient-Profile-page" action="">
+                        <div class="col-sm-12 main-form-fild">
+                            <div class="form-group has-float-label">
+                                <input name="drug" id="drug" type="text" class="form-control" placeholder="Drug">
                                 <label>Drug</label>
                             </div>
-                            <div class="form-group">
-
-                                <input name="dose" id="dose" type="text" class="form-control effect-19" >
+                            <div class="form-group has-float-label">
+                                <input name="dose" id="dose" type="text" class="form-control" placeholder="Dose">
                                 <label>Dose</label>
                             </div>
-                            <div class="form-group">
-
+                            <div class="form-group has-float-label">
                                 <select
-                                        class="form-control effect-19"
+                                        class="form-control cp-select"
                                         name="route" id="route">
+                                        <option value="">Select Route</option>
                                         @foreach ($routes as $route)
                                             <option value={{$route->route_name}}>{{$route->route_name}}</option>
                                         @endforeach
                                         
                                 </select>
-                                <label>Route</label>
+                                <!-- <label>Route</label> -->
                             </div>
-                            <div class="form-group">
-
-                                <input name="frequency" id="frequency" type="text" class="form-control effect-19">
+                            <div class="form-group has-float-label">
+                                <input name="frequency" id="frequency" type="text" class="form-control" placeholder="Frequency">
                                 <label>Frequency</label>
                             </div>
-                            <div class="form-group">
-
-                                <input name="duration" id="duration" type="text" class="form-control effect-19">
+                            <div class="form-group has-float-label">
+                                <input name="duration" id="duration" type="text" class="form-control" placeholder="Duration">
                                 <label>Duration</label>
                             </div>
-                            <div class="form-group">
-
-                                <textarea name="comments" id="comments" class="form-control effect-19" rows="4"></textarea>
+                            <div class="form-group has-float-label">
+                                <textarea name="comments" id="comments" class="form-control" rows="3" placeholder="Comments"></textarea>
                                 <label>Comments</label>
                             </div>
 
@@ -519,42 +513,34 @@
 
                   </button>
                 <div class="col-sm-12 Prescription-form-fild">
-                    <h1 class="inner-page-title text-center mb-4">
+                    <h1 class="inner-page-title text-center mb-2">
                         Edit Drug Prescribed
                     </h1>
-                    <form class="row">
-                        <div class="col-sm-12 input-effect">
+                    <form class="row Patient-Profile-page">
+                        <div class="col-sm-12 main-form-fild">
 
-                            <div class="form-group">
-
-                                <input type="text" class="form-control effect-19 has-content" value="Flucloxacillin " >
+                            <div class="form-group has-float-label">
+                                <input type="text" class="form-control has-content" value="Flucloxacillin " placeholder="Drug">
                                 <label>Drug</label>
                             </div>
-                            <div class="form-group">
-
-                                <input type="text" class="form-control effect-19 has-content" value="500 milligrams">
+                            <div class="form-group has-float-label">
+                                <input type="text" class="form-control has-content" value="500 milligrams" placeholder="Dose">
                                 <label>Dose</label>
                             </div>
-                            <div class="form-group">
-
-                                <input type="text" class="form-control effect-19 has-content" value="4x per day ">
+                            <div class="form-group has-float-label">
+                                <input type="text" class="form-control has-content" value="4x per day " placeholder="Frequency">
                                 <label>Frequency</label>
                             </div>
-                            <div class="form-group">
-
-                                <input type="text" class="form-control effect-19 has-content" value="Oral tablets">
+                            <div class="form-group has-float-label">
+                                <input type="text" class="form-control has-content" value="Oral tablets" placeholder="Route">
                                 <label>Route</label>
                             </div>
-                            <div class="form-group">
-
-                                <input type="text" class="form-control effect-19 has-content" value="One Week">
+                            <div class="form-group has-float-label">
+                                <input type="text" class="form-control has-content" value="One Week" placeholder="Duration">
                                 <label>Duration</label>
                             </div>
-                            <div class="form-group">
-
-                                <textarea name="" id="" type="text" placeholder="See GP for weekly weight check reduce prednisolone by 10mg a day" class="form-control effect-19 has-content"  rows="4">
-
-                                </textarea>
+                            <div class="form-group has-float-label">
+                                <textarea name="" id="" type="text" placeholder="See GP for weekly weight check reduce prednisolone by 10mg a day" class="form-control has-content"  rows="3"></textarea>
                                 <label>Comments</label>
                             </div>
                             <div class="form-group text-center">

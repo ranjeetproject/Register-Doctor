@@ -32,7 +32,7 @@
 
                                     <div class="row">
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12 p-case-select-field">
 
 
                                             <div class="form-group">

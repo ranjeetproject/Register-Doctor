@@ -1,17 +1,22 @@
 <script src="{{ asset('public/js/frontend/js/jquery-1.11.0.js') }}"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{{ asset('public/js/frontend/js/popper.min.js') }}"></script>
 <script src="{{ asset('public/js/frontend/js/bootstrap.min.js') }}"></script>
 <!-- Script for custom script-->
 <script src="{{ asset('public/js/frontend/js/custom-script.js') }}"></script>
+
 <script type="text/javascript">
     $('.carousel').carousel({
         interval: false,
     });
     $(document).ready(function(){
-  $("button.btn.sider-bar-toggle, button.btn.sider-bar-toggle ~ ul.left-nav li a").click(function(){
-    $("button.btn.sider-bar-toggle ~ ul.left-nav").toggleClass("main");
-  });
-});
+      $("button.btn.sider-bar-toggle, button.btn.sider-bar-toggle ~ ul.left-nav li a").click(function(){
+        $("button.btn.sider-bar-toggle ~ ul.left-nav").toggleClass("main");
+      });
+    });
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
 </script>
 
  <!-- toastr js-->

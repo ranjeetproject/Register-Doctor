@@ -12,7 +12,6 @@
   <meta name="author" content="">
 
   <title>@yield('title')</title>
-
      @include('layout.common_css')
 
 </head>

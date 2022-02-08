@@ -1,4 +1,4 @@
-
+  <link rel="shortcut icon" href="{{ asset('public/images/frontend/images/favicon.png') }}" type="image/x-icon">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('public/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Ionicons -->
