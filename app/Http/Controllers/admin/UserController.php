@@ -86,7 +86,7 @@ class UserController extends Controller
 
 	public function userUpdate(Request $request)
 	    {
-         $data = $request->validate([
+      $data = $request->validate([
       "name"=>"sometimes|required|min:3|max:100",
       "mobile"=>"sometimes|nullable|digits:11",
       "dob"=>"sometimes|nullable|date|before_or_equal:".now()->subYears(13)->format('Y-m-d'),
@@ -125,6 +125,11 @@ class UserController extends Controller
      if(!empty($request->gender) ) $profile->gender = $request->gender;
      if(!empty($request->address) ) $profile->address = $request->address;
      if(!empty($request->about) ) $profile->about = $request->about;
+     if(!empty($request->commission)){
+      $profile->commission = $request->commission;
+     }else{
+      $profile->commission = 0;
+     }
 
       if ($request->hasFile('profile_photo')) {
             $rand_val           = date('YMDHIS').rand(11111,99999);

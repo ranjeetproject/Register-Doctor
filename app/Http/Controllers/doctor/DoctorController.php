@@ -8,6 +8,7 @@ use App\Models\DoctorAvailableDays;
 use App\Models\DrugsDetails;
 use App\Models\DoctorReview;
 use App\Models\DoctorSpeciality;
+use App\Models\SetQuickQuestionCost;
 use App\Models\Route;
 use App\Models\DrugsProblem;
 use App\Models\PastSymptoms;
@@ -250,12 +251,12 @@ class DoctorController extends Controller
 
 
       }
-
+        $quick_question_cost = SetQuickQuestionCost::find(1);
         $user = Auth::guard('siteDoctor')->user();
         $allDoctorReview = $this->allReviews($user->id);
         // return $user->profile->dr_qa_fee_notification; 
         $twoReviews = array_slice($allDoctorReview,0,2);
-        return view('frontend.doctor.profile',compact('user','dr_specialties','form_name','speciality','allDoctorReview','twoReviews'));
+        return view('frontend.doctor.profile',compact('user','dr_specialties','form_name','speciality','allDoctorReview','twoReviews','quick_question_cost'));
 
     }
 

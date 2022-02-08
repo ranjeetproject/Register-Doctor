@@ -186,7 +186,7 @@
                                                     @if(18 < $d_years || $d_years < 11)
                                                     <div class="col-md-4">
                                                         <p><i class="fas fa-pound-sign"></i>
-                                                            {{ $doctor->profile->dr_live_chat_fee }} per 15 mins</p>
+                                                            {{ ($doctor->profile->dr_live_chat_fee)?$doctor->profile->dr_live_chat_fee + $doctor->profile->commission: $doctor->profile->dr_live_chat_fee}} per 15 mins</p>
                                                         {{-- <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
                                                             class="btn btn-block Book-Live">Book Live Chat</a> --}}
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->id), 'questions_type'=> 'live-chat']) }}"
@@ -195,7 +195,7 @@
                                                     @endif
                                                     <div class="col-md-4">
                                                         <p><i class="fas fa-pound-sign"></i>
-                                                            {{ $doctor->profile->dr_live_video_fee }} per 15 mins</p>
+                                                            {{ ($doctor->profile->dr_live_video_fee) ? $doctor->profile->dr_live_video_fee + $doctor->profile->commission : $doctor->profile->dr_live_video_fee }} per 15 mins</p>
 
                                                         {{-- <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
                                                             class="btn btn-block Book-Live">Book Live Video</a> --}}
@@ -205,7 +205,7 @@
                                                     @if(18 < $d_years || $d_years < 11)
                                                     <div class="col-md-4">
                                                         <p><i class="fas fa-pound-sign"></i>
-                                                            {{ $doctor->profile->dr_qa_fee }} per 15 mins</p>
+                                                            {{ ($doctor->profile->dr_qa_fee) ? $doctor->profile->dr_qa_fee + $doctor->profile->commission:$doctor->profile->dr_qa_fee }} per 15 mins</p>
                                                         <button type="button"
                                                             onclick="bookLiveChats('{{ $doctor->id }}')"
                                                             class="btn btn-block Request">Request Typed Q&A <br>

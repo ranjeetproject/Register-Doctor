@@ -241,8 +241,9 @@
                                             </div>
                                         </div>
                                     @endforeach
+                                        {{$data['pharmacies']->links()}}
                                 </div>
-
+                                
                             </div>
 
                         </div>

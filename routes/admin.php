@@ -96,6 +96,13 @@ Route::get('route/edit/{id}', 'RouteController@edit')->name('route-edit');
 Route::post('route/update/{id}', 'RouteController@update')->name('route-update');
 Route::get('route/delete/{id}', 'RouteController@deleteSpecific')->name('route-delete');
 
+Route::get('set_quick_question_cost/create', 'SetQuickQuestionCostController@create')->name('create-set_quick_question_cost');
+Route::post('set_quick_question_cost/save', 'SetQuickQuestionCostController@store')->name('save-set_quick_question_cost');
+Route::post('set_quick_question_cost/update/{id}', 'SetQuickQuestionCostController@update')->name('set_quick_question_cost-update');
+
+
+
+
 
 
 

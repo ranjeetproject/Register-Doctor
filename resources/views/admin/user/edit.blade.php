@@ -74,6 +74,7 @@
                   <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
                   <li class="nav-item"><a class="nav-link" href="#profile-image" data-toggle="tab">Profile Image</a></li>
                   <li class="nav-item"><a class="nav-link" href="#change-email" data-toggle="tab">Change Email</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#change-commission" data-toggle="tab">Commission</a></li>
                   {{-- <li class="nav-item"><a class="nav-link" href="#change-password" data-toggle="tab">Change Password</a></li> --}}
                 </ul>
               </div><!-- /.card-header -->
@@ -182,9 +183,9 @@
                   {{-- general tab end  --}}
 
                   {{-- profile image tab end  --}}
-                 <div class="tab-pane" id="profile-image">
+                  <div class="tab-pane" id="profile-image">
 
-                   <form class="form-horizontal" action="{{ route('admin.user.update') }}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="{{ route('admin.user.update') }}" method="POST" enctype="multipart/form-data">
                       <input type="hidden" name="user_id" value="{{$user->id}}">
                       @csrf
                       <div class="form-group row">
@@ -235,6 +236,33 @@
                     </form>
                   </div>
                   <!-- /.change email end -->
+
+                  <!-- /.change commission start -->
+                  <div class="tab-pane" id="change-commission">
+                    <form class="form-horizontal" action="{{ route('admin.user.update') }}" method="POST">
+                      <input type="hidden" name="user_id" value="{{$user->id}}">
+                      @csrf
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Commission</label>
+                        <div class="col-sm-9">
+                          <input type="text" name="commission" class="form-control @error('commission') is-invalid @enderror" placeholder="Commission" value="{{($user->profile->commission==0)?'':$user->profile->commission}}">
+                          @error('commission')
+                           <span class="error invalid-feedback" id="error_commission">{{ $message }}</span>
+                          @enderror
+                        </div>
+                      </div>
+
+                     
+                      
+                      <div class="form-group row">
+                        <div class="offset-sm-10 col-sm-2">
+                          <button type="submit" class="btn btn-outline-primary">Submit</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                  <!-- /.change commission end --> 
 
                  <!-- /.change-password start -->
                   {{-- <div class="tab-pane" id="change-password">
