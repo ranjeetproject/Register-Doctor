@@ -6,7 +6,12 @@
             <div class="col-md-6">
                 <a href="#" class="card find-p">
                     <div class="card-cont">
-                        <img src="{{ asset('public/images/frontend/images/find-p.png') }}" alt="">
+                        <div class="dash-icons-bx">
+                            <div class="dash-icon-badge">
+                                <img src="{{ asset('public/images/frontend/images/find-p-icon.png') }}" width="27" alt="">
+                                <!-- <span>0</span> -->
+                            </div>
+                        </div>
                         <h4>Find Prescription</h4>
                     </div>
                 </a>
@@ -21,7 +26,12 @@
                 <h3>INCOMING Prescriptions</h3>
                 <a href="#" class="card">
                     <div class="card-cont">
-                        <img src="{{ asset('public/images/frontend/images/Waiting-icon.png') }}" alt="">
+                        <div class="dash-icons-bx">
+                            <div class="dash-icon-badge">
+                                <img src="{{ asset('public/images/frontend/images/Prescription-icon.png') }}" width="25" alt="">
+                                <span>0</span>
+                            </div>
+                        </div>
                         {{-- <h4>Prescriptions<br><span>4 Your Pharmacy</span> Waiting</h4> --}}
                         <h4>You have {{ $new_prescription }} new<br><span>prescription waiting</span> at your pharmecy</h4>
                     </div>
@@ -31,7 +41,12 @@
                 <h3>Accepted - to be Dispensed</h3>
                 <a href="#" class="card">
                     <div class="card-cont">
-                        <img src="{{ asset('public/images/frontend/images/Waiting-icon.png') }}" alt="">
+                        <div class="dash-icons-bx">
+                            <div class="dash-icon-badge">
+                                <img src="{{ asset('public/images/frontend/images/Prescription-icon.png') }}" width="25" alt="">
+                                <span>0</span>
+                            </div>
+                        </div>
                         <h4>Waiting</h4>
                     </div>
                 </a>

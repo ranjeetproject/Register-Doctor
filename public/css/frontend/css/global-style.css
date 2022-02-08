@@ -1239,7 +1239,6 @@ section.news-banner-bx .news-banner-img img{
     margin-top: 15px;
 }
 .dr-reviews-list li{
-    background-color: #fff;
     border-bottom: 1px solid rgba(0,0,0,.125);
     padding-bottom: 15px;
     margin-bottom: 15px;
@@ -1291,7 +1290,7 @@ section.news-banner-bx .news-banner-img img{
     color: #000;
     font-weight: 500;
     margin-bottom: 15px;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 .pdt-deliver-eg-bx{
     margin-bottom: 8px;
@@ -1447,7 +1446,7 @@ section.news-banner-bx .news-banner-img img{
     margin-bottom: 15px;
 }
 .dash-icons-bx img{
-    margin:0 8px;
+    margin:0 10px;
 }
 .profile-header-bx{
     display: flex;
@@ -1518,4 +1517,49 @@ section.news-banner-bx .news-banner-img img{
     justify-content: center;
     border-radius: 50%;
 }
-
+.dash-icon-badge{
+    position: relative;
+    display: inline-block;
+}
+.dash-icon-badge span{
+    position: absolute;
+    top: -3px;
+    right: 1px;
+    width: 18px;
+    height: 18px;
+    background-color: #fc490d;
+    font-size: 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.pp-mrgn-left-20{
+    margin-left: 20px !important;
+}
+.cmn-card-box{
+    border-radius: 10px;
+}
+.margin-bottom-20{
+    margin-bottom: 20px;
+}
+.padding-20{
+    padding: 20px 20px 5px 20px;
+}
+a.Set-Opening-Hours.pp-oh-btn{
+    margin-left: 0 !important;
+    display: inline-block;
+    border: 1px solid #24b1fe;
+    color: #117be5;
+    padding: 8px 18px 8px 13px;
+    border-radius: 25px;
+}
+.Manage-Profile .Customer-Pick-up input:checked ~ label {
+    background: rgb(33 169 250 / 16%) !important;
+    color: #004cac;
+}
+.pm-btn-grp{
+    text-align: left !important;
+    margin-top: 20px !important;
+}
