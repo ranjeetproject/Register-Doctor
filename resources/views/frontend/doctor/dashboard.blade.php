@@ -14,19 +14,19 @@
                             <div class="dash-icons-bx">
                                 <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/live-txtchat-icon.png') }}" alt="">
-                                    <span>4</span>
+                                    <span>{{$total_live_chat}}</span>
                                 </div>
                                 <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/live-d-video-icon.png') }}" alt="">
-                                    <span>1</span>
+                                    <span>{{$total_live_video_chat}}</span>
                                 </div>
                                 <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/QA-icon.png') }}" alt="">
-                                    <span>5</span>
+                                    <span>{{$total_quick_questions}}</span>
                                 </div>
                                 <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/Prescription-icon.png') }}" width="25" alt="">
-                                    <span>0</span>
+                                    <span>{{$total_book_questions}}</span>
                                 </div>
                             </div>
                             <h4>Booking Requests <br><span>Patient Chose You - Accept or Decline</span></h4>
@@ -72,15 +72,15 @@
                             <div class="dash-icons-bx">
                                 <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/live-txtchat-icon.png') }}" alt="">
-                                    <span>1</span>
+                                    <span>{{$total_accept_live_chat}}</span>
                                 </div>
                                 <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/live-d-video-icon.png') }}" alt="">
-                                    <span>4</span>
+                                    <span>{{$total_accept_live_video_chat}}</span>
                                 </div>
                                 <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/QA-icon.png') }}" alt="">
-                                    <span>0</span>
+                                    <span>{{$total_accept_quick_questions}}</span>
                                 </div>
                                 <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/QQ-icon.png') }}" alt="">
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/Prescription-icon.png') }}" width="25" alt="">
-                                    <span>2</span>
+                                    <span>{{$total_accept_book_questions}}</span>
                                 </div>
                             </div>
                             <h4>Your Accepted Cases</h4>
