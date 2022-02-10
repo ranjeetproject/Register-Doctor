@@ -9,11 +9,11 @@
 
     <li><a href="{{ route('doctor.get-thumbs-up')}}"><img src="{{ asset('public/images/frontend/images/icon13.png') }}" alt="">How to Get Thumbs Up</a></li>
 
-    <li><a href="{{ route('doctor.appointment')}}"><img src="{{ asset('public/images/frontend/images/icon11.png') }}" alt="">Appointments </a></li>
+    <li><a href="{{ route('doctor.appointment')}}"><img src="{{ asset('public/images/frontend/images/icon11.png') }}" alt="">Appointments ({{($doctorAppointmentNotification)?$doctorAppointmentNotification:0}})</a></li>
 
     <li><a href="{{ route('doctor.send-patient-message')}}"><img src="{{ asset('public/images/frontend/images/icon5.png') }}" alt="">Send Patient Message</a></li>
 
-    <li><a href="{{ route('doctor.create-prescription')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Create Prescription</a></li>
+    <li><a href="{{ route('doctor.create-prescription')}}"><img src="{{ asset('public/images/frontend/images/icon3.png') }}" alt="">Create Prescription ({{($doctorCreatePrescriptionNotification)?$doctorCreatePrescriptionNotification:0}})</a></li>
 
     <li><a href="{{ route('doctor.prescription-issues')}}"><img src="{{ asset('public/images/frontend/images/icon4.png') }}" alt="">Prescriptions Issued</a></li>
 

@@ -9,7 +9,7 @@
       <form id="logout-form" action="{{route('logout')}}" method="POST"style="display: none;">
         @csrf
       </form>
-      <a class="ser-log-list h-notifications-btn" data-toggle="tooltip" title="Notifications" href="#"><img src="{{ asset('public/images/frontend/images/notification-icon.png') }}" alt=""><span>2</span></a>
+      <a class="ser-log-list h-notifications-btn" data-toggle="tooltip" title="Notifications" href="#"><img src="{{ asset('public/images/frontend/images/notification-icon.png') }}" alt=""><span>{{($doctorTotalBookingNotification)?$doctorTotalBookingNotification:0}}</span></a>
     </div>
   </div>
 </nav>

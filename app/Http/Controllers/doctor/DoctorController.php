@@ -65,7 +65,26 @@ class DoctorController extends Controller
       if(empty(Auth::guard('siteDoctor')->user()->profile->dr_name_of_medical_licencer)){
         return redirect()->route('doctor.profile');
       }
-        return view('frontend.doctor.dashboard');
+      $total_live_chat = PatientCase::where('questions_type',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+      $total_accept_live_chat = PatientCase::where('questions_type',1)->where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+      $total_live_video_chat = PatientCase::where('questions_type',2)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+      $total_accept_live_video_chat = PatientCase::where('questions_type',2)->where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+      $total_quick_questions =  PatientCase::where('questions_type',3)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+      $total_accept_quick_questions = PatientCase::where('questions_type',3)->where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count();
+      $total_book_questions = PatientCase::where('questions_type',4)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count();
+      $total_accept_book_questions = PatientCase::where('questions_type',4)->where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count();
+      $data['total_live_chat'] = abs($total_live_chat - $total_accept_live_chat);
+      $data['total_live_video_chat'] = abs($total_live_video_chat - $total_accept_live_video_chat);
+      $data['total_quick_questions'] = abs($total_quick_questions - $total_accept_quick_questions);
+      $data['total_book_questions'] = abs($total_book_questions - $total_accept_book_questions);
+     
+      $data['total_accept_live_chat'] = $total_accept_live_chat;
+      $data['total_accept_live_video_chat'] = $total_accept_live_video_chat;
+      $data['total_accept_quick_questions'] = $total_accept_quick_questions;
+      $data['total_accept_book_questions'] = $total_accept_book_questions; 
+
+      
+      return view('frontend.doctor.dashboard',$data);
     }
 
     public function profile(Request $request) {
@@ -1313,5 +1332,34 @@ $get_day = $get_day->delete();
         $user = Auth::guard('siteDoctor')->user();
         $allDoctorReview = $this->allReviews($user->id);
         return view('frontend.doctor.dr_all_reviews',compact('allDoctorReview'));
+    }
+
+    public function doctorAppointmentNotification($id)
+    {
+        $totalAppointment = PatientCase::where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count();
+        return $totalAppointment;
+    }
+    public function doctorPrescriptionNotification($id)
+    {
+        $pre = Prescription::where('status','=','no')->where('doc_id', '=', $id)->count();
+        return $pre;
+    }
+
+    public function doctorBookingNotification($id)
+    {
+        $total_live_chat = PatientCase::where('questions_type',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+        $total_accept_live_chat = PatientCase::where('questions_type',1)->where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+        $total_live_video_chat = PatientCase::where('questions_type',2)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+        $total_accept_live_video_chat = PatientCase::where('questions_type',2)->where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+        $total_quick_questions =  PatientCase::where('questions_type',3)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count(); 
+        $total_accept_quick_questions = PatientCase::where('questions_type',3)->where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count();
+        $total_book_questions = PatientCase::where('questions_type',4)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count();
+        $total_accept_book_questions = PatientCase::where('questions_type',4)->where('accept_status',1)->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->count();
+        $total_booking_live_chat = abs($total_live_chat - $total_accept_live_chat);
+        $total_booking_live_video_chat = abs($total_live_video_chat - $total_accept_live_video_chat);
+        $total_booking_quick_questions = abs($total_quick_questions - $total_accept_quick_questions);
+        $total_booking_book_questions = abs($total_book_questions - $total_accept_book_questions);
+        $total_booking = $total_booking_live_chat +  $total_booking_live_video_chat + $total_booking_quick_questions +  $total_booking_book_questions;
+        return $total_booking;
     }
 }
