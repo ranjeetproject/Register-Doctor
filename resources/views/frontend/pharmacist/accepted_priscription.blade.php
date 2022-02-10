@@ -44,7 +44,7 @@
 
                                                     <option value="">Select Prescription No.</option>
                                                    @foreach($priscriptions as $prisc)
-                                                   <option value="{{$prisc->case_id}}">{{$prisc->priscription_id}}</option>
+                                                   <option value="{{$prisc->case_id}}">A-{{$prisc->priscription_id}} {{$prisc->patientcase->doctor->name}} {{$prisc->patientcase->user->name}}</option>
                                                    @endforeach
 
                                                 </select>
@@ -111,9 +111,9 @@
 
                                 </div>
 
-                                <div class="col-sm-12" style="display:none;">
+                                <div class="col-sm-12">
 
-                                    <a id="msg_doc" href="#" target="_blank" class="btn blue-button">Message Doctor</a>
+                                    {{-- <a id="msg_doc" href="#" target="_blank" class="btn blue-button">Message Doctor</a> --}}
                                     <a id="sub_prisc" href="#" target="_blank" class="btn blue-button">Submit Priscription</a>
 
                                 </div>
@@ -237,7 +237,7 @@ $('#case_no').on('change', function(){
                 }
                 $('#sub_prisc').attr('href',"{{url('patient/pharmacies')}}/?c_id="+res.case_details[0].case_id+"&s_id="+presc_no);
                 //var d_name = $('#presc_no').html();
-                $('#presc_no').html( '<strong>Prescription No.: </strong>'+presc_no);
+                $('#presc_no').html( '<strong>Prescription No.: </strong>'+'A-'+presc_no);
                 date_time =  date_time.split(" ");
                 var my_date  = date_time[0];
                 var my_time  = date_time[1];
