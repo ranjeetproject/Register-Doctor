@@ -1676,3 +1676,18 @@ a.Set-Opening-Hours.pp-oh-btn{
     font-size: 15px;
     font-weight: 500;
 }
+.pharmacies-item-pagination{
+    display: flex;
+    justify-content: flex-end;
+}
+.pharmacies-item-pagination ul.pagination {
+    margin-bottom: 0!important;
+    margin-top: 10px!important;
+}
+.pharmacies-item-pagination ul.pagination li{
+    margin-bottom: 0!important;
+    padding-left: 0!important;
+}
+.pharmacies-item-pagination ul.pagination li::after{
+    display: none !important;
+}
