@@ -1,5 +1,6 @@
 <script src="{{ asset('public/js/frontend/js/jquery-1.11.0.js') }}"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{{ asset('public/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{ asset('public/js/frontend/js/popper.min.js') }}"></script>
 <script src="{{ asset('public/js/frontend/js/bootstrap.min.js') }}"></script>
 <!-- Script for custom script-->
@@ -16,6 +17,28 @@
     });
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
+    });
+    $(function () {
+        $("#availabilityDatepicker").datepicker({
+            showOn: "button",
+            buttonText:'<i class="far fa-calendar-alt"></i>',
+            dateFormat : "ds M yy",
+            onSelect: function(dateText, inst) {
+                var arrOrd = new Array('0','st','nd','rd','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','st','nd','rd','th','th','th','th','th','th','th','st');
+                var day = Number(inst.selectedDay);
+                var suffix = arrOrd[day];       
+                $(this).val($(this).val().replace(inst.selectedDay+"s",inst.selectedDay+suffix));
+            }
+        });
+    });
+    $(function () {
+        $("#availability-switch-id").change(function () {
+            if ($(this).is(":checked")) {
+                $(".availabilityContent").show();
+            } else {
+                $(".availabilityContent").hide();
+            }
+        });
     });
 </script>
 

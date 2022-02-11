@@ -221,29 +221,11 @@
                                     </div>
                                 </div>
 
-<<<<<<< HEAD
-
-
-
-
-                                <div class="col-sm-12">
-                                    <div class="form-group Communication">
-                                        <label> <img src="{{ asset('public/images/frontend/images/Communication-icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Communication Options</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 mb-2">
-                                    <div class="form-group">
-                                        <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Quick question</label>
-                                        <div class="row all-question-list">
-                                            <div class="col aql-comm">
-                                                <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" readonly value="{{$quick_question_cost->set_quick_question_cost}}">  First Doctor to Take Case
-=======
                                 <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">  
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group Communication">
                                                 <label> <img src="{{ asset('public/images/frontend/images/Communication-icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Communication Options</label>
->>>>>>> 6cba1179031747a61252c863b1746e63353e82eb
                                             </div>
                                         </div>
                                         <div class="col-sm-12 mb-2">

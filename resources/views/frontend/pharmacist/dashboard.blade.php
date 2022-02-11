@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-6">
                 <h3>INCOMING Prescriptions</h3>
-                <a href="#" class="card">
+                <a href="{{route('pharmacist.accepted-priscription')}}" class="card">
                     <div class="card-cont">
                         <div class="dash-icons-bx">
                             <div class="dash-icon-badge">

@@ -12,4 +12,9 @@ class pharma_req_prescription extends Model
     {
         return $this->hasMany('App\Prescription','case_no','case_id');
     }
+
+    public function patientcase()
+    {
+        return $this->belongsTo(PatientCase::class,'case_id','case_id');
+    }
 }

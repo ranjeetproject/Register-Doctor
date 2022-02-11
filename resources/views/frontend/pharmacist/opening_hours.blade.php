@@ -21,10 +21,10 @@
                                     <div class="row">
                                         <div class="col">
 
-                                            <input id="From-date" name="monday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->monday_opening_time  ?? '09:00' }}"/>
+                                            <input id="From-date" name="monday_opening_time" class="form-control" type="time" value="{{ ($user->openingTime->monday_opening_time != '00:00:00')? $user->openingTime->monday_opening_time:'N/A'  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
-                                            <input id="Till-date" name="monday_closing_time" class="form-control " type="time" value="{{ $user->openingTime->monday_closing_time  ?? '22:00' }}"/>
+                                            <input id="Till-date" name="monday_closing_time" class="form-control " type="time" value="{{ ($user->openingTime->monday_closing_time != '00:00:00')?$user->openingTime->monday_closing_time:'N/A'  ?? '22:00' }}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -38,10 +38,10 @@
                                     <div class="row">
                                         <div class="col">
 
-                                            <input id="From-date" name="tuesday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->tuesday_opening_time  ?? '09:00' }}"/>
+                                            <input id="From-date" name="tuesday_opening_time" class="form-control" type="time" value="{{ ($user->openingTime->tuesday_opening_time != '00:00:00')?$user->openingTime->tuesday_opening_time:'N/A'  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
-                                            <input id="Till-date" name="tuesday_closing_time" class="form-control " type="time" value="{{ $user->openingTime->tuesday_closing_time  ?? '22:00' }}"/>
+                                            <input id="Till-date" name="tuesday_closing_time" class="form-control " type="time" value="{{ ($user->openingTime->tuesday_closing_time != '00:00:00')?$user->openingTime->tuesday_closing_time:'N/A'  ?? '22:00' }}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -52,10 +52,10 @@
                                     <div class="row">
                                         <div class="col">
 
-                                            <input id="From-date" name="wednesday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->wednesday_opening_time ?? '09:00' }}"/>
+                                            <input id="From-date" name="wednesday_opening_time" class="form-control" type="time" value="{{ ($user->openingTime->wednesday_opening_time != '00:00:00')?$user->openingTime->wednesday_opening_time:'N/A' ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
-                                            <input id="Till-date" name="wednesday_closing_time" class="form-control" type="time" value="{{ $user->openingTime->wednesday_closing_time ?? '22:00' }}"/>
+                                            <input id="Till-date" name="wednesday_closing_time" class="form-control" type="time" value="{{ ($user->openingTime->wednesday_closing_time != '00:00:00')?$user->openingTime->wednesday_closing_time:'N/A' ?? '22:00' }}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -66,10 +66,10 @@
                                     <div class="row">
                                         <div class="col">
 
-                                            <input id="From-date" name="thursday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->thursday_opening_time  ?? '09:00' }}"/>
+                                            <input id="From-date" name="thursday_opening_time" class="form-control" type="time" value="{{ ($user->openingTime->thursday_opening_time != '00:00:00')?$user->openingTime->thursday_opening_time:'N/A'  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
-                                            <input id="Till-date" name="thursday_closing_time" class="form-control " type="time" value="{{ $user->openingTime->thursday_closing_time  ?? '22:00' }}"/>
+                                            <input id="Till-date" name="thursday_closing_time" class="form-control " type="time" value="{{ ($user->openingTime->thursday_closing_time != '00:00:00')?$user->openingTime->thursday_closing_time:'N/A'  ?? '22:00' }}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -80,10 +80,10 @@
                                     <div class="row">
                                         <div class="col">
 
-                                            <input id="From-date" name="friday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->friday_opening_time  ?? '09:00' }}" />
+                                            <input id="From-date" name="friday_opening_time" class="form-control" type="time" value="{{ ($user->openingTime->friday_opening_time != '00:00:00')?$user->openingTime->friday_opening_time:'N/A'  ?? '09:00' }}" />
                                         </div>
                                         <div class="col">
-                                            <input id="Till-date" name="friday_closing_time" class="form-control " type="time" value="{{ $user->openingTime->friday_closing_time  ?? '22:00' }}"/>
+                                            <input id="Till-date" name="friday_closing_time" class="form-control " type="time" value="{{ ($user->openingTime->friday_closing_time != '00:00:00')?$user->openingTime->friday_closing_time:'N/A'  ?? '22:00' }}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -94,10 +94,10 @@
                                     <div class="row">
                                         <div class="col">
 
-                                            <input id="From-date" name="saturday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->saturday_opening_time  ?? '09:00' }}"/>
+                                            <input id="From-date" name="saturday_opening_time" class="form-control" type="time" value="{{ ($user->openingTime->saturday_opening_time != '00:00:00')?$user->openingTime->saturday_opening_time:'N/A'  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
-                                            <input id="Till-date" name="saturday_closing_time" class="form-control " type="time" value="{{ $user->openingTime->saturday_closing_time  ?? '22:00' }}"/>
+                                            <input id="Till-date" name="saturday_closing_time" class="form-control " type="time" value="{{ ($user->openingTime->saturday_closing_time != '00:00:00')?$user->openingTime->saturday_closing_time:'N/A'  ?? '22:00' }}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -109,10 +109,10 @@
                                     <div class="row">
                                         <div class="col">
 
-                                            <input id="From-date" name="sunday_opening_time" class="form-control" type="time" value="{{ $user->openingTime->sunday_opening_time  ?? '09:00' }}"/>
+                                            <input id="From-date" name="sunday_opening_time" class="form-control" type="time" value="{{ ($user->openingTime->sunday_opening_time != '00:00:00')?$user->openingTime->sunday_opening_time:'N/A'  ?? '09:00' }}"/>
                                         </div>
                                         <div class="col">
-                                            <input id="Till-date" name="sunday_closing_time" class="form-control " type="time" value="{{ $user->openingTime->sunday_closing_time ?? '22:00' }}"/>
+                                            <input id="Till-date" name="sunday_closing_time" class="form-control " type="time" value="{{ ($user->openingTime->sunday_closing_time != '00:00:00')?$user->openingTime->sunday_closing_time:'N/A' ?? '22:00' }}"/>
                                         </div>
                                     </div>
                                 </div>

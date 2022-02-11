@@ -1,7 +1,7 @@
 @extends('frontend.patient.afterloginlayout.app')
 
 @section('content')
-    <div class="col Choose-Your-Doctor-right innerpage  case-page">
+    <div class="col Choose-Your-Doctor-right innerpage case-page">
         <div class="row">
             <div class="col-sm-12">
 
@@ -27,7 +27,7 @@
                         <b>{{$case->health_problem}}</b>
                     </div>
                     <h2>Attachments</h2>
-                    <div class="view-case-details">
+                    <div class="view-case-details v-case-view">
                         @foreach($case->casefile as $casefile)
                             @if (strpos($casefile->file_name, '.pdf') !== false)
                                 <a class="nav-link" target="_blank" href="{{asset('public/uploads/cases/'.$casefile->file_name)}}">

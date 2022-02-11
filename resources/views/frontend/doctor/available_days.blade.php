@@ -975,6 +975,6 @@ $.ajax({
                     $(this).val($(this).val().replace(inst.selectedDay+"s",inst.selectedDay+suffix));
                 }
             });
-          });
+        });
     </script>
 @endsection

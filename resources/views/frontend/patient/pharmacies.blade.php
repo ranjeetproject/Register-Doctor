@@ -142,8 +142,7 @@
                                                                 class="pharma_sub btn blue-button">send prescription No.
                                                                 electronically</a> <img
                                                                 src="{{ asset('public/images/frontend/images/ex-icon.png') }}"
-                                                                alt="" data-toggle="modal" data-target="#Pharmacy-popup"
-                                                                title='Info icon to state "To use this Pharmacy give them your prescription number and they will find your prescription on this website. You can also send the prescription on this website. You can also send the prescription number electronically to them."'>
+                                                                alt="" data-toggle="tooltip" title='Info icon to state "To use this Pharmacy give them your prescription number and they will find your prescription on this website. You can also send the prescription on this website. You can also send the prescription number electronically to them."'>
                                                         </p>
                                                     @else
                                                     <div class="phar-pas-bx">
@@ -243,7 +242,9 @@
                                             </div>
                                         </div>
                                     @endforeach
+                                    <div class="pharmacies-item-pagination">
                                         {{$data['pharmacies']->links()}}
+                                    </div>
                                 </div>
                                 
                             </div>
