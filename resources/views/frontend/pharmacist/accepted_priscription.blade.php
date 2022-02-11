@@ -114,7 +114,7 @@
                                 <div class="col-sm-12">
 
                                     {{-- <a id="msg_doc" href="#" target="_blank" class="btn blue-button">Message Doctor</a> --}}
-                                    <a id="sub_prisc" href="#" target="_blank" class="btn blue-button">Submit Priscription</a>
+                                    <a id="sub_prisc" href="#" data-toggle="modal" data-target="#finalprisc" class="btn blue-button">Submit Priscription</a>
 
                                 </div>
 
@@ -136,37 +136,61 @@
 
 <div class="modal fade add-edit-prs" id="finalprisc" >
 
-<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
 
-  <div class="modal-content">
-    <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
-            <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
 
-          </button>
-        <div class="col-sm-12 Prescription-form-fild">
-            <h1 class="inner-page-title text-center mb-4">
-                Please check after theat the prescription will visible for patients
-            </h1>
-            <form class="row" action="">
-                <div class="col-sm-12 input-effect">
+                </button>
+                <div class="col-sm-12 Prescription-form-fild">
+                    <h1 class="inner-page-title text-center mb-4">
+                        Please check after theat the prescription will visible for patients
+                    </h1>
+                    <form class="row" action="">
+                        <div class="col-sm-12 input-effect">
 
-                    <div class="form-group text-center">
-                        <button type="button" id="final_prisc" class="add-submit btn blue-button Prescription-submit ">Submit</button>
+                            <div class="form-group text-center">
+                                <button type="button" id="final_prisc" class="add-submit btn blue-button Prescription-submit ">Submit</button>
 
-                    </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
-            </form>
-
+            </div>
         </div>
+
     </div>
-  </div>
 
 </div>
 
-</div>
 
+ <!-- Error modal -->
+<div class="modal fade add-edit-prs" id="error_finalprisc" >
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                    <span aria-hidden="true">&times;</span>
+
+                </button>
+                <div class="col-sm-12 Prescription-form-fild">
+                    <h1 class="inner-page-title text-center mb-4">
+                        Please Select Prescriptions No.
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 
 
@@ -223,7 +247,7 @@ $('#case_no').on('change', function(){
             if(prescription.length > 0){
 
                 $('#msg_doc').attr('href',"{{url('patient/chats')}}/"+res.case_details[0].case_id);
-                $('#doc_name').html( '<strong>Paitent Name: </strong>'+res.case_details[0].doctor.name);
+                $('#doc_name').html( '<strong>Paitent Name: </strong>'+res.case_details[0].user.name);
                 var presc_no =0;
                 var date_time =0;
                 for(i=0; i < prescription.length; i++){
@@ -235,7 +259,7 @@ $('#case_no').on('change', function(){
 
                     $('#add-tr tbody').html('<tr class="only-remv"><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td></tr>');
                 }
-                $('#sub_prisc').attr('href',"{{url('patient/pharmacies')}}/?c_id="+res.case_details[0].case_id+"&s_id="+presc_no);
+               // $('#sub_prisc').attr('href',"{{url('patient/pharmacies')}}/?c_id="+res.case_details[0].case_id+"&s_id="+presc_no);
                 //var d_name = $('#presc_no').html();
                 $('#presc_no').html( '<strong>Prescription No.: </strong>'+'A-'+presc_no);
                 date_time =  date_time.split(" ");
@@ -253,6 +277,28 @@ $('#case_no').on('change', function(){
     })
 
 });
+
+$('#final_prisc').on('click', function(){
+    var case_id = $('#case_no').val();
+    var _token = $("input[name=_token]").val();
+    $.ajax({
+        url: "{{ url('pharmacist/ajaxAcceptPriscriptionDetailsSendStatus')}}",
+        type: 'POST',
+        data:{
+            case_id : case_id,
+            _token : _token
+        },
+        success:function(res){
+            if(res.accepted_priscription == 1){
+                $('#finalprisc').modal('hide');
+                location.href = "{{url('pharmacist/dispensed-prescriptions')}}";
+            }else{  
+                $('#finalprisc').modal('hide');
+                $('#error_finalprisc').modal('show');
+            }
+        }
+    })
+})
 $(document).ready(function() {
     $('.select_search').select2();
 });

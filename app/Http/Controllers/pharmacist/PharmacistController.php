@@ -238,7 +238,7 @@ class PharmacistController extends Controller
     }
     public function acceptedPriscription(Request $request)
     {
-        $priscriptions = pharma_req_prescription::get();
+        $priscriptions = pharma_req_prescription::where('send_status','!=',1)->get();
         //print_r($priscriptions);
 
         return view('frontend.pharmacist.accepted_priscription',compact('priscriptions'));
@@ -247,7 +247,7 @@ class PharmacistController extends Controller
     public function ajaxAcceptPriscriptionDetails(Request $request)
     {
 
-        $case = PatientCase::where( 'case_id', $request->case_id)->with('doctor')->get();
+        $case = PatientCase::where( 'case_id', $request->case_id)->with('user')->get();
         $prescription = PatientCase::where( 'case_id', $request->case_id)->with('pharma_req_prescription')->with('prescription')->get();
 
         $return = array('case_details'=>$case, 'prescription'=>$prescription);
@@ -256,16 +256,15 @@ class PharmacistController extends Controller
     }
     public function dispensedPrescriptions(Request $request)
     {
-        $priscriptions = Prescription::groupByRaw('prescription_no')->get();
+        $priscriptions = pharma_req_prescription::where('send_status','=',1)->get();
         //print_r($priscriptions);
-
         return view('frontend.pharmacist.dispensed_prescriptions',compact('priscriptions'));
     }
 
     public function ajaxDispensedPrescriptions(Request $request)
     {
 
-        $case = PatientCase::where( 'case_id', $request->case_id)->with('doctor')->get();
+        $case = PatientCase::where('case_id', $request->case_id)->with('user')->get();
         $prescription = PatientCase::where( 'case_id', $request->case_id)->with('prescription')->get();
 
         $return = array('case_details'=>$case, 'prescription'=>$prescription);
@@ -337,6 +336,13 @@ class PharmacistController extends Controller
             $users = [];
         }
       return view('frontend.pharmacist.chat',compact('users','p_user','d_user','key_per','val_sur'));
+    }
+
+    public function acceptedPriscriptionSubmit(Request $request)
+    {
+        $accepted_priscription = pharma_req_prescription::where('case_id', $request->case_id)->update(['send_status'=> 1]);
+        $return = array('accepted_priscription'=>$accepted_priscription);
+        return response()->json( $return);
     }
 
 }

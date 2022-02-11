@@ -12,6 +12,7 @@ Route::middleware(['isPharmacist:sitePharmacist','activeUser','emailVerified','a
 
     Route::match(['get','post'],'/accepted-priscription', 'PharmacistController@acceptedPriscription')->name('accepted-priscription');
     Route::match(['get','post'],'/ajaxAcceptPriscriptionDetails', 'PharmacistController@ajaxAcceptPriscriptionDetails')->name('ajaxAcceptPriscriptionDetails');
+    Route::match(['get','post'],'/ajaxAcceptPriscriptionDetailsSendStatus', 'PharmacistController@acceptedPriscriptionSubmit')->name('ajaxAcceptPriscriptionDetailsSendStatus');
     Route::match(['get','post'],'/dispensed-prescriptions', 'PharmacistController@dispensedPrescriptions')->name('dispensed-prescriptions');
     Route::match(['get','post'],'/ajaxDispensedPrescriptions', 'PharmacistController@ajaxDispensedPrescriptions')->name('ajaxDispensedPrescriptions');
     Route::match(['get','post'],'/handy-document', 'PharmacistController@handyDocument')->name('handy-document');
@@ -20,4 +21,3 @@ Route::middleware(['isPharmacist:sitePharmacist','activeUser','emailVerified','a
     Route::post('chat', 'PharmacistController@chat_post')->name('chat_post');
     Route::match(['get','post'],'chats/{id}', 'PharmacistController@chats')->name('chats');
 });
-

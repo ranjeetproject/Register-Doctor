@@ -44,7 +44,7 @@
                                                     <option value="">Select Prescription No.</option>
 
                                                    @foreach($priscriptions as $prisc)
-                                                   <option value="{{$prisc->case_no}}">{{$prisc->prescription_no}}</option>
+                                                   <option value="{{$prisc->case_id}}">{{$prisc->priscription_id}}</option>
                                                    @endforeach
 
                                                 </select>
@@ -219,7 +219,7 @@ $('#case_no').on('change', function(){
             if(prescription.length > 0){
                 
                 $('#msg_doc').attr('href',"{{url('patient/chats')}}/"+res.case_details[0].case_id);
-                $('#doc_name').html( '<strong>Paitent Name: </strong>'+res.case_details[0].doctor.name);
+                $('#doc_name').html( '<strong>Paitent Name: </strong>'+res.case_details[0].user.name);
                 var presc_no =0;
                 var date_time =0;
                 for(i=0; i < prescription.length; i++){
