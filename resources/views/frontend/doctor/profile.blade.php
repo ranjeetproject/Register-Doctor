@@ -233,7 +233,7 @@
                                                 <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Quick question</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
-                                                        <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{$user->profile->dr_standard_fee}}">  First Doctor to Take Case
+                                                        <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{@$quick_question_cost->set_quick_question_cost}}">  First Doctor to Take Case
                                                     </div>
                                                 </div>
                                                 <div class="Notifications-on-of">
