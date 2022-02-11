@@ -57,9 +57,6 @@ class PharmacistController extends Controller
                 "pharmacy_name"=>"required",
                 "profile_photo"=>"image|mimes:jpeg,png,jpg|max:2048",
                 'email' => 'sometimes|nullable|required|unique:users,email,'.$user->id,
-                // "old_password"=>"sometimes|nullable|required",
-                // "new_password"=>"sometimes|nullable|required|min:6",
-                // "confirm_password"=>"sometimes|nullable|required|same:new_password",
             ]);
 
             if ($validator->fails()) {
