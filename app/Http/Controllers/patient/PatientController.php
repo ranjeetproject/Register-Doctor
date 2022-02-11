@@ -577,7 +577,7 @@ class PatientController extends Controller
             $error = 'There is some problem please try again';
           }
         }
-        $pharmacies = User::whereRole(3)->latest()->paginate(8);
+        $pharmacies = User::whereRole(3)->latest()->paginate(1);
         $pharmacies->appends(['c_id'=>$request->c_id, 
         's_id'=> $request->s_id]);
         $pharma_ids = array();

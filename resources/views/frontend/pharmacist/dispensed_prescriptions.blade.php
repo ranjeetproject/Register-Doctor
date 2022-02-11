@@ -44,7 +44,7 @@
                                                     <option value="">Select Prescription No.</option>
 
                                                    @foreach($priscriptions as $prisc)
-                                                   <option value="{{$prisc->case_id}}">{{$prisc->priscription_id}}</option>
+                                                   <option value="{{$prisc->case_id}}">A{{$prisc->priscription_id}}</option>
                                                    @endforeach
 
                                                 </select>
@@ -231,9 +231,9 @@ $('#case_no').on('change', function(){
                     
                     $('#add-tr tbody').html('<tr class="only-remv"><td>'+prescription[i]['drug']+'</td><td>'+prescription[i]['dose']+'</td><td>'+prescription[i]['frequency']+'</td><td>'+prescription[i]['route']+'</td><td>'+prescription[i]['duration']+'</td><td> '+prescription[i]['comments']+'</td></tr>');
                 }
-                $('#sub_prisc').attr('href',"{{url('patient/pharmacies')}}/?c_id="+res.case_details[0].case_id+"&s_id="+presc_no);
+                //$('#sub_prisc').attr('href',"{{url('patient/pharmacies')}}/?c_id="+res.case_details[0].case_id+"&s_id="+presc_no);
                 //var d_name = $('#presc_no').html();
-                $('#presc_no').html( '<strong>Prescription No.: </strong>'+presc_no);
+                $('#presc_no').html( '<strong>Prescription No.: </strong> A'+presc_no);
                 date_time =  date_time.split(" ");   
                 var my_date  = date_time[0];
                 var my_time  = date_time[1];

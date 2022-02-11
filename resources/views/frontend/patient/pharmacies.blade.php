@@ -18,18 +18,18 @@
                         <div class="col-sm-12">
                             <ul class="nav nav-pills" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#Posted-to-You">
+                                    <a class="nav-link" data-toggle="tab" href="#Posted-to-You">
                                         Posted to You <br><small> Up to 2 - 3 working days</small>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab"
+                                    <a class="nav-link active" data-toggle="tab"
                                         href="#Electronic-Direct-to-Pharmacy-Rapid">Electronic Direct to
                                         Pharmacy<br>Rapid</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="Posted-to-You">
+                                <div class="tab-pane fade" id="Posted-to-You">
                                     <ul>
                                         <li>Prescription will be mailed to you by your Doctor</li>
                                         <li>Takes up to ~2-3 days (usually 1-2 days) depending on postal service</li>
@@ -64,7 +64,7 @@
                                 </div>
 
 
-                                <div class="tab-pane fade" id="Electronic-Direct-to-Pharmacy-Rapid">
+                                <div class="tab-pane fade show active" id="Electronic-Direct-to-Pharmacy-Rapid">
                                     <ul>
                                         <li>In a hurry? Prescription will be sent electronically to one of our Special
                                             Pharmacists</li>
@@ -108,6 +108,21 @@
                                                     </form>
                                                 </div> -->
                                     </div>
+
+                                    {{-- <form>
+                                        <div class="form-group row Speciality-form">
+                                            <label class="col col-form-label">Pharmacy Name :</label>
+                                            <div class="col-sm-7">
+                                             <input type="text" name="pharmacy_name"
+                                                    class="form-control"
+                                                    value="" id="pharmacy_name" placeholder="Pharmacy Name">   
+                                               
+                                            </div>
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-primary btn-block" id="search">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form> --}}
 
                                     @foreach ($data['pharmacies'] as $pharmaci)
 
@@ -170,9 +185,9 @@
                                                                         Sunday
                                                                     </th>
                                                                     <td>
-                                                                        {{ $pharmaci->openingTime->sunday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->sunday_opening_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->sunday_opening_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->sunday_opening_time)) : 'N/A' }}
                                                                         -
-                                                                        {{ $pharmaci->openingTime->sunday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->sunday_closing_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->sunday_closing_time != '00:00:00')? date('h:i a', strtotime($pharmaci->openingTime->sunday_closing_time)) : 'N/A' }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -180,9 +195,9 @@
                                                                         Monday
                                                                     </th>
                                                                     <td>
-                                                                        {{ $pharmaci->openingTime->monday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->monday_opening_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->monday_opening_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->monday_opening_time)) : 'N/A' }}
                                                                         -
-                                                                        {{ $pharmaci->openingTime->monday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->monday_closing_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->monday_closing_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->monday_closing_time)) : 'N/A' }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -190,9 +205,9 @@
                                                                         Tuesday
                                                                     </th>
                                                                     <td>
-                                                                        {{ $pharmaci->openingTime->tuesday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->tuesday_opening_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->tuesday_opening_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->tuesday_opening_time)) : 'N/A' }}
                                                                         -
-                                                                        {{ $pharmaci->openingTime->tuesday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->tuesday_closing_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->tuesday_closing_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->tuesday_closing_time)) : 'N/A' }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -200,9 +215,9 @@
                                                                         Wednesday
                                                                     </th>
                                                                     <td>
-                                                                        {{ $pharmaci->openingTime->wednesday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->wednesday_opening_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->wednesday_opening_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->wednesday_opening_time)) : 'N/A' }}
                                                                         -
-                                                                        {{ $pharmaci->openingTime->wednesday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->wednesday_closing_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->wednesday_closing_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->wednesday_closing_time)) : 'N/A' }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -210,9 +225,9 @@
                                                                         Thursday
                                                                     </th>
                                                                     <td>
-                                                                        {{ $pharmaci->openingTime->thursday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->thursday_opening_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->thursday_opening_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->thursday_opening_time)) : 'N/A' }}
                                                                         -
-                                                                        {{ $pharmaci->openingTime->thursday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->thursday_closing_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->thursday_closing_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->thursday_closing_time)) : 'N/A' }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -220,9 +235,9 @@
                                                                         Friday
                                                                     </th>
                                                                     <td>
-                                                                        {{ $pharmaci->openingTime->friday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->friday_opening_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->friday_opening_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->friday_opening_time)) : 'N/A' }}
                                                                         -
-                                                                        {{ $pharmaci->openingTime->friday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->friday_closing_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->friday_closing_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->friday_closing_time)) : 'N/A' }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -230,9 +245,9 @@
                                                                         Saturday
                                                                     </th>
                                                                     <td>
-                                                                        {{ $pharmaci->openingTime->saturday_opening_time ? date('h:i a', strtotime($pharmaci->openingTime->saturday_opening_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->saturday_opening_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->saturday_opening_time)) : 'N/A' }}
                                                                         -
-                                                                        {{ $pharmaci->openingTime->saturday_closing_time ? date('h:i a', strtotime($pharmaci->openingTime->saturday_closing_time)) : '' }}
+                                                                        {{ ($pharmaci->openingTime->saturday_closing_time != '00:00:00') ? date('h:i a', strtotime($pharmaci->openingTime->saturday_closing_time)) : 'N/A' }}
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -289,5 +304,7 @@
                 }
             });
         });
+
+         
     </script>
 @endsection
