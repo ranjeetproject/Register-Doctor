@@ -34,11 +34,13 @@
                                               
                                              
                                               <td>Patient’s<br> Name  </td>
-                                              <td>Case No.</td>
-                                              <td> View <br>Case</td>
-                                              <td>View Medical <br>Record</td>
+                                               <td>Patient’s<br> Email  </td>
+                                               <td>Case No.</td>
+                                               <td> View <br>Case</td> 
+                                               <td>View Medical <br>Record</td>
+                                             
                                            
-                                              <td style="min-width: 250px;"> Action</td>
+                                              <td style="min-width: 150px;"> Action</td>
                                           </tr>
                                       </thead>
                                       <tbody>
@@ -55,21 +57,38 @@
                                         <tr >
                                            
                                             <td>{{$quick_question->user->name}}</td>
+                                            <td>{{$quick_question->user->email}}</td>
                                             <td>{{$quick_question->case_id}}</td>
                                             
-                                            <td><a href="{{route('doctor.view-case',$quick_question->case_id)}}" target="_blank" ><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td> 
+                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>
+                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>  
                                    
-                                            <td class="masg-dep-tol">
+                                            {{-- <td class="masg-dep-tol">
                                                
                                                 <a href="{{route('doctor.chats',$quick_question->case_id)}}" class="btn p-btn "><span>Reply</span></a>
                                                 @if(empty($quick_question->accept_status))
                                                 <a href="{{route('doctor.doctor-accept-case',$quick_question->id)}}" class="btn blue-button btn-primary">Accept</a>
                                                 @else
                                                 <b class="text-success">Accepted</b>
+                                                <a href="{{ route('doctor.cancel-booking', $quick_question->case_id) }}"
+                                                                class="btn Decline">Decline</a><br>
                                                 @endif
+                                                
+                                             </td> --}}
+                                            <td class="masg-dep-tol">
 
-                                             </td>
+                                                @if (empty($quick_question->accept_status))
+                                                    <a href="{{ route('doctor.doctor-accept-case', $quick_question->id) }}"
+                                                        target="_blank"
+                                                        class="btn blue-button Finish-Exchange">Accept</a>
+                                                @endif
+                                                <a href="{{ route('doctor.cancel-booking', $quick_question->case_id) }}"
+                                                    class="btn Decline">Decline</a><br>
+                    
+                                                <a href="{{ route('doctor.chats', $quick_question->case_id) }}"
+                                                    target="_blank"
+                                                    class="btn blue-button Finish-Exchange">Message</a>
+                                            </td>
                                              
                                         </tr>
                                         @endforeach
@@ -84,7 +103,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <nav aria-label="Page navigation example">
-                                    {{ $quick_questions->onEachSide(1)->links() }}
+                                    {{$quick_questions->links()}}
                                   </nav>
                             </div>
                         </div>
