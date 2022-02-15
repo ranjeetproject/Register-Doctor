@@ -1691,3 +1691,12 @@ a.Set-Opening-Hours.pp-oh-btn{
 .pharmacies-item-pagination ul.pagination li::after{
     display: none !important;
 }
+.phar-sa-txt span{
+    color: #fff !important;
+    background-color: #ff4d0f;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    display: inline-block;
+}

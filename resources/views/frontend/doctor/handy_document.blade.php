@@ -48,8 +48,8 @@
                                                 <td>{{ date('dS M Y', strtotime($handy_doc->created_at)) }}</td>
                                                 <td class="for-divider">
                                                     @if ($handy_doc->file_name)
-                                                    <a href="{{ route('doctor.view-handy-document',['id'=>$handy_doc->id]) }}"><i class="fal fa-eye"></i></a>
-                                                    <a href="{{ route('download.handy_doc',['id'=>encrypt($handy_doc->id)]) }}"><i class="fal fa-cloud-download"></i></a>
+                                                    <a href="{{ route('doctor.view-handy-document',['id'=>$handy_doc->id]) }}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></i></a>
+                                                    <a href="{{ route('download.handy_doc',['id'=>encrypt($handy_doc->id)]) }}"><img src="{{ asset('public/images/frontend/images/download-icon.png')}}" width="26" alt=""></a>
                                                     @else
                                                     <a href="{{ $handy_doc->website }}" target="_blank"><i class="fal fa-eye"></i></a>
                                                     @endif

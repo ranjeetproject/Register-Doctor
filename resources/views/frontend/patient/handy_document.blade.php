@@ -46,7 +46,7 @@
                                             <tr>
                                                 <td>{{ $handy_doc->topic_name }}</td>
                                                 <td>{{ date('d M Y', strtotime($handy_doc->created_at)) }}</td>
-                                                <td class="for-divider"><a href="{{ route('patient.view-handy-document',['id'=>$handy_doc->id]) }}"><i class="fal fa-eye"></i></a><a href="{{ route('download.handy_doc',['id'=>encrypt($handy_doc->id)]) }}"><i class="fal fa-cloud-download"></i></a></td>
+                                                <td class="for-divider"><a href="{{ route('patient.view-handy-document',['id'=>$handy_doc->id]) }}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a><a href="{{ route('download.handy_doc',['id'=>encrypt($handy_doc->id)]) }}"><img src="{{ asset('public/images/frontend/images/download-icon.png')}}" width="26" alt=""></a></td>
                                             </tr>
                                             @empty
                                             <tr>

@@ -37,12 +37,12 @@
                         <div class="card-cont">
                             <div class="dash-icons-bx">
                                 <div class="dash-icon-badge">
-                                    <img src="{{ asset('public/images/frontend/images/Prescription-icon.png') }}" width="25" alt="">
-                                    <span>3</span>
-                                </div>
-                                <div class="dash-icon-badge">
                                     <img src="{{ asset('public/images/frontend/images/QQ-icon.png') }}" alt="">
                                     <span>2</span>
+                                </div>
+                                <div class="dash-icon-badge">
+                                    <img src="{{ asset('public/images/frontend/images/Prescription-icon.png') }}" width="25" alt="">
+                                    <span>3</span>
                                 </div>
                             </div>
                             <h4>Quick Questions + General Prescriptions<br><span>Any Doctor to Take</span></h4>

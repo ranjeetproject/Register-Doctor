@@ -111,14 +111,14 @@
                                                     Quick Questions
                                                     <br>
                                                     <p>Max 3 Exchanges</p><br>
-                                                    <img src="{{ asset('public/images/frontend/images/Quick-Question.png')}}" alt="">
+                                                    <img src="{{ asset('public/images/frontend/images/QQ-icon.png')}}" width="32" alt="">
                                                     @endif
 
                                                     @if($case->questions_type == 4)
                                                     Typed Q&A
                                                     <br>
                                                     <p>Max 3 Exchanges</p><br>
-                                                    <img src="{{ asset('public/images/frontend/images/Booked-Question.png')}}" alt="">
+                                                    <img src="{{ asset('public/images/frontend/images/QA-icon.png')}}"  width="32" alt="">
                                                     @endif
                                                 </a>
                                               @endif
@@ -134,8 +134,8 @@
                                            <td>{{$case->user->name}}</td>
                                             <td>{{$case->case_id}}</td>
 
-                                            <td><a href="{{route('doctor.view-case',$case->case_id)}}"><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="{{route('doctor.view-medical-recorde',$case->case_id)}}"><i class="fal fa-eye"></i></a></td>
+                                            <td><a href="{{route('doctor.view-case',$case->case_id)}}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td>
+                                            <td><a href="{{route('doctor.view-medical-recorde',$case->case_id)}}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td>
 
                                             <td class="masg-dep-tol apt-btn-group">
                                                 @if(!empty($start_time))

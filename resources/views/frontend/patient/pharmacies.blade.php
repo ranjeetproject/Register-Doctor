@@ -140,6 +140,7 @@
                                                 <p><span>Contact : </span> {{ $pharmaci->profile->telephone1 }}</p>
                                                 <p><span>Email : </span> {{ $pharmaci->email }}</p>
                                                 <p><span>Opening hours uk : </span></p>
+                                                <p class="phar-sa-txt"><span>Special availability : 14 Feb 2022 </span></p>
                                                 <form action="">
                                                     @csrf
                                                     <p><span>Delivery options : </span>
