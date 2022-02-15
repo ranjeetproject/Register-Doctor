@@ -1077,9 +1077,10 @@ $get_day = $get_day->delete();
 
      public function prescriptions(Request $request)
     {
-        $quick_questions = PatientCase::where('case_type',2)->where(function($query){
-          $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_id',null);
-        })->orderBy('id','desc')->paginate(6);
+        // $quick_questions = PatientCase::where('case_type',2)->where(function($query){
+        //   $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_id',null);
+        // })->orderBy('id','desc')->paginate(6);
+        $quick_questions = PatientCase::where('questions_type',3)->where('doctor_id',null)->paginate(6);
         return view('frontend.doctor.prescriptions', compact('quick_questions'));
 
     }
