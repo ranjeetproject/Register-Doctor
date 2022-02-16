@@ -186,7 +186,7 @@ class PatientController extends Controller
                 "questions_type"=>"required",
                 // "case_file.*"=>"nullable|max:2000",
                 // "case_file"=>"image|mimes:jpeg,png,jpg|max:2000",
-                
+
             ]);
 
             if ($validator->fails()) {
@@ -243,7 +243,7 @@ class PatientController extends Controller
                       Session::flash('Error-toastr','File Formate Not Supported');
                       return redirect()->back();
                     }
-                  
+
                 }
               }
             }
@@ -548,6 +548,7 @@ class PatientController extends Controller
     {
         $success = '';
         $error = '';
+        $search = $request->search;
         if(isset($request->post_sub)){
           //echo $request->c_id .' '.$request->s_id;
           if($request->c_id !='' && $request->s_id != ''){
@@ -577,9 +578,19 @@ class PatientController extends Controller
             $error = 'There is some problem please try again';
           }
         }
-        $pharmacies = User::whereRole(3)->latest()->paginate(1);
-        $pharmacies->appends(['c_id'=>$request->c_id, 
+        $pharmacies = User::whereRole(3)->when($search, function ($query) use ($search) {
+            $query->where('email','LIKE', "%$search%")
+                ->orWhereHas('profile', function($query) use ($search){
+                    $query->where('pharmacy_name', 'LIKE', "%$search%")
+                        ->orwhere('location','LIKE', "%$search%");
+                });
+        })
+        ->latest()->paginate(1);
+        $pharmacies->appends(['c_id'=>$request->c_id,
         's_id'=> $request->s_id]);
+        if($search){
+            $pharmacies->appends(['search'=>$search]);
+        }
         $pharma_ids = array();
         $pharma_req = pharma_req_prescription::where('priscription_id','=',$request->s_id)->where('case_id','=',$request->c_id)->get();
         foreach($pharma_req as $ph){
@@ -925,7 +936,7 @@ class PatientController extends Controller
     {
         $user = Auth::guard('sitePatient')->user();
         $last_symptroms = SymptromsDetails::where('user_id',$user->id)->latest()->first();
-      
+
         if($request->isMethod('post')){
             // return $request->all();
             $case = PatientCase::where('case_id',$case_id)->first();
@@ -1215,6 +1226,6 @@ class PatientController extends Controller
       $patientPrescriptionCount = Prescription::where('status','=','y')->where('read','=',0)->count();
       $patientPrescription = Prescription::where('case_no',$request->case_id)->update(['read'=>1]);
       $remainingPatientPrescription = abs($patientPrescriptionCount - $patientPrescription);
-      return response()->json($remainingPatientPrescription); 
+      return response()->json($remainingPatientPrescription);
     }
 }

@@ -109,20 +109,26 @@
                                                 </div> -->
                                     </div>
 
-                                    {{-- <form>
+                                    <form>
+                                        @if (request()->c_id)
+                                        <input type="hidden" name="c_id" value="{{ request()->c_id }}">
+                                        @endif
+                                        @if (request()->s_id)
+                                        <input type="hidden" name="s_id" value="{{ request()->s_id }}">
+                                        @endif
                                         <div class="form-group row Speciality-form">
                                             <label class="col col-form-label">Pharmacy Name :</label>
                                             <div class="col-sm-7">
-                                             <input type="text" name="pharmacy_name"
+                                             <input type="text" name="search"
                                                     class="form-control"
-                                                    value="" id="pharmacy_name" placeholder="Pharmacy Name">   
-                                               
+                                                    value="{{ request()->search }}" id="pharmacy_name" placeholder="Search">
+
                                             </div>
                                             <div class="col">
                                                 <button type="submit" class="btn btn-primary btn-block" id="search">Submit</button>
                                             </div>
                                         </div>
-                                    </form> --}}
+                                    </form>
 
                                     @foreach ($data['pharmacies'] as $pharmaci)
 
@@ -262,7 +268,7 @@
                                         {{$data['pharmacies']->links()}}
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                         </div>
@@ -306,6 +312,6 @@
             });
         });
 
-         
+
     </script>
 @endsection
