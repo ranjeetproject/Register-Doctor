@@ -60,8 +60,8 @@
                                             <td>{{$quick_question->user->email}}</td>
                                             <td>{{$quick_question->case_id}}</td>
                                             
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td>  
+                                            <td><a href="#"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td>
+                                            <td><a href="#"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td>  
                                    
                                             {{-- <td class="masg-dep-tol">
                                                

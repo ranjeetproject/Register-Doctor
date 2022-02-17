@@ -57,8 +57,8 @@
                                             <td>{{$quick_question->user->name}}</td>
                                             <td>{{$quick_question->case_id}}</td>
                                             
-                                            <td><a href="{{route('doctor.view-case',$quick_question->case_id)}}" target="_blank" ><i class="fal fa-eye"></i></a></td>
-                                            <td><a href="#"><i class="fal fa-eye"></i></a></td> 
+                                            <td><a href="{{route('doctor.view-case',$quick_question->case_id)}}" target="_blank" ><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td>
+                                            <td><a href="#"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td> 
                                    
                                             <td class="masg-dep-tol">
                                                

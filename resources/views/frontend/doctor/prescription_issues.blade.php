@@ -51,8 +51,8 @@
                                             <td>{{$case->user->name}}</td>
                                             <td>{{$case->case_id}}</td>
 
-                                            <td><a target="_blank" href="{{url('doctor/view-case')}}/{{$case->case_id}}"><i class="fal fa-eye"></i></a></td>
-                                            <td><a target="_blank" href="{{url('doctor/view-medical-recorde')}}/{{$case->case_id}}"><i class="fal fa-eye"></i></a></td>
+                                            <td><a target="_blank" href="{{url('doctor/view-case')}}/{{$case->case_id}}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td>
+                                            <td><a target="_blank" href="{{url('doctor/view-medical-recorde')}}/{{$case->case_id}}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td>
                                             <td>{{$case->prescription[0]->prescription_no}}</td>
                                             <td class="masg-dep-tol">
                                                 <!-- <button class="btn Decline p-btn"><img src="{{ asset('public/images/frontend/images/P-icon.png')}}" alt=""><span>Open<br>Prescription</span></button>

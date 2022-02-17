@@ -126,16 +126,16 @@
                                                                         Quick Questions
                                                                         <br>
                                                                         <p>Max 3 Exchanges</p><br>
-                                                                        <img src="{{ asset('public/images/frontend/images/Quick-Question.png') }}"
-                                                                            alt="">
+                                                                        <img src="{{ asset('public/images/frontend/images/QQ-icon.png') }}"
+                                                                            alt="" width="34">
                                                                     @endif
 
                                                                     @if ($case->questions_type == 4)
                                                                         Typed Q&A
                                                                         <br>
                                                                         <p>Max 3 Exchanges</p><br>
-                                                                        <img src="{{ asset('public/images/frontend/images/Booked-Question.png') }}"
-                                                                            alt="">
+                                                                        <img src="{{ asset('public/images/frontend/images/QA-icon.png') }}"
+                                                                            alt="" width="34">
                                                                     @endif
                                                                 </a>
                                                             @else
@@ -165,9 +165,9 @@
                                                     </td>
                                                     <td>
                                                         @if ($case->accept_status == 1)
-                                                            <font style="font-size: 16px;">Confirmed</font> <br>
+                                                            <font style="font-size: 13px;">Confirmed</font> <br>
                                                             <strong
-                                                                style="font-size: 18px;">{{ date('d F Y', strtotime($case->booking_date)) }}
+                                                                style="font-size: 14px;">{{ date('d F Y', strtotime($case->booking_date)) }}
 
 
                                                             @else

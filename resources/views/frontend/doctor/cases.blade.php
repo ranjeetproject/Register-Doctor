@@ -133,10 +133,10 @@
                                                         </td>
 
                                                         <td><a href="{{ route('doctor.view-case', $case->case_id) }}"
-                                                                target="_blank"><i class="fal fa-eye"></i></a></td>
+                                                                target="_blank"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td>
                                                         {{-- @if (Request::segment(3) == 'live-chat' || Request::segment(3) == 'live-video') --}}
                                                         <td><a href="{{ route('doctor.view-medical-recorde', $case->case_id) }}"
-                                                                target="_blank"><i class="fal fa-eye"></i></a></td>
+                                                                target="_blank"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a></td>
                                                         {{-- @endif --}}
 
                                                         <td class="masg-dep-tol">
