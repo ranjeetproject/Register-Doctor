@@ -1700,3 +1700,35 @@ a.Set-Opening-Hours.pp-oh-btn{
     font-size: 13px;
     display: inline-block;
 }
+.mr-item-bx{
+    padding: 20px;
+}
+.Medical-Record-page .mr-item-bx{
+    border: 0;
+}
+.Medical-Record-page .comm-title-details{
+    padding-top: 0 !important;
+}
+.Medical-Record-page .card .card-body table tbody tr td {
+    line-height: inherit !important;
+    vertical-align: middle!important;
+}
+.mr-scroll-bar{
+    max-height: 190px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.mr-scroll-bar::-webkit-scrollbar-track{
+	border-radius: 10px;
+	background-color: rgb(218, 218, 218);
+}
+
+.mr-scroll-bar::-webkit-scrollbar{
+	width: 8px;
+	background-color: rgb(218, 218, 218);
+}
+
+.mr-scroll-bar::-webkit-scrollbar-thumb{
+	border-radius: 8px;
+	background-color: #3c4f60;
+}
