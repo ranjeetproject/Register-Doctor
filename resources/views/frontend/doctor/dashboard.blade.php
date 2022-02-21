@@ -45,7 +45,7 @@
                                     <span>3</span>
                                 </div>
                             </div>
-                            <h4>Quick Questions + General Prescriptions<br><span>Any Doctor to Take</span></h4>
+                            <h4>Type Quick Question + General Prescriptions<br><span>Any Doctor to Take</span></h4>
                         </div>
                     </a>
 

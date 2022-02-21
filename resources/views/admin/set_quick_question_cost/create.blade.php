@@ -4,15 +4,15 @@
 
 @section('body')
 
-@section('header', 'Add Set Quick Question Cost')
+@section('header', 'Type Quick Question Cost And Time')
 @section('badge')
-    <li class="breadcrumb-item"><a href="{{ route('admin.create-set_quick_question_cost') }}">Add Set Quick Question Cost</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.create-set_quick_question_cost') }}"> Type Quick Question Cost And Time</a></li>
 @endsection
 
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Set Quick Question Cost Add</h3>
+        <h3 class="card-title">Type Quick Question Cost And Time</h3>
     </div>
     <div class="card-body">
     @if(@$quick_question_cost->id)
@@ -28,7 +28,7 @@
             <div class="card-body">
 
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="set_quick_question_cost">Set Quick Question Cost <span
+                    <label class="col-md-2 form-control-label" for="set_quick_question_cost">Type Quick Question Cost <span
                             class="text-danger">*</span></label>
 
                     <div class="col-md-10">
@@ -37,6 +37,20 @@
                             value="{{ @$quick_question_cost->set_quick_question_cost }}">
                         @error('set_quick_question_cost')
                             <span class="error invalid-feedback" id="error_set_quick_question_cost">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <!--col-->
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 form-control-label" for="set_quick_question_time">Type Quick Question Time (HRS) <span
+                            class="text-danger">*</span></label>
+
+                    <div class="col-md-10">
+                        <input class="form-control @error('set_quick_question_time') is-invalid @enderror" type="text" name="set_quick_question_time"
+                            id="set_quick_question_time" placeholder="Please enter set quick question time in hours"
+                            value="{{ @$quick_question_cost->set_quick_question_time }}">
+                        @error('set_quick_question_time')
+                            <span class="error invalid-feedback" id="error_set_quick_question_time">{{ $message }}</span>
                         @enderror
                     </div>
                     <!--col-->

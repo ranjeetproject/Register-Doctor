@@ -230,10 +230,24 @@
                                         </div>
                                         <div class="col-sm-12 mb-2">
                                             <div class="form-group">
-                                                <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Quick question</label>
+                                                <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition">Type Quick Question</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
-                                                        <!--<input type="checkbox" class="" >  Set your own fee but--> Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{@$quick_question_cost->set_quick_question_cost}}">  First Doctor to Take Case
+                                                        Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{@$quick_question_cost->set_quick_question_cost}}"> Set your max turnaround time
+                                                        for response in Hours
+                                                        @php
+                                                        $get_dr_quick_question_time = explode(' ',$user->profile->dr_quick_question_time);
+                                                        // print_r($get_dr_turnaround_time);
+                                                        @endphp
+
+                                                        <select class="form-control  form-control -lg" name="dr_quick_question_time">
+                                                            @for($i = 1; $i <= 10; $i++)
+                                                            <option value="{{$i}}" {{(isset($get_dr_quick_question_time[0]) && $get_dr_quick_question_time[0]==$i) ? 'selected':''}}>{{$i}}</option>
+                                                            @endfor
+                                                        </select> <select class="form-control  form-control -lg" name="dr_quick_question_time_type">
+                                                            <option value="hours" {{(isset($get_dr_quick_question_time[1]) && $get_dr_quick_question_time[1]=='hours') ? 'selected':''}}>Hours</option>
+
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="Notifications-on-of">

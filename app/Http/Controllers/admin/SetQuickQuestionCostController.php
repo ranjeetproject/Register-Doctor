@@ -24,10 +24,12 @@ class SetQuickQuestionCostController extends Controller
     	if ($request->isMethod('post')) 
         {
             $validator = $request->validate([
-                "set_quick_question_cost"=>"required"
+                "set_quick_question_cost"=>"required",
+                "set_quick_question_time"=>"required|numeric"
               ]);
               $quick_question_cost = new SetQuickQuestionCost;
               $quick_question_cost->set_quick_question_cost = $request->set_quick_question_cost;
+              $quick_question_cost->set_quick_question_time = $request->set_quick_question_time;
   
               $quick_question_cost->save();
               Session::flash('Success-toastr', 'Successfully added.');
@@ -41,10 +43,12 @@ class SetQuickQuestionCostController extends Controller
         if ($request->isMethod('post')) {
             $validator = $request->validate(
            [
-              "set_quick_question_cost"=>"required"
+              "set_quick_question_cost"=>"required",
+              "set_quick_question_time"=>"required|numeric"
             ]);
 
         $quick_question_cost->set_quick_question_cost = $request->set_quick_question_cost;
+        $quick_question_cost->set_quick_question_time = $request->set_quick_question_time;
         $quick_question_cost->save();
         Session::flash('Success-toastr', 'Successfully Updated.');
         return redirect()->route('admin.create-set_quick_question_cost');

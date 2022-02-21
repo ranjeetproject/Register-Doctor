@@ -113,6 +113,7 @@ class DoctorController extends Controller
 
     if($request->isMethod('post'))
     {
+        
             $form_name = $request->form_name;
 
             // dd($request->all());
@@ -189,6 +190,7 @@ class DoctorController extends Controller
        if(!empty($request->dr_signature) ) $profile->dr_signature = $request->dr_signature;
 
        if(!empty($request->dr_turnaround_time) && !empty($request->dr_turnaround_time_type)) $profile->dr_turnaround_time = $request->dr_turnaround_time.' '.$request->dr_turnaround_time_type;
+       if(!empty($request->dr_quick_question_time) && !empty($request->dr_quick_question_time_type)) $profile->dr_quick_question_time = $request->dr_quick_question_time.' '.$request->dr_quick_question_time_type;
 
 
        if(!empty($request->telephone1) ) $profile->telephone1 = $request->telephone1;
@@ -1080,7 +1082,7 @@ $get_day = $get_day->delete();
         // $quick_questions = PatientCase::where('case_type',2)->where(function($query){
         //   $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_id',null);
         // })->orderBy('id','desc')->paginate(6);
-        $quick_questions = PatientCase::where('questions_type',3)->where('doctor_id',null)->paginate(6);
+        $quick_questions = PatientCase::leftJoin('user_profiles', 'user_profiles.user_id', '=', 'patient_cases.user_id')->where('questions_type',3)->where('doctor_id',null)->where('user_profiles.dr_standard_fee_notification','=',1)->paginate(6);
         return view('frontend.doctor.prescriptions', compact('quick_questions'));
 
     }
