@@ -116,7 +116,7 @@
                                         @if (request()->s_id)
                                         <input type="hidden" name="s_id" value="{{ request()->s_id }}">
                                         @endif
-                                        <div class="form-group row Speciality-form">
+                                        <div class="form-group row Speciality-form mt-4">
                                             <label class="col col-form-label">Pharmacy Name :</label>
                                             <div class="col-sm-7">
                                              <input type="text" name="search"

@@ -91,7 +91,7 @@
                                                         
                                                     </td>
                                                     <td>
-                                                        <a href="{{route('patient.view-case',$case->case_id)}}"><i class="fal fa-eye"></i></a>
+                                                        <a href="{{route('patient.view-case',$case->case_id)}}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a>
                                                     </td>
                                               
                                                     <td>
@@ -192,7 +192,7 @@
                                                         
                                                     </td>
                                                     <td>
-                                                        <a href="{{route('patient.view-case',$case->case_id)}}"><i class="fal fa-eye"></i></a>
+                                                        <a href="{{route('patient.view-case',$case->case_id)}}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a>
                                                     </td>
                                               
                                                     <td>
@@ -306,7 +306,7 @@
                                                         
                                                     </td>
                                                     <td>
-                                                        <a href="{{route('patient.view-case',$case->case_id)}}"><i class="fal fa-eye"></i></a>
+                                                        <a href="{{route('patient.view-case',$case->case_id)}}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a>
                                                     </td>
                                               
                                                     <td>

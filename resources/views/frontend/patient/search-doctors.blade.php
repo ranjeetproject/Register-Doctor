@@ -38,7 +38,8 @@
                                     <div class="ask-a-d">
                                         <span>
                                             ASK ALL DOCTORS
-                                        </span> <img src="images/Hello-icon.png" alt="">
+                                        </span> 
+                                        <img src="{{ asset('public/images/frontend/images/Hello-icon.png')}}" alt="">
                                     </div>
                                 </div>
                                 <ul>
