@@ -42,7 +42,7 @@
                     <!--col-->
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="set_quick_question_time">Type Quick Question Time (HRS) <span
+                    <label class="col-md-2 form-control-label" for="set_quick_question_time">Type Quick Question Time For Admin (HRS) <span
                             class="text-danger">*</span></label>
 
                     <div class="col-md-10">
@@ -51,6 +51,20 @@
                             value="{{ @$quick_question_cost->set_quick_question_time }}">
                         @error('set_quick_question_time')
                             <span class="error invalid-feedback" id="error_set_quick_question_time">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <!--col-->
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 form-control-label" for="set_quick_question_time_doctor">Type Quick Question Time For Doctor (HRS) <span
+                            class="text-danger">*</span></label>
+
+                    <div class="col-md-10">
+                        <input class="form-control @error('set_quick_question_time_doctor') is-invalid @enderror" type="text" name="set_quick_question_time_doctor"
+                            id="set_quick_question_time_doctor" placeholder="Please enter set quick question time in hours"
+                            value="{{ @$quick_question_cost->set_quick_question_time_doctor }}">
+                        @error('set_quick_question_time_doctor')
+                            <span class="error invalid-feedback" id="error_set_quick_question_time_doctor">{{ $message }}</span>
                         @enderror
                     </div>
                     <!--col-->
