@@ -635,12 +635,12 @@ font-size: 18px;
 .ask-all-d .ask-a-d {
     position: relative;
     color: #0047a8;
+    display: flex;
+    align-items: flex-end;
 }
 .ask-all-d .ask-a-d span{
     font-weight: 700;
     font-size: 20px;
-    position: relative;
-    bottom: -82px;
 }
 
 tr.only-remv:after{
