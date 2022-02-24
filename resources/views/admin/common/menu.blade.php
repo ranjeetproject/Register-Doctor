@@ -148,7 +148,7 @@
             <a href="{{route('admin.create-set_quick_question_cost')}}" class="nav-link {{ Request::is('admin/set_quick_question_cost/create*') ? 'active' : '' }}">
             <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
               <p>
-               Set Quick Question Cost
+               Type Quick Question Cost
               </p>
             </a>
           </li>

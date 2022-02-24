@@ -11,6 +11,10 @@ class PatientCase extends Model
         return $this->hasOne('App\User','id','user_id')->withDefault();
     }
 
+    public function user_profile()
+    {
+        return $this->hasOne('App\Models\UserProfile','user_id','user_id');
+    }
     public function prescription()
     {
         return $this->hasMany('App\Prescription','case_no','case_id');
