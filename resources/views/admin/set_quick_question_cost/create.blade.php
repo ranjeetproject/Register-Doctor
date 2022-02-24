@@ -89,5 +89,100 @@
 
     <!-- /.card-footer-->
 </div>
-
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>QQ cost ($)</th>
+                <th>End Date</th>
+                <th>Time Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>20-02-2022</td>
+                <td>$30</td>
+                <td>28-02-2022</td>
+                <td>01:00 PM</td>
+            </tr>
+            <tr>
+                <td>20-02-2022</td>
+                <td>$30</td>
+                <td>28-02-2022</td>
+                <td>01:00 PM</td>
+            </tr>
+            <tr>
+                <td>20-02-2022</td>
+                <td>$30</td>
+                <td>28-02-2022</td>
+                <td>01:00 PM</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>QQ cost ($)</th>
+                <th>End Date</th>
+                <th>Time Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>20-02-2022</td>
+                <td>$30</td>
+                <td>28-02-2022</td>
+                <td>01:00 PM</td>
+            </tr>
+            <tr>
+                <td>20-02-2022</td>
+                <td>$30</td>
+                <td>28-02-2022</td>
+                <td>01:00 PM</td>
+            </tr>
+            <tr>
+                <td>20-02-2022</td>
+                <td>$30</td>
+                <td>28-02-2022</td>
+                <td>01:00 PM</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>QQ cost ($)</th>
+                <th>End Date</th>
+                <th>Time Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>20-02-2022</td>
+                <td>$30</td>
+                <td>28-02-2022</td>
+                <td>01:00 PM</td>
+            </tr>
+            <tr>
+                <td>20-02-2022</td>
+                <td>$30</td>
+                <td>28-02-2022</td>
+                <td>01:00 PM</td>
+            </tr>
+            <tr>
+                <td>20-02-2022</td>
+                <td>$30</td>
+                <td>28-02-2022</td>
+                <td>01:00 PM</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 @endsection
