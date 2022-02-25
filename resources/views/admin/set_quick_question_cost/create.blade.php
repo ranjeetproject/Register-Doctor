@@ -18,9 +18,9 @@
         <form role="form" action="{{route('admin.save-set_quick_question_cost')}}" method="POST" enctype="multipart/form-data"
             id="cmsForm">
             {{ csrf_field() }}
-    
-    <input class="form-control" type="hidden" name="id"
-                            value="{{ @$quick_question_cost->id }}">
+
+    {{-- <input class="form-control" type="hidden" name="id"
+                            value="{{ @$quick_question_cost->id }}"> --}}
             <div class="card-body">
 
                 <div class="form-group row">
@@ -29,7 +29,7 @@
 
                     <div class="col-md-10">
                         <input class="form-control @error('set_quick_question_cost') is-invalid @enderror" type="text" name="set_quick_question_cost"
-                            id="set_quick_question_cost" placeholder="Please enter set quick question cost">
+                            placeholder="Please enter set quick question cost" value="{{ $quick_question_cost->set_quick_question_cost }}">
                         @error('set_quick_question_cost')
                             <span class="error invalid-feedback" id="error_set_quick_question_cost">{{ $message }}</span>
                         @enderror
@@ -42,7 +42,7 @@
 
                     <div class="col-md-10">
                         <input class="form-control @error('set_quick_question_time') is-invalid @enderror" type="text" name="set_quick_question_time"
-                            id="set_quick_question_time" placeholder="Please enter set quick question time in hours">
+                            id="set_quick_question_time" placeholder="Please enter set quick question time in hours"  value="{{ $quick_question_cost->set_quick_question_time }}">
                         @error('set_quick_question_time')
                             <span class="error invalid-feedback" id="error_set_quick_question_time">{{ $message }}</span>
                         @enderror
@@ -55,7 +55,7 @@
 
                     <div class="col-md-10">
                         <input class="form-control @error('set_quick_question_time_doctor') is-invalid @enderror" type="text" name="set_quick_question_time_doctor"
-                            id="set_quick_question_time_doctor" placeholder="Please enter set quick question time in hours">
+                            id="set_quick_question_time_doctor" placeholder="Please enter set quick question time in hours" value="{{ $quick_question_cost->set_quick_question_time_doctor }}">
                         @error('set_quick_question_time_doctor')
                             <span class="error invalid-feedback" id="error_set_quick_question_time_doctor">{{ $message }}</span>
                         @enderror
@@ -68,9 +68,9 @@
                 <div class="col text-right">
                     {{-- <a href="{{ url()->previous() }}" class="btn btn-outline-danger"><i
                             class="far fa-arrow-alt-circle-left"></i> Cancel</a> --}}
-                   
+
                     <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Submit</button>
-                    
+
 
                 </div>
             </div>
@@ -91,15 +91,16 @@
             </tr>
         </thead>
         <tbody>
-        @foreach ($quick_question_costs as $quick_question_cost)
+        @foreach ($quick_question_cost_history as $quick_question_cost_hist)
+
             <tr>
-                <td>{{$quick_question_cost->quick_question_costs_start_date}}</td>
-                <td>{{$quick_question_cost->set_quick_question_cost}}</td>
-                <td>{{$quick_question_cost->quick_question_costs_end_date}}</td>
+                <td>{{$quick_question_cost_hist->start_date_time}}</td>
+                <td>{{$quick_question_cost_hist->costs}}</td>
+                <td>{{$quick_question_cost_hist->end_date_time}}</td>
             </tr>
         @endforeach
-            
-          
+
+
         </tbody>
     </table>
 </div>
