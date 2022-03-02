@@ -48,9 +48,9 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                      
+
                                          @foreach ($cases as $case)
-    
+
                                          <tr >
                                             <td>{{date('dS M Y', strtotime($case->booking_date))}}</td>
 
@@ -108,14 +108,14 @@
 
 
                                                     @if($case->questions_type == 3)
-                                                    Quick Questions
+                                                    Typed Quick Questions
                                                     <br>
                                                     <p>Max 3 Exchanges</p><br>
                                                     <img src="{{ asset('public/images/frontend/images/QQ-icon.png')}}" width="32" alt="">
                                                     @endif
 
                                                     @if($case->questions_type == 4)
-                                                    Typed Q&A
+                                                    Booked Q&A
                                                     <br>
                                                     <p>Max 3 Exchanges</p><br>
                                                     <img src="{{ asset('public/images/frontend/images/QA-icon.png')}}"  width="32" alt="">

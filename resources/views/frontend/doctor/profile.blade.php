@@ -45,7 +45,7 @@
                             @csrf
                             <div class="Doctor-contact main-form-fild">
 
-                                <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">  
+                                <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">
                                     <div class="profile-header-bx mb-4">
                                         <div class="profile-image-bx">
                                             <div class="profile-image-upload">
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
 
-                                <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">  
+                                <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group has-float-label">
@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
 
-                                <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">  
+                                <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <p><sup>*</sup>Mandatory in case you need to be contacted eg by Pharmacist, Admin</p>
@@ -221,7 +221,7 @@
                                     </div>
                                 </div>
 
-                                <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">  
+                                <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group Communication">
@@ -233,7 +233,9 @@
                                                 <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition">Type Quick Question</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
-                                                        Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{@$quick_question_cost->set_quick_question_cost}}"> First Doctor to Take Case
+                                                        Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{@$quick_question_cost->set_quick_question_cost}}" readonly>
+                                                        {{-- First Doctor to Take Case --}}
+                                                        Doctor response time {{ $quick_question_cost->set_quick_question_time_doctor }} Hours
                                                     </div>
                                                 </div>
                                                 <div class="Notifications-on-of">
@@ -330,7 +332,7 @@
                                     </div>
                                 </div>
 
-                                <div class="bg-light-blue cmn-card-box padding-20">  
+                                <div class="bg-light-blue cmn-card-box padding-20">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
@@ -362,7 +364,7 @@
                                                     </li>
                                             @endforeach
                                                 </ul>
-                                            <a href="{{ route('doctor.all-dr-review')}}" class="btn btn-sm dr-btn-readmore">Read More</a> 
+                                            <a href="{{ route('doctor.all-dr-review')}}" class="btn btn-sm dr-btn-readmore">Read More</a>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -567,10 +569,10 @@
         $('#exampleModal').modal('show');
     });
 
-    
+
 
 });
-    
+
 
     </script>
 @endsection

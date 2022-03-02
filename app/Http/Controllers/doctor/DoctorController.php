@@ -27,6 +27,8 @@ use App\Models\ThumbsUp;
 use App\Models\Payment;
 use App\Models\BookTimeSlot;
 use App\Models\PrescriptionComment;
+use App\Models\QqAcceptResponse;
+use App\Models\Response;
 use App\UserDoctor;
 use App\helpers;
 use App\User;
@@ -1067,8 +1069,9 @@ $get_day = $get_day->delete();
 
 
 
-     public function quickQuestions(Request $request)
+    public function quickQuestions(Request $request)
     {
+        // dd('hi');
         $quick_questions = PatientCase::where('questions_type',3)->where(function($query){
           $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_reply',null);
         })->orderBy('id','desc')->paginate(6);
@@ -1082,10 +1085,11 @@ $get_day = $get_day->delete();
         // $quick_questions = PatientCase::where('case_type',2)->where(function($query){
         //   $query->where('doctor_id',Auth::guard('siteDoctor')->user()->id)->orWhere('doctor_id',null);
         // })->orderBy('id','desc')->paginate(6);
+        //Type Quick Question
         $date = date('Y-m-d H:i:s');
         $quickQuestionCost = SetQuickQuestionCost::first();
         $subDate = date('Y-m-d H:i:s', strtotime($date. ' -'.$quickQuestionCost->set_quick_question_time.' hours'));
-    
+
         $quick_questions = PatientCase::leftJoin('user_profiles', 'user_profiles.user_id', '=', 'patient_cases.user_id')
         ->where('questions_type',3)->where('doctor_id',null)
         ->where('patient_cases.created_at','>',$subDate)
@@ -1139,33 +1143,52 @@ $get_day = $get_day->delete();
 
     public function doctorReplyCase(Request $request)
     {
-      $case = PatientCase::where('case_id',$request->case_id)->first();
-      $case->doctor_id = Auth::guard('siteDoctor')->user()->id;
-      $case->doctor_reply = 1;
-      $case->save();
-       return response()->json(['success' =>true, 'message'=>'success.','data'=>$case], 200);
+        $case = PatientCase::where('case_id',$request->case_id)->first();
+        $case->doctor_id = Auth::guard('siteDoctor')->user()->id;
+        $case->doctor_reply = 1;
+        $case->save();
+
+        // if(($case->case_type == 1) && ($case->questions_type == 3)){
+
+        //     $accept_res = QqAcceptResponse::where('case_id',$case->id)->update(['response_time' => date('Y-m-d H:i:s')]);
+        //     Response::where('case_id',$case->id)->delete();
+        // }
+        return response()->json(['success' =>true, 'message'=>'success.','data'=>$case], 200);
     }
 
     public function doctorAcceptCase(Request $request,$id)
     {
-      $case = PatientCase::find($id);
-      if(($case->case_type == 2) && ($case->questions_type == 3)){
+        $case = PatientCase::find($id);
+        if(($case->case_type == 2) && ($case->questions_type == 3)){
 
-        $accept_case = new AcceptedPrescriptionDoc;
-        $accept_case->patient_case_id = $case->id;
-        $accept_case->doctor_id = Auth::guard('siteDoctor')->user()->id;
-        $accept_case->save();
-      Session::flash('Success-toastr','Successfully Accepted');
-      return redirect()->back();
+            $accept_case = new AcceptedPrescriptionDoc;
+            $accept_case->patient_case_id = $case->id;
+            $accept_case->doctor_id = Auth::guard('siteDoctor')->user()->id;
+            $accept_case->save();
+            Session::flash('Success-toastr','Successfully Accepted');
+            return redirect()->back();
 
-      }else{
-      $case->doctor_id = Auth::guard('siteDoctor')->user()->id;
-      }
+        }else{
+            $case->doctor_id = Auth::guard('siteDoctor')->user()->id;
+        }
 
-      $case->accept_status = 1;
-      $case->save();
-      Session::flash('Success-toastr','Successfully Accepted');
-      return redirect()->back();
+        // if(($case->case_type == 1) && ($case->questions_type == 3)){
+
+        //     $accept_res = new QqAcceptResponse;
+        //     $accept_res->case_id = $case->id;
+        //     $accept_case->doctor_id = Auth::guard('siteDoctor')->user()->id;
+        //     $accept_case->save();
+
+        //     $accept_res = new Response;
+        //     $accept_res->case_id = $case->id;
+        //     $accept_case->save();
+        // }
+
+        $case->accept_status = 1;
+        $case->accept_time = date('Y-m-d H:i:s');
+        $case->save();
+        Session::flash('Success-toastr','Successfully Accepted');
+        return redirect()->back();
     }
 
     public function summaryDiagnosis(Request $request,$id)

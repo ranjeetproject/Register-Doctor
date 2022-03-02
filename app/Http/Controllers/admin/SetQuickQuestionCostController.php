@@ -20,7 +20,9 @@ class SetQuickQuestionCostController extends Controller
     {
         $quick_question_cost = SetQuickQuestionCost::first();
         $quick_question_cost_history = QuickQuestionCostHistory::get();
-    	return view('admin.set_quick_question_cost.create',compact('quick_question_cost','quick_question_cost_history'));
+        $accept_time_history = QuickQuestionAcceptTimeHistory::get();
+        $response_time_history = QuickQuestionResponseTimeHistory::get();
+    	return view('admin.set_quick_question_cost.create',compact('quick_question_cost','quick_question_cost_history','accept_time_history','response_time_history'));
     }
 
     public function store(Request $request)

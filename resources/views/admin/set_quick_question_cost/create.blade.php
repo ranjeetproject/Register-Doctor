@@ -37,7 +37,7 @@
                     <!--col-->
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="set_quick_question_time">Type Quick Question Time For Admin (HRS) <span
+                    <label class="col-md-2 form-control-label" for="set_quick_question_time">Type Quick Question Active Time (HRS) <span
                             class="text-danger">*</span></label>
 
                     <div class="col-md-10">
@@ -50,12 +50,12 @@
                     <!--col-->
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="set_quick_question_time_doctor">Type Quick Question Time For Doctor (HRS) <span
+                    <label class="col-md-2 form-control-label" for="set_quick_question_time_doctor">Type Quick Question Response Time For Doctor (HRS) <span
                             class="text-danger">*</span></label>
 
                     <div class="col-md-10">
                         <input class="form-control @error('set_quick_question_time_doctor') is-invalid @enderror" type="text" name="set_quick_question_time_doctor"
-                            id="set_quick_question_time_doctor" placeholder="Please enter set quick question time in hours" value="{{ $quick_question_cost->set_quick_question_time_doctor }}">
+                            id="set_quick_question_time_doctor" placeholder="Please enter set quick question response time in hours" value="{{ $quick_question_cost->set_quick_question_time_doctor }}">
                         @error('set_quick_question_time_doctor')
                             <span class="error invalid-feedback" id="error_set_quick_question_time_doctor">{{ $message }}</span>
                         @enderror
@@ -80,6 +80,7 @@
 
     <!-- /.card-footer-->
 </div>
+<h4 >Type Quick Question Cost History</h4>
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
         <thead>
@@ -104,68 +105,49 @@
         </tbody>
     </table>
 </div>
-{{-- <div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Start Date</th>
-                <th>QQ cost ($)</th>
-                <th>End Date</th>
-                <th>Time Duration</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>20-02-2022</td>
-                <td>$30</td>
-                <td>28-02-2022</td>
-                <td>01:00 PM</td>
-            </tr>
-            <tr>
-                <td>20-02-2022</td>
-                <td>$30</td>
-                <td>28-02-2022</td>
-                <td>01:00 PM</td>
-            </tr>
-            <tr>
-                <td>20-02-2022</td>
-                <td>$30</td>
-                <td>28-02-2022</td>
-                <td>01:00 PM</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<hr />
+<h4 >Type Quick Question Accept Time History</h4>
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Start Date</th>
-                <th>QQ cost ($)</th>
+                <th>QQ Question Accept Time (HRs)</th>
                 <th>End Date</th>
-                <th>Time Duration</th>
+                {{-- <th>Time Duration</th> --}}
             </tr>
         </thead>
         <tbody>
+            @foreach ($accept_time_history as $accept_data)
             <tr>
-                <td>20-02-2022</td>
-                <td>$30</td>
-                <td>28-02-2022</td>
-                <td>01:00 PM</td>
+                <td>{{ $accept_data->start_date_time }}</td>
+                <td>{{ $accept_data->accept_time }}</td>
+                <td>{{ $accept_data->end_date_time }}</td>
             </tr>
-            <tr>
-                <td>20-02-2022</td>
-                <td>$30</td>
-                <td>28-02-2022</td>
-                <td>01:00 PM</td>
-            </tr>
-            <tr>
-                <td>20-02-2022</td>
-                <td>$30</td>
-                <td>28-02-2022</td>
-                <td>01:00 PM</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
-</div> --}}
+</div>
+<hr />
+<h4 >Type Quick Question Response Time History</h4>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>QQ Question Response Time (HRs)</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($response_time_history as $response_data)
+                <tr>
+                    <td>{{ $response_data->start_date_time }}</td>
+                    <td>{{ $response_data->response_time }}</td>
+                    <td>{{ $response_data->end_date_time }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection

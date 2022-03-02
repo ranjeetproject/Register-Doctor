@@ -233,7 +233,7 @@ class PatientController extends Controller
                     $file               = $image;
                     $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
                     $extension =  pathinfo(storage_path($fileName),PATHINFO_EXTENSION);
-                    if($extension == 'jpg' || $extension == 'pdf' || $extension=='jpeg'){
+                    if($extension == 'jpg' || $extension == 'pdf' || $extension=='jpeg' || $extension=='png'){
                       $destinationPath    = public_path().'/uploads/cases/';
                       $file->move($destinationPath,$fileName);
                       $images['file_name']    = $fileName;
