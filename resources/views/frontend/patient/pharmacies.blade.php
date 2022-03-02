@@ -30,6 +30,7 @@
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade" id="Posted-to-You">
+                                    <div class="bg-light-blue pharmacies-info-ps">
                                     <ul>
                                         <li>Prescription will be mailed to you by your Doctor</li>
                                         <li>Takes up to ~2-3 days (usually 1-2 days) depending on postal service</li>
@@ -57,15 +58,16 @@
                                                 {{ $data['error'] }}
                                             </div>
                                         @endif
-                                        <input class="btn blue-button mr-lf-top" type="submit" name="post_sub"
+                                        <input class="btn blue-button mt-2 ml-0" type="submit" name="post_sub"
                                             value="Post prescription" />
                                     </form>
-
+                                </div>
                                 </div>
 
 
                                 <div class="tab-pane fade show active" id="Electronic-Direct-to-Pharmacy-Rapid">
-                                    <ul>
+                                <div class="bg-light-blue pharmacies-info-ps">
+                                    <ul class="mt-0">
                                         <li>In a hurry? Prescription will be sent electronically to one of our Special
                                             Pharmacists</li>
                                         <li> Please check below that the special Pharmacy is local or can deliver to you
@@ -101,6 +103,7 @@
                                             DRUG IS IN STOCK </strong></p>
                                     <p><a href="{{ route('patient.profile') }}" target="_blank">Click</a> to check your
                                         delivery address is correct</p>
+                                    </div> 
                                     <div class="row justify-content-end">
                                         <!-- <div class="col-sm-6">
                                                     <form action="" method="post" class="Pharmacy-loc">
@@ -146,7 +149,15 @@
                                                 <p><span>Contact : </span> {{ $pharmaci->profile->telephone1 }}</p>
                                                 <p><span>Email : </span> {{ $pharmaci->email }}</p>
                                                 <p><span>Opening hours uk : </span></p>
-                                                <p class="phar-sa-txt"><span>Special availability : 14 Feb 2022 </span></p>
+                                                <div class="phar-sa-txt">
+                                                    <h5>Special Availability</h5>
+                                                    <p><span class="sa-date-span">13 Feb 2022</span> (12:00 AM-11:45 PM | 01:00 PM-01:01 PM)</p>
+                                                    <p><span class="sa-date-span">14 Feb 2022</span> (12:00 AM-11:45 PM | 01:00 PM-01:01 PM)</p>
+                                                </div>
+                                                <div class="phar-sa-txt">
+                                                    <h5>Special Non Availability</h5>
+                                                    <p><span class="sn-date-span">15 Feb 2022</span></p>
+                                                </div>
                                                 <form action="">
                                                     @csrf
                                                     <p><span>Delivery options : </span>
