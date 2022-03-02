@@ -1340,7 +1340,9 @@ section.news-banner-bx .news-banner-img img{
 .pharmacies-item .card-body{
     padding-left: 15px !important;
     padding-right: 0 !important;
-    width: calc(100% - 80px);
+    width: calc(100% - 95px);
+    border-left: 1px solid rgba(0,0,0,.125);
+    margin-left: 15px;
 }
 .pharmacies-item .card-body h2{
     font-weight: 700;
@@ -1689,14 +1691,29 @@ a.Set-Opening-Hours.pp-oh-btn{
 .pharmacies-item-pagination ul.pagination li::after{
     display: none !important;
 }
-.phar-sa-txt span{
-    color: #fff !important;
-    background-color: #ff4d0f;
+.phar-sa-txt h5{
+    color: #606060;
     font-weight: bold;
-    padding: 5px 15px;
-    border-radius: 20px;
     font-size: 13px;
+    margin-top: 10px;
+}
+.phar-sa-txt p{
+    color: #0096df;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.phar-sa-txt p span{
+    color: #fff !important;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
     display: inline-block;
+}
+.sa-date-span{
+    background-color: #ff4d0f;
+}
+.sn-date-span{
+    background-color: rgb(255 77 15 / 60%);
 }
 .mr-item-bx{
     padding: 20px;
@@ -1720,13 +1737,14 @@ a.Set-Opening-Hours.pp-oh-btn{
 	border-radius: 10px;
 	background-color: rgb(218, 218, 218);
 }
-
 .mr-scroll-bar::-webkit-scrollbar{
 	width: 8px;
 	background-color: rgb(218, 218, 218);
 }
-
 .mr-scroll-bar::-webkit-scrollbar-thumb{
 	border-radius: 8px;
 	background-color: #3c4f60;
+}
+.pharmacies-info-ps{
+    padding: 20px 20px 20px 20px;
 }

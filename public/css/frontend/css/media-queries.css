@@ -761,6 +761,25 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
         width: 100%;
         margin-top: 0;
     }
+    button.btn.sider-bar-toggle ~ ul.left-nav {
+        border-radius: 0px;
+        position: fixed;
+        top: 0px;
+        z-index: 99;
+        width: 100%;
+        left: 0;
+        overflow: auto;
+        max-height: 100vh;
+        -webkit-transform: translate(-100%);
+                transform: translate(-100%);
+        height: 100vh;
+    }
+    button.btn.sider-bar-toggle ~ ul.left-nav.main {
+        -webkit-transform: translate(0%);
+                transform: translate(0%);
+        -webkit-transition: all 0.8s;
+        transition: all 0.8s;
+    }
 }
 @media only screen and (max-width : 767px) {
     section.Banner .bann-img img {
