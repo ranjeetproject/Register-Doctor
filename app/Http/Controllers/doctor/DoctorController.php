@@ -1085,11 +1085,7 @@ $get_day = $get_day->delete();
         $date = date('Y-m-d H:i:s');
         $quickQuestionCost = SetQuickQuestionCost::first();
         $subDate = date('Y-m-d H:i:s', strtotime($date. ' -'.$quickQuestionCost->set_quick_question_time.' hours'));
-
-    // echo $date;
-    // echo '<br />';
-    // echo $subDate;
-    // dd();
+    
         $quick_questions = PatientCase::leftJoin('user_profiles', 'user_profiles.user_id', '=', 'patient_cases.user_id')
         ->where('questions_type',3)->where('doctor_id',null)
         ->where('patient_cases.created_at','>',$subDate)
