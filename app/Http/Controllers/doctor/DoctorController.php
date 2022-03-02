@@ -1091,6 +1091,7 @@ $get_day = $get_day->delete();
         $subDate = date('Y-m-d H:i:s', strtotime($date. ' -'.$quickQuestionCost->set_quick_question_time.' hours'));
 
         $quick_questions = PatientCase::leftJoin('user_profiles', 'user_profiles.user_id', '=', 'patient_cases.user_id')
+        ->select('patient_cases.*')
         ->where('questions_type',3)->where('doctor_id',null)
         ->where('patient_cases.created_at','>',$subDate)
         ->where('user_profiles.dr_standard_fee_notification','=',1)->paginate(6);
