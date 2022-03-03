@@ -60,29 +60,29 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input type="text" name="forename"
                                                     class="form-control {{ !empty($user->forename) ? 'has-content' : '' }}"
                                                     value="{{ $user->forename }}" id="pforename" placeholder="Forename">
-                                                <label for="pforename">Forename</label>
+                                                <label for="pforename">Forename <span class="fc-star">*</span></label>
                                                 @error('forename')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input type="text" name="surname"
                                                     class="form-control {{ !empty($user->surname) ? 'has-content' : '' }}"
                                                     value="{{ $user->surname }}" id="psurname" placeholder="Surname">
-                                                <label for="psurname">Surname</label>
+                                                <label for="psurname">Surname <span class="fc-star">*</span></label>
                                                 @error('surname')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <select name="gender"
                                                     class="form-control {{ !empty($user->profile->gender) ? 'has-content' : '' }}">
                                                     <option value="">Select</option>
@@ -93,40 +93,41 @@
                                                     <option value="other"
                                                         {{ $user->profile->gender == 'other' ? 'Selected' : '' }}>Others</option>
                                                 </select>
+                                                <label for="gender">Gender <span class="fc-star">*</span></label>
                                                 @error('gender')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input type="date"
                                                     class="form-control effect-19 {{ !empty($user->profile->dob) ? 'has-content' : '' }}"
                                                     name="dob" value="{{ date('Y-m-d', strtotime($user->profile->dob)) }}" placeholder="Date of Birth">
-                                                <label>Date of Birth</label>
+                                                <label>Date of Birth <span class="fc-star">*</span></label>
                                                 @error('dob')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input type="text"
                                                     class="form-control {{ !empty($user->profile->address) ? 'has-content' : '' }}"
                                                     name="address" value="{{ $user->profile->address }}" id="paddress"
                                                     placeholder="Address">
-                                                <label for="paddress">Address</label>
+                                                <label for="paddress">Address <span class="fc-star">*</span></label>
                                                 @error('address')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input type="email" name="email"
                                                     class="form-control {{ !empty($user->email) ? 'has-content' : '' }}"
                                                     value="{{ $user->email }}" id="Pemail" placeholder="Email" readonly>
-                                                <label for="Pemail">Email</label>
+                                                <label for="Pemail">Email <span class="fc-star">*</span></label>
                                             </div>
                                         </div>
                                     </div>
@@ -137,24 +138,24 @@
                                             <label>Address for delivery of drugs if different to above</label>
                                         </div>
                                         <div class="col-sm-12">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input type="text"
                                                     class="form-control {{ !empty($user->profile->address) ? 'has-content' : '' }}"
                                                     name="address" value="{{ $user->profile->address }}" id="paddress"
                                                     placeholder="Address">
-                                                <label for="paddress">Address</label>
+                                                <label for="paddress">Address <span class="fc-star">*</span></label>
                                                 @error('address')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-sm-6 ">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input type="tel" name="telephone1"
                                                     class="form-control {{ !empty($user->profile->telephone1) ? 'has-content' : '' }}"
                                                     value="{{ $user->profile->telephone1 }}" id="Ptelephone1"
                                                     placeholder="Telephone 1">
-                                                <label for="Ptelephone1">Telephone 1</label>
+                                                <label for="Ptelephone1">Telephone 1 <span class="fc-star">*</span></label>
                                                 @error('telephone1')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
