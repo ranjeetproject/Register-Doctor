@@ -1748,3 +1748,27 @@ a.Set-Opening-Hours.pp-oh-btn{
 .pharmacies-info-ps{
     padding: 20px 20px 20px 20px;
 }
+.padding-20-dp{
+    padding: 20px;
+}
+.bg-light-blue-1 {
+    background-color: rgb(0 76 172 / 12%);
+}
+.bg-light-blue-2 {
+    background-color: rgb(0 76 172 / 20%);
+}
+.dp-sub-title{
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+.dp-sub-title img{
+    margin-right: 5px;
+}
+.fc-star{
+    color: #e00;
+}
+.has-float-label .form-control{
+    padding-left: 15px;
+    padding-right: 15px;
+}
