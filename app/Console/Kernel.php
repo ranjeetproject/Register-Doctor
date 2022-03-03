@@ -41,7 +41,8 @@ class Kernel extends ConsoleKernel
             $sub_date = date('Y-m-d H:i:s', strtotime($date. ' -'.$quickQuestionCost->set_quick_question_time_doctor.' hours'));
             $responses = PatientCase::where('accept_status',1)->where('questions_type',3)->where('accept_time','>',$sub_date)->update([
                 'accept_time' => null,
-                'accept_status' => null
+                'accept_status' => null,
+                'doctor_id' => null
             ]);
 
         })

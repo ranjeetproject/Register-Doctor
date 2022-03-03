@@ -185,32 +185,57 @@
                                                 <div class="row books-btn">
                                                     @if(18 < $d_years || $d_years < 11)
                                                     <div class="col-md-4">
-                                                        <p><i class="fas fa-pound-sign"></i>
-                                                            {{ ($doctor->profile->dr_live_chat_fee)?$doctor->profile->dr_live_chat_fee + $doctor->profile->commission: $doctor->profile->dr_live_chat_fee}} per 15 mins</p>
+                                                        <p>
+                                                            @if ($doctor->profile->dr_live_chat_fee_notification == 1)
+                                                             <i class="fas fa-pound-sign"></i>
+                                                             {{ ($doctor->profile->dr_live_chat_fee)?$doctor->profile->dr_live_chat_fee + $doctor->profile->commission: $doctor->profile->dr_live_chat_fee}} per 15 mins
+                                                             @else
+                                                            &nbsp;
+                                                             @endif
+                                                            {{-- <i class="fas fa-pound-sign"></i>
+                                                            {{ ($doctor->profile->dr_live_chat_fee)?$doctor->profile->dr_live_chat_fee + $doctor->profile->commission: $doctor->profile->dr_live_chat_fee}} per 15 mins --}}
+                                                        </p>
                                                         {{-- <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
                                                             class="btn btn-block Book-Live">Book Live Chat</a> --}}
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->id), 'questions_type'=> 'live-chat']) }}"
-                                                            class="btn btn-block patient-book-lc">Book Live Chat</a>
+                                                            class="btn btn-block patient-book-lc {{ $doctor->profile->dr_live_chat_fee_notification == 1? '':"disabled" }}">Book Live Chat</a>
                                                     </div>
                                                     @endif
                                                     <div class="col-md-4">
-                                                        <p><i class="fas fa-pound-sign"></i>
-                                                            {{ ($doctor->profile->dr_live_video_fee) ? $doctor->profile->dr_live_video_fee + $doctor->profile->commission : $doctor->profile->dr_live_video_fee }} per 15 mins</p>
+                                                        <p>
+                                                            @if ($doctor->profile->dr_live_video_fee_notification == 1)
+                                                            {{  ($doctor->profile->dr_live_video_fee) ? $doctor->profile->dr_live_video_fee + $doctor->profile->commission : $doctor->profile->dr_live_video_fee  }} per 15 mins
+                                                             @else
+                                                            &nbsp;
+                                                             @endif
+                                                            {{-- <i class="fas fa-pound-sign"></i>
+                                                            {{ ($doctor->profile->dr_live_video_fee) ? $doctor->profile->dr_live_video_fee + $doctor->profile->commission : $doctor->profile->dr_live_video_fee }} per 15 mins --}}
+                                                        </p>
 
                                                         {{-- <a href="{{ route('patient.view-doctor-profile', Crypt::encryptString($doctor->id)) }}"
                                                             class="btn btn-block Book-Live">Book Live Video</a> --}}
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->id), 'questions_type'=> 'live-video']) }}"
-                                                            class="btn btn-block patient-book-lc">Book Live Video</a>
+                                                            class="btn btn-block patient-book-lc {{ $doctor->profile->dr_live_video_fee_notification == 1? '':"disabled" }}">Book Live Video</a>
                                                     </div>
                                                     @if(18 < $d_years || $d_years < 11)
                                                     <div class="col-md-4">
-                                                        <p><i class="fas fa-pound-sign"></i>
-                                                            {{ ($doctor->profile->dr_qa_fee) ? $doctor->profile->dr_qa_fee + $doctor->profile->commission:$doctor->profile->dr_qa_fee }} per 15 mins</p>
-                                                        <button type="button"
-                                                            onclick="bookLiveChats('{{ $doctor->id }}')"
-                                                            class="btn btn-block Request">Request Typed Q&A <br>
+                                                        <p>
+                                                            @if ($doctor->profile->dr_qa_fee_notification == 1)
+                                                             <i class="fas fa-pound-sign"></i>
+                                                             {{ ($doctor->profile->dr_qa_fee) ? $doctor->profile->dr_qa_fee + $doctor->profile->commission:$doctor->profile->dr_qa_fee }} per 15 mins
+                                                             @else
+                                                            &nbsp;
+                                                             @endif
+                                                            {{-- <i class="fas fa-pound-sign"></i>
+                                                            {{ ($doctor->profile->dr_qa_fee) ? $doctor->profile->dr_qa_fee + $doctor->profile->commission:$doctor->profile->dr_qa_fee }} per 15 mins --}}
+                                                        </p>
+                                                        <button type="button" @if ($doctor->profile->dr_qa_fee_notification == 1)
+
+                                                        onclick="bookLiveChats('{{ $doctor->id }}')"
+                                                        @endif
+                                                            class="btn btn-block Request {{ $doctor->profile->dr_qa_fee_notification == 1? '':'disabled' }}">Request Booked Q&A <br>
                                                             <small>Turnaround
-                                                                Time 5 hrs 2 days</small></button>
+                                                                Time {{ $doctor->profile->dr_turnaround_time }}</small></button>
                                                     </div>
                                                     @endif
                                                 </div>
@@ -284,33 +309,56 @@
                                                 <div class="row books-btn">
                                                     @if(18 < $d_years || $d_years <11)
                                                     <div class="col-md">
-                                                        <p><i class="fas fa-pound-sign"></i>
-                                                            {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins
+                                                        <p>
+                                                            @if ($doctor->doctor->profile->dr_live_chat_fee_notification == 1)
+                                                             <i class="fas fa-pound-sign"></i>
+                                                             {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins
+                                                             @else
+                                                            &nbsp;
+                                                             @endif
+                                                            {{-- <i class="fas fa-pound-sign"></i>
+                                                            {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins --}}
                                                         </p>
                                                         {{-- <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->doctor->id), 'questions_type'=> 'live-chat']) }}"
                                                             class="btn btn-block Book-Live">Book Live Chat</a> --}}
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->doctor->id), 'questions_type'=> 'live-chat']) }}"
-                                                            class="btn btn-block patient-book-lc">Book Live Chat</a>
+                                                            class="btn btn-block patient-book-lc {{ $doctor->doctor->profile->dr_live_chat_fee_notification == 1? '':"disabled" }}">Book Live Chat</a>
                                                     </div>
                                                     @endif
                                                     <div class="col-md">
-                                                        <p><i class="fas fa-pound-sign"></i>
-                                                            {{ $doctor->doctor->profile->dr_live_video_fee }} per 15 mins
+                                                        <p>
+                                                             @if ($doctor->doctor->profile->dr_live_video_fee_notification == 1)
+                                                             <i class="fas fa-pound-sign"></i>
+                                                             {{ $doctor->doctor->profile->dr_live_video_fee }} per 15 mins
+                                                             @else
+                                                            &nbsp;
+                                                             @endif
                                                         </p>
                                                         {{-- <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->doctor->id), 'questions_type'=> 'live-video']) }}"
                                                             class="btn btn-block Book-Live">Book Live Video</a> --}}
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->doctor->id), 'questions_type'=> 'live-video']) }}"
-                                                            class="btn btn-block patient-book-lc">Book Live Video</a>
+                                                            class="btn btn-block patient-book-lc {{ $doctor->doctor->profile->dr_live_video_fee_notification == 1? '':"disabled" }}">Book Live Video</a>
                                                     </div>
 
                                                     @if(18 < $d_years || $d_years < 11)
                                                     <div class="col-md-5">
-                                                        <p><i class="fas fa-pound-sign"></i>
-                                                            {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins</p>
+                                                        <p>
+                                                            {{-- <i class="fas fa-pound-sign"></i>
+                                                            {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins --}}
+                                                            @if ($doctor->doctor->profile->dr_qa_fee_notification == 1)
+                                                             <i class="fas fa-pound-sign"></i>
+                                                             {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins
+                                                             @else
+                                                            &nbsp;
+                                                             @endif
+                                                        </p>
                                                         <button type="button"
+                                                            @if ($doctor->doctor->profile->dr_qa_fee_notification == 1)
+
                                                             onclick="bookLiveChats('{{ $doctor->doctor->id }}')"
-                                                            class="btn btn-block Request">Request Typed Q&A <br> <small>Turnaround
-                                                                Time 5 hrs 2 days</small></button>
+                                                            @endif
+                                                            class="btn btn-block Request {{ $doctor->doctor->profile->dr_qa_fee_notification == 1? '':'disabled' }}">Request Booked Q&A <br> <small>Turnaround
+                                                                Time {{ $doctor->doctor->profile->dr_turnaround_time }}</small></button>
                                                     </div>
                                                     @endif
                                                 </div>
