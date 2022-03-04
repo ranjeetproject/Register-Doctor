@@ -204,6 +204,7 @@
                                                     <div class="col-md-4">
                                                         <p>
                                                             @if ($doctor->profile->dr_live_video_fee_notification == 1)
+                                                            <i class="fas fa-pound-sign"></i>
                                                             {{  ($doctor->profile->dr_live_video_fee) ? $doctor->profile->dr_live_video_fee + $doctor->profile->commission : $doctor->profile->dr_live_video_fee  }} per 15 mins
                                                              @else
                                                             &nbsp;
@@ -233,7 +234,7 @@
 
                                                         onclick="bookLiveChats('{{ $doctor->id }}')"
                                                         @endif
-                                                            class="btn btn-block Request {{ $doctor->profile->dr_qa_fee_notification == 1? '':'disabled' }}">Request Booked Q&A <br>
+                                                            class="btn btn-block Request {{ $doctor->profile->dr_qa_fee_notification == 1? '':'disabled' }}">Request Typed Q&A <br>
                                                             <small>Turnaround
                                                                 Time {{ $doctor->profile->dr_turnaround_time }}</small></button>
                                                     </div>
@@ -357,7 +358,7 @@
 
                                                             onclick="bookLiveChats('{{ $doctor->doctor->id }}')"
                                                             @endif
-                                                            class="btn btn-block Request {{ $doctor->doctor->profile->dr_qa_fee_notification == 1? '':'disabled' }}">Request Booked Q&A <br> <small>Turnaround
+                                                            class="btn btn-block Request {{ $doctor->doctor->profile->dr_qa_fee_notification == 1? '':'disabled' }}">Request Typed Q&A <br> <small>Turnaround
                                                                 Time {{ $doctor->doctor->profile->dr_turnaround_time }}</small></button>
                                                     </div>
                                                     @endif

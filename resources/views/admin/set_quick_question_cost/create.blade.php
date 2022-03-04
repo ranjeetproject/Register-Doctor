@@ -24,7 +24,7 @@
             <div class="card-body">
 
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="set_quick_question_cost">Type Quick Question Cost ($)<span
+                    <label class="col-md-2 form-control-label" for="set_quick_question_cost">Type Quick Question Cost ( <i class="fas fa-pound-sign"></i> )<span
                             class="text-danger">*</span></label>
 
                     <div class="col-md-10">
@@ -34,10 +34,10 @@
                             <span class="error invalid-feedback" id="error_set_quick_question_cost">{{ $message }}</span>
                         @enderror
                     </div>
-                    <!--col-->
+
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="set_quick_question_time">Type Quick Question Active Time (HRS) <span
+                    <label class="col-md-2 form-control-label" for="set_quick_question_time">Type Quick Question Active Time (Hours) <span
                             class="text-danger">*</span></label>
 
                     <div class="col-md-10">
@@ -50,7 +50,7 @@
                     <!--col-->
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="set_quick_question_time_doctor">Type Quick Question Response Time For Doctor (HRS) <span
+                    <label class="col-md-2 form-control-label" for="set_quick_question_time_doctor">Type Quick Question Response Time For Doctor (Hours) <span
                             class="text-danger">*</span></label>
 
                     <div class="col-md-10">
@@ -86,7 +86,7 @@
         <thead>
             <tr>
                 <th>Start Date</th>
-                <th>QQ cost ($)</th>
+                <th>QQ cost ( <i class="fas fa-pound-sign"></i> )</th>
                 <th>End Date</th>
                 {{-- <th>Time Duration</th> --}}
             </tr>
@@ -112,7 +112,7 @@
         <thead>
             <tr>
                 <th>Start Date</th>
-                <th>QQ Question Accept Time (HRs)</th>
+                <th>QQ Question Accept Time (Hours)</th>
                 <th>End Date</th>
                 {{-- <th>Time Duration</th> --}}
             </tr>
@@ -135,7 +135,7 @@
         <thead>
             <tr>
                 <th>Start Date</th>
-                <th>QQ Question Response Time (HRs)</th>
+                <th>QQ Question Response Time (Hours)</th>
                 <th>End Date</th>
             </tr>
         </thead>
