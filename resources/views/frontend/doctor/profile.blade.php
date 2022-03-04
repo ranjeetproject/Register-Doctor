@@ -230,7 +230,7 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group bg-light-blue-1 mb-0 padding-20-dp">
-                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition">Type Quick Question</label>
+                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition">Quick Question</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
                                                         Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{@$quick_question_cost->set_quick_question_cost}}" readonly>
@@ -274,7 +274,7 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group bg-light-blue-2 mb-0 padding-20-dp">
-                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Booked Q&A</label>
+                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Type Q&A</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
                                                         <input type="checkbox" class="" disabled>  <span style="white-space: nowrap;">Set your own Rate :&nbsp;&nbsp;<i class="fas fa-pound-sign"></i></span> <input class="form-control " name="dr_qa_fee" type="text" value="{{$user->profile->dr_qa_fee}}" > Set your max turnaround time

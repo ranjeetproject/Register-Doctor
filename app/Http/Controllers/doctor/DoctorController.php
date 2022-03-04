@@ -1087,14 +1087,18 @@ $get_day = $get_day->delete();
         // })->orderBy('id','desc')->paginate(6);
         //Type Quick Question
         $date = date('Y-m-d H:i:s');
+        $doctor_id = 2;
         $quickQuestionCost = SetQuickQuestionCost::first();
         $subDate = date('Y-m-d H:i:s', strtotime($date. ' -'.$quickQuestionCost->set_quick_question_time.' hours'));
 
-        $quick_questions = PatientCase::leftJoin('user_profiles', 'user_profiles.user_id', '=', 'patient_cases.user_id')
-        ->select('patient_cases.*')
+        $quick_questions = PatientCase::whereDoesntHave('qQAcceptResponses', function ($query) use($doctor_id) {
+            $query->where('accept_id', $doctor_id);
+        })
+        // ::leftJoin('user_profiles', 'user_profiles.user_id', '=', 'patient_cases.user_id')
+        // ->select('patient_cases.*')
         ->where('questions_type',3)->where('doctor_id',null)
-        ->where('patient_cases.created_at','>',$subDate)
-        ->where('user_profiles.dr_standard_fee_notification','=',1)->paginate(6);
+        ->where('patient_cases.created_at','>',$subDate)->paginate(6);
+        // ->where('user_profiles.dr_standard_fee_notification','=',1)
 
         return view('frontend.doctor.prescriptions', compact('quick_questions'));
 
@@ -1149,11 +1153,10 @@ $get_day = $get_day->delete();
         $case->doctor_reply = 1;
         $case->save();
 
-        // if(($case->case_type == 1) && ($case->questions_type == 3)){
+        if(($case->case_type == 1) && ($case->questions_type == 3)){
 
-        //     $accept_res = QqAcceptResponse::where('case_id',$case->id)->update(['response_time' => date('Y-m-d H:i:s')]);
-        //     Response::where('case_id',$case->id)->delete();
-        // }
+            $accept_res = QqAcceptResponse::where('case_id',$case->id)->update(['response_time' => date('Y-m-d H:i:s')]);
+        }
         return response()->json(['success' =>true, 'message'=>'success.','data'=>$case], 200);
     }
 
@@ -1173,17 +1176,12 @@ $get_day = $get_day->delete();
             $case->doctor_id = Auth::guard('siteDoctor')->user()->id;
         }
 
-        // if(($case->case_type == 1) && ($case->questions_type == 3)){
-
-        //     $accept_res = new QqAcceptResponse;
-        //     $accept_res->case_id = $case->id;
-        //     $accept_case->doctor_id = Auth::guard('siteDoctor')->user()->id;
-        //     $accept_case->save();
-
-        //     $accept_res = new Response;
-        //     $accept_res->case_id = $case->id;
-        //     $accept_case->save();
-        // }
+        if(($case->case_type == 1) && ($case->questions_type == 3)){
+            $accept_res = new QqAcceptResponse;
+            $accept_res->case_id = $case->id;
+            $accept_res->accept_id = Auth::guard('siteDoctor')->user()->id;
+            $accept_res->save();
+        }
 
         $case->accept_status = 1;
         $case->accept_time = date('Y-m-d H:i:s');

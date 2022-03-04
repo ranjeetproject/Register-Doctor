@@ -8,6 +8,7 @@ use App\Models\PharmacyOpeningTime;
 use App\Models\UserProfile;
 use App\Models\HandyDocument;
 use App\Models\PersonTOPersonChat;
+use App\Models\SpecialAvailability;
 use Auth, Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -221,8 +222,10 @@ class PharmacistController extends Controller
          Session::flash('Success-toastr','Successfully updated');
 
       }
+      $specialAvailabilities = SpecialAvailability::where('user_id',$user->id)->where('available',1)->get();
+      $specialUnAvailabilities = SpecialAvailability::where('user_id',$user->id)->where('available',0)->get();
 
-      return view('frontend.pharmacist.opening_hours',compact('user','time_zone'));
+      return view('frontend.pharmacist.opening_hours',compact('user','time_zone','specialAvailabilities','specialUnAvailabilities'));
     }
 
     public function handyDocument(Request $request)
@@ -343,6 +346,22 @@ class PharmacistController extends Controller
         $accepted_priscription = pharma_req_prescription::where('case_id', $request->case_id)->update(['send_status'=> 1]);
         $return = array('accepted_priscription'=>$accepted_priscription);
         return response()->json( $return);
+    }
+
+    public function specialAvailability(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            // dd($request->available_dt);
+            $date = date("Y-m-d", strtotime($request->available_dt));
+           $specialAvailability = new SpecialAvailability;
+           $specialAvailability->user_id = auth()->user()->id;
+           $specialAvailability->available_at = $request->available? $date.' '.$request->from_time:$date;
+           $specialAvailability->available_to = $request->available? $date.' '.$request->to_time:$date;
+           $specialAvailability->available = $request->available? 1:0;
+           $specialAvailability->save();
+           Session::flash('Success-toastr','Successfully added');
+           return redirect()->back();
+        }
     }
 
 }

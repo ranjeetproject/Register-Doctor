@@ -9,6 +9,7 @@ Route::middleware(['isPharmacist:sitePharmacist','activeUser','emailVerified','a
      Route::match(['get','post'],'/profile', 'PharmacistController@profile')->name('profile');
     Route::match(['get','post'],'/change-password', 'PharmacistController@changePassword')->name('change-password');
     Route::match(['get','post'],'/opening-hours', 'PharmacistController@openingHours')->name('opening-hours');
+    Route::match(['get','post'],'/special-availability', 'PharmacistController@specialAvailability')->name('special-availability');
 
     Route::match(['get','post'],'/accepted-priscription', 'PharmacistController@acceptedPriscription')->name('accepted-priscription');
     Route::match(['get','post'],'/ajaxAcceptPriscriptionDetails', 'PharmacistController@ajaxAcceptPriscriptionDetails')->name('ajaxAcceptPriscriptionDetails');

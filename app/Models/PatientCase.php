@@ -63,4 +63,9 @@ class PatientCase extends Model
     {
         return $this->hasOne('App\Models\SickNote','case_id','case_id')->withDefault();
     }
+
+    public function qQAcceptResponses()
+    {
+        return $this->hasMany('App\Models\QqAcceptResponse','case_id','id');
+    }
 }

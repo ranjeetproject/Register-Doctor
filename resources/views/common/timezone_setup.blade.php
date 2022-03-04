@@ -1,8 +1,4 @@
 <!-- Button trigger modal -->
-{{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button> --}}
-
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -41,11 +37,6 @@
                   </div>
                 </div>
               </fieldset>
-              {{-- <div class="form-group row">
-                <div class="col-sm-10">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </div> --}}
 
         </div>
         <div class="modal-footer">

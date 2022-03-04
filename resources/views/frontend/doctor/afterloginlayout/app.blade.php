@@ -33,18 +33,7 @@
         <!-- Common js library start -->
             @include('frontend.doctor.afterloginlayout.common_js')
         <!-- Common js library end-->
-        @include('common.timezone_setup')
+        {{-- @include('common.timezone_setup') --}}
         @yield('scripts')
-        <script>
-            $( document ).ready(function() {
-                <?php if(Auth::user()->profile->time_zone == 0) {
-                ?>
-                    $('#exampleModal').modal('show');
-                <?php
-                }
-                ?>
-            });
-
-        </script>
     </body>
 </html>
