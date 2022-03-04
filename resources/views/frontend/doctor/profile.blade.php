@@ -65,9 +65,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input name="forename" class="form-control {{!empty($user->forename) ? 'has-content':''}} " type="text" value="{{$user->forename}}" id="forename" placeholder="Enter Forename">
-                                                <label for="forename">Forename</label>
+                                                <label for="forename">Forename <span class="fc-star">*</span></label>
                                             </div>
                                             @error('forename')
                                             <span class="text-danger">{{ $message }}</span>
@@ -75,9 +75,9 @@
                                         </div>
 
                                         <div class="col-sm-6">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->surname) ? 'has-content':''}}" name="surname" type="text" value="{{$user->surname}}" id="surname" placeholder="Surname">
-                                                <label for="surname">Surname</label>
+                                                <label for="surname">Surname <span class="fc-star">*</span></label>
 
                                             </div>
 
@@ -87,15 +87,15 @@
                                         </div>
 
                                         <div class="col-sm-12">
-                                            <div class="form-group required has-float-label multiOpt-input-field">
+                                            <div class="form-group has-float-label multiOpt-input-field">
                                                 {{-- <input class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" type="text"  name="dr_speciality" value="{{$user->profile->dr_speciality}}" id="specialityorinterest" placeholder="Speciality or Interest"> --}}
                                                 <select class="form-control {{!empty($user->profile->dr_speciality) ? 'has-content':''}}" name="dr_speciality[]" multiple="multiple" id="multiOpt">
-                                                    <option value="">Select Speciality or Interest</option>
+                                                    <option value="">Select Speciality or Interest </option>
                                                     @foreach ($speciality as $special)
                                                         <option value="{{ $special->id }}" @if(in_array($special->id,$dr_specialties)) {{'Selected'}} @endIf>{{ $special->name }}</option>
                                                     @endforeach
                                                 </select>
-                                                <label for="specialityorinterest">Speciality or Interest <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" class="info-si-icon" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"></label>
+                                                <label for="specialityorinterest">Speciality or Interest <span class="fc-star">*</span> <img src="{{ asset('public/images/frontend/images/ex-icon.png') }}" class="info-si-icon" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"></label>
                                             @error('dr_speciality')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -125,18 +125,18 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->profile->dr_medical_license_no) ? 'has-content':''}}" type="text" name="dr_medical_license_no" value="{{$user->profile->dr_medical_license_no}}" id="mln" placeholder="Medical License No. (National/State)">
-                                                <label for="mln">Medical License No. (National/State)</label>
+                                                <label for="mln">Medical License No. (National/State) <span class="fc-star">*</span></label>
                                             @error('dr_medical_license_no')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->profile->dr_name_of_medical_licencer) ? 'has-content':''}}" type="text" name="dr_name_of_medical_licencer" value="{{$user->profile->dr_name_of_medical_licencer}}" id="nml" placeholder="Name of Medical Licencer">
-                                                <label for="nml">Name of Medical Licencer</label>
+                                                <label for="nml">Name of Medical Licencer <span class="fc-star">*</span></label>
                                                 @error('dr_name_of_medical_licencer')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -191,9 +191,9 @@
                                             <label>The following details will not be available to patients :</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->profile->telephone1) ? 'has-content':''}}" name="telephone1" value="{{$user->profile->telephone1}}" type="tel" id="cpn1" placeholder="Contact Phone No. 1">
-                                                <label for="cpn1">Contact Phone No. 1</label>
+                                                <label for="cpn1">Contact Phone No. 1 <span class="fc-star">*</span></label>
                                             @error('telephone1')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -203,14 +203,14 @@
                                         <div class="col-sm-6">
                                             <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->profile->telephone2) ? 'has-content':''}}"  name="telephone2" value="{{$user->profile->telephone2}}"  type="tel" id="cpn2" placeholder="Contact Phone No. 2">
-                                                <label for="cpn2">Contact Phone No. 2 </label>
+                                                <label for="cpn2">Contact Phone No. 2 <span class="fc-star">*</span></label>
                                             @error('telephone2')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
-                                            <div class="form-group required has-float-label">
+                                            <div class="form-group has-float-label">
                                                 <textarea class="form-control {{!empty($user->profile->address) ? 'has-content':''}}" name="address" rows="5" id="professionaladdres" placeholder="Professional Address">{{$user->profile->address}}</textarea>
                                                 <label for="professionaladdres">Professional Address </label>
                                             @error('address')
@@ -221,16 +221,16 @@
                                     </div>
                                 </div>
 
-                                <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">
+                                <div class="bg-light-blue cmn-card-box margin-bottom-20">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="form-group Communication">
-                                                <label> <img src="{{ asset('public/images/frontend/images/Communication-icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Communication Options</label>
+                                            <div class="form-group Communication mb-0 padding-20-dp">
+                                                <label class="mb-0"> <img src="{{ asset('public/images/frontend/images/Communication-icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Communication Options</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 mb-2">
-                                            <div class="form-group">
-                                                <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition">Type Quick Question</label>
+                                        <div class="col-sm-12">
+                                            <div class="form-group bg-light-blue-1 mb-0 padding-20-dp">
+                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition">Type Quick Question</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
                                                         Standard Rate per 15 mins : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_standard_fee" value="{{@$quick_question_cost->set_quick_question_cost}}" readonly>
@@ -243,11 +243,10 @@
                                                     <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off {{($user->profile->dr_standard_fee_notification == 0) ? 'of':'on'}}"><span></span></div>
                                                 </div>
                                             </div>
-                                            <hr>
                                         </div>
-                                        <div class="col-sm-12 mb-2">
-                                            <div class="form-group">
-                                                <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Video</label>
+                                        <div class="col-sm-12">
+                                            <div class="form-group bg-light-blue-2 mb-0 padding-20-dp">
+                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Video</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
                                                         <input type="checkbox" class="" disabled>  Set your own Rate : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text" name="dr_live_video_fee"  value="{{$user->profile->dr_live_video_fee}}">  Set availability in Your Calendar above
@@ -258,11 +257,10 @@
                                                     <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off {{($user->profile->dr_live_video_fee_notification == 0) ? 'of':'on'}}"><span></span></div>
                                                 </div>
                                             </div>
-                                            <hr>
                                         </div>
-                                        <div class="col-sm-12 mb-2">
-                                            <div class="form-group">
-                                                <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Chat</label>
+                                        <div class="col-sm-12">
+                                            <div class="form-group bg-light-blue-1 mb-0 padding-20-dp">
+                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Chat</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
                                                         <input type="checkbox" name="" class="" disabled>  Set your own Rate : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  name="dr_live_chat_fee" value="{{$user->profile->dr_live_chat_fee}}">  Set availability in Your Calendar above
@@ -273,11 +271,10 @@
                                                     <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off {{($user->profile->dr_live_chat_fee_notification == 0) ? 'of':'on'}}"><span ></span></div>
                                                 </div>
                                             </div>
-                                            <hr>
                                         </div>
-                                        <div class="col-sm-12 mb-2">
-                                            <div class="form-group">
-                                                <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Booked Q&A</label>
+                                        <div class="col-sm-12">
+                                            <div class="form-group bg-light-blue-2 mb-0 padding-20-dp">
+                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Booked Q&A</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
                                                         <input type="checkbox" class="" disabled>  <span style="white-space: nowrap;">Set your own Rate :&nbsp;&nbsp;<i class="fas fa-pound-sign"></i></span> <input class="form-control " name="dr_qa_fee" type="text" value="{{$user->profile->dr_qa_fee}}" > Set your max turnaround time
@@ -306,11 +303,10 @@
                                                     <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off {{($user->profile->dr_qa_fee_notification == 0) ? 'of':'on'}}"><span></span></div>
                                                 </div>
                                             </div>
-                                            <hr>
                                         </div>
                                         <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Tick to offer prescription online (only UK Doctors)</label>
+                                            <div class="form-group bg-light-blue-1 mb-0 padding-20-dp">
+                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Tick to offer prescription online (only UK Doctors)</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
                                                         <input type="checkbox" class="" >
@@ -320,7 +316,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
-                                            <div class="form-group">
+                                            <div class="form-group mb-0 padding-20-dp">
                                                 <p class="Prescriptions-dt">
                                                     <strong>
                                                         Prescriptions are assumed to take up to 15 mins. If more time is needed request the patient to book a longer time slot before you accept the case.
