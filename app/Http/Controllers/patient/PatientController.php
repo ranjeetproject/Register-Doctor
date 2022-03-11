@@ -578,7 +578,7 @@ class PatientController extends Controller
             $error = 'There is some problem please try again';
           }
         }
-        $pharmacies = User::whereRole(3)->when($search, function ($query) use ($search) {
+        $pharmacies = User::with('specialAvailabilities')->whereRole(3)->when($search, function ($query) use ($search) {
             $query->where('email','LIKE', "%$search%")
                 ->orWhereHas('profile', function($query) use ($search){
                     $query->where('pharmacy_name', 'LIKE', "%$search%")

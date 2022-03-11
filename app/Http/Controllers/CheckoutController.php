@@ -16,11 +16,17 @@ class CheckoutController extends Controller
         $case = PatientCase::where('case_id',$case_id)->with('doctor.profile')->withCount('getBookingSlot')->first();
 
         if($case->questions_type == 1){
-            $amount = $case->doctor->profile->dr_live_chat_fee * $case->get_booking_slot_count;
+            $live_chat_fee = $case->doctor->profile->dr_live_chat_fee;
+            $dr_fee = $live_chat_fee * $case->get_booking_slot_count;
+            $admin_fee = ($live_chat_fee*( $case->doctor->profile->commission/100))*$case->get_booking_slot_count;
+            $amount = $dr_fee + $admin_fee;
         }
 
         if($case->questions_type == 2){
-            $amount = $case->doctor->profile->dr_live_video_fee * $case->get_booking_slot_count;
+            $live_video_fee = $case->doctor->profile->dr_live_video_fee;
+            $dr_fee = $live_video_fee * $case->get_booking_slot_count;
+            $admin_fee = ($live_video_fee * ( $case->doctor->profile->commission / 100)) * $case->get_booking_slot_count;
+            $amount = $dr_fee + $admin_fee;
         }
 
         if($case->questions_type == 3){
@@ -28,8 +34,11 @@ class CheckoutController extends Controller
         }
 
         if($case->questions_type == 4){
-            $amount = $case->doctor->profile->dr_qa_fee;
+            $qa_fee = $dr_fee = $case->doctor->profile->dr_qa_fee;
+            $admin_fee = $qa_fee*($case->doctor->profile->commission/100);
+            $amount = $dr_fee + $admin_fee;
         }
+        // dd($amount, $live_video_fee,$dr_fee,$admin_fee);
 
         // return $amount;
         // return $case->get_booking_slot_count;
@@ -61,12 +70,18 @@ class CheckoutController extends Controller
         // dd($request->all());
          $case = PatientCase::where('case_id',$request->case_id)->with('doctor.profile')->withCount('getBookingSlot')->first();
 
-        if($case->questions_type == 1){
-            $amount = $case->doctor->profile->dr_live_chat_fee * $case->get_booking_slot_count;
+         if($case->questions_type == 1){
+            $live_chat_fee = $case->doctor->profile->dr_live_chat_fee;
+            $dr_fee = $live_chat_fee * $case->get_booking_slot_count;
+            $admin_fee = ($live_chat_fee*( $case->doctor->profile->commission/100))*$case->get_booking_slot_count;
+            $amount = $dr_fee + $admin_fee;
         }
 
         if($case->questions_type == 2){
-            $amount = $case->doctor->profile->dr_live_video_fee * $case->get_booking_slot_count;
+            $live_video_fee = $case->doctor->profile->dr_live_video_fee;
+            $dr_fee = $live_video_fee * $case->get_booking_slot_count;
+            $admin_fee = ($live_video_fee * ( $case->doctor->profile->commission / 100)) * $case->get_booking_slot_count;
+            $amount = $dr_fee + $admin_fee;
         }
 
         if($case->questions_type == 3){
@@ -74,7 +89,9 @@ class CheckoutController extends Controller
         }
 
         if($case->questions_type == 4){
-            $amount = $case->doctor->profile->dr_qa_fee;
+            $qa_fee = $dr_fee = $case->doctor->profile->dr_qa_fee;
+            $admin_fee = $qa_fee*($case->doctor->profile->commission/100);
+            $amount = $dr_fee + $admin_fee;
         }
 
         $payment = new Payment;
@@ -82,6 +99,8 @@ class CheckoutController extends Controller
         $payment->user_id = $case->user_id;
         $payment->intent_id = $request->intent_id;
         $payment->secure_token = $case->_token;
+        $payment->doctor_amount = $dr_fee;
+        $payment->admin_amount = $admin_fee;
         $payment->amount = $amount;
         $payment->payment_date = date('Y-m-d H:i:s');
         $payment->save();

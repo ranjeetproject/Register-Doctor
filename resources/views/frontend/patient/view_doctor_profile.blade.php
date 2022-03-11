@@ -58,7 +58,7 @@
                                                 {{ request()->questions_type == 'live-video' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="exampleRadios1">
                                                 Live Video: Price : <i class="fas fa-pound-sign"></i>
-                                                {{ $doctor->profile->dr_live_video_fee }} per 15 mins
+                                                {{ $doctor->profile->dr_live_video_fee ? $doctor->profile->dr_live_video_fee + ($doctor->profile->dr_live_video_fee*($doctor->profile->commission/100)) : $doctor->profile->dr_live_video_fee }} per 15 mins
                                                 Check availability in Calendar below
                                             </label>
                                         </div>
@@ -71,7 +71,7 @@
                                                 {{ request()->questions_type == 'live-chat' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="exampleRadios2">
                                                 Live Chat : Price : <i class="fas fa-pound-sign"></i>
-                                                {{ $doctor->profile->dr_live_chat_fee }} per 15 mins
+                                                {{ $doctor->profile->dr_live_chat_fee? $doctor->profile->dr_live_chat_fee + ($doctor->profile->dr_live_chat_fee*($doctor->profile->commission/100)) : $doctor->profile->dr_live_chat_fee }} per 15 mins
                                                 Check availability in Calendar below
                                             </label>
                                         </div>
@@ -84,7 +84,7 @@
                                             value="4">
                                         <label class="form-check-label" for="exampleRadios2">
                                             Typed Q & A: Price: <i class="fas fa-pound-sign"></i>
-                                            {{ $doctor->profile->dr_qa_fee }} per 15 mins This doctor's
+                                            {{ $doctor->profile->dr_qa_fee? $doctor->profile->dr_qa_fee+($doctor->profile->dr_qa_fee*($doctor->profile->commission/100)) : $doctor->profile->dr_qa_fee }} per 15 mins This doctor's
                                             turnaround time : 8 days
                                         </label>
                                     </div>
@@ -407,7 +407,7 @@
                                             accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right"
                                             title="" data-original-title="One line definition"
                                             src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="">
-                                            
+
                                     </div>
                                     <!-- <div class="form-group">
                                         <div class="file-count">
@@ -416,35 +416,35 @@
                                         </div>
                                     </div> -->
                                     <ul class="nav vdp-tabs">
-                                        
+
                                     </ul>
                                     <!-- <div class="tab-content">
                                         <div class="tab-pane fade" id="vdp-pdf" role="tabpanel">
-                                            <ul class="vdp-upload-gallery">                                             
+                                            <ul class="vdp-upload-gallery">
                                                 <li>
                                                     <a href="#">
                                                         <i class="fas fa-file-pdf"></i>
                                                     </a>
-                                                </li>                                                                 
+                                                </li>
                                                 <li>
                                                     <a href="#">
                                                         <i class="fas fa-file-pdf"></i>
                                                     </a>
-                                                </li>                              
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="tab-pane fade" id="vdp-image" role="tabpanel">
-                                            <ul class="vdp-upload-gallery">                                             
+                                            <ul class="vdp-upload-gallery">
                                                 <li>
                                                     <a href="#">
                                                         <img src="{{ asset('public/images/frontend/images/opction-one-top-image.png')}}" alt="">
                                                     </a>
-                                                </li>                                                                 
+                                                </li>
                                                 <li>
                                                     <a href="#">
                                                         <img src="{{ asset('public/images/frontend/images/opction-one-top-image.png')}}" alt="">
                                                     </a>
-                                                </li>                              
+                                                </li>
                                             </ul>
                                         </div>
                                     </div> -->
@@ -540,8 +540,8 @@
                 // }else{
                 //     alert("correct, you have selected less than 10 files");
                 // }
-                
-                for (var i = 0; i < files.length; i++) 
+
+                for (var i = 0; i < files.length; i++)
                 {
                     var file_name = files[i].name;
                     var ext = file_name.substring(file_name.lastIndexOf('.') + 1).toLowerCase();
@@ -562,7 +562,7 @@
                                             </a>
                                         </li>${i}`).appendTo('ul.vdp-tabs')
                     }
-                     
+
                 }
 
             });
@@ -582,7 +582,7 @@
             $('#case_details').show();
         }
 
-       
+
     </script>
 
 @endpush

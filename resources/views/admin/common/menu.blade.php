@@ -139,7 +139,7 @@
             <a href="{{route('admin.route')}}" class="nav-link {{ Request::is('admin/route*') ? 'active' : '' }}">
             <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
               <p>
-                Manage Route 
+                Manage Route
               </p>
             </a>
           </li>
@@ -149,6 +149,15 @@
             <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
               <p>
                Type Quick Question Cost
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.commission')}}" class="nav-link {{ Request::is('admin/set-commission*') ? 'active' : '' }}">
+            <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
+              <p>
+               Set commission
               </p>
             </a>
           </li>
@@ -185,6 +194,26 @@
             <i class="nav-icon far fa-address-book" aria-hidden="true"></i>
               <p>
                 Contact us
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.payment_history')}}" class="nav-link {{ Request::is('admin/payment-history*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-th-list" aria-hidden="true"></i>
+            {{-- <i class="far fa-file-chart-line"></i> --}}
+              <p>
+                Payment History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.doctor_wise_payment_history')}}" class="nav-link {{ Request::is('admin/doctor-wise-payment-history*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-th-list" aria-hidden="true"></i>
+            {{-- <i class="fas fa-th-list"></i> --}}
+              <p>
+                Doctor wise Payment History
               </p>
             </a>
           </li>

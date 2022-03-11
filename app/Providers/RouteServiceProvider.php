@@ -54,7 +54,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapPatientRoutes();
 
         $this->mapDoctorRoutes();
-        
+
         $this->mapPharmacistRoutes();
 
         $this->mapAdminRoutes();

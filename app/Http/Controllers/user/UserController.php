@@ -134,8 +134,13 @@ class UserController extends Controller
       $user->role = $request->user_type;
       $user->password = Hash::make($request->password);
       $user->save();
+      $commission = Commission::latest()->first();
       $userProfile = new UserProfile;
       $userProfile->user_id = $user->id;
+      if($request->user_type == 2 && $commission){
+
+          $userProfile->commission = $commission->commission;
+      }
       $userProfile->save();
 
 
@@ -222,7 +227,7 @@ class UserController extends Controller
 
         return redirect()->route('registration');
         } catch (\Exception $e) {
-          print_r($e->getMessage()); exit;
+        //   print_r($e->getMessage()); exit;
             Session::flash('Error-toastr', $e->getMessage());
             DB::rollback();
             return redirect()->back();

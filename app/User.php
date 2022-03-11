@@ -115,6 +115,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\DoctorSpeciality','user_id','id');
     }
-
+//pharmacist
+    public function specialAvailabilities()
+    {
+        return $this->hasMany('App\Models\SpecialAvailability','user_id','id');
+    }
 
 }

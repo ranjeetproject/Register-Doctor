@@ -188,7 +188,7 @@
                                                         <p>
                                                             @if ($doctor->profile->dr_live_chat_fee_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
-                                                             {{ ($doctor->profile->dr_live_chat_fee)?$doctor->profile->dr_live_chat_fee + $doctor->profile->commission: $doctor->profile->dr_live_chat_fee}} per 15 mins
+                                                             {{ ($doctor->profile->dr_live_chat_fee)?$doctor->profile->dr_live_chat_fee + ($doctor->profile->dr_live_chat_fee*($doctor->profile->commission/100)): $doctor->profile->dr_live_chat_fee}} per 15 mins
                                                              @else
                                                             &nbsp;
                                                              @endif
@@ -205,7 +205,7 @@
                                                         <p>
                                                             @if ($doctor->profile->dr_live_video_fee_notification == 1)
                                                             <i class="fas fa-pound-sign"></i>
-                                                            {{  ($doctor->profile->dr_live_video_fee) ? $doctor->profile->dr_live_video_fee + $doctor->profile->commission : $doctor->profile->dr_live_video_fee  }} per 15 mins
+                                                            {{  ($doctor->profile->dr_live_video_fee) ? $doctor->profile->dr_live_video_fee + ($doctor->profile->dr_live_video_fee*($doctor->profile->commission/100)) : $doctor->profile->dr_live_video_fee  }} per 15 mins
                                                              @else
                                                             &nbsp;
                                                              @endif
@@ -223,7 +223,7 @@
                                                         <p>
                                                             @if ($doctor->profile->dr_qa_fee_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
-                                                             {{ ($doctor->profile->dr_qa_fee) ? $doctor->profile->dr_qa_fee + $doctor->profile->commission:$doctor->profile->dr_qa_fee }} per 15 mins
+                                                             {{ ($doctor->profile->dr_qa_fee) ? $doctor->profile->dr_qa_fee + ($doctor->profile->dr_qa_fee*($doctor->profile->commission/100)):$doctor->profile->dr_qa_fee }} per 15 mins
                                                              @else
                                                             &nbsp;
                                                              @endif
@@ -313,7 +313,9 @@
                                                         <p>
                                                             @if ($doctor->doctor->profile->dr_live_chat_fee_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
-                                                             {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins
+                                                             {{-- {{ $doctor->doctor->profile->dr_live_chat_fee }} per 15 mins --}}
+                                                             {{ ($doctor->doctor->profile->dr_live_chat_fee)?$doctor->doctor->profile->dr_live_chat_fee + ($doctor->doctor->profile->dr_live_chat_fee*($doctor->doctor->profile->commission/100)): $doctor->doctor->profile->dr_live_chat_fee}} per 15 mins
+
                                                              @else
                                                             &nbsp;
                                                              @endif
@@ -330,7 +332,9 @@
                                                         <p>
                                                              @if ($doctor->doctor->profile->dr_live_video_fee_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
-                                                             {{ $doctor->doctor->profile->dr_live_video_fee }} per 15 mins
+                                                             {{-- {{ $doctor->doctor->profile->dr_live_video_fee }} per 15 mins --}}
+                                                            {{  ($doctor->doctor->profile->dr_live_video_fee) ? $doctor->doctor->profile->dr_live_video_fee + ($doctor->doctor->profile->dr_live_video_fee*($doctor->doctor->profile->commission/100)) : $doctor->doctor->profile->dr_live_video_fee  }} per 15 mins
+
                                                              @else
                                                             &nbsp;
                                                              @endif
@@ -348,7 +352,8 @@
                                                             {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins --}}
                                                             @if ($doctor->doctor->profile->dr_qa_fee_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
-                                                             {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins
+                                                             {{-- {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins --}}
+                                                             {{ ($doctor->doctor->profile->dr_qa_fee) ? $doctor->doctor->profile->dr_qa_fee + ($doctor->doctor->profile->dr_qa_fee*($doctor->doctor->profile->commission/100)):$doctor->doctor->profile->dr_qa_fee }} per 15 mins
                                                              @else
                                                             &nbsp;
                                                              @endif

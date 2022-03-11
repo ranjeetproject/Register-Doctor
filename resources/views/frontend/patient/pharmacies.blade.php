@@ -103,7 +103,7 @@
                                             DRUG IS IN STOCK </strong></p>
                                     <p><a href="{{ route('patient.profile') }}" target="_blank">Click</a> to check your
                                         delivery address is correct</p>
-                                    </div> 
+                                    </div>
                                     <div class="row justify-content-end">
                                         <!-- <div class="col-sm-6">
                                                     <form action="" method="post" class="Pharmacy-loc">
@@ -151,12 +151,25 @@
                                                 <p><span>Opening hours uk : </span></p>
                                                 <div class="phar-sa-txt">
                                                     <h5>Special Availability</h5>
-                                                    <p><span class="sa-date-span">13 Feb 2022</span> (12:00 AM-11:45 PM | 01:00 PM-01:01 PM)</p>
-                                                    <p><span class="sa-date-span">14 Feb 2022</span> (12:00 AM-11:45 PM | 01:00 PM-01:01 PM)</p>
+                                                    @php
+                                                         $allSpecialAvailabilities = $pharmaci->specialAvailabilities;
+                                                         $specialAvailabilities = $allSpecialAvailabilities->where('available',1);
+                                                         $specialUnAvailabilities = $allSpecialAvailabilities->where('available',0);
+                                                        //  dd($specialAvailabilities);
+                                                    @endphp
+                                                    @foreach ($specialAvailabilities as $specialAvailability)
+
+                                                        <p><span class="sa-date-span">{{ date('dS M Y', strtotime($specialAvailability->available_at)) }}</span> ({{ date('h:i a', strtotime($specialAvailability->available_at)).' - '.date('h:i a', strtotime($specialAvailability->available_to)) }})</p>
+                                                    @endforeach
+                                                    {{-- <p><span class="sa-date-span">14 Feb 2022</span> (12:00 AM-11:45 PM | 01:00 PM-01:01 PM)</p> --}}
                                                 </div>
                                                 <div class="phar-sa-txt">
                                                     <h5>Special Non Availability</h5>
-                                                    <p><span class="sn-date-span">15 Feb 2022</span></p>
+                                                    @foreach ($specialUnAvailabilities as $specialunAvailability)
+
+                                                        <p><span class="sn-date-span">{{ date('dS M Y', strtotime($specialunAvailability->available_at)) }}</span> </p>
+                                                    @endforeach
+                                                    {{-- <p><span class="sn-date-span">15 Feb 2022</span></p> --}}
                                                 </div>
                                                 <form action="">
                                                     @csrf

@@ -99,12 +99,9 @@ Route::get('route/delete/{id}', 'RouteController@deleteSpecific')->name('route-d
 Route::get('set_quick_question_cost/create', 'SetQuickQuestionCostController@create')->name('create-set_quick_question_cost');
 Route::post('set_quick_question_cost/save', 'SetQuickQuestionCostController@store')->name('save-set_quick_question_cost');
 Route::post('set_quick_question_cost/update/{id}', 'SetQuickQuestionCostController@update')->name('set_quick_question_cost-update');
-
-
-
-
-
-
+Route::get('payment-history', 'PaymentHistoryController@index')->name('payment_history');
+Route::get('doctor-wise-payment-history', 'PaymentHistoryController@doctorWiseReport')->name('doctor_wise_payment_history');
+Route::any('set-commission', 'CommissionController@create')->name('commission');
 
 });
 //  *************for admin *************//
