@@ -28,6 +28,7 @@ use App\Models\Payment;
 use App\Models\BookTimeSlot;
 use App\Models\PrescriptionComment;
 use App\Models\QqAcceptResponse;
+use App\Models\GeneralPrescription;
 use App\Models\Response;
 use App\UserDoctor;
 use App\helpers;
@@ -179,6 +180,7 @@ class DoctorController extends Controller
        // if(!empty($request->dr_qa_fee_notification)) $profile->dr_qa_fee_notification = $request->dr_qa_fee_notification;
        if($request->form_name=='profile'){
        $profile->dr_live_video_fee_notification = ($request->dr_live_video_fee_notification == null) ? 1:0;
+       $profile->dr_general_prescription_notification = ($request->dr_general_prescription_notification == null) ? 1:0;
        $profile->dr_standard_fee_notification = ($request->dr_standard_fee_notification == null) ? 1:0;
        $profile->dr_live_chat_fee_notification = ($request->dr_live_chat_fee_notification == null) ? 1:0;
        $profile->dr_qa_fee_notification = ($request->dr_qa_fee_notification == null) ? 1:0;
@@ -275,11 +277,12 @@ class DoctorController extends Controller
 
       }
         $quick_question_cost = SetQuickQuestionCost::find(1);
+        $general_prescription = GeneralPrescription::latest()->first();
         $user = Auth::guard('siteDoctor')->user();
         $allDoctorReview = $this->allReviews($user->id);
         // return $user->profile->dr_qa_fee_notification;
         $twoReviews = array_slice($allDoctorReview,0,2);
-        return view('frontend.doctor.profile',compact('user','dr_specialties','form_name','speciality','allDoctorReview','twoReviews','quick_question_cost'));
+        return view('frontend.doctor.profile',compact('user','dr_specialties','form_name','speciality','allDoctorReview','twoReviews','quick_question_cost','general_prescription'));
 
     }
 

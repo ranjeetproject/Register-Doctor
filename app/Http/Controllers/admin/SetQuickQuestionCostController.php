@@ -33,7 +33,8 @@ class SetQuickQuestionCostController extends Controller
             $validator = $request->validate([
                 "set_quick_question_cost"=>"required",
                 "set_quick_question_time"=>"required|numeric",
-                "set_quick_question_time_doctor"=>"required|numeric"
+                "set_quick_question_time_doctor"=>"required|numeric",
+                "commission"=>"required|numeric",
             ]);
             $quick_question_cost = SetQuickQuestionCost::first();
             if($quick_question_cost->set_quick_question_cost != $request->set_quick_question_cost) {
@@ -49,6 +50,7 @@ class SetQuickQuestionCostController extends Controller
             $quick_question_cost->set_quick_question_cost = $request->set_quick_question_cost;
             $quick_question_cost->set_quick_question_time = $request->set_quick_question_time;
             $quick_question_cost->set_quick_question_time_doctor = $request->set_quick_question_time_doctor;
+            $quick_question_cost->commission = $request->commission;
             $quick_question_cost->save();
 
               Session::flash('Success-toastr', 'Successfully added.');

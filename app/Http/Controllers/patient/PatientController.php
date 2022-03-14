@@ -26,6 +26,7 @@ use App\Models\Specialties;
 use App\Models\pharma_req_prescription;
 use App\Models\PrescriptionComment;
 use App\Models\PersonTOPersonChat;
+use App\Models\GeneralPrescription;
 use App\User;
 use App\UserDoctor;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -319,6 +320,7 @@ class PatientController extends Controller
 
         $doctors = $login_user->userFavDoc()->where('status',1)->with('doctor')->paginate(8);
         // dd($doctors);
+        $general_prescription = GeneralPrescription::latest()->first();
 
         $search_doctors = '';
         if(!empty($request->dr_speciality)) {
@@ -364,7 +366,7 @@ class PatientController extends Controller
         }
 
 
-        return view('frontend.patient.my-favorite-doctors', compact('doctors','doctors_speciality','search_doctors'));
+        return view('frontend.patient.my-favorite-doctors', compact('doctors','doctors_speciality','search_doctors','general_prescription'));
     }
 
 

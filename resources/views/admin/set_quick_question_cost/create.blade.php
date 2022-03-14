@@ -63,6 +63,20 @@
                     <!--col-->
                 </div>
 
+                <div class="form-group row">
+                    <label class="col-md-2 form-control-label" for="set_quick_question_time_doctor">Commission (%) <span
+                            class="text-danger">*</span></label>
+
+                    <div class="col-md-10">
+                        <input class="form-control @error('commission') is-invalid @enderror" type="text" name="commission"
+                            id="commission" placeholder="Please enter quick question commission" value="{{ $quick_question_cost->commission }}">
+                        @error('commission')
+                            <span class="error invalid-feedback" id="error_set_quick_question_time_doctor">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <!--col-->
+                </div>
+
             </div>
             <div class="card-footer">
                 <div class="col text-right">

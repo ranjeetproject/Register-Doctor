@@ -102,6 +102,7 @@ Route::post('set_quick_question_cost/update/{id}', 'SetQuickQuestionCostControll
 Route::get('payment-history', 'PaymentHistoryController@index')->name('payment_history');
 Route::get('doctor-wise-payment-history', 'PaymentHistoryController@doctorWiseReport')->name('doctor_wise_payment_history');
 Route::any('set-commission', 'CommissionController@create')->name('commission');
+Route::any('set-general-prescription-commission', 'GeneralPrescriptionController@create')->name('gen_pres_commission');
 
 });
 //  *************for admin *************//

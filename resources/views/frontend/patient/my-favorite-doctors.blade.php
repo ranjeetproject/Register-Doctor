@@ -183,6 +183,21 @@
 
                                                 </div>
                                                 <div class="row books-btn">
+                                                    <div class="col-md">
+                                                        <p>
+                                                            @if ($doctor->profile->dr_general_prescription_notification == 1)
+                                                             <i class="fas fa-pound-sign"></i>
+                                                             {{ ($general_prescription->cost)?$general_prescription->cost + ($general_prescription->cost*($general_prescription->commission/100)): $general_prescription->cost}} per prescription
+
+                                                             @else
+                                                            &nbsp;
+                                                             @endif
+
+                                                        </p>
+
+                                                        <a href="#"
+                                                            class="btn btn-block patient-book-lc {{ $doctor->profile->dr_general_prescription_notification == 1? '':"disabled" }}">General Prescription</a>
+                                                    </div>
                                                     @if(18 < $d_years || $d_years < 11)
                                                     <div class="col-md-4">
                                                         <p>
@@ -308,6 +323,21 @@
 
                                                 </div>
                                                 <div class="row books-btn">
+                                                    <div class="col-md">
+                                                        <p>
+                                                            @if ($doctor->doctor->profile->dr_general_prescription_notification == 1)
+                                                             <i class="fas fa-pound-sign"></i>
+                                                             {{ ($general_prescription->cost)?$general_prescription->cost + ($general_prescription->cost*($general_prescription->commission/100)): $general_prescription->cost}} per prescription
+
+                                                             @else
+                                                            &nbsp;
+                                                             @endif
+
+                                                        </p>
+
+                                                        <a href="#"
+                                                            class="btn btn-block patient-book-lc {{ $doctor->doctor->profile->dr_general_prescription_notification == 1? '':"disabled" }}">General Prescription</a>
+                                                    </div>
                                                     @if(18 < $d_years || $d_years <11)
                                                     <div class="col-md">
                                                         <p>

@@ -246,6 +246,22 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group bg-light-blue-2 mb-0 padding-20-dp">
+                                                <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition">General Prescription</label>
+                                                <div class="row all-question-list">
+                                                    <div class="col aql-comm">
+                                                        Standard Rate : &nbsp;&nbsp;<i class="fas fa-pound-sign"></i><input class="form-control " type="text"  value="{{@$general_prescription->cost}}" readonly>
+                                                        {{-- First Doctor to Take Case --}}
+                                                        {{-- Doctor response time {{ $quick_question_cost->set_quick_question_time_doctor }} Hours --}}
+                                                    </div>
+                                                </div>
+                                                <div class="Notifications-on-of">
+                                                    <input type="checkbox" name="dr_general_prescription_notification" class="form-check-input" value="0" {{($user->profile->dr_general_prescription_notification == 0) ? 'checked':''}}>
+                                                    <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> <span>Notifications </span> <div class="on-and-off {{($user->profile->dr_general_prescription_notification == 0) ? 'of':'on'}}"><span></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group bg-light-blue-1 mb-0 padding-20-dp">
                                                 <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Video</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
@@ -259,7 +275,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
-                                            <div class="form-group bg-light-blue-1 mb-0 padding-20-dp">
+                                            <div class="form-group bg-light-blue-2 mb-0 padding-20-dp">
                                                 <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Live Chat</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
@@ -273,7 +289,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
-                                            <div class="form-group bg-light-blue-2 mb-0 padding-20-dp">
+                                            <div class="form-group bg-light-blue-1 mb-0 padding-20-dp">
                                                 <label class="dp-sub-title"> <img src="{{ asset('public/images/frontend/images/notification.png') }}" alt="" data-toggle="tooltip" data-placement="top" title="" data-original-title="One line definition"> Type Q&A</label>
                                                 <div class="row all-question-list">
                                                     <div class="col aql-comm">
