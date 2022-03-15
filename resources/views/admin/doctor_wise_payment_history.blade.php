@@ -59,10 +59,12 @@
                         @forelse ($payments as $payment)
                             <tr>
                                 <td>
-                                    {{ date('M-d-Y', strtotime($payment->created_at)) }}
+                                    {{ date('Y-m-d', strtotime($payment->created_at)) }}
+                                    {{-- {{ date('M-d-Y', strtotime($payment->created_at)) }} --}}
                                 </td>
                                 <td>{{ $payment->admin_amount }}</td>
                                 <td>{{ $payment->doctor_amount }}</td>
+                                <td>{{ $payment->amount }}</td>
                                 {{-- <td></td>
                                 <td>
 
@@ -107,7 +109,19 @@
 @push('scripts')
 <script>
     $(document).ready(function(){
-        $('#date_timepicker_start').daterangepicker();
+        $('#date_timepicker_start').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+        $('#date_timepicker_start').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
+
+        $('#date_timepicker_start').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
     });
 
     $('#doctor_id').change(function(e){

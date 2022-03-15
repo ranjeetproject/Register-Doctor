@@ -152,6 +152,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('admin.gen_pres_commission')}}" class="nav-link {{ Request::is('admin/set_quick_question_cost/create*') ? 'active' : '' }}">
+            <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
+              <p>
+               General Prescription Cost
+              </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="{{route('admin.commission')}}" class="nav-link {{ Request::is('admin/set-commission*') ? 'active' : '' }}">

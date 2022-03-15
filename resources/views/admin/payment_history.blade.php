@@ -3,23 +3,29 @@
 @section('title', 'admin-dashboard')
 
 @section('body')
-@section('header', 'Payment history')
+@section('header', 'Doctor wise Total Payment')
 @section('badge')
-    <li class="breadcrumb-item"><a href="{{ route('admin.payment_history') }}">Payment history</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.payment_history') }}">Doctor wise Total Payment</a></li>
 @endsection
 
 <!-- /.col -->
 
 <div class="card card-primary card-outline">
     <div class="card-header">
-        <h3 class="card-title">Payment history</h3>
+        <h3 class="card-title">Doctor wise Total Payment</h3>
 
         <div class="card-tools">
             <form action="" method="GET">
                 <div class="input-group input-group-sm">
                     <a href="{{ url('/') }}/admin/payment-history?export=export&start_date={{ request()->start_date }}"><i class="fas fa-file-export"></i></a>
+                    <select name="doctor_id" id="doctor_id" class="form-control">
+                        <option value="">All</option>
+                        @foreach ($doctors as $doctor)
+                            <option value="{{ $doctor->id }}" {{ request()->doctor_id == $doctor->id ? "selected":"" }}>{{ $doctor->name }}</option>
+                        @endforeach
+                    </select>
                     {{-- <input type="text" name="search" class="form-control" placeholder="Search"> --}}
-                    <input type="text" id="date_timepicker_start" class="form-control ml-mrtlf-10" name="start_date" placeholder="Date range" value="{{ request()->start_date }}">
+                    <input type="text" id="date_timepicker_start" class="form-control ml-mrtlf-10" name="start_date" placeholder="Date range" value="{{ request()->start_date }}" readonly>
                     {{-- <input type="text" id="date_timepicker_end" class="form-control ml-mrtlf-10" name="end_date" placeholder="End Date"> --}}
                     <div class="input-group-append">
                         <button class="btn btn-primary"><i class="fas fa-search"></i></button>
@@ -41,8 +47,8 @@
                             <th>Date</th>
                             <th>Admin amount</th>
                             <th>Doctor's amount</th>
-                            {{-- <th>Created date</th>
-                            <th></th> --}}
+                            <th>Total amount</th>
+                            {{-- <th></th> --}}
                         </tr>
                     </thead>
 
@@ -50,10 +56,12 @@
                         @forelse ($payments as $payment)
                             <tr>
                                 <td>
-                                    {{ date('M-d-Y', strtotime($payment->created_at)) }}
+                                    {{ date('Y-m-d', strtotime($payment->created_at)) }}
+                                    {{-- {{ date('M-d-Y', strtotime($payment->created_at)) }} --}}
                                 </td>
                                 <td>{{ $payment->admin_amount }}</td>
                                 <td>{{ $payment->doctor_amount }}</td>
+                                <td>{{ $payment->amount }}</td>
                                 {{-- <td></td>
                                 <td>
 
@@ -98,7 +106,19 @@
 @push('scripts')
 <script>
     $(document).ready(function(){
-        $('#date_timepicker_start').daterangepicker();
+        $('#date_timepicker_start').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+        $('#date_timepicker_start').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
+
+        $('#date_timepicker_start').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
     });
 
     // $('#date_timepicker_start').datetimepicker({
