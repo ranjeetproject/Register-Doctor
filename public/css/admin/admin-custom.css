@@ -115,3 +115,18 @@ ol.breadcrumb.float-sm-right li a:hover{
     background-color: #41d3f2;
     border-color: #40d6f3;
 }
+.btn-csv{
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0069d9;
+    margin-left: 15px;
+    border-radius: 0;
+}
+.btn-csv:hover{
+    color: #01105c;
+    background-color: transparent;
+    border-color: #01105c;
+}
+.pyh-input-fields .form-control{
+    height: 38px !important;
+}

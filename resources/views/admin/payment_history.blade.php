@@ -16,13 +16,10 @@
 
         <div class="card-tools">
             <form action="" method="GET">
-                <div class="input-group input-group-sm">
-                    <a href="{{ url('/') }}/admin/payment-history?export=export&start_date={{ request()->start_date }}"><i class="fas fa-file-export"></i></a>
+                <div class="input-group input-group-sm pyh-input-fields">
                     <select name="doctor_id" id="doctor_id" class="form-control">
                         <option value="">All</option>
-                        @foreach ($doctors as $doctor)
-                            <option value="{{ $doctor->id }}" {{ request()->doctor_id == $doctor->id ? "selected":"" }}>{{ $doctor->name }}</option>
-                        @endforeach
+                        
                     </select>
                     {{-- <input type="text" name="search" class="form-control" placeholder="Search"> --}}
                     <input type="text" id="date_timepicker_start" class="form-control ml-mrtlf-10" name="start_date" placeholder="Date range" value="{{ request()->start_date }}" readonly>
@@ -31,6 +28,7 @@
                         <button class="btn btn-primary"><i class="fas fa-search"></i></button>
 
                     </div>
+                    <a class="btn btn-csv" href="{{ url('/') }}/admin/payment-history?export=export&start_date={{ request()->start_date }}"><i class="fas fa-file-export"></i></a>
                 </div>
             </form>
 

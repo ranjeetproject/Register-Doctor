@@ -17,9 +17,7 @@
         <div class="card-tools">
 
             <form action="" method="GET" id="filterSearch">
-                <div class="input-group input-group-sm">
-
-                        <a href="{{ url('/') }}/admin/payment-history?export=export&start_date={{ request()->start_date }}"><i class="fas fa-file-export"></i></a>
+                <div class="input-group input-group-sm pyh-input-fields">
                         <select name="doctor_id" id="doctor_id" class="form-control">
                             <option value="">All</option>
                             @foreach ($doctors as $doctor)
@@ -33,6 +31,7 @@
                         <button class="btn btn-primary"><i class="fas fa-search"></i></button>
 
                     </div>
+                    <a class="btn btn-csv" href="{{ url('/') }}/admin/payment-history?export=export&start_date={{ request()->start_date }}"><i class="fas fa-file-export"></i></a>
                 </div>
 
         </div>
