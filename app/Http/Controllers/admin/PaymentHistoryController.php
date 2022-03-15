@@ -8,12 +8,14 @@ use App\User;
 use Session;
 use Illuminate\Http\Request;
 use Response;
+use DB;
 
 class PaymentHistoryController extends Controller
 {
     public function index(Request $request)
     {
         $start_date = $request->start_date;
+        $doctor_id = $request->doctor_id;
         $date = explode(' - ',$request->start_date);
         if($request->export == 'export') {
             if($start_date) {
@@ -30,12 +32,19 @@ class PaymentHistoryController extends Controller
                 "Expires" => "0"
             );
             $heading_c = array($file_name);
-            $columns = array('Date', 'Admins amount', 'Doctors amount');
-            $payments = Payment::when($start_date, function ($query, $date) {
+            // $columns = array('Date', 'Admins amount', 'Doctors amount');
+            // $payments = Payment::when($start_date, function ($query, $date) {
+            //     $query->whereDate('created_at','>=',date('Y-m-d',strtotime($date[0])))
+            //         ->whereDate('created_at','<=',date('Y-m-d',strtotime($date[1])));
+            // })->latest()->get();
+            $columns = array('Doctors name', 'Total Admins amount', 'Total Doctors amount', 'Total Amount');
+            $payments = Payment::with('user:name,id')->select(DB::raw('user_id,sum(amount) as total_amount,sum(doctor_amount) as total_doctor_amount,sum(admin_amount) as total_admin_amount'))->when($start_date, function ($query, $date) {
                 $query->whereDate('created_at','>=',date('Y-m-d',strtotime($date[0])))
                     ->whereDate('created_at','<=',date('Y-m-d',strtotime($date[1])));
-            })->latest()->get();
-
+                })
+                ->when($doctor_id, function ($query, $doctor_id) {
+                    $query->where('doctor_id',$doctor_id);
+                })->groupby('user_id')->get();
 
             $callback = function() use ($payments,$date, $columns, $heading_c)
             {
@@ -45,7 +54,7 @@ class PaymentHistoryController extends Controller
 
                 foreach($payments as $payment) {
 
-                    fputcsv($file, array(date('d-m-Y', strtotime($payment->created_at)), $payment->admin_amount, $payment->doctor_amount));
+                    fputcsv($file, array($payment->user->name, $payment->total_admin_amount, $payment->total_doctor_amount, $payment->total_amount));
                 }
 
                 fclose($file);
@@ -53,12 +62,15 @@ class PaymentHistoryController extends Controller
             return Response::stream($callback, 200, $headers);
         } else {
 
-            // dump($date);
-            $payments = Payment::when($start_date, function ($query, $date) {
+            $doctors = User::where('role',2)->select('id', 'name')->get();
+            $payments = Payment::with('doctor:name,id')->select(DB::raw('user_id,sum(amount) as total_amount,sum(doctor_amount) as total_doctor_amount,sum(admin_amount) as total_admin_amount'))->when($start_date, function ($query, $date) {
                 $query->whereDate('created_at','>=',date('Y-m-d',strtotime($date[0])))
                     ->whereDate('created_at','<=',date('Y-m-d',strtotime($date[1])));
-                })->latest()->paginate(50);
-            return view('admin.payment_history', compact('payments'));
+                })
+                ->when($doctor_id, function ($query, $doctor_id) {
+                    $query->where('doctor_id',$doctor_id);
+                })->groupby('doctor_id')->paginate(50);
+            return view('admin.payment_history', compact('payments','doctors'));
         }
     }
 
@@ -89,7 +101,7 @@ class PaymentHistoryController extends Controller
                         ->whereDate('created_at','<=',date('Y-m-d',strtotime($date[1])));
                 })
                 ->when($doctor_id, function ($query, $doctor_id) {
-                    $query->where('user_id',$doctor_id);
+                    $query->where('doctor_id',$doctor_id);
                 })
                 ->latest()->get();
 
@@ -117,7 +129,7 @@ class PaymentHistoryController extends Controller
                     ->whereDate('created_at','<=',date('Y-m-d',strtotime($date[1])));
                 })
                 ->when($doctor_id, function ($query, $doctor_id) {
-                    $query->where('user_id',$doctor_id);
+                    $query->where('doctor_id',$doctor_id);
                 })->latest()->paginate(50);
             return view('admin.doctor_wise_payment_history', compact('payments','doctors'));
         }

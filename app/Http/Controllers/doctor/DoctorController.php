@@ -1306,6 +1306,7 @@ $get_day = $get_day->delete();
             $sicknotes = SickNote::where('case_id',$id)->first();
             if(empty($sicknotes)){
             $sicknotes = new SickNote;
+            $sicknotes->sick_note_id = getSickNoteId();
                 // PatientCase::where('case_id',$id)->update(['case_closed' => 'yes','closed_at' => date('Y-m-d')]);
             }
 

@@ -37,7 +37,7 @@
                     <td>Medical Licenser:  GMC</td>
                 </tr>
                 <tr>
-                    <td>Registered-Doctor.com </td><td>I.D. Number</td>
+                    <td>Registered-Doctor.com </td><td>I.D. Number : {{ $sicknote ? $sicknote->sick_note_id : '' }}</td>
                 </tr>
             </tbody>
         </table>

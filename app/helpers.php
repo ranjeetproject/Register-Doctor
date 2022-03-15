@@ -6,6 +6,7 @@ use App\Models\FavouriteDoctor;
 use App\Models\SiteSetting;
 use App\Models\TimeSlot;
 use App\Models\ThumbsUp;
+use App\Models\MaxId;
 use App\Models\UserTimezone;
 use App\User;
 
@@ -332,4 +333,13 @@ function getDirectChatId($id)
     return 'DC'.str_pad($id,12,"0",STR_PAD_LEFT);
 }
 
+//sicknote unique id
+function getSickNoteId()
+{
+    $max_id = MaxId::where('key_p','sicknoteid')->first();
+    $stock_max_id = $max_id->value_p;
+    $max_id->value_p =  $max_id->value_p+1;
+    $max_id->save();
+    return 'SN'.date('ymd').strtoupper(substr(date('l'),0,2)).str_pad($stock_max_id,6,"0",STR_PAD_LEFT);
+}
 ?>

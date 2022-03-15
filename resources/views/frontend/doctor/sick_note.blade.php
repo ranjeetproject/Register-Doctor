@@ -8,9 +8,10 @@
         </div>
         <form action="{{ route('doctor.sick-note',$case->case_id) }}" method="post">
             @csrf
-        <div class="form-group">
+        <div class="form-group" style="display: flex;">
             {{-- <input type="text" class="form-control" placeholder="To Mr. Jhone Doe"> --}}
-            To, {{ $case->user->name }}
+            <p style="flex:50%">To, {{ $case->user->name }}</p>
+            <p style="flex:50%;">Sick note ID: {{ $sicknote ? $sicknote->sick_note_id : '' }}</p>
         </div>
         <div class="sick-note-info">
             <p>I assessed your case on {{ $case->booking_date }}. I advise that:</p>
@@ -26,6 +27,7 @@
         <div class="form-group">
         <textarea rows="5"  name="remarks" class="form-control" placeholder="Doctors’ remarks where applicable e.g. functional effects of condition">{{ $sicknote ? $sicknote->remarks : '' }}</textarea>
         </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         {{-- <table class="table sick-note-info-details">

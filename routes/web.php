@@ -17,6 +17,7 @@ Route::get('/nearest-doctor', 'frontend\FrontendController@nearestDoctor')->name
 Route::get('/top-doctor', 'frontend\FrontendController@topDoctor')->name('topDoctor');
 Route::get('/child-pathway', 'frontend\FrontendController@childPathway')->name('child-pathway');
 Route::get('/show-prescriptions-rules', 'frontend\FrontendController@showPrescriptionsRules')->name('show-prescriptions-rules');
+Route::get('/verify-sick-note', 'frontend\FrontendController@verifySickNote')->name('verify_sick_note');
 
 //Route::get('/home', 'frontend\FrontendController@index');
 Route::any('search/{model}/{type?}', 'SearchController')->name('search');

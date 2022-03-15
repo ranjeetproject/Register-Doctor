@@ -31,6 +31,7 @@
 
         <!-- Footer start -->
             @include('frontend.beforeloginlayout.common_footer')
+            @include('common.sickNoteVerify')
             @include('cookieConsent::index')
         <!-- Footer end -->
 
@@ -38,5 +39,33 @@
             @include('frontend.beforeloginlayout.common_js')
         <!-- common js end -->
            @stack('scripts')
+           <script>
+               $( document ).ready(function() {
+                    // console.log( "ready!" );
+                    $('#verify_sick_note').click(function(){
+
+                        $('#sickNotVerifyModal').modal('show');
+                    });
+                    $('#stick_note_verify_btn').click(function(){
+                        if($('#stick_note_id').val() == ''){
+                            alert('Please enter sick note id');
+                        } else {
+                            $.ajax({
+                                type:'GET',
+                                url:"{{ route('verify_sick_note') }}",
+                                data:{
+                                    sick_note_id: $('#stick_note_id').val()
+                                },
+                                success:function(data) {
+                                    console.log(data);
+                                    $("#sick_note_msg").html(data);
+                                }
+                            });
+                        }
+
+                    });
+                });
+
+           </script>
     </body>
 </html>

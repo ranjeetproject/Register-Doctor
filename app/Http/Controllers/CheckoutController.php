@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PatientCase;
 use App\Models\Payment;
+use App\Models\SetQuickQuestionCost;
 use Illuminate\Http\Request;
 use Session;
 use Stripe;
@@ -30,7 +31,8 @@ class CheckoutController extends Controller
         }
 
         if($case->questions_type == 3){
-            $amount = $case->doctor->profile->dr_standard_fee;
+            $qq_cost = SetQuickQuestionCost::latest()->first();
+            $amount = $qq_cost->set_quick_question_cost + ($qq_cost->set_quick_question_cost*($qq_cost->commission/100));
         }
 
         if($case->questions_type == 4){
@@ -85,7 +87,10 @@ class CheckoutController extends Controller
         }
 
         if($case->questions_type == 3){
-            $amount = $case->doctor->profile->dr_standard_fee;
+            $qq_cost = SetQuickQuestionCost::latest()->first();
+            $dr_fee = $qq_cost->set_quick_question_cost;
+            $admin_fee = $qq_cost->set_quick_question_cost*($qq_cost->commission/100);
+            $amount = $dr_fee + $admin_fee;
         }
 
         if($case->questions_type == 4){
@@ -97,6 +102,7 @@ class CheckoutController extends Controller
         $payment = new Payment;
         $payment->case_id = $request->case_id;
         $payment->user_id = $case->user_id;
+        $payment->doctor_id = $case->doctor_id;
         $payment->intent_id = $request->intent_id;
         $payment->secure_token = $case->_token;
         $payment->doctor_amount = $dr_fee;

@@ -13,13 +13,14 @@
 <div class="card card-primary card-outline">
     <div class="card-header">
         <h3 class="card-title">Doctor wise Total Payment</h3>
-
         <div class="card-tools">
             <form action="" method="GET">
                 <div class="input-group input-group-sm pyh-input-fields">
                     <select name="doctor_id" id="doctor_id" class="form-control">
                         <option value="">All</option>
-                        
+                        @foreach ($doctors as $doctor)
+                            <option value="{{ $doctor->id }}" {{ request()->doctor_id == $doctor->id ? "selected":"" }}>{{ $doctor->name }}</option>
+                        @endforeach
                     </select>
                     {{-- <input type="text" name="search" class="form-control" placeholder="Search"> --}}
                     <input type="text" id="date_timepicker_start" class="form-control ml-mrtlf-10" name="start_date" placeholder="Date range" value="{{ request()->start_date }}" readonly>
@@ -42,7 +43,7 @@
 
                     <thead>
                         <tr>
-                            <th>Date</th>
+                            <th>Doctor's name</th>
                             <th>Admin amount</th>
                             <th>Doctor's amount</th>
                             <th>Total amount</th>
@@ -54,12 +55,13 @@
                         @forelse ($payments as $payment)
                             <tr>
                                 <td>
-                                    {{ date('Y-m-d', strtotime($payment->created_at)) }}
+                                    {{ $payment->doctor->name }}
+                                    {{-- {{ date('Y-m-d', strtotime($payment->created_at)) }} --}}
                                     {{-- {{ date('M-d-Y', strtotime($payment->created_at)) }} --}}
                                 </td>
-                                <td>{{ $payment->admin_amount }}</td>
-                                <td>{{ $payment->doctor_amount }}</td>
-                                <td>{{ $payment->amount }}</td>
+                                <td>{{ $payment->total_admin_amount }}</td>
+                                <td>{{ $payment->total_doctor_amount }}</td>
+                                <td>{{ $payment->total_amount }}</td>
                                 {{-- <td></td>
                                 <td>
 
@@ -68,7 +70,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3" class="text-center">No data found.</td>
+                                <td colspan="4" class="text-center">No data found.</td>
                             </tr>
                         @endforelse
 

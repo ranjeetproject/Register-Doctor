@@ -13,6 +13,8 @@ use App\User;
 use App\Models\ContactUs;
 use App\Models\HomePageBanner;
 use App\Models\UserProfile;
+use App\Models\SickNote;
+use App\Models\PatientCase;
 use App\Mail\ThankYou;
 use App\Mail\AfterContactUsMailForAdmin;
 use Illuminate\Support\Facades\Mail;
@@ -243,5 +245,18 @@ class FrontendController extends Controller
     public function showPrescriptionsRules(Request $request)
     {
       return view('frontend.patient.show-prescriptions-rules');
+    }
+
+    public function verifySickNote(Request $request)
+    {
+        $sickNote = SickNote::where('sick_note_id',$request->sick_note_id)->first();
+        if(empty($sickNote)) {
+            $msg = 'This sick note is not valid one';
+        } else {
+            $pts = PatientCase::with(['user:id,name','doctor:id,name'])->where('case_id',$sickNote->case_id)->first();
+            // dd($pts);
+            $msg = 'Generate By - Dr, '.$pts->doctor->name.' Issued To - '.$pts->user->name;
+        }
+        return $msg;
     }
 }
