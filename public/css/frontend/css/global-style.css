@@ -141,7 +141,7 @@ nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand img {
     border-radius: 0px 0px 8px 8px;
 }
 nav.navbar.navbar-expand-lg.navbar-light.men-menu ul.navbar-nav li {
-    margin-left: 3.5%;
+    margin-left: 1.5%;
 }
 nav.navbar.navbar-expand-lg.navbar-light.men-menu ul.navbar-nav li a {
     color: #8891a1;
@@ -1771,4 +1771,24 @@ a.Set-Opening-Hours.pp-oh-btn{
 .has-float-label .form-control{
     padding-left: 15px;
     padding-right: 15px;
+}
+a.btn-vsn-hdr{
+    color: #fff;
+    background: #0351d2;
+    background: -moz-linear-gradient(right, #0351d2 0%, #25b5ff 100%);
+    background: -webkit-linear-gradient(right, #0351d2 0%, #25b5ff 100%);
+    background: linear-gradient(right, #0351d2 0%, #25b5ff 100%);
+    border-radius: 30px;
+    font-size: 14px;
+    border:0;
+    margin-left: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+a.btn-vsn-hdr:hover {
+    color: #fff;
+    background: #fc490d;
+    background: -moz-linear-gradient(left, #fc490d 0%, #e92b02 100%);
+    background: -webkit-linear-gradient(left, #fc490d 0%, #e92b02 100%);
+    background: linear-gradient(left, #fc490d 0%, #e92b02 100%);
 }
