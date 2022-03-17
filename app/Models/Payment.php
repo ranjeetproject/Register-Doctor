@@ -10,4 +10,9 @@ class Payment extends Model
     {
         return $this->belongsTo('App\User', 'doctor_id', 'id')->withDefault();
     }
+
+    public function case()
+    {
+        return $this->belongsTo('App\Models\PatientCase', 'case_id', 'case_id')->withDefault();
+    }
 }

@@ -31,7 +31,7 @@
                         <button class="btn btn-primary"><i class="fas fa-search"></i></button>
 
                     </div>
-                    <a class="btn btn-csv" href="{{ url('/') }}/admin/payment-history?export=export&start_date={{ request()->start_date }}"><i class="fas fa-file-export"></i></a>
+                    <a class="btn btn-csv" href="{{ url('/') }}/admin/doctor-wise-payment-history?export=export&start_date={{ request()->start_date }}"><i class="fas fa-file-export"></i></a>
                 </div>
 
         </div>
@@ -47,32 +47,32 @@
                     <thead>
                         <tr>
                             <th>Date</th>
+                            <th>Case ID</th>
+                            <th>Case type</th>
                             <th>Admin amount</th>
                             <th>Doctor's amount</th>
-                            {{-- <th>Created date</th>
-                            <th></th> --}}
+                            <th>Total amount</th>
                         </tr>
                     </thead>
 
                     <tbody id="search_result">
                         @forelse ($payments as $payment)
+                        {{-- @dump($payment) --}}
                             <tr>
                                 <td>
                                     {{ date('Y-m-d', strtotime($payment->created_at)) }}
-                                    {{-- {{ date('M-d-Y', strtotime($payment->created_at)) }} --}}
+                                </td>
+                                <td>{{ $payment->case_id }}</td>
+                                <td>
+                                    {{ getQuestionTypeNumberToString($payment->case->questions_type) }}
                                 </td>
                                 <td>{{ $payment->admin_amount }}</td>
                                 <td>{{ $payment->doctor_amount }}</td>
                                 <td>{{ $payment->amount }}</td>
-                                {{-- <td></td>
-                                <td>
-
-
-                                </td> --}}
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3" class="text-center">No data found.</td>
+                                <td colspan="6" class="text-center">No data found.</td>
                             </tr>
                         @endforelse
 

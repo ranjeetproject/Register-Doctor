@@ -342,4 +342,17 @@ function getSickNoteId()
     $max_id->save();
     return 'SN'.date('ymd').strtoupper(substr(date('l'),0,2)).str_pad($stock_max_id,6,"0",STR_PAD_LEFT);
 }
+
+function getQuestionTypeNumberToString($value)
+{
+    if($value == 1) {
+        return 'Live Chat';
+    } elseif($value == 2) {
+        return 'Live Video';
+    } elseif($value == 3) {
+        return 'Live Video';
+    } else {
+        return 'Typed Booked Question';
+    }
+}
 ?>

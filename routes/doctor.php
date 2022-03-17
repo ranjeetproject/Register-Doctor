@@ -51,4 +51,5 @@ Route::middleware(['isDoctor:siteDoctor','activeUser','emailVerified','adminVeri
     Route::get('/all-reviews', 'DoctorController@doctorAllReviews')->name('all-dr-review');
 
     Route::match(['get','post'],'sick-note/{id}', 'DoctorController@sickNote')->name('sick-note');
+    Route::match(['get'],'payment-history', 'DoctorController@paymentHistory')->name('payment-history');
 });
