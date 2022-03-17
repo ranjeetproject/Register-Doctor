@@ -183,7 +183,7 @@
 
                                                 </div>
                                                 <div class="row books-btn">
-                                                    <div class="col-md">
+                                                    <div class="col-md-6">
                                                         <p>
                                                             @if ($doctor->profile->dr_general_prescription_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
@@ -323,7 +323,7 @@
 
                                                 </div>
                                                 <div class="row books-btn">
-                                                    <div class="col-md">
+                                                    <div class="col-md-6">
                                                         <p>
                                                             @if ($doctor->doctor->profile->dr_general_prescription_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
@@ -339,7 +339,7 @@
                                                             class="btn btn-block patient-book-lc {{ $doctor->doctor->profile->dr_general_prescription_notification == 1? '':"disabled" }}">General Prescription</a>
                                                     </div>
                                                     @if(18 < $d_years || $d_years <11)
-                                                    <div class="col-md">
+                                                    <div class="col-md-6">
                                                         <p>
                                                             @if ($doctor->doctor->profile->dr_live_chat_fee_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
@@ -358,7 +358,7 @@
                                                             class="btn btn-block patient-book-lc {{ $doctor->doctor->profile->dr_live_chat_fee_notification == 1? '':"disabled" }}">Book Live Chat</a>
                                                     </div>
                                                     @endif
-                                                    <div class="col-md">
+                                                    <div class="col-md-6">
                                                         <p>
                                                              @if ($doctor->doctor->profile->dr_live_video_fee_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
@@ -376,7 +376,7 @@
                                                     </div>
 
                                                     @if(18 < $d_years || $d_years < 11)
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-6">
                                                         <p>
                                                             {{-- <i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->doctor->profile->dr_qa_fee }} per 15 mins --}}
