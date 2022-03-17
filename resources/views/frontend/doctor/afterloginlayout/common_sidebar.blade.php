@@ -18,6 +18,7 @@
     <li><a href="{{ route('doctor.prescription-issues')}}"><img src="{{ asset('public/images/frontend/images/icon4.png') }}" alt="">Prescriptions Issued</a></li>
 
     <li><a href="{{ route('doctor.close-cases')}}"><img src="{{ asset('public/images/frontend/images/icon8.png') }}" alt="">Closed Cases</a></li>
+    <li><a href="{{ route('doctor.payment-history')}}"><img src="{{ asset('public/images/frontend/images/icon8.png') }}" alt="">Payment History</a></li>
   </ul>
 </div>
 
