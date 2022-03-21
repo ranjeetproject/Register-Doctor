@@ -1816,3 +1816,9 @@ a.btn-vsn-hdr:hover {
     display: flex;
     align-items: center;
 }
+
+i.fas.fa-history {
+    color: #6995ce;
+    margin-left: 9px;
+    margin-right: 6px;
+}

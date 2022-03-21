@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function paymentHistory(Request $request)
     {
         $start_date = $request->start_date;
-        $doctor_id = auth()->user()->doctor_id;
+        $doctor_id = auth()->user()->id;
         $date = explode(' - ',$request->start_date);
         if($request->export == 'export') {
             if($start_date) {

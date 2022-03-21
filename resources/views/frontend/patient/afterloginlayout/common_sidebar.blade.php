@@ -20,5 +20,6 @@
       <li><a href="{{route('patient.pharmacies')}}"><img src="{{ asset('public/images/frontend/images/icon7.png') }}" alt="">Pharmacies</a></li>
 
       <li><a href="{{route('patient.my-favorite-doctors')}}"><img src="{{ asset('public/images/frontend/images/icon6.png') }}" alt="">My Favorite Doctors</a></li>
+      <li><a href="{{ route('patient.payment-history')}}"><i class="fas fa-history"></i>Payment History</a></li>
   </ul>
 </div>
