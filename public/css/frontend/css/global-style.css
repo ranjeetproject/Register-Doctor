@@ -1766,7 +1766,7 @@ a.Set-Opening-Hours.pp-oh-btn{
     margin-right: 5px;
 }
 .fc-star{
-    color: #e00;
+    color: #e00 !important;
 }
 .has-float-label .form-control{
     padding-left: 15px;
@@ -1853,4 +1853,11 @@ h2.Creat-Prescription-title{
 }
 .news-page.news-details-page .news-listing .news-listing-bottom .news-img img {
     height: 100%!important;
+}
+.Prescriptions-page .Prescriptions-step .follow-opction table thead tr td{
+    padding-left: 12px !important;
+    padding-right: 12px!important;
+}
+.Contact-Us-page{
+    margin-top: 0 !important;
 }

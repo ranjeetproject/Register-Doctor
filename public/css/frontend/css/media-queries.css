@@ -831,6 +831,9 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     .news-page.news-details-page .news-listing .news-listing-bottom .news-img{
         height: 250px;
     }
+    .news-page .news-listing .news-listing-top h2{
+        font-size: 24px !important;
+    }
 }
 @media only screen and (max-width : 767px) {
     section.Banner .bann-img img {
@@ -1009,6 +1012,65 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     .news-page.news-details-page .news-listing .news-listing-bottom .news-img {
         height: 170px;
     }
+    .Prescriptions-page .Prescriptions-step h3{
+        font-size: 20px;
+    }
+    .Prescriptions-page .Prescriptions-step p{
+        font-size: 15px;
+    }
+    .Prescriptions-page .Prescriptions-step .follow-opction table tr td,
+    .Prescriptions-page .Prescriptions-step .follow-opction table thead tr td,
+    .child-pathway-page .follow-opction table tr td,
+    .child-pathway-page .follow-opction table thead tr td {
+        font-size: 15px;
+        padding: 10px!important;
+    }
+    .Prescriptions-page .Prescriptions-step .follow-opction table tr td i,
+    .child-pathway-page .follow-opction table tr td i{
+        font-size: 20px;
+    }
+    .child-pathway-page .child-pathway-left h1.page-title{
+        font-size: 26px;
+        margin-top: 0;
+    }
+    .child-pathway-page ul.child-pathway-right-top li {
+        padding: 7px 0px 7px 16px;
+        font-size: 16px;
+    }
+    .child-pathway-page ul.child-pathway-right-top li:after {
+        width: 6px;
+        height: 6px;
+        top: 17px;
+    }
+    .child-pathway-page .follow-opction-top h2{
+        font-size: 17px;
+    }
+    .home-banner-left-cont p{
+        font-size: 14px;
+    }
+    .news-page .news-listing .news-listing-top h2{
+        font-size: 20px !important;
+    }
+    .faq-accordian .card .card-header .btn-header-link{
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+    .faq-accordian .card .card-header .btn-header-link:after{
+        top: 13px;
+    }
+    .Contact-Us-page .cont-in-right .contact-infodetails ul {
+        margin-top: 15px !important;
+    }
+    .has-float-label .form-control:placeholder-shown:not(:focus)+* {
+        font-size: 16px !important;
+        top: 1.3em;
+    }
+    .Patient-Profile-page .Submit-Medical-Record {
+        margin-top: 10px;
+    }
+    .Doctor-Manage-Account-Profile-page .form-check-label {
+        font-size: 16px;
+    }
 }
 @media only screen and (max-width : 575px) {
     .home-banner-left-cont {
@@ -1020,6 +1082,9 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     a.btn-vsn-hdr{
         margin-right: 5px;
         font-size: 13px;
+    }
+    .Doctor-Manage-Account-Profile-page .nav.Choose-Your-tab li {
+        width: calc(100% / 1);
     }
 }
 

@@ -17,29 +17,29 @@
                             </div>
                             <div class="row main-form-fild">
                                 <div class="col-sm-12">
-                                    <div class="form-group required">
-                                        <input type="password" name="old_password" class="form-control effect-19" placeholder="">
-                                        <label>Old Password </label>
+                                    <div class="form-group has-float-label">
+                                        <input type="password" name="old_password" class="form-control" placeholder="Old Password">
+                                        <label>Old Password <span class="fc-star">*</span></label>
                                       </div>
                                     @error('old_password')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="col-sm-12">
-                                    <div class="form-group required">
+                                    <div class="form-group has-float-label">
                                         
-                                        <input type="password" name="new_password" class="form-control effect-19" placeholder="">
-                                        <label>New Password</label>
+                                        <input type="password" name="new_password" class="form-control" placeholder="New Password">
+                                        <label>New Password <span class="fc-star">*</span></label>
                                       </div>
                                       @error('new_password')
                                       <span class="text-danger">{{ $message }}</span>
                                       @enderror
                                 </div>
                                 <div class="col-sm-12">
-                                    <div class="form-group required">
+                                    <div class="form-group has-float-label">
                                         
-                                        <input type="password" class="form-control effect-19" placeholder="" name="confirm_password">
-                                        <label>Confirm Password</label>
+                                        <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password">
+                                        <label>Confirm Password <span class="fc-star">*</span></label>
                                       </div>
                                       @error('confirm_password')
                                       <span class="text-danger">{{ $message }}</span>
