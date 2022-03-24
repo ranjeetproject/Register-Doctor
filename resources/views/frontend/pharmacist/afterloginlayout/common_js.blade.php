@@ -23,10 +23,11 @@
             showOn: "button",
             buttonText:'<i class="far fa-calendar-alt"></i>',
             dateFormat : "ds M yy",
+            minDate: '0D',
             onSelect: function(dateText, inst) {
                 var arrOrd = new Array('0','st','nd','rd','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','st','nd','rd','th','th','th','th','th','th','th','st');
                 var day = Number(inst.selectedDay);
-                var suffix = arrOrd[day];       
+                var suffix = arrOrd[day];
                 $(this).val($(this).val().replace(inst.selectedDay+"s",inst.selectedDay+suffix));
             }
         });
