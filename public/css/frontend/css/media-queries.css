@@ -719,6 +719,11 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
         margin-top: 16px;
     }
 }
+@media only screen and (max-width : 1200px) {
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu ul.navbar-nav li {
+        margin-left: 0;
+    } 
+}
 @media only screen and (max-width : 1024px) {
     .home-banner-left-cont h1 {
         font-size: 28px;
@@ -780,10 +785,56 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
         -webkit-transition: all 0.8s;
         transition: all 0.8s;
     }
+    .homepage .opction-one .opction-one-bottom-right{
+        width: 100%;
+    }
+    a.btn-vsn-hdr{
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    .men-menu .navbar-collapse{
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        top: 55px;
+        background-color: #fff;
+        border-radius: 10px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu ul.navbar-nav li{
+        margin: 0;
+        padding: 5px;
+        text-align: center;
+    }
+    footer.footer.Banner.for-w-100{
+        text-align: center;
+    }
+    footer.footer.Banner.for-w-100 ul.footer-menu{
+        column-count: 1;
+    }
+    footer.footer.Banner.for-w-100 h3{
+        margin-top: 15px;
+    }
+    .for-w-100.copywright{
+        margin-top: 40px;
+    }
+    nav.navbar.navbar-expand-lg.navbar-light.men-menu a.navbar-brand{
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .Doctor-Dashboard-page .Queries{
+        text-align: center;
+    }
+    .news-page .resent-post h3 {
+        margin-top: 20px;
+    }
+    .news-page.news-details-page .news-listing .news-listing-bottom .news-img{
+        height: 250px;
+    }
 }
 @media only screen and (max-width : 767px) {
     section.Banner .bann-img img {
-        max-width: 100%;
+        max-width: 60%;
     }
     .mrt-sm-15{
         margin-top: 40px;
@@ -836,6 +887,128 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     .top-doctor-details-info .doctor-info-right p.tdd-text-warning{
         font-size: 17px;
     }
+    .men-menu .navbar-collapse{
+        top: 79px;
+    }
+    .homepage .Prescriptions{
+        min-height: inherit;
+    }
+    .for-w-100.copywright{
+        margin-top: 20px;
+    }
+    .h-notifications-btn span {
+        right: 2px;
+        width: 14px;
+        height: 14px;
+        font-size: 7px;
+    }
+    .Doctor-Manage-Account-Profile-page .profile-info h2 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .Doctor-Manage-Account-Profile-page .Communication,
+    .Doctor-Manage-Account-Profile-page .form-group h4{
+        font-size: 17px;
+    }
+    .Doctor-Manage-Account-Profile-page .all-question-list .aql-comm{
+        font-size: 16px;
+    }
+    .Doctor-Manage-Account-Profile-page p.Prescriptions-dt strong{
+        font-size: 15px;
+    }
+    .Doc-Diary-1-Create-Regular-weekly-timetable-page .for-box-sad .calend_status h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    .Doc-Diary-1-Create-Regular-weekly-timetable-page .for-box-sad .calend_status h3 {
+        font-size: 16px;
+        margin-top: 15px;
+    }
+    .Doc-Diary-1-Create-Regular-weekly-timetable-page .Available-table-details .Available-Time {
+        padding: 15px 0px;
+        font-size: 18px;
+    }
+    nav .breadcrumb.Pharmacist-doc-com li,
+    .How-to-Get-Thumbs-comm-form .How-Thumbs-Up-Work-right nav ~ h2{
+        font-size: 18px;
+    }
+    .How-to-Get-Thumbs-comm-form .How-Thumbs-Up-Work-right button.btn.Next-Name-btn{
+        font-size: 16px;
+    }
+    .form-history{
+        flex-direction: column;
+    }
+    .case-page button.btn{
+        font-size: 16px;
+        min-width: 100px;
+        padding: 7px;
+        margin-right: 5px;
+    }
+    .case-page .view-case-details ul li {
+        width: inherit;
+        font-size: 15px;
+    }
+    .case-page .view-case-details ul li label {
+        width: inherit;
+        margin-bottom: 0;
+    }
+    .case-page .view-case-details ul li span span{
+        padding-right: 5px;
+    }
+    .case-page h2{
+        font-size: 17px;
+    }
+    .Doctor-Dashboard-page .incoming-request a.card.new-crd{
+        min-height: inherit;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .Doctor-Dashboard-page .incoming-request a.card{
+        margin-bottom: 20px;
+    }
+    .Doctor-Dashboard-page .Queries {
+        margin-bottom: 0;
+    }
+    .Doctor-Dashboard-page h3{
+        font-size: 18px;
+        margin-top: 15px;
+    }
+    .Doctor-Dashboard-page .Queries h2 small {
+        font-size: 15px;
+    }
+    .Doctor-Dashboard-page .Queries h2 {
+        font-size: 18px !important;
+    }    
+    .Doctor-Dashboard-page .Queries p {
+        font-size: 15px !important;
+    }
+    .Doctor-Dashboard-page .incoming-request a.card .card-cont h4{
+        font-size: 16px;
+    }
+    .Doctor-Dashboard-page .incoming-request a.card .card-cont h4 span{
+        font-size: 14px;
+    }
+    .dash-icon-badge{
+        margin-bottom: 10px;
+    }
+    .news-page .resent-post h3 {
+        font-size: 20px;
+    }
+    .news-page .resent-post .resent-listing ul li{
+        font-size: 15px;
+    }
+    .news-page .news-listing .news-listing-top h2{
+        font-size: 20px;
+    }
+    h1.inner-page-title{
+        font-size: 18px;
+    }
+    .news-page .news-listing .news-listing-bottom .news-cont p{
+        font-size: 15px;
+    }
+    .news-page.news-details-page .news-listing .news-listing-bottom .news-img {
+        height: 170px;
+    }
 }
 @media only screen and (max-width : 575px) {
     .home-banner-left-cont {
@@ -843,5 +1016,15 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
         text-align: center;
         padding-top: 20px;
         padding-bottom: 20px;
+    }
+    a.btn-vsn-hdr{
+        margin-right: 5px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 575px){
+    .Doctor-Manage-Account-Profile-page {
+        max-width: inherit;
     }
 }

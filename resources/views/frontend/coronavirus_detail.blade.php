@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-lg-8">
                     {{-- @dd($news) --}}
                     <div class="news-listing for-w-100">
                         <div class="news-listing-top for-w-100">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div> --}}
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <div class="resent-post for-w-100">
                         <h3>Recent Posts</h3>
                         <form method="get" action="{{ route('latestOnCoronavirus') }}">

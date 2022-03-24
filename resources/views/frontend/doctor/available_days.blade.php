@@ -1,7 +1,7 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col Choose-Your-Doctor-right innerpage  Doc-Diary-1-Create-Regular-weekly-timetable-page">
+    <div class="col-lg Choose-Your-Doctor-right innerpage  Doc-Diary-1-Create-Regular-weekly-timetable-page">
         <div class="row">
             <div class="col-sm-12">
                 {{-- <h1>available_days page</h1> --}}

@@ -88,7 +88,7 @@
 
                                 <div class="col-sm-12">
 
-                                    <p class="Creat-Prescription-title">Create Prescription</p>
+                                    <h2 class="Creat-Prescription-title mt-3 mb-2">Create Prescription</h2>
 
                                 </div>
 

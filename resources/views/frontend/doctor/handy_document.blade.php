@@ -1,7 +1,7 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col Choose-Your-Doctor-right innerpage  Handy-Documents-page">
+    <div class="col-lg Choose-Your-Doctor-right innerpage  Handy-Documents-page">
         <div class="row">
             <div class="col-sm-12">
                 <div class="col Incoming-Prescription-Requests-right">
@@ -51,7 +51,7 @@
                                                     <a href="{{ route('doctor.view-handy-document',['id'=>$handy_doc->id]) }}"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a>
                                                     <a href="{{ route('download.handy_doc',['id'=>encrypt($handy_doc->id)]) }}"><img src="{{ asset('public/images/frontend/images/download-icon.png')}}" width="26" alt=""></a>
                                                     @else
-                                                    <a href="{{ $handy_doc->website }}" target="_blank"><i class="fal fa-eye"></i></a>
+                                                    <a href="{{ $handy_doc->website }}" target="_blank"><img src="{{ asset('public/images/frontend/images/view-icon.png')}}" width="26" alt=""></a>
                                                     @endif
                                                 </td>
                                             </tr>

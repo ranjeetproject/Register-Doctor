@@ -1816,3 +1816,41 @@ a.btn-vsn-hdr:hover {
     display: flex;
     align-items: center;
 }
+.form-history-left .form-control{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.form-history-right .form-control{
+    height: 40px !important;
+}
+.Prescriptions-Dispensed-page .Prescriptions-Dispensed-right-table .table-responsive{
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch!important;
+}
+h2.Creat-Prescription-title{
+    color: #004cac;
+    font-size: 18px;
+}
+.Doctor-Dashboard-page .Queries h2{
+    font-size: 22px !important;
+}
+.Doctor-Dashboard-page .Queries p{
+    font-size: 16px !important;
+    color: #004cac;
+}
+.incoming-request .Yac-block a.card.new-crd{
+    width: 100%!important;
+    max-width: 100%!important;
+}
+.incoming-request .Yac-block a.card.new-crd h3{
+    margin-bottom: 20px !important;
+}
+.news-page .news-listing .news-listing-bottom .news-img{
+    overflow: hidden;
+}
+.news-page.news-details-page .news-listing .news-listing-bottom .news-img{
+    height: 300px;
+}
+.news-page.news-details-page .news-listing .news-listing-bottom .news-img img {
+    height: 100%!important;
+}

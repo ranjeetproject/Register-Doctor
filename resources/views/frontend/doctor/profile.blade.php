@@ -1,7 +1,7 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col Choose-Your-Doctor-right Doctor-Manage-Account-Profile-page">
+    <div class="col-lg Choose-Your-Doctor-right Doctor-Manage-Account-Profile-page">
         <div class="row">
             <div class="col-sm-12">
 
@@ -106,25 +106,25 @@
 
                                 <div class="bg-light-blue cmn-card-box padding-20 margin-bottom-20">
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-md-12">
                                             <div class="form-group has-float-label">
                                                 <textarea class="form-control {{!empty($user->profile->about) ? 'has-content':''}}" name="about" rows="4" id="about" placeholder="About">{{$user->profile->about}}</textarea>
                                                 <label for="about">About </label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-md-6">
                                             <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->profile->dr_experience) ? 'has-content':''}}" name="dr_experience" type="text"  value="{{$user->profile->dr_experience}}" id="experience" placeholder="Experience">
                                                 <label for="experience">Experience</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-md-6">
                                             <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->profile->dr_qualifications) ? 'has-content':''}}" type="text" name="dr_qualifications" value="{{$user->profile->dr_qualifications}}" id="qualifications" placeholder="Qualifications">
                                                 <label for="qualifications">Qualifications</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-md-4">
                                             <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->profile->dr_medical_license_no) ? 'has-content':''}}" type="text" name="dr_medical_license_no" value="{{$user->profile->dr_medical_license_no}}" id="mln" placeholder="Medical License No. (National/State)">
                                                 <label for="mln">Medical License No. (National/State) <span class="fc-star">*</span></label>
@@ -133,7 +133,7 @@
                                             @enderror
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-md-4">
                                             <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->profile->dr_name_of_medical_licencer) ? 'has-content':''}}" type="text" name="dr_name_of_medical_licencer" value="{{$user->profile->dr_name_of_medical_licencer}}" id="nml" placeholder="Name of Medical Licencer">
                                                 <label for="nml">Name of Medical Licencer <span class="fc-star">*</span></label>
@@ -142,13 +142,13 @@
                                             @enderror
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-md-4">
                                             <div class="form-group has-float-label">
                                                 <input class="form-control {{!empty($user->registration_number) ? 'has-content':''}}" type="text" name="dr_registered_no" value="{{$user->registration_number}}" id="rdn" placeholder="Registered-Doctor No." readonly>
                                                 <label for="rdn">Registered-Doctor No.</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12">
+                                        <div class="col-md-12">
                                             <div class="form-group Tick-one ">
                                                 <div class="form-check form-check-inline">
                                                     <label class="Tick-lab"><sup>*</sup> Tick one or both - Do you see</label>

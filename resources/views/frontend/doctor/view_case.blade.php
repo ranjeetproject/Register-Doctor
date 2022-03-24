@@ -22,7 +22,7 @@
                             <li><label>Unique Patient Number (UPN) </label><span class="cont"> <span>:</span>   {{$case->user->registration_number}}</span></li>
                         </ul>
                     </div>
-                    <h2>Patient Query <i class="fas fa-caret-down"></i></h2>
+                    <h2>Patient Query</h2>
                     <div class="view-case-details">
                         <p>{{$case->health_problem}}</p>
                     </div>
