@@ -103,6 +103,7 @@ Route::get('payment-history', 'PaymentHistoryController@index')->name('payment_h
 Route::get('doctor-wise-payment-history', 'PaymentHistoryController@doctorWiseReport')->name('doctor_wise_payment_history');
 Route::any('set-commission', 'CommissionController@create')->name('commission');
 Route::any('set-general-prescription-commission', 'GeneralPrescriptionController@create')->name('gen_pres_commission');
+Route::any('set-id-verify-difference-time', 'SetIdVerifyDifferenceTimeController@create')->name('setIdVerifyDifference');
 
 });
 //  *************for admin *************//

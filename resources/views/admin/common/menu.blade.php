@@ -153,10 +153,19 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.gen_pres_commission')}}" class="nav-link {{ Request::is('admin/set_quick_question_cost/create*') ? 'active' : '' }}">
+            <a href="{{route('admin.gen_pres_commission')}}" class="nav-link {{ Request::is('admin/set-general-prescription-commission*') ? 'active' : '' }}">
             <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
               <p>
                General Prescription Cost
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.setIdVerifyDifference')}}" class="nav-link {{ Request::is('admin/set-id-verify-difference-time*') ? 'active' : '' }}">
+            <i class="nav-icon fa fa-sticky-note" aria-hidden="true"></i>
+              <p>
+               Id Verify Difference Days
               </p>
             </a>
           </li>

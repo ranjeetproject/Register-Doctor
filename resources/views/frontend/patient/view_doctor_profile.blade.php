@@ -112,17 +112,11 @@
 
                                                 <i class="far fa-thumbs-up reting"></i>
                                             @endfor
-                                            {{-- <i class="far fa-thumbs-up reting"></i> --}}
                                         </div>
                                         <p>Comments:</p>
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
 
                             <div id="book_slot">
 
@@ -415,7 +409,37 @@
                                             <i class="fas fa-file-medical-alt"></i>
                                         </div>
                                     </div> -->
-                                    <ul class="nav vdp-tabs">
+                                    <ul class="nav vdp-tabs doc">
+
+                                    </ul>
+
+                                    <div class="form-group m-0">
+                                        <label for="exampleFormControlFile1">Upload ID Front Image <i
+                                                class="fal fa-paperclip"></i></label><p>You Can Upload Max 1 File PDF & JPEG</p>
+                                        <input type="file" name="upload_id_front" class="form-control-file"
+                                            id="idFrontImage" style="opacity: 0; margin-top: -35px;"
+                                            accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right"
+                                            title="" data-original-title="One line definition"
+                                            src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="">
+
+                                    </div>
+
+                                    <ul class="nav vdp-tabs doc1">
+
+                                    </ul>
+
+                                    <div class="form-group m-0">
+                                        <label for="exampleFormControlFile1">Upload ID Back Image <i
+                                                class="fal fa-paperclip"></i></label><p>You Can Upload Max 1 File PDF & JPEG</p>
+                                        <input type="file" name="upload_id_back" class="form-control-file"
+                                            id="idBackImage" style="opacity: 0; margin-top: -35px;"
+                                            accept="image/*,.pdf"><br> <img data-toggle="tooltip" data-placement="right"
+                                            title="" data-original-title="One line definition"
+                                            src="{{ asset('public/images/frontend/images/ex-icon.png') }}" alt="">
+
+                                    </div>
+
+                                    <ul class="nav vdp-tabs doc2">
 
                                     </ul>
                                     <!-- <div class="tab-content">
@@ -533,6 +557,7 @@
             });
 
             $('input#exampleFormControlFile1').change(function() {
+                // $('ul.doc').html('');
                 var files = $(this)[0].files;
                // $('#count_up_attach').html(files.length);
                 // if(files.length > 10){
@@ -552,7 +577,7 @@
                                             <i class="fas fa-file-pdf"></i>
                                             <span>${file_name}</span>
                                             </a>
-                                        </li>${i}`).appendTo('ul.vdp-tabs')
+                                        </li>${i}`).appendTo('ul.doc')
                     }else{
                         //console.log('this is jpg');
                         $(`<li class="nav-item">
@@ -560,7 +585,65 @@
                                                 <i class="fas fa-file-image"></i>
                                                 <span>${file_name}</span>
                                             </a>
-                                        </li>${i}`).appendTo('ul.vdp-tabs')
+                                        </li>${i}`).appendTo('ul.doc')
+                    }
+
+                }
+
+            });
+
+            $('input#idFrontImage').change(function() {
+                $('ul.doc1').html('');
+                var files = $(this)[0].files;
+                for (var i = 0; i < files.length; i++)
+                {
+                    var file_name = files[i].name;
+                    var ext = file_name.substring(file_name.lastIndexOf('.') + 1).toLowerCase();
+                    if(ext == 'pdf'){
+                        //console.log('this is pdf');
+                        $(`<li class="nav-item">
+                                            <a class="nav-link" target="_blank" href="${URL.createObjectURL(files[i])}">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span>${file_name}</span>
+                                            </a>
+                                        </li>${i}`).appendTo('ul.doc1')
+                    }else{
+                        //console.log('this is jpg');
+                        $(`<li class="nav-item">
+                                            <a class="nav-link" target="_blank" href="${URL.createObjectURL(files[i])}">
+                                                <i class="fas fa-file-image"></i>
+                                                <span>${file_name}</span>
+                                            </a>
+                                        </li>${i}`).appendTo('ul.doc1')
+                    }
+
+                }
+
+            });
+
+            $('input#idBackImage').change(function() {
+                $('ul.doc2').html('');
+                var files = $(this)[0].files;
+                for (var i = 0; i < files.length; i++)
+                {
+                    var file_name = files[i].name;
+                    var ext = file_name.substring(file_name.lastIndexOf('.') + 1).toLowerCase();
+                    if(ext == 'pdf'){
+                        //console.log('this is pdf');
+                        $(`<li class="nav-item">
+                                            <a class="nav-link" target="_blank" href="${URL.createObjectURL(files[i])}">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span>${file_name}</span>
+                                            </a>
+                                        </li>${i}`).appendTo('ul.doc2')
+                    }else{
+                        //console.log('this is jpg');
+                        $(`<li class="nav-item">
+                                            <a class="nav-link" target="_blank" href="${URL.createObjectURL(files[i])}">
+                                                <i class="fas fa-file-image"></i>
+                                                <span>${file_name}</span>
+                                            </a>
+                                        </li>${i}`).appendTo('ul.doc2')
                     }
 
                 }

@@ -27,6 +27,7 @@ use App\Models\pharma_req_prescription;
 use App\Models\PrescriptionComment;
 use App\Models\PersonTOPersonChat;
 use App\Models\GeneralPrescription;
+use App\Models\PatientDoc;
 use App\User;
 use App\UserDoctor;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -251,6 +252,45 @@ class PatientController extends Controller
             // print_r($img_did); exit;
 
             CaseFile::insert($img_did);
+            if ($request->hasFile('upload_id_front') || $request->hasFile('upload_id_back')) {
+                $upload_id = new PatientDoc;
+                $upload_id->user_id = Auth::guard('sitePatient')->user()->id;
+                if($request->hasFile('upload_id_front')) {
+                    $rand_val           = date('YMDHIS') . rand(11111, 99999);
+                    $image_file_name    = md5($rand_val);
+                    // $file               = $request->file('image');
+                    $file               = $request->file('upload_id_front');
+                    $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
+                    $extension =  pathinfo(storage_path($fileName),PATHINFO_EXTENSION);
+                    if($extension == 'jpg' || $extension == 'pdf' || $extension=='jpeg' || $extension=='png') {
+                        $destinationPath    = public_path().'/uploads/patient_id/';
+                        $file->move($destinationPath,$fileName);
+                        $upload_id->id_font_side = $fileName;
+                    }else{
+                        Session::flash('Error-toastr','File Formate Not Supported');
+                        return redirect()->back();
+                    }
+                }
+                if($request->hasFile('upload_id_back')) {
+                    $rand_val           = date('YMDHIS') . rand(11111, 99999);
+                    $image_file_name    = md5($rand_val);
+                    // $file               = $request->file('image');
+                    $file               = $request->file('upload_id_back');
+                    $fileName           = $image_file_name.'.'.$file->getClientOriginalExtension();
+                    $extension =  pathinfo(storage_path($fileName),PATHINFO_EXTENSION);
+                    if($extension == 'jpg' || $extension == 'pdf' || $extension=='jpeg' || $extension=='png') {
+                        $destinationPath    = public_path().'/uploads/patient_id/';
+                        $file->move($destinationPath,$fileName);
+                        $upload_id->id_back_side = $fileName;
+                    }else{
+                        Session::flash('Error-toastr','File Formate Not Supported');
+                        return redirect()->back();
+                    }
+                }
+
+                $upload_id->save();
+            }
+
 
             // if ($request->hasFile('case_file')) {
             //    $rand_val           = date('YMDHis').rand(11111,99999);
@@ -275,19 +315,15 @@ class PatientController extends Controller
                     $booking_time_slot->time_slot_id = $time_slot;
                     $booking_time_slot->save();
                 }
-
             }
 
             Session::flash('Success-toastr','Successfully submited');
 
-
             if($request->questions_type == 1 || $request->questions_type == 2 || $request->questions_type == 4){
                 return redirect()->route('patient.payment',$case->case_id);
-                // return redirect()->route('patient.symptoms-checker',$case->case_id);
             }
             return redirect()->back();
         }
-
 
         // return view('frontend.patient.create_case');
 

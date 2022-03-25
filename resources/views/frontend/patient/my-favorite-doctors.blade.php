@@ -195,11 +195,13 @@
 
                                                         </p>
 
-                                                        <a href="#"
-                                                            class="btn btn-block patient-book-lc {{ $doctor->profile->dr_general_prescription_notification == 1? '':"disabled" }}">General Prescription</a>
+                                                        <button @if ($doctor->profile->dr_general_prescription_notification == 1)
+                                                            onclick="bookGenaralPres('{{ $doctor->id }}')"
+                                                            @endif
+                                                            class="btn btn-block patient-book-lc {{ $doctor->profile->dr_general_prescription_notification == 1? '':"disabled" }}">General Prescription</button>
                                                     </div>
                                                     @if(18 < $d_years || $d_years < 11)
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <p>
                                                             @if ($doctor->profile->dr_live_chat_fee_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
@@ -216,7 +218,7 @@
                                                             class="btn btn-block patient-book-lc {{ $doctor->profile->dr_live_chat_fee_notification == 1? '':"disabled" }}">Book Live Chat</a>
                                                     </div>
                                                     @endif
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <p>
                                                             @if ($doctor->profile->dr_live_video_fee_notification == 1)
                                                             <i class="fas fa-pound-sign"></i>
@@ -234,7 +236,7 @@
                                                             class="btn btn-block patient-book-lc {{ $doctor->profile->dr_live_video_fee_notification == 1? '':"disabled" }}">Book Live Video</a>
                                                     </div>
                                                     @if(18 < $d_years || $d_years < 11)
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <p>
                                                             @if ($doctor->profile->dr_qa_fee_notification == 1)
                                                              <i class="fas fa-pound-sign"></i>
@@ -335,8 +337,11 @@
 
                                                         </p>
 
-                                                        <a href="#"
-                                                            class="btn btn-block patient-book-lc {{ $doctor->doctor->profile->dr_general_prescription_notification == 1? '':"disabled" }}">General Prescription</a>
+                                                        <button @if ($doctor->doctor->profile->dr_general_prescription_notification == 1)
+
+                                                                onclick="bookGenaralPres('{{ $doctor->doctor->id }}')"
+                                                            @endif
+                                                            class="btn btn-block patient-book-lc {{ $doctor->doctor->profile->dr_general_prescription_notification == 1? '':"disabled" }}">General Prescription</button>
                                                     </div>
                                                     @if(18 < $d_years || $d_years <11)
                                                     <div class="col-md-6">
@@ -480,10 +485,46 @@
             </div>
         </div>
 
+        <div class="modal fade bd-example-modal-lg how-it-works" tabindex="-1" id="genPrescrip" role="dialog"
+            aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fal fa-times-circle"></i>
+                    </button>
+                    <form method="POST" action="{{ route('patient.create-case') }}" enctype="multipart/form-data">
 
+                        @csrf
+                        <input type="hidden" name="questions_type" value="5">
+                        <input type="hidden" name="doctor_id" id="doctor_id_gen">
 
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="health_problem" id="exampleFormControlTextarea1"
+                                        rows="5" placeholder="Type your helth query here..."></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Upload Attachments <i
+                                            class="fal fa-paperclip"></i></label>
+                                    <input type="file" name="case_file[]" class="form-control-file"
+                                        id="exampleFormControlFile1" style="opacity: 0;" multiple><br> <img
+                                        data-toggle="tooltip" data-placement="right" title=""
+                                        data-original-title="One line definition" src="images/ex-icon.png" alt="">
+                                </div>
 
+                            </div>
+                            <div class="col-sm-12 ask-submit">
+                                <button type="submit" class="btn orange-button">Submit Your Query</button>
+                            </div>
+                        </div>
 
+                    </form>
+                </div>
+            </div>
+        </div>
 
         {{-- <div class="modal fade" id="doct-review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -613,6 +654,11 @@
         function bookLiveChats(doctor_id) {
             $('#myModal3').modal('show');
             $('#doctor_id').val(doctor_id);
+        }
+
+        function bookGenaralPres(doctor_id) {
+            $('#genPrescrip').modal('show');
+            $('#doctor_id_gen').val(doctor_id);
         }
 
 

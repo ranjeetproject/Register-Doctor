@@ -129,6 +129,9 @@
                                                                 @if ($case->questions_type == 4)
                                                                     Typed Q&A
                                                                 @endif
+                                                                @if ($case->questions_type == 5)
+                                                                    General Prescription
+                                                                @endif
                                                             </a>
                                                         </td>
 

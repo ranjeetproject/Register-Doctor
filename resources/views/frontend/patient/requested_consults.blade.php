@@ -137,6 +137,13 @@
                                                                         <img src="{{ asset('public/images/frontend/images/QA-icon.png') }}"
                                                                             alt="" width="34">
                                                                     @endif
+                                                                    @if ($case->questions_type == 5)
+                                                                        General
+                                                                        <br>
+                                                                        <p>Prescription</p><br>
+                                                                        {{-- <img src="{{ asset('public/images/frontend/images/QA-icon.png') }}"
+                                                                            alt="" width="34"> --}}
+                                                                    @endif
                                                                 </a>
                                                             @else
                                                                 @if ($case->questions_type == 1)
@@ -159,6 +166,11 @@
                                                                     Typed Q&A
                                                                     <br>
                                                                     <p>Max 3 Exchanges</p>
+                                                                @endif
+                                                                @if ($case->questions_type == 5)
+                                                                    General
+                                                                    <br>
+                                                                    <p>Prescription</p>
                                                                 @endif
                                                             @endif
                                                         @endif
