@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="col Post-prescription-right Patient-Profile-page">
+    <div class="col-lg-9 Post-prescription-right Patient-Profile-page">
         <div class="row">
             <div class="col-sm-12">
                 
@@ -18,8 +18,8 @@
                             <div class="row main-form-fild">
                                 <div class="col-sm-12">
                                     <div class="form-group has-float-label">
-                                        <input type="password" name="old_password" class="form-control" placeholder="Old Password">
-                                        <label>Old Password <span class="fc-star">*</span></label>
+                                        <input type="password" name="old_password" class="form-control" id="OldPassword" placeholder="Old Password">
+                                        <label for="OldPassword">Old Password <span class="fc-star">*</span></label>
                                       </div>
                                     @error('old_password')
                                     <span class="text-danger">{{ $message }}</span>
@@ -28,8 +28,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group has-float-label">
                                         
-                                        <input type="password" name="new_password" class="form-control" placeholder="New Password">
-                                        <label>New Password <span class="fc-star">*</span></label>
+                                        <input type="password" name="new_password" class="form-control" id="NewPassword" placeholder="New Password">
+                                        <label for="NewPassword">New Password <span class="fc-star">*</span></label>
                                       </div>
                                       @error('new_password')
                                       <span class="text-danger">{{ $message }}</span>
@@ -38,8 +38,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group has-float-label">
                                         
-                                        <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password">
-                                        <label>Confirm Password <span class="fc-star">*</span></label>
+                                        <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm Password" name="confirm_password">
+                                        <label for="ConfirmPassword">Confirm Password <span class="fc-star">*</span></label>
                                       </div>
                                       @error('confirm_password')
                                       <span class="text-danger">{{ $message }}</span>

@@ -769,21 +769,24 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     button.btn.sider-bar-toggle ~ ul.left-nav {
         border-radius: 0px;
         position: fixed;
-        top: 0px;
-        z-index: 99;
-        width: 100%;
         left: 0;
-        overflow: auto;
-        max-height: 100vh;
-        -webkit-transform: translate(-100%);
-                transform: translate(-100%);
-        height: 100vh;
+        bottom:0;
+        top: 0;
+        z-index: 99;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+        width: 320px;
     }
     button.btn.sider-bar-toggle ~ ul.left-nav.main {
-        -webkit-transform: translate(0%);
-                transform: translate(0%);
-        -webkit-transition: all 0.8s;
-        transition: all 0.8s;
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+    ul.left-nav li a {
+        padding: 8px 15px;
     }
     .homepage .opction-one .opction-one-bottom-right{
         width: 100%;
@@ -833,6 +836,19 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     }
     .news-page .news-listing .news-listing-top h2{
         font-size: 24px !important;
+    }
+    .sidebar-menu-overlay{
+        display: none;
+        background-color: #000;
+        bottom: 0;
+        left: 0;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+        /* IE7 & 8 */
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 49;
     }
 }
 @media only screen and (max-width : 767px) {
@@ -891,7 +907,7 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
         font-size: 17px;
     }
     .men-menu .navbar-collapse{
-        top: 79px;
+        top: 70px;
     }
     .homepage .Prescriptions{
         min-height: inherit;
@@ -1070,6 +1086,31 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     }
     .Doctor-Manage-Account-Profile-page .form-check-label {
         font-size: 16px;
+    }
+    .homepage .opction-one .opction-one-bottom{
+        margin-top: 0;
+        margin-bottom: 0px;
+    }
+    .homepage h2 {
+        font-size: 22px;
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+    .homepage h3 {
+        font-size: 14px;
+    }
+    .homepage .opction-one,
+    .homepage .opction-two{
+        margin-top: 15px;
+    }
+    .homepage .Prescriptions{
+        margin-top: 90px;
+    }
+    .homepage .opction-two{
+        min-height: inherit;
+    }
+    .homepage .Prescriptions > img {
+        margin-top: -124px;
     }
 }
 @media only screen and (max-width : 575px) {
