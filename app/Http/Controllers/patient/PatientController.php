@@ -401,7 +401,7 @@ class PatientController extends Controller
                 $search_doctors = $search_doctors->appends(request()->query());
         }
 
-
+        // dd(Auth::guard('sitePatient')->user()->id);
         return view('frontend.patient.my-favorite-doctors', compact('doctors','doctors_speciality','search_doctors','general_prescription'));
     }
 

@@ -10,6 +10,8 @@
                     $d_years = $age->format('%y');
                     $d_months = $age->format('%m');
                     $d_days = $age->format('%d');
+                   $id_verify_check = userCaseCheck(auth()->user()->id);
+                //    dd(auth()->user()->id,$id_verify_check);
                     // dump($age, $sd, $d_years,$d_months,$d_days);
                 @endphp
 
@@ -183,6 +185,9 @@
 
                                                 </div>
                                                 <div class="row books-btn">
+                                                    @if ($id_verify_check)
+
+
                                                     <div class="col-md-6">
                                                         <p>
                                                             @if ($doctor->profile->dr_general_prescription_notification == 1)
@@ -195,7 +200,7 @@
 
                                                         </p>
 
-                                                        <button @if ($doctor->profile->dr_general_prescription_notification == 1)
+                                                        <button @if ($doctor->profile->dr_general_prescription_notification == 1 && $id_verify_check)
                                                             onclick="bookGenaralPres('{{ $doctor->id }}')"
                                                             @endif
                                                             class="btn btn-block patient-book-lc {{ $doctor->profile->dr_general_prescription_notification == 1? '':"disabled" }}">General Prescription</button>
@@ -218,6 +223,7 @@
                                                             class="btn btn-block patient-book-lc {{ $doctor->profile->dr_live_chat_fee_notification == 1? '':"disabled" }}">Book Live Chat</a>
                                                     </div>
                                                     @endif
+                                                    @endif
                                                     <div class="col-md-6">
                                                         <p>
                                                             @if ($doctor->profile->dr_live_video_fee_notification == 1)
@@ -235,6 +241,7 @@
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->id), 'questions_type'=> 'live-video']) }}"
                                                             class="btn btn-block patient-book-lc {{ $doctor->profile->dr_live_video_fee_notification == 1? '':"disabled" }}">Book Live Video</a>
                                                     </div>
+                                                    @if ($id_verify_check)
                                                     @if(18 < $d_years || $d_years < 11)
                                                     <div class="col-md-6">
                                                         <p>
@@ -256,6 +263,8 @@
                                                                 Time {{ $doctor->profile->dr_turnaround_time }}</small></button>
                                                     </div>
                                                     @endif
+                                                    @endif
+
                                                 </div>
                                             </div>
 
@@ -325,6 +334,8 @@
 
                                                 </div>
                                                 <div class="row books-btn">
+                                                    @if ($id_verify_check)
+
                                                     <div class="col-md-6">
                                                         <p>
                                                             @if ($doctor->doctor->profile->dr_general_prescription_notification == 1)
@@ -363,6 +374,7 @@
                                                             class="btn btn-block patient-book-lc {{ $doctor->doctor->profile->dr_live_chat_fee_notification == 1? '':"disabled" }}">Book Live Chat</a>
                                                     </div>
                                                     @endif
+                                                    @endif
                                                     <div class="col-md-6">
                                                         <p>
                                                              @if ($doctor->doctor->profile->dr_live_video_fee_notification == 1)
@@ -379,6 +391,7 @@
                                                         <a href="{{ route('patient.view-doctor-profile', [Crypt::encryptString($doctor->doctor->id), 'questions_type'=> 'live-video']) }}"
                                                             class="btn btn-block patient-book-lc {{ $doctor->doctor->profile->dr_live_video_fee_notification == 1? '':"disabled" }}">Book Live Video</a>
                                                     </div>
+                                                    @if ($id_verify_check)
 
                                                     @if(18 < $d_years || $d_years < 11)
                                                     <div class="col-md-6">
@@ -401,6 +414,7 @@
                                                             class="btn btn-block Request {{ $doctor->doctor->profile->dr_qa_fee_notification == 1? '':'disabled' }}">Request Typed Q&A <br> <small>Turnaround
                                                                 Time {{ $doctor->doctor->profile->dr_turnaround_time }}</small></button>
                                                     </div>
+                                                    @endif
                                                     @endif
                                                 </div>
                                             </div>

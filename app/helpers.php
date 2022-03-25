@@ -8,6 +8,7 @@ use App\Models\TimeSlot;
 use App\Models\ThumbsUp;
 use App\Models\MaxId;
 use App\Models\UserTimezone;
+use App\Models\PatientCase;
 use App\User;
 
  function dateDifferent($date1, $date2)
@@ -354,5 +355,9 @@ function getQuestionTypeNumberToString($value)
     } else {
         return 'Typed Booked Question';
     }
+}
+function userCaseCheck($id)
+{
+    return PatientCase::where('user_id',$id)->count();
 }
 ?>
