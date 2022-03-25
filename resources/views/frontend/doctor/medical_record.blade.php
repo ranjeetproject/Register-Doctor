@@ -1,11 +1,11 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col Choose-Your-Doctor-right Medical-Record-page">
+    <div class="col-lg-9 Choose-Your-Doctor-right Medical-Record-page">
         <div class="row">
             <div class="col-sm-12">
 
-                <div class="col Choose-Your-Doctor-right">
+                <div class="Choose-Your-Doctor-right">
                     <nav aria-label="breadcrumb ">
                         <ol class="breadcrumb Pharmacist-doc-com">
                           <li class="breadcrumb-item"><a href="javascript:void(0)">Medical Record</a></li>
@@ -25,8 +25,8 @@
                                   </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="comm-title-details">
-                                    <h4>Recorded Past Medical History <i class="fas fa-caret-down"></i></h4>
+                                <div class="comm-title-details mt-3">
+                                    <h4>Recorded Past Medical History</h4>
                                    {{--  <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div> --}}
                                 </div>
                                 <div class="card">
@@ -41,7 +41,7 @@
                                   </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="comm-title-details">
+                                <div class="comm-title-details mt-3">
                                     <h4>Recorded Past Medical History</h4>
                                     {{-- <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div> --}}
                                 </div>
@@ -56,11 +56,11 @@
                                   </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="comm-title-details">
+                                <div class="comm-title-details mt-3">
                                     <h4>Doctor's Diagnosis Details</h4>
                                 </div>
                                 <div class="card">
-                                    <div class="card-body p-0">
+                                    <div class="card-body p-0 table-responsive">
                                         <table class="table table-bordered">
                                             <thead>
                                               <tr>
@@ -89,8 +89,8 @@
                                   </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="comm-title-details">
-                                    <h4>Recorded Drug and Allergy Histories <i class="fas fa-caret-down"></i></h4>
+                                <div class="comm-title-details mt-3">
+                                    <h4>Recorded Drug and Allergy Histories </h4>
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
@@ -98,7 +98,7 @@
                                             <h4>If you can please provide details of drugs taken in the past 6 months</h4>
                                            {{--  <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div> --}}
                                         </div>
-                                        <div class="card-body p-0">
+                                        <div class="card-body p-0 table-responsive">
                                             <table class="table border-0" border="0">
                                                 <thead>
                                                   <tr>
@@ -152,10 +152,10 @@
 
                                             </tbody>
                                           </table>
-                                          <div class="comm-title-details">
+                                          <div class="comm-title-details mt-3">
                                             <h4>Drugs prescribed on this website</h4>
                                         </div>
-                                        <div class="card-under-table">
+                                        <div class="card-under-table table-responsive">
                                             <table class="table table-bordered">
                                                 <thead>
                                                   <tr>
@@ -183,8 +183,8 @@
                                     </div>
                                   </div>
                                   <div class="col-sm-12">
-                                    <div class="comm-title-details">
-                                        <h4>Recorded Past Medical History <i class="fas fa-caret-down"></i></h4>
+                                    <div class="comm-title-details mt-3">
+                                        <h4>Recorded Past Medical History</h4>
                                         {{-- <div class="add-and-edite"><a href="#"><i class="fal fa-plus"></i></a> <a href="#"><i class="fas fa-pencil-alt"></i></a></div> --}}
                                     </div>
                                     <div class="card">
@@ -194,8 +194,8 @@
                                       </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <div class="comm-title-details">
-                                        <h4>Please provide your Family Doctor or GP Details <i class="fas fa-caret-down"></i></h4>
+                                    <div class="comm-title-details mt-3">
+                                        <h4>Please provide your Family Doctor or GP Details</h4>
                                     </div>
                                     <div class="card">
                                         <div class="card-body">

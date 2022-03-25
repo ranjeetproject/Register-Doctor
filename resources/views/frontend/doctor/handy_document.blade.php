@@ -1,10 +1,10 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col-lg Choose-Your-Doctor-right innerpage  Handy-Documents-page">
+    <div class="col-lg-9 Choose-Your-Doctor-right innerpage  Handy-Documents-page">
         <div class="row">
             <div class="col-sm-12">
-                <div class="col Incoming-Prescription-Requests-right">
+                <div class="Incoming-Prescription-Requests-right">
                     <h2>Handy Documents</h2>
                     <div class="for-w-100 Incoming-Prescription-Requests-right-table">
                         <h3>Documents</h3>

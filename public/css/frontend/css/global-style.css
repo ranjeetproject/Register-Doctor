@@ -1861,4 +1861,14 @@ h2.Creat-Prescription-title{
 .Contact-Us-page{
     margin-top: 0 !important;
 }
-
+.Prescribed-Modal .modal-dialog{
+    margin-left: auto;
+    margin-right: auto;
+}
+.news-page .news-listing .news-listing-top h2{
+    font-size: 26px !important;
+}
+.login-page form .form-group.new-regis p{
+    margin-top: 20px;
+    margin-bottom: 0;
+}

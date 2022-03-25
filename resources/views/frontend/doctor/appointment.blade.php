@@ -1,10 +1,10 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col-lg Choose-Your-Doctor-right innerpage  Prescriptions-Dispensed-page">
+    <div class="col-lg-9 Choose-Your-Doctor-right innerpage  Prescriptions-Dispensed-page">
         <div class="row">
             <div class="col-sm-12">
-                <div class="col Prescriptions-Dispensed-right">
+                <div class="Prescriptions-Dispensed-right">
                     <nav aria-label="breadcrumb ">
                         <ol class="breadcrumb Pharmacist-doc-com">
                             <li class="breadcrumb-item active">Appointment</li>

@@ -1,7 +1,7 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col Choose-Your-Doctor-right Message-Doctor-to-Patient-via-Left-Hand-Navigation-page">
+    <div class="col-lg-9 Choose-Your-Doctor-right Message-Doctor-to-Patient-via-Left-Hand-Navigation-page">
         <div class="row">
             <div class="col-sm-12">
                 <div class="col">

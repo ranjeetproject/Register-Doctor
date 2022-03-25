@@ -844,11 +844,13 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
         left: 0;
         opacity: 0.5;
         filter: alpha(opacity=50);
-        /* IE7 & 8 */
         position: fixed;
         right: 0;
         top: 0;
         z-index: 49;
+    }
+    .login-page form .form-group button{
+        font-size: 16px !important;
     }
 }
 @media only screen and (max-width : 767px) {
@@ -1112,6 +1114,26 @@ section.for-w-100.main-content.innerpage.Post-prescription-page.select.pharmacy.
     .homepage .Prescriptions > img {
         margin-top: -124px;
     }
+    .Medical-Record-page .comm-title-details h4{
+        font-size: 16px;
+    }
+    .Medical-Record-page .card .card-body thead th,
+    .Medical-Record-page .card .card-body body td{
+        font-size: 14px;
+    }
+    .login-page form .form-group.new-regis p{
+        font-size: 16px !important;
+    }
+    .login-page form .form-group.Forgot a {
+        font-size: 15px !important;
+    }
+    .login-page form h1{
+        font-size: 28px;
+    }
+    .login-page form p{
+        font-size: 16px;
+    }
+   
 }
 @media only screen and (max-width : 575px) {
     .home-banner-left-cont {

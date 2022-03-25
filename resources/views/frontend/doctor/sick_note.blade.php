@@ -1,7 +1,7 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <section class="col sick-note-wrap">
+    <section class="col-lg-9 sick-note-wrap">
         <div class="sick-note-header">
             <h2>STATEMENT OF LICENSED MEDICAL DOCTOR</h2>
             <p>Fitness for Work Statement - Certificate Number</p>
