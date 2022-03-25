@@ -19,7 +19,7 @@
 
     <li><a href="{{ route('doctor.close-cases')}}"><img src="{{ asset('public/images/frontend/images/icon8.png') }}" alt="">Closed Cases</a></li>
     
-    <li><a href="{{ route('doctor.payment-history')}}"><i class="fas fa-history"></i> Payment History</a></li>
+    <li><a href="{{ route('doctor.payment-history')}}"><img src="{{ asset('public/images/frontend/images/icon14.png') }}" alt=""> Payment History</a></li>
   </ul>
   <div class="sidebar-menu-overlay"></div>
 </div>
