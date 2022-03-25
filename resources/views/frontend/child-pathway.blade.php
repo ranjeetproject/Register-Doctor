@@ -25,12 +25,12 @@
 <section class="for-w-100 main-content innerpage child-pathway-page">
     <div class="container">
         <div class="row ">
-            <div class="col-sm-3 child-pathway-left">
+            <div class="col-md-3 child-pathway-left">
                 <h1 class="page-title">Children</h1>
                 <img src="{{ asset('public/images/frontend/images/ch-pic.jpg') }}" alt="">
                 <p><a href="#">  For CHILD FAQs click here</a></p>
             </div>
-            <div class="col-sm-9">
+            <div class="col-md-9">
                 <ul class="child-pathway-right-top">
                     <li>
                         First create an account as the parent/guardian

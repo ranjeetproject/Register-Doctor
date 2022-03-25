@@ -20,13 +20,18 @@
 
 <script>
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip();
     })
-$(document).ready(function(){
-  $("button.btn.sider-bar-toggle, button.btn.sider-bar-toggle ~ ul.left-nav li a").click(function(){
-    $("button.btn.sider-bar-toggle ~ ul.left-nav").toggleClass("main");
-  });
-});
+    $(document).ready(function(){
+      $("button.btn.sider-bar-toggle, button.btn.sider-bar-toggle ~ ul.left-nav li a").click(function(){
+        $("button.btn.sider-bar-toggle ~ ul.left-nav").toggleClass("main");
+        $(".sidebar-menu-overlay").fadeIn(500);
+      });
+      $(".sidebar-menu-overlay").click(function(event) {
+        $("button.btn.sider-bar-toggle ~ ul.left-nav").toggleClass("main");
+        $(".sidebar-menu-overlay").fadeOut(500);
+      })
+    });
 </script>
 
   <!-- toastr js-->

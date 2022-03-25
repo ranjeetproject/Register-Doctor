@@ -1,7 +1,7 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col Choose-Your-Doctor-right innerpage  Prescriptions-Dispensed-page">
+    <div class="col-lg Choose-Your-Doctor-right innerpage  Prescriptions-Dispensed-page">
         <div class="row">
             <div class="col-sm-12">
                 <div class="col Prescriptions-Dispensed-right">

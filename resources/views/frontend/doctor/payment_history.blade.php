@@ -1,7 +1,7 @@
 @extends('frontend.doctor.afterloginlayout.app')
 
 @section('content')
-    <div class="col Choose-Your-Doctor-right innerpage  Prescriptions-Dispensed-page">
+    <div class="col-lg Choose-Your-Doctor-right innerpage  Prescriptions-Dispensed-page">
         <div class="row">
             <div class="col-sm-12">
                 <div class="col Prescriptions-Dispensed-right">
@@ -19,18 +19,18 @@
                             <div class="col-sm-12">
                                 <form class="form-history" id="filterSearch" method="GET">
                                     <div class="form-group form-history-left">
-                                      <label>Show</label>
+                                      <span>Show</span>
                                       <select class="form-control">
                                         <option>8</option>
                                       </select>
                                       <span>entries</span>
                                     </div>
-                                    <div class="form-history-right">
-                                    <input type="text" id="date_timepicker_start" class="form-control ml-mrtlf-10" name="start_date" placeholder="Date range" value="{{ request()->start_date }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                    </div>
-                                    <a class="btn btn-csv" href="{{ url('/') }}/doctor/payment-history?export=export&start_date={{ request()->start_date }}"><i class="fas fa-file-export"></i></a>
+                                    <div class="form-group form-history-right">
+                                        <input type="text" id="date_timepicker_start" class="form-control ml-mrtlf-10" name="start_date" placeholder="Date range" value="{{ request()->start_date }}">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                        </div>
+                                        <a class="btn btn-csv" href="{{ url('/') }}/doctor/payment-history?export=export&start_date={{ request()->start_date }}"><i class="fas fa-file-export"></i></a>
                                     <div>
                                 </form>
                             </div>

@@ -48,8 +48,10 @@
           @endauth
       </ul>
     </div>
-    <div class=""><a href="#" class="btn btn-vsn-hdr" id="verify_sick_note">verify sick note</a></div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="header-mobile-btns">
+      <a href="#" class="btn btn-vsn-hdr" id="verify_sick_note">verify sick note</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
 </nav>
