@@ -350,7 +350,7 @@ class PatientController extends Controller
         // $doctors = UserDoctor::where('role',2)->paginate(5);
         $doctors_speciality = Specialties::select('name','id')->orderBy('name')->get()->toArray();
 
-         $doctors_speciality = array_map("unserialize", array_unique(array_map("serialize", $doctors_speciality)));
+        $doctors_speciality = array_map("unserialize", array_unique(array_map("serialize", $doctors_speciality)));
          // return $doctors_speciality;
         $login_user = Auth::guard('sitePatient')->user();
 
@@ -416,10 +416,10 @@ class PatientController extends Controller
     public function searchDoctors(Request $request)
     {
         // $doctors = UserDoctor::where('role',2)->paginate(5);
-        $doctors_speciality = UserProfile::select('dr_speciality')->where('dr_speciality','!=',null)->orderBy('dr_speciality')->get()->toArray();
+        $doctors_speciality = Specialties::select('name','id')->orderBy('name')->get()->toArray();
 
-         $doctors_speciality = array_map("unserialize", array_unique(array_map("serialize", $doctors_speciality)));
-         // return $doctors_speciality;
+        $doctors_speciality = array_map("unserialize", array_unique(array_map("serialize", $doctors_speciality)));
+        // return $doctors_speciality;
         $login_user = Auth::guard('sitePatient')->user();
 
         $doctors = User::where('role',2)->with('profile')->paginate(4);
@@ -427,47 +427,44 @@ class PatientController extends Controller
 
         $search_doctors = '';
         if(!empty($request->dr_speciality)) {
-           $search_doctors = User::where('role',2)->whereHas('profile',function($query) use($request){
-            if($request->dr_speciality != 'all'){
-            $query->where('dr_speciality',$request->dr_speciality);
-            }
+            $doctors = User::where('role',2)->whereHas('profile',function($query) use($request){
+                if($request->dr_speciality != 'all'){
+                    $query->where('dr_speciality',$request->dr_speciality);
+                }
 
+                if(!empty($request->video_consult)){
+                    if($request->video_consult == 'live_video'){
+                        $query->where('dr_live_video_fee_notification', 1);
+                    }
+                    if($request->video_consult == 'live_chat'){
+                        $query->where('dr_live_chat_fee_notification', 1);
+                    }
+                    if($request->video_consult == 'qa'){
+                        $query->where('dr_qa_fee_notification', 1);
+                    }
+                }
 
+                if(!empty($request->dr_see)){
+                    $query->where('dr_see', $request->dr_see);
+                }
 
-            if(!empty($request->video_consult)){
-              if($request->video_consult == 'live_video'){
-              $query->where('dr_live_video_fee_notification', 1);
-              }
-              if($request->video_consult == 'live_chat'){
-              $query->where('dr_live_chat_fee_notification', 1);
-              }
-              if($request->video_consult == 'qa'){
-              $query->where('dr_qa_fee_notification', 1);
-              }
-            }
+                if(!empty($request->price)){
+                    $query->orderBy('dr_standard_fee', $request->price);
+                }
 
-            if(!empty($request->dr_see)){
-            $query->where('dr_see', $request->dr_see);
-            }
-
-           if(!empty($request->price)){
-            $query->orderBy('dr_standard_fee', $request->price);
-            }
-
-           })->with('profile');
+            })->with('profile');
 
             if(!empty($request->prescribers)){
-              if($request->prescribers == 'yes'){
-                $search_doctors->where('admin_verified_at', '<>', null);
-              }else{
-                $search_doctors->where('admin_verified_at', null);
-              }
+                if($request->prescribers == 'yes'){
+                    $doctors->where('admin_verified_at', '<>', null);
+                }else{
+                    $doctors->where('admin_verified_at', null);
+                }
             }
 
-           $search_doctors = $search_doctors->paginate(5);
-                $search_doctors = $search_doctors->appends(request()->query());
+            $doctors = $doctors->paginate(5);
+            $doctors = $doctors->appends(request()->query());
         }
-
 
         return view('frontend.patient.search-doctors', compact('doctors','doctors_speciality','search_doctors'));
     }

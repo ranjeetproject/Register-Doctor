@@ -38,7 +38,7 @@
                                     <div class="ask-a-d">
                                         <span>
                                             ASK ALL DOCTORS
-                                        </span> 
+                                        </span>
                                         <img src="{{ asset('public/images/frontend/images/Hello-icon.png')}}" alt="">
                                     </div>
                                 </div>
@@ -105,15 +105,22 @@
 
                     <form>
                         <div class="form-group row Speciality-form">
-                            <label class="col col-form-label">Speciality :</label>
+                            <label class="col col-form-label">Speciality or Interest :</label>
                             <div class="col-sm-7">
                                 <select class="custom-select mr-sm-2" name="dr_speciality" id="inlineFormCustomSelect">
                                     <option value="">Select Speciality </option>
-                                    <option value="all">All</option>
+                                    {{-- <option value="all">All</option>
                                     @foreach ($doctors_speciality as $doctor_speciality)
                                         <option value="{{ $doctor_speciality['dr_speciality'] }}"
                                             {{ isset($_GET['dr_speciality']) && $_GET['dr_speciality'] == $doctor_speciality['dr_speciality'] ? 'selected' : '' }}>
                                             {{ ucfirst($doctor_speciality['dr_speciality']) }}</option>
+
+                                    @endforeach --}}
+                                    <option value="all" {{ isset($_GET['dr_speciality']) && $_GET['dr_speciality'] == "all" ? 'selected' : '' }}>All</option>
+                                    @foreach ($doctors_speciality as $doctor_speciality)
+                                        <option value="{{ $doctor_speciality['id'] }}"
+                                            {{ isset($_GET['dr_speciality']) && $_GET['dr_speciality'] == $doctor_speciality['id'] ? 'selected' : '' }}>
+                                            {{ ucfirst($doctor_speciality['name']) }}</option>
 
                                     @endforeach
                                 </select>
@@ -192,7 +199,7 @@
                         <div class="col-sm-12">
 
 
-                            @if (isset($_GET['dr_speciality']) && !empty($_GET['dr_speciality']))
+                            {{-- @if (isset($_GET['dr_speciality']) && !empty($_GET['dr_speciality']))
                                 @forelse ($search_doctors as $doctor)
 
                                     <div class="card">
@@ -247,7 +254,6 @@
                                                     <div class="col">
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->profile->dr_live_chat_fee }} per 15 mins</p>
-                                                        {{-- <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Chat</a> --}}
                                                         <a href="{{ route('patient.book-prescriptions', Crypt::encryptString($doctor->id)) }}"
                                                             class="btn btn-block Book-Live">Book Live Chat</a>
                                                     </div>
@@ -255,10 +261,8 @@
                                                         <p><i class="fas fa-pound-sign"></i>
                                                             {{ $doctor->profile->dr_live_video_fee }} per 15 mins</p>
 
-                                                        {{-- <a href="{{route('patient.view-doctor-profile',Crypt::encryptString($doctor->id))}}" class="btn btn-block Book-Live">Book Live Video</a> --}}
                                                         <a href="{{ route('patient.book-prescriptions', Crypt::encryptString($doctor->id)) }}"
                                                             class="btn btn-block Book-Live">Book Live Video</a>
-                                                        {{-- <button type="submit" class="btn btn-block Book-Live">Book Live Video</button> --}}
                                                     </div>
                                                     <div class="col-sm-5">
                                                         <p><i class="fas fa-pound-sign"></i>
@@ -278,7 +282,7 @@
                                     <p>No Doctor Found</p>
                                 @endforelse
 
-                            @else
+                            @else --}}
 
 
 
@@ -361,21 +365,17 @@
                                     <p>No Doctor Found</p>
                                 @endforelse
 
-                            @endif
+                            {{-- @endif --}}
 
 
 
 
                             <div class="col-sm-12">
-                                @if (isset($_GET['dr_speciality']) && !empty($_GET['dr_speciality']))
-                                    {{-- {{$search_doctors->links()}} --}}
+                                {{-- @if (isset($_GET['dr_speciality']) && !empty($_GET['dr_speciality']))
                                     {{ $search_doctors->links() }}
-                                @else
+                                @else --}}
                                     {{ $doctors->links() }}
-
-                                    {{-- {{$doctors->links()}} --}}
-
-                                @endif
+                                {{-- @endif --}}
                             </div>
 
 
